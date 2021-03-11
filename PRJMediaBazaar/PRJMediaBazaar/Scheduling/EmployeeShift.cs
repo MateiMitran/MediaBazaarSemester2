@@ -24,7 +24,7 @@ namespace PRJMediaBazaar
         public int EmployeeID { get; private set; }
         public Shift FirstShift { get; set; }
         public Shift SecondShift { get; set; }
-        public bool Absence { get; private set; }
-        public AbsenceReason AbsenceReason { get; private set; }
+        public bool Absence { get;  set; }
+        public AbsenceReason AbsenceReason { get; set; }
     }
 }

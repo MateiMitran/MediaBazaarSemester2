@@ -14,11 +14,13 @@ namespace PRJMediaBazaar
         private List<EmployeePreference> _employeesPreferences;
         private List<EmployeeShift> _employeesShifts;
         private DateTime _date;
-        private int _cashiersNeeded;
-        private int _securityNeeded;
-        private int _salesAssistantsNeeded;
-        private int _managersNeeded;
-        private int _stockersNeeded;
+       
+        public int SecurityNeeded { get; private set; }
+        public int CashiersNeeded { get; private set; }
+        public int StockersNeeded { get; private set; }
+        public int SalesAssistantsNeeded { get; private set; }
+        public int WarehouseManagersNeeded { get; private set; }
+
 
         public Day(DateTime date)
         {
@@ -29,13 +31,9 @@ namespace PRJMediaBazaar
             _employeesShifts = new List<EmployeeShift>();
 
         }
-        
-        public void PopulateShiftPreferences() //used in GetEmployeePreferedShift()
-        {
-            //SQL query to get the preferences for that day
-            //create the EmployeePreference objects and add them to the list _employeePreferences 
-        }
 
+        public DateTime Date { get; }
+      
         private bool ShiftIsValid(Shift assignedShift, Shift secondShift)
         {
             if(assignedShift == Shift.Morning && secondShift == Shift.Evening)
@@ -51,7 +49,7 @@ namespace PRJMediaBazaar
             return true;
         }
 
-        public bool EmployeeHasDoubleShift(EmployeeShift es)
+        private bool EmployeeHasDoubleShift(EmployeeShift es)
         {
             if (es.FirstShift != Shift.None && es.SecondShift != Shift.None)
             {
@@ -66,6 +64,7 @@ namespace PRJMediaBazaar
 
             if (employeeShift != null && employeeShift.SecondShift == Shift.None && ShiftIsValid(employeeShift.FirstShift, shift))
             {
+                //SQL quey to add the shift to the employees_workdays table
                 employeeShift.SecondShift = shift;
                 return true;
             }
@@ -73,6 +72,7 @@ namespace PRJMediaBazaar
             else if (employeeShift == null)
             {
                 //create an object with inital second shift as None.
+                //SQL quey to add the shift to the employees_workdays table
                 _employeesShifts.Add(new EmployeeShift(_id, _date, employeeID, shift, Shift.None));
                 return true;
             }
@@ -84,6 +84,7 @@ namespace PRJMediaBazaar
             EmployeeShift employeeShift = GetEmployeeShift(employeeID);
             if (!EmployeeHasDoubleShift(employeeShift)) //if the employee doesn't have a double shift, remove the object from the list
             {
+                //SQL query to remove the shift from employees_workdays table
                 _employeesShifts.Remove(employeeShift);
             }
             else //check which shift is selected and replace it with Shift.None
@@ -100,14 +101,30 @@ namespace PRJMediaBazaar
 
         }
 
-        public void AssignAbsence(AbsenceReason absenceReason)
+        public void AssignAbsence(AbsenceReason absenceReason , int employeeID)
         {
+            EmployeeShift employee = GetEmployeeShift(employeeID);
+            if (employee != null)
+            {
+                employee.FirstShift = Shift.None;
+                employee.SecondShift = Shift.None;
+                employee.AbsenceReason = absenceReason;
+                employee.Absence = true;
+                //SQL - UPDATE the row in employees_workdays with the new values.
+            }
+            else
+            {
+              EmployeeShift es = new EmployeeShift(_id, _date, employeeID, Shift.None, Shift.None);
+                es.Absence = true;
+                es.AbsenceReason = absenceReason;
+                //SQL - INSERT a new row in employees_workdays
+            }
 
         }
 
         public EmployeePreference GetEmployeePreferedShift(int employeeID)
         {
-            this.PopulateShiftPreferences();
+           
             foreach (EmployeePreference ep in _employeesPreferences)
             {
                 if (ep.EmployeeID == employeeID)
@@ -130,6 +147,28 @@ namespace PRJMediaBazaar
             return null;
         }
 
+        public void ChangeNeededJobPosition(JobPosition jobPosition , int amount)
+        {
+            switch(jobPosition)
+            {
+                case JobPosition.Cashier:
+                    CashiersNeeded = amount;
+                    break;
+                case JobPosition.Security:
+                    SecurityNeeded = amount;
+                    break;
+                case JobPosition.SalesAssistant:
+                    SalesAssistantsNeeded = amount;
+                    break;
+                case JobPosition.Stocker:
+                    StockersNeeded = amount;
+                    break;
+                case JobPosition.WarehouseManager:
+                    WarehouseManagersNeeded = amount;
+                    break;
+            }
+            //SQL query to UPDATE the value in the days table
+        }
 
     }
 }

@@ -8,10 +8,11 @@ namespace PRJMediaBazaar
 {
     enum JobPosition
     {
-        Cashier,
         Security,
+        Cashier,
+        Stocker,
         SalesAssistant,
-        WarehouseManager,
-        Stocker
+        WarehouseManager
+        
     }
 }

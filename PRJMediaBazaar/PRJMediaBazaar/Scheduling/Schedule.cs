@@ -10,7 +10,7 @@ namespace PRJMediaBazaar
     {
         private static int _idCounter = 1;
         
-        List<Day> days;
+        List<Day> _days;
         public int Id { get; private set; }
         public DateTime StartDate { get; private set; }
         public DateTime EndDate { get; private set; }
@@ -23,13 +23,25 @@ namespace PRJMediaBazaar
             Id = _idCounter;
             _idCounter++;
 
-            days = new List<Day>();
+            _days = new List<Day>();
             //create the Day objects between StartDate and EndDate
             for (DateTime date = StartDate; date.Date <= EndDate.Date; date = date.AddDays(1))
             {
              
-                days.Add(new Day(date));
+                _days.Add(new Day(date));
             }
+        }
+
+        public Day GetDay(DateTime date)
+        {
+            foreach(Day d in _days)
+            {
+                if (d.Date == date)
+                {
+                    return d;
+                }
+            }
+            return null;
         }
 
     }

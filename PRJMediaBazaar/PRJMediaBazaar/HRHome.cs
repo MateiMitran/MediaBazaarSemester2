@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace PRJMediaBazaar
 {
-    public partial class HRHome : Form
+     partial class HRHome : Form
     {
         public HRHome()
         {

@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace PRJMediaBazaar
 {
-    public partial class LogIn : Form
+    partial class LogIn : Form
     {
         public LogIn()
         {
