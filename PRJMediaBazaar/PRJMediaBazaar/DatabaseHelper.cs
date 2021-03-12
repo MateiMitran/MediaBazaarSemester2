@@ -64,19 +64,11 @@ namespace PRJMediaBazaar
             //SQL query to UPDATE the value in the days table
         }
 
-        public static bool ScheduleExists(DateTime startDate, DateTime endDate)
-        {
-            if (/*SQL query retrieves an existing schedule for the startDate and endDates in table schedules*/)
-            {
-                return true;
-            }
-            return false;
-        }
-
-        public static bool CreateEmptySchedule(DateTime startDate , DateTime endDate)
+       
+        public static bool CreateEmptySchedule(DateTime startDate, DateTime endDate)
         {
 
-            if (ScheduleExists(startDate, endDate))
+            if (GetScheduleId(startDate,endDate) > 0)
             {
                 return false;
             }
@@ -85,36 +77,25 @@ namespace PRJMediaBazaar
             return true;
         }
 
-        public static bool ScheduleIsEmpty(DateTime startDate, DateTime endDate)
-        {
-            if (/*SQL query retrieves an existing schedule for the startDate and endDates,
-                 * where schedule is NOT in employees_workdays table*/)
-            {
-                return true;
-            }
-            return false;
-        }
-
         public static Schedule GetSchedule(DateTime startDate, DateTime endDate)
         {
-            if (ScheduleExists(startDate, endDate) && ScheduleIsEmpty(startDate, endDate))
+            int scheduleId = GetScheduleId(startDate, endDate);
+            if (scheduleId > 0 && ScheduleIsEmpty(scheduleId))
             { 
-              //SQL query the days table for that schedule and add them to a List<Days>
+              //SQL query the days table for that scheduleId and add them to a List<Days>
               //create the Schedule object and return it
             }
 
-            else if(ScheduleExists(startDate,endDate) && !ScheduleIsEmpty(startDate,endDate))
+            else if(scheduleId > 0  && !ScheduleIsEmpty(scheduleId))
             {
-                //SQL query the days table for that schedule and add them to a List<Days>
+
                 //create the Schedule object
-                //SQL query all days for this shift id in days table
-                //result = SQL query employee_workdays for dayID in (select dayid where scheduleID = "")
-                //make the List<EmployeeShifts>
-                //make the List<Days>
-                //foreach Day
+                //make the List<Days> ---> SQL query the days table for that scheduleId and add them to a List<Days>
+                //make the List<EmployeeShifts>  ---> SQL query employee_workdays with dayID in (get the dayId's with this scheduleId)
+                //foreach Day d
                 //(
-                //   //foreach EmployeeShift
-                //   //if(es.dayID == Day.dayId)
+                //   //foreach EmployeeShift es
+                //   //if(es.dayID == d.dayId)
                 //{
                 //    // day.AddEmployeeShift(es);
                 //}
@@ -122,6 +103,28 @@ namespace PRJMediaBazaar
                 //)
             }
             return null;
+        }
+
+       private static int  GetScheduleId(DateTime startDate, DateTime endDate)
+        {
+            //SELECT id FROM schedule WHERE start_date = startDate AND end_Date = endDate
+            //if(/*retrieves an id > 0*/)
+            //{
+            //    return id
+            //}
+            return 0;
+        }
+
+
+        private static bool ScheduleIsEmpty(int scheduleId)
+        {
+
+            if (/*SQL query retrieves an existing schedule ,
+                 * where scheduleId is NOT in employees_workdays table*/)
+            {
+                return true;
+            }
+            return false;
         }
 
     }
