@@ -1,0 +1,117 @@
+/* DASHBOARD CSS */
+
+#dashboard-wrapper {
+    max-width: 1000px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+#dashboard-container {
+    width: 100%;
+    height: 300px;
+    background-color: #fff;
+    border-radius: 3px;
+        -webkit-border-radius: 3px;
+        -moz-border-radius: 3px;
+    box-shadow: 0px 0px 42px -33px rgba(0,0,0,0.75);
+        -webkit-box-shadow: 0px 0px 42px -33px rgba(0,0,0,0.75);
+        -moz-box-shadow: 0px 0px 42px -33px rgba(0,0,0,0.75);
+    overflow-y: scroll;
+    text-align: left;
+}
+
+.dashboard-content {
+    display: none;
+    margin-top: -16px;
+}
+
+.dashboard-content.visible {
+    display: block;
+}
+
+.dashboard-button:link {
+    display: inline-block;
+    padding: 15px 30px;
+    border-radius: 3px;
+        -webkit-border-radius: 3px;
+        -moz-border-radius: 3px;
+    margin-top: 30px;
+    margin-left: 20px;
+    color: #fff;
+    transition: all 0.2s ease-in-out;
+        -webkit-transition: all 0.2s ease-in-out;
+        -moz-transition: all 0.2s ease-in-out;
+        -o-transition: all 0.2s ease-in-out;
+    min-width: 150px;
+}
+
+.dashboard-button:visited {
+    color: #fff;
+}
+
+#dashboard-button-announcements {
+    background-color: #759675;
+}
+
+#dashboard-button-announcements:hover {
+    background-color: #698769;
+}
+
+#dashboard-button-schedule {
+    background-color: #8d99ae;
+}
+
+#dashboard-button-schedule:hover {
+    background-color: #7e899c;
+}
+
+#dashboard-button-preferences {
+    background-color: #555667;
+}
+
+#dashboard-button-preferences:hover {
+    background-color: #444452;
+}
+
+#dashboard-button-rules {
+    background-color: #f14b5f;
+}
+
+#dashboard-button-rules:hover {
+    background-color: #d84355;
+}
+
+/* ANNOUNCEMENTS CSS */
+
+#dashboard-announcements ul {
+    padding: 0;
+    list-style-type: none;
+}
+
+#dashboard-announcements ul li{
+    padding: 15px 20px;
+    border-top: 1px solid #eee;
+}
+
+#dashboard-announcements ul li:first-of-type {
+    border-top: none;
+}
+
+#dashboard-announcements ul li:nth-of-type(1n) {
+    background-color: #f3f3f3;
+}
+
+#dashboard-announcements ul li:nth-of-type(2n) {
+    background-color: #fff;
+}
+
+/* RULES CSS */
+
+#dashboard-rules ol li {
+    padding: 15px 20px;
+    border-top: 1px solid #eee;
+}
+
+#dashboard-rules ol li:first-of-type {
+    border-top: none;
+}

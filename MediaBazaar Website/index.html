@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MediaBazaar: Dashboard</title>
+    <!-- GOOGLE FONTS -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <!-- FONTAWESOME -->
+    <script src="https://use.fontawesome.com/560785642e.js"></script>
+    <!-- CSS IMPORTS -->
+    <link rel="stylesheet" href="css/essentials.css" type="text/css">
+    <link rel="stylesheet" href="css/index.css" type="text/css">
+</head>
+<body>
+<!-- BODY WRAPPER -->
+<div id="body-wrapper">
+    <!-- TOP NAV -->
+    <nav id="top-nav">
+        <a href="index.html" id="logo"><span>Media</span>Bazaar</a>
+        <ul>
+            <li>
+                <a href="index.html">Dashboard</a>
+           </li><li>
+               <a href="account-preferences.html">Account</a>
+           </li>
+           <li>
+                <a href="#" id="top-nav-sign-in-button">Log Out</a>
+           </li>
+        </ul>
+    </nav>
+    <!-- DASHBOARD -->
+    <div id="dashboard-wrapper">
+        <h2 class="section-title">Announcements</h2>
+        <div id="dashboard-container">
+            <!-- ANNOUNCEMENTS -->
+            <div class="dashboard-content visible" id="dashboard-announcements">
+                <ul>
+                    <li>
+                        this is a random announcement
+                    </li>
+                    <li>
+                        hello world
+                    </li>
+                    <li>
+                        this is a test
+                    </li>
+                    <li>
+                        this is a test
+                    </li>
+                    <li>
+                        this is a test
+                    </li>
+                </ul>
+            </div>
+            <!-- SCHEDULE -->
+            <div class="dashboard-content" id="dashboard-schedule">
+                <p>Schedule</p>
+            </div>
+            <div class="dashboard-content" id="dashboard-preferences">
+                <p>Preferences</p>
+            </div>
+            <div class="dashboard-content" id="dashboard-rules">
+                <ol>
+                    <li>
+                        this is a random rule
+                    </li>
+                    <li>
+                        hello world
+                    </li>
+                    <li>
+                        this is a test
+                    </li>
+                    <li>
+                        this is a test
+                    </li>
+                    <li>
+                        this is a test
+                    </li>
+                </ol>
+            </div>
+        </div>
+        <a href="javascript:void(0)" class="dashboard-button" id="dashboard-button-announcements" page="dashboard-announcements">
+            Announcements
+        </a>
+        <a href="javascript:void(0)" class="dashboard-button" id="dashboard-button-schedule" page="dashboard-schedule">
+            Schedule
+        </a>
+        <a href="javascript:void(0)" class="dashboard-button" id="dashboard-button-preferences" page="dashboard-preferences">
+            Preferences
+        </a>
+        <a href="javascript:void(0)" class="dashboard-button" id="dashboard-button-rules" page="dashboard-rules">
+            Rules
+        </a>
+    </div>
+</div>
+<!-- FOOTER -->
+<footer id="footer">
+	<a href="index.html">&copy; 2021 MediaBazaar Inc. All rights reserved</a>
+</footer>
+
+<!-- JAVASCRIPT IMPORTS -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script src="js/essentials.js"></script>
+<script src="js/dashboard.js"></script>
+</body>
+</html>
