@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: studmysql01.fhict.local
--- Generation Time: Mar 12, 2021 at 12:27 PM
+-- Generation Time: Mar 13, 2021 at 03:19 PM
 -- Server version: 5.7.26-log
 -- PHP Version: 7.3.27
 
@@ -19,7 +19,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `dbi457864`
+-- Database: `dbi460221`
 --
 
 -- --------------------------------------------------------
@@ -51,8 +51,39 @@ CREATE TABLE `employees` (
   `last_name` varchar(40) NOT NULL,
   `email` varchar(320) NOT NULL,
   `password` varchar(40) NOT NULL,
-  `job_position` enum('Security','Cashier','Stocker','SalesAssistant','WarehouseManager') NOT NULL
+  `job_position` enum('Security','Cashier','Stocker','SalesAssistant','WarehouseManager') NOT NULL,
+  `phoneNumber` int(10) DEFAULT NULL,
+  `address` varchar(50) NOT NULL,
+  `salary` float DEFAULT NULL,
+  `gender` enum('MALE','FEMALE','OTHER') NOT NULL,
+  `education` varchar(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `employees`
+--
+
+INSERT INTO `employees` (`id`, `first_name`, `last_name`, `email`, `password`, `job_position`, `phoneNumber`, `address`, `salary`, `gender`, `education`) VALUES
+(1, 'John', 'McDuffin', 'john.mcduffin@mail.com', 'john1', 'Security', 731234568, 'Flower Street 23A', 1400, 'MALE', 'High School'),
+(2, 'Maria', 'Vincenzio', 'maria.vincenzio@mail.com', 'maria1', 'Security', 198767889, 'Stationsweg 16', 1400, 'FEMALE', 'High School'),
+(3, 'Lawrence', 'Moschino', 'lawrence.moschino@mail.com', 'lawrence1', 'Security', 965234521, 'Buekeslaan 12A', 1400, 'OTHER', 'University'),
+(4, 'Ponton', 'Portofino', 'ponton.portofino@mail.com', 'ponton1', 'Security', 134156123, 'Cebeslaan 213A', 1400, 'MALE', 'University'),
+(5, 'Caitlyn', 'Rose', 'caitlyn.rose@mail.com', 'caitlyn1', 'Cashier', 623144155, 'Transformatorstraat 1', 1200, 'FEMALE', 'High School'),
+(6, 'Daniel', 'Burton', 'daniel.burton@mail.com', 'daniel1', 'Cashier', 534412415, 'Borneolaan 5', 1200, 'MALE', 'University'),
+(7, 'Prince', 'John', 'prince.john', 'prince1', 'Cashier', 333125619, 'Winston Churchilaan 12', 1200, 'MALE', 'High School'),
+(8, 'Laquesha', 'Johnson', 'laquesha.johnson@mail.com', 'laquesha1', 'Cashier', 564123667, 'Horneolaan 32', 1200, 'FEMALE', 'University'),
+(9, 'Anastasia', 'Krilov', 'anastasio.krilov@mail.com', 'anastasia1', 'Stocker', 567889001, 'John F. Kennedylaan 168', 2500, 'FEMALE', 'University'),
+(10, 'Claire', 'Temple', 'claire.temple@mail.com', 'claire1', 'Stocker', 193343600, 'Luciferstraat 32', 2500, 'FEMALE', 'University'),
+(11, 'Daniel', 'Meachum', 'daniel.meachum@mail.com', 'daniel1', 'Stocker', 358890065, 'Cederlaan 12D', 2500, 'MALE', 'University'),
+(12, 'Cornell', 'Stokes', 'cornell.stokes@mail.com', 'cornell1', 'Stocker', 466781032, 'Franklin D. Rooseveltlaan 12', 2500, 'MALE', 'University'),
+(13, 'Maria', 'Antoinette', 'maria.antoinette@mail.com', 'maria1', 'SalesAssistant', 913576787, 'Hemelrijken 215A', 2000, 'FEMALE', 'University'),
+(14, 'Lucas', 'Cage', 'lucas.cage@mail.com', 'lucas1', 'SalesAssistant', 919071783, 'Lombokpad 3.42', 2000, 'MALE', 'University'),
+(15, 'Janette', 'Stones', 'janette.stones@mail.com', 'janette1', 'SalesAssistant', 675553687, ' Bulevardul Iuliu Maniu 205', 2000, 'FEMALE', 'University'),
+(16, 'Alex', 'Spades', 'alex.spades@mail.com', 'alex1', 'SalesAssistant', 727567672, ' Fuutlaan 3', 2000, 'MALE', 'University'),
+(17, 'Matthew', 'Murdock', 'matthew.murdock@mail.com', 'matthew1', 'WarehouseManager', 657773686, ' Pagelaan 21', 3500, 'MALE', 'University'),
+(18, 'Johnatan', 'Joestar', 'johnatan.joestar@mail.com', 'johnatan1', 'WarehouseManager', 757699888, ' Mathildelaan 32', 3500, 'MALE', 'University'),
+(19, 'Colleen', 'Wing', 'colleen.wing@mail.com', 'colleen1', 'WarehouseManager', 723679009, ' Havenstraat 2B', 3500, 'FEMALE', 'University'),
+(20, 'Joy', 'Meachum', 'joy.meachum@mail.com', 'joy1', 'WarehouseManager', 165663686, ' Lakerstraat', 3500, 'OTHER', 'University');
 
 -- --------------------------------------------------------
 
@@ -148,7 +179,7 @@ ALTER TABLE `days`
 -- AUTO_INCREMENT for table `employees`
 --
 ALTER TABLE `employees`
-  MODIFY `id` tinyint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` tinyint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `schedule`
