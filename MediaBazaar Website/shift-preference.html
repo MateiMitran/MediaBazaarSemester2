@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MediaBazaar: Preferences</title>
+    <!-- GOOGLE FONTS -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <!-- FONTAWESOME -->
+    <script src="https://use.fontawesome.com/560785642e.js"></script>
+    <!-- CSS IMPORTS -->
+    <link rel="stylesheet" href="css/style.css" type="text/css">
+</head>
+
+<body>
+    <!-- BODY WRAPPER -->
+    <div id="body-wrapper">
+        <!-- TOP NAV -->
+        <nav id="top-nav">
+            <a href="index.html" id="logo"><span>Media</span>Bazaar</a>
+            <ul>
+                <li>
+                    <a href="#">Dashboard</a>
+                </li>
+                <li>
+                    <a href="#">Account</a>
+                </li>
+                <li>
+                    <a href="#" id="top-nav-sign-in-button">Log Out</a>
+                </li>
+            </ul>
+        </nav>
+        <!-- LOGIN FORM -->
+        <form class="simple-form" method="POST">
+            <h2>Shift Preference</h2>
+            <div class="form-group half">
+                <label for="preferences-first-name">Date:</label>
+                <input type="text" name="preferences-first-name" id="preferences-first-name" value="2012-06-29">
+            </div>
+            <div class="form-group half">
+                <label for="preferences-last-name">Shift:</label>
+                <div class="select">
+                    <select id="preferences-last-name">
+                        <option value="Option 1">Morning</option>
+                        <option value="Option 2">Middle Day</option>
+                        <option value="Option 3">Evening</option>
+                    </select>
+
+                </div>
+
+            </div>
+            <div class="form-group submit">
+                <input type="submit" name="preferences-submit" value="Set the preference">
+            </div>
+        </form>
+    </div>
+    <!-- FOOTER -->
+    <footer id="footer">
+        <a href="index.html">&copy; 2021 MediaBazaar Inc. All rights reserved</a>
+    </footer>
+
+    <!-- JAVASCRIPT IMPORTS -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="js/essentials.js"></script>
+</body>
+
+</html>
