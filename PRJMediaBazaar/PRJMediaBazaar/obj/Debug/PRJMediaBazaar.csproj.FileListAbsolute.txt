@@ -1,0 +1,20 @@
+C:\Users\Matei Mitran\Desktop\Fontys\Semester 2\Project\PRJMediaBazaar\PRJMediaBazaar\bin\Debug\PRJMediaBazaar.exe.config
+C:\Users\Matei Mitran\Desktop\Fontys\Semester 2\Project\PRJMediaBazaar\PRJMediaBazaar\bin\Debug\PRJMediaBazaar.exe
+C:\Users\Matei Mitran\Desktop\Fontys\Semester 2\Project\PRJMediaBazaar\PRJMediaBazaar\bin\Debug\PRJMediaBazaar.pdb
+C:\Users\Matei Mitran\Desktop\Fontys\Semester 2\Project\PRJMediaBazaar\PRJMediaBazaar\obj\Debug\PRJMediaBazaar.csprojAssemblyReference.cache
+C:\Users\Matei Mitran\Desktop\Fontys\Semester 2\Project\PRJMediaBazaar\PRJMediaBazaar\obj\Debug\PRJMediaBazaar.LogIn.resources
+C:\Users\Matei Mitran\Desktop\Fontys\Semester 2\Project\PRJMediaBazaar\PRJMediaBazaar\obj\Debug\PRJMediaBazaar.Properties.Resources.resources
+C:\Users\Matei Mitran\Desktop\Fontys\Semester 2\Project\PRJMediaBazaar\PRJMediaBazaar\obj\Debug\PRJMediaBazaar.csproj.GenerateResource.cache
+C:\Users\Matei Mitran\Desktop\Fontys\Semester 2\Project\PRJMediaBazaar\PRJMediaBazaar\obj\Debug\PRJMediaBazaar.csproj.CoreCompileInputs.cache
+C:\Users\Matei Mitran\Desktop\Fontys\Semester 2\Project\PRJMediaBazaar\PRJMediaBazaar\obj\Debug\PRJMediaBazaar.exe
+C:\Users\Matei Mitran\Desktop\Fontys\Semester 2\Project\PRJMediaBazaar\PRJMediaBazaar\obj\Debug\PRJMediaBazaar.pdb
+C:\Users\Matei Mitran\Desktop\Fontys\Semester 2\Project\PRJMediaBazaar\PRJMediaBazaar\obj\Debug\PRJMediaBazaar.HRHome.resources
+D:\SEMESTER 2\PRJ\prj-cb05-group-5-project\PRJMediaBazaar\PRJMediaBazaar\obj\Debug\PRJMediaBazaar.csprojAssemblyReference.cache
+D:\SEMESTER 2\PRJ\prj-cb05-group-5-project\PRJMediaBazaar\PRJMediaBazaar\obj\Debug\PRJMediaBazaar.HRHome.resources
+D:\SEMESTER 2\PRJ\prj-cb05-group-5-project\PRJMediaBazaar\PRJMediaBazaar\obj\Debug\PRJMediaBazaar.LogIn.resources
+D:\SEMESTER 2\PRJ\prj-cb05-group-5-project\PRJMediaBazaar\PRJMediaBazaar\obj\Debug\PRJMediaBazaar.Properties.Resources.resources
+D:\SEMESTER 2\PRJ\prj-cb05-group-5-project\PRJMediaBazaar\PRJMediaBazaar\obj\Debug\PRJMediaBazaar.csproj.GenerateResource.cache
+D:\SEMESTER 2\PRJ\prj-cb05-group-5-project\PRJMediaBazaar\PRJMediaBazaar\obj\Debug\PRJMediaBazaar.csproj.CoreCompileInputs.cache
+D:\SEMESTER 2\PRJ\prj-cb05-group-5-project\PRJMediaBazaar\PRJMediaBazaar\obj\Debug\PRJMediaBazaar.exe
+D:\SEMESTER 2\PRJ\prj-cb05-group-5-project\PRJMediaBazaar\PRJMediaBazaar\obj\Debug\PRJMediaBazaar.pdb
+D:\SEMESTER 2\PRJ\prj-cb05-group-5-project\PRJMediaBazaar\PRJMediaBazaar\obj\Debug\PRJMediaBazaar.ShiftAssigning.resources
