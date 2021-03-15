@@ -15,23 +15,6 @@ namespace PRJMediaBazaar
         public LogIn()
         {
             InitializeComponent();
-
-            DateTime startDate = DateTime.ParseExact("2021-01-04", "yyyy-MM-dd", System.Globalization.CultureInfo.InvariantCulture);
-
-            while(startDate.Year != 2022)
-            {
-                Console.Write(startDate);
-                Console.Write(" - ");
-
-                DateTime endDate = startDate.AddDays(13);
-
-                DatabaseHelper.CreateEmptySchedule(startDate, endDate);
-                Console.Write(endDate);
-
-                startDate = endDate.AddDays(1);
-
-                Console.WriteLine(" ");
-            }
         }
 
         private void label1_Click(object sender, EventArgs e)
