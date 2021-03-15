@@ -10,8 +10,8 @@ namespace PRJMediaBazaar
     abstract class User
     {
         protected User(int id, string firstName, string lastName, DateTime birthDate, 
-            Gender gender, double salary, string email, string password, 
-            JobPosition jobPosition, int phoneNumber, string address, string education)
+            string gender, double salary, string email, string password, 
+           string jobPosition, int phoneNumber, string address, string education)
         {
             Id = id;
             FirstName = firstName;
@@ -31,11 +31,11 @@ namespace PRJMediaBazaar
         public string FirstName { get; private set; }
         public string LastName { get; private set; }
         public DateTime BirthDate { get; private set; }
-        public  Gender Gender { get; private set; }
+        public  string Gender { get; private set; }
         public double Salary { get; private set; }
         public string Email { get; private set; }
         public string Password { get; private set; }
-        public JobPosition JobPosition { get; private set; }
+        public string JobPosition { get; private set; }
         public int PhoneNumber { get; private set; }
         public string Address { get; private set; }
         public string Education { get; private set; }

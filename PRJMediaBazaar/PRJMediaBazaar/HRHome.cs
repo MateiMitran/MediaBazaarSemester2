@@ -12,9 +12,17 @@ namespace PRJMediaBazaar
 {
      partial class HRHome : Form
     {
+        RegularEmployee[] _employees;
+
         public HRHome()
         {
             InitializeComponent();
+   
+            _employees = DatabaseHelper.GetEmployees();
+            foreach(RegularEmployee e in _employees)
+            {
+                cbAllEmployees.Items.Add(e.FirstName + " " + e.LastName);
+            }
         }
 
         private void label2_Click(object sender, EventArgs e)
@@ -123,6 +131,11 @@ namespace PRJMediaBazaar
         private void panelSchedule_Paint(object sender, PaintEventArgs e)
         {
 
+        }
+
+        private void btnGenerateSchedule_Click(object sender, EventArgs e)
+        {
+           
         }
     }
 }
