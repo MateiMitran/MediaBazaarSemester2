@@ -60,9 +60,8 @@ namespace PRJMediaBazaar
         }
 
 
-        public static bool CreateEmptySchedule(DateTime startDate)
+        public static bool CreateEmptySchedule(DateTime startDate, DateTime endDate)
         {
-            DateTime endDate = startDate.AddDays(13);
             if (GetScheduleId(startDate, endDate) > 0)
             {
                 MessageBox.Show("Schedule already exists");
@@ -75,11 +74,12 @@ namespace PRJMediaBazaar
             {
                 conn = new MySqlConnection(connStr);
                 String sql = "INSERT INTO schedules(start_date,end_date) VALUES(@startDate,@endDate) ";
-                    MySqlCommand cmd = new MySqlCommand(sql, conn);
-                    cmd.Parameters.AddWithValue("@startDate", startDate);
-                    cmd.Parameters.AddWithValue("@endDate", endDate);
-                    conn.Open();
-                    if (cmd.ExecuteNonQuery() > 0)
+
+                MySqlCommand cmd = new MySqlCommand(sql, conn);
+                cmd.Parameters.AddWithValue("@startDate", startDate);
+                cmd.Parameters.AddWithValue("@endDate", endDate);
+                conn.Open();
+                if (cmd.ExecuteNonQuery() > 0)
                 {
                     int scheduleId = GetScheduleId(startDate, endDate);
                     for (DateTime date = startDate; date.Date <= endDate.Date; date = date.AddDays(1))
@@ -96,6 +96,7 @@ namespace PRJMediaBazaar
             }
             catch (MySqlException ex)
             {
+               Console.WriteLine(ex);
                MessageBox.Show("An error occured!");
             }
 
