@@ -58,6 +58,7 @@ namespace PRJMediaBazaar
             this.lblPosition = new System.Windows.Forms.Label();
             this.btnAssignForm = new System.Windows.Forms.Button();
             this.panelSchedule = new System.Windows.Forms.Panel();
+            this.btnSaveChanges = new System.Windows.Forms.Button();
             this.lbSickReports = new System.Windows.Forms.ListBox();
             this.btnSickConfirm = new System.Windows.Forms.Button();
             this.btnSickDeny = new System.Windows.Forms.Button();
@@ -66,7 +67,6 @@ namespace PRJMediaBazaar
             this.btnDenyDayOff = new System.Windows.Forms.Button();
             this.btnConfirmDayOff = new System.Windows.Forms.Button();
             this.lbDayOff = new System.Windows.Forms.ListBox();
-            this.btnSaveChanges = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.panelDayOffReports.SuspendLayout();
             this.panelEmployees.SuspendLayout();
@@ -212,10 +212,10 @@ namespace PRJMediaBazaar
             this.panelEmployees.Controls.Add(this.lbEmployeeInfo);
             this.panelEmployees.Controls.Add(this.lblAllEmployees);
             this.panelEmployees.Controls.Add(this.cbAllEmployees);
-            this.panelEmployees.Location = new System.Drawing.Point(4, 67);
+            this.panelEmployees.Location = new System.Drawing.Point(489, 370);
             this.panelEmployees.Margin = new System.Windows.Forms.Padding(2);
             this.panelEmployees.Name = "panelEmployees";
-            this.panelEmployees.Size = new System.Drawing.Size(807, 431);
+            this.panelEmployees.Size = new System.Drawing.Size(322, 54);
             this.panelEmployees.TabIndex = 8;
             this.panelEmployees.Paint += new System.Windows.Forms.PaintEventHandler(this.panelEmployees_Paint);
             // 
@@ -318,6 +318,7 @@ namespace PRJMediaBazaar
             this.btnGenerateSchedule.TabIndex = 11;
             this.btnGenerateSchedule.Text = "Generate \r\nSchedule\r\n";
             this.btnGenerateSchedule.UseVisualStyleBackColor = true;
+            this.btnGenerateSchedule.Click += new System.EventHandler(this.btnGenerateSchedule_Click);
             // 
             // btnPreferences
             // 
@@ -411,6 +412,16 @@ namespace PRJMediaBazaar
             this.panelSchedule.TabIndex = 20;
             this.panelSchedule.Paint += new System.Windows.Forms.PaintEventHandler(this.panelSchedule_Paint);
             // 
+            // btnSaveChanges
+            // 
+            this.btnSaveChanges.Location = new System.Drawing.Point(164, 346);
+            this.btnSaveChanges.Margin = new System.Windows.Forms.Padding(2);
+            this.btnSaveChanges.Name = "btnSaveChanges";
+            this.btnSaveChanges.Size = new System.Drawing.Size(143, 45);
+            this.btnSaveChanges.TabIndex = 12;
+            this.btnSaveChanges.Text = "Save Changes";
+            this.btnSaveChanges.UseVisualStyleBackColor = true;
+            // 
             // lbSickReports
             // 
             this.lbSickReports.FormattingEnabled = true;
@@ -445,10 +456,10 @@ namespace PRJMediaBazaar
             this.panelSickReports.Controls.Add(this.lbSickReports);
             this.panelSickReports.Controls.Add(this.btnSickConfirm);
             this.panelSickReports.Controls.Add(this.btnSickDeny);
-            this.panelSickReports.Location = new System.Drawing.Point(4, 69);
+            this.panelSickReports.Location = new System.Drawing.Point(399, 350);
             this.panelSickReports.Margin = new System.Windows.Forms.Padding(2);
             this.panelSickReports.Name = "panelSickReports";
-            this.panelSickReports.Size = new System.Drawing.Size(787, 425);
+            this.panelSickReports.Size = new System.Drawing.Size(392, 136);
             this.panelSickReports.TabIndex = 24;
             this.panelSickReports.Paint += new System.Windows.Forms.PaintEventHandler(this.panelSickReports_Paint);
             // 
@@ -457,10 +468,10 @@ namespace PRJMediaBazaar
             this.pnlDayOff.Controls.Add(this.btnDenyDayOff);
             this.pnlDayOff.Controls.Add(this.btnConfirmDayOff);
             this.pnlDayOff.Controls.Add(this.lbDayOff);
-            this.pnlDayOff.Location = new System.Drawing.Point(4, 64);
+            this.pnlDayOff.Location = new System.Drawing.Point(559, 339);
             this.pnlDayOff.Margin = new System.Windows.Forms.Padding(2);
             this.pnlDayOff.Name = "pnlDayOff";
-            this.pnlDayOff.Size = new System.Drawing.Size(805, 436);
+            this.pnlDayOff.Size = new System.Drawing.Size(250, 142);
             this.pnlDayOff.TabIndex = 24;
             // 
             // btnDenyDayOff
@@ -491,16 +502,6 @@ namespace PRJMediaBazaar
             this.lbDayOff.Name = "lbDayOff";
             this.lbDayOff.Size = new System.Drawing.Size(768, 342);
             this.lbDayOff.TabIndex = 24;
-            // 
-            // btnSaveChanges
-            // 
-            this.btnSaveChanges.Location = new System.Drawing.Point(164, 346);
-            this.btnSaveChanges.Margin = new System.Windows.Forms.Padding(2);
-            this.btnSaveChanges.Name = "btnSaveChanges";
-            this.btnSaveChanges.Size = new System.Drawing.Size(143, 45);
-            this.btnSaveChanges.TabIndex = 12;
-            this.btnSaveChanges.Text = "Save Changes";
-            this.btnSaveChanges.UseVisualStyleBackColor = true;
             // 
             // HRHome
             // 
