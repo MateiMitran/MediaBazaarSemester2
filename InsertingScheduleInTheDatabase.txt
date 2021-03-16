@@ -1,0 +1,49 @@
+ public static bool InsertEmptyScheduleToDatabase(DateTime startDate, DateTime endDate)
+        {
+            if (GetScheduleId(startDate, endDate) > 0)
+            {
+                MessageBox.Show("Schedule already exists");
+                return false;
+            }
+
+            MySqlConnection conn = null;
+
+            try
+            {
+                conn = new MySqlConnection(connStr);
+                String sql = "INSERT INTO schedules(start_date,end_date) VALUES(@startDate,@endDate) ";
+
+                MySqlCommand cmd = new MySqlCommand(sql, conn);
+                cmd.Parameters.AddWithValue("@startDate", startDate);
+                cmd.Parameters.AddWithValue("@endDate", endDate);
+                conn.Open();
+                if (cmd.ExecuteNonQuery() > 0)
+                {
+                    int scheduleId = GetScheduleId(startDate, endDate);
+                    for (DateTime date = startDate; date.Date <= endDate.Date; date = date.AddDays(1))
+                    {
+                        String sql2 = "INSERT INTO days(date,schedule_id) VALUES(@date,@scheduleId)";
+                        MySqlCommand cmd2 = new MySqlCommand(sql2, conn);
+                        cmd2.Parameters.AddWithValue("@date", date);
+                        cmd2.Parameters.AddWithValue("@scheduleId", scheduleId );
+                        cmd2.ExecuteNonQuery();
+                    }
+                    return true;
+                }
+                
+            }
+            catch (MySqlException ex)
+            {
+               Console.WriteLine(ex);
+               MessageBox.Show("An error occured!");
+            }
+
+            finally
+            {
+                if (conn != null)
+                {
+                    conn.Close();
+                }
+            }
+            return false;
+        }
