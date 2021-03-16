@@ -21,12 +21,27 @@ namespace PRJMediaBazaar
         public DateTime Date { get; private set; }
 
 
-        public Day(List<EmployeePreference> employeesPreferences, List<EmployeeShift> employeesShifts, int id,
-            int securityNeeded, int cashiersNeeded, int stockersNeeded, int salesAssistantsNeeded,
-            int warehouseManagersNeeded, DateTime date)
+        //public Day(List<EmployeePreference> employeesPreferences, List<EmployeeShift> employeesShifts, int id, DateTime date,
+        //    int securityNeeded, int cashiersNeeded, int stockersNeeded, int salesAssistantsNeeded,
+        //    int warehouseManagersNeeded)
+        //{
+        //    _employeesPreferences = employeesPreferences;
+        //    _employeesShifts = employeesShifts;
+        //    Id = id;
+        //    SecurityNeeded = securityNeeded;
+        //    CashiersNeeded = cashiersNeeded;
+        //    StockersNeeded = stockersNeeded;
+        //    SalesAssistantsNeeded = salesAssistantsNeeded;
+        //    WarehouseManagersNeeded = warehouseManagersNeeded;
+        //    Date = date;
+        //}
+
+        public Day(int id, DateTime date,
+           int securityNeeded, int cashiersNeeded, int stockersNeeded, int salesAssistantsNeeded,
+           int warehouseManagersNeeded)
         {
-            _employeesPreferences = employeesPreferences;
-            _employeesShifts = employeesShifts;
+            _employeesPreferences = new List<EmployeePreference>();
+            _employeesShifts = new List<EmployeeShift>();
             Id = id;
             SecurityNeeded = securityNeeded;
             CashiersNeeded = cashiersNeeded;
@@ -35,6 +50,18 @@ namespace PRJMediaBazaar
             WarehouseManagersNeeded = warehouseManagersNeeded;
             Date = date;
         }
+
+        public void AddEmployeeShiftFromDatabase(EmployeeShift es)
+        {
+            _employeesShifts.Add(es);
+        }
+
+        public EmployeeShift[] EmployeeShifts()
+        {
+            return _employeesShifts.ToArray();
+        }
+
+
 
 
     }

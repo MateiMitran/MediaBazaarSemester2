@@ -8,15 +8,14 @@ namespace PRJMediaBazaar
 {
     class EmployeeShift
     {
-        public EmployeeShift(int dayID, DateTime date, int employeeID, Shift firstShift, Shift secondShift)
+        public EmployeeShift(int dayID, DateTime date, int employeeID, Shift firstShift, Shift secondShift, bool absence,AbsenceReason absenceReason)
         {
             DayID = dayID;
             Date = date;
             EmployeeID = employeeID;
             FirstShift = firstShift;
             SecondShift = secondShift;
-            Absence = false;
-            AbsenceReason = AbsenceReason.None;
+           
         }
 
         public int DayID { get; private set; }
