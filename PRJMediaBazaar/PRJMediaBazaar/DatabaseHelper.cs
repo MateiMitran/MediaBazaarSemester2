@@ -11,9 +11,75 @@ namespace PRJMediaBazaar
 {
     class DatabaseHelper
     {
-       private static readonly string connStr = "server=studmysql01.fhict.local;database=dbi460221;uid=dbi460221;password=lol;";
+        private static readonly string connStr = "server=studmysql01.fhict.local;database=dbi460221;uid=dbi460221;password=lol;";
 
-                                                                   //SCHEDULING
+        //============================================================SCHEDULING=================================================================================
+
+       
+        public static Schedule GetSchedule(DateTime startDate, DateTime endDate)
+        {
+            int scheduleId = GetScheduleId(startDate, endDate);
+            Schedule schedule = null;
+
+            if (scheduleId > 0 && ScheduleIsEmpty(scheduleId))
+            {
+                schedule = GetEmptySchedule(startDate, endDate); // Get the schedule with empty EmployeeShift list in the days
+            }
+
+            else if (scheduleId > 0 && !ScheduleIsEmpty(scheduleId))
+            {
+
+                schedule = GetEmptySchedule(startDate, endDate);
+                List<EmployeeShift> employeeShifts = new List<EmployeeShift>();
+
+                MySqlConnection conn = null;
+                try
+                {
+                    conn = new MySqlConnection(connStr);
+
+                    String sql = "SELECT ew.*, d.date FROM employees_workdays ew INNER JOIN days d ON ew.day_id = d.id WHERE ew.day_id IN (SELECT id FROM days WHERE schedule_id = @scheduleId);";
+                    MySqlCommand cmd = new MySqlCommand(sql, conn);
+                    cmd.Parameters.AddWithValue("@scheduleId", scheduleId);
+                    conn.Open();
+                    MySqlDataReader dr = cmd.ExecuteReader();
+                    while (dr.Read()) //add EmployeeShift objects to the list of employeeShifts
+                    {
+                        int dayId = Convert.ToInt32(dr[0]);
+                        int employeeId = Convert.ToInt32(dr[1]);
+                        Shift firstShift = (Shift)Enum.Parse(typeof(Shift), dr[2].ToString());
+                        Shift secondShift = (Shift)Enum.Parse(typeof(Shift), dr[3].ToString());
+                        bool absence = Convert.ToBoolean(dr[4]);
+                        AbsenceReason absenceReason = (AbsenceReason)Enum.Parse(typeof(AbsenceReason), dr[5].ToString());
+                        DateTime date = DateTime.Parse(dr[6].ToString());
+                        employeeShifts.Add(new EmployeeShift(dayId, date, employeeId, firstShift, secondShift, absence, absenceReason));
+                    }
+                    foreach (Day d in schedule.Days) // separate the EmployeeShift objects in the days they belong to
+                    {
+                        foreach (EmployeeShift es in employeeShifts)
+                        {
+                            if (es.DayID == d.Id)
+                            {
+                                d.AddEmployeeShiftFromDatabase(es);
+                            }
+                        }
+                    }
+                }
+                catch (MySqlException ex)
+                {
+                    MessageBox.Show("An error occured!");
+                }
+
+                finally
+                {
+                    if (conn != null)
+                    {
+                        conn.Close();
+                    }
+                }
+
+            }
+            return schedule;
+        }
 
         //Helping methods for GetSchedule()
 
@@ -29,47 +95,47 @@ namespace PRJMediaBazaar
             Schedule schedule = null;
             List<Day> days = new List<Day>();
 
-                MySqlConnection conn = null;
-                try
-                {
-                    conn = new MySqlConnection(connStr);
+            MySqlConnection conn = null;
+            try
+            {
+                conn = new MySqlConnection(connStr);
 
-                    String sql = "SELECT * FROM days WHERE schedule_id = @scheduleId;";
-                    MySqlCommand cmd = new MySqlCommand(sql, conn);
-                    cmd.Parameters.AddWithValue("@scheduleId", scheduleId);
-                    conn.Open();
-                    MySqlDataReader dr = cmd.ExecuteReader();
-                    while (dr.Read())
-                    {
-                        int id = Convert.ToInt32(dr[0]);
-                        DateTime date = DateTime.Parse(dr[1].ToString());
-                        int securityNeeded = Convert.ToInt32(dr[3]);
-                        int cashiersNeeded = Convert.ToInt32(dr[4]);
-                        int stockersNeeded = Convert.ToInt32(dr[5]);
-                        int salesAssistantsNeeded = Convert.ToInt32(dr[6]);
-                        int warehouseManagersNeeded = Convert.ToInt32(dr[7]);
-                        days.Add(new Day(id, date, securityNeeded, cashiersNeeded, stockersNeeded, salesAssistantsNeeded, warehouseManagersNeeded));
-                    }
-
-                    schedule = new Schedule(days, scheduleId, startDate, endDate);
-                 
-                }
-                catch (MySqlException ex)
+                String sql = "SELECT * FROM days WHERE schedule_id = @scheduleId;";
+                MySqlCommand cmd = new MySqlCommand(sql, conn);
+                cmd.Parameters.AddWithValue("@scheduleId", scheduleId);
+                conn.Open();
+                MySqlDataReader dr = cmd.ExecuteReader();
+                while (dr.Read())
                 {
-                    MessageBox.Show("An error occured!");
+                    int id = Convert.ToInt32(dr[0]);
+                    DateTime date = DateTime.Parse(dr[1].ToString());
+                    int securityNeeded = Convert.ToInt32(dr[3]);
+                    int cashiersNeeded = Convert.ToInt32(dr[4]);
+                    int stockersNeeded = Convert.ToInt32(dr[5]);
+                    int salesAssistantsNeeded = Convert.ToInt32(dr[6]);
+                    int warehouseManagersNeeded = Convert.ToInt32(dr[7]);
+                    days.Add(new Day(id, date, securityNeeded, cashiersNeeded, stockersNeeded, salesAssistantsNeeded, warehouseManagersNeeded));
                 }
 
-                finally
+                schedule = new Schedule(days, scheduleId, startDate, endDate);
+
+            }
+            catch (MySqlException ex)
+            {
+                MessageBox.Show("An error occured!");
+            }
+
+            finally
+            {
+                if (conn != null)
                 {
-                    if (conn != null)
-                    {
-                        conn.Close();
-                    }
+                    conn.Close();
                 }
-                return schedule;
+            }
+            return schedule;
         }
 
-   
+
         private static int GetScheduleId(DateTime startDate, DateTime endDate)
         {
             MySqlConnection conn = null;
@@ -146,6 +212,8 @@ namespace PRJMediaBazaar
             return false;
         }
 
+        //ASSIGNING SHIFTS
+
         //Helping methods for AssignShift()
         private static int GetEmptyShiftIndex(string firstShift, string secondShift)
         {
@@ -195,7 +263,7 @@ namespace PRJMediaBazaar
         }
 
         //The main methods for AssignShift()
-        private static bool AssignSecondShift(Shift shift, int employeeId, int dayId, int indexOfShift)
+        private static bool InsertSecondShift(Shift shift, int employeeId, int dayId, int shiftIndex)
         {
 
             MySqlConnection conn = null;
@@ -205,7 +273,7 @@ namespace PRJMediaBazaar
                 conn = new MySqlConnection(connStr);
                 String sql = "";
 
-                switch (indexOfShift)
+                switch (shiftIndex)
                 {
                     case 2:
                         sql = "UPDATE employees_workdays SET first_shift = @shift WHERE day_id = @dayId AND employee_id = @employeeId;";
@@ -222,7 +290,6 @@ namespace PRJMediaBazaar
                 conn.Open();
                 if (cmd.ExecuteNonQuery() > 0)
                 {
-                    MessageBox.Show("Successfully added a second shift!");
                     return true;
                 }
 
@@ -241,7 +308,7 @@ namespace PRJMediaBazaar
             }
             return false;
 
-        }
+        } //also used for DeleteShift() for double shifts
 
         private static bool InsertEmployeeWorkday(Shift shift, int employeeId, int dayId)
         {
@@ -279,80 +346,6 @@ namespace PRJMediaBazaar
             return false;
         }
 
-
-        //Public methods
-        /// <summary>
-        /// Make sure you've parsed the dates with: DateTime.ParseExact("the date", "yyyy-MM-dd", System.Globalization.CultureInfo.InvariantCulture)
-        /// </summary>
-        /// <param name="startDate"></param>
-        /// <param name="endDate"></param>
-        /// <returns></returns>
-        public static Schedule GetSchedule(DateTime startDate, DateTime endDate)
-        {
-            int scheduleId = GetScheduleId(startDate, endDate);
-            Schedule schedule = null;
-
-            if (scheduleId > 0 && ScheduleIsEmpty(scheduleId))
-            {
-                schedule = GetEmptySchedule(startDate, endDate); // Get the schedule with empty EmployeeShift list in the days
-            }
-
-            else if (scheduleId > 0 && !ScheduleIsEmpty(scheduleId))
-            {
-
-                schedule = GetEmptySchedule(startDate,endDate);
-                List<EmployeeShift> employeeShifts = new List<EmployeeShift>();
-
-                MySqlConnection conn = null;
-                try
-                {
-                    conn = new MySqlConnection(connStr);
-
-                    String sql = "SELECT ew.*, d.date FROM employees_workdays ew INNER JOIN days d ON ew.day_id = d.id WHERE ew.day_id IN (SELECT id FROM days WHERE schedule_id = @scheduleId);";
-                    MySqlCommand cmd = new MySqlCommand(sql, conn);
-                    cmd.Parameters.AddWithValue("@scheduleId", scheduleId);
-                    conn.Open();
-                    MySqlDataReader dr = cmd.ExecuteReader();
-                    while (dr.Read()) //add EmployeeShift objects to the list of employeeShifts
-                    {
-                        int dayId = Convert.ToInt32(dr[0]);
-                        int employeeId = Convert.ToInt32(dr[1]);
-                       Shift firstShift = (Shift)Enum.Parse(typeof(Shift), dr[2].ToString());
-                       Shift secondShift = (Shift)Enum.Parse(typeof(Shift), dr[3].ToString());
-                        bool absence = Convert.ToBoolean(dr[4]);
-                       AbsenceReason absenceReason = (AbsenceReason)Enum.Parse(typeof(AbsenceReason), dr[5].ToString());
-                       DateTime date = DateTime.Parse(dr[6].ToString());
-                        employeeShifts.Add(new EmployeeShift(dayId, date, employeeId, firstShift, secondShift, absence,absenceReason));
-                    }
-                    foreach (Day d in schedule.Days) // separate the EmployeeShift objects in the days they belong to
-                    {
-                        foreach (EmployeeShift es in employeeShifts)
-                        {
-                            if (es.DayID == d.Id)
-                            {
-                                d.AddEmployeeShiftFromDatabase(es);
-                            }
-                        }
-                    }
-                }
-                catch (MySqlException ex)
-                {
-                    MessageBox.Show("An error occured!");
-                }
-
-                finally
-                {
-                    if (conn != null)
-                    {
-                        conn.Close();
-                    }
-                }
-
-            }
-            return schedule;
-        }
-
-
         public static bool AssignShift(Shift shift, int employeeId, int dayId)
         {
 
@@ -360,7 +353,7 @@ namespace PRJMediaBazaar
 
             try
             {
-               
+
                 conn = new MySqlConnection(connStr);
 
                 //returns a row if the employee is in the employees_workdays table
@@ -370,23 +363,24 @@ namespace PRJMediaBazaar
                 cmd.Parameters.AddWithValue("@employeeId", employeeId);
 
                 conn.Open();
-               MySqlDataReader result = cmd.ExecuteReader();
+                MySqlDataReader result = cmd.ExecuteReader();
                 if (result.Read()) //if the employee is in the workdays_table
                 {
-                    int index = GetEmptyShiftIndex(result[2].ToString(),result[3].ToString());
+                    int index = GetEmptyShiftIndex(result[2].ToString(), result[3].ToString());
                     int busyIndex = GetBusyShiftIndex(result[2].ToString(), result[3].ToString());
 
-                   if (index == -1)  //employee has a double shift
+                    if (index == -1)  //employee has a double shift
                     {
                         MessageBox.Show("Employee already has a double shift");
                         return false;
                     }
 
-                   else if (index != -1 && DoubleShiftIsValid(result[busyIndex].ToString(), shift.ToString())) //employee has only one shift, and the second one is valid
+                    else if (index != -1 && DoubleShiftIsValid(result[busyIndex].ToString(), shift.ToString())) //employee has only one shift, and the second one is valid
                     {
-                       return AssignSecondShift(shift, employeeId, dayId, index);
+                        MessageBox.Show("Successfully added a second shift!");
+                        return InsertSecondShift(shift, employeeId, dayId, index);
                     }
-                   else
+                    else
                     {
                         MessageBox.Show("Double shift is invalid! Shifts should be consecutive.");
                         return false;
@@ -395,7 +389,7 @@ namespace PRJMediaBazaar
 
                 else if (!result.Read()) //if the employee has no shifts assigned, insert a row in the table
                 {
-                   return InsertEmployeeWorkday(shift, employeeId, dayId);
+                    return InsertEmployeeWorkday(shift, employeeId, dayId);
                 }
 
             }
@@ -416,48 +410,160 @@ namespace PRJMediaBazaar
 
         }
 
+        //REMOVING SHIFTS
+
+        public static bool DeleteShift(Shift shift, int employeeId, int dayId)
+        {
+            MySqlConnection conn = null;
 
 
+            try
+            {
+
+                conn = new MySqlConnection(connStr);
+
+                //returns a row if the employee is in the employees_workdays table
+                String sql = "SELECT * FROM employees_workdays WHERE day_id = @dayId AND employee_id = @employeeId";
+                MySqlCommand cmd = new MySqlCommand(sql, conn);
+                cmd.Parameters.AddWithValue("@dayId", dayId);
+                cmd.Parameters.AddWithValue("@employeeId", employeeId);
+
+                conn.Open();
+                MySqlDataReader result = cmd.ExecuteReader();
+                if (result.Read())
+                {
+                    int emptyShiftIndex = GetEmptyShiftIndex(result[2].ToString(), result[3].ToString());
 
 
-            // public static void DeleteShift(Shift shift, int employeeID, int DayId)
-            // {
+                    if (emptyShiftIndex != -1 && !Convert.ToBoolean(result[4])) //if there is an empty shift, remove the row
+                    {
+                        return RemoveEmployeeWorkday(dayId, employeeId);
+                    }
+                    else if (emptyShiftIndex == -1 && !Convert.ToBoolean(result[4]))//if there is a double shift,insert None on the chosen one
+                    {
+                        int indexToReplace = GetShiftIndex(shift, dayId, employeeId);
+                        MessageBox.Show("Successfully removed a shift from the employee workday");
+                        return InsertSecondShift(Shift.None, employeeId, dayId, indexToReplace);
+                    }
+                }
 
-            //     if (/*if the employee doesn't have a double shift*/) 
-            //     {
-            //         //SQL query to remove the shift from employees_workdays table
 
-            //     }
-            //     else //check which shift is selected and replace it with Shift.None
-            //     {
-            //        //SQL query to replace the shift with "None"
-            //     }
+            }
+            catch (MySqlException ex)
+            {
+                MessageBox.Show("An error occured!");
+            }
 
-            // }
+            finally
+            {
+                if (conn != null)
+                {
+                    conn.Close();
+                }
+            }
+            return false;
 
-            // public static void AssignAbsence(AbsenceReason absenceReason, int employeeID , int dayId)
-            // {
+        }
 
-            //     if (/*if query retrieves a row for this dayID*/)
-            //     {
-            //         //SQL - UPDATE the row in employees_workdays with the new values. (Shift- "None" + Absence & AbsenceReason)
-            //     }
-            //     else
-            //     {
+        private static bool RemoveEmployeeWorkday(int dayId, int employeeId)
+        {
+            MySqlConnection conn = null;
 
-            //         //SQL - INSERT a new row in employees_workdays with Absence and AbsenceReason
-            //     }
+            try
+            {
+                conn = new MySqlConnection(connStr);
+                String sql = "DELETE FROM employees_workdays WHERE day_id = @dayId AND employee_id = @employeeId";
 
-            // }
+                MySqlCommand cmd = new MySqlCommand(sql, conn);
+                cmd.Parameters.AddWithValue("@dayId", dayId);
+                cmd.Parameters.AddWithValue("@employeeId", employeeId);
+                conn.Open();
+                if (cmd.ExecuteNonQuery() > 0)
+                {
+                    MessageBox.Show("Successfully removed an employee workday");
+                    return true;
+                }
 
-            // public static void ChangeNeededJobPosition(JobPosition jobPosition, int amount , int dayId)
-            // {
-            //     //SQL query to UPDATE the value in the days table
-            // }
+            }
+            catch (MySqlException ex)
+            {
+                MessageBox.Show("An error occured!");
+            }
 
-                                                                      //ACCOUNTING
+            finally
+            {
+                if (conn != null)
+                {
+                    conn.Close();
+                }
+            }
+            return false;
+        }
 
-            public static RegularEmployee[] GetEmployees()
+        private static int GetShiftIndex(Shift shift, int dayId, int employeeId)
+        {
+            MySqlConnection conn = null;
+            try
+            {
+
+                conn = new MySqlConnection(connStr);
+
+                //returns a row if the employee is in the employees_workdays table
+                String sql = "SELECT * FROM employees_workdays WHERE day_id = @dayId AND employee_id = @employeeId";
+                MySqlCommand cmd = new MySqlCommand(sql, conn);
+                cmd.Parameters.AddWithValue("@dayId", dayId);
+                cmd.Parameters.AddWithValue("@employeeId", employeeId);
+
+                conn.Open();
+                MySqlDataReader result = cmd.ExecuteReader();
+                if (result.Read())
+                {
+                    if (result[2].ToString() == shift.ToString()) { return 2; }
+                    else if (result[3].ToString() == shift.ToString()) { return 3; }
+                }
+
+
+            }
+            catch (MySqlException ex)
+            {
+                MessageBox.Show("An error occured!");
+            }
+
+            finally
+            {
+                if (conn != null)
+                {
+                    conn.Close();
+                }
+            }
+            return -1;
+
+        }
+
+
+        // public static void AssignAbsence(AbsenceReason absenceReason, int employeeID , int dayId)
+        // {
+
+        //     if (/*if query retrieves a row for this dayID*/)
+        //     {
+        //         //SQL - UPDATE the row in employees_workdays with the new values. (Shift- "None" + Absence & AbsenceReason)
+        //     }
+        //     else
+        //     {
+
+        //         //SQL - INSERT a new row in employees_workdays with Absence and AbsenceReason
+        //     }
+
+        // }
+
+        // public static void ChangeNeededJobPosition(JobPosition jobPosition, int amount , int dayId)
+        // {
+        //     //SQL query to UPDATE the value in the days table
+        // }
+
+        //===========================================================ACCOUNTING================================================================================
+
+        public static RegularEmployee[] GetEmployees()
         {
 
             MySqlConnection conn = null;
@@ -502,6 +608,6 @@ namespace PRJMediaBazaar
             return employees.ToArray();
 
         }
-
     }
+
 }
