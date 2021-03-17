@@ -10,7 +10,7 @@ namespace PRJMediaBazaar
     {
 
         private List<EmployeePreference> _employeesPreferences;
-        private List<EmployeeShift> _employeesShifts;
+        private List<EmployeeWorkday> _employeesWorkdays;
 
         public int Id { get; private set; }
         public int SecurityNeeded { get; private set; }
@@ -41,7 +41,7 @@ namespace PRJMediaBazaar
            int warehouseManagersNeeded)
         {
             _employeesPreferences = new List<EmployeePreference>();
-            _employeesShifts = new List<EmployeeShift>();
+            _employeesWorkdays = new List<EmployeeWorkday>();
             Id = id;
             SecurityNeeded = securityNeeded;
             CashiersNeeded = cashiersNeeded;
@@ -51,14 +51,14 @@ namespace PRJMediaBazaar
             Date = date;
         }
 
-        public void AddEmployeeShiftFromDatabase(EmployeeShift es)
+        public void AddEmployeeShiftFromDatabase(EmployeeWorkday es)
         {
-            _employeesShifts.Add(es);
+            _employeesWorkdays.Add(es);
         }
 
-        public EmployeeShift[] EmployeeShifts()
+        public EmployeeWorkday[] EmployeeShifts()
         {
-            return _employeesShifts.ToArray();
+            return _employeesWorkdays.ToArray();
         }
 
 

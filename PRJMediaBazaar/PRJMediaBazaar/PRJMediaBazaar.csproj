@@ -92,11 +92,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Availabilities.cs" />
     <Compile Include="Database.cs" />
+    <Compile Include="Scheduling\EmployeePlanner.cs" />
     <Compile Include="Scheduling\AbsenceReason.cs" />
     <Compile Include="Scheduling\Day.cs" />
     <Compile Include="Scheduling\EmployeePreference.cs" />
-    <Compile Include="Scheduling\EmployeeShift.cs" />
+    <Compile Include="Scheduling\EmployeeWorkday.cs" />
     <Compile Include="HRHome.cs">
       <SubType>Form</SubType>
     </Compile>

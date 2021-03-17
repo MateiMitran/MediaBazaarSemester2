@@ -11,13 +11,21 @@ namespace PRJMediaBazaar
       
         List<Day> _days;
 
-        public Schedule(List<Day> days, int id, DateTime startDate, DateTime endDate)
+        public Schedule(List<Day> days, int id, DateTime startDate, DateTime endDate, bool isOutdated)
         {
             _days = days;
             Id = id;
             StartDate = startDate;
             EndDate = endDate;
-            IsOutdated = false;
+            IsOutdated = isOutdated;
+        }
+        public Schedule(int scheduleId, DateTime startDate, DateTime endDate, bool isOutdated)
+        {
+            Id = scheduleId;
+            StartDate = startDate;
+            EndDate = endDate;
+            IsOutdated = isOutdated;
+            _days = null;
         }
 
         public int Id { get; private set; }
@@ -26,6 +34,11 @@ namespace PRJMediaBazaar
         public bool IsOutdated { get; private set; }
 
         public List<Day> Days { get { return _days; } }
+
+        public override string ToString()
+        {
+            return $"{StartDate.ToString("dd-MM-yyyy")} - {EndDate.ToString("dd-MM-yyyy")}";
+        }
 
     }
 }

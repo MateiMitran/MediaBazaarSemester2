@@ -13,6 +13,7 @@ namespace PRJMediaBazaar
      partial class HRHome : Form
     {
         RegularEmployee[] _employees;
+        Schedule[] _schedules;
 
         public HRHome()
         {
@@ -23,6 +24,12 @@ namespace PRJMediaBazaar
             {
                 cbAllEmployees.Items.Add(e.FirstName + " " + e.LastName);
             }
+            _schedules = Database.GetAllSchedules();
+            foreach(Schedule s in _schedules)
+            {
+                cbSchedule.Items.Add(s);
+            }
+            
         }
 
         private void label2_Click(object sender, EventArgs e)
@@ -129,9 +136,37 @@ namespace PRJMediaBazaar
 
         }
 
-        private void btnGenerateSchedule_Click(object sender, EventArgs e)
+
+        private void cbSchedule_SelectedIndexChanged(object sender, EventArgs e)
         {
-           
+            Schedule schedule = (Schedule)cbSchedule.SelectedItem;
+            int scheduleId = schedule.Id;
+            UpdateDaysCheckbox(schedule);
+
+        }
+
+        private void UpdateDaysCheckbox(Schedule schedule)
+        {
+            this.cbDay.Items.Clear();
+            for (DateTime date = schedule.StartDate; date <= schedule.EndDate; date = date.AddDays(1))
+            {
+                cbDay.Items.Add($"{date.DayOfWeek} {date.ToString("dd-MM-yyyy")}");
+            }
+        }
+
+        private void cbPosition_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            //reload the table layout panel, based on the day and position
+        }
+
+        private void cbDay_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            //if a position is selected, reload the table layout panel, based on the day and position
+        }
+
+        private void btnChangeNeededPosition_Click(object sender, EventArgs e)
+        {
+            //based on the selected position and day, open a new form to change the needed amount of that the position
         }
     }
 }

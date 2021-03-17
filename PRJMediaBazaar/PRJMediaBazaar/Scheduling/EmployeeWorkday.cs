@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace PRJMediaBazaar
 {
-    class EmployeeShift
+    class EmployeeWorkday
     {
-        public EmployeeShift(int dayID, DateTime date, int employeeID, Shift firstShift, Shift secondShift, bool absence,AbsenceReason absenceReason)
+        public EmployeeWorkday(int dayID, DateTime date, int employeeID, Shift firstShift, Shift secondShift, bool absence,AbsenceReason absenceReason)
         {
             DayID = dayID;
             Date = date;

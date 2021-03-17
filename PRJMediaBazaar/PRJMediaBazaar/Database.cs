@@ -15,22 +15,22 @@ namespace PRJMediaBazaar
 
         //============================================================SCHEDULING=================================================================================
 
-       
-        public static Schedule GetSchedule(DateTime startDate, DateTime endDate)
+       //Maybe we don't need this method,but let's keep it here for now
+        public static Schedule GetScheduleObject(DateTime startDate, DateTime endDate)
         {
             int scheduleId = GetScheduleId(startDate, endDate);
             Schedule schedule = null;
 
             if (scheduleId > 0 && ScheduleIsEmpty(scheduleId))
             {
-                schedule = GetEmptySchedule(startDate, endDate); // Get the schedule with empty EmployeeShift list in the days
+                schedule = GetEmptySchedule(startDate, endDate); // Get the schedule with empty EmployeeWorkday list in the days
             }
 
             else if (scheduleId > 0 && !ScheduleIsEmpty(scheduleId))
             {
 
                 schedule = GetEmptySchedule(startDate, endDate);
-                List<EmployeeShift> employeeShifts = new List<EmployeeShift>();
+                List<EmployeeWorkday> employeeWorkdays = new List<EmployeeWorkday>();
 
                 MySqlConnection conn = null;
                 try
@@ -42,7 +42,7 @@ namespace PRJMediaBazaar
                     cmd.Parameters.AddWithValue("@scheduleId", scheduleId);
                     conn.Open();
                     MySqlDataReader dr = cmd.ExecuteReader();
-                    while (dr.Read()) //add EmployeeShift objects to the list of employeeShifts
+                    while (dr.Read()) //add EmployeeWorkday objects to the list of employeeShifts
                     {
                         int dayId = Convert.ToInt32(dr[0]);
                         int employeeId = Convert.ToInt32(dr[1]);
@@ -51,11 +51,11 @@ namespace PRJMediaBazaar
                         bool absence = Convert.ToBoolean(dr[4]);
                         AbsenceReason absenceReason = (AbsenceReason)Enum.Parse(typeof(AbsenceReason), dr[5].ToString());
                         DateTime date = DateTime.Parse(dr[6].ToString());
-                        employeeShifts.Add(new EmployeeShift(dayId, date, employeeId, firstShift, secondShift, absence, absenceReason));
+                        employeeWorkdays.Add(new EmployeeWorkday(dayId, date, employeeId, firstShift, secondShift, absence, absenceReason));
                     }
-                    foreach (Day d in schedule.Days) // separate the EmployeeShift objects in the days they belong to
+                    foreach (Day d in schedule.Days) // separate the EmployeeWorkday objects in the days they belong to
                     {
-                        foreach (EmployeeShift es in employeeShifts)
+                        foreach (EmployeeWorkday es in employeeWorkdays)
                         {
                             if (es.DayID == d.Id)
                             {
@@ -79,6 +79,44 @@ namespace PRJMediaBazaar
 
             }
             return schedule;
+        }
+
+        public static Schedule[] GetAllSchedules()
+        {
+            List<Schedule> schedules = new List<Schedule>();
+
+            MySqlConnection conn = null;
+            try
+            {
+                conn = new MySqlConnection(connStr);
+
+                String sql = "SELECT * FROM schedules;";
+                MySqlCommand cmd = new MySqlCommand(sql, conn);
+                conn.Open();
+                MySqlDataReader dr = cmd.ExecuteReader();
+                while (dr.Read())
+                {
+                    int id = Convert.ToInt32(dr[0]);
+                    DateTime startDate = dr.GetDateTime(1);
+                    DateTime endDate = dr.GetDateTime(2);
+                    bool isOutdated = Convert.ToBoolean(dr[3]);
+                    schedules.Add(new Schedule(id, startDate, endDate, isOutdated));
+                }
+
+            }
+            catch (MySqlException ex)
+            {
+                MessageBox.Show("An error occured!");
+            }
+
+            finally
+            {
+                if (conn != null)
+                {
+                    conn.Close();
+                }
+            }
+            return schedules.ToArray();
         }
 
         public static int GetDayId(DateTime date)
@@ -113,12 +151,20 @@ namespace PRJMediaBazaar
             }
             return -1;
         }
+
+        //to be implemented
+        public static bool DayIsFull(int dayId)
+        {
+            //get the positions_needed for that day
+            //get the count of each shift in employees_workdays and compare it to the coresponding the positionNeeded
+            return false;
+        }
         
 
         //Helping methods for GetSchedule()
 
         /// <summary>
-        /// Creating the Schedule with a List of 14 Days, each day has empty List<EmployeeShift> and List<EmployeePreference>
+        /// Creating the Schedule with a List of 14 Days, each day has empty List<EmployeeWorkday> and List<EmployeePreference>
         /// </summary>
         /// <param name="startDate"></param>
         /// <param name="endDate"></param>
@@ -151,7 +197,7 @@ namespace PRJMediaBazaar
                     days.Add(new Day(id, date, securityNeeded, cashiersNeeded, stockersNeeded, salesAssistantsNeeded, warehouseManagersNeeded));
                 }
 
-                schedule = new Schedule(days, scheduleId, startDate, endDate);
+                schedule = new Schedule(days, scheduleId, startDate, endDate, false);
 
             }
             catch (MySqlException ex)
@@ -248,7 +294,7 @@ namespace PRJMediaBazaar
         //ASSIGNING SHIFTS
 
         //Helping methods for AssignShift()
-        private static int GetEmptyShiftIndex(string firstShift, string secondShift)
+        public static int GetEmptyShiftIndex(string firstShift, string secondShift)
         {
             if (firstShift == "None" && secondShift != "None")
             {
@@ -261,7 +307,7 @@ namespace PRJMediaBazaar
             return -1;
         }
 
-        private static int GetBusyShiftIndex(string firstShift, string secondShift)
+        public static int GetBusyShiftIndex(string firstShift, string secondShift)
         {
             if (firstShift == "None" && secondShift != "None")
             {
@@ -274,7 +320,7 @@ namespace PRJMediaBazaar
             return -1;
         }
 
-        private static bool DoubleShiftIsValid(string assignedShift, string shiftToAssign)
+        public static bool DoubleShiftIsValid(string assignedShift, string shiftToAssign)
         {
             if (assignedShift == "Morning" && shiftToAssign == "Evening")
             {
@@ -379,7 +425,7 @@ namespace PRJMediaBazaar
             return false;
         }
 
-        public static bool AssignShift(Shift shift, int employeeId, int dayId)
+        public static bool AssignShift(Shift shift, int employeeId, int dayId, int emptyShiftIndex)
         {
 
             MySqlConnection conn = null;
@@ -399,49 +445,8 @@ namespace PRJMediaBazaar
                 MySqlDataReader result = cmd.ExecuteReader();
                 if (result.Read()) //the employee is in the workdays_table
                 {
-                    if (!Convert.ToBoolean(result[4])) //the employee isn't absent
-                    {
-                        int index = GetEmptyShiftIndex(result[2].ToString(), result[3].ToString());
-                        int busyIndex = GetBusyShiftIndex(result[2].ToString(), result[3].ToString());
-
-                        if (index == -1)  //employee has a double shift
-                        {
-                            MessageBox.Show("Employee already has a double shift");
-                            return false;
-                        }
-
-                        else if (index != -1 && DoubleShiftIsValid(result[busyIndex].ToString(), shift.ToString())) //employee has only one shift, and the second one is valid
-                        {
-                            MessageBox.Show("Successfully added a second shift!");
-                            return UpdateSecondShift(shift, employeeId, dayId, index);
-                        }
-                        else //employee has either a double shift, or the double shift is invalid
-                        {
-                            MessageBox.Show("Double shift is invalid! Shifts should be consecutive.");
-                            return false;
-                        }
-                    }
-
-                    else if (Convert.ToBoolean(result[4]))
-                    {
-                        DialogResult dialogResult = MessageBox.Show($"The employee has an absence: {result[5].ToString()}. Do you want to " +
-                            "remove the absence and assign him a shift?", "Confirm", MessageBoxButtons.YesNo);
-
-                        if (dialogResult == DialogResult.Yes)
-                        {
-                            if (UpdateAbsence(employeeId, dayId, false, AbsenceReason.None))
-                            {
-                                MessageBox.Show("Successfully removed absence and assigned a shift");
-                                return UpdateSecondShift(shift, employeeId, dayId, 2);
-                            }
-                        }
-                        else
-                        {
-                            return false;
-                        }
-                    }
+                    return UpdateSecondShift(shift, employeeId, dayId, emptyShiftIndex);                
                 }
-
 
                 else //if the employee is not in the employees_workdays table, insert a row
                 {
@@ -788,6 +793,20 @@ namespace PRJMediaBazaar
             return employees.ToArray();
 
         }
+
+        public static RegularEmployee[] GetEmployees(string jobPosition)
+        {
+            List<RegularEmployee> employees = new List<RegularEmployee>();
+           foreach (RegularEmployee e in GetEmployees())
+            {
+                if (e.JobPosition == jobPosition)
+                {
+                    employees.Add(e);
+                }
+            }
+            return employees.ToArray();
+        }
+
         
     }
 
