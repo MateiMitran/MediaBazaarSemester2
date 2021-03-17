@@ -18,7 +18,7 @@ namespace PRJMediaBazaar
         {
             InitializeComponent();
    
-            _employees = DatabaseHelper.GetEmployees();
+            _employees = Database.GetEmployees();
             foreach(RegularEmployee e in _employees)
             {
                 cbAllEmployees.Items.Add(e.FirstName + " " + e.LastName);

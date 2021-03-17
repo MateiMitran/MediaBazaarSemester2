@@ -12,11 +12,9 @@ namespace PRJMediaBazaar
 {
      partial class ShiftAssigning : Form
     {
-        private HrManagement _hrm;
-        public ShiftAssigning(HrManagement hrm)
+        public ShiftAssigning()
         {
             InitializeComponent();
-            _hrm = hrm;
         }
     }
 }

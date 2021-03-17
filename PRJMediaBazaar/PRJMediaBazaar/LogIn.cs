@@ -38,6 +38,7 @@ namespace PRJMediaBazaar
             HRHome home = new HRHome();
             home.Show();
             this.Hide();
+            Database.AssignShift(Shift.Morning, 16, 1);
         }
 
         private void LogIn_Load(object sender, EventArgs e)

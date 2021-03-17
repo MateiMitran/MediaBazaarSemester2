@@ -92,8 +92,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Accounts\Gender.cs" />
-    <Compile Include="DatabaseHelper.cs" />
+    <Compile Include="Database.cs" />
     <Compile Include="Scheduling\AbsenceReason.cs" />
     <Compile Include="Scheduling\Day.cs" />
     <Compile Include="Scheduling\EmployeePreference.cs" />
@@ -104,7 +103,6 @@
     <Compile Include="HRHome.Designer.cs">
       <DependentUpon>HRHome.cs</DependentUpon>
     </Compile>
-    <Compile Include="HrManagement.cs" />
     <Compile Include="Accounts\HrManager.cs" />
     <Compile Include="Accounts\JobPosition.cs" />
     <Compile Include="LogIn.cs">
