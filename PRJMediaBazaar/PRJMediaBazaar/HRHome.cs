@@ -29,7 +29,7 @@ namespace PRJMediaBazaar
             {
                 cbSchedule.Items.Add(s);
             }
-            
+            cbPosition.Text = "All";
         }
 
         private void label2_Click(object sender, EventArgs e)
@@ -157,6 +157,8 @@ namespace PRJMediaBazaar
         private void cbPosition_SelectedIndexChanged(object sender, EventArgs e)
         {
             //reload the table layout panel, based on the day and position
+            //if All is selected, disable the change position button.
+            //enable the button if All is not selected.
         }
 
         private void cbDay_SelectedIndexChanged(object sender, EventArgs e)

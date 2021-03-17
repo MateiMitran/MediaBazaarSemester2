@@ -304,6 +304,7 @@ namespace PRJMediaBazaar
             this.cbPosition.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbPosition.FormattingEnabled = true;
             this.cbPosition.Items.AddRange(new object[] {
+            "All",
             "Security",
             "Cashier",
             "Stocker",
@@ -350,7 +351,6 @@ namespace PRJMediaBazaar
             this.panelSchedule.Name = "panelSchedule";
             this.panelSchedule.Size = new System.Drawing.Size(782, 495);
             this.panelSchedule.TabIndex = 20;
-            this.panelSchedule.Paint += new System.Windows.Forms.PaintEventHandler(this.panelSchedule_Paint);
             // 
             // lbIncompleteDays
             // 
@@ -414,13 +414,13 @@ namespace PRJMediaBazaar
             this.ShiftsTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 101F));
             this.ShiftsTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 118F));
             this.ShiftsTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 128F));
-            this.ShiftsTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 142F));
+            this.ShiftsTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 144F));
             this.ShiftsTable.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ShiftsTable.ForeColor = System.Drawing.Color.White;
             this.ShiftsTable.Location = new System.Drawing.Point(0, 0);
             this.ShiftsTable.Name = "ShiftsTable";
             this.ShiftsTable.RowCount = 1;
-            this.ShiftsTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 385F));
+            this.ShiftsTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 387F));
             this.ShiftsTable.Size = new System.Drawing.Size(488, 367);
             this.ShiftsTable.TabIndex = 11;
             // 

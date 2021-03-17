@@ -38,6 +38,8 @@ namespace PRJMediaBazaar
             HRHome home = new HRHome();
             home.Show();
             this.Hide();
+            //ShiftAssigning form = new ShiftAssigning(1, DateTime.Parse("Jan 4, 2021"), Shift.Evening, "Security");
+            //form.Show();
         }
 
         private void LogIn_Load(object sender, EventArgs e)
