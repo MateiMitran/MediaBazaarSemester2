@@ -253,6 +253,12 @@ input {
         -o-transition: all 0.2s ease-in-out;
 }
 
+.simple-form .form-group input[type="submit"].small-submit {
+    padding: 12px 15px;
+    width: 30%;
+    text-transform: capitalize;
+}
+
 .simple-form .form-group input[type="submit"]:hover {
     background-color: #7e899c;
 }
