@@ -168,6 +168,7 @@ input {
 .simple-form .form-group.submit {
     text-align: center;
     margin-top: 40px;
+    clear: both;
 }
 
 .simple-form .form-group label {
@@ -176,7 +177,7 @@ input {
     margin-bottom: 3px;
 }
 
-.simple-form .form-group input {
+.simple-form .form-group input, .simple-form .form-group select {
     width: 100%;
     font-size: 18px;
     padding: 10px 15px;
@@ -204,6 +205,34 @@ input {
 .simple-form .form-group input:disabled {
     cursor: not-allowed;
     background-color: #e8eaee;
+}
+
+.simple-form .form-group select {
+    padding: 12px 15px;
+    position: relative;
+    width: 390px;
+    vertical-align: top;
+    appearance: none;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+}
+
+.simple-form .form-group #shift-preferences-arrow-label {
+    overflow: hidden;   
+    position: relative;
+}
+
+.simple-form .form-group #shift-preferences-arrow-label::after {
+    content: "";
+    position: absolute;
+    pointer-events: none;
+    background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHN0cm9rZS13aWR0aD0iMCIgZmlsbD0iIzY2NiIgdmlld0JveD0iMCAwIDEyIDciPjxwYXRoIGQ9Ik0xMS44OTMuNTU5TDExLjMzNiAwIDUuOTQ3IDUuMzkuNTU5IDAgMCAuNTU5bDUuOTQ3IDUuOTQ0eiIvPjwvc3ZnPg==);
+    background-size: contain;
+    background-repeat: no-repeat;
+    top: 50%;
+    right: 12px;
+    width: 15px;
+    height: 8px;
 }
 
 .simple-form .form-group input[type="submit"] {
