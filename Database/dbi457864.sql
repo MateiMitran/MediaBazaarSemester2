@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: studmysql01.fhict.local
--- Generation Time: Mar 18, 2021 at 06:26 PM
+-- Generation Time: Mar 18, 2021 at 06:29 PM
 -- Server version: 5.7.26-log
 -- PHP Version: 7.3.27
 
@@ -416,7 +416,7 @@ INSERT INTO `days` (`id`, `date`, `schedule_id`, `security_needed`, `cashiers_ne
 --
 
 CREATE TABLE `employees` (
-  `id` int(25) NOT NULL,
+  `id` int(65) NOT NULL,
   `first_name` varchar(40) NOT NULL,
   `last_name` varchar(40) NOT NULL,
   `birthDate` date NOT NULL,
@@ -634,7 +634,7 @@ ALTER TABLE `days`
 -- AUTO_INCREMENT for table `employees`
 --
 ALTER TABLE `employees`
-  MODIFY `id` int(25) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=85;
+  MODIFY `id` int(65) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=85;
 
 --
 -- AUTO_INCREMENT for table `schedules`
