@@ -58,8 +58,27 @@
             <div class="dashboard-content" id="dashboard-schedule">
                 <p>Schedule</p>
             </div>
+            <!-- PREFERENCES -->
             <div class="dashboard-content" id="dashboard-preferences">
-                <p>Preferences</p>
+                <form class="simple-form" method="POST" style="margin-top: 70px;">
+                    <div class="form-group half">
+                        <label for="preferences-date">Date:</label>
+                        <input type="date" name="preferences-date" id="preferences-date">
+                    </div>
+                    <div class="form-group half">
+                        <label for="preferences-shift">Preferred Shift:</label>
+                            <label id="shift-preferences-arrow-label">
+                                <select id="preferences-shift" id="preferences-shift">
+                                    <option value="Option 1">Morning</option>
+                                    <option value="Option 2">Middle Day</option>
+                                    <option value="Option 3">Evening</option>
+                                </select>
+                            </label>
+                    </div>
+                    <div class="form-group submit">
+                        <input type="submit" name="preferences-submit" class="small-submit" value="Save" style="margin-top: 30px;">
+                    </div>
+                </form>
             </div>
             <div class="dashboard-content" id="dashboard-rules">
                 <ol>
