@@ -51,6 +51,7 @@ namespace PRJMediaBazaar
             this.cbPosition = new System.Windows.Forms.ComboBox();
             this.lblPosition = new System.Windows.Forms.Label();
             this.panelSchedule = new System.Windows.Forms.Panel();
+            this.lblPositionNeeded = new System.Windows.Forms.Label();
             this.lbIncompleteDays = new System.Windows.Forms.ListBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -270,7 +271,7 @@ namespace PRJMediaBazaar
             // 
             this.lblMorningShift.AutoSize = true;
             this.lblMorningShift.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.lblMorningShift.Location = new System.Drawing.Point(572, 402);
+            this.lblMorningShift.Location = new System.Drawing.Point(569, 444);
             this.lblMorningShift.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblMorningShift.Name = "lblMorningShift";
             this.lblMorningShift.Size = new System.Drawing.Size(180, 17);
@@ -281,7 +282,7 @@ namespace PRJMediaBazaar
             // 
             this.lblMiddayShift.AutoSize = true;
             this.lblMiddayShift.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.lblMiddayShift.Location = new System.Drawing.Point(572, 426);
+            this.lblMiddayShift.Location = new System.Drawing.Point(569, 468);
             this.lblMiddayShift.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblMiddayShift.Name = "lblMiddayShift";
             this.lblMiddayShift.Size = new System.Drawing.Size(182, 17);
@@ -292,7 +293,7 @@ namespace PRJMediaBazaar
             // 
             this.lblEveningShift.AutoSize = true;
             this.lblEveningShift.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.lblEveningShift.Location = new System.Drawing.Point(572, 450);
+            this.lblEveningShift.Location = new System.Drawing.Point(569, 492);
             this.lblEveningShift.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblEveningShift.Name = "lblEveningShift";
             this.lblEveningShift.Size = new System.Drawing.Size(188, 17);
@@ -329,6 +330,7 @@ namespace PRJMediaBazaar
             // 
             // panelSchedule
             // 
+            this.panelSchedule.Controls.Add(this.lblPositionNeeded);
             this.panelSchedule.Controls.Add(this.lbIncompleteDays);
             this.panelSchedule.Controls.Add(this.label4);
             this.panelSchedule.Controls.Add(this.label3);
@@ -349,21 +351,30 @@ namespace PRJMediaBazaar
             this.panelSchedule.Location = new System.Drawing.Point(0, 0);
             this.panelSchedule.Margin = new System.Windows.Forms.Padding(2);
             this.panelSchedule.Name = "panelSchedule";
-            this.panelSchedule.Size = new System.Drawing.Size(782, 495);
+            this.panelSchedule.Size = new System.Drawing.Size(879, 540);
             this.panelSchedule.TabIndex = 20;
+            // 
+            // lblPositionNeeded
+            // 
+            this.lblPositionNeeded.AutoSize = true;
+            this.lblPositionNeeded.Location = new System.Drawing.Point(215, 116);
+            this.lblPositionNeeded.Name = "lblPositionNeeded";
+            this.lblPositionNeeded.Size = new System.Drawing.Size(89, 13);
+            this.lblPositionNeeded.TabIndex = 36;
+            this.lblPositionNeeded.Text = "Position needed: ";
             // 
             // lbIncompleteDays
             // 
             this.lbIncompleteDays.FormattingEnabled = true;
-            this.lbIncompleteDays.Location = new System.Drawing.Point(555, 131);
+            this.lbIncompleteDays.Location = new System.Drawing.Point(552, 173);
             this.lbIncompleteDays.Name = "lbIncompleteDays";
-            this.lbIncompleteDays.Size = new System.Drawing.Size(218, 264);
+            this.lbIncompleteDays.Size = new System.Drawing.Size(315, 264);
             this.lbIncompleteDays.TabIndex = 35;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(428, 100);
+            this.label4.Location = new System.Drawing.Point(426, 142);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(46, 13);
             this.label4.TabIndex = 34;
@@ -372,7 +383,7 @@ namespace PRJMediaBazaar
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(320, 100);
+            this.label3.Location = new System.Drawing.Point(318, 142);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(41, 13);
             this.label3.TabIndex = 33;
@@ -381,7 +392,7 @@ namespace PRJMediaBazaar
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(199, 100);
+            this.label2.Location = new System.Drawing.Point(197, 142);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(45, 13);
             this.label2.TabIndex = 32;
@@ -390,7 +401,7 @@ namespace PRJMediaBazaar
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(69, 100);
+            this.label5.Location = new System.Drawing.Point(67, 142);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(44, 13);
             this.label5.TabIndex = 31;
@@ -399,29 +410,31 @@ namespace PRJMediaBazaar
             // PanelTableScroll
             // 
             this.PanelTableScroll.AutoScroll = true;
+            this.PanelTableScroll.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.PanelTableScroll.Controls.Add(this.ShiftsTable);
-            this.PanelTableScroll.Location = new System.Drawing.Point(56, 116);
+            this.PanelTableScroll.Location = new System.Drawing.Point(53, 158);
             this.PanelTableScroll.Name = "PanelTableScroll";
             this.PanelTableScroll.Size = new System.Drawing.Size(488, 367);
             this.PanelTableScroll.TabIndex = 30;
             // 
             // ShiftsTable
             // 
-            this.ShiftsTable.AutoScroll = true;
             this.ShiftsTable.AutoSize = true;
-            this.ShiftsTable.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
+            this.ShiftsTable.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.ShiftsTable.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.ShiftsTable.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Inset;
             this.ShiftsTable.ColumnCount = 4;
-            this.ShiftsTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 101F));
-            this.ShiftsTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 118F));
-            this.ShiftsTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 128F));
-            this.ShiftsTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 144F));
-            this.ShiftsTable.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ShiftsTable.ForeColor = System.Drawing.Color.White;
+            this.ShiftsTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 47.24771F));
+            this.ShiftsTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 52.75229F));
+            this.ShiftsTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 130F));
+            this.ShiftsTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 138F));
+            this.ShiftsTable.Dock = System.Windows.Forms.DockStyle.Top;
             this.ShiftsTable.Location = new System.Drawing.Point(0, 0);
             this.ShiftsTable.Name = "ShiftsTable";
             this.ShiftsTable.RowCount = 1;
-            this.ShiftsTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 387F));
-            this.ShiftsTable.Size = new System.Drawing.Size(488, 367);
+            this.ShiftsTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.ShiftsTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.ShiftsTable.Size = new System.Drawing.Size(488, 4);
             this.ShiftsTable.TabIndex = 11;
             // 
             // label1
@@ -540,14 +553,14 @@ namespace PRJMediaBazaar
             this.pnlNavbar.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlNavbar.Location = new System.Drawing.Point(0, 0);
             this.pnlNavbar.Name = "pnlNavbar";
-            this.pnlNavbar.Size = new System.Drawing.Size(782, 48);
+            this.pnlNavbar.Size = new System.Drawing.Size(879, 48);
             this.pnlNavbar.TabIndex = 5;
             // 
             // HRHome
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(782, 495);
+            this.ClientSize = new System.Drawing.Size(879, 540);
             this.Controls.Add(this.pnlNavbar);
             this.Controls.Add(this.panelSchedule);
             this.Margin = new System.Windows.Forms.Padding(2);
@@ -607,7 +620,8 @@ namespace PRJMediaBazaar
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Panel PanelTableScroll;
-        private System.Windows.Forms.TableLayoutPanel ShiftsTable;
         private System.Windows.Forms.ListBox lbIncompleteDays;
+        private System.Windows.Forms.Label lblPositionNeeded;
+        public System.Windows.Forms.TableLayoutPanel ShiftsTable;
     }
 }

@@ -119,6 +119,8 @@
     <Compile Include="Scheduling\Schedule.cs" />
     <Compile Include="Scheduling\Shift.cs" />
     <Compile Include="Accounts\User.cs" />
+    <Compile Include="Scheduling\ShiftSeparator.cs" />
+    <Compile Include="Scheduling\NamesRow.cs" />
     <Compile Include="ShiftAssigning.cs">
       <SubType>Form</SubType>
     </Compile>

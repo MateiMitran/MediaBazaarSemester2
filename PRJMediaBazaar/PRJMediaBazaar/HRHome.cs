@@ -29,7 +29,7 @@ namespace PRJMediaBazaar
             {
                 cbSchedule.Items.Add(s);
             }
-            cbPosition.Text = "All";
+            cbPosition.Text = "All";  
         }
 
         private void label2_Click(object sender, EventArgs e)
@@ -141,34 +141,300 @@ namespace PRJMediaBazaar
         {
             Schedule schedule = (Schedule)cbSchedule.SelectedItem;
             int scheduleId = schedule.Id;
-            UpdateDaysCheckbox(schedule);
+            UpdateDaysCheckbox(scheduleId);
 
         }
 
-        private void UpdateDaysCheckbox(Schedule schedule)
-        {
-            this.cbDay.Items.Clear();
-            for (DateTime date = schedule.StartDate; date <= schedule.EndDate; date = date.AddDays(1))
-            {
-                cbDay.Items.Add($"{date.DayOfWeek} {date.ToString("dd-MM-yyyy")}");
-            }
-        }
 
         private void cbPosition_SelectedIndexChanged(object sender, EventArgs e)
         {
+            UpdatePositionNeededLabel();
             //reload the table layout panel, based on the day and position
             //if All is selected, disable the change position button.
             //enable the button if All is not selected.
+            Day day = (Day)this.cbDay.SelectedItem;
+            if (day != null)
+            {
+                if (cbPosition.Text != "All")
+                {
+                    LoadTableByPosition(day, cbPosition.Text);
+                }
+            }
+
         }
 
         private void cbDay_SelectedIndexChanged(object sender, EventArgs e)
         {
+            UpdatePositionNeededLabel();
             //if a position is selected, reload the table layout panel, based on the day and position
+            Day day = (Day)this.cbDay.SelectedItem;
+            if (cbPosition.Text != "All")
+            {
+                LoadTableByPosition(day, cbPosition.Text);
+            }
         }
+
 
         private void btnChangeNeededPosition_Click(object sender, EventArgs e)
         {
             //based on the selected position and day, open a new form to change the needed amount of that the position
+
         }
+
+
+        public void LoadTableByPosition(Day day, string jobPosition)
+        {
+            try
+            {
+                int neededJobPositionAmount = day.GetNeededPositionAmount(jobPosition);
+                EmployeeWorkday[] workdays = Database.GetEmployeesWorkdays(day.Id, jobPosition);
+                ShiftSeparator ssp = new ShiftSeparator(workdays, neededJobPositionAmount);
+                NamesRow[] namesRows = ssp.GetNamesRows();
+
+                //Clear Table and suspend rendering is easier then editing each row
+                ShiftsTable.SuspendLayout();
+                ShiftsTable.Parent.SuspendLayout();
+                ShiftsTable.Visible = false;
+                ShiftsTable.Controls.Clear();
+                ShiftsTable.RowCount = 0;
+                ShiftsTable.ColumnCount = 4;
+                for (int i = 0; i < namesRows.Count(); i++)
+                {
+                    Button MorningShiftButton = null;
+                    Button MiddayShiftButton = null;
+                    Button EveningShiftButton = null;
+                    //label with the position
+                    Label JobPositionLabel = new Label()
+                    {
+                        BackColor = System.Drawing.Color.Transparent,
+                        Font = new System.Drawing.Font("Rockwell Condensed", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0))),
+                        ForeColor = System.Drawing.Color.White,
+                        Location = new System.Drawing.Point(4, 1),
+                        Name = "JobPositionLabel",
+                        Size = new System.Drawing.Size(365, 38),
+                        TabIndex = 0,
+                        Text = jobPosition,
+                        TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+                    };
+
+                    if (namesRows[i].Morning == "-" && namesRows[i].Midday == "-" && namesRows[i].Evening == "-") // row with unassigned shifts
+                    {
+                        MorningShiftButton = GetUnassignedShiftButton(day, Shift.Morning, jobPosition);
+                        MiddayShiftButton = GetUnassignedShiftButton(day, Shift.Midday, jobPosition);
+                        EveningShiftButton = GetUnassignedShiftButton(day, Shift.Evening, jobPosition);
+
+                    }
+
+                    else //row with assigned shifts
+                    {
+                        int emptyEmployeeIndex = GetEmptyShiftIndex(namesRows[i].Morning, namesRows[i].Midday, namesRows[i].Evening);
+                        int busyEmployeeIndex = GetBusyShiftIndex(namesRows[i].Morning, namesRows[i].Midday, namesRows[i].Evening);
+
+                        if (emptyEmployeeIndex != -1) //2 assigned buttons, 1 unassigned button
+                        {
+                            //separate the buttons
+                            switch (emptyEmployeeIndex)
+                            {
+                                case 1:
+                                    MorningShiftButton = GetUnassignedShiftButton(day, Shift.Morning, jobPosition);
+                                    MiddayShiftButton = GetAssignedShiftButton(day, Shift.Midday, jobPosition, namesRows[i].Midday);
+                                    EveningShiftButton = GetAssignedShiftButton(day, Shift.Evening, jobPosition, namesRows[i].Evening);
+                                    break;
+                                case 2:
+                                    MorningShiftButton = GetAssignedShiftButton(day, Shift.Morning, jobPosition, namesRows[i].Morning);
+                                    MiddayShiftButton = GetUnassignedShiftButton(day, Shift.Midday, jobPosition);
+                                    EveningShiftButton = GetAssignedShiftButton(day, Shift.Evening, jobPosition, namesRows[i].Evening);
+                                    break;
+                                case 3:
+                                    MorningShiftButton = GetAssignedShiftButton(day, Shift.Morning, jobPosition, namesRows[i].Morning);
+                                    MiddayShiftButton = GetAssignedShiftButton(day, Shift.Midday, jobPosition, namesRows[i].Midday);
+                                    EveningShiftButton = GetUnassignedShiftButton(day, Shift.Evening, jobPosition);
+                                    break;
+                            }
+                        }
+                        else if (busyEmployeeIndex != -1) //2 unassigned buttons, 1 assigned button
+                        {
+                            //separate the buttons
+                            switch (busyEmployeeIndex)
+                            {
+                                case 1:
+                                    MorningShiftButton = GetAssignedShiftButton(day, Shift.Morning, jobPosition, namesRows[i].Morning);
+                                    MiddayShiftButton = GetUnassignedShiftButton(day, Shift.Midday, jobPosition);
+                                    EveningShiftButton = GetUnassignedShiftButton(day, Shift.Evening, jobPosition);
+                                    break;
+                                case 2:
+                                    MorningShiftButton = GetUnassignedShiftButton(day, Shift.Morning, jobPosition);
+                                    MiddayShiftButton = GetAssignedShiftButton(day, Shift.Midday, jobPosition, namesRows[i].Midday);
+                                    EveningShiftButton = GetUnassignedShiftButton(day, Shift.Evening, jobPosition);
+                                    break;
+                                case 3:
+                                    MorningShiftButton = GetUnassignedShiftButton(day, Shift.Morning, jobPosition);
+                                    MiddayShiftButton = GetUnassignedShiftButton(day, Shift.Midday, jobPosition);
+                                    EveningShiftButton = GetAssignedShiftButton(day, Shift.Evening, jobPosition, namesRows[i].Evening);
+                                    break;
+                            }
+                        }
+                        else //row is full
+                        {
+                            MorningShiftButton = GetAssignedShiftButton(day, Shift.Morning, jobPosition, namesRows[i].Morning);
+                            MiddayShiftButton = GetAssignedShiftButton(day, Shift.Midday, jobPosition, namesRows[i].Midday);
+                            EveningShiftButton = GetAssignedShiftButton(day, Shift.Evening, jobPosition, namesRows[i].Evening);
+                        }
+                    }
+
+                    ShiftsTable.Controls.Add(JobPositionLabel, 0, ShiftsTable.RowCount - 1);
+                    ShiftsTable.Controls.Add(MorningShiftButton, 1, ShiftsTable.RowCount - 1);
+                    ShiftsTable.Controls.Add(MiddayShiftButton, 2, ShiftsTable.RowCount - 1);
+                    ShiftsTable.Controls.Add(EveningShiftButton, 3, ShiftsTable.RowCount - 1);
+
+
+
+                }
+
+                //Enable rendering after inserting rows
+                ShiftsTable.Visible = true;
+                ShiftsTable.Parent.ResumeLayout();
+                ShiftsTable.ResumeLayout();
+            }
+            catch(NullReferenceException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
+        }
+
+
+        private Button GetUnassignedShiftButton(Day day, Shift shift, string jobPosition)
+        {
+            Button UnassignedShiftButton = new Button()
+            {
+                Cursor = System.Windows.Forms.Cursors.Hand,
+                FlatStyle = System.Windows.Forms.FlatStyle.Flat,
+                Dock = DockStyle.Fill,
+                Font = new System.Drawing.Font("Microsoft YaHei", 6.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0))),
+                ForeColor = System.Drawing.Color.White,
+                BackColor = System.Drawing.Color.Red,
+                Location = new System.Drawing.Point(0, 0),
+                Name = "UnassignedShiftButton",
+                TabIndex = 0,
+                Text = "Unassigned",
+                UseVisualStyleBackColor = true,
+                Size = new System.Drawing.Size(365, 38)
+            };
+            UnassignedShiftButton.FlatAppearance.BorderSize = 0;
+            UnassignedShiftButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            UnassignedShiftButton.Click += delegate (object sender, EventArgs e) { UnassignedShiftButton_Click(sender, e, new ShiftAssigning(day.Id, day.Date, shift, jobPosition,this,day)); };
+            return UnassignedShiftButton;
+
+
+        }
+
+        private Button GetAssignedShiftButton(Day day, Shift shift, string jobPosition, string employeeName)
+        {
+            Button AssignedShiftButton = new Button()
+            {
+                Cursor = System.Windows.Forms.Cursors.Hand,
+                FlatStyle = System.Windows.Forms.FlatStyle.Flat,
+                Dock = DockStyle.Fill,
+                Font = new System.Drawing.Font("Microsoft YaHei", 6.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0))),
+                ForeColor = System.Drawing.Color.Black,
+                BackColor = System.Drawing.Color.White,
+                Location = new System.Drawing.Point(0, 0),
+                Name = "AssignedShiftButton",
+                TabIndex = 0,
+                Text = employeeName,
+                UseVisualStyleBackColor = true,
+                Size = new System.Drawing.Size(365, 38)
+            };
+            AssignedShiftButton.FlatAppearance.BorderSize = 0;
+            AssignedShiftButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            AssignedShiftButton.Click += delegate (object sender, EventArgs e) { AssignedShiftButton_Click(sender, e); };
+            return AssignedShiftButton;
+        }
+
+
+        private void UnassignedShiftButton_Click(object sender, EventArgs e, ShiftAssigning assigningForm)
+        {
+            ShiftsTable.Enabled = false;
+            assigningForm.Show();
+        }
+
+        private void AssignedShiftButton_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void UpdateDaysCheckbox(int scheduleId)
+        {
+            Day[] days = Database.GetDays(scheduleId);
+            this.cbDay.Items.Clear();
+            foreach (Day d in days)
+            {
+                this.cbDay.Items.Add(d);
+            }
+        }
+
+        private void UpdatePositionNeededLabel()
+        {
+            Day day = (Day)cbDay.SelectedItem;
+            if (this.cbPosition.Text != "All" && day != null)
+            {
+              
+                this.lblPositionNeeded.Text = day.GetNeededPositionInfo(cbPosition.Text);
+            }
+            else if (this.cbPosition.Text == "All" && day != null)
+            {
+                this.lblPositionNeeded.Text = day.GetAllNeededPositionsInfo();
+            }
+        }
+
+        private int GetEmptyShiftIndex(string morning, string mid, string evening)
+        {
+            if (morning != "-" && mid != "-" && evening == "-")
+            {
+                return 3;
+            }
+           else  if (morning != "-" && mid == "-" && evening != "-")
+            {
+                return 2;
+            }
+            else if (morning == "-" && mid != "-" && evening != "-")
+            {
+                return 1;
+            }
+            return -1;
+        }
+
+        private int GetBusyShiftIndex(string morning, string mid, string evening)
+        {
+          
+            if (morning != "-" && mid == "-" && evening == "-")
+            {
+                return 1;
+            }
+            else if (morning == "-" && mid == "-" && evening != "-")
+            {
+                return 3;
+            }
+            else if (morning == "-" && mid != "-" && evening == "-")
+            {
+                return 2;
+            }
+            return -1;
+        }
+
+
+        public string GetEmployeeFullName(int id)
+        {
+            foreach(RegularEmployee e in _employees)
+            {
+                if (e.Id == id)
+                {
+                    return $"{e.FirstName} {e.LastName}";
+                }
+            }
+            return "";
+        }
+
     }
 }

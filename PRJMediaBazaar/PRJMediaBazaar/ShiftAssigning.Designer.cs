@@ -102,6 +102,7 @@
             this.Controls.Add(this.lbAvailableEmployees);
             this.Name = "ShiftAssigning";
             this.Text = "ShiftAssigning";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.ShiftAssigning_FormClosed);
             this.ResumeLayout(false);
             this.PerformLayout();
 

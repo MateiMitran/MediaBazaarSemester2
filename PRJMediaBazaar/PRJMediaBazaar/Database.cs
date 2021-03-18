@@ -15,70 +15,50 @@ namespace PRJMediaBazaar
 
         //============================================================SCHEDULING=================================================================================
 
-       //Maybe we don't need this method,but let's keep it here for now
-        public static Schedule GetScheduleObject(DateTime startDate, DateTime endDate)
+
+        public static EmployeeWorkday[] GetEmployeesWorkdays(int dayId, string jobPosition)
         {
-            int scheduleId = GetScheduleId(startDate, endDate);
-            Schedule schedule = null;
-
-            if (scheduleId > 0 && ScheduleIsEmpty(scheduleId))
+            MySqlConnection conn = null;
+            List<EmployeeWorkday> workdays = new List<EmployeeWorkday>();
+            try
             {
-                schedule = GetEmptySchedule(startDate, endDate); // Get the schedule with empty EmployeeWorkday list in the days
-            }
+                conn = new MySqlConnection(connStr);
 
-            else if (scheduleId > 0 && !ScheduleIsEmpty(scheduleId))
-            {
+                String sql = "SELECT ew.*, d.date, e.first_name, e.last_name FROM employees_workdays ew INNER JOIN days d ON ew.day_id = d.id" +
+                    " INNER JOIN employees e ON ew.employee_id = e.id WHERE ew.day_id = @dayId AND job_position = @jobPosition AND ew.absence = false;";
+                MySqlCommand cmd = new MySqlCommand(sql, conn);
+                cmd.Parameters.AddWithValue("@dayId", dayId);
+                cmd.Parameters.AddWithValue("@jobPosition", jobPosition);
 
-                schedule = GetEmptySchedule(startDate, endDate);
-                List<EmployeeWorkday> employeeWorkdays = new List<EmployeeWorkday>();
+                conn.Open();
+                MySqlDataReader dr = cmd.ExecuteReader();
 
-                MySqlConnection conn = null;
-                try
-                {
-                    conn = new MySqlConnection(connStr);
-
-                    String sql = "SELECT ew.*, d.date FROM employees_workdays ew INNER JOIN days d ON ew.day_id = d.id WHERE ew.day_id IN (SELECT id FROM days WHERE schedule_id = @scheduleId);";
-                    MySqlCommand cmd = new MySqlCommand(sql, conn);
-                    cmd.Parameters.AddWithValue("@scheduleId", scheduleId);
-                    conn.Open();
-                    MySqlDataReader dr = cmd.ExecuteReader();
-                    while (dr.Read()) //add EmployeeWorkday objects to the list of employeeShifts
+                    while (dr.Read()) //add EmployeeWorkday objects to the list
                     {
-                        int dayId = Convert.ToInt32(dr[0]);
                         int employeeId = Convert.ToInt32(dr[1]);
                         Shift firstShift = (Shift)Enum.Parse(typeof(Shift), dr[2].ToString());
                         Shift secondShift = (Shift)Enum.Parse(typeof(Shift), dr[3].ToString());
                         bool absence = Convert.ToBoolean(dr[4]);
                         AbsenceReason absenceReason = (AbsenceReason)Enum.Parse(typeof(AbsenceReason), dr[5].ToString());
                         DateTime date = DateTime.Parse(dr[6].ToString());
-                        employeeWorkdays.Add(new EmployeeWorkday(dayId, date, employeeId, firstShift, secondShift, absence, absenceReason));
+                         string fullName = dr[7].ToString() + " " + dr[8].ToString();
+                        workdays.Add(new EmployeeWorkday(dayId, date, employeeId, firstShift, secondShift, absence, absenceReason, jobPosition, fullName));
                     }
-                    foreach (Day d in schedule.Days) // separate the EmployeeWorkday objects in the days they belong to
-                    {
-                        foreach (EmployeeWorkday es in employeeWorkdays)
-                        {
-                            if (es.DayID == d.Id)
-                            {
-                                d.AddEmployeeShiftFromDatabase(es);
-                            }
-                        }
-                    }
-                }
-                catch (MySqlException ex)
-                {
-                    MessageBox.Show("An error occured!");
-                }
-
-                finally
-                {
-                    if (conn != null)
-                    {
-                        conn.Close();
-                    }
-                }
 
             }
-            return schedule;
+            catch (MySqlException ex)
+            {
+                MessageBox.Show("An error occured!");
+            }
+
+            finally
+            {
+                if (conn != null)
+                {
+                    conn.Close();
+                }
+            }
+            return workdays.ToArray();
         }
 
         public static Schedule[] GetAllSchedules()
@@ -119,21 +99,32 @@ namespace PRJMediaBazaar
             return schedules.ToArray();
         }
 
-        public static int GetDayId(DateTime date)
+        public static Day[] GetDays(int scheduleId)
         {
             MySqlConnection conn = null;
+            List<Day> days = new List<Day>();
+
             try
             {
                 conn = new MySqlConnection(connStr);
 
-                String sql = "SELECT id FROM days WHERE date = @date";
+                String sql = "SELECT * FROM days WHERE schedule_id = @scheduleId";
                 MySqlCommand cmd = new MySqlCommand(sql, conn);
-                cmd.Parameters.AddWithValue("@date",date);
+                cmd.Parameters.AddWithValue("@scheduleId", scheduleId);
                 conn.Open();
-                Object result = cmd.ExecuteScalar();
-                if (result != null)
+               MySqlDataReader dr = cmd.ExecuteReader();
+              while(dr.Read())
                 {
-                    return Convert.ToInt32(result);
+                    int dayId = Convert.ToInt32(dr[0]);
+                    DateTime date = dr.GetDateTime(1);
+                    int securityNeeded = Convert.ToInt32(dr[3]);
+                    int cashiersNeeded = Convert.ToInt32(dr[4]);
+                    int stockersNeeded = Convert.ToInt32(dr[5]);
+                    int salesAssistantsNeeded = Convert.ToInt32(dr[6]);
+                    int warehouseManagersNeeded = Convert.ToInt32(dr[7]);
+
+                    days.Add(new Day(dayId,date,securityNeeded,cashiersNeeded,stockersNeeded,salesAssistantsNeeded,warehouseManagersNeeded));
+
                 }
 
             }
@@ -149,8 +140,9 @@ namespace PRJMediaBazaar
                     conn.Close();
                 }
             }
-            return -1;
+            return days.ToArray();
         }
+
 
         //to be implemented
         public static bool DayIsFull(int dayId)
@@ -163,94 +155,6 @@ namespace PRJMediaBazaar
 
         //Helping methods for GetSchedule()
 
-        /// <summary>
-        /// Creating the Schedule with a List of 14 Days, each day has empty List<EmployeeWorkday> and List<EmployeePreference>
-        /// </summary>
-        /// <param name="startDate"></param>
-        /// <param name="endDate"></param>
-        /// <returns>Schedule</returns>
-        private static Schedule GetEmptySchedule(DateTime startDate, DateTime endDate)
-        {
-            int scheduleId = GetScheduleId(startDate, endDate);
-            Schedule schedule = null;
-            List<Day> days = new List<Day>();
-
-            MySqlConnection conn = null;
-            try
-            {
-                conn = new MySqlConnection(connStr);
-
-                String sql = "SELECT * FROM days WHERE schedule_id = @scheduleId;";
-                MySqlCommand cmd = new MySqlCommand(sql, conn);
-                cmd.Parameters.AddWithValue("@scheduleId", scheduleId);
-                conn.Open();
-                MySqlDataReader dr = cmd.ExecuteReader();
-                while (dr.Read())
-                {
-                    int id = Convert.ToInt32(dr[0]);
-                    DateTime date = DateTime.Parse(dr[1].ToString());
-                    int securityNeeded = Convert.ToInt32(dr[3]);
-                    int cashiersNeeded = Convert.ToInt32(dr[4]);
-                    int stockersNeeded = Convert.ToInt32(dr[5]);
-                    int salesAssistantsNeeded = Convert.ToInt32(dr[6]);
-                    int warehouseManagersNeeded = Convert.ToInt32(dr[7]);
-                    days.Add(new Day(id, date, securityNeeded, cashiersNeeded, stockersNeeded, salesAssistantsNeeded, warehouseManagersNeeded));
-                }
-
-                schedule = new Schedule(days, scheduleId, startDate, endDate, false);
-
-            }
-            catch (MySqlException ex)
-            {
-                MessageBox.Show("An error occured!");
-            }
-
-            finally
-            {
-                if (conn != null)
-                {
-                    conn.Close();
-                }
-            }
-            return schedule;
-        }
-
-
-        private static int GetScheduleId(DateTime startDate, DateTime endDate)
-        {
-            MySqlConnection conn = null;
-
-            try
-            {
-                conn = new MySqlConnection(connStr);
-                String sql = "SELECT id FROM schedules WHERE start_date = @startDate AND end_date = @endDate;";
-                MySqlCommand cmd = new MySqlCommand(sql, conn);
-                cmd.Parameters.AddWithValue("@startDate", startDate);
-                cmd.Parameters.AddWithValue("@endDate", endDate);
-                conn.Open();
-                Object result = cmd.ExecuteScalar();
-                if (result != null)
-                {
-                   return Convert.ToInt32(result);
-                }
-                conn.Close();
-
-            }
-            catch (MySqlException ex)
-            {
-                MessageBox.Show("An error occured!");
-            }
-
-            finally
-            {
-                if (conn != null)
-                {
-                    conn.Close();
-                }
-            }
-            return -1;
-
-        }
 
         /// <summary>
         /// Checks if the scheduleId is related to the employees_workdays table in the database
@@ -741,10 +645,136 @@ namespace PRJMediaBazaar
             return false;
         }
 
-        // public static void ChangeNeededJobPosition(JobPosition jobPosition, int amount , int dayId)
-        // {
-        //     //SQL query to UPDATE the value in the days table
-        // }
+        //Daily job positions
+
+        public static List<int> GetAllNeededJobPositionsAmounts(int dayId)
+        {
+            MySqlConnection conn = null;
+            List<int> neededPositions = new List<int>();
+            try
+            {
+                conn = new MySqlConnection(connStr);
+
+                String sql = "SELECT * FROM days WHERE id = @dayId";
+                MySqlCommand cmd = new MySqlCommand(sql, conn);
+                cmd.Parameters.AddWithValue("@dayId", dayId);
+                conn.Open();
+                MySqlDataReader dr = cmd.ExecuteReader();
+                if (dr.Read())
+                {
+                    neededPositions.Add(Convert.ToInt32(dr[3]));
+                    neededPositions.Add(Convert.ToInt32(dr[4]));
+                    neededPositions.Add(Convert.ToInt32(dr[5]));
+                    neededPositions.Add(Convert.ToInt32(dr[6]));
+                    neededPositions.Add(Convert.ToInt32(dr[7]));
+                }
+
+            }
+            catch (MySqlException ex)
+            {
+                MessageBox.Show("An error occured!");
+            }
+
+            finally
+            {
+                if (conn != null)
+                {
+                    conn.Close();
+                }
+            }
+            return neededPositions;
+        }
+
+        public static int GetNeededJobPositionAmount(string jobPosition, int dayId)
+        {
+            List<int> list = GetAllNeededJobPositionsAmounts(dayId);
+            int neededPosition = -1;
+            switch(jobPosition)
+            {
+                case "Security":
+                    neededPosition = list[0];
+                    break;
+                case "Cashier":
+                    neededPosition = list[1];
+                    break;
+                case "Stocker":
+                    neededPosition = list[2];
+                    break;
+                case "SalesAssistant":
+                    neededPosition = list[3];
+                    break;
+                case "WarehouseManager":
+                    neededPosition = list[4];
+                    break;
+
+            }
+            return neededPosition;
+        }
+
+
+        public static bool ChangeNeededJobPosition(string jobPosition, int amount, int dayId)
+        {
+            MySqlConnection conn = null;
+
+            try
+            {
+                string column = GetNeededJobPositionColumn(jobPosition);
+                conn = new MySqlConnection(connStr);
+                String sql = "UPDATE days SET @column = @amount WHERE day_id = @dayId";
+
+                MySqlCommand cmd = new MySqlCommand(sql, conn);
+                cmd.Parameters.AddWithValue("@dayId", dayId);
+                cmd.Parameters.AddWithValue("@column", column);
+                cmd.Parameters.AddWithValue("@amount", amount);
+
+
+
+                conn.Open();
+                if (cmd.ExecuteNonQuery() > 0)
+                {
+                    return true;
+                }
+
+            }
+            catch (MySqlException ex)
+            {
+                MessageBox.Show("An error occured!");
+            }
+
+            finally
+            {
+                if (conn != null)
+                {
+                    conn.Close();
+                }
+            }
+            return false;
+        }
+
+        private static string GetNeededJobPositionColumn(string jobPosition)
+        {
+            string column = "";
+            switch (jobPosition)
+            {
+                case "Security":
+                    column = "security_needed";
+                    break;
+                case "Cashier":
+                    column = "cashiers_needed";
+                    break;
+                case "Stocker":
+                    column = "stockers_needed";
+                    break;
+                case "SalesAssistant":
+                    column = "sales_assistants_needed";
+                    break;
+                case "WarehouseManager":
+                    column = "warehouse_managers_needed";
+                    break;
+
+            }
+            return column;
+        }
 
         //===========================================================ACCOUNTING================================================================================
 

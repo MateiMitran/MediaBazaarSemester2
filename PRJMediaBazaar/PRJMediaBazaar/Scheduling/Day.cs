@@ -9,39 +9,20 @@ namespace PRJMediaBazaar
     class Day
     {
 
-        private List<EmployeePreference> _employeesPreferences;
-        private List<EmployeeWorkday> _employeesWorkdays;
-
         public int Id { get; private set; }
-        public int SecurityNeeded { get; private set; }
-        public int CashiersNeeded { get; private set; }
-        public int StockersNeeded { get; private set; }
-        public int SalesAssistantsNeeded { get; private set; }
-        public int WarehouseManagersNeeded { get; private set; }
+        public int SecurityNeeded { get; set; }
+        public int CashiersNeeded { get;  set; }
+        public int StockersNeeded { get;  set; }
+        public int SalesAssistantsNeeded { get;  set; }
+        public int WarehouseManagersNeeded { get; set; }
         public DateTime Date { get; private set; }
 
 
-        //public Day(List<EmployeePreference> employeesPreferences, List<EmployeeShift> employeesShifts, int id, DateTime date,
-        //    int securityNeeded, int cashiersNeeded, int stockersNeeded, int salesAssistantsNeeded,
-        //    int warehouseManagersNeeded)
-        //{
-        //    _employeesPreferences = employeesPreferences;
-        //    _employeesShifts = employeesShifts;
-        //    Id = id;
-        //    SecurityNeeded = securityNeeded;
-        //    CashiersNeeded = cashiersNeeded;
-        //    StockersNeeded = stockersNeeded;
-        //    SalesAssistantsNeeded = salesAssistantsNeeded;
-        //    WarehouseManagersNeeded = warehouseManagersNeeded;
-        //    Date = date;
-        //}
-
         public Day(int id, DateTime date,
-           int securityNeeded, int cashiersNeeded, int stockersNeeded, int salesAssistantsNeeded,
-           int warehouseManagersNeeded)
+            int securityNeeded, int cashiersNeeded, int stockersNeeded, int salesAssistantsNeeded,
+            int warehouseManagersNeeded)
         {
-            _employeesPreferences = new List<EmployeePreference>();
-            _employeesWorkdays = new List<EmployeeWorkday>();
+           
             Id = id;
             SecurityNeeded = securityNeeded;
             CashiersNeeded = cashiersNeeded;
@@ -51,18 +32,47 @@ namespace PRJMediaBazaar
             Date = date;
         }
 
-        public void AddEmployeeShiftFromDatabase(EmployeeWorkday es)
+        public override string ToString()
         {
-            _employeesWorkdays.Add(es);
+            return $"{Date.DayOfWeek} {Date.ToString("dd-MM-yyyy")}";
         }
 
-        public EmployeeWorkday[] EmployeeShifts()
+        public int GetNeededPositionAmount(string jobPosition)
         {
-            return _employeesWorkdays.ToArray();
+            int neededPosition = -1;
+            switch (jobPosition)
+            {
+                case "Security":
+                    neededPosition = SecurityNeeded;
+                    break;
+                case "Cashier":
+                    neededPosition = CashiersNeeded;
+                    break;
+                case "Stocker":
+                    neededPosition = StockersNeeded;
+                    break;
+                case "SalesAssistant":
+                    neededPosition = SalesAssistantsNeeded;
+                    break;
+                case "WarehouseManager":
+                    neededPosition = WarehouseManagersNeeded;
+                    break;
+
+            }
+            return neededPosition;
         }
 
+        public string GetNeededPositionInfo(string jobPosition)
+        {
+            int amount = GetNeededPositionAmount(jobPosition);
+            return $"Needed {jobPosition}: {amount}";
+        }
 
-
+        public string GetAllNeededPositionsInfo()
+        {
+            return $"Needed: {SecurityNeeded} Security| {CashiersNeeded} Cashiers| {StockersNeeded} Stockers|" +
+                $" {SalesAssistantsNeeded} SalesAssistants| {WarehouseManagersNeeded} Managers";
+        }
 
     }
 }
