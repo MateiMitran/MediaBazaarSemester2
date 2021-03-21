@@ -93,6 +93,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Database.cs" />
+    <Compile Include="EmptyComboBoxException.cs" />
     <Compile Include="Scheduling\AbsenceReason.cs" />
     <Compile Include="Scheduling\Day.cs" />
     <Compile Include="Scheduling\EmployeePreference.cs" />

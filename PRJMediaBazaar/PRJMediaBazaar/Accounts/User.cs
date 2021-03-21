@@ -39,5 +39,7 @@ namespace PRJMediaBazaar
         public int PhoneNumber { get; private set; }
         public string Address { get; private set; }
         public string Education { get; private set; }
+       
+
     }
 }

@@ -114,6 +114,54 @@ namespace PRJMediaBazaar
             return -1;
         }
         
+        public static bool AddPromotionPoints(int id,int promotionPoints)
+        {
+            MySqlConnection conn = null;
+            try
+            {
+                conn = new MySqlConnection(connStr);
+                String sql = "UPDATE employees SET promotionPoints = promotionPoints + @promotionPoints WHERE id = @id";
+                MySqlCommand cmd = new MySqlCommand(sql, conn);
+                cmd.Parameters.AddWithValue("@promotionPoints", promotionPoints);
+                cmd.Parameters.AddWithValue("@id", id);
+                conn.Open();
+                if (cmd.ExecuteNonQuery() > 0)
+                {
+                    MessageBox.Show("Success!");
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("An error has occured!" + ex.ToString());
+                
+            }
+            return false;
+        }
+        public static bool AddLatePoints(int id,int latePoints)
+        {
+            MySqlConnection conn = null;
+            try
+            {
+                conn = new MySqlConnection(connStr);
+                String sql = "UPDATE employees SET latePoints = latePoints + @latePoints WHERE id = @id";
+                MySqlCommand cmd = new MySqlCommand(sql, conn);
+                cmd.Parameters.AddWithValue("@latePoints", latePoints);
+                cmd.Parameters.AddWithValue("@id", id);
+                conn.Open();
+                if (cmd.ExecuteNonQuery() > 0)
+                {
+                    MessageBox.Show("Success!");
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("An error has occured!" + ex.ToString());
+
+            }
+            return false;
+        }
 
         //Helping methods for GetSchedule()
 
@@ -770,7 +818,12 @@ namespace PRJMediaBazaar
                     double salary = Convert.ToDouble(dr[9]);
                     String gender = dr[10].ToString();
                     String education = dr[11].ToString();
-                    employees.Add(new RegularEmployee(id, firstName, lastName, birthDate, gender, salary, email, password, jobPosition, phoneNumber, address, education));
+                    var promotionPoints = Convert.ToInt32(dr[12]);
+                    var latePoints = Convert.ToInt32(dr[13]);
+                    RegularEmployee temp = new RegularEmployee(id, firstName, lastName, birthDate, gender, salary, email, password, jobPosition, phoneNumber, address, education);
+                    temp.PromotionPoints = promotionPoints;
+                    temp.LatePoints = latePoints;
+                    employees.Add(temp);
                 }
             }
             catch (MySqlException ex)

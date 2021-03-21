@@ -35,10 +35,10 @@ namespace PRJMediaBazaar
             this.lblEmployees = new System.Windows.Forms.Label();
             this.lblTitle = new System.Windows.Forms.Label();
             this.panelEmployees = new System.Windows.Forms.Panel();
-            this.btnDemote = new System.Windows.Forms.Button();
+            this.btnAddLatePoints = new System.Windows.Forms.Button();
             this.btnShowInfo = new System.Windows.Forms.Button();
             this.lbGeneralInfo = new System.Windows.Forms.ListBox();
-            this.btnPromote = new System.Windows.Forms.Button();
+            this.btnAddPromotionPoints = new System.Windows.Forms.Button();
             this.lbEmployeeInfo = new System.Windows.Forms.ListBox();
             this.lblAllEmployees = new System.Windows.Forms.Label();
             this.cbAllEmployees = new System.Windows.Forms.ComboBox();
@@ -137,31 +137,31 @@ namespace PRJMediaBazaar
             // 
             // panelEmployees
             // 
-            this.panelEmployees.Controls.Add(this.btnDemote);
+            this.panelEmployees.Controls.Add(this.btnAddLatePoints);
             this.panelEmployees.Controls.Add(this.btnShowInfo);
             this.panelEmployees.Controls.Add(this.lbGeneralInfo);
-            this.panelEmployees.Controls.Add(this.btnPromote);
+            this.panelEmployees.Controls.Add(this.btnAddPromotionPoints);
             this.panelEmployees.Controls.Add(this.lbEmployeeInfo);
             this.panelEmployees.Controls.Add(this.lblAllEmployees);
             this.panelEmployees.Controls.Add(this.cbAllEmployees);
             this.panelEmployees.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelEmployees.Location = new System.Drawing.Point(0, 0);
+            this.panelEmployees.Location = new System.Drawing.Point(0, 59);
             this.panelEmployees.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panelEmployees.Name = "panelEmployees";
-            this.panelEmployees.Size = new System.Drawing.Size(1043, 609);
+            this.panelEmployees.Size = new System.Drawing.Size(1043, 550);
             this.panelEmployees.TabIndex = 8;
             this.panelEmployees.Paint += new System.Windows.Forms.PaintEventHandler(this.panelEmployees_Paint);
             // 
-            // btnDemote
+            // btnAddLatePoints
             // 
-            this.btnDemote.Location = new System.Drawing.Point(632, 230);
-            this.btnDemote.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.btnDemote.Name = "btnDemote";
-            this.btnDemote.Size = new System.Drawing.Size(188, 25);
-            this.btnDemote.TabIndex = 6;
-            this.btnDemote.Text = "Demote";
-            this.btnDemote.UseVisualStyleBackColor = true;
-            this.btnDemote.Click += new System.EventHandler(this.button3_Click);
+            this.btnAddLatePoints.Location = new System.Drawing.Point(632, 230);
+            this.btnAddLatePoints.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnAddLatePoints.Name = "btnAddLatePoints";
+            this.btnAddLatePoints.Size = new System.Drawing.Size(188, 25);
+            this.btnAddLatePoints.TabIndex = 6;
+            this.btnAddLatePoints.Text = "Add Late Points";
+            this.btnAddLatePoints.UseVisualStyleBackColor = true;
+            this.btnAddLatePoints.Click += new System.EventHandler(this.button3_Click);
             // 
             // btnShowInfo
             // 
@@ -184,15 +184,16 @@ namespace PRJMediaBazaar
             this.lbGeneralInfo.Size = new System.Drawing.Size(399, 228);
             this.lbGeneralInfo.TabIndex = 7;
             // 
-            // btnPromote
+            // btnAddPromotionPoints
             // 
-            this.btnPromote.Location = new System.Drawing.Point(632, 196);
-            this.btnPromote.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.btnPromote.Name = "btnPromote";
-            this.btnPromote.Size = new System.Drawing.Size(188, 25);
-            this.btnPromote.TabIndex = 5;
-            this.btnPromote.Text = "Promote";
-            this.btnPromote.UseVisualStyleBackColor = true;
+            this.btnAddPromotionPoints.Location = new System.Drawing.Point(632, 196);
+            this.btnAddPromotionPoints.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnAddPromotionPoints.Name = "btnAddPromotionPoints";
+            this.btnAddPromotionPoints.Size = new System.Drawing.Size(188, 25);
+            this.btnAddPromotionPoints.TabIndex = 5;
+            this.btnAddPromotionPoints.Text = "Add Promotion Points";
+            this.btnAddPromotionPoints.UseVisualStyleBackColor = true;
+            this.btnAddPromotionPoints.Click += new System.EventHandler(this.btnAddPromotionPoints_Click);
             // 
             // lbEmployeeInfo
             // 
@@ -387,11 +388,10 @@ namespace PRJMediaBazaar
             this.panelSickReports.Controls.Add(this.lbSickReports);
             this.panelSickReports.Controls.Add(this.btnSickConfirm);
             this.panelSickReports.Controls.Add(this.btnSickDeny);
-            this.panelSickReports.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelSickReports.Location = new System.Drawing.Point(0, 0);
+            this.panelSickReports.Location = new System.Drawing.Point(6, 65);
             this.panelSickReports.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panelSickReports.Name = "panelSickReports";
-            this.panelSickReports.Size = new System.Drawing.Size(1043, 609);
+            this.panelSickReports.Size = new System.Drawing.Size(1037, 542);
             this.panelSickReports.TabIndex = 24;
             this.panelSickReports.Paint += new System.Windows.Forms.PaintEventHandler(this.panelSickReports_Paint);
             // 
@@ -400,11 +400,10 @@ namespace PRJMediaBazaar
             this.pnlDayOff.Controls.Add(this.btnDenyDayOff);
             this.pnlDayOff.Controls.Add(this.btnConfirmDayOff);
             this.pnlDayOff.Controls.Add(this.lbDayOff);
-            this.pnlDayOff.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlDayOff.Location = new System.Drawing.Point(0, 0);
+            this.pnlDayOff.Location = new System.Drawing.Point(0, 61);
             this.pnlDayOff.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pnlDayOff.Name = "pnlDayOff";
-            this.pnlDayOff.Size = new System.Drawing.Size(1043, 609);
+            this.pnlDayOff.Size = new System.Drawing.Size(1048, 548);
             this.pnlDayOff.TabIndex = 24;
             // 
             // btnDenyDayOff
@@ -442,13 +441,15 @@ namespace PRJMediaBazaar
             // 
             this.pnlNavbar.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.pnlNavbar.Controls.Add(this.lblTitle);
+            this.pnlNavbar.Controls.Add(this.panelSickReports);
+            this.pnlNavbar.Controls.Add(this.pnlDayOff);
             this.pnlNavbar.Controls.Add(this.lblDayOffReports);
             this.pnlNavbar.Controls.Add(this.lblEmployees);
             this.pnlNavbar.Controls.Add(this.lblSickReports);
             this.pnlNavbar.Controls.Add(this.lblSchedule);
             this.pnlNavbar.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlNavbar.Location = new System.Drawing.Point(0, 0);
-            this.pnlNavbar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pnlNavbar.Margin = new System.Windows.Forms.Padding(4);
             this.pnlNavbar.Name = "pnlNavbar";
             this.pnlNavbar.Size = new System.Drawing.Size(1043, 59);
             this.pnlNavbar.TabIndex = 5;
@@ -458,10 +459,8 @@ namespace PRJMediaBazaar
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1043, 609);
-            this.Controls.Add(this.pnlNavbar);
-            this.Controls.Add(this.pnlDayOff);
-            this.Controls.Add(this.panelSickReports);
             this.Controls.Add(this.panelEmployees);
+            this.Controls.Add(this.pnlNavbar);
             this.Controls.Add(this.panelSchedule);
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "HRHome";
@@ -488,8 +487,8 @@ namespace PRJMediaBazaar
         private System.Windows.Forms.ComboBox cbAllEmployees;
         private System.Windows.Forms.Label lblAllEmployees;
         private System.Windows.Forms.Button btnShowInfo;
-        private System.Windows.Forms.Button btnPromote;
-        private System.Windows.Forms.Button btnDemote;
+        private System.Windows.Forms.Button btnAddPromotionPoints;
+        private System.Windows.Forms.Button btnAddLatePoints;
         private System.Windows.Forms.ListBox lbGeneralInfo;
         private System.Windows.Forms.ListBox lbEmployeeInfo;
         private System.Windows.Forms.Panel panelEmployees;
