@@ -14,6 +14,7 @@ namespace PRJMediaBazaar
     {
         RegularEmployee[] _employees;
         Schedule[] _schedules;
+        private NamesRow[] _tableRows;
 
         public HRHome()
         {
@@ -29,7 +30,8 @@ namespace PRJMediaBazaar
             {
                 cbSchedule.Items.Add(s);
             }
-            cbPosition.Text = "All";  
+            cbPosition.Text = "All";
+            this.btnChangeNeededPosition.Enabled = false;
         }
 
         private void label2_Click(object sender, EventArgs e)
@@ -158,6 +160,11 @@ namespace PRJMediaBazaar
                 if (cbPosition.Text != "All")
                 {
                     LoadTableByPosition(day, cbPosition.Text);
+                    this.btnChangeNeededPosition.Enabled = true;
+                }
+                else
+                {
+                    this.btnChangeNeededPosition.Enabled = false;
                 }
             }
 
@@ -178,6 +185,8 @@ namespace PRJMediaBazaar
         private void btnChangeNeededPosition_Click(object sender, EventArgs e)
         {
             //based on the selected position and day, open a new form to change the needed amount of that the position
+            ChangeNeededPosition form = new ChangeNeededPosition(this.cbPosition.Text, (Day)cbDay.SelectedItem, _tableRows,this, ((Schedule)cbSchedule.SelectedItem).Id, cbDay.SelectedIndex);
+            form.Show();
 
         }
 
@@ -188,8 +197,9 @@ namespace PRJMediaBazaar
             {
                 int neededJobPositionAmount = day.GetNeededPositionAmount(jobPosition);
                 EmployeeWorkday[] workdays = Database.GetEmployeesWorkdays(day.Id, jobPosition);
-                ShiftSeparator ssp = new ShiftSeparator(workdays, neededJobPositionAmount);
+                ShiftSeparator ssp = new ShiftSeparator(workdays, neededJobPositionAmount, _employees);
                 NamesRow[] namesRows = ssp.GetNamesRows();
+                _tableRows = namesRows;
 
                 //Clear Table and suspend rendering is easier then editing each row
                 ShiftsTable.SuspendLayout();
@@ -217,7 +227,7 @@ namespace PRJMediaBazaar
                         TextAlign = System.Drawing.ContentAlignment.MiddleLeft
                     };
 
-                    if (namesRows[i].Morning == "-" && namesRows[i].Midday == "-" && namesRows[i].Evening == "-") // row with unassigned shifts
+                    if (namesRows[i].Morning == null && namesRows[i].Midday == null && namesRows[i].Evening == null) // row with unassigned shifts
                     {
                         MorningShiftButton = GetUnassignedShiftButton(day, Shift.Morning, jobPosition);
                         MiddayShiftButton = GetUnassignedShiftButton(day, Shift.Midday, jobPosition);
@@ -329,7 +339,7 @@ namespace PRJMediaBazaar
 
         }
 
-        private Button GetAssignedShiftButton(Day day, Shift shift, string jobPosition, string employeeName)
+        private Button GetAssignedShiftButton(Day day, Shift shift, string jobPosition, RegularEmployee employee)
         {
             Button AssignedShiftButton = new Button()
             {
@@ -342,13 +352,13 @@ namespace PRJMediaBazaar
                 Location = new System.Drawing.Point(0, 0),
                 Name = "AssignedShiftButton",
                 TabIndex = 0,
-                Text = employeeName,
+                Text = employee.FirstName + " "+ employee.LastName,
                 UseVisualStyleBackColor = true,
                 Size = new System.Drawing.Size(365, 38)
             };
             AssignedShiftButton.FlatAppearance.BorderSize = 0;
             AssignedShiftButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            AssignedShiftButton.Click += delegate (object sender, EventArgs e) { AssignedShiftButton_Click(sender, e); };
+            AssignedShiftButton.Click += delegate (object sender, EventArgs e) { AssignedShiftButton_Click(sender, e, employee, shift); };
             return AssignedShiftButton;
         }
 
@@ -359,12 +369,25 @@ namespace PRJMediaBazaar
             assigningForm.Show();
         }
 
-        private void AssignedShiftButton_Click(object sender, EventArgs e)
+        private void AssignedShiftButton_Click(object sender, EventArgs e, RegularEmployee employee, Shift shift)
         {
-
+            ContextMenuStrip contextMenuStrip = new ContextMenuStrip();
+            contextMenuStrip.Items.Add("Remove Employee", null, delegate (object sender2, EventArgs e2) { RemoveShift(shift,employee); });     
+            contextMenuStrip.Show(Cursor.Position);
         }
 
-        private void UpdateDaysCheckbox(int scheduleId)
+        private void RemoveShift(Shift shift, RegularEmployee employee)
+        {
+            DialogResult dialogResult = MessageBox.Show($"Are you sure you want to remove " +
+                $"{employee.FirstName} {employee.LastName}'s {shift.ToString()} shift?", "Confirmation", MessageBoxButtons.YesNo);
+            if (dialogResult == DialogResult.Yes)
+            {
+                Database.RemoveShift(shift, employee.Id, ((Day)cbDay.SelectedItem).Id);
+            }
+            LoadTableByPosition((Day)cbDay.SelectedItem, employee.JobPosition);
+        }
+
+        public void UpdateDaysCheckbox(int scheduleId)
         {
             Day[] days = Database.GetDays(scheduleId);
             this.cbDay.Items.Clear();
@@ -374,7 +397,7 @@ namespace PRJMediaBazaar
             }
         }
 
-        private void UpdatePositionNeededLabel()
+        public void UpdatePositionNeededLabel()
         {
             Day day = (Day)cbDay.SelectedItem;
             if (this.cbPosition.Text != "All" && day != null)
@@ -388,52 +411,39 @@ namespace PRJMediaBazaar
             }
         }
 
-        private int GetEmptyShiftIndex(string morning, string mid, string evening)
+        private int GetEmptyShiftIndex(RegularEmployee morning, RegularEmployee mid, RegularEmployee evening)
         {
-            if (morning != "-" && mid != "-" && evening == "-")
+            if (morning != null && mid != null && evening == null)
             {
                 return 3;
             }
-           else  if (morning != "-" && mid == "-" && evening != "-")
+           else  if (morning != null && mid == null && evening != null)
             {
                 return 2;
             }
-            else if (morning == "-" && mid != "-" && evening != "-")
+            else if (morning == null && mid != null && evening != null)
             {
                 return 1;
             }
             return -1;
         }
 
-        private int GetBusyShiftIndex(string morning, string mid, string evening)
+        private int GetBusyShiftIndex(RegularEmployee morning, RegularEmployee mid, RegularEmployee evening)
         {
           
-            if (morning != "-" && mid == "-" && evening == "-")
+            if (morning != null && mid == null && evening == null)
             {
                 return 1;
             }
-            else if (morning == "-" && mid == "-" && evening != "-")
+            else if (morning == null && mid == null && evening != null)
             {
                 return 3;
             }
-            else if (morning == "-" && mid != "-" && evening == "-")
+            else if (morning == null && mid != null && evening == null)
             {
                 return 2;
             }
             return -1;
-        }
-
-
-        public string GetEmployeeFullName(int id)
-        {
-            foreach(RegularEmployee e in _employees)
-            {
-                if (e.Id == id)
-                {
-                    return $"{e.FirstName} {e.LastName}";
-                }
-            }
-            return "";
         }
 
     }

@@ -377,7 +377,7 @@ namespace PRJMediaBazaar
 
         //REMOVING SHIFTS
 
-        public static bool DeleteShift(Shift shift, int employeeId, int dayId)
+        public static bool RemoveShift(Shift shift, int employeeId, int dayId)
         {
             MySqlConnection conn = null;
 
@@ -407,7 +407,6 @@ namespace PRJMediaBazaar
                     else if (emptyShiftIndex == -1 && !Convert.ToBoolean(result[4]))//if there is a double shift,insert None on the chosen one
                     {
                         int indexToReplace = GetShiftIndex(shift, dayId, employeeId);
-                        MessageBox.Show("Successfully removed a shift from the employee workday");
                         return UpdateSecondShift(Shift.None, employeeId, dayId, indexToReplace);
                     }
                 }
@@ -718,13 +717,12 @@ namespace PRJMediaBazaar
 
             try
             {
-                string column = GetNeededJobPositionColumn(jobPosition);
+              
                 conn = new MySqlConnection(connStr);
-                String sql = "UPDATE days SET @column = @amount WHERE day_id = @dayId";
-
+                String sql = GetNeededPositionUPDATEQuery(jobPosition);
+                
                 MySqlCommand cmd = new MySqlCommand(sql, conn);
                 cmd.Parameters.AddWithValue("@dayId", dayId);
-                cmd.Parameters.AddWithValue("@column", column);
                 cmd.Parameters.AddWithValue("@amount", amount);
 
 
@@ -751,29 +749,32 @@ namespace PRJMediaBazaar
             return false;
         }
 
-        private static string GetNeededJobPositionColumn(string jobPosition)
+        private static string GetNeededPositionUPDATEQuery(string jobPosition)
         {
-            string column = "";
+            string sql = "";
+
             switch (jobPosition)
             {
                 case "Security":
-                    column = "security_needed";
+                    sql = "UPDATE days SET security_needed = @amount WHERE id = @dayId";
                     break;
                 case "Cashier":
-                    column = "cashiers_needed";
+                    sql = "UPDATE days SET cashiers_needed = @amount WHERE id = @dayId";
                     break;
                 case "Stocker":
-                    column = "stockers_needed";
+                    sql = "UPDATE days SET stockers_needed = @amount WHERE id = @dayId";
+
                     break;
                 case "SalesAssistant":
-                    column = "sales_assistants_needed";
+                    sql = "UPDATE days SET sales_assistants_needed = @amount WHERE id = @dayId";
+
                     break;
                 case "WarehouseManager":
-                    column = "warehouse_managers_needed";
+                    sql = "UPDATE days SET warehouse_managers_needed = @amount WHERE id = @dayId";
                     break;
 
             }
-            return column;
+            return sql;
         }
 
         //===========================================================ACCOUNTING================================================================================

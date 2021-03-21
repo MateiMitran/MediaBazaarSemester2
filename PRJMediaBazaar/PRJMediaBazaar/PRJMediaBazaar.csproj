@@ -92,6 +92,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ChangeNeededPosition.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ChangeNeededPosition.Designer.cs">
+      <DependentUpon>ChangeNeededPosition.cs</DependentUpon>
+    </Compile>
     <Compile Include="Scheduling\Availabilities.cs" />
     <Compile Include="Database.cs" />
     <Compile Include="Scheduling\EmployeePlanner.cs" />
@@ -127,6 +133,9 @@
     <Compile Include="ShiftAssigning.Designer.cs">
       <DependentUpon>ShiftAssigning.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="ChangeNeededPosition.resx">
+      <DependentUpon>ChangeNeededPosition.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="HRHome.resx">
       <DependentUpon>HRHome.cs</DependentUpon>
     </EmbeddedResource>

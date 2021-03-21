@@ -24,7 +24,7 @@ namespace PRJMediaBazaar
 
         public override string ToString()
         {
-            return ($"{EmployeeId} {EmployeeName} , Occupation:{Occupation}, esIndex: {EmptyShiftIndex}");
+            return ($"{EmployeeId} {EmployeeName}, Occupation:{Occupation}");
         }
     }
 }

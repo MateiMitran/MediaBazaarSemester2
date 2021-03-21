@@ -8,19 +8,22 @@ namespace PRJMediaBazaar
 {
     class ShiftSeparator
     {
+        private RegularEmployee[] allEmployees;
+
         private int neededShiftAmount;
         private EmployeeWorkday[] workdays;
-        private List<string> morning;
-        private List<string> mid;
-        private List<string> evening;
+        private List<RegularEmployee> morning;
+        private List<RegularEmployee> mid;
+        private List<RegularEmployee> evening;
 
-        public ShiftSeparator(EmployeeWorkday[] workdays, int neededShiftAmount)
+        public ShiftSeparator(EmployeeWorkday[] workdays, int neededShiftAmount, RegularEmployee[] allEmployees)
         {
-            morning = new List<string>();
-            mid = new List<string>();
-            evening = new List<string>();
+            morning = new List<RegularEmployee>();
+            mid = new List<RegularEmployee>();
+            evening = new List<RegularEmployee>();
             this.workdays = workdays;
             this.neededShiftAmount = neededShiftAmount;
+            this.allEmployees = allEmployees;
             SeparateShifts();
         }
 
@@ -31,22 +34,22 @@ namespace PRJMediaBazaar
             {
                 foreach (EmployeeWorkday ew in workdays)
                 {
-
+                    RegularEmployee emp = GetEmployee(ew.EmployeeID);
                     if (ew.SecondShift == Shift.None || ew.FirstShift == Shift.None) //1  assigned shift
                     {
                         Shift busyShift = GetBusyShift(ew.FirstShift, ew.SecondShift);
-                        string employeeName = ew.EmployeeName;
+                        
 
                         switch (busyShift)
                         {
                             case Shift.Morning:
-                                morning.Add(employeeName);
+                                morning.Add(emp);
                                 break;
                             case Shift.Midday:
-                                mid.Add(employeeName);
+                                mid.Add(emp);
                                 break;
                             case Shift.Evening:
-                                evening.Add(employeeName);
+                                evening.Add(emp);
                                 break;
                         }
                     }
@@ -59,13 +62,13 @@ namespace PRJMediaBazaar
                         switch (emptyShift)
                         {
                             case Shift.Morning:
-                                mid.Add(employeeName);
-                                evening.Add(employeeName);
+                                mid.Add(emp);
+                                evening.Add(emp);
                                 break;
 
                             case Shift.Evening:
-                                morning.Add(employeeName);
-                                mid.Add(employeeName);
+                                morning.Add(emp);
+                                mid.Add(emp);
                                 break;
                         }
                     }
@@ -74,15 +77,15 @@ namespace PRJMediaBazaar
             }
             while (morning.Count < neededShiftAmount)
             {
-                morning.Add("-");
+                morning.Add(null);
             }
             while (mid.Count < neededShiftAmount)
             {
-                mid.Add("-");
+                mid.Add(null);
             }
             while (evening.Count < neededShiftAmount)
             {
-                evening.Add("-");
+                evening.Add(null);
             }
         }
 
@@ -128,6 +131,18 @@ namespace PRJMediaBazaar
 
         }
 
+        public RegularEmployee GetEmployee(int id)
+        {
+            foreach (RegularEmployee e in allEmployees)
+            {
+                if (e.Id == id)
+                {
+                    return e;
+                }
+            }
+            return null;
+        }
 
+   
     }
 }

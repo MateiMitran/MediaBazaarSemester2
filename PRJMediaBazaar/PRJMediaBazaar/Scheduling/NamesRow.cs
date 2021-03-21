@@ -8,11 +8,11 @@ namespace PRJMediaBazaar
 {
      class NamesRow
     {
-        public string Morning { get; set; }
-        public string Midday{ get; set; }
-        public string Evening{ get; set; }
+        public RegularEmployee Morning { get; set; }
+        public RegularEmployee Midday{ get; set; }
+        public RegularEmployee Evening{ get; set; }
 
-        public NamesRow(string morningEmployee, string middayEmployee, string eveningEmployee)
+        public NamesRow(RegularEmployee morningEmployee, RegularEmployee middayEmployee,RegularEmployee eveningEmployee)
         {
             Morning = morningEmployee;
             Midday = middayEmployee;

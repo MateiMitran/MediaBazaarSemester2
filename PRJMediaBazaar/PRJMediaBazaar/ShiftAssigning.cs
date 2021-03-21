@@ -29,7 +29,7 @@ namespace PRJMediaBazaar
             _hr = hr;
             _day = day;
 
-            lblDay.Text = $"{date.DayOfWeek} ({_date.Date})";
+            lblDay.Text = $"{_date.ToString("ddd-MM-yyyy")}";
             lblPosition.Text = $"Position: {_jobPosition}";
             lblShift.Text = $"Shift: {shift}";
 

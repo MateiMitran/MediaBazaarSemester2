@@ -305,7 +305,6 @@ namespace PRJMediaBazaar
             this.cbPosition.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbPosition.FormattingEnabled = true;
             this.cbPosition.Items.AddRange(new object[] {
-            "All",
             "Security",
             "Cashier",
             "Stocker",
@@ -357,9 +356,10 @@ namespace PRJMediaBazaar
             // lblPositionNeeded
             // 
             this.lblPositionNeeded.AutoSize = true;
-            this.lblPositionNeeded.Location = new System.Drawing.Point(215, 116);
+            this.lblPositionNeeded.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPositionNeeded.Location = new System.Drawing.Point(592, 117);
             this.lblPositionNeeded.Name = "lblPositionNeeded";
-            this.lblPositionNeeded.Size = new System.Drawing.Size(89, 13);
+            this.lblPositionNeeded.Size = new System.Drawing.Size(131, 20);
             this.lblPositionNeeded.TabIndex = 36;
             this.lblPositionNeeded.Text = "Position needed: ";
             // 
@@ -427,7 +427,7 @@ namespace PRJMediaBazaar
             this.ShiftsTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 47.24771F));
             this.ShiftsTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 52.75229F));
             this.ShiftsTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 130F));
-            this.ShiftsTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 138F));
+            this.ShiftsTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 144F));
             this.ShiftsTable.Dock = System.Windows.Forms.DockStyle.Top;
             this.ShiftsTable.Location = new System.Drawing.Point(0, 0);
             this.ShiftsTable.Name = "ShiftsTable";
@@ -595,7 +595,6 @@ namespace PRJMediaBazaar
         private System.Windows.Forms.ListBox lbGeneralInfo;
         private System.Windows.Forms.ListBox lbEmployeeInfo;
         private System.Windows.Forms.Panel panelEmployees;
-        private System.Windows.Forms.ComboBox cbDay;
         private System.Windows.Forms.Label lblWeek;
         private System.Windows.Forms.Button btnChangeNeededPosition;
         private System.Windows.Forms.Label lblMorningShift;
@@ -623,5 +622,6 @@ namespace PRJMediaBazaar
         private System.Windows.Forms.ListBox lbIncompleteDays;
         private System.Windows.Forms.Label lblPositionNeeded;
         public System.Windows.Forms.TableLayoutPanel ShiftsTable;
+        public System.Windows.Forms.ComboBox cbDay;
     }
 }

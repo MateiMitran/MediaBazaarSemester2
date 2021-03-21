@@ -83,3 +83,4 @@ C:\Users\alexb\Desktop\MediaBazaar\prj-cb05-group-5-project\PRJMediaBazaar\PRJMe
 C:\Users\alexb\Desktop\MediaBazaar\prj-cb05-group-5-project\PRJMediaBazaar\PRJMediaBazaar\obj\Debug\PRJMediaBazaar.csproj.CopyComplete
 C:\Users\alexb\Desktop\MediaBazaar\prj-cb05-group-5-project\PRJMediaBazaar\PRJMediaBazaar\obj\Debug\PRJMediaBazaar.exe
 C:\Users\alexb\Desktop\MediaBazaar\prj-cb05-group-5-project\PRJMediaBazaar\PRJMediaBazaar\obj\Debug\PRJMediaBazaar.pdb
+D:\SEMESTER 2\PRJ\prj-cb05-group-5-project\PRJMediaBazaar\PRJMediaBazaar\obj\Debug\PRJMediaBazaar.ChangeNeededPosition.resources

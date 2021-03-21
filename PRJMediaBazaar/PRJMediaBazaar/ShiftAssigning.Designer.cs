@@ -55,27 +55,30 @@
             // lblPosition
             // 
             this.lblPosition.AutoSize = true;
-            this.lblPosition.Location = new System.Drawing.Point(205, 31);
+            this.lblPosition.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPosition.Location = new System.Drawing.Point(283, 31);
             this.lblPosition.Name = "lblPosition";
-            this.lblPosition.Size = new System.Drawing.Size(44, 13);
+            this.lblPosition.Size = new System.Drawing.Size(76, 24);
             this.lblPosition.TabIndex = 2;
             this.lblPosition.Text = "Position";
             // 
             // lblShift
             // 
             this.lblShift.AutoSize = true;
-            this.lblShift.Location = new System.Drawing.Point(295, 31);
+            this.lblShift.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblShift.Location = new System.Drawing.Point(660, 31);
             this.lblShift.Name = "lblShift";
-            this.lblShift.Size = new System.Drawing.Size(28, 13);
+            this.lblShift.Size = new System.Drawing.Size(45, 24);
             this.lblShift.TabIndex = 2;
             this.lblShift.Text = "Shift";
             // 
             // lblDay
             // 
             this.lblDay.AutoSize = true;
-            this.lblDay.Location = new System.Drawing.Point(371, 31);
+            this.lblDay.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblDay.Location = new System.Drawing.Point(12, 31);
             this.lblDay.Name = "lblDay";
-            this.lblDay.Size = new System.Drawing.Size(24, 13);
+            this.lblDay.Size = new System.Drawing.Size(40, 24);
             this.lblDay.TabIndex = 2;
             this.lblDay.Text = "day";
             // 
