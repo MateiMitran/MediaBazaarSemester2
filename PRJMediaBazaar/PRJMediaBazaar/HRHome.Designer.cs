@@ -62,8 +62,7 @@ namespace PRJMediaBazaar
             this.label1 = new System.Windows.Forms.Label();
             this.cbSchedule = new System.Windows.Forms.ComboBox();
             this.lbSickReports = new System.Windows.Forms.ListBox();
-            this.btnSickConfirm = new System.Windows.Forms.Button();
-            this.btnSickDeny = new System.Windows.Forms.Button();
+            this.btnMarkAsSeen = new System.Windows.Forms.Button();
             this.panelSickReports = new System.Windows.Forms.Panel();
             this.pnlDayOff = new System.Windows.Forms.Panel();
             this.btnDenyDayOff = new System.Windows.Forms.Button();
@@ -157,10 +156,11 @@ namespace PRJMediaBazaar
             this.panelEmployees.Controls.Add(this.lbEmployeeInfo);
             this.panelEmployees.Controls.Add(this.lblAllEmployees);
             this.panelEmployees.Controls.Add(this.cbAllEmployees);
-            this.panelEmployees.Location = new System.Drawing.Point(365, 14);
+            this.panelEmployees.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelEmployees.Location = new System.Drawing.Point(0, 0);
             this.panelEmployees.Margin = new System.Windows.Forms.Padding(2);
             this.panelEmployees.Name = "panelEmployees";
-            this.panelEmployees.Size = new System.Drawing.Size(68, 27);
+            this.panelEmployees.Size = new System.Drawing.Size(879, 540);
             this.panelEmployees.TabIndex = 8;
             this.panelEmployees.Paint += new System.Windows.Forms.PaintEventHandler(this.panelEmployees_Paint);
             // 
@@ -427,7 +427,7 @@ namespace PRJMediaBazaar
             this.ShiftsTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 47.24771F));
             this.ShiftsTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 52.75229F));
             this.ShiftsTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 130F));
-            this.ShiftsTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 144F));
+            this.ShiftsTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 147F));
             this.ShiftsTable.Dock = System.Windows.Forms.DockStyle.Top;
             this.ShiftsTable.Location = new System.Drawing.Point(0, 0);
             this.ShiftsTable.Name = "ShiftsTable";
@@ -467,35 +467,25 @@ namespace PRJMediaBazaar
             this.lbSickReports.Size = new System.Drawing.Size(751, 342);
             this.lbSickReports.TabIndex = 21;
             // 
-            // btnSickConfirm
+            // btnMarkAsSeen
             // 
-            this.btnSickConfirm.Location = new System.Drawing.Point(622, 441);
-            this.btnSickConfirm.Margin = new System.Windows.Forms.Padding(2);
-            this.btnSickConfirm.Name = "btnSickConfirm";
-            this.btnSickConfirm.Size = new System.Drawing.Size(160, 28);
-            this.btnSickConfirm.TabIndex = 22;
-            this.btnSickConfirm.Text = "Confirm";
-            this.btnSickConfirm.UseVisualStyleBackColor = true;
-            // 
-            // btnSickDeny
-            // 
-            this.btnSickDeny.Location = new System.Drawing.Point(9, 441);
-            this.btnSickDeny.Margin = new System.Windows.Forms.Padding(2);
-            this.btnSickDeny.Name = "btnSickDeny";
-            this.btnSickDeny.Size = new System.Drawing.Size(160, 28);
-            this.btnSickDeny.TabIndex = 23;
-            this.btnSickDeny.Text = "Deny";
-            this.btnSickDeny.UseVisualStyleBackColor = true;
+            this.btnMarkAsSeen.Location = new System.Drawing.Point(321, 431);
+            this.btnMarkAsSeen.Margin = new System.Windows.Forms.Padding(2);
+            this.btnMarkAsSeen.Name = "btnMarkAsSeen";
+            this.btnMarkAsSeen.Size = new System.Drawing.Size(159, 44);
+            this.btnMarkAsSeen.TabIndex = 23;
+            this.btnMarkAsSeen.Text = "Mark report as seen";
+            this.btnMarkAsSeen.UseVisualStyleBackColor = true;
             // 
             // panelSickReports
             // 
             this.panelSickReports.Controls.Add(this.lbSickReports);
-            this.panelSickReports.Controls.Add(this.btnSickConfirm);
-            this.panelSickReports.Controls.Add(this.btnSickDeny);
-            this.panelSickReports.Location = new System.Drawing.Point(437, 14);
+            this.panelSickReports.Controls.Add(this.btnMarkAsSeen);
+            this.panelSickReports.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelSickReports.Location = new System.Drawing.Point(0, 0);
             this.panelSickReports.Margin = new System.Windows.Forms.Padding(2);
             this.panelSickReports.Name = "panelSickReports";
-            this.panelSickReports.Size = new System.Drawing.Size(75, 10);
+            this.panelSickReports.Size = new System.Drawing.Size(879, 540);
             this.panelSickReports.TabIndex = 24;
             this.panelSickReports.Paint += new System.Windows.Forms.PaintEventHandler(this.panelSickReports_Paint);
             // 
@@ -504,10 +494,11 @@ namespace PRJMediaBazaar
             this.pnlDayOff.Controls.Add(this.btnDenyDayOff);
             this.pnlDayOff.Controls.Add(this.btnConfirmDayOff);
             this.pnlDayOff.Controls.Add(this.lbDayOff);
-            this.pnlDayOff.Location = new System.Drawing.Point(515, 14);
+            this.pnlDayOff.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlDayOff.Location = new System.Drawing.Point(0, 0);
             this.pnlDayOff.Margin = new System.Windows.Forms.Padding(2);
             this.pnlDayOff.Name = "pnlDayOff";
-            this.pnlDayOff.Size = new System.Drawing.Size(76, 10);
+            this.pnlDayOff.Size = new System.Drawing.Size(879, 540);
             this.pnlDayOff.TabIndex = 24;
             // 
             // btnDenyDayOff
@@ -533,7 +524,7 @@ namespace PRJMediaBazaar
             // lbDayOff
             // 
             this.lbDayOff.FormattingEnabled = true;
-            this.lbDayOff.Location = new System.Drawing.Point(10, 80);
+            this.lbDayOff.Location = new System.Drawing.Point(59, 78);
             this.lbDayOff.Margin = new System.Windows.Forms.Padding(2);
             this.lbDayOff.Name = "lbDayOff";
             this.lbDayOff.Size = new System.Drawing.Size(753, 342);
@@ -543,9 +534,6 @@ namespace PRJMediaBazaar
             // 
             this.pnlNavbar.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.pnlNavbar.Controls.Add(this.lblTitle);
-            this.pnlNavbar.Controls.Add(this.panelEmployees);
-            this.pnlNavbar.Controls.Add(this.panelSickReports);
-            this.pnlNavbar.Controls.Add(this.pnlDayOff);
             this.pnlNavbar.Controls.Add(this.lblDayOffReports);
             this.pnlNavbar.Controls.Add(this.lblEmployees);
             this.pnlNavbar.Controls.Add(this.lblSickReports);
@@ -562,6 +550,9 @@ namespace PRJMediaBazaar
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(879, 540);
             this.Controls.Add(this.pnlNavbar);
+            this.Controls.Add(this.pnlDayOff);
+            this.Controls.Add(this.panelSickReports);
+            this.Controls.Add(this.panelEmployees);
             this.Controls.Add(this.panelSchedule);
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "HRHome";
@@ -604,8 +595,7 @@ namespace PRJMediaBazaar
         private System.Windows.Forms.Label lblPosition;
         private System.Windows.Forms.Panel panelSchedule;
         private System.Windows.Forms.ListBox lbSickReports;
-        private System.Windows.Forms.Button btnSickConfirm;
-        private System.Windows.Forms.Button btnSickDeny;
+        private System.Windows.Forms.Button btnMarkAsSeen;
         private System.Windows.Forms.Panel panelSickReports;
         private System.Windows.Forms.Panel pnlDayOff;
         private System.Windows.Forms.Button btnDenyDayOff;
