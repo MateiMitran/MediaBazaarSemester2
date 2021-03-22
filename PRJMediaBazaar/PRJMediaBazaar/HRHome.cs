@@ -12,6 +12,7 @@ namespace PRJMediaBazaar
 {
      partial class HRHome : Form
     {
+        
         RegularEmployee[] _employees;
         Schedule[] _schedules;
         private NamesRow[] _tableRows;
@@ -465,7 +466,7 @@ namespace PRJMediaBazaar
         private void btnAddPromotionPoints_Click(object sender, EventArgs e)
         {
             try
-            {
+            { //
                 if (this.cbAllEmployees.SelectedItem == null)
                 {
                     throw new EmptyComboBoxException("Please select an employee!");
