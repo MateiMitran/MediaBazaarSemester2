@@ -34,10 +34,17 @@ namespace PRJMediaBazaar
 
         private void button1_Click(object sender, EventArgs e)
         {
-            
-            HRHome home = new HRHome();
-            home.Show();
-            this.Hide();
+
+            if (this.tbUsername.Text == "hrmanager" && this.tbPassword.Text == "hrmanager")
+            {
+                HRHome home = new HRHome(this);
+                home.Show();
+                this.Hide();
+            }
+            else
+            {
+                MessageBox.Show("Invalid username or password!");
+            }
         }
 
         private void LogIn_Load(object sender, EventArgs e)
