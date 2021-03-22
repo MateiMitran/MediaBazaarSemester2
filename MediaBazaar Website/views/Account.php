@@ -1,34 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MediaBazaar: Preferences</title>
-    <!-- GOOGLE FONTS -->
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
-    <!-- FONTAWESOME -->
-    <script src="https://use.fontawesome.com/560785642e.js"></script>
-    <!-- CSS IMPORTS -->
-    <link rel="stylesheet" href="css/essentials.css" type="text/css">
-</head>
-<body>
-<!-- BODY WRAPPER -->
-<div id="body-wrapper">
-    <!-- TOP NAV -->
-    <nav id="top-nav">
-        <a href="index.html" id="logo"><span>Media</span>Bazaar</a>
-        <ul>
-            <li>
-                <a href="index.html">Dashboard</a>
-           </li><li>
-               <a href="account-preferences.html">Account</a>
-           </li>
-           <li>
-                <a href="#" id="top-nav-sign-in-button">Log Out</a>
-           </li>
-        </ul>
-    </nav>
+<?php
+    $page == 'account';
+    include('includes/header.php');
+?>
     <!-- LOGIN FORM -->
     <form class="simple-form" method="POST">
         <h2 class="section-title">Account Preferences</h2>
@@ -64,14 +37,4 @@
             <input type="submit" name="preferences-submit" value="Save">
         </div>
     </form>
-</div>
-<!-- FOOTER -->
-<footer id="footer">
-	<a href="index.html">&copy; 2021 MediaBazaar Inc. All rights reserved</a>
-</footer>
-
-<!-- JAVASCRIPT IMPORTS -->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-<script src="js/essentials.js"></script>
-</body>
-</html>
+<?php include('includes/footer.php'); ?>
