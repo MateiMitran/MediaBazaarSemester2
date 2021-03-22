@@ -838,7 +838,55 @@ namespace PRJMediaBazaar
             return employees.ToArray();
         }
 
-        
+        public static bool AddPromotionPoints(int id, int promotionPoints)
+        {
+            MySqlConnection conn = null;
+            try
+            {
+                conn = new MySqlConnection(connStr);
+                String sql = "UPDATE employees SET promotionPoints = promotionPoints + @promotionPoints WHERE id = @id";
+                MySqlCommand cmd = new MySqlCommand(sql, conn);
+                cmd.Parameters.AddWithValue("@promotionPoints", promotionPoints);
+                cmd.Parameters.AddWithValue("@id", id);
+                conn.Open();
+                if (cmd.ExecuteNonQuery() > 0)
+                {
+                    MessageBox.Show("Success!");
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("An error has occured!" + ex.ToString());
+
+            }
+            return false;
+        }
+        public static bool AddLatePoints(int id, int latePoints)
+        {
+            MySqlConnection conn = null;
+            try
+            {
+                conn = new MySqlConnection(connStr);
+                String sql = "UPDATE employees SET latePoints = latePoints + @latePoints WHERE id = @id";
+                MySqlCommand cmd = new MySqlCommand(sql, conn);
+                cmd.Parameters.AddWithValue("@latePoints", latePoints);
+                cmd.Parameters.AddWithValue("@id", id);
+                conn.Open();
+                if (cmd.ExecuteNonQuery() > 0)
+                {
+                    MessageBox.Show("Success!");
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("An error has occured!" + ex.ToString());
+
+            }
+            return false;
+        }
+
     }
 
 }

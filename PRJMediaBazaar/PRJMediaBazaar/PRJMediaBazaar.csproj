@@ -98,6 +98,7 @@
     <Compile Include="ChangeNeededPosition.Designer.cs">
       <DependentUpon>ChangeNeededPosition.cs</DependentUpon>
     </Compile>
+    <Compile Include="EmptyComboBoxException.cs" />
     <Compile Include="Scheduling\Availabilities.cs" />
     <Compile Include="Database.cs" />
     <Compile Include="Scheduling\EmployeePlanner.cs" />
