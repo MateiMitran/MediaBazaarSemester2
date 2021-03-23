@@ -68,7 +68,7 @@ input {
 #top-nav ul li {
     display: inline-block;
     font-size: 16px;
-    margin-left: 20px;
+    margin-left: 30px;
 }
 
 #top-nav ul li a:link, #top-nav ul li a:visited {
