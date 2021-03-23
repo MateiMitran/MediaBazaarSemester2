@@ -1,5 +1,7 @@
 <?php
     $page = 'dashboard';
+    $functionalityRequirements = ['preferences-functionality'];
+    
     require_once('includes/header.php');
 ?>
     <!-- DASHBOARD -->
@@ -32,26 +34,27 @@
             </div>
             <!-- PREFERENCES -->
             <div class="dashboard-content" id="dashboard-preferences">
-                <form class="simple-form" method="POST" style="margin-top: 70px;">
+                <form class="simple-form" action="/dashboard" method="POST" style="margin-top: 70px;">
                     <div class="form-group half">
                         <label for="preferences-date">Date:</label>
-                        <input type="date" name="preferences-date" id="preferences-date">
+                        <input type="date" name="preferences-date" id="preferences-date" required />
                     </div>
                     <div class="form-group half">
                         <label for="preferences-shift">Preferred Shift:</label>
-                            <label id="shift-preferences-arrow-label">
-                                <select id="preferences-shift" id="preferences-shift">
-                                    <option value="Option 1">Morning</option>
-                                    <option value="Option 2">Middle Day</option>
-                                    <option value="Option 3">Evening</option>
-                                </select>
-                            </label>
+                        <label id="shift-preferences-arrow-label">
+                            <select id="preferences-shift" name="preferences-shift" id="preferences-shift" required>
+                                <option value="morning">Morning</option>
+                                <option value="midday">Midday</option>
+                                <option value="evening">Evening</option>
+                            </select>
+                        </label>
                     </div>
                     <div class="form-group submit">
                         <input type="submit" name="preferences-submit" class="small-submit" value="Save" style="margin-top: 30px;">
                     </div>
                 </form>
             </div>
+            <!-- RULES -->
             <div class="dashboard-content" id="dashboard-rules">
                 <ol>
                     <li>

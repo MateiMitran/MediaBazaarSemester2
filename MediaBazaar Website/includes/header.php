@@ -1,17 +1,20 @@
 <?php
     require_once('initialize.php');
 
-    // REDIRECT
-    if($page != 'login' && empty($_SESSION['user_id'])) {
-        header("Location: /login");
-        exit();
+    // INCLUDE REQUIRED FUNCTIONALITY FILES
+    require_once('functionality/redirect-functionality.php');
+    require_once('functionality/logout-functionality.php');
+
+    if(!empty($functionalityRequirements)) {
+        foreach($functionalityRequirements as $functionality) {
+            require_once('functionality/' . $functionality . '.php');
+        }
     }
 
-    // LOGOUT
-    if(isset($_REQUEST['logout'])) {
-        session_destroy();
-        header("Location: /login");
-        exit();
+    // GET LOGIN SUCCESS MESSAGE
+    if(!empty($_SESSION['login_message'])) {
+        array_push($successMessages, $_SESSION['login_message']);
+        unset($_SESSION['login_message']);
     }
 ?>
 <!DOCTYPE html>
@@ -24,7 +27,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
     <!-- FONTAWESOME -->
-    <script src="https://use.fontawesome.com/560785642e.js"></script>
+    <script src="https://kit.fontawesome.com/3073970c9d.js" crossorigin="anonymous"></script>
     <!-- CSS IMPORTS -->
     <link rel="stylesheet" href="../css/essentials.css" type="text/css">
     <?php
@@ -38,6 +41,37 @@
 <body>
 <!-- BODY WRAPPER -->
 <div id="body-wrapper">
+    <!-- ERROR MESSAGES -->
+    <div id="messages-container">
+        <ul id="success-messages">
+        <?php 
+            if(!empty($successMessages)) {
+                foreach($successMessages as $message) {
+        ?>
+                <li>
+                    <p><?php echo $message; ?></p>
+                    <i class="fal fa-times"></i>
+                </li>
+        <?php
+                }
+            }
+        ?>
+        </ul>
+        <ul id="error-messages">
+        <?php 
+            if(!empty($errorMessages)) {
+                foreach($errorMessages as $message) {
+        ?>
+                <li>
+                    <p><?php echo $message; ?></p>
+                    <i class="fal fa-times"></i>
+                </li>
+        <?php
+                }
+            }
+        ?>
+        </ul>
+    </div>
     <!-- TOP NAV -->
     <nav id="top-nav">
         <a href="/dashboard" id="logo"><span>Media</span>Bazaar</a>

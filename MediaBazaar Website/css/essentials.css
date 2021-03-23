@@ -26,7 +26,63 @@ input {
     display: table;
 }
 
-/* TOP-NAV CSS */
+/* MESSAGES CSS */
+
+#messages-container {
+    width: 100%;
+}
+
+#messages-container ul {
+    margin: 0;
+    list-style: none;
+    padding: 0;
+}
+
+#messages-container  #success-messages {
+    background-color: #4cb77c;
+}
+
+#messages-container #error-messages {
+    background-color: #e8384b;
+}
+
+#messages-container ul li {
+    position: relative;
+    color: #fff;
+    padding: 12px 0;
+}
+
+#messages-container #success-messages li {
+    border-bottom: 1px solid #44a46f;
+}
+
+#messages-container #success-messages li:last-of-type {
+    border-bottom: none;
+}
+
+#messages-container #error-messages li {
+    border-bottom: 1px solid #a11827;
+}
+
+#messages-container #error-messages li:last-of-type {
+    border-bottom: none;
+}
+
+#messages-container ul li p {
+    margin: 0 auto;
+    max-width: 1000px;
+    text-align: center;
+}
+
+#messages-container ul li i {
+    position: absolute;
+    right: 60px;
+    top: 10.5px;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+/* TOP NAV CSS */
 
 #top-nav {
     width: 100%;
