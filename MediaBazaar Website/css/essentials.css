@@ -84,9 +84,13 @@ input {
 }
 
 #top-nav-sign-in-button {
+    font-size: 16px;
     display: inline-block;
     margin-top: 3px;
     padding: 4px 10px;
+    background-color: #2b2d42;
+    color: #d5d9db;
+    cursor: pointer;
     border-radius: 3px;
         -webkit-border-radius: 3px;
         -moz-border-radius: 3px;

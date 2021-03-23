@@ -52,7 +52,7 @@
                 </li>
                 <li>
                     <form method="POST">
-                        <button type="submit" name="logout" id="top-nav-sign-in-button">Log Out</a>
+                        <input type="submit" name="logout" id="top-nav-sign-in-button" value="Log Out">
                     </form>
                 </li>
             </ul>
