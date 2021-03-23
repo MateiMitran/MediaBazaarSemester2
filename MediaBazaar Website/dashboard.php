@@ -1,6 +1,6 @@
 <?php
     $page = 'dashboard';
-    include('includes/header.php');
+    require_once('includes/header.php');
 ?>
     <!-- DASHBOARD -->
     <div id="dashboard-wrapper">
@@ -85,4 +85,4 @@
             Rules
         </a>
     </div>
-<?php include('includes/footer.php'); ?>
+<?php require_once('includes/footer.php'); ?>

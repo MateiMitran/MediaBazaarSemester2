@@ -1,6 +1,6 @@
 <?php
-    $page == 'account';
-    include('includes/header.php');
+    $page = 'account';
+    require_once('includes/header.php');
 ?>
     <!-- LOGIN FORM -->
     <form class="simple-form" method="POST">
@@ -37,4 +37,4 @@
             <input type="submit" name="preferences-submit" value="Save">
         </div>
     </form>
-<?php include('includes/footer.php'); ?>
+<?php require_once('includes/footer.php'); ?>

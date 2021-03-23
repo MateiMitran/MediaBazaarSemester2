@@ -1,3 +1,19 @@
+<?php
+    require_once('initialize.php');
+
+    // REDIRECT
+    if($page != 'login' && empty($_SESSION['user_id'])) {
+        header("Location: /login");
+        exit();
+    }
+
+    // LOGOUT
+    if(isset($_REQUEST['logout'])) {
+        session_destroy();
+        header("Location: /login");
+        exit();
+    }
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -35,7 +51,9 @@
                     <a href="/account">Account</a>
                 </li>
                 <li>
-                    <a href="/login" id="top-nav-sign-in-button">Log Out</a>
+                    <form method="POST">
+                        <button type="submit" name="logout" id="top-nav-sign-in-button">Log Out</a>
+                    </form>
                 </li>
             </ul>
         <?php

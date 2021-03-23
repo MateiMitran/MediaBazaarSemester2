@@ -1,13 +1,10 @@
 <?php
-    spl_autoload_register('load_classes');
+    $page = 'index';
+    require_once('includes/header.php');
 
-    function load_classes($class_name) {
-        if(file_exists('./classes/'.$class_name.'.php')) {
-            require_once './classes/'.$class_name.'.php';
-        } else if('./controllers/'.$class_name.'.php') {
-            require_once './controllers/'.$class_name.'.php';   
-        }
+    if(empty($_SESSION['user_id'])) {
+        header("Location: /login");
+    } else {
+        header("Location: /dashboard");
     }
-
-    require_once('includes/routes.php');
 ?>
