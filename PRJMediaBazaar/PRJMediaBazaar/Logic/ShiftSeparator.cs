@@ -4,26 +4,24 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PRJMediaBazaar
+namespace PRJMediaBazaar.Logic
 {
     class ShiftSeparator
     {
-        private RegularEmployee[] allEmployees;
 
         private int neededShiftAmount;
         private EmployeeWorkday[] workdays;
-        private List<RegularEmployee> morning;
-        private List<RegularEmployee> mid;
-        private List<RegularEmployee> evening;
+        private List<Employee> morning;
+        private List<Employee> mid;
+        private List<Employee> evening;
 
-        public ShiftSeparator(EmployeeWorkday[] workdays, int neededShiftAmount, RegularEmployee[] allEmployees)
+        public ShiftSeparator(EmployeeWorkday[] workdays, int neededShiftAmount)
         {
-            morning = new List<RegularEmployee>();
-            mid = new List<RegularEmployee>();
-            evening = new List<RegularEmployee>();
+            morning = new List<Employee>();
+            mid = new List<Employee>();
+            evening = new List<Employee>();
             this.workdays = workdays;
             this.neededShiftAmount = neededShiftAmount;
-            this.allEmployees = allEmployees;
             SeparateShifts();
         }
 
@@ -34,22 +32,22 @@ namespace PRJMediaBazaar
             {
                 foreach (EmployeeWorkday ew in workdays)
                 {
-                    RegularEmployee emp = GetEmployee(ew.EmployeeID);
+                 
                     if (ew.SecondShift == Shift.None || ew.FirstShift == Shift.None) //1  assigned shift
                     {
                         Shift busyShift = GetBusyShift(ew.FirstShift, ew.SecondShift);
-                        
+
 
                         switch (busyShift)
                         {
                             case Shift.Morning:
-                                morning.Add(emp);
+                                morning.Add(ew.Employee);
                                 break;
                             case Shift.Midday:
-                                mid.Add(emp);
+                                mid.Add(ew.Employee);
                                 break;
                             case Shift.Evening:
-                                evening.Add(emp);
+                                evening.Add(ew.Employee);
                                 break;
                         }
                     }
@@ -57,23 +55,23 @@ namespace PRJMediaBazaar
                     {
                         Shift emptyShift = GetEmptyShift(ew.FirstShift, ew.SecondShift);
 
-                        string employeeName = ew.EmployeeName;
+                        string employeeName = ew.Employee.FullName;
 
                         switch (emptyShift)
                         {
                             case Shift.Morning:
-                                mid.Add(emp);
-                                evening.Add(emp);
+                                mid.Add(ew.Employee);
+                                evening.Add(ew.Employee);
                                 break;
 
                             case Shift.Evening:
-                                morning.Add(emp);
-                                mid.Add(emp);
+                                morning.Add(ew.Employee);
+                                mid.Add(ew.Employee);
                                 break;
                         }
                     }
                 }
-               
+
             }
             while (morning.Count < neededShiftAmount)
             {
@@ -91,8 +89,8 @@ namespace PRJMediaBazaar
 
         public NamesRow[] GetNamesRows()
         {
-           List<NamesRow> rows = new List<NamesRow>();
-           for(int i = 0;i <neededShiftAmount;i++)
+            List<NamesRow> rows = new List<NamesRow>();
+            for (int i = 0; i < neededShiftAmount; i++)
             {
                 rows.Add(new NamesRow(morning[i], mid[i], evening[i]));
             }
@@ -131,18 +129,5 @@ namespace PRJMediaBazaar
 
         }
 
-        public RegularEmployee GetEmployee(int id)
-        {
-            foreach (RegularEmployee e in allEmployees)
-            {
-                if (e.Id == id)
-                {
-                    return e;
-                }
-            }
-            return null;
-        }
-
-   
     }
 }

@@ -7,29 +7,30 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using PRJMediaBazaar.Logic;
+using Day = PRJMediaBazaar.Logic.Day;
 
 namespace PRJMediaBazaar
 {
      partial class ShiftAssigning : Form
     {
-        private int _dayId;
-        private DateTime _date;
         private Shift _shift;
-        private string _jobPosition;
         private HRHome _hr;
         private Day _day;
-
-        public ShiftAssigning(int dayId, DateTime date, Shift shift, string jobPosition, HRHome hr, Day day)
+        private string _jobPosition;
+        private ScheduleControl _scheduleControl;
+        private List<Employee> _employees;
+        public ShiftAssigning(ScheduleControl scheduleControl, List<Employee> empsOnPositon, Shift shift, string jobPosition, HRHome hr, Day day)
         {
             InitializeComponent();
-            _dayId = dayId;
-            _date = date;
             _shift = shift;
             _jobPosition = jobPosition;
             _hr = hr;
             _day = day;
+            _employees = empsOnPositon;
+            _scheduleControl = scheduleControl;
 
-            lblDay.Text = $"{_date.ToString("ddd-MM-yyyy")}";
+            lblDay.Text = $"{_day.Date.ToString("ddd-MM-yyyy")}";
             lblPosition.Text = $"Position: {_jobPosition}";
             lblShift.Text = $"Shift: {shift}";
 
@@ -43,11 +44,11 @@ namespace PRJMediaBazaar
            
             if (ep != null)
             {
-                int employeeId = ep.EmployeeId;
-                DialogResult dialogResult = MessageBox.Show($"Are you sure you want to assign {ep.EmployeeName} for a {_shift} shift?", "Confirmation", MessageBoxButtons.YesNo);
+                int employeeId = ep.Employee.Id;
+                DialogResult dialogResult = MessageBox.Show($"Are you sure you want to assign {ep.Employee.FullName} for a {_shift} shift?", "Confirmation", MessageBoxButtons.YesNo);
                 if (dialogResult == DialogResult.Yes)
                 {
-                    Database.AssignShift(_shift, employeeId, _dayId, ep.EmptyShiftIndex);
+                    _scheduleControl.AssignShift(_shift.ToString(), employeeId, _day.Id, ep.EmptyShiftIndex);
                     _hr.LoadTableByPosition(_day,_jobPosition);
                     _hr.ShiftsTable.Enabled = true;
                     this.Close();
@@ -69,14 +70,14 @@ namespace PRJMediaBazaar
         {
             this.lbAvailableEmployees.Items.Clear();
             this.lbUnavailableEmployees.Items.Clear();
-            Availabilities a = new Availabilities(_jobPosition, _dayId, _shift);
+            Availabilities a = new Availabilities(_employees.ToArray(), _day.Id, _shift);
 
-            foreach (EmployeePlanner ep in a.AvailableEmployees)
+            foreach (EmployeePlanner ep in a.Available)
             {
                 lbAvailableEmployees.Items.Add(ep);
             }
 
-            foreach (EmployeePlanner ep in a.UnavailableEmployees)
+            foreach (EmployeePlanner ep in a.Unavailable)
             {
                 lbUnavailableEmployees.Items.Add(ep);
             }

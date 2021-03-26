@@ -4,12 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PRJMediaBazaar
+namespace PRJMediaBazaar.Logic
 {
-    enum AbsenceReason
+    enum Shift
     {
         None,
-        Sick,
-        DayOff
+        Morning,
+        Midday,
+        Evening
     }
 }

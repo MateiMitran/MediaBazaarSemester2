@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Day = PRJMediaBazaar.Logic.Day;
+using PRJMediaBazaar.Logic;
 
 namespace PRJMediaBazaar
 {
@@ -42,7 +44,7 @@ namespace PRJMediaBazaar
               $"{_jobPositon} to {amount}", "Confirmation", MessageBoxButtons.YesNo);
                 if (dialogResult == DialogResult.Yes)
                 {
-                       if ( Database.ChangeNeededJobPosition(_jobPositon, amount, _day.Id))
+                       if (_day.ChangeNeededJobPosition(_jobPositon, amount) != null)
                         {
                             _hr.UpdateDaysCheckbox(_scheduleId);
                             _hr.cbDay.SelectedIndex = _dayIndex;

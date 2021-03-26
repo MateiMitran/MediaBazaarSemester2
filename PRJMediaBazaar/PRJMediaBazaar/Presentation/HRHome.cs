@@ -7,14 +7,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using PRJMediaBazaar.Logic;
+using Day = PRJMediaBazaar.Logic.Day;
 
 namespace PRJMediaBazaar
 {
      partial class HRHome : Form
     {
-        
-        RegularEmployee[] _employees;
-        Schedule[] _schedules;
+
+        private EmployeeControl _empControl;
+        private ScheduleControl _scheduleControl;
+        private Employee[] _employees;
+
         private NamesRow[] _tableRows;
         private LogIn _loginForm;
 
@@ -22,13 +26,16 @@ namespace PRJMediaBazaar
         {
             InitializeComponent();
             _loginForm = loginForm;
-            _employees = Database.GetEmployees();
-            foreach(RegularEmployee e in _employees)
+
+            _empControl = new EmployeeControl();
+            _employees = _empControl.Employees;
+            _scheduleControl = new ScheduleControl(_employees.ToList());
+            foreach(Employee e in _empControl.Employees)
             {
                 cbAllEmployees.Items.Add(e.FirstName + " " + e.LastName);
             }
-            _schedules = Database.GetAllSchedules();
-            foreach(Schedule s in _schedules)
+            
+            foreach(Schedule s in _scheduleControl.Schedules)
             {
                 cbSchedule.Items.Add(s);
             }
@@ -115,7 +122,7 @@ namespace PRJMediaBazaar
            
         }
 
-        private void LoadEmployeeListboxes(RegularEmployee currentEmployee)
+        private void LoadEmployeeListboxes(Employee currentEmployee)
         {
             this.lbEmployeeInfo.Items.Clear();
             this.lbGeneralInfo.Items.Clear();
@@ -127,8 +134,6 @@ namespace PRJMediaBazaar
             this.lbEmployeeInfo.Items.Add("Password : " + currentEmployee.Password);
             this.lbEmployeeInfo.Items.Add("Job Position : " + currentEmployee.JobPosition);
             this.lbEmployeeInfo.Items.Add("Salary : " + currentEmployee.Salary);
-            this.lbEmployeeInfo.Items.Add("Promotion Points : " + currentEmployee.PromotionPoints);
-            this.lbEmployeeInfo.Items.Add("Late Points : " + currentEmployee.LatePoints);
             this.lbGeneralInfo.Items.Add("Birth Date : " + currentEmployee.BirthDate);
             this.lbGeneralInfo.Items.Add("Phone Number : " + currentEmployee.PhoneNumber);
             this.lbGeneralInfo.Items.Add("Address : " + currentEmployee.Address);
@@ -201,6 +206,7 @@ namespace PRJMediaBazaar
 
         private void btnChangeNeededPosition_Click(object sender, EventArgs e)
         {
+   
             //based on the selected position and day, open a new form to change the needed amount of that the position
             ChangeNeededPosition form = new ChangeNeededPosition(this.cbPosition.Text, (Day)cbDay.SelectedItem, _tableRows,this, ((Schedule)cbSchedule.SelectedItem).Id, cbDay.SelectedIndex);
             form.Show();
@@ -213,8 +219,8 @@ namespace PRJMediaBazaar
             try
             {
                 int neededJobPositionAmount = day.GetNeededPositionAmount(jobPosition);
-                EmployeeWorkday[] workdays = Database.GetEmployeesWorkdays(day.Id, jobPosition);
-                ShiftSeparator ssp = new ShiftSeparator(workdays, neededJobPositionAmount, _employees);
+                EmployeeWorkday[] workdays = _scheduleControl.GetEmployeesWorkdays(day.Id, jobPosition);
+                ShiftSeparator ssp = new ShiftSeparator(workdays, neededJobPositionAmount);
                 NamesRow[] namesRows = ssp.GetNamesRows();
                 _tableRows = namesRows;
 
@@ -350,13 +356,13 @@ namespace PRJMediaBazaar
             };
             UnassignedShiftButton.FlatAppearance.BorderSize = 0;
             UnassignedShiftButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            UnassignedShiftButton.Click += delegate (object sender, EventArgs e) { UnassignedShiftButton_Click(sender, e, new ShiftAssigning(day.Id, day.Date, shift, jobPosition,this,day)); };
+            UnassignedShiftButton.Click += delegate (object sender, EventArgs e) { UnassignedShiftButton_Click(sender, e, new ShiftAssigning(_scheduleControl,_empControl.GetEmployeesByPosition(jobPosition).ToList(), shift, jobPosition,this,day)); };
             return UnassignedShiftButton;
 
 
         }
 
-        private Button GetAssignedShiftButton(Day day, Shift shift, string jobPosition, RegularEmployee employee)
+        private Button GetAssignedShiftButton(Day day, Shift shift, string jobPosition, Employee employee)
         {
             Button AssignedShiftButton = new Button()
             {
@@ -386,27 +392,27 @@ namespace PRJMediaBazaar
             assigningForm.Show();
         }
 
-        private void AssignedShiftButton_Click(object sender, EventArgs e, RegularEmployee employee, Shift shift)
+        private void AssignedShiftButton_Click(object sender, EventArgs e, Employee employee, Shift shift)
         {
             ContextMenuStrip contextMenuStrip = new ContextMenuStrip();
             contextMenuStrip.Items.Add("Remove Employee", null, delegate (object sender2, EventArgs e2) { RemoveShift(shift,employee); });     
             contextMenuStrip.Show(Cursor.Position);
         }
 
-        private void RemoveShift(Shift shift, RegularEmployee employee)
+        private void RemoveShift(Shift shift, Employee employee)
         {
             DialogResult dialogResult = MessageBox.Show($"Are you sure you want to remove " +
                 $"{employee.FirstName} {employee.LastName}'s {shift.ToString()} shift?", "Confirmation", MessageBoxButtons.YesNo);
             if (dialogResult == DialogResult.Yes)
             {
-                Database.RemoveShift(shift, employee.Id, ((Day)cbDay.SelectedItem).Id);
+                _scheduleControl.RemoveShift(shift.ToString(),((Day)cbDay.SelectedItem).Id, employee.Id);
             }
             LoadTableByPosition((Day)cbDay.SelectedItem, employee.JobPosition);
         }
 
         public void UpdateDaysCheckbox(int scheduleId)
         {
-            Day[] days = Database.GetDays(scheduleId);
+            Day[] days =_scheduleControl.GetDays(scheduleId);
             this.cbDay.Items.Clear();
             foreach (Day d in days)
             {
@@ -428,7 +434,7 @@ namespace PRJMediaBazaar
             }
         }
 
-        private int GetEmptyShiftIndex(RegularEmployee morning, RegularEmployee mid, RegularEmployee evening)
+        private int GetEmptyShiftIndex(Employee morning, Employee mid, Employee evening)
         {
             if (morning != null && mid != null && evening == null)
             {
@@ -445,7 +451,7 @@ namespace PRJMediaBazaar
             return -1;
         }
 
-        private int GetBusyShiftIndex(RegularEmployee morning, RegularEmployee mid, RegularEmployee evening)
+        private int GetBusyShiftIndex(Employee morning, Employee mid, Employee evening)
         {
           
             if (morning != null && mid == null && evening == null)
@@ -465,82 +471,12 @@ namespace PRJMediaBazaar
 
         private void btnAddPromotionPoints_Click(object sender, EventArgs e)
         {
-            try
-            { //
-                if (this.cbAllEmployees.SelectedItem == null)
-                {
-                    throw new EmptyComboBoxException("Please select an employee!");
-                }
-                String name = this.cbAllEmployees.SelectedItem.ToString();
-                RegularEmployee currentEmployee = null;
-                for (int i = 0; i < _employees.Length; i++)
-                {
-                    if (_employees[i].FirstName + " " + _employees[i].LastName == name)
-                    {
-                        currentEmployee = _employees[i];
-                        break;
-                    }
-                }
-                if (currentEmployee == null)
-                    MessageBox.Show("No employee found!");
-                else
-                {
-                    if (currentEmployee.PromotionPoints > 5)
-                        MessageBox.Show("Cannot add more promotion points!");
-                    else
-                    {
-                        currentEmployee.PromotionPoints++;
-                        int id = currentEmployee.Id;
-                        Database.AddPromotionPoints(id, 1);
-                        LoadEmployeeListboxes(currentEmployee);
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("An error occured!" + ex.ToString());
-            }
+           
         }
 
         private void btnAddLatePoints_Click(object sender, EventArgs e)
         {
-            try
-            {
-                if (this.cbAllEmployees.SelectedItem == null)
-                {
-                    throw new EmptyComboBoxException("Please select an employee!");
-                }
-                String name = this.cbAllEmployees.SelectedItem.ToString();
-                RegularEmployee currentEmployee = null;
-                for (int i = 0; i < _employees.Length; i++)
-                {
-                    if (_employees[i].FirstName + " " + _employees[i].LastName == name)
-                    {
-                        currentEmployee = _employees[i];
-                        break;
-                    }
-                }
-                if (currentEmployee == null)
-                    MessageBox.Show("No employee found!");
-                else
-                {
-                    if (currentEmployee.LatePoints > 5)
-                    {
-                        MessageBox.Show("Cannot add more late points!");
-                    }
-                    else
-                    {
-                        currentEmployee.LatePoints++;
-                        int id = currentEmployee.Id;
-                        Database.AddLatePoints(id, 1);
-                        LoadEmployeeListboxes(currentEmployee);
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("An error occured!" + ex.ToString());
-            }
+            
         }
 
         private void HRHome_FormClosing(object sender, FormClosingEventArgs e)
@@ -558,7 +494,7 @@ namespace PRJMediaBazaar
                     throw new EmptyComboBoxException("Please select an employee!");
                 }
                 String name = this.cbAllEmployees.SelectedItem.ToString();
-                RegularEmployee currentEmployee = null;
+                Employee currentEmployee = null;
                 for (int i = 0; i < _employees.Length; i++)
                 {
                     if (_employees[i].FirstName + " " + _employees[i].LastName == name)

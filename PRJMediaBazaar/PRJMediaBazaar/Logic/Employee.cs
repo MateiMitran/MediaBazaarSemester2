@@ -4,14 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PRJMediaBazaar
+namespace PRJMediaBazaar.Logic
 {
-
-    abstract class User
+    class Employee
     {
-        protected User(int id, string firstName, string lastName, DateTime birthDate, 
-            string gender, double salary, string email, string password, 
-           string jobPosition, int phoneNumber, string address, string education)
+        public Employee(int id, string firstName, string lastName, DateTime birthDate,
+           string gender, double salary, string email, string password,
+          string jobPosition, int phoneNumber, string address, string education, int promotionPoints, int latePoints)
         {
             Id = id;
             FirstName = firstName;
@@ -31,7 +30,7 @@ namespace PRJMediaBazaar
         public string FirstName { get; private set; }
         public string LastName { get; private set; }
         public DateTime BirthDate { get; private set; }
-        public  string Gender { get; private set; }
+        public string Gender { get; private set; }
         public double Salary { get; private set; }
         public string Email { get; private set; }
         public string Password { get; private set; }
@@ -39,5 +38,6 @@ namespace PRJMediaBazaar
         public int PhoneNumber { get; private set; }
         public string Address { get; private set; }
         public string Education { get; private set; }
+        public string FullName { get { return FirstName + " " + LastName; } }
     }
 }
