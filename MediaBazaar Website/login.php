@@ -1,25 +1,8 @@
 <?php
     $page = 'login';
+    $functionalityRequirements = ['login-functionality'];
+    
     require_once('includes/header.php');
-
-    // LOGIN
-    if(isset($_POST['submit']) && isset($_POST['email']) && isset($_POST['password'])) {
-        $email = $_POST['email'];
-        $password = $_POST['password'];
-
-        $results = login($conn, $email, $password);
-        $numRows = mysqli_num_rows($results);
-
-        if($numRows === 1) {
-            foreach($results as $r) {
-                $_SESSION['user_id'] = $r['id'];
-                $_SESSION['email'] = $r['email'];
-
-                header("Location: /dashboard");
-                exit();
-            }
-        }
-    }
 ?>
     <!-- LOGIN FORM -->
     <form class="simple-form" action="/login" method="POST">
