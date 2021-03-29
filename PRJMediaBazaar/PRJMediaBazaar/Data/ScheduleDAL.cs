@@ -57,17 +57,31 @@ namespace PRJMediaBazaar.Data
         /// <param name="dayId"></param>
         /// <param name="jobPosition"></param>
         /// <returns></returns>
-        protected MySqlDataReader SelectEmployeesWorkdays(int dayId, string jobPosition)
+        protected MySqlDataReader SelectEmployeesShifts(int dayId, string jobPosition)
         {
             string[] parameters = new string[] { dayId.ToString(), jobPosition };
-            return executeReader("SELECT ew.*, d.date, e.first_name, e.last_name FROM employees_workdays ew INNER JOIN days d ON ew.day_id = d.id" +
-                    " INNER JOIN employees e ON ew.employee_id = e.id WHERE ew.day_id = @dayId AND job_position = @jobPosition AND ew.absence = false;", parameters);
+            return executeReader("SELECT ew.* FROM employees_workdays ew INNER JOIN employees e ON ew.employee_id =e.id" +
+                    "  WHERE day_id = @dayId AND e.job_position = @jobPosition AND absence = false;", parameters);
         }
 
 
         /// <summary>
-        /// takes the employee workday for that day and employee
+        /// takes all employees workdays, by the given job position
         /// </summary>
+        /// <returns></returns>
+        protected MySqlDataReader SelectEmployeesWorkdays(int dayId, string jobPosition)
+        {
+            string[] parameters = new string[] { dayId.ToString(), jobPosition };
+            string sql = "SELECT ew.* FROM employees_workdays ew INNER JOIN employees e ON ew.employee_id =e.id WHERE day_id = @dayId AND e.job_position = @jobPosition";
+
+            return executeReader(sql, parameters);
+        }
+
+        /// <summary>
+        /// takes the employee's workday
+        /// </summary>
+        /// <param name="dayId"></param>
+        /// <param name="employeeId"></param>
         /// <returns></returns>
         protected MySqlDataReader SelectEmployeeWorkday(int dayId, int employeeId)
         {
@@ -106,7 +120,7 @@ namespace PRJMediaBazaar.Data
         }
 
 
-        protected Object DeleteShift(string shift, int dayId, int employeeId)
+        protected Object DeleteShift(int dayId, int employeeId)
         {
             string sql = "DELETE FROM employees_workdays WHERE day_id = @dayId AND employee_id = @employeeId";
             string[] parameters = new string[] { dayId.ToString(), employeeId.ToString() };

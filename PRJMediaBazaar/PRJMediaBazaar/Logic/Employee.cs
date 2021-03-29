@@ -10,7 +10,7 @@ namespace PRJMediaBazaar.Logic
     {
         public Employee(int id, string firstName, string lastName, DateTime birthDate,
            string gender, double salary, string email, string password,
-          string jobPosition, int phoneNumber, string address, string education, int promotionPoints, int latePoints)
+          string jobPosition, int phoneNumber, string address, string education)
         {
             Id = id;
             FirstName = firstName;
@@ -24,6 +24,14 @@ namespace PRJMediaBazaar.Logic
             PhoneNumber = phoneNumber;
             Address = address;
             Education = education;
+        }
+
+        public Employee(int id, string firstName, string lastName, string jobPosition)
+        {
+            Id = id;
+            FirstName = firstName;
+            LastName = lastName;
+            JobPosition = jobPosition;
         }
 
         public int Id { get; private set; }

@@ -96,6 +96,7 @@
     <Compile Include="Logic\NamesRow.cs" />
     <Compile Include="Logic\Schedule.cs" />
     <Compile Include="Logic\ScheduleControl.cs" />
+    <Compile Include="Logic\ShiftFinder.cs" />
     <Compile Include="Logic\ShiftSeparator.cs" />
     <Compile Include="Presentation\ChangeNeededPosition.cs">
       <SubType>Form</SubType>

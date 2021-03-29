@@ -36,9 +36,8 @@ namespace PRJMediaBazaar.Logic
                 double salary = Convert.ToDouble(dr[9]);
                 String gender = dr[10].ToString();
                 String education = dr[11].ToString();
-                int promotionPoints = Convert.ToInt32(dr[12]);
-                int latePoints = Convert.ToInt32(dr[13]);
-                employees.Add(new Employee(id, firstName, lastName, birthDate, gender, salary, email, password, jobPosition, phoneNumber, address, education, promotionPoints, latePoints));
+                
+                employees.Add(new Employee(id, firstName, lastName, birthDate, gender, salary, email, password, jobPosition, phoneNumber, address, education));
             }
             CloseConnection();
             _employees = employees;

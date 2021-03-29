@@ -60,11 +60,11 @@ namespace PRJMediaBazaar.Logic
             return days.ToArray();
         }
 
-        public EmployeeWorkday[] GetEmployeesWorkdays(int dayId, string jobPosition)
+        public EmployeeWorkday[] GetEmployeesShifts(int dayId, string jobPosition)
         {
             List<EmployeeWorkday> workdays = new List<EmployeeWorkday>();
 
-            MySqlDataReader dr = SelectEmployeesWorkdays(dayId, jobPosition);
+            MySqlDataReader dr = SelectEmployeesShifts(dayId, jobPosition);
             while (dr.Read()) //add EmployeeWorkday objects to the list
             {
                 Employee employee =GetEmployeeById( Convert.ToInt32(dr[1]));
@@ -72,13 +72,32 @@ namespace PRJMediaBazaar.Logic
                 Shift secondShift = (Shift)Enum.Parse(typeof(Shift), dr[3].ToString());
                 bool absence = Convert.ToBoolean(dr[4]);
                 AbsenceReason absenceReason = (AbsenceReason)Enum.Parse(typeof(AbsenceReason), dr[5].ToString());
-                DateTime date = DateTime.Parse(dr[6].ToString());
-                string fullName = dr[7].ToString() + " " + dr[8].ToString();
+
                 workdays.Add(new EmployeeWorkday(employee,firstShift,secondShift,absence,absenceReason));
             }
             CloseConnection();
             return workdays.ToArray();
 
+        }
+
+        public EmployeeWorkday[] GetEmployeesWorkdays(int dayId, string jobPosition)
+        {
+            List<EmployeeWorkday> workdays = new List<EmployeeWorkday>();
+
+            MySqlDataReader dr = SelectEmployeesWorkdays(dayId, jobPosition);
+            while (dr.Read()) //add EmployeeWorkday objects to the list
+            {
+                Employee employee = GetEmployeeById(Convert.ToInt32(dr[1]));
+                Shift firstShift = (Shift)Enum.Parse(typeof(Shift), dr[2].ToString());
+                Shift secondShift = (Shift)Enum.Parse(typeof(Shift), dr[3].ToString());
+                bool absence = Convert.ToBoolean(dr[4]);
+                AbsenceReason absenceReason = (AbsenceReason)Enum.Parse(typeof(AbsenceReason), dr[5].ToString());
+                DateTime date = DateTime.Parse(dr[6].ToString());
+                string fullName = dr[7].ToString() + " " + dr[8].ToString();
+                workdays.Add(new EmployeeWorkday(employee, firstShift, secondShift, absence, absenceReason));
+            }
+            CloseConnection();
+            return workdays.ToArray();
         }
 
         private Employee GetEmployeeById(int id)
@@ -95,7 +114,26 @@ namespace PRJMediaBazaar.Logic
 
        public void RemoveShift(string shift,int dayId,int employeeId)
         {
-            DeleteShift(shift, dayId, employeeId);
+            MySqlDataReader result = SelectEmployeeWorkday(dayId, employeeId);
+            if (result.Read()) 
+            {
+                int emptyShiftIndex = ShiftFinder.GetEmptyShiftIndex(result[2].ToString(), result[3].ToString());
+                if (emptyShiftIndex != -1 && !Convert.ToBoolean(result[4])) //if there is an empty shift, remove the row
+                {
+                      DeleteShift(dayId, employeeId);
+                }
+                else if (emptyShiftIndex == -1 && !Convert.ToBoolean(result[4]))//if there is a double shift,insert None on the chosen one
+                {
+                    if (result[2].ToString() == shift.ToString()) 
+                    {
+                      UpdateShift(2,"None",dayId,employeeId);
+                    }
+                    else if (result[3].ToString() == shift.ToString())
+                    {
+                       UpdateShift(3,"None", dayId, employeeId);
+                    }
+                }
+            }
             CloseConnection();
         }
         

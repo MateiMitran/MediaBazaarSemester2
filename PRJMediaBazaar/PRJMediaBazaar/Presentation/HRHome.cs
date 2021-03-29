@@ -219,7 +219,7 @@ namespace PRJMediaBazaar
             try
             {
                 int neededJobPositionAmount = day.GetNeededPositionAmount(jobPosition);
-                EmployeeWorkday[] workdays = _scheduleControl.GetEmployeesWorkdays(day.Id, jobPosition);
+                EmployeeWorkday[] workdays = _scheduleControl.GetEmployeesShifts(day.Id, jobPosition);
                 ShiftSeparator ssp = new ShiftSeparator(workdays, neededJobPositionAmount);
                 NamesRow[] namesRows = ssp.GetNamesRows();
                 _tableRows = namesRows;
