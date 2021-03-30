@@ -8,7 +8,7 @@ using MySql.Data.MySqlClient;
 
 namespace PRJMediaBazaar.Logic
 {
-    class Day : ScheduleDAL
+    class Day : DayDAL
     {
         public int Id { get; private set; }
         public int SecurityNeeded { get; set; }
@@ -79,7 +79,9 @@ namespace PRJMediaBazaar.Logic
 
         public Object ChangeNeededJobPosition(string jobPosition, int amount)
         {
-           return UpdatePosition(jobPosition, amount, Id);
+           Object result = UpdatePosition(jobPosition, amount, Id);
+            CloseConnection();
+            return result;
         }
 
     }

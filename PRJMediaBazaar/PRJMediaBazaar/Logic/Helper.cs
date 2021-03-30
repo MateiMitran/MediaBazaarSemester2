@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PRJMediaBazaar.Logic
 {
-    public static class ShiftFinder
+    public static class Helper
     {
         public static int GetEmptyShiftIndex(string firstShift, string secondShift)
         {
@@ -53,6 +53,19 @@ namespace PRJMediaBazaar.Logic
 
             return true;
 
+        }
+
+
+        public static Employee GetEmployeeById(int id, Employee[] employees)
+        {
+            foreach (Employee e in employees)
+            {
+                if (e.Id == id)
+                {
+                    return e;
+                }
+            }
+            return null;
         }
     }
 }

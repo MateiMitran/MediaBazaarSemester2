@@ -7,7 +7,7 @@ using MySql.Data.MySqlClient;
 
 namespace PRJMediaBazaar.Data
 {
-     class EmployeeDAL : BaseDAL
+      class EmployeeDAL : BaseDAL
     {
         protected MySqlDataReader SelectAll()
         {

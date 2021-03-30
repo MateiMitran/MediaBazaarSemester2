@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PRJMediaBazaar.Logic
 {
-    class Employee
+    public class Employee
     {
         public Employee(int id, string firstName, string lastName, DateTime birthDate,
            string gender, double salary, string email, string password,

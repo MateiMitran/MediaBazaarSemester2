@@ -9,7 +9,7 @@ using MySql.Data;
 
 namespace PRJMediaBazaar.Logic
 {
-    class Availabilities : ScheduleDAL
+    class Availabilities : AvailabilitiesDAL
     {
         private Employee[] _employees;
         private List<EmployeePlanner> _available;
@@ -37,11 +37,11 @@ namespace PRJMediaBazaar.Logic
 
             while (result.Read()) //employees in the workdays_table
             {
-                Employee employee = GetEmployeeById(Convert.ToInt32(result[1]));
+                Employee employee = Helper.GetEmployeeById(Convert.ToInt32(result[1]), _employees);
                 if (!Convert.ToBoolean(result[4])) //the employee isn't absent
                 {
-                    int index = ShiftFinder.GetEmptyShiftIndex(result[2].ToString(), result[3].ToString());
-                    int busyIndex = ShiftFinder.GetBusyShiftIndex(result[2].ToString(), result[3].ToString());
+                    int index = Helper.GetEmptyShiftIndex(result[2].ToString(), result[3].ToString());
+                    int busyIndex = Helper.GetBusyShiftIndex(result[2].ToString(), result[3].ToString());
 
                     if (index == -1)  //employee has a double shift
                     {
@@ -49,7 +49,7 @@ namespace PRJMediaBazaar.Logic
                         _unavailable.Add(ea);
                     }
 
-                    else if (index != -1 && ShiftFinder.DoubleShiftIsValid(result[busyIndex].ToString(), shift.ToString())) //employee has only one shift, and the second one is valid
+                    else if (index != -1 && Helper.DoubleShiftIsValid(result[busyIndex].ToString(), shift.ToString())) //employee has only one shift, and the second one is valid
                     {
 
                         EmployeePlanner ea = new EmployeePlanner(employee, result[busyIndex].ToString(), index);
@@ -82,17 +82,5 @@ namespace PRJMediaBazaar.Logic
             CloseConnection();
         }
 
-
-        private Employee GetEmployeeById(int id)
-        {
-            foreach (Employee e in _employees)
-            {
-                if (e.Id == id)
-                {
-                    return e;
-                }
-            }
-            return null;
-        }
     }
 }

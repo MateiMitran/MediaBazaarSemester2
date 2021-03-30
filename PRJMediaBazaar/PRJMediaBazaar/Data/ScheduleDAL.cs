@@ -10,7 +10,7 @@ namespace PRJMediaBazaar.Data
 {
      class ScheduleDAL : BaseDAL
     { 
-     protected MySqlDataReader SelectSchedules()
+        protected MySqlDataReader SelectSchedules()
         {
             return executeReader("SELECT * FROM schedules;", null);
         }
@@ -20,35 +20,6 @@ namespace PRJMediaBazaar.Data
             string[] parameters = new string[] { scheduleId.ToString() };
 
             return executeReader("SELECT * FROM days WHERE schedule_id = @scheduleId", parameters);
-        }
-
-
-        protected Object UpdatePosition(string jobPosition, int amount, int dayId)
-        {
-            string sql = "";
-            string[] parameters = new string[] { amount.ToString(), dayId.ToString() };
-            switch (jobPosition)
-            {
-                case "Security":
-                    sql = "UPDATE days SET security_needed = @amount WHERE id = @dayId";
-                    break;
-                case "Cashier":
-                    sql = "UPDATE days SET cashiers_needed = @amount WHERE id = @dayId";
-                    break;
-                case "Stocker":
-                    sql = "UPDATE days SET stockers_needed = @amount WHERE id = @dayId";
-
-                    break;
-                case "SalesAssistant":
-                    sql = "UPDATE days SET sales_assistants_needed = @amount WHERE id = @dayId";
-
-                    break;
-                case "WarehouseManager":
-                    sql = "UPDATE days SET warehouse_managers_needed = @amount WHERE id = @dayId";
-                    break;
-
-            }
-            return executeNonQuery(sql, parameters);
         }
 
         /// <summary>
@@ -64,18 +35,6 @@ namespace PRJMediaBazaar.Data
                     "  WHERE day_id = @dayId AND e.job_position = @jobPosition AND absence = false;", parameters);
         }
 
-
-        /// <summary>
-        /// takes all employees workdays, by the given job position
-        /// </summary>
-        /// <returns></returns>
-        protected MySqlDataReader SelectEmployeesWorkdays(int dayId, string jobPosition)
-        {
-            string[] parameters = new string[] { dayId.ToString(), jobPosition };
-            string sql = "SELECT ew.* FROM employees_workdays ew INNER JOIN employees e ON ew.employee_id =e.id WHERE day_id = @dayId AND e.job_position = @jobPosition";
-
-            return executeReader(sql, parameters);
-        }
 
         /// <summary>
         /// takes the employee's workday
