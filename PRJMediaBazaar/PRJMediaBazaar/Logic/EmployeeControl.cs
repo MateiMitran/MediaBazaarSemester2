@@ -36,8 +36,13 @@ namespace PRJMediaBazaar.Logic
                 double salary = Convert.ToDouble(dr[9]);
                 String gender = dr[10].ToString();
                 String education = dr[11].ToString();
-                
-                employees.Add(new Employee(id, firstName, lastName, birthDate, gender, salary, email, password, jobPosition, phoneNumber, address, education));
+                String contract = dr[12].ToString();
+                int daysOff = Convert.ToInt32(dr[13]);
+                int contractHours = Convert.ToInt32(dr[14]);
+                String note = dr[15].ToString();
+                Employee temp = new Employee(id, firstName, lastName, birthDate, gender, salary, email, password, jobPosition, phoneNumber, address, education, contract, daysOff, contractHours);
+                temp.Note = note;
+                employees.Add(temp);
             }
             CloseConnection();
             _employees = employees;
@@ -56,7 +61,24 @@ namespace PRJMediaBazaar.Logic
             }
             return employees.ToArray();
         }
-
+        public void AddAnEmployee(String firstName, String lastName, DateTime birthDate, String email, String password, String jobPosition, int phoneNumber, String address, int salary, String gender, String education, String contract, int daysOff, int contractHours)
+        {
+            AddEmployee(firstName, lastName, birthDate, email, password, jobPosition, phoneNumber, address, salary, gender, education, contract, daysOff, contractHours);
+            int id = Convert.ToInt32(GetIDByEmail(email));
+            _employees.Add(new Employee(id, firstName, lastName, birthDate,gender,salary,email,password,jobPosition,phoneNumber,address,education,contract,daysOff,contractHours));
+            CloseConnection();
+        }
+        public void UpdateNote(String note,String email)
+        {
+            AddNoteToEmployee(note, email);
+            CloseConnection();
+        }
         public Employee[] Employees { get { return _employees.ToArray(); } }
+
+        public int GetIDFromEmail(String email)
+        {
+            int id = Convert.ToInt32(GetIDByEmail(email));
+            return id;
+        }
     }
 }

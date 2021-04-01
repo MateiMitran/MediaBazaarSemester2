@@ -9,15 +9,17 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using PRJMediaBazaar.Logic;
 using Day = PRJMediaBazaar.Logic.Day;
+using System.Text.RegularExpressions;
 
 namespace PRJMediaBazaar
 {
-     partial class HRHome : Form
+    partial class HRHome : Form
     {
 
         private EmployeeControl _empControl;
         private ScheduleControl _scheduleControl;
         private Employee[] _employees;
+        private Employee thisEmployee;
 
         private NamesRow[] _tableRows;
         private LogIn _loginForm;
@@ -26,21 +28,29 @@ namespace PRJMediaBazaar
         {
             InitializeComponent();
             _loginForm = loginForm;
-
             _empControl = new EmployeeControl();
-            _employees = _empControl.Employees;
+            thisEmployee = null;
+            LoadEmployees();
             _scheduleControl = new ScheduleControl(_employees.ToList());
-            foreach(Employee e in _empControl.Employees)
-            {
-                cbAllEmployees.Items.Add(e.FirstName + " " + e.LastName);
-            }
-            
-            foreach(Schedule s in _scheduleControl.Schedules)
+            foreach (Schedule s in _scheduleControl.Schedules)
             {
                 cbSchedule.Items.Add(s);
             }
             cbPosition.Text = "All";
             this.btnChangeNeededPosition.Enabled = false;
+        }
+
+        public void LoadEmployees()
+        {
+            _employees = _empControl.Employees;
+            
+        }
+        public void AddEmployee(Employee temp)
+        {
+            List<Employee> temp1;
+            temp1 = _employees.ToList();
+            temp1.Add(temp);
+            _employees = temp1.ToArray();
         }
 
         private void label2_Click(object sender, EventArgs e)
@@ -134,10 +144,14 @@ namespace PRJMediaBazaar
             this.lbEmployeeInfo.Items.Add("Password : " + currentEmployee.Password);
             this.lbEmployeeInfo.Items.Add("Job Position : " + currentEmployee.JobPosition);
             this.lbEmployeeInfo.Items.Add("Salary : " + currentEmployee.Salary);
+            this.lbEmployeeInfo.Items.Add("Contract : " + currentEmployee.Contract);
+            this.lbEmployeeInfo.Items.Add("Days Off : " + currentEmployee.DaysOff);
+            this.lbEmployeeInfo.Items.Add("Contract Hours : " + currentEmployee.ContractHours);
             this.lbGeneralInfo.Items.Add("Birth Date : " + currentEmployee.BirthDate);
             this.lbGeneralInfo.Items.Add("Phone Number : " + currentEmployee.PhoneNumber);
             this.lbGeneralInfo.Items.Add("Address : " + currentEmployee.Address);
             this.lbGeneralInfo.Items.Add("Gender : " + currentEmployee.Gender);
+            this.lbGeneralInfo.Items.Add("Education : " + currentEmployee.Education);
         }
 
         private void lbEmployeeInfo_SelectedIndexChanged(object sender, EventArgs e)
@@ -471,14 +485,21 @@ namespace PRJMediaBazaar
 
         private void btnAddPromotionPoints_Click(object sender, EventArgs e)
         {
-           
+            AddEmployees addEmployees = new AddEmployees(this,_empControl,_employees.ToList());
+            addEmployees.Show();
         }
 
         private void btnAddLatePoints_Click(object sender, EventArgs e)
         {
-            
+            if (thisEmployee == null)
+                MessageBox.Show("Please select an employee!");
+            else
+            {
+                EditNote editNote = new EditNote(thisEmployee, _empControl,this);
+                editNote.Show();
+            }
         }
-
+        
         private void HRHome_FormClosing(object sender, FormClosingEventArgs e)
         {
             _loginForm.Close();
@@ -486,34 +507,47 @@ namespace PRJMediaBazaar
 
         private void cbAllEmployees_SelectedIndexChanged(object sender, EventArgs e)
         {
-            try
+            
+        }
+        public void AddNoteToEmployee(Employee temp,String note)
+        {
+            temp.Note = note;
+        }
+        private void button1_Click(object sender, EventArgs e)
+        {
+            int ok = 0;
+            List<Employee> employees = _empControl.Employees.ToList();
+            String input = this.tbEmployee.Text;
+            if (Regex.IsMatch(input, @"^\d+$") == true)
             {
-
-                if (this.cbAllEmployees.SelectedItem == null)
+                int id = Convert.ToInt32(input);
+                foreach (Employee employee in employees)
                 {
-                    throw new EmptyComboBoxException("Please select an employee!");
-                }
-                String name = this.cbAllEmployees.SelectedItem.ToString();
-                Employee currentEmployee = null;
-                for (int i = 0; i < _employees.Length; i++)
-                {
-                    if (_employees[i].FirstName + " " + _employees[i].LastName == name)
+                    if (employee.Id == id)
                     {
-                        currentEmployee = _employees[i];
+                        thisEmployee = employee;
+                        LoadEmployeeListboxes(thisEmployee);
+                        ok = 1;
                         break;
                     }
                 }
-                if (currentEmployee == null)
-                    MessageBox.Show("No employee found!");
-                else
-                {
-                    LoadEmployeeListboxes(currentEmployee);
-                }
             }
-            catch (Exception ex)
+            else
             {
-                MessageBox.Show("An error ocurred!" + ex.ToString());
+                foreach (Employee employee in employees)
+                {
+                    if (employee.LastName == input || employee.FirstName == input || employee.FirstName + " " + employee.LastName == input)
+                    {
+                        thisEmployee = employee;
+                        LoadEmployeeListboxes(thisEmployee);
+                        ok = 1;
+                        break;
+                    }
+                }
+
             }
+            if (ok == 0)
+                MessageBox.Show("No employee found with that id/last name!");
         }
     }
 }

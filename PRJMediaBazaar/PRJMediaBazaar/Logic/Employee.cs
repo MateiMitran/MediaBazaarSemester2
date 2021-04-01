@@ -8,9 +8,11 @@ namespace PRJMediaBazaar.Logic
 {
     public class Employee
     {
+        
         public Employee(int id, string firstName, string lastName, DateTime birthDate,
            string gender, double salary, string email, string password,
-          string jobPosition, int phoneNumber, string address, string education)
+          string jobPosition, int phoneNumber, string address, string education, string contract,
+            int daysOff, int contractHours)
         {
             Id = id;
             FirstName = firstName;
@@ -24,6 +26,9 @@ namespace PRJMediaBazaar.Logic
             PhoneNumber = phoneNumber;
             Address = address;
             Education = education;
+            Contract = contract;
+            DaysOff = daysOff;
+            ContractHours = contractHours;
         }
 
         public Employee(int id, string firstName, string lastName, string jobPosition)
@@ -47,5 +52,10 @@ namespace PRJMediaBazaar.Logic
         public string Address { get; private set; }
         public string Education { get; private set; }
         public string FullName { get { return FirstName + " " + LastName; } }
+        public String Contract { get; set; }
+        public int DaysOff { get; set; }
+        public int ContractHours { get; set; }
+
+        public String Note { get; set; }       
     }
 }

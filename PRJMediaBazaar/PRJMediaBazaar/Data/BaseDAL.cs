@@ -19,7 +19,7 @@ namespace PRJMediaBazaar.Data
         {
             try
             {
-                con = new MySqlConnection(@"server=studmysql01.fhict.local;database=dbi460221;uid=dbi460221;password=lol;");
+                con = new MySqlConnection(@"server=studmysql01.fhict.local;database=dbi460221;uid=dbi460221;password=lol;AllowUserVariables=true");
                 MySqlCommand cmd = con.CreateCommand();
                 con.Open();
                 cmd.CommandType = CommandType.Text;

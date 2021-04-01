@@ -92,6 +92,22 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="InvaidEmailException.cs" />
+    <Compile Include="InvalidIntException.cs" />
+    <Compile Include="InvalidStringException.cs" />
+    <Compile Include="NegativeInputException.cs" />
+    <Compile Include="Presentation\EditNote.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Presentation\EditNote.Designer.cs">
+      <DependentUpon>EditNote.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Presentation\AddEmployees.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Presentation\AddEmployees.Designer.cs">
+      <DependentUpon>AddEmployees.cs</DependentUpon>
+    </Compile>
     <Compile Include="Data\AvailabilitiesDAL.cs" />
     <Compile Include="Data\DayDAL.cs" />
     <Compile Include="Logic\EmployeeControl.cs" />
@@ -137,6 +153,12 @@
     <Compile Include="Presentation\ShiftAssigning.Designer.cs">
       <DependentUpon>ShiftAssigning.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Presentation\EditNote.resx">
+      <DependentUpon>EditNote.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Presentation\AddEmployees.resx">
+      <DependentUpon>AddEmployees.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Presentation\ChangeNeededPosition.resx">
       <DependentUpon>ChangeNeededPosition.cs</DependentUpon>
     </EmbeddedResource>
