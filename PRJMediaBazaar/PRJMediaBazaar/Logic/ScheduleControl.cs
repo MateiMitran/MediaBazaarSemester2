@@ -47,11 +47,11 @@ namespace PRJMediaBazaar.Logic
             {
                 int dayId = Convert.ToInt32(dr[0]);
                 DateTime date = dr.GetDateTime(1);
-                int securityNeeded = Convert.ToInt32(dr[3]);
-                int cashiersNeeded = Convert.ToInt32(dr[4]);
-                int stockersNeeded = Convert.ToInt32(dr[5]);
-                int salesAssistantsNeeded = Convert.ToInt32(dr[6]);
-                int warehouseManagersNeeded = Convert.ToInt32(dr[7]);
+                string securityNeeded = Convert.ToString(dr[3]);
+                string cashiersNeeded = Convert.ToString(dr[4]);
+                string stockersNeeded = Convert.ToString(dr[5]);
+                string salesAssistantsNeeded = Convert.ToString(dr[6]);
+                string warehouseManagersNeeded = Convert.ToString(dr[7]);
 
                 days.Add(new Day(dayId, date, securityNeeded, cashiersNeeded, stockersNeeded, salesAssistantsNeeded, warehouseManagersNeeded));
 

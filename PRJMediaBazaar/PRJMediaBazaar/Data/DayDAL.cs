@@ -4,16 +4,24 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
+using PRJMediaBazaar.Logic;
 
 
 namespace PRJMediaBazaar.Data
 {
     class DayDAL : BaseDAL
     {
-        protected Object UpdatePosition(string jobPosition, int amount, int dayId)
+        /// <summary>
+        /// the three amounts should be separated by ' '
+        /// </summary>
+        /// <param name="jobPosition"></param>
+        /// <param name="amount"></param>
+        /// <param name="dayId"></param>
+        /// <returns></returns>
+        protected Object UpdatePosition(string jobPosition, string amounts, int dayId)
         {
             string sql = "";
-            string[] parameters = new string[] { amount.ToString(), dayId.ToString() };
+            string[] parameters = new string[] { amounts, dayId.ToString() };
             switch (jobPosition)
             {
                 case "Security":

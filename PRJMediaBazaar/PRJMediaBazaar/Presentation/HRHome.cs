@@ -36,7 +36,7 @@ namespace PRJMediaBazaar
             {
                 cbSchedule.Items.Add(s);
             }
-            cbPosition.Text = "All";
+            cbPosition.Text = "Security";
             this.btnChangeNeededPosition.Enabled = false;
         }
 
@@ -180,6 +180,10 @@ namespace PRJMediaBazaar
             Schedule schedule = (Schedule)cbSchedule.SelectedItem;
             int scheduleId = schedule.Id;
             UpdateDaysCheckbox(scheduleId);
+            if (cbDay.Text == "")
+            {
+                ShiftsTable.Controls.Clear();
+            }
 
         }
 
@@ -232,9 +236,10 @@ namespace PRJMediaBazaar
         {
             try
             {
-                int neededJobPositionAmount = day.GetNeededPositionAmount(jobPosition);
+                NeededPositions neededAmounts = day.GetNeededPositionAmount(jobPosition);
+
                 EmployeeWorkday[] workdays = _scheduleControl.GetEmployeesShifts(day.Id, jobPosition);
-                ShiftSeparator ssp = new ShiftSeparator(workdays, neededJobPositionAmount);
+                ShiftSeparator ssp = new ShiftSeparator(workdays, neededAmounts.MaxValue());
                 NamesRow[] namesRows = ssp.GetNamesRows();
                 _tableRows = namesRows;
 
@@ -328,6 +333,33 @@ namespace PRJMediaBazaar
                             EveningShiftButton = GetAssignedShiftButton(day, Shift.Evening, jobPosition, namesRows[i].Evening);
                         }
                     }
+                    
+                    if(i+1 > neededAmounts.Morning)
+                    {
+                        MorningShiftButton.Enabled = false;
+                        MorningShiftButton.BackColor = Color.Silver;
+                        MorningShiftButton.ForeColor = Color.Silver;
+                        MorningShiftButton.Text = "";
+
+
+                    }
+                    if (i+1 > neededAmounts.Midday)
+                    {
+                        MiddayShiftButton.Enabled = false;
+                        MiddayShiftButton.BackColor = Color.Silver;
+                        MiddayShiftButton.ForeColor = Color.Silver;
+                        MiddayShiftButton.Text = "";
+
+                    }
+                    if (i+1 > neededAmounts.Evening)
+                    {
+                        EveningShiftButton.Enabled = false;
+                        EveningShiftButton.ForeColor = Color.Silver;
+                        EveningShiftButton.Text = "";
+
+                    }
+
+
 
                     ShiftsTable.Controls.Add(JobPositionLabel, 0, ShiftsTable.RowCount - 1);
                     ShiftsTable.Controls.Add(MorningShiftButton, 1, ShiftsTable.RowCount - 1);
