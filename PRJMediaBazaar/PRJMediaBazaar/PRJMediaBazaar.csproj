@@ -95,6 +95,7 @@
     <Compile Include="InvaidEmailException.cs" />
     <Compile Include="InvalidIntException.cs" />
     <Compile Include="InvalidStringException.cs" />
+    <Compile Include="Logic\DayOff.cs" />
     <Compile Include="Logic\NeededPositions.cs" />
     <Compile Include="NegativeInputException.cs" />
     <Compile Include="Presentation\EditNote.cs">

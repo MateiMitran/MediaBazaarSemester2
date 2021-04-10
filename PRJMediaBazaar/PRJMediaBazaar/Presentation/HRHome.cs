@@ -38,6 +38,11 @@ namespace PRJMediaBazaar
             }
             cbPosition.Text = "Security";
             this.btnChangeNeededPosition.Enabled = false;
+
+            foreach (DayOff d in _scheduleControl.DaysOffRequests)
+            {
+
+            }
         }
 
         public void LoadEmployees()
@@ -580,6 +585,16 @@ namespace PRJMediaBazaar
             }
             if (ok == 0)
                 MessageBox.Show("No employee found with that id/last name!");
+        }
+
+        private void panelSchedule_Paint_1(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void pnlDayOff_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }

@@ -9,7 +9,9 @@ using PRJMediaBazaar.Logic;
 namespace PRJMediaBazaar.Data
 {
      class ScheduleDAL : BaseDAL
-    { 
+    {
+        protected List<Object> dayoff_req;
+
         protected MySqlDataReader SelectSchedules()
         {
             return executeReader("SELECT * FROM schedules;", null);
@@ -88,16 +90,16 @@ namespace PRJMediaBazaar.Data
             return executeNonQuery(sql, parameters);
         }
 
-        protected Object UpdateAbsence(AbsenceReason absenceReason, int dayId, int employeeId)
+        protected Object UpdateAbsence(int dayId, int employeeId) // !
         {
-            string[] parameters = new string[] { "None", "None", true.ToString(), absenceReason.ToString(), dayId.ToString(), employeeId.ToString() };
+            string[] parameters = new string[] { "None", "None", true.ToString(), "DayOff", dayId.ToString(), employeeId.ToString() };
             string sql = "UPDATE employees_workdays SET first_shift = @shift, second_shift = @shift, absence = @absence, absence_reason = @absenceReason" +
                              " WHERE day_id = @dayId AND employee_id = @employeeId";
 
             return executeNonQuery(sql, parameters);
         }
 
-        protected Object InsertAbsence(int dayId, int employeeId)
+        protected Object InsertAbsence(int dayId, int employeeId) // !
         {
             string[] parameters = new string[] { dayId.ToString(), employeeId.ToString(), "None", "None", true.ToString(), "DayOff" };
             string sql = "INSERT INTO employees_workdays (day_id, employee_id, first_shift, second_shift, absence, absence_reason)" +
@@ -144,6 +146,12 @@ namespace PRJMediaBazaar.Data
            Object result = executeScalar(sql, parameters);
             CloseConnection();
             return result;
+        }
+
+        protected MySqlDataReader SelectDayOffRequests()
+        {
+            string sql = "SELECT * FROM dayoff_requests WHERE status = 'Pending'; ";
+            return executeReader(sql, null);
         }
 
     }

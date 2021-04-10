@@ -11,6 +11,7 @@ namespace PRJMediaBazaar.Logic
 {
      class ScheduleControl : ScheduleDAL
     {
+        private List<DayOff> dayoff_req;
         private List<Schedule> _schedules;
         private List<Employee> _employees;
         public ScheduleControl(List<Employee> employees)
@@ -20,6 +21,7 @@ namespace PRJMediaBazaar.Logic
             LoadSchedules();
         }
 
+        public DayOff[] DaysOffRequests { get { return dayoff_req.ToArray()};
         public Schedule[] Schedules { get { return _schedules.ToArray(); } }
 
         private void LoadSchedules()
@@ -134,6 +136,23 @@ namespace PRJMediaBazaar.Logic
             CloseConnection();
         }
 
+
+        public void AssignAbsence(AbsenceReason absenceReason, int employeeId, int dayId)
+        {
+            MySqlDataReader dr = SelectEmployeeWorkday(dayId, employeeId);
+            if (dr.Read())
+            {
+                UpdateAbsence(dayId, employeeId);
+            }
+            else
+            {
+                InsertAbsence(dayId, employeeId);
+            }
+            CloseConnection();
+
+        }
+
+
         public int GetWorkedHours(int weekId, int employeeId)
         {
             int hours =Convert.ToInt32( SelectWorkedHours(weekId, employeeId));
@@ -141,7 +160,27 @@ namespace PRJMediaBazaar.Logic
             return hours;
         }
 
-    
+
+
+        public List<DayOff> PopulateList_DayOff() // add the DayOff requests to the list 
+        {
+            List<DayOff> pseudos = new List<DayOff>();
+            MySqlDataReader result = SelectDayOffRequests();
+            while (result.Read())
+            {
+                int dayId = Convert.ToInt32(result[0]);
+                int employee_id = Convert.ToInt32(result[1]);
+                bool denied = Convert.ToBoolean(result[2]);
+                string objection = result[3].ToString();
+
+                DayOff req = new DayOff(dayId, employee_id, denied, objection);
+                pseudos.Add(req);
+
+
+            }
+            CloseConnection();
+            dayoff_req = pseudos;
+        }
 
     }
 }
