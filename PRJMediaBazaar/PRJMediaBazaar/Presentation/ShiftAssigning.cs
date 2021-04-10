@@ -41,22 +41,32 @@ namespace PRJMediaBazaar
         private void btnAssign_Click(object sender, EventArgs e)
         {
             EmployeePlanner ep = (EmployeePlanner)this.lbAvailableEmployees.SelectedItem;
-           
+            
             if (ep != null)
             {
                 int employeeId = ep.Employee.Id;
-                DialogResult dialogResult = MessageBox.Show($"Are you sure you want to assign {ep.Employee.FullName} for a {_shift} shift?", "Confirmation", MessageBoxButtons.YesNo);
-                if (dialogResult == DialogResult.Yes)
+                double workedHours = _scheduleControl.GetWorkedHours(_day.WeekId, employeeId);
+                DialogResult dialogResult;
+                if (ep.Employee.ContractHours < workedHours + 4.5)
                 {
-                    _scheduleControl.AssignShift(_shift.ToString(), employeeId, _day.Id, ep.EmptyShiftIndex);
-                    _hr.LoadTableByPosition(_day,_jobPosition);
-                    _hr.ShiftsTable.Enabled = true;
-                    this.Close();
+                    dialogResult = MessageBox.Show($" {ep.Employee.FullName} exceeds his contract hours. Do you still want to assign him/her for a {_shift} shift?", "Confirmation", MessageBoxButtons.YesNo);
                 }
-                else if (dialogResult == DialogResult.No)
+                else
                 {
-                    this.lbAvailableEmployees.SelectedIndex = -1;
-                }
+                    dialogResult = MessageBox.Show($"Are you sure you want to assign {ep.Employee.FullName} for a {_shift} shift?", "Confirmation", MessageBoxButtons.YesNo);
+                }    
+                    
+                    if (dialogResult == DialogResult.Yes)
+                    {
+                        _scheduleControl.AssignShift(_shift.ToString(), employeeId, _day, ep.EmptyShiftIndex, workedHours + 4.5);
+                        _hr.LoadTableByPosition(_day, _jobPosition);
+                        _hr.ShiftsTable.Enabled = true;
+                        this.Close();
+                    }
+                    else if (dialogResult == DialogResult.No)
+                    {
+                        this.lbAvailableEmployees.SelectedIndex = -1;
+                    }
 
             }
             else

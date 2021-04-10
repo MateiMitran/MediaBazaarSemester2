@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using PRJMediaBazaar.Data;
 using MySql.Data.MySqlClient;
+using System.Globalization;
 
 namespace PRJMediaBazaar.Logic
 {
@@ -52,8 +53,9 @@ namespace PRJMediaBazaar.Logic
                 string stockersNeeded = Convert.ToString(dr[5]);
                 string salesAssistantsNeeded = Convert.ToString(dr[6]);
                 string warehouseManagersNeeded = Convert.ToString(dr[7]);
+                int weekId = Convert.ToInt32(dr[8]);
 
-                days.Add(new Day(dayId, date, securityNeeded, cashiersNeeded, stockersNeeded, salesAssistantsNeeded, warehouseManagersNeeded));
+                days.Add(new Day(dayId, date,scheduleId, securityNeeded, cashiersNeeded, stockersNeeded, salesAssistantsNeeded, warehouseManagersNeeded, weekId));
 
             }
             dr.Close();
@@ -80,44 +82,66 @@ namespace PRJMediaBazaar.Logic
 
         }
 
-       public void RemoveShift(string shift,int dayId,int employeeId)
+       public void RemoveShift(string shift,Day day,int employeeId)
         {
-            MySqlDataReader result = SelectEmployeeWorkday(dayId, employeeId);
+            MySqlDataReader result = SelectEmployeeWorkday(day.Id, employeeId);
             if (result.Read()) 
             {
                 int emptyShiftIndex = Helper.GetEmptyShiftIndex(result[2].ToString(), result[3].ToString());
                 if (emptyShiftIndex != -1 && !Convert.ToBoolean(result[4])) //if there is an empty shift, remove the row
                 {
-                      DeleteShift(dayId, employeeId);
+                      DeleteShift(day.Id, employeeId);
                 }
                 else if (emptyShiftIndex == -1 && !Convert.ToBoolean(result[4]))//if there is a double shift,insert None on the chosen one
                 {
                     if (result[2].ToString() == shift.ToString()) 
                     {
-                      UpdateShift(2,"None",dayId,employeeId);
+                      UpdateShift(2,"None",day.Id,employeeId);
                     }
                     else if (result[3].ToString() == shift.ToString())
                     {
-                       UpdateShift(3,"None", dayId, employeeId);
+                       UpdateShift(3,"None", day.Id, employeeId);
                     }
+                    
                 }
+                int workedHours = GetWorkedHours(day.WeekId, employeeId);
+                UpdateHours(workedHours - 4.5, day.ScheduleId, employeeId);
             }
             CloseConnection();
         }
         
-        public void AssignShift(string shift, int employeeId, int dayId, int emptyShiftIndex)
+        public void AssignShift(string shift, int employeeId, Day day, int emptyShiftIndex, double hours)
         {
-            MySqlDataReader dr = SelectEmployeeWorkday(dayId, employeeId);
+            MySqlDataReader dr = SelectEmployeeWorkday(day.Id, employeeId);
             if (dr.Read())
             {
-                UpdateShift(emptyShiftIndex, shift, dayId, employeeId);
+                UpdateShift(emptyShiftIndex, shift, day.Id, employeeId);  
             }
             else
             {
-                InsertShift(dayId, employeeId, shift);
+                InsertShift(day.Id, employeeId, shift);  
+            }
+            CloseConnection();
+
+            if (hours == 4.5)
+            {
+                InsertHours(hours, day.WeekId, employeeId);
+            }
+            else
+            {
+                UpdateHours(hours, day.WeekId, employeeId);
             }
             CloseConnection();
         }
+
+        public int GetWorkedHours(int weekId, int employeeId)
+        {
+            int hours =Convert.ToInt32( SelectWorkedHours(weekId, employeeId));
+            CloseConnection();
+            return hours;
+        }
+
+    
 
     }
 }

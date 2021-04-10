@@ -451,7 +451,7 @@ namespace PRJMediaBazaar
                 $"{employee.FirstName} {employee.LastName}'s {shift.ToString()} shift?", "Confirmation", MessageBoxButtons.YesNo);
             if (dialogResult == DialogResult.Yes)
             {
-                _scheduleControl.RemoveShift(shift.ToString(),((Day)cbDay.SelectedItem).Id, employee.Id);
+                _scheduleControl.RemoveShift(shift.ToString(),((Day)cbDay.SelectedItem), employee.Id);
             }
             LoadTableByPosition((Day)cbDay.SelectedItem, employee.JobPosition);
         }

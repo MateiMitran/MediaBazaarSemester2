@@ -105,5 +105,46 @@ namespace PRJMediaBazaar.Data
 
             return executeNonQuery(sql, parameters);
         }
+
+        protected Object UpdateHours(double hours, int weekId,int employeeId)
+        {
+            string[] parameters;
+            string sql;
+            if(hours <= 0)
+            {
+                parameters = new string[] {weekId.ToString(), employeeId.ToString() };
+                sql = "DELETE FROM worked_hours WHERE schedule_id = @scheduleId AND employee_id = @employeeId";
+            }
+            else
+            {
+                parameters = new string[] { hours.ToString(), weekId.ToString(), employeeId.ToString() };
+                sql = "UPDATE worked_hours SET hours = @hours WHERE week_id = @scheduleId AND employee_id = @employeeId";
+
+            }
+            Object result = executeNonQuery(sql, parameters);
+            CloseConnection();
+            return result;
+        }
+
+        protected Object InsertHours(double hours, int weekId, int employeeId)
+        {
+            string[] parameters = new string[] { weekId.ToString(), employeeId.ToString(), hours.ToString() };
+            string sql = "INSERT INTO worked_hours (week_id, employee_id, hours)" +
+                "VALUES(@weekId, @employeeId, @hours)";
+            Object result = executeNonQuery(sql, parameters);
+            CloseConnection();
+            return result;
+        }
+
+
+        protected Object SelectWorkedHours(int weekId, int employeeId)
+        {
+            string[] parameters = new string[] { weekId.ToString(), employeeId.ToString() };
+            string sql = "SELECT hours FROM worked_hours WHERE week_id = @weekId AND employee_id = @employeeId";
+           Object result = executeScalar(sql, parameters);
+            CloseConnection();
+            return result;
+        }
+
     }
 }
