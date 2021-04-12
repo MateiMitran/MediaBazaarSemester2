@@ -8,9 +8,9 @@ using MySql.Data.MySqlClient;
 
 namespace PRJMediaBazaar.Logic
 {
-    class Day : DayDAL
+    class Day
     {
-
+        private DayDAL dayDAL;
         public int Id { get; private set; }
         public int ScheduleId { get; private set; }
         public NeededPositions SecurityNeeded { get; set; }
@@ -41,6 +41,8 @@ namespace PRJMediaBazaar.Logic
             WarehouseManagersNeeded = new NeededPositions(Convert.ToInt32(managers[0]), Convert.ToInt32(managers[1]), Convert.ToInt32(managers[2]));
             Date = date;
             WeekId = weekId;
+            dayDAL = new DayDAL();
+            
         }
 
      
@@ -91,8 +93,8 @@ namespace PRJMediaBazaar.Logic
         public Object ChangeNeededJobPosition(string jobPosition, int morning, int midday, int evening)
         {
             string amounts = $"{morning} {midday} {evening}";
-           Object result = UpdatePosition(jobPosition, amounts, Id);
-            CloseConnection();
+            Object result = dayDAL.UpdatePosition(jobPosition, amounts, Id);
+            dayDAL.CloseConnection();
             return result;
         }
 

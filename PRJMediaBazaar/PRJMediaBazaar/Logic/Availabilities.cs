@@ -9,19 +9,21 @@ using MySql.Data;
 
 namespace PRJMediaBazaar.Logic
 {
-    class Availabilities : AvailabilitiesDAL
+    class Availabilities
     {
         private Employee[] _employees;
         private List<EmployeePlanner> _available;
         private List<EmployeePlanner> _unavailable;
+        private AvailabilitiesDAL availabilitiesDAL;
 
         public Availabilities(Employee[] employeesOnPosition, int dayId, Shift shift)
         {
             _available = new List<EmployeePlanner>();
             _unavailable = new List<EmployeePlanner>();
             _employees = employeesOnPosition;
+            availabilitiesDAL = new AvailabilitiesDAL();
             PopulateLists(dayId, shift);
-
+            
         }
 
         public EmployeePlanner[] Available { get { return _available.ToArray(); } }
@@ -32,7 +34,7 @@ namespace PRJMediaBazaar.Logic
         {
 
 
-            MySqlDataReader result = SelectEmployeesWorkdays(dayId, _employees[0].JobPosition);
+            MySqlDataReader result = availabilitiesDAL.SelectEmployeesWorkdays(dayId, _employees[0].JobPosition);
             List<Employee> busyEmployees = new List<Employee>();
 
             while (result.Read()) //employees in the workdays_table
@@ -79,7 +81,7 @@ namespace PRJMediaBazaar.Logic
                     _available.Add(ea);
                 }
             }
-            CloseConnection();
+            availabilitiesDAL.CloseConnection();
         }
 
     }

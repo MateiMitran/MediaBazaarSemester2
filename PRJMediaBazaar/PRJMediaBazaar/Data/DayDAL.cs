@@ -18,7 +18,7 @@ namespace PRJMediaBazaar.Data
         /// <param name="amount"></param>
         /// <param name="dayId"></param>
         /// <returns></returns>
-        protected Object UpdatePosition(string jobPosition, string amounts, int dayId)
+        public Object UpdatePosition(string jobPosition, string amounts, int dayId)
         {
             string sql = "";
             string[] parameters = new string[] { amounts, dayId.ToString() };

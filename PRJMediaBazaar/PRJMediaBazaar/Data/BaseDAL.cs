@@ -66,7 +66,7 @@ namespace PRJMediaBazaar.Data
             return defaultDatabaseConnection(sql, parameters).ExecuteNonQuery();
         }
 
-        protected void CloseConnection()
+        public void CloseConnection()
         {
             con.Close();
         }

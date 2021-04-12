@@ -10,14 +10,14 @@ namespace PRJMediaBazaar.Data
 {
      class ScheduleDAL : BaseDAL
     {
-        protected List<Object> dayoff_req;
+        public List<Object> dayoff_req;
 
-        protected MySqlDataReader SelectSchedules()
+        public MySqlDataReader SelectSchedules()
         {
             return executeReader("SELECT * FROM schedules;", null);
         }
 
-        protected MySqlDataReader SelectDays(int scheduleId)
+        public MySqlDataReader SelectDays(int scheduleId)
         {
             string[] parameters = new string[] { scheduleId.ToString() };
 
@@ -30,7 +30,7 @@ namespace PRJMediaBazaar.Data
         /// <param name="dayId"></param>
         /// <param name="jobPosition"></param>
         /// <returns></returns>
-        protected MySqlDataReader SelectEmployeesShifts(int dayId, string jobPosition)
+        public MySqlDataReader SelectEmployeesShifts(int dayId, string jobPosition)
         {
             string[] parameters = new string[] { dayId.ToString(), jobPosition };
             return executeReader("SELECT ew.* FROM employees_workdays ew INNER JOIN employees e ON ew.employee_id =e.id" +
@@ -44,7 +44,7 @@ namespace PRJMediaBazaar.Data
         /// <param name="dayId"></param>
         /// <param name="employeeId"></param>
         /// <returns></returns>
-        protected MySqlDataReader SelectEmployeeWorkday(int dayId, int employeeId)
+        public MySqlDataReader SelectEmployeeWorkday(int dayId, int employeeId)
         {
             string[] parameters = new string[] { dayId.ToString(), employeeId.ToString() };
             string sql = "SELECT * FROM employees_workdays WHERE day_id = @dayId AND employee_id = @employeeId";
@@ -53,7 +53,7 @@ namespace PRJMediaBazaar.Data
         }
 
 
-        protected Object UpdateShift(int emptyIndex, string shift, int dayId, int employeeId)
+        public Object UpdateShift(int emptyIndex, string shift, int dayId, int employeeId)
         {
             string[] parameters = new string[] { shift, dayId.ToString(), employeeId.ToString() };
             string sql = "";
@@ -71,7 +71,7 @@ namespace PRJMediaBazaar.Data
         }
 
 
-        protected Object InsertShift(int dayId, int employeeId, string shift)
+        public Object InsertShift(int dayId, int employeeId, string shift)
         {
             string sql = "INSERT INTO employees_workdays (day_id, employee_id, first_shift)" +
                 " VALUES(@dayId, @employeeId, @shift);";
@@ -81,7 +81,7 @@ namespace PRJMediaBazaar.Data
         }
 
 
-        protected Object DeleteShift(int dayId, int employeeId)
+        public Object DeleteShift(int dayId, int employeeId)
         {
             string sql = "DELETE FROM employees_workdays WHERE day_id = @dayId AND employee_id = @employeeId";
             string[] parameters = new string[] { dayId.ToString(), employeeId.ToString() };
@@ -90,7 +90,7 @@ namespace PRJMediaBazaar.Data
             return executeNonQuery(sql, parameters);
         }
 
-        protected Object UpdateAbsence(int dayId, int employeeId) // !
+        public Object UpdateAbsence(int dayId, int employeeId) // !
         {
             string[] parameters = new string[] { "None", "None", true.ToString(), "DayOff", dayId.ToString(), employeeId.ToString() };
             string sql = "UPDATE employees_workdays SET first_shift = @shift, second_shift = @shift, absence = @absence, absence_reason = @absenceReason" +
@@ -99,7 +99,7 @@ namespace PRJMediaBazaar.Data
             return executeNonQuery(sql, parameters);
         }
 
-        protected Object InsertAbsence(int dayId, int employeeId) // !
+        public Object InsertAbsence(int dayId, int employeeId) // !
         {
             string[] parameters = new string[] { dayId.ToString(), employeeId.ToString(), "None", "None", true.ToString(), "DayOff" };
             string sql = "INSERT INTO employees_workdays (day_id, employee_id, first_shift, second_shift, absence, absence_reason)" +
@@ -108,7 +108,7 @@ namespace PRJMediaBazaar.Data
             return executeNonQuery(sql, parameters);
         }
 
-        protected Object UpdateHours(double hours, int weekId,int employeeId)
+        public Object UpdateHours(double hours, int weekId,int employeeId)
         {
             string[] parameters;
             string sql;
@@ -128,7 +128,7 @@ namespace PRJMediaBazaar.Data
             return result;
         }
 
-        protected Object InsertHours(double hours, int weekId, int employeeId)
+        public Object InsertHours(double hours, int weekId, int employeeId)
         {
             string[] parameters = new string[] { weekId.ToString(), employeeId.ToString(), hours.ToString() };
             string sql = "INSERT INTO worked_hours (week_id, employee_id, hours)" +
@@ -139,7 +139,7 @@ namespace PRJMediaBazaar.Data
         }
 
 
-        protected Object SelectWorkedHours(int weekId, int employeeId)
+        public Object SelectWorkedHours(int weekId, int employeeId)
         {
             string[] parameters = new string[] { weekId.ToString(), employeeId.ToString() };
             string sql = "SELECT hours FROM worked_hours WHERE week_id = @weekId AND employee_id = @employeeId";
@@ -148,7 +148,7 @@ namespace PRJMediaBazaar.Data
             return result;
         }
 
-        protected MySqlDataReader SelectDayOffRequests()
+        public MySqlDataReader SelectDayOffRequests()
         {
             string sql = "SELECT * FROM dayoff_requests WHERE status = 'Pending'; ";
             return executeReader(sql, null);

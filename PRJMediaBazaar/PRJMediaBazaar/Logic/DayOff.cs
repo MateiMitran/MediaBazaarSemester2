@@ -17,11 +17,11 @@ namespace PRJMediaBazaar.Logic
         public String Reason { get; private set; }
 
 
-        public DayOff ( int dayId, int employee_id, String status, String reason)
+        public DayOff ( int dayId, int employee_id, bool status, String reason)
         {
             Day_id = dayId;
             Employee_id = employee_id;
-            Denied = denied;// 
+            Denied = status;
             Reason = reason;
             
         }

@@ -7,21 +7,23 @@ using PRJMediaBazaar.Data;
 using MySql.Data.MySqlClient;
 namespace PRJMediaBazaar.Logic
 {
-    class EmployeeControl : EmployeeDAL
+    class EmployeeControl
     {
         private List<Employee> _employees;
-
+        private EmployeeDAL employeeDAL;
         public EmployeeControl()
         {
             _employees = new List<Employee>();
+            employeeDAL = new EmployeeDAL();
             LoadEmployees();
+            
           
         }
 
         private void LoadEmployees()
         {
             List<Employee> employees = new List<Employee>();
-            MySqlDataReader dr = SelectAll();
+            MySqlDataReader dr = employeeDAL.SelectAll();
             while (dr.Read())
             {
                 int id = Convert.ToInt32(dr[0]);
@@ -44,7 +46,7 @@ namespace PRJMediaBazaar.Logic
                 temp.Note = note;
                 employees.Add(temp);
             }
-            CloseConnection();
+            employeeDAL.CloseConnection();
             _employees = employees;
         }
 
@@ -63,21 +65,21 @@ namespace PRJMediaBazaar.Logic
         }
         public void AddAnEmployee(String firstName, String lastName, DateTime birthDate, String email, String password, String jobPosition, int phoneNumber, String address, int salary, String gender, String education, String contract, int daysOff, int contractHours)
         {
-            AddEmployee(firstName, lastName, birthDate, email, password, jobPosition, phoneNumber, address, salary, gender, education, contract, daysOff, contractHours);
-            int id = Convert.ToInt32(GetIDByEmail(email));
+            employeeDAL.AddEmployee(firstName, lastName, birthDate, email, password, jobPosition, phoneNumber, address, salary, gender, education, contract, daysOff, contractHours);
+            int id = Convert.ToInt32(employeeDAL.GetIDByEmail(email));
             _employees.Add(new Employee(id, firstName, lastName, birthDate,gender,salary,email,password,jobPosition,phoneNumber,address,education,contract,daysOff,contractHours));
-            CloseConnection();
+            employeeDAL.CloseConnection();
         }
         public void UpdateNote(String note,String email)
         {
-            AddNoteToEmployee(note, email);
-            CloseConnection();
+            employeeDAL.AddNoteToEmployee(note, email);
+            employeeDAL.CloseConnection();
         }
         public Employee[] Employees { get { return _employees.ToArray(); } }
 
         public int GetIDFromEmail(String email)
         {
-            int id = Convert.ToInt32(GetIDByEmail(email));
+            int id = Convert.ToInt32(employeeDAL.GetIDByEmail(email));
             return id;
         }
     }
