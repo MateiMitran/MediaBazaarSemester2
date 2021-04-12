@@ -55,17 +55,5 @@ namespace PRJMediaBazaar.Logic
 
         }
 
-
-        public static Employee GetEmployeeById(int id, Employee[] employees)
-        {
-            foreach (Employee e in employees)
-            {
-                if (e.Id == id)
-                {
-                    return e;
-                }
-            }
-            return null;
-        }
     }
 }

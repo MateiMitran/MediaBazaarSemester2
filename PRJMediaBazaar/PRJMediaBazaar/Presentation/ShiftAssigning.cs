@@ -80,7 +80,7 @@ namespace PRJMediaBazaar
         {
             this.lbAvailableEmployees.Items.Clear();
             this.lbUnavailableEmployees.Items.Clear();
-            Availabilities a = new Availabilities(_employees.ToArray(), _day.Id, _shift);
+            Availabilities a = new Availabilities(_employees.ToArray(), _day, _shift);
 
             foreach (EmployeePlanner ep in a.Available)
             {

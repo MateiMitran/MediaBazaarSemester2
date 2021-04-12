@@ -110,7 +110,6 @@
     <Compile Include="Presentation\AddEmployees.Designer.cs">
       <DependentUpon>AddEmployees.cs</DependentUpon>
     </Compile>
-    <Compile Include="Data\AvailabilitiesDAL.cs" />
     <Compile Include="Data\DayDAL.cs" />
     <Compile Include="Logic\EmployeeControl.cs" />
     <Compile Include="Logic\NamesRow.cs" />
