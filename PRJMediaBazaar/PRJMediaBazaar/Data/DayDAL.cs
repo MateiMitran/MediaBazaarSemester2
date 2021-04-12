@@ -18,7 +18,7 @@ namespace PRJMediaBazaar.Data
         /// <param name="amount"></param>
         /// <param name="dayId"></param>
         /// <returns></returns>
-        public Object UpdatePosition(string jobPosition, string amounts, int dayId)
+        public bool UpdatePosition(string jobPosition, string amounts, int dayId)
         {
             string sql = "";
             string[] parameters = new string[] { amounts, dayId.ToString() };
@@ -43,7 +43,13 @@ namespace PRJMediaBazaar.Data
                     break;
 
             }
-            return executeNonQuery(sql, parameters);
+           if( executeNonQuery(sql, parameters) != null)
+            {
+                CloseConnection();
+                return true;
+            }
+            CloseConnection();
+            return false;
         }
     }
 }

@@ -34,16 +34,19 @@ namespace PRJMediaBazaar.Logic
         {
 
 
-            MySqlDataReader result = availabilitiesDAL.SelectEmployeesWorkdays(dayId, _employees[0].JobPosition);
+            List<EmployeeWorkday> workdays = availabilitiesDAL.SelectEmployeesWorkdays(dayId, _employees[0].JobPosition);
             List<Employee> busyEmployees = new List<Employee>();
 
-            while (result.Read()) //employees in the workdays_table
+            foreach(EmployeeWorkday wd in workdays) //employees in the workdays_table
             {
-                Employee employee = Helper.GetEmployeeById(Convert.ToInt32(result[1]), _employees);
-                if (!Convert.ToBoolean(result[4])) //the employee isn't absent
+                Employee employee = wd.Employee;
+                if (!Convert.ToBoolean(wd.Absence)) //the employee isn't absent
                 {
-                    int index = Helper.GetEmptyShiftIndex(result[2].ToString(), result[3].ToString());
-                    int busyIndex = Helper.GetBusyShiftIndex(result[2].ToString(), result[3].ToString());
+                    int index = Helper.GetEmptyShiftIndex(wd.FirstShift.ToString(), wd.SecondShift.ToString());
+                    int busyIndex = Helper.GetBusyShiftIndex(wd.FirstShift.ToString(), wd.SecondShift.ToString());
+
+                    string busyShift = wd.GetBusyShift();
+                    string emptyShift = wd.GetEmptyShift();
 
                     if (index == -1)  //employee has a double shift
                     {
@@ -51,22 +54,22 @@ namespace PRJMediaBazaar.Logic
                         _unavailable.Add(ea);
                     }
 
-                    else if (index != -1 && Helper.DoubleShiftIsValid(result[busyIndex].ToString(), shift.ToString())) //employee has only one shift, and the second one is valid
+                    else if (index != -1 && Helper.DoubleShiftIsValid(busyShift, shift.ToString())) //employee has only one shift, and the second one is valid
                     {
 
-                        EmployeePlanner ea = new EmployeePlanner(employee, result[busyIndex].ToString(), index);
+                        EmployeePlanner ea = new EmployeePlanner(employee, busyShift, index);
                         _available.Add(ea);
                     }
                     else // the double shift is invalid
                     {
-                        EmployeePlanner ea = new EmployeePlanner(employee, result[busyIndex].ToString(), -1);
+                        EmployeePlanner ea = new EmployeePlanner(employee,busyShift.ToString(), -1);
                         _unavailable.Add(ea);
                     }
                 }
 
-                else if (Convert.ToBoolean(result[4])) //is absent
+                else if (wd.Absence) //is absent
                 {
-                    EmployeePlanner ea = new EmployeePlanner(employee, result[5].ToString(), -1);
+                    EmployeePlanner ea = new EmployeePlanner(employee, wd.AbsenceReason.ToString(), -1);
                     _unavailable.Add(ea);
                 }
                 busyEmployees.Add(employee);

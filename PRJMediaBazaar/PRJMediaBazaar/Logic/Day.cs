@@ -90,10 +90,10 @@ namespace PRJMediaBazaar.Logic
         }
 
       
-        public Object ChangeNeededJobPosition(string jobPosition, int morning, int midday, int evening)
+        public bool ChangeNeededJobPosition(string jobPosition, int morning, int midday, int evening)
         {
             string amounts = $"{morning} {midday} {evening}";
-            Object result = dayDAL.UpdatePosition(jobPosition, amounts, Id);
+            bool result = dayDAL.UpdatePosition(jobPosition, amounts, Id);
             dayDAL.CloseConnection();
             return result;
         }

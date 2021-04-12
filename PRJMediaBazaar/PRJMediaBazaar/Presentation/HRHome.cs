@@ -359,6 +359,7 @@ namespace PRJMediaBazaar
                     if (i+1 > neededAmounts.Evening)
                     {
                         EveningShiftButton.Enabled = false;
+                        EveningShiftButton.BackColor = Color.Silver;
                         EveningShiftButton.ForeColor = Color.Silver;
                         EveningShiftButton.Text = "";
 

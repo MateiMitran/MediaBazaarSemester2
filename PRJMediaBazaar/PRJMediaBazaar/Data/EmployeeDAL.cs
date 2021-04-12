@@ -4,34 +4,77 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
+using PRJMediaBazaar.Logic;
 
 namespace PRJMediaBazaar.Data
 {
       class EmployeeDAL : BaseDAL
     {
-        public MySqlDataReader SelectAll()
+        public List<Employee> SelectAll()
         {
-            return executeReader("SELECT * FROM employees;", null);
+           MySqlDataReader dr = executeReader("SELECT * FROM employees;", null);
+            List<Employee> employees = new List<Employee>();
+            while (dr.Read())
+            {
+                int id = Convert.ToInt32(dr[0]);
+                String firstName = dr[1].ToString();
+                String lastName = dr[2].ToString();
+                DateTime birthDate = Convert.ToDateTime(dr[3]);
+                String email = dr[4].ToString();
+                String password = dr[5].ToString();
+                String jobPosition = dr[6].ToString();
+                int phoneNumber = Convert.ToInt32(dr[7]);
+                String address = dr[8].ToString();
+                double salary = Convert.ToDouble(dr[9]);
+                String gender = dr[10].ToString();
+                String education = dr[11].ToString();
+                String contract = dr[12].ToString();
+                int daysOff = Convert.ToInt32(dr[13]);
+                int contractHours = Convert.ToInt32(dr[14]);
+                String note = dr[15].ToString();
+                Employee temp = new Employee(id, firstName, lastName, birthDate, gender, salary, email, password, jobPosition, phoneNumber, address, education, contract, daysOff, contractHours);
+                temp.Note = note;
+                employees.Add(temp);
+            }
+            CloseConnection();
+            return employees;
+            
         }
-        public Object AddEmployee(String firstName, String lastName,DateTime birthDate,String email,String password,String jobPosition,int phoneNumber,String address,int salary,String gender,String education,String contract,int daysOff,int contractHours)
+        public bool AddEmployee(String firstName, String lastName,DateTime birthDate,String email,String password,String jobPosition,int phoneNumber,String address,int salary,String gender,String education,String contract,int daysOff,int contractHours)
         {
             String format = "yyyy-MM-dd";
             String sql = "INSERT INTO `employees` (`id`,`first_name`,`last_name`,`birthDate`,`email`,`password`,`job_position`,`phoneNumber`,`address`,`salary`,`gender`,`education`,`Contract`,`DaysOff`,`ContractHours`) "
                         + "VALUES(NULL,@firstName,@lastName,@birthDate,@email,@password,@jobPosition,@phoneNumber,@address,@salary,@gender,@education,@contract,@daysOff,@contractHours);";
             String[] parameters = new String[] {firstName, lastName, birthDate.ToString(format), email, password, jobPosition, phoneNumber.ToString(), address, salary.ToString(), gender, education, contract, daysOff.ToString(), contractHours.ToString() };
-            return executeNonQuery(sql, parameters);
+            if(executeNonQuery(sql, parameters) != null)
+            {
+                CloseConnection();
+                return true;
+            }
+            CloseConnection();
+            return false;
+           
         }
-        public Object GetIDByEmail(String Email)
+        public int GetIDByEmail(String Email)
         {
             String sql = "SELECT id FROM employees WHERE email=@email;";
             String[] parameters = new String[] { Email };
-            return executeScalar(sql, parameters);
+            int id = Convert.ToInt32(executeScalar(sql, parameters));
+            CloseConnection();
+            return id;
         }
-        public Object AddNoteToEmployee(String email,String note)
+
+        public bool AddNoteToEmployee(String email,String note)
         {
             String sql = "UPDATE `employees` SET `Notes`= @note WHERE `email`= @email;";
             String[] parameters = new String[] { email, note };
-            return executeNonQuery(sql, parameters);
+            if( executeNonQuery(sql, parameters) != null)
+            {
+                CloseConnection();
+                return true;
+            }
+            CloseConnection();
+            return false;
         }
     }
 }

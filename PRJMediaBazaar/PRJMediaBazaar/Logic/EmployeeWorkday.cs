@@ -24,5 +24,31 @@ namespace PRJMediaBazaar.Logic
         public string JobPosition { get; set; }
         public bool Absence { get; set; }
         public AbsenceReason AbsenceReason { get; set; }
+
+        public string GetEmptyShift()
+        {
+            if (FirstShift.ToString() == "None" && SecondShift.ToString() != "None")
+            {
+                return FirstShift.ToString();
+            }
+            else if (SecondShift.ToString() == "None" && FirstShift.ToString() != "None")
+            {
+                return SecondShift.ToString();
+            }
+            return "-1";
+        }
+
+        public string GetBusyShift()
+        {
+            if (FirstShift.ToString() == "None" && SecondShift.ToString() != "None")
+            {
+                return SecondShift.ToString();
+            }
+            else if (SecondShift.ToString() == "None" && FirstShift.ToString() != "None")
+            {
+                return FirstShift.ToString();
+            }
+            return "-1";
+        }
     }
 }

@@ -21,6 +21,7 @@ namespace PRJMediaBazaar.Logic
             _employees = employees;
             scheduleDAL = new ScheduleDAL();
             LoadSchedules();
+            LoadDaysOff();
             
         }
 
@@ -29,96 +30,52 @@ namespace PRJMediaBazaar.Logic
 
         private void LoadSchedules()
         {
-            MySqlDataReader dr = scheduleDAL.SelectSchedules();
-            List<Schedule> schedules = new List<Schedule>();
-           
-                while (dr.Read())
-                {
-                    int id = Convert.ToInt32(dr[0]);
-                    DateTime startDate = dr.GetDateTime(1);
-                    DateTime endDate = dr.GetDateTime(2);
-                    bool isOutdated = Convert.ToBoolean(dr[3]);
-                    schedules.Add(new Schedule(id, startDate, endDate, isOutdated));
-                }
-            scheduleDAL.CloseConnection();
-            _schedules = schedules;
+            _schedules = scheduleDAL.SelectSchedules();
         }
 
         public Day[] GetDays(int scheduleId)
         {
-            List<Day> days = new List<Day>();
-            MySqlDataReader dr = scheduleDAL.SelectDays(scheduleId);
-
-            while (dr.Read())
-            {
-                int dayId = Convert.ToInt32(dr[0]);
-                DateTime date = dr.GetDateTime(1);
-                string securityNeeded = Convert.ToString(dr[3]);
-                string cashiersNeeded = Convert.ToString(dr[4]);
-                string stockersNeeded = Convert.ToString(dr[5]);
-                string salesAssistantsNeeded = Convert.ToString(dr[6]);
-                string warehouseManagersNeeded = Convert.ToString(dr[7]);
-                int weekId = Convert.ToInt32(dr[8]);
-
-                days.Add(new Day(dayId, date,scheduleId, securityNeeded, cashiersNeeded, stockersNeeded, salesAssistantsNeeded, warehouseManagersNeeded, weekId));
-
-            }
-            dr.Close();
-            return days.ToArray();
+            return scheduleDAL.SelectDays(scheduleId).ToArray();
         }
 
         public EmployeeWorkday[] GetEmployeesShifts(int dayId, string jobPosition)
         {
-            List<EmployeeWorkday> workdays = new List<EmployeeWorkday>();
-
-            MySqlDataReader dr = scheduleDAL.SelectEmployeesShifts(dayId, jobPosition);
-            while (dr.Read()) //add EmployeeWorkday objects to the list
-            {
-                Employee employee =Helper.GetEmployeeById( Convert.ToInt32(dr[1]),_employees.ToArray());
-                Shift firstShift = (Shift)Enum.Parse(typeof(Shift), dr[2].ToString());
-                Shift secondShift = (Shift)Enum.Parse(typeof(Shift), dr[3].ToString());
-                bool absence = Convert.ToBoolean(dr[4]);
-                AbsenceReason absenceReason = (AbsenceReason)Enum.Parse(typeof(AbsenceReason), dr[5].ToString());
-
-                workdays.Add(new EmployeeWorkday(employee,firstShift,secondShift,absence,absenceReason));
-            }
-            scheduleDAL.CloseConnection();
-            return workdays.ToArray();
-
+          
+           return scheduleDAL.SelectEmployeesShifts(dayId, jobPosition).ToArray();
+           
         }
 
        public void RemoveShift(string shift,Day day,int employeeId)
         {
-            MySqlDataReader result = scheduleDAL.SelectEmployeeWorkday(day.Id, employeeId);
-            if (result.Read()) 
+            EmployeeWorkday result = scheduleDAL.SelectEmployeeWorkday(day.Id, employeeId);
+            if (result != null) 
             {
-                int emptyShiftIndex = Helper.GetEmptyShiftIndex(result[2].ToString(), result[3].ToString());
-                if (emptyShiftIndex != -1 && !Convert.ToBoolean(result[4])) //if there is an empty shift, remove the row
+                int emptyShiftIndex = Helper.GetEmptyShiftIndex(result.FirstShift.ToString(), result.SecondShift.ToString());
+                if (emptyShiftIndex != -1 && !result.Absence) //if there is an empty shift, remove the row
                 {
                     scheduleDAL.DeleteShift(day.Id, employeeId);
                 }
-                else if (emptyShiftIndex == -1 && !Convert.ToBoolean(result[4]))//if there is a double shift,insert None on the chosen one
+                else if (emptyShiftIndex == -1 && !result.Absence)//if there is a double shift,insert None on the chosen one
                 {
-                    if (result[2].ToString() == shift.ToString()) 
+                    if (result.FirstShift.ToString() == shift.ToString()) 
                     {
                         scheduleDAL.UpdateShift(2,"None",day.Id,employeeId);
                     }
-                    else if (result[3].ToString() == shift.ToString())
+                    else if (result.SecondShift.ToString() == shift.ToString())
                     {
                         scheduleDAL.UpdateShift(3,"None", day.Id, employeeId);
                     }
                     
                 }
-                int workedHours = GetWorkedHours(day.WeekId, employeeId);
+                double workedHours = GetWorkedHours(day.WeekId, employeeId);
                 scheduleDAL.UpdateHours(workedHours - 4.5, day.ScheduleId, employeeId);
             }
-            scheduleDAL.CloseConnection();
         }
         
         public void AssignShift(string shift, int employeeId, Day day, int emptyShiftIndex, double hours)
         {
-            MySqlDataReader dr = scheduleDAL.SelectEmployeeWorkday(day.Id, employeeId);
-            if (dr.Read())
+           EmployeeWorkday wd = scheduleDAL.SelectEmployeeWorkday(day.Id, employeeId);
+            if (wd != null)
             {
                 scheduleDAL.UpdateShift(emptyShiftIndex, shift, day.Id, employeeId);  
             }
@@ -126,7 +83,6 @@ namespace PRJMediaBazaar.Logic
             {
                 scheduleDAL.InsertShift(day.Id, employeeId, shift);  
             }
-            scheduleDAL.CloseConnection();
 
             if (hours == 4.5)
             {
@@ -136,14 +92,13 @@ namespace PRJMediaBazaar.Logic
             {
                 scheduleDAL.UpdateHours(hours, day.WeekId, employeeId);
             }
-            scheduleDAL.CloseConnection();
         }
 
 
         public void AssignAbsence(AbsenceReason absenceReason, int employeeId, int dayId)
         {
-            MySqlDataReader dr = scheduleDAL.SelectEmployeeWorkday(dayId, employeeId);
-            if (dr.Read())
+           EmployeeWorkday wd = scheduleDAL.SelectEmployeeWorkday(dayId, employeeId);
+            if (wd != null)
             {
                 scheduleDAL.UpdateAbsence(dayId, employeeId);
             }
@@ -151,36 +106,19 @@ namespace PRJMediaBazaar.Logic
             {
                 scheduleDAL.InsertAbsence(dayId, employeeId);
             }
-            scheduleDAL.CloseConnection();
-
         }
 
 
-        public int GetWorkedHours(int weekId, int employeeId)
+        public double GetWorkedHours(int weekId, int employeeId)
         {
-            int hours =Convert.ToInt32(scheduleDAL.SelectWorkedHours(weekId, employeeId));
-            scheduleDAL.CloseConnection();
-            return hours;
+            return scheduleDAL.SelectWorkedHours(weekId, employeeId);
         }
 
 
 
-        public List<DayOff> PopulateList_DayOff() // add the DayOff requests to the list 
+        public void LoadDaysOff() // add the DayOff requests to the list 
         {
-            List<DayOff> pseudos = new List<DayOff>();
-            MySqlDataReader result = scheduleDAL.SelectDayOffRequests();
-            while (result.Read())
-            {
-                int dayId = Convert.ToInt32(result[0]);
-                int employee_id = Convert.ToInt32(result[1]);
-                bool denied = Convert.ToBoolean(result[2]);
-                string objection = result[3].ToString();
-                DayOff req = new DayOff(dayId, employee_id, denied, objection);
-                pseudos.Add(req);
-            }
-            scheduleDAL.CloseConnection();
-            dayoff_req = pseudos;
-            return dayoff_req;
+           dayoff_req = scheduleDAL.SelectDayOffRequests();
         }
 
     }
