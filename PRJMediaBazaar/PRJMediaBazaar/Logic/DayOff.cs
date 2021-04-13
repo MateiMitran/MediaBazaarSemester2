@@ -31,7 +31,7 @@ namespace PRJMediaBazaar.Logic
         public Day GetDayById(int scheduleId, int dayId)
         {
             EmployeeControl employeeControl = new EmployeeControl();
-            ScheduleControl scheduleControl = new ScheduleControl(employeeControl.GetAllEmployees());
+            ScheduleControl scheduleControl = new ScheduleControl(employeeControl);
 
             Day[] days = scheduleControl.GetDays(scheduleId);
             Day day = new Day();

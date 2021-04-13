@@ -313,5 +313,25 @@ namespace PRJMediaBazaar.Data
             CloseConnection();
             return false;
         }
+
+        public void RemoveSchedule(int dayId, int weekId)
+        {
+            string[] parameters = new string[] { dayId.ToString()};
+            string sql = "DELETE FROM employees_workdays WHERE day_id = @dayId";
+            executeNonQuery(sql, parameters);  
+                CloseConnection();
+           
+            sql = "UPDATE days SET security_assigned = '0 0 0',cashiers_assigned = '0 0 0',stockers_assigned = '0 0 0'," +
+                "stockers_assigned = '0 0 0',sales_assistants_assigned = '0 0 0', warehouse_managers_assigned = '0 0 0'" +
+                "   WHERE id = @dayId";
+            executeNonQuery(sql, parameters);
+            CloseConnection();
+
+            parameters = new string[] {weekId.ToString() };
+            sql = "DELETE FROM worked_hours WHERE week_id = @weekId";
+            executeNonQuery(sql, parameters);
+            CloseConnection();
+
+        }
     }
 }

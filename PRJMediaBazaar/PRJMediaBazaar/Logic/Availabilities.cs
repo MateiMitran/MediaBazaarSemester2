@@ -83,6 +83,7 @@ namespace PRJMediaBazaar.Logic
                     _available.Add(ea);
                 }
             }
+            _available.Sort();
             availabilitiesDAL.CloseConnection();
         }
 

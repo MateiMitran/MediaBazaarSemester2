@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PRJMediaBazaar.Logic
 {
-    class EmployeePlanner
+    class EmployeePlanner :IComparable<EmployeePlanner>
     {
         public Employee Employee { get; set; }
         public string Occupation { get; set; }
@@ -24,6 +24,20 @@ namespace PRJMediaBazaar.Logic
         public override string ToString()
         {
             return ($"{Employee.Id} {Employee.FullName}, Occupation:{Occupation}| {HoursWorked} hr worked/ {Employee.ContractHours} hr contract");
+        }
+
+        public int CompareTo(EmployeePlanner other)
+        {
+            if(this.HoursWorked > other.HoursWorked)
+            {
+                return 1;
+            }
+            else if(other.HoursWorked > this.HoursWorked)
+            {
+                return -1;
+            }
+            return 0;
+           
         }
     }
 }

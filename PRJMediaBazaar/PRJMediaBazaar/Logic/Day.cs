@@ -11,6 +11,7 @@ namespace PRJMediaBazaar.Logic
     class Day
     {
         private DayDAL dayDAL;
+        private static string[] positions = new string[] { "Security", "Cashier", "Stocker","SalesAssistant","WarehouseManager"};
         public int Id { get; private set; }
         public int ScheduleId { get; private set; }
         public Duty SecurityNeeded { get; set; }
@@ -140,6 +141,17 @@ namespace PRJMediaBazaar.Logic
                 return true;
             }
             return false;
+        }
+
+        public void EmptyDuties()
+        {
+           foreach(string jobPosition in positions)
+            {
+                Duty duty = GetDuty(jobPosition);
+                duty.MorningAssigned =0;
+                duty.MiddayAssigned = 0;
+                duty.EveningAssigned = 0;
+            }
         }
 
     }

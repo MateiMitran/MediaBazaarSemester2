@@ -9,16 +9,17 @@ using System.Globalization;
 
 namespace PRJMediaBazaar.Logic
 {
-     class ScheduleControl
+    class ScheduleControl
     {
         private List<DayOff> dayoff_req;
         private List<Schedule> _schedules;
-        private List<Employee> _employees;
+        private EmployeeControl _empControl;
         private ScheduleDAL scheduleDAL;
-        public ScheduleControl(List<Employee> employees)
+
+        public ScheduleControl(EmployeeControl employeeControl)
         {
             _schedules = new List<Schedule>();
-            _employees = employees;
+            _empControl = employeeControl;
             scheduleDAL = new ScheduleDAL();
             LoadSchedules();
             LoadDaysOff();
@@ -35,7 +36,7 @@ namespace PRJMediaBazaar.Logic
 
         public Day[] GetDays(int scheduleId)
         {
-            foreach(Schedule s in _schedules)
+            foreach (Schedule s in _schedules)
             {
                 if (s.Id == scheduleId)
                 {
@@ -91,15 +92,15 @@ namespace PRJMediaBazaar.Logic
 
         public EmployeeWorkday[] GetEmployeesShifts(int dayId, string jobPosition)
         {
-          
-           return scheduleDAL.SelectEmployeesShifts(dayId, jobPosition).ToArray();
-           
+
+            return scheduleDAL.SelectEmployeesShifts(dayId, jobPosition).ToArray();
+
         }
 
-       public void RemoveShift(string shift,Day day,Employee employee)
+        public void RemoveShift(string shift, Day day, Employee employee)
         {
             EmployeeWorkday result = scheduleDAL.SelectEmployeeWorkday(day.Id, employee.Id);
-            if (result != null) 
+            if (result != null)
             {
                 int emptyShiftIndex = Helper.GetEmptyShiftIndex(result.FirstShift.ToString(), result.SecondShift.ToString());
                 if (emptyShiftIndex != -1 && !result.Absence) //if there is an empty shift, remove the row
@@ -108,33 +109,33 @@ namespace PRJMediaBazaar.Logic
                 }
                 else if (emptyShiftIndex == -1 && !result.Absence)//if there is a double shift,insert None on the chosen one
                 {
-                    if (result.FirstShift.ToString() == shift.ToString()) 
+                    if (result.FirstShift.ToString() == shift.ToString())
                     {
-                        scheduleDAL.UpdateShift(2,"None",day.Id,employee.Id);
+                        scheduleDAL.UpdateShift(2, "None", day.Id, employee.Id);
                     }
                     else if (result.SecondShift.ToString() == shift.ToString())
                     {
-                        scheduleDAL.UpdateShift(3,"None", day.Id, employee.Id);
+                        scheduleDAL.UpdateShift(3, "None", day.Id, employee.Id);
                     }
-                    
+
                 }
                 double workedHours = GetWorkedHours(day.WeekId, employee.Id);
                 scheduleDAL.UpdateHours(workedHours - 4.5, day.ScheduleId, employee.Id);
                 DecreaseAssignedPosition(day, employee.JobPosition, shift);
-             
+
             }
         }
-        
+
         public void AssignShift(string shift, Employee employee, Day day, int emptyShiftIndex, double hours)
         {
-           EmployeeWorkday wd = scheduleDAL.SelectEmployeeWorkday(day.Id, employee.Id);
+            EmployeeWorkday wd = scheduleDAL.SelectEmployeeWorkday(day.Id, employee.Id);
             if (wd != null)
             {
-                scheduleDAL.UpdateShift(emptyShiftIndex, shift, day.Id, employee.Id);  
+                scheduleDAL.UpdateShift(emptyShiftIndex, shift, day.Id, employee.Id);
             }
             else
             {
-                scheduleDAL.InsertShift(day.Id, employee.Id, shift);  
+                scheduleDAL.InsertShift(day.Id, employee.Id, shift);
             }
 
             if (hours == 4.5)
@@ -153,15 +154,15 @@ namespace PRJMediaBazaar.Logic
 
         public void AssignAbsence(AbsenceReason absenceReason, Employee employee, Day day)
         {
-           EmployeeWorkday wd = scheduleDAL.SelectEmployeeWorkday(day.Id, employee.Id);
+            EmployeeWorkday wd = scheduleDAL.SelectEmployeeWorkday(day.Id, employee.Id);
             if (wd != null)
             {
                 scheduleDAL.UpdateAbsence(day.Id, employee.Id);
-                if(wd.FirstShift != Shift.None)
+                if (wd.FirstShift != Shift.None)
                 {
                     DecreaseAssignedPosition(day, employee.JobPosition, wd.FirstShift.ToString());
                 }
-                if(wd.SecondShift != Shift.None)
+                if (wd.SecondShift != Shift.None)
                 {
                     DecreaseAssignedPosition(day, employee.JobPosition, wd.SecondShift.ToString());
                 }
@@ -182,7 +183,7 @@ namespace PRJMediaBazaar.Logic
 
         public void LoadDaysOff() // add the DayOff requests to the list 
         {
-           dayoff_req = scheduleDAL.SelectDayOffRequests();
+            dayoff_req = scheduleDAL.SelectDayOffRequests();
         }
 
 
@@ -192,7 +193,7 @@ namespace PRJMediaBazaar.Logic
 
             foreach (Duty np in d.AllPositions)
             {
-               
+
                 if ((np.MorningAssigned < np.MorningNeeded || np.MiddayAssigned < np.MiddayNeeded || np.EveningAssigned < np.EveningNeeded) &&
                     (np.MorningAssigned != 0 || np.MiddayAssigned != 0 || np.EveningAssigned != 0))
                 {
@@ -207,31 +208,17 @@ namespace PRJMediaBazaar.Logic
         }
         public string ScheduleStatus(Schedule s)
         {
-            Day[] days = s.Days;
-
-            foreach (Day d in days)
-            {
-                string status = DayStatus(d);
-                if (status == "started")
-                {
-                    return "started";
-                }
-            }
-            if (DaysAreEmpty(days))
-            {
-                return "empty";
-            }
-            return "complete";
+            return ScheduleStatus(s.Days);
 
         }
 
-        private bool DaysAreEmpty(Day[] days)
+        private bool DaysAreComplete(Day[] days)
         {
-           
+
             foreach (Day d in days)
             {
                 string status = DayStatus(d);
-                if (status != "empty")
+                if (status != "complete")
                 {
                     return false;
                 }
@@ -239,9 +226,85 @@ namespace PRJMediaBazaar.Logic
             return true;
         }
 
+        private string ScheduleStatus(Day[] days)
+        {
+            int complete = 0;
+            int started = 0;
+            int empty = 0;
+            foreach(Day d in days)
+            {
+                if(DayStatus(d) == "complete")
+                {
+                    complete++;
+                }
+                else if (DayStatus(d) == "started")
+                {
+                    started++;
+                }
+                else
+                {
+                    empty++;
+                }
+            }
+
+           if(empty == 14)
+            {
+                return "empty";
+            }
+           if(complete == 14)
+            {
+                return "complete";
+            }
+            return "started";
+
+        }
+
         public bool ConfirmDayOffRequest(int dayId, int empId)
         {
             return scheduleDAL.ConfirmDayOffRequest(dayId, empId);
+        }
+
+        public void GenerateSchedule(Day d)
+        {
+            string[] shifts = new string[] { Shift.Morning.ToString(), Shift.Midday.ToString(), Shift.Evening.ToString() };
+            Duty[] positions = new Duty[] { d.CashiersNeeded, d.SalesAssistantsNeeded,
+                d.SecurityNeeded, d.StockersNeeded, d.WarehouseManagersNeeded };
+
+            foreach (Duty p in positions)
+            {
+                Employee[] employees = _empControl.GetEmployeesByPosition(p.Position);
+
+                for (int i = 0; i < p.MorningNeeded; i++)
+                {
+                    Availabilities av = new Availabilities(employees, d, Shift.Morning);
+                    EmployeePlanner[] available = av.Available;
+                    double workedHours = GetWorkedHours(d.WeekId, available[0].Employee.Id);
+
+                    AssignShift(Shift.Morning.ToString(), available[0].Employee, d, available[0].EmptyShiftIndex, workedHours + 4.5);
+                }
+                for (int i = 0; i < p.MiddayNeeded; i++)
+                {
+                    Availabilities av = new Availabilities(employees, d, Shift.Midday);
+                    EmployeePlanner[] available = av.Available;
+                    double workedHours = GetWorkedHours(d.WeekId, available[0].Employee.Id);
+
+                    AssignShift(Shift.Midday.ToString(), available[0].Employee, d, available[0].EmptyShiftIndex, workedHours + 4.5);
+                }
+                for (int i = 0; i < p.EveningNeeded; i++)
+                {
+                    Availabilities av = new Availabilities(employees, d, Shift.Evening);
+                    EmployeePlanner[] available = av.Available;
+                    double workedHours = GetWorkedHours(d.WeekId, available[0].Employee.Id);
+
+                    AssignShift(Shift.Evening.ToString(), available[0].Employee, d, available[0].EmptyShiftIndex, workedHours + 4.5);
+                }
+            }
+        }
+
+        public void RemoveSchedule(Day d)
+        {
+            scheduleDAL.RemoveSchedule(d.Id, d.WeekId);
+            d.EmptyDuties();
         }
     }
 }

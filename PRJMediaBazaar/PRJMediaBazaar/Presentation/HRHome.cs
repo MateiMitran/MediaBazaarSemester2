@@ -31,7 +31,7 @@ namespace PRJMediaBazaar
             _empControl = new EmployeeControl();
             thisEmployee = null;
             LoadEmployees();
-            _scheduleControl = new ScheduleControl(_employees.ToList());
+            _scheduleControl = new ScheduleControl(_empControl);
             foreach (Schedule s in _scheduleControl.Schedules)
             {
                 cbSchedule.Items.Add(s);
@@ -40,8 +40,11 @@ namespace PRJMediaBazaar
             }
             cbPosition.Text = "Security";
             this.btnChangeNeededPosition.Enabled = false;
+            this.btnGenerateSchedule.Enabled = false;
+            this.btnDeleteSchedule.Enabled = false;
 
-          
+
+
         }
 
         public void LoadEmployees()
@@ -191,6 +194,7 @@ namespace PRJMediaBazaar
             if (cbDay.Text == "")
             {
                 ShiftsTable.Controls.Clear();
+                this.btnGenerateSchedule.Enabled = false;
             }
 
         }
@@ -227,6 +231,18 @@ namespace PRJMediaBazaar
             {
                 LoadTableByPosition(day, cbPosition.Text);
             }
+            if(_scheduleControl.DayStatus(day) == "empty")
+            {
+                this.btnGenerateSchedule.Enabled = true;
+                this.btnDeleteSchedule.Enabled = false;
+            }
+            else
+            {
+                this.btnGenerateSchedule.Enabled = false;
+                this.btnDeleteSchedule.Enabled = true;
+            }
+            
+
         }
 
 
@@ -461,7 +477,6 @@ namespace PRJMediaBazaar
             if (dialogResult == DialogResult.Yes)
             {
                 _scheduleControl.RemoveShift(shift.ToString(),((Day)cbDay.SelectedItem), employee);
-                UpdateSchedulesStatus();
             }
             LoadTableByPosition((Day)cbDay.SelectedItem, employee.JobPosition);
         }
@@ -490,15 +505,6 @@ namespace PRJMediaBazaar
             }
         }
 
-        public void UpdateSchedulesStatus()
-        {
-            lbIncompleteDays.Items.Clear();
-            foreach(Schedule s in _scheduleControl.Schedules)
-            {
-                lbIncompleteDays.Items.Add(_scheduleControl.ScheduleStatus(s));
-            }
-           
-        }
 
         private int GetEmptyShiftIndex(Employee morning, Employee mid, Employee evening)
         {
@@ -672,6 +678,78 @@ namespace PRJMediaBazaar
         private void btnDenyDayOff_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void cbSchedule_DrawItem(object sender, DrawItemEventArgs e)
+        {
+            // Draw the background 
+            e.DrawBackground();
+
+            if (e.Index < 0) { return; }
+
+            // Get the item text    
+            string text = ((ComboBox)sender).Items[e.Index].ToString();
+
+            // Determine the forecolor based on whether or not the item is selected    
+            Brush brush;
+            if (_scheduleControl.ScheduleStatus(_scheduleControl.Schedules[e.Index]) == "empty")// compare  date with your list.  
+            {
+                brush = Brushes.Red;
+            }
+            else if (_scheduleControl.ScheduleStatus(_scheduleControl.Schedules[e.Index]) == "started")
+            {
+                brush = Brushes.Yellow;
+            }
+            else
+            {
+                brush = Brushes.Green;
+            }
+
+            // Draw the text    
+            e.Graphics.DrawString(text, ((Control)sender).Font, brush, e.Bounds.X, e.Bounds.Y);
+
+        }
+
+        private void cbDay_DrawItem(object sender, DrawItemEventArgs e)
+        {
+            // Draw the background 
+            e.DrawBackground();
+
+            if (e.Index < 0) { return; }
+
+            // Get the item text    
+            string text = ((ComboBox)sender).Items[e.Index].ToString();
+            Day day = (Day)((ComboBox)sender).Items[e.Index];
+            // Determine the forecolor based on whether or not the item is selected    
+            Brush brush;
+            if (_scheduleControl.DayStatus(day) == "empty")// compare  date with your list.  
+            {
+                brush = Brushes.Red;
+            }
+            else if (_scheduleControl.DayStatus(day) == "started")
+            {
+                brush = Brushes.Yellow;
+            }
+            else
+            {
+                brush = Brushes.Green;
+            }
+
+            // Draw the text    
+            e.Graphics.DrawString(text, ((Control)sender).Font, brush, e.Bounds.X, e.Bounds.Y);
+        }
+
+        private void btnGenerateSchedule_Click(object sender, EventArgs e)
+        {
+            _scheduleControl.GenerateSchedule((Day)cbDay.SelectedItem);
+            LoadTableByPosition((Day)cbDay.SelectedItem, "Security");
+            this.btnGenerateSchedule.Enabled = false;
+        }
+
+        private void btnDeleteSchedule_Click(object sender, EventArgs e)
+        {
+            _scheduleControl.RemoveSchedule((Day)cbDay.SelectedItem);
+            LoadTableByPosition((Day)cbDay.SelectedItem, "Security");
         }
     }
 }
