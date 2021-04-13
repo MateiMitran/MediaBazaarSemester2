@@ -1,8 +1,8 @@
 <?php
-    $host = "localhost";
-    $username = "root";
-    $password = "root";
-    $database = "test";
+    $host = "studmysql01.fhict.local";
+    $username = "dbi460221";
+    $password = "lol";
+    $database = "dbi460221";
     
     // Create connection
     $conn = new mysqli($host, $username, $password, $database);
