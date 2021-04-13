@@ -21,6 +21,14 @@ namespace PRJMediaBazaar.Logic
         public DateTime Date { get; private set; }
         public int WeekId { get; private set; }
 
+        public NeededPositions[] AllPositions 
+        {
+            get
+            {
+                return new NeededPositions[] { SecurityNeeded, CashiersNeeded, StockersNeeded, SalesAssistantsNeeded, WarehouseManagersNeeded };
+            }
+        }
+
 
         public Day(int id, DateTime date,int scheduleId, string securityNeeded, string cashiersNeeded,
             string stockersNeeded, string salesAssistantsNeeded,
@@ -34,11 +42,11 @@ namespace PRJMediaBazaar.Logic
 
             Id = id;
             ScheduleId = scheduleId;
-            SecurityNeeded = new NeededPositions(Convert.ToInt32(security[0]), Convert.ToInt32(security[1]), Convert.ToInt32(security[2]));
-            CashiersNeeded = new NeededPositions(Convert.ToInt32(cashiers[0]), Convert.ToInt32(cashiers[1]), Convert.ToInt32(cashiers[2]));
-            StockersNeeded = new NeededPositions(Convert.ToInt32(stockers[0]), Convert.ToInt32(stockers[1]), Convert.ToInt32(stockers[2]));
-            SalesAssistantsNeeded = new NeededPositions(Convert.ToInt32(assistants[0]), Convert.ToInt32(assistants[1]), Convert.ToInt32(assistants[2]));
-            WarehouseManagersNeeded = new NeededPositions(Convert.ToInt32(managers[0]), Convert.ToInt32(managers[1]), Convert.ToInt32(managers[2]));
+            SecurityNeeded = new NeededPositions(Convert.ToInt32(security[0]), Convert.ToInt32(security[1]), Convert.ToInt32(security[2]), "Security");
+            CashiersNeeded = new NeededPositions(Convert.ToInt32(cashiers[0]), Convert.ToInt32(cashiers[1]), Convert.ToInt32(cashiers[2]), "Cashier");
+            StockersNeeded = new NeededPositions(Convert.ToInt32(stockers[0]), Convert.ToInt32(stockers[1]), Convert.ToInt32(stockers[2]), "Stocker");
+            SalesAssistantsNeeded = new NeededPositions(Convert.ToInt32(assistants[0]), Convert.ToInt32(assistants[1]), Convert.ToInt32(assistants[2]), "SalesAssistant");
+            WarehouseManagersNeeded = new NeededPositions(Convert.ToInt32(managers[0]), Convert.ToInt32(managers[1]), Convert.ToInt32(managers[2]), "WarehouseManager");
             Date = date;
             WeekId = weekId;
             dayDAL = new DayDAL();

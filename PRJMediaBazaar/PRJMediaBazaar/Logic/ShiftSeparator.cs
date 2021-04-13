@@ -15,6 +15,10 @@ namespace PRJMediaBazaar.Logic
         private List<Employee> mid;
         private List<Employee> evening;
 
+        public int MorningCount { get; private set; }
+        public int MiddayCount { get; private set; }
+        public int EveningCount { get; private set; }
+
         public ShiftSeparator(EmployeeWorkday[] workdays, int neededShiftAmount)
         {
             morning = new List<Employee>();
@@ -73,6 +77,11 @@ namespace PRJMediaBazaar.Logic
                 }
 
             }
+
+            MorningCount = morning.Count();
+            MiddayCount = mid.Count();
+            EveningCount = evening.Count();
+
             while (morning.Count < neededShiftAmount)
             {
                 morning.Add(null);
@@ -85,6 +94,7 @@ namespace PRJMediaBazaar.Logic
             {
                 evening.Add(null);
             }
+
         }
 
         public NamesRow[] GetNamesRows()

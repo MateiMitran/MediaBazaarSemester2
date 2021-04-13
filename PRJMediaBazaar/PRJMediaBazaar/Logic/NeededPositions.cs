@@ -8,16 +8,17 @@ namespace PRJMediaBazaar.Logic
 {
     class NeededPositions
     {
-
+        public string Position { get; private set; }
         public int Morning { get; private set; }
         public int Midday { get; private set; }
         public int Evening { get; private set; }
 
-          public NeededPositions(int morning, int midday, int evening)
+          public NeededPositions(int morning, int midday, int evening, string position)
         {
             Morning = morning;
             Midday = midday;
             Evening = evening;
+            Position = position;
         }
 
         public int MaxValue()

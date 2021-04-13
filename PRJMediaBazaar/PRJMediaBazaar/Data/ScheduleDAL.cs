@@ -33,10 +33,14 @@ namespace PRJMediaBazaar.Data
                 schedules.Add(new Schedule(id, startDate, endDate, isOutdated));
             }
            CloseConnection();
+             foreach(Schedule s in schedules)
+            {
+                s.AddDays(SelectDays(s.Id));
+            }
             return schedules;
         }
 
-        public List<Day> SelectDays(int scheduleId)
+        private List<Day> SelectDays(int scheduleId)
         {
             List<Day> days = new List<Day>();
             string[] parameters = new string[] { scheduleId.ToString() };

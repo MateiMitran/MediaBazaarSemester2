@@ -33,9 +33,17 @@ namespace PRJMediaBazaar.Logic
             _schedules = scheduleDAL.SelectSchedules();
         }
 
+
         public Day[] GetDays(int scheduleId)
         {
-            return scheduleDAL.SelectDays(scheduleId).ToArray();
+            foreach(Schedule s in _schedules)
+            {
+                if (s.Id == scheduleId)
+                {
+                    return s.Days;
+                }
+            }
+            return null;
         }
 
         public EmployeeWorkday[] GetEmployeesShifts(int dayId, string jobPosition)
@@ -119,6 +127,60 @@ namespace PRJMediaBazaar.Logic
         public void LoadDaysOff() // add the DayOff requests to the list 
         {
            dayoff_req = scheduleDAL.SelectDayOffRequests();
+        }
+
+
+
+        public string DayStatus(Day d)
+        {
+
+            foreach (NeededPositions np in d.AllPositions)
+            {
+                ShiftSeparator ssp = new ShiftSeparator(GetEmployeesShifts(d.Id, np.Position), np.MaxValue());
+                if ((ssp.MorningCount < np.Morning || ssp.MiddayCount < np.Midday || ssp.EveningCount < np.Evening) &&
+                    (ssp.MorningCount != 0 || ssp.MiddayCount != 0 || ssp.EveningCount != 0))
+                {
+                    return "started";
+                }
+                else if (ssp.MorningCount == 0 && ssp.MiddayCount == 0 && ssp.EveningCount == 0)
+                {
+                    return "empty";
+                }
+            }
+            return "complete";
+        }
+        public string ScheduleStatus(Schedule s)
+        {
+            Day[] days = s.Days;
+
+            foreach (Day d in days)
+            {
+                string status = DayStatus(d);
+                if (status == "started")
+                {
+                    return "started";
+                }
+            }
+            if (DaysAreEmpty(days))
+            {
+                return "empty";
+            }
+            return "complete";
+
+        }
+
+        private bool DaysAreEmpty(Day[] days)
+        {
+           
+            foreach (Day d in days)
+            {
+                string status = DayStatus(d);
+                if (status != "empty")
+                {
+                    return false;
+                }
+            }
+            return true;
         }
 
     }

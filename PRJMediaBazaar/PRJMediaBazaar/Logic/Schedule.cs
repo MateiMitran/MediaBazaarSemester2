@@ -8,18 +8,24 @@ namespace PRJMediaBazaar.Logic
 {
     class Schedule
     {
+        private List<Day> _days;
         public Schedule(int scheduleId, DateTime startDate, DateTime endDate, bool isOutdated)
         {
             Id = scheduleId;
             StartDate = startDate;
             EndDate = endDate;
+        }
 
+        public void AddDays(List<Day> days)
+        {
+            _days = days;
         }
 
         public int Id { get; private set; }
         public DateTime StartDate { get; private set; }
         public DateTime EndDate { get; private set; }
         public bool IsOutdated { get; private set; }
+        public Day[] Days { get { return _days.ToArray(); } }
 
 
         public override string ToString()

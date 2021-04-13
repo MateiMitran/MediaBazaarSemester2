@@ -35,14 +35,12 @@ namespace PRJMediaBazaar
             foreach (Schedule s in _scheduleControl.Schedules)
             {
                 cbSchedule.Items.Add(s);
+
             }
             cbPosition.Text = "Security";
             this.btnChangeNeededPosition.Enabled = false;
 
-            foreach (DayOff d in _scheduleControl.DaysOffRequests)
-            {
-
-            }
+          
         }
 
         public void LoadEmployees()
