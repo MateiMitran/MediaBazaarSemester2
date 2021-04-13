@@ -281,22 +281,37 @@ namespace PRJMediaBazaar.Data
 
         public List<DayOff> SelectDayOffRequests()
         {
-            string sql = "SELECT * FROM dayoff_requests WHERE status = 'Pending'; ";
-           MySqlDataReader result = executeReader(sql, null);
+            string sql = "SELECT * FROM dayoff_requests WHERE status = 'pending'; ";
+            MySqlDataReader result = executeReader(sql, null);
 
             List<DayOff> pseudos = new List<DayOff>();
             while (result.Read())
             {
-                int dayId = Convert.ToInt32(result[0]);
-                int employee_id = Convert.ToInt32(result[1]);
-                bool denied = Convert.ToBoolean(result[2]);
-                string objection = result[3].ToString();
-                DayOff req = new DayOff(dayId, employee_id, denied, objection);
+                int scheduleId = Convert.ToInt32(result[0]);
+                int dayId = Convert.ToInt32(result[1]);
+                int employee_id = Convert.ToInt32(result[2]);
+                bool urgent = Convert.ToBoolean(result[3]);
+                string status = result[4].ToString();
+                string reason = result[5].ToString();
+                DayOff req = new DayOff(scheduleId, dayId, employee_id, urgent, status, reason);
                 pseudos.Add(req);
             }
             CloseConnection();
             return pseudos;
         }
 
+        public bool ConfirmDayOffRequest(int dayId, int empId)
+        {
+            string[] parameters = new string[] { dayId.ToString(), empId.ToString()};
+            string sql = "DELETE FROM dayoff_requests WHERE day_id = @dayId AND employee_id = @empId";
+
+            if (executeNonQuery(sql, parameters) != null)
+            {
+                CloseConnection();
+                return true;
+            }
+            CloseConnection();
+            return false;
+        }
     }
 }

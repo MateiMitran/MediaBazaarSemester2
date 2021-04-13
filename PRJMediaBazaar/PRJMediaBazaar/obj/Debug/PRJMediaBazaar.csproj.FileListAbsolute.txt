@@ -204,3 +204,6 @@ C:\Users\Matei Mitran\Desktop\Project\prj-cb05-group-5-project\PRJMediaBazaar\PR
 C:\Users\Matei Mitran\Desktop\Project\prj-cb05-group-5-project\PRJMediaBazaar\PRJMediaBazaar\obj\Debug\PRJMediaBazaar.csproj.CopyComplete
 C:\Users\Matei Mitran\Desktop\Project\prj-cb05-group-5-project\PRJMediaBazaar\PRJMediaBazaar\obj\Debug\PRJMediaBazaar.exe
 C:\Users\Matei Mitran\Desktop\Project\prj-cb05-group-5-project\PRJMediaBazaar\PRJMediaBazaar\obj\Debug\PRJMediaBazaar.pdb
+C:\Users\alexb\Desktop\MediaBazaar\prj-cb05-group-5-project\PRJMediaBazaar\PRJMediaBazaar\obj\Debug\PRJMediaBazaar.EditNote.resources
+C:\Users\alexb\Desktop\MediaBazaar\prj-cb05-group-5-project\PRJMediaBazaar\PRJMediaBazaar\obj\Debug\PRJMediaBazaar.AddEmployees.resources
+C:\Users\alexb\Desktop\MediaBazaar\prj-cb05-group-5-project\PRJMediaBazaar\PRJMediaBazaar\obj\Debug\PRJMediaBazaar.ChangeNeededPosition.resources

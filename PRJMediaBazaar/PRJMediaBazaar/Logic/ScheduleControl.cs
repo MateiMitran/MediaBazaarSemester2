@@ -22,10 +22,9 @@ namespace PRJMediaBazaar.Logic
             scheduleDAL = new ScheduleDAL();
             LoadSchedules();
             LoadDaysOff();
-            
         }
 
-        public DayOff[] DaysOffRequests { get { return dayoff_req.ToArray(); } }
+        public List<DayOff> DaysOffRequests { get { return dayoff_req; } }
         public Schedule[] Schedules { get { return _schedules.ToArray(); } }
 
         private void LoadSchedules()
@@ -45,6 +44,8 @@ namespace PRJMediaBazaar.Logic
             }
             return null;
         }
+
+
 
         private void DecreaseAssignedPosition(Day day, string jobPosition, string shift)
         {
@@ -238,5 +239,9 @@ namespace PRJMediaBazaar.Logic
             return true;
         }
 
+        public bool ConfirmDayOffRequest(int dayId, int empId)
+        {
+            return scheduleDAL.ConfirmDayOffRequest(dayId, empId);
+        }
     }
 }

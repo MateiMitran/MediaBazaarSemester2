@@ -30,6 +30,11 @@ namespace PRJMediaBazaar.Logic
         }
 
 
+        public Day()
+        {
+            /* EMPTY DAY OBJECT CONSTRUCTOR */
+        }
+
         public Day(int id, DateTime date,int scheduleId, string securityNeeded, string cashiersNeeded,
             string stockersNeeded, string salesAssistantsNeeded,
            string warehouseManagersNeeded, int weekId, string securityAssigned, string cashiersAssigned,

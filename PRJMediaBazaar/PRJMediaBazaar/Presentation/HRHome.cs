@@ -124,6 +124,10 @@ namespace PRJMediaBazaar
             this.panelSchedule.Visible = false;
             this.panelSickReports.Visible = false;
             this.pnlDayOff.Visible = false;
+
+
+            /* LOAD DAY OFF REQUESTS */
+            LoadDayOffRequests();
         }
 
         private void lblAllEmployees_Click(object sender, EventArgs e)
@@ -557,7 +561,9 @@ namespace PRJMediaBazaar
         {
             
         }
+
         public void AddNoteToEmployee(Employee temp,String note)
+
         {
             temp.Note = note;
         }
@@ -604,6 +610,66 @@ namespace PRJMediaBazaar
         }
 
         private void pnlDayOff_Paint(object sender, PaintEventArgs e)
+        {
+        }
+
+        private void btnConfirmDayOff_Click(object sender, EventArgs e)
+        {
+            /* CONFIRM DAY OFF REQUEST */
+
+            int index = lbDayOff.SelectedIndex;
+
+            if(index >= 0)
+            {
+                DayOff req = _scheduleControl.DaysOffRequests[index];
+                bool query = _scheduleControl.ConfirmDayOffRequest(req.Day_id, req.Employee_id);
+
+                if(query)
+                {
+                    _scheduleControl.DaysOffRequests.RemoveAt(index);
+                    LoadDayOffRequests();
+                    MessageBox.Show("Successfully confirmed day-off request");
+                } else
+                {
+                    MessageBox.Show("An error occurred, please try again later.");
+                }
+            }
+            else
+            {
+                MessageBox.Show("Please select a day-off request to confirm");
+            }
+        }
+
+        private void LoadDayOffRequests()
+        {
+            lbDayOff.Items.Clear();
+            List<DayOff> daysOff = _scheduleControl.DaysOffRequests;
+
+            for (int i = 0; i < daysOff.Count(); i++)
+            {
+                DayOff dayOff = daysOff[i];
+                int scheduleId = dayOff.Schedule_id;
+                int dayId = dayOff.Day_id;
+                int employeeId = dayOff.Employee_id;
+                string urgent;
+
+                if (dayOff.Urgent == false)
+                {
+                    urgent = "Not urgent";
+                }
+                else
+                {
+                    urgent = "Urgent";
+                }
+
+                DateTime day = dayOff.GetDayById(scheduleId, dayId).Date;
+                Employee employee = _empControl.GetEmployee(employeeId);
+
+                lbDayOff.Items.Add(day.ToString("dd/MM/yyyy") + " --> " + employee.FullName + " --> " + urgent);
+            }
+        }
+
+        private void btnDenyDayOff_Click(object sender, EventArgs e)
         {
 
         }

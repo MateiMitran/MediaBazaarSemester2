@@ -16,13 +16,16 @@ namespace PRJMediaBazaar.Logic
             _employees = new List<Employee>();
             employeeDAL = new EmployeeDAL();
             LoadEmployees();
-            
-          
         }
 
         private void LoadEmployees()
         {       
             _employees = employeeDAL.SelectAll();
+        }
+
+        public List<Employee> GetAllEmployees()
+        {
+            return _employees;
         }
 
 
