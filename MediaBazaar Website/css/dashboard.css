@@ -8,7 +8,7 @@
 
 #dashboard-container {
     width: 100%;
-    height: 300px;
+    min-height: 300px;
     background-color: #fff;
     border-radius: 3px;
         -webkit-border-radius: 3px;
@@ -22,7 +22,6 @@
 
 .dashboard-content {
     display: none;
-    margin-top: -16px;
 }
 
 .dashboard-content.visible {
@@ -73,15 +72,19 @@
     background-color: #444452;
 }
 
-#dashboard-button-rules {
+#dashboard-button-absence {
     background-color: #f14b5f;
 }
 
-#dashboard-button-rules:hover {
+#dashboard-button-absence:hover {
     background-color: #d84355;
 }
 
 /* ANNOUNCEMENTS CSS */
+
+#dashboard-announcements {
+    margin-top: -16px;
+}
 
 #dashboard-announcements ul {
     padding: 0;
@@ -105,13 +108,53 @@
     background-color: #fff;
 }
 
-/* RULES CSS */
+/* PREFERENCES CSS */
 
-#dashboard-rules ol li {
-    padding: 15px 20px;
-    border-top: 1px solid #eee;
+#dashboard-preferences form {
+    margin-top: 50px;
+    margin-bottom: 0;
 }
 
-#dashboard-rules ol li:first-of-type {
-    border-top: none;
+/* ABSENCE-OFF CSS */
+
+#dashboard-absence #absence-wrapper {
+    display: -webkit-box; 
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    justify-content: space-around;
+    -webkit-justify-content: space-around;
+    -moz-justify-content: space-around;
+    justify-content: space-around;
+}
+
+#dashboard-absence #absence-wrapper p {
+    margin-top: 20px;
+    font-size: 18px;
+}
+
+#dashboard-absence #absence-wrapper form {
+    position: relative;
+    margin: 20px 0 30px;
+}
+
+#dashboard-absence #absence-wrapper form h3 {
+    font-weight: 600;
+    color: #2b2d42;
+    font-size: 24px;
+    text-align: center;
+    margin: 0 0 15px;
+}
+
+#dashboard-absence #absence-wrapper form input[type="submit"] {
+    width: auto;
+    min-width: 50%;
+    font-size: 16px;
+}
+
+#dashboard-absence #absence-wrapper #sick-report-form .form-group.submit {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
 }
