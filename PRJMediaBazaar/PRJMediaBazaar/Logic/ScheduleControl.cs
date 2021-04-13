@@ -264,39 +264,40 @@ namespace PRJMediaBazaar.Logic
             return scheduleDAL.ConfirmDayOffRequest(dayId, empId);
         }
 
-        public void GenerateSchedule(Day d)
+        public void GenerateSchedule(Day day)
         {
-            string[] shifts = new string[] { Shift.Morning.ToString(), Shift.Midday.ToString(), Shift.Evening.ToString() };
-            Duty[] positions = new Duty[] { d.CashiersNeeded, d.SalesAssistantsNeeded,
-                d.SecurityNeeded, d.StockersNeeded, d.WarehouseManagersNeeded };
+
+            Duty[] positions = new Duty[] { day.CashiersNeeded, day.SalesAssistantsNeeded,
+                day.SecurityNeeded, day.StockersNeeded, day.WarehouseManagersNeeded };
 
             foreach (Duty p in positions)
             {
-                Employee[] employees = _empControl.GetEmployeesByPosition(p.Position);
 
-                for (int i = 0; i < p.MorningNeeded; i++)
+                for (int i = 0; i < p.MaxValue(); i++)
                 {
-                    Availabilities av = new Availabilities(employees, d, Shift.Morning);
-                    EmployeePlanner[] available = av.Available;
-                    double workedHours = GetWorkedHours(d.WeekId, available[0].Employee.Id);
+                    if (p.MorningNeeded > p.MorningAssigned)
+                    {
+                        EmployeePlanner available = GetFirstAvailableEmployeePlanner(day, Shift.Morning, p.Position);
+                        double workedHours = GetWorkedHours(day.WeekId, available.Employee.Id);
 
-                    AssignShift(Shift.Morning.ToString(), available[0].Employee, d, available[0].EmptyShiftIndex, workedHours + 4.5);
-                }
-                for (int i = 0; i < p.MiddayNeeded; i++)
-                {
-                    Availabilities av = new Availabilities(employees, d, Shift.Midday);
-                    EmployeePlanner[] available = av.Available;
-                    double workedHours = GetWorkedHours(d.WeekId, available[0].Employee.Id);
+                        AssignShift(Shift.Morning.ToString(), available.Employee, day, available.EmptyShiftIndex, workedHours + 4.5);
+                    }
 
-                    AssignShift(Shift.Midday.ToString(), available[0].Employee, d, available[0].EmptyShiftIndex, workedHours + 4.5);
-                }
-                for (int i = 0; i < p.EveningNeeded; i++)
-                {
-                    Availabilities av = new Availabilities(employees, d, Shift.Evening);
-                    EmployeePlanner[] available = av.Available;
-                    double workedHours = GetWorkedHours(d.WeekId, available[0].Employee.Id);
+                    if (p.MiddayNeeded > p.MiddayAssigned)
+                    {
+                        EmployeePlanner available = GetFirstAvailableEmployeePlanner(day, Shift.Midday, p.Position);
+                        double workedHours = GetWorkedHours(day.WeekId, available.Employee.Id);
 
-                    AssignShift(Shift.Evening.ToString(), available[0].Employee, d, available[0].EmptyShiftIndex, workedHours + 4.5);
+                        AssignShift(Shift.Midday.ToString(), available.Employee, day, available.EmptyShiftIndex, workedHours + 4.5);
+                    }
+
+                    if (p.EveningNeeded > p.EveningAssigned)
+                    {
+                        EmployeePlanner available = GetFirstAvailableEmployeePlanner(day, Shift.Evening, p.Position);
+                        double workedHours = GetWorkedHours(day.WeekId, available.Employee.Id);
+
+                        AssignShift(Shift.Evening.ToString(), available.Employee, day, available.EmptyShiftIndex, workedHours + 4.5);
+                    }
                 }
             }
         }
@@ -305,6 +306,38 @@ namespace PRJMediaBazaar.Logic
         {
             scheduleDAL.RemoveSchedule(d.Id, d.WeekId);
             d.EmptyDuties();
+        }
+
+        private EmployeePlanner GetFirstAvailableEmployeePlanner(Day day, Shift shift, string position)
+        {
+            List<int> ids = scheduleDAL.SelectAvailableEmployeesIds(position,day.Id);
+            if(ids.Count > 0)
+            {
+                Employee employee = _empControl.GetEmployee(ids[0]);
+                double hoursInfo = scheduleDAL.SelectWorkedHours(day.WeekId, employee.Id);
+                return new EmployeePlanner(employee, "None", -1, hoursInfo);
+            }
+
+
+            List<EmployeeWorkday> workdays = scheduleDAL.SelectEmployeesShifts(day.Id, position);
+            List<EmployeePlanner> available = new List<EmployeePlanner>();
+            foreach (EmployeeWorkday wd in workdays) //employees in the workdays_table
+            {
+               
+                    int index = Helper.GetEmptyShiftIndex(wd.FirstShift.ToString(), wd.SecondShift.ToString());
+                    string busyShift = wd.GetBusyShift();
+
+                    if (index != -1 && Helper.DoubleShiftIsValid(busyShift, shift.ToString())) //employee has only one shift, and the second one is valid
+                    {
+                        Employee employee = wd.Employee;
+                        double hoursInfo = scheduleDAL.SelectWorkedHours(day.WeekId, employee.Id);
+
+                        EmployeePlanner ea = new EmployeePlanner(employee, busyShift, index, hoursInfo);
+                        available.Add(ea);
+                    }
+            }
+            available.Sort();
+            return available[0];
         }
     }
 }

@@ -333,5 +333,19 @@ namespace PRJMediaBazaar.Data
             CloseConnection();
 
         }
+        public List<int> SelectAvailableEmployeesIds(string position, int dayId)
+        {
+            List<int> ids = new List<int>();
+            string[] parameters = new string[] { position, dayId.ToString() };
+            string sql = "SELECT id FROM employees WHERE job_position = @position AND id NOT IN (SELECT employee_id FROM employees_workdays WHERE day_id = @dayId)";
+            MySqlDataReader dr = executeReader(sql, parameters);
+            while (dr.Read())
+            {
+                ids.Add(Convert.ToInt32(dr[0]));
+            }
+            CloseConnection();
+            return ids;
+
+        }
     }
 }
