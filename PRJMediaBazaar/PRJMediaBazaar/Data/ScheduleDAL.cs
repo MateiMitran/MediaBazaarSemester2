@@ -10,7 +10,6 @@ namespace PRJMediaBazaar.Data
 {
      class ScheduleDAL : BaseDAL
     {
-        public List<Object> dayoff_req;
         private EmployeeControl empControl;
 
         public ScheduleDAL()
@@ -56,8 +55,13 @@ namespace PRJMediaBazaar.Data
                 string salesAssistantsNeeded = Convert.ToString(dr[6]);
                 string warehouseManagersNeeded = Convert.ToString(dr[7]);
                 int weekId = Convert.ToInt32(dr[8]);
+                string securityAssigned = Convert.ToString(dr[9]);
+                string cashiersAssigned = Convert.ToString(dr[10]);
+                string stockersAssigned = Convert.ToString(dr[11]);
+                string salesAsstantsAssigned = Convert.ToString(dr[12]);
+                string warehouseManagersAssigned = Convert.ToString(dr[13]);
 
-                days.Add(new Day(dayId, date, scheduleId, securityNeeded, cashiersNeeded, stockersNeeded, salesAssistantsNeeded, warehouseManagersNeeded, weekId));
+                days.Add(new Day(dayId, date, scheduleId, securityNeeded, cashiersNeeded, stockersNeeded, salesAssistantsNeeded, warehouseManagersNeeded, weekId, securityAssigned,cashiersAssigned,stockersAssigned,salesAsstantsAssigned,warehouseManagersAssigned));
 
             }
             CloseConnection();
@@ -182,7 +186,6 @@ namespace PRJMediaBazaar.Data
             return false;
         }
 
-
         public bool DeleteShift(int dayId, int employeeId)
         {
             string sql = "DELETE FROM employees_workdays WHERE day_id = @dayId AND employee_id = @employeeId";
@@ -234,12 +237,12 @@ namespace PRJMediaBazaar.Data
             if(hours <= 0)
             {
                 parameters = new string[] {weekId.ToString(), employeeId.ToString() };
-                sql = "DELETE FROM worked_hours WHERE schedule_id = @scheduleId AND employee_id = @employeeId";
+                sql = "DELETE FROM worked_hours WHERE week_id = @weekId AND employee_id = @employeeId";
             }
             else
             {
                 parameters = new string[] { hours.ToString(), weekId.ToString(), employeeId.ToString() };
-                sql = "UPDATE worked_hours SET hours = @hours WHERE week_id = @scheduleId AND employee_id = @employeeId";
+                sql = "UPDATE worked_hours SET hours = @hours WHERE week_id = @weekId AND employee_id = @employeeId";
 
             }
             if (executeNonQuery(sql, parameters) != null)

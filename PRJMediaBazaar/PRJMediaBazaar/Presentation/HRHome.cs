@@ -35,6 +35,7 @@ namespace PRJMediaBazaar
             foreach (Schedule s in _scheduleControl.Schedules)
             {
                 cbSchedule.Items.Add(s);
+                lbIncompleteDays.Items.Add(_scheduleControl.ScheduleStatus(s));
 
             }
             cbPosition.Text = "Security";
@@ -239,7 +240,7 @@ namespace PRJMediaBazaar
         {
             try
             {
-                NeededPositions neededAmounts = day.GetNeededPositionAmount(jobPosition);
+                Duty neededAmounts = day.GetDuty(jobPosition);
 
                 EmployeeWorkday[] workdays = _scheduleControl.GetEmployeesShifts(day.Id, jobPosition);
                 ShiftSeparator ssp = new ShiftSeparator(workdays, neededAmounts.MaxValue());
@@ -337,7 +338,7 @@ namespace PRJMediaBazaar
                         }
                     }
                     
-                    if(i+1 > neededAmounts.Morning)
+                    if(i+1 > neededAmounts.MorningNeeded)
                     {
                         MorningShiftButton.Enabled = false;
                         MorningShiftButton.BackColor = Color.Silver;
@@ -346,7 +347,7 @@ namespace PRJMediaBazaar
 
 
                     }
-                    if (i+1 > neededAmounts.Midday)
+                    if (i+1 > neededAmounts.MiddayNeeded)
                     {
                         MiddayShiftButton.Enabled = false;
                         MiddayShiftButton.BackColor = Color.Silver;
@@ -354,7 +355,7 @@ namespace PRJMediaBazaar
                         MiddayShiftButton.Text = "";
 
                     }
-                    if (i+1 > neededAmounts.Evening)
+                    if (i+1 > neededAmounts.EveningNeeded)
                     {
                         EveningShiftButton.Enabled = false;
                         EveningShiftButton.BackColor = Color.Silver;
@@ -455,7 +456,8 @@ namespace PRJMediaBazaar
                 $"{employee.FirstName} {employee.LastName}'s {shift.ToString()} shift?", "Confirmation", MessageBoxButtons.YesNo);
             if (dialogResult == DialogResult.Yes)
             {
-                _scheduleControl.RemoveShift(shift.ToString(),((Day)cbDay.SelectedItem), employee.Id);
+                _scheduleControl.RemoveShift(shift.ToString(),((Day)cbDay.SelectedItem), employee);
+                UpdateSchedulesStatus();
             }
             LoadTableByPosition((Day)cbDay.SelectedItem, employee.JobPosition);
         }
@@ -482,6 +484,16 @@ namespace PRJMediaBazaar
             {
                 this.lblPositionNeeded.Text = day.GetAllNeededPositionsInfo();
             }
+        }
+
+        public void UpdateSchedulesStatus()
+        {
+            lbIncompleteDays.Items.Clear();
+            foreach(Schedule s in _scheduleControl.Schedules)
+            {
+                lbIncompleteDays.Items.Add(_scheduleControl.ScheduleStatus(s));
+            }
+           
         }
 
         private int GetEmptyShiftIndex(Employee morning, Employee mid, Employee evening)

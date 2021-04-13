@@ -58,9 +58,10 @@ namespace PRJMediaBazaar
                     
                     if (dialogResult == DialogResult.Yes)
                     {
-                        _scheduleControl.AssignShift(_shift.ToString(), employeeId, _day, ep.EmptyShiftIndex, workedHours + 4.5);
+                        _scheduleControl.AssignShift(_shift.ToString(), ep.Employee, _day, ep.EmptyShiftIndex, workedHours + 4.5);
                         _hr.LoadTableByPosition(_day, _jobPosition);
                         _hr.ShiftsTable.Enabled = true;
+                        _hr.UpdateSchedulesStatus();
                         this.Close();
                     }
                     else if (dialogResult == DialogResult.No)

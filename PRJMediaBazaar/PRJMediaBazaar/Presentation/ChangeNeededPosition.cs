@@ -49,7 +49,7 @@ namespace PRJMediaBazaar
               $"{_jobPositon} to:{Environment.NewLine} Morning:{morning}, Midday:{midday}, Evening:{evening}", "Confirmation", MessageBoxButtons.YesNo);
                 if (dialogResult == DialogResult.Yes)
                 {
-                       if (_day.ChangeNeededJobPosition(_jobPositon, morning,midday,evening))
+                       if (_day.ChangeNeededDuties(_jobPositon, morning,midday,evening))
                         {
                             _hr.UpdateDaysCheckbox(_scheduleId);
                             _hr.cbDay.SelectedIndex = _dayIndex;

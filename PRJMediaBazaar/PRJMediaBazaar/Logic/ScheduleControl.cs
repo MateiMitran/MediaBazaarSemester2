@@ -46,6 +46,48 @@ namespace PRJMediaBazaar.Logic
             return null;
         }
 
+        private void DecreaseAssignedPosition(Day day, string jobPosition, string shift)
+        {
+            Duty duty = day.GetDuty(jobPosition);
+            int morning = duty.MorningAssigned;
+            int midday = duty.MiddayAssigned;
+            int evening = duty.EveningAssigned;
+            switch (shift)
+            {
+                case "Morning":
+                    morning -= 1;
+                    break;
+                case "Midday":
+                    midday -= 1;
+                    break;
+                case "Evening":
+                    evening -= 1;
+                    break;
+            }
+            day.ChangeAssignedDuties(jobPosition, morning, midday, evening);
+        }
+
+        private void IncreaseAssignedPosition(Day day, string jobPosition, string shift)
+        {
+            Duty duty = day.GetDuty(jobPosition);
+            int morning = duty.MorningAssigned;
+            int midday = duty.MiddayAssigned;
+            int evening = duty.EveningAssigned;
+            switch (shift)
+            {
+                case "Morning":
+                    morning += 1;
+                    break;
+                case "Midday":
+                    midday += 1;
+                    break;
+                case "Evening":
+                    evening += 1;
+                    break;
+            }
+            day.ChangeAssignedDuties(jobPosition, morning, midday, evening);
+        }
+
         public EmployeeWorkday[] GetEmployeesShifts(int dayId, string jobPosition)
         {
           
@@ -53,66 +95,79 @@ namespace PRJMediaBazaar.Logic
            
         }
 
-       public void RemoveShift(string shift,Day day,int employeeId)
+       public void RemoveShift(string shift,Day day,Employee employee)
         {
-            EmployeeWorkday result = scheduleDAL.SelectEmployeeWorkday(day.Id, employeeId);
+            EmployeeWorkday result = scheduleDAL.SelectEmployeeWorkday(day.Id, employee.Id);
             if (result != null) 
             {
                 int emptyShiftIndex = Helper.GetEmptyShiftIndex(result.FirstShift.ToString(), result.SecondShift.ToString());
                 if (emptyShiftIndex != -1 && !result.Absence) //if there is an empty shift, remove the row
                 {
-                    scheduleDAL.DeleteShift(day.Id, employeeId);
+                    scheduleDAL.DeleteShift(day.Id, employee.Id);
                 }
                 else if (emptyShiftIndex == -1 && !result.Absence)//if there is a double shift,insert None on the chosen one
                 {
                     if (result.FirstShift.ToString() == shift.ToString()) 
                     {
-                        scheduleDAL.UpdateShift(2,"None",day.Id,employeeId);
+                        scheduleDAL.UpdateShift(2,"None",day.Id,employee.Id);
                     }
                     else if (result.SecondShift.ToString() == shift.ToString())
                     {
-                        scheduleDAL.UpdateShift(3,"None", day.Id, employeeId);
+                        scheduleDAL.UpdateShift(3,"None", day.Id, employee.Id);
                     }
                     
                 }
-                double workedHours = GetWorkedHours(day.WeekId, employeeId);
-                scheduleDAL.UpdateHours(workedHours - 4.5, day.ScheduleId, employeeId);
+                double workedHours = GetWorkedHours(day.WeekId, employee.Id);
+                scheduleDAL.UpdateHours(workedHours - 4.5, day.ScheduleId, employee.Id);
+                DecreaseAssignedPosition(day, employee.JobPosition, shift);
+             
             }
         }
         
-        public void AssignShift(string shift, int employeeId, Day day, int emptyShiftIndex, double hours)
+        public void AssignShift(string shift, Employee employee, Day day, int emptyShiftIndex, double hours)
         {
-           EmployeeWorkday wd = scheduleDAL.SelectEmployeeWorkday(day.Id, employeeId);
+           EmployeeWorkday wd = scheduleDAL.SelectEmployeeWorkday(day.Id, employee.Id);
             if (wd != null)
             {
-                scheduleDAL.UpdateShift(emptyShiftIndex, shift, day.Id, employeeId);  
+                scheduleDAL.UpdateShift(emptyShiftIndex, shift, day.Id, employee.Id);  
             }
             else
             {
-                scheduleDAL.InsertShift(day.Id, employeeId, shift);  
+                scheduleDAL.InsertShift(day.Id, employee.Id, shift);  
             }
 
             if (hours == 4.5)
             {
-                scheduleDAL.InsertHours(hours, day.WeekId, employeeId);
+                scheduleDAL.InsertHours(hours, day.WeekId, employee.Id);
             }
             else
             {
-                scheduleDAL.UpdateHours(hours, day.WeekId, employeeId);
+                scheduleDAL.UpdateHours(hours, day.WeekId, employee.Id);
             }
+
+            IncreaseAssignedPosition(day, employee.JobPosition, shift);
+
         }
 
 
-        public void AssignAbsence(AbsenceReason absenceReason, int employeeId, int dayId)
+        public void AssignAbsence(AbsenceReason absenceReason, Employee employee, Day day)
         {
-           EmployeeWorkday wd = scheduleDAL.SelectEmployeeWorkday(dayId, employeeId);
+           EmployeeWorkday wd = scheduleDAL.SelectEmployeeWorkday(day.Id, employee.Id);
             if (wd != null)
             {
-                scheduleDAL.UpdateAbsence(dayId, employeeId);
+                scheduleDAL.UpdateAbsence(day.Id, employee.Id);
+                if(wd.FirstShift != Shift.None)
+                {
+                    DecreaseAssignedPosition(day, employee.JobPosition, wd.FirstShift.ToString());
+                }
+                if(wd.SecondShift != Shift.None)
+                {
+                    DecreaseAssignedPosition(day, employee.JobPosition, wd.SecondShift.ToString());
+                }
             }
             else
             {
-                scheduleDAL.InsertAbsence(dayId, employeeId);
+                scheduleDAL.InsertAbsence(day.Id, employee.Id);
             }
         }
 
@@ -134,15 +189,15 @@ namespace PRJMediaBazaar.Logic
         public string DayStatus(Day d)
         {
 
-            foreach (NeededPositions np in d.AllPositions)
+            foreach (Duty np in d.AllPositions)
             {
-                ShiftSeparator ssp = new ShiftSeparator(GetEmployeesShifts(d.Id, np.Position), np.MaxValue());
-                if ((ssp.MorningCount < np.Morning || ssp.MiddayCount < np.Midday || ssp.EveningCount < np.Evening) &&
-                    (ssp.MorningCount != 0 || ssp.MiddayCount != 0 || ssp.EveningCount != 0))
+               
+                if ((np.MorningAssigned < np.MorningNeeded || np.MiddayAssigned < np.MiddayNeeded || np.EveningAssigned < np.EveningNeeded) &&
+                    (np.MorningAssigned != 0 || np.MiddayAssigned != 0 || np.EveningAssigned != 0))
                 {
                     return "started";
                 }
-                else if (ssp.MorningCount == 0 && ssp.MiddayCount == 0 && ssp.EveningCount == 0)
+                else if (np.MorningAssigned == 0 && np.MiddayAssigned == 0 && np.EveningAssigned == 0)
                 {
                     return "empty";
                 }

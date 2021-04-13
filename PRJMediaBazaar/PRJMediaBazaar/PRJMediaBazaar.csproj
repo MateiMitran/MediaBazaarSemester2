@@ -96,7 +96,7 @@
     <Compile Include="InvalidIntException.cs" />
     <Compile Include="InvalidStringException.cs" />
     <Compile Include="Logic\DayOff.cs" />
-    <Compile Include="Logic\NeededPositions.cs" />
+    <Compile Include="Logic\Duty.cs" />
     <Compile Include="NegativeInputException.cs" />
     <Compile Include="Presentation\EditNote.cs">
       <SubType>Form</SubType>

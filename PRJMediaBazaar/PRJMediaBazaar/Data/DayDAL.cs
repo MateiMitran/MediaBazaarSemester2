@@ -18,7 +18,7 @@ namespace PRJMediaBazaar.Data
         /// <param name="amount"></param>
         /// <param name="dayId"></param>
         /// <returns></returns>
-        public bool UpdatePosition(string jobPosition, string amounts, int dayId)
+        public bool UpdateNeededPosition(string jobPosition, string amounts, int dayId)
         {
             string sql = "";
             string[] parameters = new string[] { amounts, dayId.ToString() };
@@ -51,5 +51,41 @@ namespace PRJMediaBazaar.Data
             CloseConnection();
             return false;
         }
+
+        public bool UpdateAssignedPosition(string jobPosition, string amounts, int dayId)
+        {
+            string sql = "";
+            string[] parameters = new string[] { amounts, dayId.ToString() };
+            switch (jobPosition)
+            {
+                case "Security":
+                    sql = "UPDATE days SET security_assigned = @amount WHERE id = @dayId";
+                    break;
+                case "Cashier":
+                    sql = "UPDATE days SET cashiers_assigned = @amount WHERE id = @dayId";
+                    break;
+                case "Stocker":
+                    sql = "UPDATE days SET stockers_assigned = @amount WHERE id = @dayId";
+
+                    break;
+                case "SalesAssistant":
+                    sql = "UPDATE days SET sales_assistants_assigned = @amount WHERE id = @dayId";
+
+                    break;
+                case "WarehouseManager":
+                    sql = "UPDATE days SET warehouse_managers_assigned = @amount WHERE id = @dayId";
+                    break;
+
+            }
+            if (executeNonQuery(sql, parameters) != null)
+            {
+                CloseConnection();
+                return true;
+            }
+            CloseConnection();
+            return false;
+        }
     }
+
 }
+

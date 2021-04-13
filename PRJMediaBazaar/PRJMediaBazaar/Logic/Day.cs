@@ -13,26 +13,28 @@ namespace PRJMediaBazaar.Logic
         private DayDAL dayDAL;
         public int Id { get; private set; }
         public int ScheduleId { get; private set; }
-        public NeededPositions SecurityNeeded { get; set; }
-        public NeededPositions CashiersNeeded { get; set; }
-        public NeededPositions StockersNeeded { get; set; }
-        public NeededPositions SalesAssistantsNeeded { get; set; }
-        public NeededPositions WarehouseManagersNeeded { get; set; }
+        public Duty SecurityNeeded { get; set; }
+        public Duty CashiersNeeded { get; set; }
+        public Duty StockersNeeded { get; set; }
+        public Duty SalesAssistantsNeeded { get; set; }
+        public Duty WarehouseManagersNeeded { get; set; }
         public DateTime Date { get; private set; }
         public int WeekId { get; private set; }
 
-        public NeededPositions[] AllPositions 
+        public Duty[] AllPositions 
         {
             get
             {
-                return new NeededPositions[] { SecurityNeeded, CashiersNeeded, StockersNeeded, SalesAssistantsNeeded, WarehouseManagersNeeded };
+                return new Duty[] { SecurityNeeded, CashiersNeeded, StockersNeeded, SalesAssistantsNeeded, WarehouseManagersNeeded };
             }
         }
 
 
         public Day(int id, DateTime date,int scheduleId, string securityNeeded, string cashiersNeeded,
             string stockersNeeded, string salesAssistantsNeeded,
-           string warehouseManagersNeeded, int weekId)
+           string warehouseManagersNeeded, int weekId, string securityAssigned, string cashiersAssigned,
+            string stockersAssigned, string salesAssistantsAssigned,
+           string warehouseManagersAssigned)
         {
             string[] security = securityNeeded.Split(' ');
             string[] cashiers = cashiersNeeded.Split(' ');
@@ -40,13 +42,19 @@ namespace PRJMediaBazaar.Logic
             string[] assistants = salesAssistantsNeeded.Split(' ');
             string[] managers = warehouseManagersNeeded.Split(' ');
 
+            string[] security_assigned = securityAssigned.Split(' ');
+            string[] cashiers_assigned = cashiersAssigned.Split(' ');
+            string[] stockers_assigned = stockersAssigned.Split(' ');
+            string[] assistants_assigned = salesAssistantsAssigned.Split(' ');
+            string[] managers_assigned = warehouseManagersAssigned.Split(' ');
+
             Id = id;
             ScheduleId = scheduleId;
-            SecurityNeeded = new NeededPositions(Convert.ToInt32(security[0]), Convert.ToInt32(security[1]), Convert.ToInt32(security[2]), "Security");
-            CashiersNeeded = new NeededPositions(Convert.ToInt32(cashiers[0]), Convert.ToInt32(cashiers[1]), Convert.ToInt32(cashiers[2]), "Cashier");
-            StockersNeeded = new NeededPositions(Convert.ToInt32(stockers[0]), Convert.ToInt32(stockers[1]), Convert.ToInt32(stockers[2]), "Stocker");
-            SalesAssistantsNeeded = new NeededPositions(Convert.ToInt32(assistants[0]), Convert.ToInt32(assistants[1]), Convert.ToInt32(assistants[2]), "SalesAssistant");
-            WarehouseManagersNeeded = new NeededPositions(Convert.ToInt32(managers[0]), Convert.ToInt32(managers[1]), Convert.ToInt32(managers[2]), "WarehouseManager");
+            SecurityNeeded = new Duty(Convert.ToInt32(security[0]), Convert.ToInt32(security[1]), Convert.ToInt32(security[2]), "Security", Convert.ToInt32(security_assigned[0]), Convert.ToInt32(security_assigned[1]), Convert.ToInt32(security_assigned[2]));
+            CashiersNeeded = new Duty(Convert.ToInt32(cashiers[0]), Convert.ToInt32(cashiers[1]), Convert.ToInt32(cashiers[2]), "Cashier", Convert.ToInt32(cashiers_assigned[0]), Convert.ToInt32(cashiers_assigned[1]), Convert.ToInt32(cashiers_assigned[2]));
+            StockersNeeded = new Duty(Convert.ToInt32(stockers[0]), Convert.ToInt32(stockers[1]), Convert.ToInt32(stockers[2]), "Stocker", Convert.ToInt32(stockers_assigned[0]), Convert.ToInt32(stockers_assigned[1]), Convert.ToInt32(stockers_assigned[2]));
+            SalesAssistantsNeeded = new Duty(Convert.ToInt32(assistants[0]), Convert.ToInt32(assistants[1]), Convert.ToInt32(assistants[2]), "SalesAssistant", Convert.ToInt32(assistants_assigned[0]), Convert.ToInt32(assistants_assigned[1]), Convert.ToInt32(assistants_assigned[2]));
+            WarehouseManagersNeeded = new Duty(Convert.ToInt32(managers[0]), Convert.ToInt32(managers[1]), Convert.ToInt32(managers[2]), "WarehouseManager", Convert.ToInt32(managers_assigned[0]), Convert.ToInt32(managers_assigned[1]), Convert.ToInt32(managers_assigned[2]));
             Date = date;
             WeekId = weekId;
             dayDAL = new DayDAL();
@@ -60,34 +68,34 @@ namespace PRJMediaBazaar.Logic
             return $"{Date.DayOfWeek} {Date.ToString("dd-MM-yyyy")}";
         }
 
-        public NeededPositions GetNeededPositionAmount(string jobPosition)
+        public Duty GetDuty(string jobPosition)
         {
-            NeededPositions neededPosition = null;
+            Duty duty = null;
             switch (jobPosition)
             {
                 case "Security":
-                    neededPosition = SecurityNeeded;
+                    duty = SecurityNeeded;
                     break;
                 case "Cashier":
-                    neededPosition = CashiersNeeded;
+                    duty = CashiersNeeded;
                     break;
                 case "Stocker":
-                    neededPosition = StockersNeeded;
+                    duty = StockersNeeded;
                     break;
                 case "SalesAssistant":
-                    neededPosition = SalesAssistantsNeeded;
+                    duty = SalesAssistantsNeeded;
                     break;
                 case "WarehouseManager":
-                    neededPosition = WarehouseManagersNeeded;
+                    duty = WarehouseManagersNeeded;
                     break;
 
             }
-            return neededPosition;
+            return duty;
         }
 
         public string GetNeededPositionInfo(string jobPosition)
         {
-            NeededPositions amount = GetNeededPositionAmount(jobPosition);
+            Duty amount = GetDuty(jobPosition);
             return $"Needed {jobPosition}: {amount}";
         }
 
@@ -98,12 +106,35 @@ namespace PRJMediaBazaar.Logic
         }
 
       
-        public bool ChangeNeededJobPosition(string jobPosition, int morning, int midday, int evening)
+        public bool ChangeNeededDuties(string jobPosition, int morning, int midday, int evening)
+        {
+          
+            string amounts = $"{morning} {midday} {evening}";
+            bool result = dayDAL.UpdateNeededPosition(jobPosition, amounts, Id);
+           if(result)
+            {
+                Duty duty = GetDuty(jobPosition);
+                duty.MorningNeeded = morning;
+                duty.MiddayNeeded = midday;
+                duty.EveningNeeded = evening;
+                return true;
+            }
+            return false;
+        }
+
+        public bool ChangeAssignedDuties(string jobPosition, int morning, int midday, int evening)
         {
             string amounts = $"{morning} {midday} {evening}";
-            bool result = dayDAL.UpdatePosition(jobPosition, amounts, Id);
-            dayDAL.CloseConnection();
-            return result;
+            bool result = dayDAL.UpdateAssignedPosition(jobPosition, amounts, Id);
+           if(result)
+            {
+                Duty duty = GetDuty(jobPosition);
+                duty.MorningAssigned = morning;
+                duty.MiddayAssigned = midday;
+                duty.EveningAssigned = evening;
+                return true;
+            }
+            return false;
         }
 
     }

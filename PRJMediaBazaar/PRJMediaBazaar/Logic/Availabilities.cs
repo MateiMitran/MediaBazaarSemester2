@@ -44,10 +44,7 @@ namespace PRJMediaBazaar.Logic
                 if (!Convert.ToBoolean(wd.Absence)) //the employee isn't absent
                 {
                     int index = Helper.GetEmptyShiftIndex(wd.FirstShift.ToString(), wd.SecondShift.ToString());
-                    int busyIndex = Helper.GetBusyShiftIndex(wd.FirstShift.ToString(), wd.SecondShift.ToString());
-
                     string busyShift = wd.GetBusyShift();
-                    string emptyShift = wd.GetEmptyShift();
 
                     if (index == -1)  //employee has a double shift
                     {
@@ -79,7 +76,7 @@ namespace PRJMediaBazaar.Logic
 
             foreach (Employee employee in _employees) //if the employee is not in the busyEmployee list, add availability
             {
-                if (!busyEmployees.Contains(employee))
+                if (!IsBusy(employee.Id,busyEmployees))
                 {
                     double hoursInfo = availabilitiesDAL.SelectWorkedHours(day.WeekId, employee.Id);
                     EmployeePlanner ea = new EmployeePlanner(employee, "None", -1, hoursInfo);
@@ -87,6 +84,18 @@ namespace PRJMediaBazaar.Logic
                 }
             }
             availabilitiesDAL.CloseConnection();
+        }
+
+        private bool IsBusy(int id, List<Employee> busyEmps)
+        {
+            foreach(Employee e in busyEmps)
+            {
+                if(e.Id == id)
+                {
+                    return true;
+                }
+            }
+            return false;
         }
 
     }
