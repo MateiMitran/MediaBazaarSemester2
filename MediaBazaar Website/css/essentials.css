@@ -26,7 +26,63 @@ input {
     display: table;
 }
 
-/* TOP-NAV CSS */
+/* MESSAGES CSS */
+
+#messages-container {
+    width: 100%;
+}
+
+#messages-container ul {
+    margin: 0;
+    list-style: none;
+    padding: 0;
+}
+
+#messages-container  #success-messages {
+    background-color: #4cb77c;
+}
+
+#messages-container #error-messages {
+    background-color: #e8384b;
+}
+
+#messages-container ul li {
+    position: relative;
+    color: #fff;
+    padding: 12px 0;
+}
+
+#messages-container #success-messages li {
+    border-bottom: 1px solid #44a46f;
+}
+
+#messages-container #success-messages li:last-of-type {
+    border-bottom: none;
+}
+
+#messages-container #error-messages li {
+    border-bottom: 1px solid #a11827;
+}
+
+#messages-container #error-messages li:last-of-type {
+    border-bottom: none;
+}
+
+#messages-container ul li p {
+    margin: 0 auto;
+    max-width: 1000px;
+    text-align: center;
+}
+
+#messages-container ul li i {
+    position: absolute;
+    right: 60px;
+    top: 10.5px;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+/* TOP NAV CSS */
 
 #top-nav {
     width: 100%;
@@ -68,7 +124,7 @@ input {
 #top-nav ul li {
     display: inline-block;
     font-size: 16px;
-    margin-left: 20px;
+    margin-left: 30px;
 }
 
 #top-nav ul li a:link, #top-nav ul li a:visited {
@@ -84,9 +140,13 @@ input {
 }
 
 #top-nav-sign-in-button {
+    font-size: 16px;
     display: inline-block;
     margin-top: 3px;
     padding: 4px 10px;
+    background-color: #2b2d42;
+    color: #d5d9db;
+    cursor: pointer;
     border-radius: 3px;
         -webkit-border-radius: 3px;
         -moz-border-radius: 3px;
@@ -168,6 +228,7 @@ input {
 .simple-form .form-group.submit {
     text-align: center;
     margin-top: 40px;
+    clear: both;
 }
 
 .simple-form .form-group label {
@@ -176,7 +237,7 @@ input {
     margin-bottom: 3px;
 }
 
-.simple-form .form-group input {
+.simple-form .form-group input, .simple-form .form-group select {
     width: 100%;
     font-size: 18px;
     padding: 10px 15px;
@@ -206,6 +267,34 @@ input {
     background-color: #e8eaee;
 }
 
+.simple-form .form-group select {
+    padding: 13px 15px;
+    position: relative;
+    width: 390px;
+    appearance: none;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+}
+
+.simple-form .form-group #shift-preferences-arrow-label {
+    overflow: hidden;   
+    position: relative;
+    margin: 0;
+}
+
+.simple-form .form-group #shift-preferences-arrow-label::after {
+    content: "";
+    position: absolute;
+    pointer-events: none;
+    background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHN0cm9rZS13aWR0aD0iMCIgZmlsbD0iIzY2NiIgdmlld0JveD0iMCAwIDEyIDciPjxwYXRoIGQ9Ik0xMS44OTMuNTU5TDExLjMzNiAwIDUuOTQ3IDUuMzkuNTU5IDAgMCAuNTU5bDUuOTQ3IDUuOTQ0eiIvPjwvc3ZnPg==);
+    background-size: contain;
+    background-repeat: no-repeat;
+    top: 50%;
+    right: 12px;
+    width: 15px;
+    height: 8px;
+}
+
 .simple-form .form-group input[type="submit"] {
     width: 50%;
     color: #fff;
@@ -222,6 +311,12 @@ input {
         -webkit-transition: all 0.2s ease-in-out;
         -moz-transition: all 0.2s ease-in-out;
         -o-transition: all 0.2s ease-in-out;
+}
+
+.simple-form .form-group input[type="submit"].small-submit {
+    padding: 12px 15px;
+    width: 30%;
+    text-transform: capitalize;
 }
 
 .simple-form .form-group input[type="submit"]:hover {
