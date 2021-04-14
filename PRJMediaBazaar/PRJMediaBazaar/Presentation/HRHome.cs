@@ -751,5 +751,54 @@ namespace PRJMediaBazaar
             _scheduleControl.RemoveSchedule((Day)cbDay.SelectedItem);
             LoadTableByPosition((Day)cbDay.SelectedItem, "Security");
         }
+
+        private void btnMarkAsSeen_Click(object sender, EventArgs e)
+        {
+            int index = lbSickReports.SelectedIndex;
+
+            if (index >= 0)
+            {
+                SickDay req = _scheduleControl.SickReports[index];
+                bool query = _scheduleControl.MarkAsSeen(req.Day_id, req.Employee_id);
+
+                if (query)
+                {
+                    _scheduleControl.SickReports.RemoveAt(index);
+                    LoadSickReports();
+                    req.MarkAsSeen(true);
+                    MessageBox.Show("Declaration checked");
+                }
+                else
+                {
+                    MessageBox.Show("An error occurred, please try again later.");
+                }
+            }
+            else
+            {
+                MessageBox.Show("Please select a report to confirm");
+            }
+
+            private void LoadSickReports()
+            {
+                lbSickReports.Items.Clear();
+                List<SickDay> sick_request = _scheduleControl.SickReports;
+
+                for (int i = 0; i < sick_request.Count(); i++)
+                {
+                    SickDay sick = sick_request[i];
+                    int scheduleId = sick.Schedule_id;
+                    int dayId = sick.Day_id;
+                    int employeeId = sick.Employee_id;
+                    string reason = sick.Description;
+                    bool seen = sick.Seen;
+
+
+                    DateTime day = sick.GetDayById(scheduleId, dayId).Date;
+                    Employee employee = _empControl.GetEmployee(employeeId);
+
+                    lbSickReports.Items.Add(day.ToString("dd/MM/yyyy") + " --> " + employee.FullName + reason + seen);
+                }
+            }
+        }
     }
 }

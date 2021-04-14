@@ -12,6 +12,7 @@ namespace PRJMediaBazaar.Logic
     class ScheduleControl
     {
         private List<DayOff> dayoff_req;
+        private List<SickReport> sick_req;
         private List<Schedule> _schedules;
         private EmployeeControl _empControl;
         private ScheduleDAL scheduleDAL;
@@ -26,6 +27,7 @@ namespace PRJMediaBazaar.Logic
         }
 
         public List<DayOff> DaysOffRequests { get { return dayoff_req; } }
+        public List<SickReport> SickReports { get { return sick_req; } }
         public Schedule[] Schedules { get { return _schedules.ToArray(); } }
 
         private void LoadSchedules()
@@ -186,6 +188,11 @@ namespace PRJMediaBazaar.Logic
             dayoff_req = scheduleDAL.SelectDayOffRequests();
         }
 
+        public void LoadSickReports()  
+        {
+            sick_req = scheduleDAL.SelectSickReports();
+        }
+
 
 
         public string DayStatus(Day d)
@@ -262,6 +269,11 @@ namespace PRJMediaBazaar.Logic
         public bool ConfirmDayOffRequest(int dayId, int empId)
         {
             return scheduleDAL.ConfirmDayOffRequest(dayId, empId);
+        }
+
+        public bool MarkAsSeen(int dayId, int empId)
+        {
+            return scheduleDAL.ConfirmSickReport(dayId, empId);
         }
 
         public void GenerateSchedule(Day day)

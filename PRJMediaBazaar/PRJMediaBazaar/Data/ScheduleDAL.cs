@@ -326,10 +326,44 @@ namespace PRJMediaBazaar.Data
             return pseudos;
         }
 
+        public List<SickReport> SelectSickReports()
+        {
+            string sql = "SELECT * FROM sick_reports WHERE seen = 'false'; ";
+            MySqlDataReader result = executeReader(sql, null);
+
+            List<SickReport> pseudos = new List<SickReport>();
+            while (result.Read())
+            {
+                int scheduleId = Convert.ToInt32(result[0]);
+                int dayId = Convert.ToInt32(result[1]);
+                int employee_id = Convert.ToInt32(result[2]);
+                string description = result[3].ToString();
+                bool seen = Convert.ToBoolean(result[4]);
+                SickReport req = new SickReport(scheduleId, dayId, employee_id, description, seen);
+                pseudos.Add(req);
+            }
+            CloseConnection();
+            return pseudos;
+        }
+
         public bool ConfirmDayOffRequest(int dayId, int empId)
         {
             string[] parameters = new string[] { dayId.ToString(), empId.ToString()};
             string sql = "DELETE FROM dayoff_requests WHERE day_id = @dayId AND employee_id = @empId";
+
+            if (executeNonQuery(sql, parameters) != null)
+            {
+                CloseConnection();
+                return true;
+            }
+            CloseConnection();
+            return false;
+        }
+
+        public bool ConfirmSickReport(int dayId, int empId)
+        {
+            string[] parameters = new string[] { dayId.ToString(), empId.ToString() };
+            string sql = "DELETE FROM sick_reports WHERE day_id = @dayId AND employee_id = @empId";
 
             if (executeNonQuery(sql, parameters) != null)
             {
