@@ -11,7 +11,7 @@ namespace PRJMediaBazaar.Logic
     class Day
     {
         private DayDAL dayDAL;
-        private static string[] positions = new string[] { "Security", "Cashier", "Stocker","SalesAssistant","WarehouseManager"};
+        public static string[] positions = new string[] { "Security", "Cashier", "Stocker","SalesAssistant","WarehouseManager"};
         public int Id { get; private set; }
         public int ScheduleId { get; private set; }
         public Duty SecurityNeeded { get; set; }

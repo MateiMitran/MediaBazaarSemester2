@@ -34,7 +34,7 @@ namespace PRJMediaBazaar.Logic
         {
 
 
-            List<EmployeeWorkday> workdays = availabilitiesDAL.SelectEmployeesWorkdays(day.Id, _employees[0].JobPosition);
+            List<EmployeeWorkday> workdays = availabilitiesDAL.SelectEmployeesWorkdays(day.WeekId,day.Id, _employees[0].JobPosition);
             List<Employee> busyEmployees = new List<Employee>();
 
             foreach(EmployeeWorkday wd in workdays) //employees in the workdays_table

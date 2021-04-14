@@ -72,10 +72,12 @@ namespace PRJMediaBazaar.Data
         /// takes all employees workdays, by the given job position
         /// </summary>
         /// <returns></returns>
-        public List<EmployeeWorkday> SelectEmployeesWorkdays(int dayId, string jobPosition)
+        public List<EmployeeWorkday> SelectEmployeesWorkdays(int weekId, int dayId, string jobPosition)
         {
-            string[] parameters = new string[] { dayId.ToString(), jobPosition };
-            string sql = "SELECT ew.* FROM employees_workdays ew INNER JOIN employees e ON ew.employee_id =e.id WHERE day_id = @dayId AND e.job_position = @jobPosition";
+            string[] parameters = new string[] {weekId.ToString(), dayId.ToString(), jobPosition };
+            string sql = "SELECT ew.*, wh.hours FROM employees_workdays ew INNER JOIN employees e ON ew.employee_id =e.id " +
+                "LEFT JOIN worked_hours wh ON ew.employee_id = wh.employee_id AND wh.week_id = @weekId" +
+                " WHERE day_id = @dayId AND e.job_position =@jobPosition";
             List<EmployeeWorkday> workdays = new List<EmployeeWorkday>();
             MySqlDataReader dr = executeReader(sql, parameters);
             while (dr.Read()) //add EmployeeWorkday objects to the list
@@ -85,8 +87,8 @@ namespace PRJMediaBazaar.Data
                 Shift secondShift = (Shift)Enum.Parse(typeof(Shift), dr[3].ToString());
                 bool absence = Convert.ToBoolean(dr[4]);
                 AbsenceReason absenceReason = (AbsenceReason)Enum.Parse(typeof(AbsenceReason), dr[5].ToString());
-
-                workdays.Add(new EmployeeWorkday(employee, firstShift, secondShift, absence, absenceReason));
+                double hours = Convert.ToDouble(dr[6]);
+                workdays.Add(new EmployeeWorkday(employee, firstShift, secondShift, absence, absenceReason, hours));
             }
             CloseConnection();
             return workdays;
@@ -98,11 +100,12 @@ namespace PRJMediaBazaar.Data
         /// <param name="dayId"></param>
         /// <param name="jobPosition"></param>
         /// <returns></returns>
-        public List<EmployeeWorkday> SelectEmployeesShifts(int dayId, string jobPosition)
+        public List<EmployeeWorkday> SelectEmployeesShifts(int weekId, int dayId, string jobPosition)
         {
-            string[] parameters = new string[] { dayId.ToString(), jobPosition };
-            MySqlDataReader dr = executeReader("SELECT ew.* FROM employees_workdays ew INNER JOIN employees e ON ew.employee_id =e.id" +
-                    "  WHERE day_id = @dayId AND e.job_position = @jobPosition AND absence = false;", parameters);
+            string[] parameters = new string[] {dayId.ToString(), jobPosition, weekId.ToString() };
+            MySqlDataReader dr = executeReader("SELECT ew.*, wh.hours FROM employees_workdays ew " +
+                "INNER JOIN employees e ON ew.employee_id =e.id INNER JOIN worked_hours wh ON ew.employee_id = wh.employee_id" +
+                " WHERE day_id = @dayId AND e.job_position = @position AND absence = false AND wh.week_id = @weekId", parameters);
             List<EmployeeWorkday> workdays = new List<EmployeeWorkday>();
             while (dr.Read()) //add EmployeeWorkday objects to the list
             {
@@ -111,11 +114,34 @@ namespace PRJMediaBazaar.Data
                 Shift secondShift = (Shift)Enum.Parse(typeof(Shift), dr[3].ToString());
                 bool absence = Convert.ToBoolean(dr[4]);
                 AbsenceReason absenceReason = (AbsenceReason)Enum.Parse(typeof(AbsenceReason), dr[5].ToString());
-
-                workdays.Add(new EmployeeWorkday(employee, firstShift, secondShift, absence, absenceReason));
+                double hours = Convert.ToDouble(dr[6]);
+                workdays.Add(new EmployeeWorkday(employee, firstShift, secondShift, absence, absenceReason, hours));
             }
             CloseConnection();
             return workdays;
+        }
+
+        public EmployeeWorkday SelectFirstEmployeeWorkday(int dayId, string position, int weekId)
+        {
+            EmployeeWorkday workday = null;
+
+            string[] parameters = new string[] { dayId.ToString(), position, weekId.ToString() };
+            string sql = "SELECT ew.*, wh.hours FROM employees_workdays ew " +
+                "INNER JOIN employees e ON ew.employee_id =e.id INNER JOIN worked_hours wh ON ew.employee_id = wh.employee_id" +
+                " WHERE day_id = @dayId AND e.job_position = @position AND absence = false AND wh.week_id = @weekId ORDER BY wh.hours LIMIT 1";
+            MySqlDataReader dr = executeReader(sql, parameters);
+            if (dr.Read())
+            {
+                Employee employee = empControl.GetEmployee(Convert.ToInt32(dr[1]));
+                Shift firstShift = (Shift)Enum.Parse(typeof(Shift), dr[2].ToString());
+                Shift secondShift = (Shift)Enum.Parse(typeof(Shift), dr[3].ToString());
+                bool absence = Convert.ToBoolean(dr[4]);
+                AbsenceReason absenceReason = (AbsenceReason)Enum.Parse(typeof(AbsenceReason), dr[5].ToString());
+                double hours = Convert.ToDouble(dr[6]);
+                workday = new EmployeeWorkday(employee, firstShift, secondShift, absence, absenceReason, hours);
+            }
+            CloseConnection();
+            return workday;
         }
 
 
@@ -139,8 +165,8 @@ namespace PRJMediaBazaar.Data
                 Shift secondShift = (Shift)Enum.Parse(typeof(Shift), dr[3].ToString());
                 bool absence = Convert.ToBoolean(dr[4]);
                 AbsenceReason absenceReason = (AbsenceReason)Enum.Parse(typeof(AbsenceReason), dr[5].ToString());
-
-               workday = new EmployeeWorkday(employee, firstShift, secondShift, absence, absenceReason);
+                double hours = Convert.ToDouble(dr[6]);
+                workday = new EmployeeWorkday(employee, firstShift, secondShift, absence, absenceReason, hours);
             }
             CloseConnection();
             return workday;
@@ -314,24 +340,15 @@ namespace PRJMediaBazaar.Data
             return false;
         }
 
-        public void RemoveSchedule(int dayId, int weekId)
+        public void ClearAssignedPositions(int dayId, int weekId)
         {
             string[] parameters = new string[] { dayId.ToString()};
-            string sql = "DELETE FROM employees_workdays WHERE day_id = @dayId";
-            executeNonQuery(sql, parameters);  
-                CloseConnection();
-           
-            sql = "UPDATE days SET security_assigned = '0 0 0',cashiers_assigned = '0 0 0',stockers_assigned = '0 0 0'," +
+           string sql = "UPDATE days SET security_assigned = '0 0 0',cashiers_assigned = '0 0 0',stockers_assigned = '0 0 0'," +
                 "stockers_assigned = '0 0 0',sales_assistants_assigned = '0 0 0', warehouse_managers_assigned = '0 0 0'" +
                 "   WHERE id = @dayId";
             executeNonQuery(sql, parameters);
             CloseConnection();
-
-            parameters = new string[] {weekId.ToString() };
-            sql = "DELETE FROM worked_hours WHERE week_id = @weekId";
-            executeNonQuery(sql, parameters);
-            CloseConnection();
-
+           
         }
         public List<int> SelectAvailableEmployeesIds(string position, int dayId)
         {
