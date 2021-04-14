@@ -522,9 +522,9 @@ namespace PRJMediaBazaar.Data
             MySqlDataReader result = null;
             try
             {
-                string[] parameters = new string[] { position, weekId.ToString(), dayId.ToString() };
+                string[] parameters = new string[] {weekId.ToString(), position, weekId.ToString(), dayId.ToString() };
                 string sql = "SELECT id, wh.hours FROM employees e LEFT JOIN worked_hours wh" +
-                    " ON e.id = wh.employee_id AND week_id = 1 WHERE e.job_position = @position " +
+                    " ON e.id = wh.employee_id AND week_id = @weekId1 WHERE e.job_position = @position " +
                     "AND (e.id NOT IN (SELECT employee_id FROM worked_hours WHERE week_id = @weekId)" +
                     " OR e.id NOT IN(SELECT employee_id FROM employees_workdays WHERE day_id = @dayId)) ORDER BY wh.hours LIMIT 1";
                  result = executeReader(sql, parameters);

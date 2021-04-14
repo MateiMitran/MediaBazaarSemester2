@@ -44,5 +44,20 @@ namespace PRJMediaBazaar.Logic
 
             return EveningNeeded;
         }
+
+        public int MaxAssigned()
+        {
+            if (MorningAssigned >= EveningAssigned && MorningAssigned >= MiddayAssigned)
+            {
+                return MorningAssigned;
+            }
+
+            else if (MiddayAssigned >= MorningAssigned && MiddayAssigned >= EveningAssigned)
+            {
+                return MiddayAssigned;
+            }
+
+            return EveningAssigned;
+        }
     }
 }

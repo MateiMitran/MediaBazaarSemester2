@@ -126,6 +126,7 @@ namespace PRJMediaBazaar.Logic
 
                 }
 
+
                 DecreaseAssignedPosition(day, employee.JobPosition, shift);
                 scheduleDAL.UpdateHours(result.Hours - 4.5, day.ScheduleId, employee.Id);
 
@@ -228,6 +229,7 @@ namespace PRJMediaBazaar.Logic
         {
             int count = d.AllPositions.Count();
             int complete = 0;
+            int empty = 0;
 
             foreach (Duty np in d.AllPositions)
             {
@@ -242,7 +244,12 @@ namespace PRJMediaBazaar.Logic
                 }
                 else if (np.MorningAssigned == 0 && np.MiddayAssigned == 0 && np.EveningAssigned == 0)
                 {
-                    return "empty";
+                    empty++;
+                    if(empty == count)
+                    {
+                        return "empty";
+                    }
+                   
                 }
             }
             return "started";
@@ -306,30 +313,40 @@ namespace PRJMediaBazaar.Logic
             foreach (Duty p in positions)
             {
 
-                for (int i = 0; i < p.MaxValue(); i++)
+                while (p.MaxValue() > p.MaxAssigned())
                 {
                     if (p.MorningNeeded > p.MorningAssigned)
                     {
                         EmployeePlanner available = GetFirstAvailableEmployeePlanner(day, Shift.Morning, p.Position);
-                        double workedHours = available.HoursWorked;
-
-                        AssignShift(Shift.Morning.ToString(), available.Employee, day, available.EmptyShiftIndex, workedHours + 4.5);
+                        if(available != null)
+                        {
+                            double workedHours = available.HoursWorked;
+                            AssignShift(Shift.Morning.ToString(), available.Employee, day, available.EmptyShiftIndex, workedHours + 4.5);
+                        }
+                      
                     }
 
                     if (p.MiddayNeeded > p.MiddayAssigned)
                     {
                         EmployeePlanner available = GetFirstAvailableEmployeePlanner(day, Shift.Midday, p.Position);
-                        double workedHours = available.HoursWorked;
-
-                        AssignShift(Shift.Midday.ToString(), available.Employee, day, available.EmptyShiftIndex, workedHours + 4.5);
+                        if(available != null)
+                        {
+                            double workedHours = available.HoursWorked;
+                            AssignShift(Shift.Midday.ToString(), available.Employee, day, available.EmptyShiftIndex, workedHours + 4.5);
+                        }
+                        
                     }
 
                     if (p.EveningNeeded > p.EveningAssigned)
                     {
                         EmployeePlanner available = GetFirstAvailableEmployeePlanner(day, Shift.Evening, p.Position);
-                        double workedHours = available.HoursWorked;
 
-                        AssignShift(Shift.Evening.ToString(), available.Employee, day, available.EmptyShiftIndex, workedHours + 4.5);
+                        if(available != null)
+                        {
+                            double workedHours = available.HoursWorked;
+                            AssignShift(Shift.Evening.ToString(), available.Employee, day, available.EmptyShiftIndex, workedHours + 4.5);
+                        }
+                       
                     }
                 }
             }
@@ -344,7 +361,7 @@ namespace PRJMediaBazaar.Logic
                 foreach (EmployeeWorkday wd in scheduleDAL.SelectEmployeesShifts(day.WeekId,day.Id, position))
                 {
                     
-                    RemoveShift(wd.GetBusyShift(),day,wd.Employee);
+                    RemoveShift(wd.GetShift(),day,wd.Employee);
                 }
             }
         }

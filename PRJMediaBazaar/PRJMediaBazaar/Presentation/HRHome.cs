@@ -241,7 +241,7 @@ namespace PRJMediaBazaar
                 this.btnGenerateSchedule.Enabled = false;
                 this.btnDeleteSchedule.Enabled = true;
             }
-            
+           
 
         }
 
