@@ -35,9 +35,9 @@ namespace PRJMediaBazaar
             foreach (Schedule s in _scheduleControl.Schedules)
             {
                 cbSchedule.Items.Add(s);
-                lbIncompleteDays.Items.Add(_scheduleControl.ScheduleStatus(s));
-
             }
+
+            this.lbIncompleteDays.Items.Add(_scheduleControl.DayStatus(_scheduleControl.Schedules[0].Days[0]));
             cbPosition.Text = "Security";
             this.btnChangeNeededPosition.Enabled = false;
             this.btnGenerateSchedule.Enabled = false;
@@ -758,7 +758,7 @@ namespace PRJMediaBazaar
 
             if (index >= 0)
             {
-                SickDay req = _scheduleControl.SickReports[index];
+                SickReport req = _scheduleControl.SickReports[index];
                 bool query = _scheduleControl.MarkAsSeen(req.Day_id, req.Employee_id);
 
                 if (query)
@@ -778,26 +778,27 @@ namespace PRJMediaBazaar
                 MessageBox.Show("Please select a report to confirm");
             }
 
-            private void LoadSickReports()
+            
+        }
+        private void LoadSickReports()
+        {
+            lbSickReports.Items.Clear();
+            List<SickReport> sick_request = _scheduleControl.SickReports;
+
+            for (int i = 0; i < sick_request.Count(); i++)
             {
-                lbSickReports.Items.Clear();
-                List<SickDay> sick_request = _scheduleControl.SickReports;
-
-                for (int i = 0; i < sick_request.Count(); i++)
-                {
-                    SickDay sick = sick_request[i];
-                    int scheduleId = sick.Schedule_id;
-                    int dayId = sick.Day_id;
-                    int employeeId = sick.Employee_id;
-                    string reason = sick.Description;
-                    bool seen = sick.Seen;
+                SickReport sick = sick_request[i];
+                int scheduleId = sick.Schedule_id;
+                int dayId = sick.Day_id;
+                int employeeId = sick.Employee_id;
+                string reason = sick.Description;
+                bool seen = sick.Seen;
 
 
-                    DateTime day = sick.GetDayById(scheduleId, dayId).Date;
-                    Employee employee = _empControl.GetEmployee(employeeId);
+                DateTime day = sick.GetDayById(scheduleId, dayId).Date;
+                Employee employee = _empControl.GetEmployee(employeeId);
 
-                    lbSickReports.Items.Add(day.ToString("dd/MM/yyyy") + " --> " + employee.FullName + reason + seen);
-                }
+                lbSickReports.Items.Add(day.ToString("dd/MM/yyyy") + " --> " + employee.FullName + reason + seen);
             }
         }
     }

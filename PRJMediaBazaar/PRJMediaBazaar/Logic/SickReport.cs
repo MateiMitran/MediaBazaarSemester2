@@ -52,3 +52,4 @@ namespace PRJMediaBazaar.Logic
             this.Seen = seen;
         }
     }
+}

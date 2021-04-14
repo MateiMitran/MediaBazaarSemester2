@@ -40,7 +40,7 @@ namespace PRJMediaBazaar.Logic
             foreach(EmployeeWorkday wd in workdays) //employees in the workdays_table
             {
                 Employee employee = wd.Employee;
-                double hoursInfo = availabilitiesDAL.SelectWorkedHours(day.WeekId, employee.Id);
+                double hoursInfo =wd.Hours;
                 if (!Convert.ToBoolean(wd.Absence)) //the employee isn't absent
                 {
                     int index = Helper.GetEmptyShiftIndex(wd.FirstShift.ToString(), wd.SecondShift.ToString());

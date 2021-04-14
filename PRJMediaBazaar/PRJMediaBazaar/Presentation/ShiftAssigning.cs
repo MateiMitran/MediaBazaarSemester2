@@ -45,7 +45,7 @@ namespace PRJMediaBazaar
             if (ep != null)
             {
                 int employeeId = ep.Employee.Id;
-                double workedHours = _scheduleControl.GetWorkedHours(_day.WeekId, employeeId);
+                double workedHours = ep.HoursWorked;
                 DialogResult dialogResult;
                 if (ep.Employee.ContractHours < workedHours + 4.5)
                 {

@@ -143,16 +143,16 @@ namespace PRJMediaBazaar.Logic
             return false;
         }
 
-        public void EmptyDuties()
-        {
-           foreach(string jobPosition in positions)
-            {
-                Duty duty = GetDuty(jobPosition);
-                duty.MorningAssigned =0;
-                duty.MiddayAssigned = 0;
-                duty.EveningAssigned = 0;
-            }
-        }
+        //public void EmptyDuties()
+        //{
+        //   foreach(string jobPosition in positions)
+        //    {
+        //        Duty duty = GetDuty(jobPosition);
+        //        duty.MorningAssigned =0;
+        //        duty.MiddayAssigned = 0;
+        //        duty.EveningAssigned = 0;
+        //    }
+        //}
 
     }
 }
