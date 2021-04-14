@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.3
+-- version 5.1.0
 -- https://www.phpmyadmin.net/
 --
--- Host: studmysql01.fhict.local
--- Generation Time: Apr 14, 2021 at 03:54 AM
--- Server version: 5.7.26-log
--- PHP Version: 7.3.27
+-- Host: 127.0.0.1
+-- Generation Time: Apr 14, 2021 at 07:54 PM
+-- Server version: 10.4.18-MariaDB
+-- PHP Version: 8.0.3
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -72,9 +71,9 @@ CREATE TABLE `days` (
 --
 
 INSERT INTO `days` (`id`, `date`, `schedule_id`, `security_needed`, `cashiers_needed`, `stockers_needed`, `sales_assistants_needed`, `warehouse_managers_needed`, `week_id`, `security_assigned`, `cashiers_assigned`, `stockers_assigned`, `sales_assistants_assigned`, `warehouse_managers_assigned`) VALUES
-(1, '2021-01-04', 1, '2 2 2', '2 2 2', '5 5 5', '4 4 4', '1 1 1', 1, '0 0 0', '0 0 0', '0 0 0', '0 0 0', '0 0 0'),
+(1, '2021-01-04', 1, '2 2 2', '4 4 6', '5 5 5', '4 4 4', '1 1 1', 1, '0 0 0', '0 0 0', '0 0 0', '0 0 0', '0 0 0'),
 (2, '2021-01-05', 1, '2 2 2', '5 5 5', '5 5 5', '4 4 4', '1 1 1', 1, '0 0 0', '0 0 0', '0 0 0', '0 0 0', '0 0 0'),
-(3, '2021-01-06', 1, '2 2 2', '5 5 5', '5 5 5', '4 4 4', '1 1 1', 1, '0 0 0', '0 0 0', '0 0 0', '0 0 0', '0 0 0'),
+(3, '2021-01-06', 1, '2 2 2', '5 5 5', '4 4 8', '4 4 4', '1 1 1', 1, '0 0 0', '0 0 0', '0 0 0', '0 0 0', '0 0 0'),
 (4, '2021-01-07', 1, '2 2 2', '5 5 5', '5 5 5', '4 4 4', '1 1 1', 1, '0 0 0', '0 0 0', '0 0 0', '0 0 0', '0 0 0'),
 (5, '2021-01-08', 1, '2 2 2', '5 5 5', '5 5 5', '4 4 4', '1 1 1', 1, '0 0 0', '0 0 0', '0 0 0', '0 0 0', '0 0 0'),
 (6, '2021-01-09', 1, '2 2 2', '5 5 5', '5 5 5', '4 4 4', '1 1 1', 1, '0 0 0', '0 0 0', '0 0 0', '0 0 0', '0 0 0'),
@@ -467,13 +466,13 @@ CREATE TABLE `employees` (
 --
 
 INSERT INTO `employees` (`id`, `first_name`, `last_name`, `birthDate`, `email`, `password`, `job_position`, `phoneNumber`, `address`, `salary`, `gender`, `education`, `Contract`, `DaysOff`, `ContractHours`, `Notes`) VALUES
-(1, 'John', 'McDuffin', '1999-01-12', 'john.mcduffin@mail.com', 'john1', 'Security', 731234568, 'Flower Street 23A', 1400, 'MALE', 'High School', 'Fulltime', 30, 40, 'test3'),
+(1, 'John', 'McDuffin', '1999-01-12', 'john.mcduffin@mail.com', 'john1', 'Security', 731234568, 'Flower Street 23A', 1400, 'MALE', 'High School', 'Fulltime', 30, 40, 'He is a hard worker!'),
 (2, 'Maria', 'Vincenzio', '1995-04-15', 'maria.vincenzio@mail.com', 'maria1', 'Security', 198767889, 'Stationsweg 16', 1400, 'FEMALE', 'High School', 'Fulltime', 30, 40, 'test1'),
-(3, 'Lawrence', 'Moschino', '1997-12-03', 'lawrence.moschino@mail.com', 'lawrence1', 'Security', 965234521, 'Buekeslaan 12A', 1400, 'OTHER', 'University', 'Parttime', 30, 0, ''),
-(4, 'Ponton', 'Portofino', '1999-11-01', 'ponton.portofino@mail.com', 'ponton1', 'Security', 134156123, 'Cebeslaan 213A', 1400, 'MALE', 'University', 'Parttime', 30, 0, 'test'),
+(3, 'Lawrence', 'Moschino', '1997-12-03', 'lawrence.moschino@mail.com', 'lawrence1', 'Security', 965234521, 'Buekeslaan 12A', 1400, 'OTHER', 'University', 'Parttime', 30, 20, ''),
+(4, 'Ponton', 'Portofino', '1999-11-01', 'ponton.portofino@mail.com', 'ponton1', 'Security', 134156123, 'Cebeslaan 213A', 1400, 'MALE', 'University', 'Parttime', 30, 20, 'test'),
 (5, 'Caitlyn', 'Rose', '1997-10-09', 'caitlyn.rose@mail.com', 'caitlyn1', 'Cashier', 623144155, 'Transformatorstraat 1', 1200, 'FEMALE', 'High School', 'Fulltime', 30, 40, ''),
 (6, 'Daniel', 'Burton', '2000-06-06', 'daniel.burton@mail.com', 'daniel1', 'Cashier', 534412415, 'Borneolaan 5', 1200, 'MALE', 'University', 'Fulltime', 30, 40, ''),
-(7, 'Prince', 'John', '2001-07-08', 'prince.john@mail.com', 'prince1', 'Cashier', 333125619, 'Winston Churchilaan 12', 1200, 'MALE', 'High School', 'Parttime', 30, 0, ''),
+(7, 'Prince', 'John', '2001-07-08', 'prince.john@mail.com', 'prince1', 'Cashier', 333125619, 'Winston Churchilaan 12', 1200, 'MALE', 'High School', 'Parttime', 30, 20, ''),
 (8, 'Laquesha', 'Johnson', '2002-05-14', 'laquesha.johnson@mail.com', 'laquesha1', 'Cashier', 564123667, 'Horneolaan 32', 1200, 'FEMALE', 'University', 'Fulltime', 30, 40, ''),
 (9, 'Anastasia', 'Krilov', '2000-12-12', 'anastasio.krilov@mail.com', 'anastasia1', 'Stocker', 567889001, 'John F. Kennedylaan 168', 2500, 'FEMALE', 'University', 'Fulltime', 30, 40, ''),
 (10, 'Claire', 'Temple', '1995-10-12', 'claire.temple@mail.com', 'claire1', 'Stocker', 193343600, 'Luciferstraat 32', 2500, 'FEMALE', 'University', 'Fulltime', 30, 40, ''),
@@ -495,7 +494,7 @@ INSERT INTO `employees` (`id`, `first_name`, `last_name`, `birthDate`, `email`, 
 (26, 'Eric', 'Smith', '1950-12-25', 'EricASmith@dayrep.com', 'smith1', 'Security', 663865634, 'Boerestreek 156', 1400, 'MALE', 'High School', 'Fulltime', 30, 40, ''),
 (27, 'Martin', 'Weaver', '1952-05-07', 'MartinKWeaver@jourrapide.com', 'weaver1', 'Security', 689616906, 'Swemmerlaan 86', 1400, 'MALE', 'High School', 'Fulltime', 30, 40, ''),
 (28, 'Jesus', 'Goldstein', '1996-03-24', '\r\nJesusNGoldstein@rhyta.com', 'goldstein1', 'WarehouseManager', 634771911, 'Van Foreeststraat 146', 2500, 'MALE', 'University', 'Fulltime', 30, 40, ''),
-(29, 'Amber', 'Eastin', '1977-03-17', 'AmberAEastin@armyspy.com', 'eastin1', 'Cashier', 687531086, 'Ocarinalaan 193', 1200, 'FEMALE', 'High School', '', 30, 0, ''),
+(29, 'Amber', 'Eastin', '1977-03-17', 'AmberAEastin@armyspy.com', 'eastin1', 'Cashier', 687531086, 'Ocarinalaan 193', 1200, 'FEMALE', 'High School', 'Fulltime', 30, 40, ''),
 (30, 'Edward', 'Lott', '1990-03-10', 'EdwardVLott@armyspy.com', 'lott1', 'Cashier', 633109844, 'Ringweg 47', 1200, 'MALE', 'High School', 'Fulltime', 30, 40, ''),
 (31, 'Robyn', 'Pointer', '1983-03-17', 'robyn.pointer@armyspy.com', 'pointer1', 'Cashier', 687531086, 'Nederheidseweg 90', 1200, 'FEMALE', 'High School', 'Fulltime', 30, 40, ''),
 (34, 'Elsie', 'Boyette', '1977-03-11', 'ElsieNBoyette@armyspy.com', 'boyette1', 'Cashier', 685644403, 'Borgersstede 129', 1200, 'FEMALE', 'High School', 'Fulltime', 30, 40, ''),
@@ -515,18 +514,18 @@ INSERT INTO `employees` (`id`, `first_name`, `last_name`, `birthDate`, `email`, 
 (61, 'Michael', 'Faris', '1987-07-19', 'michael.faris@armyspy.com', 'faris1', 'Stocker', 624967691, 'Amsteldijk 75', 2000, 'MALE', 'University', 'Fulltime', 30, 40, ''),
 (62, 'Barry ', 'Tregre', '1983-08-14', 'barry.tregre@armyspy.com', 'tregre', 'Stocker', 666819849, 'Willem Alexanderplein 197', 2000, 'MALE', 'University', 'Fulltime', 30, 40, ''),
 (63, 'Ronald', 'Carmean', '1992-03-03', 'ronald.carmean@armyspy.com', 'carmean1', 'Stocker', 694023509, 'Bernissestraat 114', 2000, 'MALE', 'University', 'Fulltime', 30, 40, ''),
-(64, 'Gregory ', 'Atwell', '1990-08-15', 'gregoy.atwell@armyspy.com', 'atwell1', 'Stocker', 669719447, 'Schimmelstraat 135', 2000, 'MALE', 'University', 'Parttime', 30, 0, ''),
-(65, 'Patrick', 'Armstrong', '1988-03-23', 'patrickarmstrong@mail.com', 'armstrong1', 'SalesAssistant', 638404573, 'Hendrikstraat', 2500, 'MALE', 'University', 'Parttime', 30, 0, ''),
-(66, 'David ', 'Ruffin', '2000-05-31', 'david.ruffin@mail.com', 'ruffin1', 'SalesAssistant', 623498076, 'Aldenhof 80', 2500, 'MALE', 'University', '', 30, 0, ''),
-(67, 'Carol ', 'Jenkins', '1994-03-08', 'carol.jenkins@mail.com', 'jenkins1', 'SalesAssistant', 658101141, 'Havenstraat 8', 2500, 'FEMALE', 'University', '', 30, 0, ''),
-(68, 'Billy ', 'Decarlo', '1998-05-18', 'billy.decarlo@mail.com', 'decarlo1', 'SalesAssistant', 691513042, 'Nijboerstrjitte 192', 2500, 'MALE', 'University', '', 30, 0, ''),
-(69, 'Jerome ', 'Hearn', '1981-01-18', 'jerome.hearn@mail.com', 'hearn1', 'SalesAssistant', 688110113, 'Reigerdreef 70', 2500, 'MALE', 'University', '', 30, 0, ''),
-(70, 'Ada ', 'Tillmon', '1993-08-18', 'ada.tillmon@mail.com', 'tillmon1', 'SalesAssistant', 697949031, 'Groteweg 23', 2500, 'FEMALE', 'University', '', 30, 0, ''),
-(71, 'Sandy ', 'Blaisdell', '1981-01-13', 'sandy.blaisdell@mail.com', 'blaisdell', 'SalesAssistant', 624445180, 'Staalstraat 147', 2500, 'FEMALE', 'University', '', 30, 0, ''),
-(72, 'Dorothy ', 'Sims', '1983-05-13', 'dorothy.sims@mail.com', 'sims1', 'SalesAssistant', 659167920, 'Kwietheuvel 53', 2500, 'MALE', 'University', '', 30, 0, ''),
-(73, 'Danilo ', 'Huerta', '1978-07-23', 'danilo.huerta@mail.com', 'huerta1', 'SalesAssistant', 629410719, 'Kerklaan 118', 2500, 'MALE', 'University', '', 30, 0, ''),
-(74, 'Lawrence ', 'Jones', '1992-02-23', 'lawrence.jones@mail.com', 'jones1', 'SalesAssistant', 676080931, 'Pompstraat 21', 2500, 'MALE', 'University', '', 30, 0, ''),
-(84, 'William ', 'Jackson', '1980-12-24', 'william.jackson@mail.com', 'jackson1', 'SalesAssistant', 67087774, 'Vossendaal 180', 2500, 'MALE', 'University', '', 30, 0, '');
+(64, 'Gregory ', 'Atwell', '1990-08-15', 'gregoy.atwell@armyspy.com', 'atwell1', 'Stocker', 669719447, 'Schimmelstraat 135', 2000, 'MALE', 'University', 'Parttime', 30, 20, ''),
+(65, 'Patrick', 'Armstrong', '1988-03-23', 'patrickarmstrong@mail.com', 'armstrong1', 'SalesAssistant', 638404573, 'Hendrikstraat', 2500, 'MALE', 'University', 'Parttime', 30, 20, ''),
+(66, 'David ', 'Ruffin', '2000-05-31', 'david.ruffin@mail.com', 'ruffin1', 'SalesAssistant', 623498076, 'Aldenhof 80', 2500, 'MALE', 'University', 'Fulltime', 30, 40, ''),
+(67, 'Carol ', 'Jenkins', '1994-03-08', 'carol.jenkins@mail.com', 'jenkins1', 'SalesAssistant', 658101141, 'Havenstraat 8', 2500, 'FEMALE', 'University', 'Fulltime', 30, 40, ''),
+(68, 'Billy ', 'Decarlo', '1998-05-18', 'billy.decarlo@mail.com', 'decarlo1', 'SalesAssistant', 691513042, 'Nijboerstrjitte 192', 2500, 'MALE', 'University', 'Fulltime', 30, 40, ''),
+(69, 'Jerome ', 'Hearn', '1981-01-18', 'jerome.hearn@mail.com', 'hearn1', 'SalesAssistant', 688110113, 'Reigerdreef 70', 2500, 'MALE', 'University', 'Fulltime', 30, 40, ''),
+(70, 'Ada ', 'Tillmon', '1993-08-18', 'ada.tillmon@mail.com', 'tillmon1', 'SalesAssistant', 697949031, 'Groteweg 23', 2500, 'FEMALE', 'University', 'Fulltime', 30, 40, ''),
+(71, 'Sandy ', 'Blaisdell', '1981-01-13', 'sandy.blaisdell@mail.com', 'blaisdell', 'SalesAssistant', 624445180, 'Staalstraat 147', 2500, 'FEMALE', 'University', 'Fulltime', 30, 40, ''),
+(72, 'Dorothy ', 'Sims', '1983-05-13', 'dorothy.sims@mail.com', 'sims1', 'SalesAssistant', 659167920, 'Kwietheuvel 53', 2500, 'MALE', 'University', 'Fulltime', 30, 40, ''),
+(73, 'Danilo ', 'Huerta', '1978-07-23', 'danilo.huerta@mail.com', 'huerta1', 'SalesAssistant', 629410719, 'Kerklaan 118', 2500, 'MALE', 'University', 'Fulltime', 30, 40, ''),
+(74, 'Lawrence ', 'Jones', '1992-02-23', 'lawrence.jones@mail.com', 'jones1', 'SalesAssistant', 676080931, 'Pompstraat 21', 2500, 'MALE', 'University', 'Fulltime', 30, 40, ''),
+(84, 'William ', 'Jackson', '1980-12-24', 'william.jackson@mail.com', 'jackson1', 'SalesAssistant', 67087774, 'Vossendaal 180', 2500, 'MALE', 'University', 'Fulltime', 30, 40, '');
 
 -- --------------------------------------------------------
 
@@ -559,9 +558,16 @@ CREATE TABLE `employees_workdays` (
   `employee_id` int(20) NOT NULL,
   `first_shift` varchar(10) NOT NULL,
   `second_shift` varchar(10) NOT NULL DEFAULT 'None',
-  `absence` int(1) NOT NULL DEFAULT '0',
+  `absence` int(1) NOT NULL DEFAULT 0,
   `absence_reason` varchar(10) NOT NULL DEFAULT 'None'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `employees_workdays`
+--
+
+INSERT INTO `employees_workdays` (`day_id`, `employee_id`, `first_shift`, `second_shift`, `absence`, `absence_reason`) VALUES
+(3, 53, 'Midday', 'Evening', 0, 'None');
 
 -- --------------------------------------------------------
 
@@ -573,7 +579,7 @@ CREATE TABLE `schedules` (
   `id` int(20) NOT NULL,
   `start_date` date NOT NULL,
   `end_date` date NOT NULL,
-  `is_outdated` int(1) NOT NULL DEFAULT '0'
+  `is_outdated` int(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -618,7 +624,7 @@ CREATE TABLE `sick_reports` (
   `day_id` int(11) NOT NULL,
   `employee_id` int(11) NOT NULL,
   `description` varchar(300) NOT NULL,
-  `seen` tinyint(1) NOT NULL DEFAULT '0'
+  `seen` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
