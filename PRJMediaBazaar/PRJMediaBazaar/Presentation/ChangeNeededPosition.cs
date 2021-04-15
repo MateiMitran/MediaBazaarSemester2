@@ -53,7 +53,7 @@ namespace PRJMediaBazaar
                         {
                             _hr.UpdateDaysCheckbox(_scheduleId);
                             _hr.cbDay.SelectedIndex = _dayIndex;
-                            _hr.UpdatePositionNeededLabel();
+                            _hr.UpdateDaysInfoListbox();
                             _hr.LoadTableByPosition((Day)_hr.cbDay.SelectedItem, _jobPositon);
                             this.Close();
                             MessageBox.Show("Successfully updated needed amount");

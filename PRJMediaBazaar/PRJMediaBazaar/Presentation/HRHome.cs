@@ -15,11 +15,13 @@ namespace PRJMediaBazaar
 {
     partial class HRHome : Form
     {
+        private static string[] positions = new string[] { "Security", "Cashier", "Stocker", "SalesAssistant", "WarehouseManager"};
 
         private EmployeeControl _empControl;
         private ScheduleControl _scheduleControl;
         private Employee[] _employees;
         private Employee thisEmployee;
+        private Schedule _currentSchedule;
 
         private NamesRow[] _tableRows;
         private LogIn _loginForm;
@@ -31,20 +33,18 @@ namespace PRJMediaBazaar
             _loginForm = loginForm;
             _empControl = new EmployeeControl();
             thisEmployee = null;
+            _currentSchedule = null;
             LoadEmployees();
             _scheduleControl = new ScheduleControl(_empControl);
-            foreach (Schedule s in _scheduleControl.Schedules)
-            {
-                cbSchedule.Items.Add(s);
-                lbIncompleteDays.Items.Add(_scheduleControl.ScheduleStatus(s));
-
-            }
             cbPosition.Text = "Security";
             this.btnChangeNeededPosition.Enabled = false;
             this.btnGenerateSchedule.Enabled = false;
             this.btnDeleteSchedule.Enabled = false;
 
-
+            foreach(Schedule s in _scheduleControl.Schedules)
+            {
+                this.cbSchedule.Items.Add(s);
+            }
 
         }
 
@@ -197,13 +197,13 @@ namespace PRJMediaBazaar
                 ShiftsTable.Controls.Clear();
                 this.btnGenerateSchedule.Enabled = false;
             }
-
+            _currentSchedule = schedule;
         }
 
 
         private void cbPosition_SelectedIndexChanged(object sender, EventArgs e)
         {
-            UpdatePositionNeededLabel();
+           
             //reload the table layout panel, based on the day and position
             //if All is selected, disable the change position button.
             //enable the button if All is not selected.
@@ -225,7 +225,7 @@ namespace PRJMediaBazaar
 
         private void cbDay_SelectedIndexChanged(object sender, EventArgs e)
         {
-            UpdatePositionNeededLabel();
+            UpdateDaysInfoListbox();
             //if a position is selected, reload the table layout panel, based on the day and position
             Day day = (Day)this.cbDay.SelectedItem;
             if (cbPosition.Text != "All")
@@ -480,6 +480,7 @@ namespace PRJMediaBazaar
                 _scheduleControl.RemoveShift(shift.ToString(), ((Day)cbDay.SelectedItem), employee);
             }
             LoadTableByPosition((Day)cbDay.SelectedItem, employee.JobPosition);
+            UpdateDaysInfoListbox();
         }
 
         public void UpdateDaysCheckbox(int scheduleId)
@@ -492,18 +493,33 @@ namespace PRJMediaBazaar
             }
         }
 
-        public void UpdatePositionNeededLabel()
+        public void UpdateDaysInfoListbox()
         {
-            Day day = (Day)cbDay.SelectedItem;
-            if (this.cbPosition.Text != "All" && day != null)
+            this.lbIncompleteDays.Items.Clear();
+            if(_scheduleControl.ScheduleStatus(_currentSchedule) == "started")
             {
+                foreach (Day day in _currentSchedule.Days)
+                {
+                    if (day != null && _scheduleControl.DayStatus(day) == "started")
+                    {
+                        var difs = day.DutyDifs;
+                        string info = $"({day.Date.DayOfWeek}) {day.Date.ToString("dd-MM")}| Missing shifts:  ";
+                        foreach (string position in HRHome.positions)
+                        {
+                            int dif = difs[position];
 
-                this.lblPositionNeeded.Text = day.GetNeededPositionInfo(cbPosition.Text);
+                            if (dif > 0)
+                            {
+                                info += $"{dif} {position}/ ";
+                            }
+
+                        }
+                        this.lbIncompleteDays.Items.Add(info);
+                    }
+
+                }
             }
-            else if (this.cbPosition.Text == "All" && day != null)
-            {
-                this.lblPositionNeeded.Text = day.GetAllNeededPositionsInfo();
-            }
+            
         }
 
 
@@ -742,14 +758,14 @@ namespace PRJMediaBazaar
 
             // Get the item text    
             string text = ((ComboBox)sender).Items[e.Index].ToString();
-
-            // Determine the forecolor based on whether or not the item is selected    
+            string status = _scheduleControl.ScheduleStatus(_scheduleControl.Schedules[e.Index]);
+            // Determine the forecolor
             Brush brush;
-            if (_scheduleControl.ScheduleStatus(_scheduleControl.Schedules[e.Index]) == "empty")// compare  date with your list.  
+            if (status == "empty")
             {
                 brush = Brushes.Red;
             }
-            else if (_scheduleControl.ScheduleStatus(_scheduleControl.Schedules[e.Index]) == "started")
+            else if (status == "started")
             {
                 brush = Brushes.Yellow;
             }
@@ -770,16 +786,18 @@ namespace PRJMediaBazaar
 
             if (e.Index < 0) { return; }
 
+            Brush brush;
             // Get the item text    
             string text = ((ComboBox)sender).Items[e.Index].ToString();
             Day day = (Day)((ComboBox)sender).Items[e.Index];
-            // Determine the forecolor based on whether or not the item is selected    
-            Brush brush;
-            if (_scheduleControl.DayStatus(day) == "empty")// compare  date with your list.  
+
+            // Determine the forecolor
+            string status = _scheduleControl.DayStatus(day);
+            if ( status == "empty")// compare  date with your list.  
             {
                 brush = Brushes.Red;
             }
-            else if (_scheduleControl.DayStatus(day) == "started")
+            else if (status == "started")
             {
                 brush = Brushes.Yellow;
             }
@@ -858,6 +876,41 @@ namespace PRJMediaBazaar
                      lbSickReports.Items.Add(day.ToString("dd/MM/yyyy") + " --> " + employee.FullName + reason + seen);
                  }
              } */
+        }
+
+        private void cbPosition_DrawItem(object sender, DrawItemEventArgs e)
+        {
+            // Draw the background 
+            e.DrawBackground();
+
+            if (e.Index < 0) { return; }
+
+            Brush brush = Brushes.White;
+
+            // Get the item text    
+            string text = ((ComboBox)sender).Items[e.Index].ToString();
+            Day day = (Day)cbDay.SelectedItem;
+            // Determine the forecolor
+
+            if(day != null)
+            {
+                string status = day.PositionStatus(text);
+                if (status == "empty")
+                {
+                    brush = Brushes.Red;
+                }
+                else if (status == "started")
+                {
+                    brush = Brushes.Yellow;
+                }
+                else
+                {
+                    brush = Brushes.Green;
+                }
+            }
+           
+            // Draw the text    
+            e.Graphics.DrawString(text, ((Control)sender).Font, brush, e.Bounds.X, e.Bounds.Y);
         }
     }
 }

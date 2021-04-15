@@ -277,8 +277,7 @@ namespace PRJMediaBazaar.Logic
         public void GenerateSchedule(Day day)
         {
 
-            Duty[] positions = new Duty[] { day.CashiersNeeded, day.SalesAssistantsNeeded,
-                day.SecurityNeeded, day.StockersNeeded, day.WarehouseManagersNeeded };
+            Duty[] positions = day.AllPositions;
 
             foreach (Duty p in positions)
             {

@@ -66,6 +66,7 @@ namespace PRJMediaBazaar
                     _scheduleControl.AssignShift(_shift.ToString(), ep.Employee, _day, ep.EmptyShiftIndex, workedHours + 4.5);
                     _hr.LoadTableByPosition(_day, _jobPosition);
                     _hr.ShiftsTable.Enabled = true;
+                    _hr.UpdateDaysInfoListbox();
                     this.Close();
                 }
 

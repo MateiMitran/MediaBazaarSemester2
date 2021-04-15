@@ -14,11 +14,11 @@ namespace PRJMediaBazaar.Logic
         public static string[] positions = new string[] { "Security", "Cashier", "Stocker","SalesAssistant","WarehouseManager"};
         public int Id { get; private set; }
         public int ScheduleId { get; private set; }
-        public Duty SecurityNeeded { get; set; }
-        public Duty CashiersNeeded { get; set; }
-        public Duty StockersNeeded { get; set; }
-        public Duty SalesAssistantsNeeded { get; set; }
-        public Duty WarehouseManagersNeeded { get; set; }
+        public Duty Security { get; set; }
+        public Duty Cashiers { get; set; }
+        public Duty Stockers{ get; set; }
+        public Duty SalesAssistants { get; set; }
+        public Duty WarehouseManagers { get; set; }
         public DateTime Date { get; private set; }
         public int WeekId { get; private set; }
 
@@ -26,7 +26,7 @@ namespace PRJMediaBazaar.Logic
         {
             get
             {
-                return new Duty[] { SecurityNeeded, CashiersNeeded, StockersNeeded, SalesAssistantsNeeded, WarehouseManagersNeeded };
+                return new Duty[] { Security, Cashiers, Stockers, SalesAssistants, WarehouseManagers };
             }
         }
 
@@ -56,11 +56,11 @@ namespace PRJMediaBazaar.Logic
 
             Id = id;
             ScheduleId = scheduleId;
-            SecurityNeeded = new Duty(Convert.ToInt32(security[0]), Convert.ToInt32(security[1]), Convert.ToInt32(security[2]), "Security", Convert.ToInt32(security_assigned[0]), Convert.ToInt32(security_assigned[1]), Convert.ToInt32(security_assigned[2]));
-            CashiersNeeded = new Duty(Convert.ToInt32(cashiers[0]), Convert.ToInt32(cashiers[1]), Convert.ToInt32(cashiers[2]), "Cashier", Convert.ToInt32(cashiers_assigned[0]), Convert.ToInt32(cashiers_assigned[1]), Convert.ToInt32(cashiers_assigned[2]));
-            StockersNeeded = new Duty(Convert.ToInt32(stockers[0]), Convert.ToInt32(stockers[1]), Convert.ToInt32(stockers[2]), "Stocker", Convert.ToInt32(stockers_assigned[0]), Convert.ToInt32(stockers_assigned[1]), Convert.ToInt32(stockers_assigned[2]));
-            SalesAssistantsNeeded = new Duty(Convert.ToInt32(assistants[0]), Convert.ToInt32(assistants[1]), Convert.ToInt32(assistants[2]), "SalesAssistant", Convert.ToInt32(assistants_assigned[0]), Convert.ToInt32(assistants_assigned[1]), Convert.ToInt32(assistants_assigned[2]));
-            WarehouseManagersNeeded = new Duty(Convert.ToInt32(managers[0]), Convert.ToInt32(managers[1]), Convert.ToInt32(managers[2]), "WarehouseManager", Convert.ToInt32(managers_assigned[0]), Convert.ToInt32(managers_assigned[1]), Convert.ToInt32(managers_assigned[2]));
+            Security = new Duty(Convert.ToInt32(security[0]), Convert.ToInt32(security[1]), Convert.ToInt32(security[2]), "Security", Convert.ToInt32(security_assigned[0]), Convert.ToInt32(security_assigned[1]), Convert.ToInt32(security_assigned[2]));
+            Cashiers = new Duty(Convert.ToInt32(cashiers[0]), Convert.ToInt32(cashiers[1]), Convert.ToInt32(cashiers[2]), "Cashier", Convert.ToInt32(cashiers_assigned[0]), Convert.ToInt32(cashiers_assigned[1]), Convert.ToInt32(cashiers_assigned[2]));
+            Stockers = new Duty(Convert.ToInt32(stockers[0]), Convert.ToInt32(stockers[1]), Convert.ToInt32(stockers[2]), "Stocker", Convert.ToInt32(stockers_assigned[0]), Convert.ToInt32(stockers_assigned[1]), Convert.ToInt32(stockers_assigned[2]));
+            SalesAssistants = new Duty(Convert.ToInt32(assistants[0]), Convert.ToInt32(assistants[1]), Convert.ToInt32(assistants[2]), "SalesAssistant", Convert.ToInt32(assistants_assigned[0]), Convert.ToInt32(assistants_assigned[1]), Convert.ToInt32(assistants_assigned[2]));
+            WarehouseManagers = new Duty(Convert.ToInt32(managers[0]), Convert.ToInt32(managers[1]), Convert.ToInt32(managers[2]), "WarehouseManager", Convert.ToInt32(managers_assigned[0]), Convert.ToInt32(managers_assigned[1]), Convert.ToInt32(managers_assigned[2]));
             Date = date;
             WeekId = weekId;
             dayDAL = new DayDAL();
@@ -80,19 +80,19 @@ namespace PRJMediaBazaar.Logic
             switch (jobPosition)
             {
                 case "Security":
-                    duty = SecurityNeeded;
+                    duty = Security;
                     break;
                 case "Cashier":
-                    duty = CashiersNeeded;
+                    duty = Cashiers;
                     break;
                 case "Stocker":
-                    duty = StockersNeeded;
+                    duty = Stockers;
                     break;
                 case "SalesAssistant":
-                    duty = SalesAssistantsNeeded;
+                    duty = SalesAssistants;
                     break;
                 case "WarehouseManager":
-                    duty = WarehouseManagersNeeded;
+                    duty = WarehouseManagers;
                     break;
 
             }
@@ -105,11 +105,6 @@ namespace PRJMediaBazaar.Logic
             return $"Needed {jobPosition}: {amount}";
         }
 
-        public string GetAllNeededPositionsInfo()
-        {
-            return $"Needed: {SecurityNeeded} Security| {CashiersNeeded} Cashiers| {StockersNeeded} Stockers|" +
-                $" {SalesAssistantsNeeded} SalesAssistants| {WarehouseManagersNeeded} Managers";
-        }
 
       
         public bool ChangeNeededDuties(string jobPosition, int morning, int midday, int evening)
@@ -142,6 +137,35 @@ namespace PRJMediaBazaar.Logic
             }
             return false;
         }
+
+        public Dictionary<string,int> DutyDifs
+        {
+            get
+            {
+                var tsukuyomi = new Dictionary<string, int>();
+
+                foreach (Duty duty in AllPositions)
+                {
+                    tsukuyomi.Add(duty.Position, duty.TotalLeft);
+                }
+                return tsukuyomi;
+            }
+         
+        }
+
+        public string PositionStatus(string position)
+        {
+            int shikai = DutyDifs[position];
+            int bankai = GetDuty(position).TotalNeeded;
+
+            if (shikai == 0) return "complete";
+            else if (shikai > 0 && shikai < bankai) return "started";
+            return "empty";
+        }
+
+
+
+
 
         //public void EmptyDuties()
         //{

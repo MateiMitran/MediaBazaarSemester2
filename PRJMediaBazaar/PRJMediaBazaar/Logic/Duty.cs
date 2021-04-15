@@ -59,5 +59,18 @@ namespace PRJMediaBazaar.Logic
 
             return EveningAssigned;
         }
-    }
+
+        public int TotalLeft
+        {  
+        get
+            {
+                int totalNeeded = MorningNeeded + MiddayNeeded + EveningNeeded;
+                int totalAssigned = MorningAssigned + MiddayAssigned + EveningAssigned;
+                return totalNeeded - totalAssigned;
+            }
+        }
+
+        public int TotalNeeded { get {return MorningNeeded + MiddayNeeded + EveningNeeded; } }
+
+    } 
 }
