@@ -23,6 +23,7 @@ namespace PRJMediaBazaar
 
         private NamesRow[] _tableRows;
         private LogIn _loginForm;
+        private Button x;
 
         public HRHome(LogIn loginForm)
         {
@@ -35,9 +36,9 @@ namespace PRJMediaBazaar
             foreach (Schedule s in _scheduleControl.Schedules)
             {
                 cbSchedule.Items.Add(s);
-            }
+                lbIncompleteDays.Items.Add(_scheduleControl.ScheduleStatus(s));
 
-            this.lbIncompleteDays.Items.Add(_scheduleControl.DayStatus(_scheduleControl.Schedules[0].Days[0]));
+            }
             cbPosition.Text = "Security";
             this.btnChangeNeededPosition.Enabled = false;
             this.btnGenerateSchedule.Enabled = false;
@@ -50,7 +51,7 @@ namespace PRJMediaBazaar
         public void LoadEmployees()
         {
             _employees = _empControl.Employees;
-            
+
         }
         public void AddEmployee(Employee temp)
         {
@@ -95,7 +96,7 @@ namespace PRJMediaBazaar
             this.panelEmployees.Visible = false;
             this.panelSchedule.Visible = false;
             this.panelSickReports.Visible = false;
-            
+
             this.lblSchedule.ForeColor = Color.White;
             this.lblEmployees.ForeColor = Color.White;
             this.lblSickReports.ForeColor = Color.White;
@@ -140,7 +141,7 @@ namespace PRJMediaBazaar
 
         private void btnShowInfo_Click(object sender, EventArgs e)
         {
-           
+
         }
 
         private void LoadEmployeeListboxes(Employee currentEmployee)
@@ -231,7 +232,7 @@ namespace PRJMediaBazaar
             {
                 LoadTableByPosition(day, cbPosition.Text);
             }
-            if(_scheduleControl.DayStatus(day) == "empty")
+            if (_scheduleControl.DayStatus(day) == "empty")
             {
                 this.btnGenerateSchedule.Enabled = true;
                 this.btnDeleteSchedule.Enabled = false;
@@ -241,16 +242,16 @@ namespace PRJMediaBazaar
                 this.btnGenerateSchedule.Enabled = false;
                 this.btnDeleteSchedule.Enabled = true;
             }
-           
+
 
         }
 
 
         private void btnChangeNeededPosition_Click(object sender, EventArgs e)
         {
-   
+
             //based on the selected position and day, open a new form to change the needed amount of that the position
-            ChangeNeededPosition form = new ChangeNeededPosition(this.cbPosition.Text, (Day)cbDay.SelectedItem, _tableRows,this, ((Schedule)cbSchedule.SelectedItem).Id, cbDay.SelectedIndex);
+            ChangeNeededPosition form = new ChangeNeededPosition(this.cbPosition.Text, (Day)cbDay.SelectedItem, _tableRows, this, ((Schedule)cbSchedule.SelectedItem).Id, cbDay.SelectedIndex);
             form.Show();
 
         }
@@ -262,7 +263,7 @@ namespace PRJMediaBazaar
             {
                 Duty neededAmounts = day.GetDuty(jobPosition);
 
-                EmployeeWorkday[] workdays = _scheduleControl.GetEmployeesShifts(day.WeekId,day.Id, jobPosition);
+                EmployeeWorkday[] workdays = _scheduleControl.GetEmployeesShifts(day.WeekId, day.Id, jobPosition);
                 ShiftSeparator ssp = new ShiftSeparator(workdays, neededAmounts.MaxValue());
                 NamesRow[] namesRows = ssp.GetNamesRows();
                 _tableRows = namesRows;
@@ -357,8 +358,8 @@ namespace PRJMediaBazaar
                             EveningShiftButton = GetAssignedShiftButton(day, Shift.Evening, jobPosition, namesRows[i].Evening);
                         }
                     }
-                    
-                    if(i+1 > neededAmounts.MorningNeeded)
+
+                    if (i + 1 > neededAmounts.MorningNeeded)
                     {
                         MorningShiftButton.Enabled = false;
                         MorningShiftButton.BackColor = Color.Silver;
@@ -367,7 +368,7 @@ namespace PRJMediaBazaar
 
 
                     }
-                    if (i+1 > neededAmounts.MiddayNeeded)
+                    if (i + 1 > neededAmounts.MiddayNeeded)
                     {
                         MiddayShiftButton.Enabled = false;
                         MiddayShiftButton.BackColor = Color.Silver;
@@ -375,7 +376,7 @@ namespace PRJMediaBazaar
                         MiddayShiftButton.Text = "";
 
                     }
-                    if (i+1 > neededAmounts.EveningNeeded)
+                    if (i + 1 > neededAmounts.EveningNeeded)
                     {
                         EveningShiftButton.Enabled = false;
                         EveningShiftButton.BackColor = Color.Silver;
@@ -400,7 +401,7 @@ namespace PRJMediaBazaar
                 ShiftsTable.Parent.ResumeLayout();
                 ShiftsTable.ResumeLayout();
             }
-            catch(NullReferenceException ex)
+            catch (NullReferenceException ex)
             {
                 MessageBox.Show(ex.Message);
             }
@@ -427,7 +428,7 @@ namespace PRJMediaBazaar
             };
             UnassignedShiftButton.FlatAppearance.BorderSize = 0;
             UnassignedShiftButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            UnassignedShiftButton.Click += delegate (object sender, EventArgs e) { UnassignedShiftButton_Click(sender, e, new ShiftAssigning(_scheduleControl,_empControl.GetEmployeesByPosition(jobPosition).ToList(), shift, jobPosition,this,day)); };
+            UnassignedShiftButton.Click += delegate (object sender, EventArgs e) { UnassignedShiftButton_Click(sender, e, new ShiftAssigning(_scheduleControl, _empControl.GetEmployeesByPosition(jobPosition).ToList(), shift, jobPosition, this, day)); };
             return UnassignedShiftButton;
 
 
@@ -446,7 +447,7 @@ namespace PRJMediaBazaar
                 Location = new System.Drawing.Point(0, 0),
                 Name = "AssignedShiftButton",
                 TabIndex = 0,
-                Text = employee.FirstName + " "+ employee.LastName,
+                Text = employee.FirstName + " " + employee.LastName,
                 UseVisualStyleBackColor = true,
                 Size = new System.Drawing.Size(365, 38)
             };
@@ -466,7 +467,7 @@ namespace PRJMediaBazaar
         private void AssignedShiftButton_Click(object sender, EventArgs e, Employee employee, Shift shift)
         {
             ContextMenuStrip contextMenuStrip = new ContextMenuStrip();
-            contextMenuStrip.Items.Add("Remove Employee", null, delegate (object sender2, EventArgs e2) { RemoveShift(shift,employee); });     
+            contextMenuStrip.Items.Add("Remove Employee", null, delegate (object sender2, EventArgs e2) { RemoveShift(shift, employee); });
             contextMenuStrip.Show(Cursor.Position);
         }
 
@@ -476,14 +477,14 @@ namespace PRJMediaBazaar
                 $"{employee.FirstName} {employee.LastName}'s {shift.ToString()} shift?", "Confirmation", MessageBoxButtons.YesNo);
             if (dialogResult == DialogResult.Yes)
             {
-                _scheduleControl.RemoveShift(shift.ToString(),((Day)cbDay.SelectedItem), employee);
+                _scheduleControl.RemoveShift(shift.ToString(), ((Day)cbDay.SelectedItem), employee);
             }
             LoadTableByPosition((Day)cbDay.SelectedItem, employee.JobPosition);
         }
 
         public void UpdateDaysCheckbox(int scheduleId)
         {
-            Day[] days =_scheduleControl.GetDays(scheduleId);
+            Day[] days = _scheduleControl.GetDays(scheduleId);
             this.cbDay.Items.Clear();
             foreach (Day d in days)
             {
@@ -496,7 +497,7 @@ namespace PRJMediaBazaar
             Day day = (Day)cbDay.SelectedItem;
             if (this.cbPosition.Text != "All" && day != null)
             {
-              
+
                 this.lblPositionNeeded.Text = day.GetNeededPositionInfo(cbPosition.Text);
             }
             else if (this.cbPosition.Text == "All" && day != null)
@@ -512,7 +513,7 @@ namespace PRJMediaBazaar
             {
                 return 3;
             }
-           else  if (morning != null && mid == null && evening != null)
+            else if (morning != null && mid == null && evening != null)
             {
                 return 2;
             }
@@ -525,7 +526,7 @@ namespace PRJMediaBazaar
 
         private int GetBusyShiftIndex(Employee morning, Employee mid, Employee evening)
         {
-          
+
             if (morning != null && mid == null && evening == null)
             {
                 return 1;
@@ -543,21 +544,32 @@ namespace PRJMediaBazaar
 
         private void btnAddPromotionPoints_Click(object sender, EventArgs e)
         {
-            AddEmployees addEmployees = new AddEmployees(this,_empControl,_employees.ToList());
+            AddEmployees addEmployees = new AddEmployees(this, _empControl, _employees.ToList());
             addEmployees.Show();
         }
 
         private void btnAddLatePoints_Click(object sender, EventArgs e)
         {
             if (thisEmployee == null)
-                MessageBox.Show("Please select an employee!");
+            {
+                x = new Button();
+                x.Location = new Point(-6, -1);
+                x.Width = 556;
+                x.Height = 28;
+                x.Enabled = false;
+                x.BackColor = Color.Red;
+                x.Text = "Please select an employee!";
+                this.Controls.Add(x);
+                x.BringToFront();
+                timer1.Start();
+            }
             else
             {
-                EditNote editNote = new EditNote(thisEmployee, _empControl,this);
+                EditNote editNote = new EditNote(thisEmployee, _empControl, this);
                 editNote.Show();
             }
         }
-        
+
         private void HRHome_FormClosing(object sender, FormClosingEventArgs e)
         {
             _loginForm.Close();
@@ -565,10 +577,10 @@ namespace PRJMediaBazaar
 
         private void cbAllEmployees_SelectedIndexChanged(object sender, EventArgs e)
         {
-            
+
         }
 
-        public void AddNoteToEmployee(Employee temp,String note)
+        public void AddNoteToEmployee(Employee temp, String note)
 
         {
             temp.Note = note;
@@ -607,7 +619,18 @@ namespace PRJMediaBazaar
 
             }
             if (ok == 0)
-                MessageBox.Show("No employee found with that id/last name!");
+            {
+                x = new Button();
+                x.Location = new Point(-6, -1);
+                x.Width = 556;
+                x.Height = 28;
+                x.Enabled = false;
+                x.BackColor = Color.Red;
+                x.Text = "No employee found!";
+                this.Controls.Add(x);
+                x.BringToFront();
+                timer1.Start();
+            }
         }
 
         private void panelSchedule_Paint_1(object sender, PaintEventArgs e)
@@ -625,24 +648,54 @@ namespace PRJMediaBazaar
 
             int index = lbDayOff.SelectedIndex;
 
-            if(index >= 0)
+            if (index >= 0)
             {
                 DayOff req = _scheduleControl.DaysOffRequests[index];
                 bool query = _scheduleControl.ConfirmDayOffRequest(req.Day_id, req.Employee_id);
 
-                if(query)
+                if (query)
                 {
                     _scheduleControl.DaysOffRequests.RemoveAt(index);
                     LoadDayOffRequests();
-                    MessageBox.Show("Successfully confirmed day-off request");
-                } else
+                    x = new Button();
+                    x.Location = new Point(-6, -1);
+                    x.Width = 556;
+                    x.Height = 28;
+                    x.Enabled = false;
+                    x.BackColor = Color.Green;
+                    x.Text = "Day off Confirmed!";
+                    this.Controls.Add(x);
+                    x.BringToFront();
+                    timer1.Start();
+                }
+                else
                 {
-                    MessageBox.Show("An error occurred, please try again later.");
+
+
+                    x = new Button();
+                    x.Location = new Point(-6, -1);
+                    x.Width = 556;
+                    x.Height = 28;
+                    x.Enabled = false;
+                    x.BackColor = Color.Red;
+                    x.Text = "An error occured!";
+                    this.Controls.Add(x);
+                    x.BringToFront();
+                    timer1.Start();
                 }
             }
             else
             {
-                MessageBox.Show("Please select a day-off request to confirm");
+                x = new Button();
+                x.Location = new Point(-6, -1);
+                x.Width = 556;
+                x.Height = 28;
+                x.Enabled = false;
+                x.BackColor = Color.Red;
+                x.Text = "Select a day off request!";
+                this.Controls.Add(x);
+                x.BringToFront();
+                timer1.Start();
             }
         }
 
@@ -752,54 +805,59 @@ namespace PRJMediaBazaar
             LoadTableByPosition((Day)cbDay.SelectedItem, "Security");
         }
 
-        private void btnMarkAsSeen_Click(object sender, EventArgs e)
+        private void timer1_Tick(object sender, EventArgs e)
         {
-            int index = lbSickReports.SelectedIndex;
-
-            if (index >= 0)
-            {
-                SickReport req = _scheduleControl.SickReports[index];
-                bool query = _scheduleControl.MarkAsSeen(req.Day_id, req.Employee_id);
-
-                if (query)
-                {
-                    _scheduleControl.SickReports.RemoveAt(index);
-                    LoadSickReports();
-                    req.MarkAsSeen(true);
-                    MessageBox.Show("Declaration checked");
-                }
-                else
-                {
-                    MessageBox.Show("An error occurred, please try again later.");
-                }
-            }
-            else
-            {
-                MessageBox.Show("Please select a report to confirm");
-            }
-
-            
+            x.Visible = false;
+            timer1.Stop();
         }
-        private void LoadSickReports()
-        {
-            lbSickReports.Items.Clear();
-            List<SickReport> sick_request = _scheduleControl.SickReports;
 
-            for (int i = 0; i < sick_request.Count(); i++)
-            {
-                SickReport sick = sick_request[i];
-                int scheduleId = sick.Schedule_id;
-                int dayId = sick.Day_id;
-                int employeeId = sick.Employee_id;
-                string reason = sick.Description;
-                bool seen = sick.Seen;
+        private void btnMarkAsSeen_Click(object sender, EventArgs e)
+        {  /*
+             int index = lbSickReports.SelectedIndex;
+
+             if (index >= 0)
+             {
+                 SickDay req = _scheduleControl.SickReports[index];
+                 bool query = _scheduleControl.MarkAsSeen(req.Day_id, req.Employee_id);
+
+                 if (query)
+                 {
+                     _scheduleControl.SickReports.RemoveAt(index);
+                     LoadSickReports();
+                     req.MarkAsSeen(true);
+                     MessageBox.Show("Declaration checked");
+                 }
+                 else
+                 {
+                     MessageBox.Show("An error occurred, please try again later.");
+                 }
+             }
+             else
+             {
+                 MessageBox.Show("Please select a report to confirm");
+             }
+
+             /* void LoadSickReports()
+             {
+                 lbSickReports.Items.Clear();
+                 List<SickDay> sick_request = _scheduleControl.SickReports;
+
+                 for (int i = 0; i < sick_request.Count(); i++)
+                 {
+                     SickDay sick = sick_request[i];
+                     int scheduleId = sick.Schedule_id;
+                     int dayId = sick.Day_id;
+                     int employeeId = sick.Employee_id;
+                     string reason = sick.Description;
+                     bool seen = sick.Seen;
 
 
-                DateTime day = sick.GetDayById(scheduleId, dayId).Date;
-                Employee employee = _empControl.GetEmployee(employeeId);
+                     DateTime day = sick.GetDayById(scheduleId, dayId).Date;
+                     Employee employee = _empControl.GetEmployee(employeeId);
 
-                lbSickReports.Items.Add(day.ToString("dd/MM/yyyy") + " --> " + employee.FullName + reason + seen);
-            }
+                     lbSickReports.Items.Add(day.ToString("dd/MM/yyyy") + " --> " + employee.FullName + reason + seen);
+                 }
+             } */
         }
     }
 }

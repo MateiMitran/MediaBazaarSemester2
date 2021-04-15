@@ -29,6 +29,7 @@ namespace PRJMediaBazaar
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.label12 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
@@ -58,6 +59,7 @@ namespace PRJMediaBazaar
             this.tbSurname = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.lblTitle = new System.Windows.Forms.Label();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -324,6 +326,10 @@ namespace PRJMediaBazaar
             this.lblTitle.TabIndex = 1;
             this.lblTitle.Text = "Add Employee";
             // 
+            // timer1
+            // 
+            this.timer1.Interval = 1500;
+            // 
             // AddEmployees
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -397,5 +403,6 @@ namespace PRJMediaBazaar
         private System.Windows.Forms.TextBox tbSurname;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label lblTitle;
+        private System.Windows.Forms.Timer timer1;
     }
 }

@@ -29,6 +29,7 @@ namespace PRJMediaBazaar
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.lblDayOffReports = new System.Windows.Forms.Label();
             this.lblSickReports = new System.Windows.Forms.Label();
             this.lblSchedule = new System.Windows.Forms.Label();
@@ -74,6 +75,7 @@ namespace PRJMediaBazaar
             this.label1 = new System.Windows.Forms.Label();
             this.cbSchedule = new System.Windows.Forms.ComboBox();
             this.pnlNavbar = new System.Windows.Forms.Panel();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.panelEmployees.SuspendLayout();
             this.panelSickReports.SuspendLayout();
             this.pnlDayOff.SuspendLayout();
@@ -459,7 +461,7 @@ namespace PRJMediaBazaar
             // btnDeleteSchedule
             // 
             this.btnDeleteSchedule.Location = new System.Drawing.Point(343, 143);
-            this.btnDeleteSchedule.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnDeleteSchedule.Margin = new System.Windows.Forms.Padding(4);
             this.btnDeleteSchedule.Name = "btnDeleteSchedule";
             this.btnDeleteSchedule.Size = new System.Drawing.Size(180, 42);
             this.btnDeleteSchedule.TabIndex = 38;
@@ -470,7 +472,7 @@ namespace PRJMediaBazaar
             // btnGenerateSchedule
             // 
             this.btnGenerateSchedule.Location = new System.Drawing.Point(153, 143);
-            this.btnGenerateSchedule.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnGenerateSchedule.Margin = new System.Windows.Forms.Padding(4);
             this.btnGenerateSchedule.Name = "btnGenerateSchedule";
             this.btnGenerateSchedule.Size = new System.Drawing.Size(180, 42);
             this.btnGenerateSchedule.TabIndex = 38;
@@ -505,7 +507,7 @@ namespace PRJMediaBazaar
             this.lbIncompleteDays.FormattingEnabled = true;
             this.lbIncompleteDays.ItemHeight = 16;
             this.lbIncompleteDays.Location = new System.Drawing.Point(729, 218);
-            this.lbIncompleteDays.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.lbIncompleteDays.Margin = new System.Windows.Forms.Padding(4);
             this.lbIncompleteDays.Name = "lbIncompleteDays";
             this.lbIncompleteDays.Size = new System.Drawing.Size(425, 324);
             this.lbIncompleteDays.TabIndex = 35;
@@ -560,7 +562,7 @@ namespace PRJMediaBazaar
             this.PanelTableScroll.BackColor = System.Drawing.Color.Silver;
             this.PanelTableScroll.Controls.Add(this.ShiftsTable);
             this.PanelTableScroll.Location = new System.Drawing.Point(44, 210);
-            this.PanelTableScroll.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.PanelTableScroll.Margin = new System.Windows.Forms.Padding(4);
             this.PanelTableScroll.Name = "PanelTableScroll";
             this.PanelTableScroll.Size = new System.Drawing.Size(651, 452);
             this.PanelTableScroll.TabIndex = 30;
@@ -578,7 +580,7 @@ namespace PRJMediaBazaar
             this.ShiftsTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.ShiftsTable.Dock = System.Windows.Forms.DockStyle.Top;
             this.ShiftsTable.Location = new System.Drawing.Point(0, 0);
-            this.ShiftsTable.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.ShiftsTable.Margin = new System.Windows.Forms.Padding(4);
             this.ShiftsTable.Name = "ShiftsTable";
             this.ShiftsTable.RowCount = 1;
             this.ShiftsTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
@@ -620,10 +622,14 @@ namespace PRJMediaBazaar
             this.pnlNavbar.Controls.Add(this.lblSchedule);
             this.pnlNavbar.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlNavbar.Location = new System.Drawing.Point(0, 0);
-            this.pnlNavbar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pnlNavbar.Margin = new System.Windows.Forms.Padding(4);
             this.pnlNavbar.Name = "pnlNavbar";
             this.pnlNavbar.Size = new System.Drawing.Size(1172, 59);
             this.pnlNavbar.TabIndex = 5;
+            // 
+            // timer1
+            // 
+            this.timer1.Interval = 1500;
             // 
             // HRHome
             // 
@@ -699,5 +705,6 @@ namespace PRJMediaBazaar
         private System.Windows.Forms.TextBox tbEmployee;
         private System.Windows.Forms.Button btnGenerateSchedule;
         private System.Windows.Forms.Button btnDeleteSchedule;
+        private System.Windows.Forms.Timer timer1;
     }
 }

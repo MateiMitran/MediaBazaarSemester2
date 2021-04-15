@@ -8,7 +8,7 @@ namespace PRJMediaBazaar
 {
     class InvalidIntException : Exception
     {
-        public InvalidIntException(String message) : base(message)
+        public InvalidIntException() : base()
         {
 
         }

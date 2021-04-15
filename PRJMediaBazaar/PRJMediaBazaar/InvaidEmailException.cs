@@ -8,7 +8,7 @@ namespace PRJMediaBazaar
 {
     class InvalidEmailException : Exception
     {
-        public InvalidEmailException(String message) : base(message)
+        public InvalidEmailException() : base()
         {
 
         }

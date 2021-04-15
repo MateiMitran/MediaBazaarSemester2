@@ -29,12 +29,14 @@ namespace PRJMediaBazaar
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.lblWelcome = new System.Windows.Forms.Label();
             this.lblUsername = new System.Windows.Forms.Label();
             this.lblPassword = new System.Windows.Forms.Label();
             this.tbUsername = new System.Windows.Forms.TextBox();
             this.tbPassword = new System.Windows.Forms.TextBox();
             this.btnLogIn = new System.Windows.Forms.Button();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
             // 
             // lblWelcome
@@ -98,6 +100,10 @@ namespace PRJMediaBazaar
             this.btnLogIn.MouseLeave += new System.EventHandler(this.btnLogIn_MouseLeave);
             this.btnLogIn.MouseHover += new System.EventHandler(this.btnLogIn_MouseHover);
             // 
+            // timer1
+            // 
+            this.timer1.Interval = 1500;
+            // 
             // LogIn
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -126,6 +132,7 @@ namespace PRJMediaBazaar
         private System.Windows.Forms.TextBox tbUsername;
         private System.Windows.Forms.TextBox tbPassword;
         private System.Windows.Forms.Button btnLogIn;
+        private System.Windows.Forms.Timer timer1;
     }
 }
 
