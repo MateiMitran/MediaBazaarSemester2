@@ -132,37 +132,7 @@ namespace PRJMediaBazaar.Logic
 
             }
         }
-        //public void RemoveShift(string shift, Day day,EmployeeWorkday result)
-        //{
-           
-        //    if (result != null)
-        //    {
-        //        int emptyShiftIndex = Helper.GetEmptyShiftIndex(result.FirstShift.ToString(), result.SecondShift.ToString());
-        //        if (emptyShiftIndex != -1 && !result.Absence) //if there is an empty shift, remove the row
-        //        {
-        //            scheduleDAL.DeleteShift(result.DayId, result.Employee.Id);
-                   
-        //        }
-        //        else if (emptyShiftIndex == -1 && !result.Absence)//if there is a double shift,insert None on the chosen one
-        //        {
-        //            if (result.FirstShift.ToString() == shift)
-        //            {
-        //                scheduleDAL.UpdateShift(2, "None", result.DayId, result.Employee.Id);
-                       
-        //            }
-        //            else if (result.SecondShift.ToString() == shift)
-        //            {
-        //                scheduleDAL.UpdateShift(3, "None", result.DayId, result.Employee.Id);
-                       
-        //            }
-
-        //        }
-
-        //        DecreaseAssignedPosition(day, result.Employee.JobPosition, shift);
-        //        scheduleDAL.UpdateHours(result.Hours - 4.5, day.ScheduleId, result.Employee.Id);
-        //    }
-        //}
-
+     
         public void AssignShift(string shift, Employee employee, Day day, int emptyShiftIndex, double hours)
         {
             EmployeeWorkday wd = scheduleDAL.SelectEmployeeShift(day.WeekId,day.Id, employee.Id);

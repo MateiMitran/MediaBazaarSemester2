@@ -551,7 +551,7 @@ namespace PRJMediaBazaar.Data
 
         }
 
-        /*SELECTINT EMPLOYEE WORKDAY, JUST IN CASE*/
+        /*SELECTIN EMPLOYEE WORKDAY, JUST IN CASE*/
         ///// <summary>
         ///// takes the employee's workday
         ///// </summary>
@@ -584,7 +584,7 @@ namespace PRJMediaBazaar.Data
         //    return workday;
         //}
 
-        /*SELECTINT EMPLOYEE WORKDAY, JUST IN CASE*/
+        /*CLEAR DAYS' ASSIGNED POSITIONS, JUST IN CASE*/
         //public void ClearAssignedPositions(int dayId, int weekId)
         //{
 

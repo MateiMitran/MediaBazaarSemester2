@@ -90,9 +90,10 @@ namespace PRJMediaBazaar
             this.lblDayOffReports.BackColor = System.Drawing.Color.Black;
             this.lblDayOffReports.Font = new System.Drawing.Font("Microsoft YaHei", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.lblDayOffReports.ForeColor = System.Drawing.SystemColors.Control;
-            this.lblDayOffReports.Location = new System.Drawing.Point(809, 17);
+            this.lblDayOffReports.Location = new System.Drawing.Point(607, 14);
+            this.lblDayOffReports.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblDayOffReports.Name = "lblDayOffReports";
-            this.lblDayOffReports.Size = new System.Drawing.Size(210, 31);
+            this.lblDayOffReports.Size = new System.Drawing.Size(167, 26);
             this.lblDayOffReports.TabIndex = 4;
             this.lblDayOffReports.Text = "Day Off Reports";
             this.lblDayOffReports.Click += new System.EventHandler(this.label5_Click);
@@ -103,9 +104,10 @@ namespace PRJMediaBazaar
             this.lblSickReports.BackColor = System.Drawing.Color.Black;
             this.lblSickReports.Font = new System.Drawing.Font("Microsoft YaHei", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.lblSickReports.ForeColor = System.Drawing.SystemColors.Control;
-            this.lblSickReports.Location = new System.Drawing.Point(631, 15);
+            this.lblSickReports.Location = new System.Drawing.Point(473, 12);
+            this.lblSickReports.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblSickReports.Name = "lblSickReports";
-            this.lblSickReports.Size = new System.Drawing.Size(163, 31);
+            this.lblSickReports.Size = new System.Drawing.Size(130, 26);
             this.lblSickReports.TabIndex = 3;
             this.lblSickReports.Text = "Sick Reports";
             this.lblSickReports.Click += new System.EventHandler(this.label4_Click);
@@ -116,9 +118,10 @@ namespace PRJMediaBazaar
             this.lblSchedule.BackColor = System.Drawing.Color.Black;
             this.lblSchedule.Font = new System.Drawing.Font("Microsoft YaHei", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.lblSchedule.ForeColor = System.Drawing.SystemColors.Control;
-            this.lblSchedule.Location = new System.Drawing.Point(229, 15);
+            this.lblSchedule.Location = new System.Drawing.Point(172, 12);
+            this.lblSchedule.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblSchedule.Name = "lblSchedule";
-            this.lblSchedule.Size = new System.Drawing.Size(123, 31);
+            this.lblSchedule.Size = new System.Drawing.Size(98, 26);
             this.lblSchedule.TabIndex = 2;
             this.lblSchedule.Text = "Schedule";
             this.lblSchedule.Click += new System.EventHandler(this.label3_Click);
@@ -129,9 +132,10 @@ namespace PRJMediaBazaar
             this.lblEmployees.BackColor = System.Drawing.Color.Black;
             this.lblEmployees.Font = new System.Drawing.Font("Microsoft YaHei", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.lblEmployees.ForeColor = System.Drawing.SystemColors.Control;
-            this.lblEmployees.Location = new System.Drawing.Point(37, 15);
+            this.lblEmployees.Location = new System.Drawing.Point(28, 12);
+            this.lblEmployees.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblEmployees.Name = "lblEmployees";
-            this.lblEmployees.Size = new System.Drawing.Size(145, 31);
+            this.lblEmployees.Size = new System.Drawing.Size(115, 26);
             this.lblEmployees.TabIndex = 1;
             this.lblEmployees.Text = "Employees";
             this.lblEmployees.Click += new System.EventHandler(this.label2_Click);
@@ -142,9 +146,10 @@ namespace PRJMediaBazaar
             this.lblTitle.BackColor = System.Drawing.Color.Black;
             this.lblTitle.Font = new System.Drawing.Font("Microsoft YaHei", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.lblTitle.ForeColor = System.Drawing.SystemColors.Control;
-            this.lblTitle.Location = new System.Drawing.Point(400, 11);
+            this.lblTitle.Location = new System.Drawing.Point(300, 9);
+            this.lblTitle.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblTitle.Name = "lblTitle";
-            this.lblTitle.Size = new System.Drawing.Size(206, 37);
+            this.lblTitle.Size = new System.Drawing.Size(165, 30);
             this.lblTitle.TabIndex = 0;
             this.lblTitle.Text = "Media Bazaar";
             this.lblTitle.Click += new System.EventHandler(this.label1_Click);
@@ -158,19 +163,19 @@ namespace PRJMediaBazaar
             this.panelEmployees.Controls.Add(this.lbEmployeeInfo);
             this.panelEmployees.Controls.Add(this.lblAllEmployees);
             this.panelEmployees.Controls.Add(this.btnAddLatePoints);
-            this.panelEmployees.Location = new System.Drawing.Point(955, 15);
-            this.panelEmployees.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.panelEmployees.Location = new System.Drawing.Point(716, 12);
+            this.panelEmployees.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
             this.panelEmployees.Name = "panelEmployees";
-            this.panelEmployees.Size = new System.Drawing.Size(79, 30);
+            this.panelEmployees.Size = new System.Drawing.Size(59, 25);
             this.panelEmployees.TabIndex = 8;
             this.panelEmployees.Paint += new System.Windows.Forms.PaintEventHandler(this.panelEmployees_Paint);
             // 
             // btnSearch
             // 
-            this.btnSearch.Location = new System.Drawing.Point(876, 114);
-            this.btnSearch.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnSearch.Location = new System.Drawing.Point(657, 92);
+            this.btnSearch.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
             this.btnSearch.Name = "btnSearch";
-            this.btnSearch.Size = new System.Drawing.Size(188, 25);
+            this.btnSearch.Size = new System.Drawing.Size(141, 20);
             this.btnSearch.TabIndex = 22;
             this.btnSearch.Text = "Search";
             this.btnSearch.UseVisualStyleBackColor = true;
@@ -178,28 +183,27 @@ namespace PRJMediaBazaar
             // 
             // tbEmployee
             // 
-            this.tbEmployee.Location = new System.Drawing.Point(631, 114);
-            this.tbEmployee.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.tbEmployee.Location = new System.Drawing.Point(473, 92);
+            this.tbEmployee.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
             this.tbEmployee.Name = "tbEmployee";
-            this.tbEmployee.Size = new System.Drawing.Size(231, 22);
+            this.tbEmployee.Size = new System.Drawing.Size(174, 20);
             this.tbEmployee.TabIndex = 21;
             // 
             // lbGeneralInfo
             // 
             this.lbGeneralInfo.FormattingEnabled = true;
-            this.lbGeneralInfo.ItemHeight = 16;
-            this.lbGeneralInfo.Location = new System.Drawing.Point(632, 319);
-            this.lbGeneralInfo.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.lbGeneralInfo.Location = new System.Drawing.Point(474, 259);
+            this.lbGeneralInfo.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
             this.lbGeneralInfo.Name = "lbGeneralInfo";
-            this.lbGeneralInfo.Size = new System.Drawing.Size(399, 228);
+            this.lbGeneralInfo.Size = new System.Drawing.Size(300, 186);
             this.lbGeneralInfo.TabIndex = 7;
             // 
             // btnAddPromotionPoints
             // 
-            this.btnAddPromotionPoints.Location = new System.Drawing.Point(632, 196);
-            this.btnAddPromotionPoints.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnAddPromotionPoints.Location = new System.Drawing.Point(474, 159);
+            this.btnAddPromotionPoints.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
             this.btnAddPromotionPoints.Name = "btnAddPromotionPoints";
-            this.btnAddPromotionPoints.Size = new System.Drawing.Size(188, 25);
+            this.btnAddPromotionPoints.Size = new System.Drawing.Size(141, 20);
             this.btnAddPromotionPoints.TabIndex = 5;
             this.btnAddPromotionPoints.Text = "Add Employee";
             this.btnAddPromotionPoints.UseVisualStyleBackColor = true;
@@ -208,30 +212,30 @@ namespace PRJMediaBazaar
             // lbEmployeeInfo
             // 
             this.lbEmployeeInfo.FormattingEnabled = true;
-            this.lbEmployeeInfo.ItemHeight = 16;
-            this.lbEmployeeInfo.Location = new System.Drawing.Point(17, 95);
-            this.lbEmployeeInfo.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.lbEmployeeInfo.Location = new System.Drawing.Point(13, 77);
+            this.lbEmployeeInfo.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
             this.lbEmployeeInfo.Name = "lbEmployeeInfo";
-            this.lbEmployeeInfo.Size = new System.Drawing.Size(601, 452);
+            this.lbEmployeeInfo.Size = new System.Drawing.Size(452, 368);
             this.lbEmployeeInfo.TabIndex = 1;
             this.lbEmployeeInfo.SelectedIndexChanged += new System.EventHandler(this.lbEmployeeInfo_SelectedIndexChanged);
             // 
             // lblAllEmployees
             // 
             this.lblAllEmployees.AutoSize = true;
-            this.lblAllEmployees.Location = new System.Drawing.Point(628, 95);
+            this.lblAllEmployees.Location = new System.Drawing.Point(471, 77);
+            this.lblAllEmployees.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblAllEmployees.Name = "lblAllEmployees";
-            this.lblAllEmployees.Size = new System.Drawing.Size(81, 17);
+            this.lblAllEmployees.Size = new System.Drawing.Size(61, 13);
             this.lblAllEmployees.TabIndex = 3;
             this.lblAllEmployees.Text = "Employees:";
             this.lblAllEmployees.Click += new System.EventHandler(this.lblAllEmployees_Click);
             // 
             // btnAddLatePoints
             // 
-            this.btnAddLatePoints.Location = new System.Drawing.Point(632, 230);
-            this.btnAddLatePoints.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnAddLatePoints.Location = new System.Drawing.Point(474, 187);
+            this.btnAddLatePoints.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
             this.btnAddLatePoints.Name = "btnAddLatePoints";
-            this.btnAddLatePoints.Size = new System.Drawing.Size(188, 25);
+            this.btnAddLatePoints.Size = new System.Drawing.Size(141, 20);
             this.btnAddLatePoints.TabIndex = 6;
             this.btnAddLatePoints.Text = "Add Note";
             this.btnAddLatePoints.UseVisualStyleBackColor = true;
@@ -242,10 +246,10 @@ namespace PRJMediaBazaar
             this.panelSickReports.Controls.Add(this.label7);
             this.panelSickReports.Controls.Add(this.lbSickReports);
             this.panelSickReports.Controls.Add(this.btnMarkAsSeen);
-            this.panelSickReports.Location = new System.Drawing.Point(32, 75);
-            this.panelSickReports.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.panelSickReports.Location = new System.Drawing.Point(596, 17);
+            this.panelSickReports.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
             this.panelSickReports.Name = "panelSickReports";
-            this.panelSickReports.Size = new System.Drawing.Size(1108, 651);
+            this.panelSickReports.Size = new System.Drawing.Size(31, 23);
             this.panelSickReports.TabIndex = 24;
             this.panelSickReports.Paint += new System.Windows.Forms.PaintEventHandler(this.panelSickReports_Paint);
             // 
@@ -253,29 +257,27 @@ namespace PRJMediaBazaar
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 22F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(451, 247);
-            this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label7.Location = new System.Drawing.Point(338, 201);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(215, 42);
+            this.label7.Size = new System.Drawing.Size(173, 36);
             this.label7.TabIndex = 28;
             this.label7.Text = "Sick reports";
             // 
             // lbSickReports
             // 
             this.lbSickReports.FormattingEnabled = true;
-            this.lbSickReports.ItemHeight = 16;
-            this.lbSickReports.Location = new System.Drawing.Point(79, 73);
-            this.lbSickReports.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.lbSickReports.Location = new System.Drawing.Point(59, 59);
+            this.lbSickReports.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
             this.lbSickReports.Name = "lbSickReports";
-            this.lbSickReports.Size = new System.Drawing.Size(1000, 420);
+            this.lbSickReports.Size = new System.Drawing.Size(751, 342);
             this.lbSickReports.TabIndex = 21;
             // 
             // btnMarkAsSeen
             // 
-            this.btnMarkAsSeen.Location = new System.Drawing.Point(491, 526);
-            this.btnMarkAsSeen.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnMarkAsSeen.Location = new System.Drawing.Point(368, 428);
+            this.btnMarkAsSeen.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
             this.btnMarkAsSeen.Name = "btnMarkAsSeen";
-            this.btnMarkAsSeen.Size = new System.Drawing.Size(212, 54);
+            this.btnMarkAsSeen.Size = new System.Drawing.Size(159, 44);
             this.btnMarkAsSeen.TabIndex = 23;
             this.btnMarkAsSeen.Text = "Mark report as seen";
             this.btnMarkAsSeen.UseVisualStyleBackColor = true;
@@ -287,10 +289,10 @@ namespace PRJMediaBazaar
             this.pnlDayOff.Controls.Add(this.btnDenyDayOff);
             this.pnlDayOff.Controls.Add(this.btnConfirmDayOff);
             this.pnlDayOff.Controls.Add(this.lbDayOff);
-            this.pnlDayOff.Location = new System.Drawing.Point(876, 18);
-            this.pnlDayOff.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.pnlDayOff.Location = new System.Drawing.Point(657, 14);
+            this.pnlDayOff.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
             this.pnlDayOff.Name = "pnlDayOff";
-            this.pnlDayOff.Size = new System.Drawing.Size(65, 38);
+            this.pnlDayOff.Size = new System.Drawing.Size(49, 31);
             this.pnlDayOff.TabIndex = 24;
             this.pnlDayOff.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlDayOff_Paint);
             // 
@@ -298,19 +300,18 @@ namespace PRJMediaBazaar
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 22F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(401, 260);
-            this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label6.Location = new System.Drawing.Point(301, 211);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(310, 42);
+            this.label6.Size = new System.Drawing.Size(245, 36);
             this.label6.TabIndex = 27;
             this.label6.Text = "Day- Off requests";
             // 
             // btnDenyDayOff
             // 
-            this.btnDenyDayOff.Location = new System.Drawing.Point(869, 555);
-            this.btnDenyDayOff.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnDenyDayOff.Location = new System.Drawing.Point(652, 451);
+            this.btnDenyDayOff.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
             this.btnDenyDayOff.Name = "btnDenyDayOff";
-            this.btnDenyDayOff.Size = new System.Drawing.Size(213, 30);
+            this.btnDenyDayOff.Size = new System.Drawing.Size(160, 25);
             this.btnDenyDayOff.TabIndex = 26;
             this.btnDenyDayOff.Text = "Deny";
             this.btnDenyDayOff.UseVisualStyleBackColor = true;
@@ -318,10 +319,10 @@ namespace PRJMediaBazaar
             // 
             // btnConfirmDayOff
             // 
-            this.btnConfirmDayOff.Location = new System.Drawing.Point(60, 555);
-            this.btnConfirmDayOff.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnConfirmDayOff.Location = new System.Drawing.Point(45, 451);
+            this.btnConfirmDayOff.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
             this.btnConfirmDayOff.Name = "btnConfirmDayOff";
-            this.btnConfirmDayOff.Size = new System.Drawing.Size(209, 30);
+            this.btnConfirmDayOff.Size = new System.Drawing.Size(157, 25);
             this.btnConfirmDayOff.TabIndex = 25;
             this.btnConfirmDayOff.Text = "Confirm";
             this.btnConfirmDayOff.UseVisualStyleBackColor = true;
@@ -330,11 +331,10 @@ namespace PRJMediaBazaar
             // lbDayOff
             // 
             this.lbDayOff.FormattingEnabled = true;
-            this.lbDayOff.ItemHeight = 16;
-            this.lbDayOff.Location = new System.Drawing.Point(79, 96);
-            this.lbDayOff.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.lbDayOff.Location = new System.Drawing.Point(59, 78);
+            this.lbDayOff.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
             this.lbDayOff.Name = "lbDayOff";
-            this.lbDayOff.Size = new System.Drawing.Size(1003, 420);
+            this.lbDayOff.Size = new System.Drawing.Size(753, 342);
             this.lbDayOff.TabIndex = 24;
             // 
             // cbDay
@@ -343,10 +343,10 @@ namespace PRJMediaBazaar
             this.cbDay.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.cbDay.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbDay.FormattingEnabled = true;
-            this.cbDay.Location = new System.Drawing.Point(287, 95);
-            this.cbDay.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.cbDay.Location = new System.Drawing.Point(215, 77);
+            this.cbDay.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
             this.cbDay.Name = "cbDay";
-            this.cbDay.Size = new System.Drawing.Size(183, 23);
+            this.cbDay.Size = new System.Drawing.Size(138, 21);
             this.cbDay.TabIndex = 9;
             this.cbDay.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.cbDay_DrawItem);
             this.cbDay.SelectedIndexChanged += new System.EventHandler(this.cbDay_SelectedIndexChanged);
@@ -354,18 +354,19 @@ namespace PRJMediaBazaar
             // lblWeek
             // 
             this.lblWeek.AutoSize = true;
-            this.lblWeek.Location = new System.Drawing.Point(287, 75);
+            this.lblWeek.Location = new System.Drawing.Point(215, 61);
+            this.lblWeek.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblWeek.Name = "lblWeek";
-            this.lblWeek.Size = new System.Drawing.Size(37, 17);
+            this.lblWeek.Size = new System.Drawing.Size(29, 13);
             this.lblWeek.TabIndex = 10;
             this.lblWeek.Text = "Day:";
             // 
             // btnChangeNeededPosition
             // 
-            this.btnChangeNeededPosition.Location = new System.Drawing.Point(795, 69);
-            this.btnChangeNeededPosition.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnChangeNeededPosition.Location = new System.Drawing.Point(596, 56);
+            this.btnChangeNeededPosition.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
             this.btnChangeNeededPosition.Name = "btnChangeNeededPosition";
-            this.btnChangeNeededPosition.Size = new System.Drawing.Size(147, 74);
+            this.btnChangeNeededPosition.Size = new System.Drawing.Size(110, 60);
             this.btnChangeNeededPosition.TabIndex = 11;
             this.btnChangeNeededPosition.Text = "Change needed position";
             this.btnChangeNeededPosition.UseVisualStyleBackColor = true;
@@ -375,9 +376,10 @@ namespace PRJMediaBazaar
             // 
             this.lblMorningShift.AutoSize = true;
             this.lblMorningShift.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.lblMorningShift.Location = new System.Drawing.Point(759, 546);
+            this.lblMorningShift.Location = new System.Drawing.Point(569, 443);
+            this.lblMorningShift.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblMorningShift.Name = "lblMorningShift";
-            this.lblMorningShift.Size = new System.Drawing.Size(211, 20);
+            this.lblMorningShift.Size = new System.Drawing.Size(180, 17);
             this.lblMorningShift.TabIndex = 14;
             this.lblMorningShift.Text = "Morning Shift : 08:00-12:30";
             // 
@@ -385,9 +387,10 @@ namespace PRJMediaBazaar
             // 
             this.lblMiddayShift.AutoSize = true;
             this.lblMiddayShift.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.lblMiddayShift.Location = new System.Drawing.Point(759, 576);
+            this.lblMiddayShift.Location = new System.Drawing.Point(569, 468);
+            this.lblMiddayShift.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblMiddayShift.Name = "lblMiddayShift";
-            this.lblMiddayShift.Size = new System.Drawing.Size(214, 20);
+            this.lblMiddayShift.Size = new System.Drawing.Size(182, 17);
             this.lblMiddayShift.TabIndex = 15;
             this.lblMiddayShift.Text = "Midday Shift : 12:30 - 17:00";
             // 
@@ -395,9 +398,10 @@ namespace PRJMediaBazaar
             // 
             this.lblEveningShift.AutoSize = true;
             this.lblEveningShift.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.lblEveningShift.Location = new System.Drawing.Point(759, 606);
+            this.lblEveningShift.Location = new System.Drawing.Point(569, 493);
+            this.lblEveningShift.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblEveningShift.Name = "lblEveningShift";
-            this.lblEveningShift.Size = new System.Drawing.Size(220, 20);
+            this.lblEveningShift.Size = new System.Drawing.Size(188, 17);
             this.lblEveningShift.TabIndex = 16;
             this.lblEveningShift.Text = "Evening Shift : 17:00 - 21:30";
             // 
@@ -411,25 +415,25 @@ namespace PRJMediaBazaar
             "Stocker",
             "SalesAssistant",
             "WarehouseManager"});
-            this.cbPosition.Location = new System.Drawing.Point(511, 95);
-            this.cbPosition.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.cbPosition.Location = new System.Drawing.Point(383, 77);
+            this.cbPosition.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
             this.cbPosition.Name = "cbPosition";
-            this.cbPosition.Size = new System.Drawing.Size(183, 24);
+            this.cbPosition.Size = new System.Drawing.Size(138, 21);
             this.cbPosition.TabIndex = 17;
             this.cbPosition.SelectedIndexChanged += new System.EventHandler(this.cbPosition_SelectedIndexChanged);
             // 
             // lblPosition
             // 
             this.lblPosition.AutoSize = true;
-            this.lblPosition.Location = new System.Drawing.Point(508, 75);
+            this.lblPosition.Location = new System.Drawing.Point(381, 61);
+            this.lblPosition.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblPosition.Name = "lblPosition";
-            this.lblPosition.Size = new System.Drawing.Size(66, 17);
+            this.lblPosition.Size = new System.Drawing.Size(50, 13);
             this.lblPosition.TabIndex = 18;
             this.lblPosition.Text = "Position :";
             // 
             // panelSchedule
             // 
-            this.panelSchedule.Controls.Add(this.panelSickReports);
             this.panelSchedule.Controls.Add(this.btnDeleteSchedule);
             this.panelSchedule.Controls.Add(this.btnGenerateSchedule);
             this.panelSchedule.Controls.Add(this.label8);
@@ -452,18 +456,17 @@ namespace PRJMediaBazaar
             this.panelSchedule.Controls.Add(this.cbDay);
             this.panelSchedule.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelSchedule.Location = new System.Drawing.Point(0, 0);
-            this.panelSchedule.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.panelSchedule.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
             this.panelSchedule.Name = "panelSchedule";
-            this.panelSchedule.Size = new System.Drawing.Size(1172, 679);
+            this.panelSchedule.Size = new System.Drawing.Size(879, 552);
             this.panelSchedule.TabIndex = 20;
             this.panelSchedule.Paint += new System.Windows.Forms.PaintEventHandler(this.panelSchedule_Paint_1);
             // 
             // btnDeleteSchedule
             // 
-            this.btnDeleteSchedule.Location = new System.Drawing.Point(343, 143);
-            this.btnDeleteSchedule.Margin = new System.Windows.Forms.Padding(4);
+            this.btnDeleteSchedule.Location = new System.Drawing.Point(257, 116);
             this.btnDeleteSchedule.Name = "btnDeleteSchedule";
-            this.btnDeleteSchedule.Size = new System.Drawing.Size(180, 42);
+            this.btnDeleteSchedule.Size = new System.Drawing.Size(135, 34);
             this.btnDeleteSchedule.TabIndex = 38;
             this.btnDeleteSchedule.Text = "Empty Schedule";
             this.btnDeleteSchedule.UseVisualStyleBackColor = true;
@@ -471,10 +474,9 @@ namespace PRJMediaBazaar
             // 
             // btnGenerateSchedule
             // 
-            this.btnGenerateSchedule.Location = new System.Drawing.Point(153, 143);
-            this.btnGenerateSchedule.Margin = new System.Windows.Forms.Padding(4);
+            this.btnGenerateSchedule.Location = new System.Drawing.Point(115, 116);
             this.btnGenerateSchedule.Name = "btnGenerateSchedule";
-            this.btnGenerateSchedule.Size = new System.Drawing.Size(180, 42);
+            this.btnGenerateSchedule.Size = new System.Drawing.Size(135, 34);
             this.btnGenerateSchedule.TabIndex = 38;
             this.btnGenerateSchedule.Text = "Generate Schedule";
             this.btnGenerateSchedule.UseVisualStyleBackColor = true;
@@ -484,10 +486,9 @@ namespace PRJMediaBazaar
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(832, 346);
-            this.label8.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label8.Location = new System.Drawing.Point(624, 281);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(217, 31);
+            this.label8.Size = new System.Drawing.Size(175, 26);
             this.label8.TabIndex = 37;
             this.label8.Text = "Incomplete Days";
             // 
@@ -495,31 +496,27 @@ namespace PRJMediaBazaar
             // 
             this.lblPositionNeeded.AutoSize = true;
             this.lblPositionNeeded.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPositionNeeded.Location = new System.Drawing.Point(789, 144);
-            this.lblPositionNeeded.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblPositionNeeded.Location = new System.Drawing.Point(592, 117);
             this.lblPositionNeeded.Name = "lblPositionNeeded";
-            this.lblPositionNeeded.Size = new System.Drawing.Size(163, 25);
+            this.lblPositionNeeded.Size = new System.Drawing.Size(131, 20);
             this.lblPositionNeeded.TabIndex = 36;
             this.lblPositionNeeded.Text = "Position needed: ";
             // 
             // lbIncompleteDays
             // 
             this.lbIncompleteDays.FormattingEnabled = true;
-            this.lbIncompleteDays.ItemHeight = 16;
-            this.lbIncompleteDays.Location = new System.Drawing.Point(729, 218);
-            this.lbIncompleteDays.Margin = new System.Windows.Forms.Padding(4);
+            this.lbIncompleteDays.Location = new System.Drawing.Point(547, 177);
             this.lbIncompleteDays.Name = "lbIncompleteDays";
-            this.lbIncompleteDays.Size = new System.Drawing.Size(425, 324);
+            this.lbIncompleteDays.Size = new System.Drawing.Size(320, 251);
             this.lbIncompleteDays.TabIndex = 35;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(529, 186);
-            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label4.Location = new System.Drawing.Point(397, 151);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(68, 20);
+            this.label4.Size = new System.Drawing.Size(59, 17);
             this.label4.TabIndex = 34;
             this.label4.Text = "Evening";
             // 
@@ -527,10 +524,9 @@ namespace PRJMediaBazaar
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(339, 186);
-            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label3.Location = new System.Drawing.Point(254, 151);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(62, 20);
+            this.label3.Size = new System.Drawing.Size(53, 17);
             this.label3.TabIndex = 33;
             this.label3.Text = "Midday";
             // 
@@ -538,10 +534,9 @@ namespace PRJMediaBazaar
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(183, 186);
-            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label2.Location = new System.Drawing.Point(137, 151);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(69, 20);
+            this.label2.Size = new System.Drawing.Size(59, 17);
             this.label2.TabIndex = 32;
             this.label2.Text = "Morning";
             // 
@@ -549,10 +544,9 @@ namespace PRJMediaBazaar
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(48, 186);
-            this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label5.Location = new System.Drawing.Point(36, 151);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(69, 20);
+            this.label5.Size = new System.Drawing.Size(58, 17);
             this.label5.TabIndex = 31;
             this.label5.Text = "Position";
             // 
@@ -561,10 +555,9 @@ namespace PRJMediaBazaar
             this.PanelTableScroll.AutoScroll = true;
             this.PanelTableScroll.BackColor = System.Drawing.Color.Silver;
             this.PanelTableScroll.Controls.Add(this.ShiftsTable);
-            this.PanelTableScroll.Location = new System.Drawing.Point(44, 210);
-            this.PanelTableScroll.Margin = new System.Windows.Forms.Padding(4);
+            this.PanelTableScroll.Location = new System.Drawing.Point(33, 170);
             this.PanelTableScroll.Name = "PanelTableScroll";
-            this.PanelTableScroll.Size = new System.Drawing.Size(651, 452);
+            this.PanelTableScroll.Size = new System.Drawing.Size(488, 367);
             this.PanelTableScroll.TabIndex = 30;
             // 
             // ShiftsTable
@@ -580,19 +573,19 @@ namespace PRJMediaBazaar
             this.ShiftsTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.ShiftsTable.Dock = System.Windows.Forms.DockStyle.Top;
             this.ShiftsTable.Location = new System.Drawing.Point(0, 0);
-            this.ShiftsTable.Margin = new System.Windows.Forms.Padding(4);
             this.ShiftsTable.Name = "ShiftsTable";
             this.ShiftsTable.RowCount = 1;
             this.ShiftsTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.ShiftsTable.Size = new System.Drawing.Size(651, 4);
+            this.ShiftsTable.Size = new System.Drawing.Size(488, 4);
             this.ShiftsTable.TabIndex = 11;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(75, 76);
+            this.label1.Location = new System.Drawing.Point(56, 62);
+            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(71, 17);
+            this.label1.Size = new System.Drawing.Size(55, 13);
             this.label1.TabIndex = 21;
             this.label1.Text = "Schedule:";
             // 
@@ -602,10 +595,10 @@ namespace PRJMediaBazaar
             this.cbSchedule.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.cbSchedule.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbSchedule.FormattingEnabled = true;
-            this.cbSchedule.Location = new System.Drawing.Point(32, 96);
-            this.cbSchedule.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.cbSchedule.Location = new System.Drawing.Point(24, 78);
+            this.cbSchedule.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
             this.cbSchedule.Name = "cbSchedule";
-            this.cbSchedule.Size = new System.Drawing.Size(225, 23);
+            this.cbSchedule.Size = new System.Drawing.Size(170, 21);
             this.cbSchedule.TabIndex = 20;
             this.cbSchedule.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.cbSchedule_DrawItem);
             this.cbSchedule.SelectedIndexChanged += new System.EventHandler(this.cbSchedule_SelectedIndexChanged);
@@ -613,6 +606,7 @@ namespace PRJMediaBazaar
             // pnlNavbar
             // 
             this.pnlNavbar.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.pnlNavbar.Controls.Add(this.panelSickReports);
             this.pnlNavbar.Controls.Add(this.pnlDayOff);
             this.pnlNavbar.Controls.Add(this.panelEmployees);
             this.pnlNavbar.Controls.Add(this.lblTitle);
@@ -622,9 +616,8 @@ namespace PRJMediaBazaar
             this.pnlNavbar.Controls.Add(this.lblSchedule);
             this.pnlNavbar.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlNavbar.Location = new System.Drawing.Point(0, 0);
-            this.pnlNavbar.Margin = new System.Windows.Forms.Padding(4);
             this.pnlNavbar.Name = "pnlNavbar";
-            this.pnlNavbar.Size = new System.Drawing.Size(1172, 59);
+            this.pnlNavbar.Size = new System.Drawing.Size(879, 48);
             this.pnlNavbar.TabIndex = 5;
             // 
             // timer1
@@ -633,12 +626,12 @@ namespace PRJMediaBazaar
             // 
             // HRHome
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1172, 679);
+            this.ClientSize = new System.Drawing.Size(879, 552);
             this.Controls.Add(this.pnlNavbar);
             this.Controls.Add(this.panelSchedule);
-            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "HRHome";
             this.Text = "HRHome";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.HRHome_FormClosing);
