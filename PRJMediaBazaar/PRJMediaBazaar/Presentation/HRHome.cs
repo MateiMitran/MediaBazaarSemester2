@@ -18,6 +18,7 @@ namespace PRJMediaBazaar
         private static string[] positions = new string[] { "Security", "Cashier", "Stocker", "SalesAssistant", "WarehouseManager"};
 
         private EmployeeControl _empControl;
+        private AbsenceControl _absenceControl;
         private ScheduleControl _scheduleControl;
         private Employee[] _employees;
         private Employee thisEmployee;
@@ -35,7 +36,8 @@ namespace PRJMediaBazaar
             thisEmployee = null;
             _currentSchedule = null;
             LoadEmployees();
-            _scheduleControl = new ScheduleControl(_empControl);
+            _absenceControl = new AbsenceControl(_empControl);
+            _scheduleControl = _absenceControl.GetScheduleControl();
             cbPosition.Text = "Security";
             this.btnChangeNeededPosition.Enabled = false;
             this.btnGenerateSchedule.Enabled = false;
@@ -666,12 +668,12 @@ namespace PRJMediaBazaar
 
             if (index >= 0)
             {
-                DayOff req = _scheduleControl.DaysOffRequests[index];
-                bool query = _scheduleControl.ConfirmDayOffRequest(req.Day_id, req.Employee_id);
+                DayOff req = _absenceControl.DaysOffRequests[index];
+                bool query = _absenceControl.ConfirmDayOffRequest(req.Day.Id, req.Employee.Id);
 
                 if (query)
                 {
-                    _scheduleControl.DaysOffRequests.RemoveAt(index);
+                    _absenceControl.DaysOffRequests.RemoveAt(index);
                     LoadDayOffRequests();
                     x = new Button();
                     x.Location = new Point(-6, -1);
@@ -718,14 +720,14 @@ namespace PRJMediaBazaar
         private void LoadDayOffRequests()
         {
             lbDayOff.Items.Clear();
-            List<DayOff> daysOff = _scheduleControl.DaysOffRequests;
+            List<DayOff> daysOff = _absenceControl.DaysOffRequests;
 
             for (int i = 0; i < daysOff.Count(); i++)
             {
                 DayOff dayOff = daysOff[i];
-                int scheduleId = dayOff.Schedule_id;
-                int dayId = dayOff.Day_id;
-                int employeeId = dayOff.Employee_id;
+                int scheduleId = dayOff.Day.ScheduleId;
+                int dayId = dayOff.Day.Id;
+                int employeeId = dayOff.Employee.Id;
                 string urgent;
 
                 if (dayOff.Urgent == false)
@@ -737,7 +739,7 @@ namespace PRJMediaBazaar
                     urgent = "Urgent";
                 }
 
-                DateTime day = dayOff.GetDayById(scheduleId, dayId).Date;
+                DateTime day = dayOff.Day.Date;
                 Employee employee = _empControl.GetEmployee(employeeId);
 
                 lbDayOff.Items.Add(day.ToString("dd/MM/yyyy") + " --> " + employee.FullName + " --> " + urgent);

@@ -9,6 +9,8 @@ namespace PRJMediaBazaar.Logic
     class Schedule
     {
         private List<Day> _days;
+
+
         public Schedule(int scheduleId, DateTime startDate, DateTime endDate, bool isOutdated)
         {
             Id = scheduleId;
@@ -26,6 +28,16 @@ namespace PRJMediaBazaar.Logic
         public DateTime EndDate { get; private set; }
         public bool IsOutdated { get; private set; }
         public Day[] Days { get { return _days.ToArray(); } }
+
+        public Day GetDay(int dayId)
+        {
+            foreach(Day d in _days)
+            {
+                if (d.Id == dayId)
+                    return d;
+            }
+            return null;
+        }
 
 
         public override string ToString()

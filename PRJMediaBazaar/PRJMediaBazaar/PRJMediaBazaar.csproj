@@ -92,9 +92,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Data\AbsenceDAL.cs" />
+    <Compile Include="Data\AvailabilitiesDAL.cs" />
     <Compile Include="InvaidEmailException.cs" />
     <Compile Include="InvalidIntException.cs" />
     <Compile Include="InvalidStringException.cs" />
+    <Compile Include="Logic\AbsenceControl.cs" />
     <Compile Include="Logic\DayOff.cs" />
     <Compile Include="Logic\Duty.cs" />
     <Compile Include="Logic\SickReport.cs" />

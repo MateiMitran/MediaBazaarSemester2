@@ -14,14 +14,14 @@ namespace PRJMediaBazaar.Logic
         private Employee[] _employees;
         private List<EmployeePlanner> _available;
         private List<EmployeePlanner> _unavailable;
-        private ScheduleDAL availabilitiesDAL;
+        private AvailabilitiesDAL availabilitiesDAL;
 
         public Availabilities(Employee[] employeesOnPosition, Day day, Shift shift)
         {
             _available = new List<EmployeePlanner>();
             _unavailable = new List<EmployeePlanner>();
             _employees = employeesOnPosition;
-            availabilitiesDAL = new ScheduleDAL();
+            availabilitiesDAL = new AvailabilitiesDAL(employeesOnPosition.ToList());
             PopulateLists(day, shift);
             
         }

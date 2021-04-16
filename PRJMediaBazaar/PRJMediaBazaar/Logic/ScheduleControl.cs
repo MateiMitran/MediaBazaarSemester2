@@ -11,23 +11,19 @@ namespace PRJMediaBazaar.Logic
 {
     class ScheduleControl
     {
-        private List<DayOff> dayoff_req;
-        private List<SickReport> sick_req;
-        private List<Schedule> _schedules;
-        private EmployeeControl _empControl;
-        private ScheduleDAL scheduleDAL;
+       
+        protected List<Schedule> _schedules;
+       protected EmployeeControl _empControl;
+        protected ScheduleDAL scheduleDAL;
 
         public ScheduleControl(EmployeeControl employeeControl)
         {
             _schedules = new List<Schedule>();
             _empControl = employeeControl;
-            scheduleDAL = new ScheduleDAL();
+            scheduleDAL = new ScheduleDAL(_empControl.GetAllEmployees());
             LoadSchedules();
-            LoadDaysOff();
         }
 
-        public List<DayOff> DaysOffRequests { get { return dayoff_req; } }
-        public List<SickReport> SickReports { get { return sick_req; } }
         public Schedule[] Schedules { get { return _schedules.ToArray(); } }
 
         private void LoadSchedules()
@@ -50,7 +46,7 @@ namespace PRJMediaBazaar.Logic
 
 
 
-        private void DecreaseAssignedPosition(Day day, string jobPosition, string shift)
+        protected void DecreaseAssignedPosition(Day day, string jobPosition, string shift)
         {
             Duty duty = day.GetDuty(jobPosition);
             int morning = duty.MorningAssigned;
@@ -71,7 +67,7 @@ namespace PRJMediaBazaar.Logic
             day.ChangeAssignedDuties(jobPosition, morning, midday, evening);
         }
 
-        private void IncreaseAssignedPosition(Day day, string jobPosition, string shift)
+        protected void IncreaseAssignedPosition(Day day, string jobPosition, string shift)
         {
             Duty duty = day.GetDuty(jobPosition);
             int morning = duty.MorningAssigned;
@@ -132,6 +128,11 @@ namespace PRJMediaBazaar.Logic
 
             }
         }
+
+        protected EmployeeWorkday GetEmployeeShift(int weekId, int dayId, int employeeId)
+        {
+            return scheduleDAL.SelectEmployeeShift(weekId, dayId, employeeId);
+        }
      
         public void AssignShift(string shift, Employee employee, Day day, int emptyShiftIndex, double hours)
         {
@@ -158,40 +159,6 @@ namespace PRJMediaBazaar.Logic
 
         }
 
-
-        public void AssignAbsence(AbsenceReason absenceReason, Employee employee, Day day)
-        {
-            EmployeeWorkday wd = scheduleDAL.SelectEmployeeShift(day.WeekId, day.Id, employee.Id);
-            if (wd != null)
-            {
-                scheduleDAL.UpdateAbsence(day.Id, employee.Id);
-                if (wd.FirstShift != Shift.None)
-                {
-                    DecreaseAssignedPosition(day, employee.JobPosition, wd.FirstShift.ToString());
-                }
-                if (wd.SecondShift != Shift.None)
-                {
-                    DecreaseAssignedPosition(day, employee.JobPosition, wd.SecondShift.ToString());
-                }
-                scheduleDAL.UpdateHours(wd.Hours, day.WeekId, employee.Id);
-            }
-            else
-            {
-                scheduleDAL.InsertAbsence(day.Id, employee.Id);
-            }
-        }
-
-
-
-        public void LoadDaysOff() // add the DayOff requests to the list 
-        {
-            dayoff_req = scheduleDAL.SelectDayOffRequests();
-        }
-
-        public void LoadSickReports()  
-        {
-            sick_req = scheduleDAL.SelectSickReports();
-        }
 
 
 
@@ -264,15 +231,6 @@ namespace PRJMediaBazaar.Logic
 
         }
 
-        public bool ConfirmDayOffRequest(int dayId, int empId)
-        {
-            return scheduleDAL.ConfirmDayOffRequest(dayId, empId);
-        }
-
-        public bool MarkAsSeen(int dayId, int empId)
-        {
-            return scheduleDAL.ConfirmSickReport(dayId, empId);
-        }
 
         public void GenerateSchedule(Day day)
         {
