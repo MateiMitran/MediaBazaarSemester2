@@ -200,6 +200,7 @@ namespace PRJMediaBazaar
                 this.btnGenerateSchedule.Enabled = false;
             }
             _currentSchedule = schedule;
+            this.ActiveControl = null;
         }
 
 
@@ -222,6 +223,7 @@ namespace PRJMediaBazaar
                     this.btnChangeNeededPosition.Enabled = false;
                 }
             }
+            this.ActiveControl = null;
 
         }
 
@@ -244,7 +246,7 @@ namespace PRJMediaBazaar
                 this.btnGenerateSchedule.Enabled = false;
                 this.btnDeleteSchedule.Enabled = true;
             }
-
+            this.ActiveControl = null;
 
         }
 
@@ -521,6 +523,7 @@ namespace PRJMediaBazaar
 
                 }
             }
+            RedrawComboboxes();
             
         }
 
@@ -913,6 +916,28 @@ namespace PRJMediaBazaar
            
             // Draw the text    
             e.Graphics.DrawString(text, ((Control)sender).Font, brush, e.Bounds.X, e.Bounds.Y);
+        }
+
+        private void cbSchedule_DropDownClosed(object sender, EventArgs e)
+        {
+            this.ActiveControl = null;
+        }
+
+        private void cbDay_DropDownClosed(object sender, EventArgs e)
+        {
+            this.ActiveControl = null;
+        }
+
+        private void cbPosition_DropDownClosed(object sender, EventArgs e)
+        {
+            this.ActiveControl = null;
+        }
+
+        private void RedrawComboboxes()
+        {
+            cbSchedule.Invalidate();
+            cbDay.Invalidate();
+            cbPosition.Invalidate();
         }
     }
 }

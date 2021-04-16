@@ -64,6 +64,7 @@ namespace PRJMediaBazaar
             this.btnDeleteSchedule = new System.Windows.Forms.Button();
             this.btnGenerateSchedule = new System.Windows.Forms.Button();
             this.lblPositionNeeded = new System.Windows.Forms.Label();
+            this.lbIncompleteDays = new System.Windows.Forms.ListBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -74,7 +75,6 @@ namespace PRJMediaBazaar
             this.cbSchedule = new System.Windows.Forms.ComboBox();
             this.pnlNavbar = new System.Windows.Forms.Panel();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.lbIncompleteDays = new System.Windows.Forms.ListBox();
             this.panelEmployees.SuspendLayout();
             this.panelSickReports.SuspendLayout();
             this.pnlDayOff.SuspendLayout();
@@ -349,6 +349,7 @@ namespace PRJMediaBazaar
             this.cbDay.TabIndex = 9;
             this.cbDay.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.cbDay_DrawItem);
             this.cbDay.SelectedIndexChanged += new System.EventHandler(this.cbDay_SelectedIndexChanged);
+            this.cbDay.DropDownClosed += new System.EventHandler(this.cbDay_DropDownClosed);
             // 
             // lblWeek
             // 
@@ -423,6 +424,7 @@ namespace PRJMediaBazaar
             this.cbPosition.TabIndex = 17;
             this.cbPosition.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.cbPosition_DrawItem);
             this.cbPosition.SelectedIndexChanged += new System.EventHandler(this.cbPosition_SelectedIndexChanged);
+            this.cbPosition.DropDownClosed += new System.EventHandler(this.cbPosition_DropDownClosed);
             // 
             // lblPosition
             // 
@@ -492,6 +494,16 @@ namespace PRJMediaBazaar
             this.lblPositionNeeded.Size = new System.Drawing.Size(131, 20);
             this.lblPositionNeeded.TabIndex = 36;
             this.lblPositionNeeded.Text = "Position needed: ";
+            // 
+            // lbIncompleteDays
+            // 
+            this.lbIncompleteDays.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbIncompleteDays.FormattingEnabled = true;
+            this.lbIncompleteDays.ItemHeight = 16;
+            this.lbIncompleteDays.Location = new System.Drawing.Point(536, 174);
+            this.lbIncompleteDays.Name = "lbIncompleteDays";
+            this.lbIncompleteDays.Size = new System.Drawing.Size(312, 244);
+            this.lbIncompleteDays.TabIndex = 35;
             // 
             // label4
             // 
@@ -585,6 +597,7 @@ namespace PRJMediaBazaar
             this.cbSchedule.TabIndex = 20;
             this.cbSchedule.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.cbSchedule_DrawItem);
             this.cbSchedule.SelectedIndexChanged += new System.EventHandler(this.cbSchedule_SelectedIndexChanged);
+            this.cbSchedule.DropDownClosed += new System.EventHandler(this.cbSchedule_DropDownClosed);
             // 
             // pnlNavbar
             // 
@@ -606,16 +619,6 @@ namespace PRJMediaBazaar
             // timer1
             // 
             this.timer1.Interval = 1500;
-            // 
-            // lbIncompleteDays
-            // 
-            this.lbIncompleteDays.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbIncompleteDays.FormattingEnabled = true;
-            this.lbIncompleteDays.ItemHeight = 16;
-            this.lbIncompleteDays.Location = new System.Drawing.Point(536, 174);
-            this.lbIncompleteDays.Name = "lbIncompleteDays";
-            this.lbIncompleteDays.Size = new System.Drawing.Size(312, 244);
-            this.lbIncompleteDays.TabIndex = 35;
             // 
             // HRHome
             // 
