@@ -36,8 +36,8 @@ namespace PRJMediaBazaar
             thisEmployee = null;
             _currentSchedule = null;
             LoadEmployees();
-            _absenceControl = new AbsenceControl(_empControl);
-            _scheduleControl = _absenceControl.GetScheduleControl();
+            _scheduleControl = new ScheduleControl(_empControl);
+            _absenceControl = new AbsenceControl(_scheduleControl);
             cbPosition.Text = "Security";
             this.btnChangeNeededPosition.Enabled = false;
             this.btnGenerateSchedule.Enabled = false;

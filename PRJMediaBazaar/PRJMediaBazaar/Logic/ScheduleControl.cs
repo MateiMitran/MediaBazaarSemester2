@@ -11,9 +11,9 @@ namespace PRJMediaBazaar.Logic
 {
     class ScheduleControl
     {
-       
+
         protected List<Schedule> _schedules;
-       protected EmployeeControl _empControl;
+        protected EmployeeControl _empControl;
         protected ScheduleDAL scheduleDAL;
 
         public ScheduleControl(EmployeeControl employeeControl)
@@ -23,6 +23,8 @@ namespace PRJMediaBazaar.Logic
             scheduleDAL = new ScheduleDAL(_empControl.GetAllEmployees());
             LoadSchedules();
         }
+
+        public EmployeeControl EmployeeControl{ get { return _empControl; } }
 
         public Schedule[] Schedules { get { return _schedules.ToArray(); } }
 
@@ -46,7 +48,7 @@ namespace PRJMediaBazaar.Logic
 
 
 
-        protected void DecreaseAssignedPosition(Day day, string jobPosition, string shift)
+        public void DecreaseAssignedPosition(Day day, string jobPosition, string shift)
         {
             Duty duty = day.GetDuty(jobPosition);
             int morning = duty.MorningAssigned;
@@ -67,7 +69,7 @@ namespace PRJMediaBazaar.Logic
             day.ChangeAssignedDuties(jobPosition, morning, midday, evening);
         }
 
-        protected void IncreaseAssignedPosition(Day day, string jobPosition, string shift)
+        public void IncreaseAssignedPosition(Day day, string jobPosition, string shift)
         {
             Duty duty = day.GetDuty(jobPosition);
             int morning = duty.MorningAssigned;
@@ -86,6 +88,11 @@ namespace PRJMediaBazaar.Logic
                     break;
             }
             day.ChangeAssignedDuties(jobPosition, morning, midday, evening);
+        }
+
+        public bool UpdateHours(double hours,int weekId,int employeeId)
+        {
+           return  scheduleDAL.UpdateHours(hours, weekId, employeeId);
         }
 
         public EmployeeWorkday[] GetEmployeesShifts(int weekId, int dayId, string jobPosition)
@@ -129,7 +136,7 @@ namespace PRJMediaBazaar.Logic
             }
         }
 
-        protected EmployeeWorkday GetEmployeeShift(int weekId, int dayId, int employeeId)
+        public EmployeeWorkday GetEmployeeShift(int weekId, int dayId, int employeeId)
         {
             return scheduleDAL.SelectEmployeeShift(weekId, dayId, employeeId);
         }
