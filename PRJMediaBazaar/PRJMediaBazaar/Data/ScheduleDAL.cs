@@ -455,23 +455,24 @@ namespace PRJMediaBazaar.Data
             List<DayOff> pseudos = new List<DayOff>();
             while (result.Read())
             {
-                int scheduleId = Convert.ToInt32(result[0]);
-                int dayId = Convert.ToInt32(result[1]);
-                int employee_id = Convert.ToInt32(result[2]);
-                bool urgent = Convert.ToBoolean(result[3]);
-                string status = result[4].ToString();
-                string reason = result[5].ToString();
-                DayOff req = new DayOff(scheduleId, dayId, employee_id, urgent, status, reason);
+                int requestId = Convert.ToInt32(result[0]);
+                int scheduleId = Convert.ToInt32(result[1]);
+                int dayId = Convert.ToInt32(result[2]);
+                int employee_id = Convert.ToInt32(result[3]);
+                bool urgent = Convert.ToBoolean(result[4]);
+                string status = result[5].ToString();
+                string reason = result[6].ToString();
+                DayOff req = new DayOff(requestId,scheduleId, dayId, employee_id, urgent, status, reason);
                 pseudos.Add(req);
             }
             CloseConnection();
             return pseudos;
         }
 
-        public bool AddReasonForDenial(int employee_id, String reason)
+        public bool AddReasonForDenial(int employee_id, String reason, String denied)
         {
-            String sql = "UPDATE `dayoff_requests` SET `reason`= @reason WHERE `employee_id`= @employee_id; ";
-            String[] parameters = new String[] { employee_id.ToString(), reason };
+            String sql = "UPDATE `dayoff_requests` SET `reason`= @reason, `status`= @denied WHERE `employee_id`= @employee_id; ";
+            String[] parameters = new String[] { employee_id.ToString(), reason, denied };
             if(executeNonQuery (sql, parameters) != null)
             {
                 CloseConnection();

@@ -301,7 +301,7 @@ namespace PRJMediaBazaar.Logic
 
         public void AddReason(int id, String note)
         {
-           scheduleDAL.AddReasonForDenial(id, note);
+           scheduleDAL.AddReasonForDenial(id, note, "denied");
         }
 
         public bool MarkAsSeen(int dayId, int empId)

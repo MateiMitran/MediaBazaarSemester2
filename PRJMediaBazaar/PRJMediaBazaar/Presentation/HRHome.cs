@@ -22,6 +22,7 @@ namespace PRJMediaBazaar
         private Employee[] _employees;
         private Employee thisEmployee;
         private DayOff thisDayOff;
+        private List<DayOff> daysOff;
 
         private NamesRow[] _tableRows;
         private LogIn _loginForm;
@@ -669,8 +670,7 @@ namespace PRJMediaBazaar
         private void LoadDayOffRequests()
         {
             lbDayOff.Items.Clear();
-            List<DayOff> daysOff = _scheduleControl.DaysOffRequests;
-
+            daysOff = _scheduleControl.DaysOffRequests;
             for (int i = 0; i < daysOff.Count(); i++)
             {
                 DayOff dayOff = daysOff[i];
@@ -678,7 +678,7 @@ namespace PRJMediaBazaar
                 int dayId = dayOff.Day_id;
                 int employeeId = dayOff.Employee_id;
                 string urgent;
-
+                int requestId = dayOff.DayOffId;
                 if (dayOff.Urgent == false)
                 {
                     urgent = "Not urgent";
@@ -691,7 +691,7 @@ namespace PRJMediaBazaar
                 DateTime day = dayOff.GetDayById(scheduleId, dayId).Date;
                 Employee employee = _empControl.GetEmployee(employeeId);
 
-                lbDayOff.Items.Add(day.ToString("dd/MM/yyyy") + " --> " + employee.FullName + " --> " + urgent);
+                lbDayOff.Items.Add("Id : " + requestId + " | " + day.ToString("dd/MM/yyyy") + " --> " + employee.FullName + " --> " + urgent);
             }
         }
 
@@ -699,17 +699,35 @@ namespace PRJMediaBazaar
         {
             try
             {
-                thisDayOff = (DayOff)lbDayOff.SelectedItem;
-                ExplainDenial explain = new ExplainDenial(thisDayOff, _scheduleControl, this);
-                explain.Show();
+                String request = this.lbDayOff.SelectedItem.ToString();
+                string x = new string(request.SkipWhile(c => !char.IsDigit(c))
+                         .TakeWhile(c => char.IsDigit(c))
+                         .ToArray());
+                int requestID = Convert.ToInt32(x);
+                foreach (DayOff temp in daysOff)
+                {
+                    if (temp.DayOffId == requestID)
+                    {
+                        thisDayOff = temp;
+                    }
+                }
+                if (thisDayOff == null)
+                {
+                    MessageBox.Show("No day off found!");
+                }
+                else
+                {
+                    ExplainDenial explain = new ExplainDenial(thisDayOff, _scheduleControl, this);
+                    explain.Show();
+                }
+                
             }
             catch(Exception ex)
             {
-
+                MessageBox.Show("An error occured!" + ex.ToString());
             }
             
         }
-
         private void cbSchedule_DrawItem(object sender, DrawItemEventArgs e)
         {
             // Draw the background 

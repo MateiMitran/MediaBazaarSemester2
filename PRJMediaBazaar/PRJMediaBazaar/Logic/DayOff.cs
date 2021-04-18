@@ -10,6 +10,7 @@ namespace PRJMediaBazaar.Logic
 {
       class DayOff : ScheduleDAL
     {
+        public int DayOffId { get; private set; }
         public int Schedule_id { get; private set; }
         public int Day_id { get; private set; }
         public int Employee_id { get; private set; }
@@ -18,8 +19,9 @@ namespace PRJMediaBazaar.Logic
         public String Reason { get; set; }
 
 
-        public DayOff (int scheduleId, int dayId, int employee_id, bool urgent, String status, String reason)
+        public DayOff (int dayOffId, int scheduleId, int dayId, int employee_id, bool urgent, String status, String reason)
         {
+            DayOffId = dayOffId;
             Schedule_id = scheduleId;
             Day_id = dayId;
             Employee_id = employee_id;
