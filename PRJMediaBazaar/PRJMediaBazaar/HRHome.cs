@@ -7,60 +7,34 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using PRJMediaBazaar.Logic;
-using Day = PRJMediaBazaar.Logic.Day;
 using System.Text.RegularExpressions;
 
 namespace PRJMediaBazaar
 {
-    partial class HRHome : Form
+     partial class HRHome : Form
     {
-
-        private EmployeeControl _empControl;
-        private ScheduleControl _scheduleControl;
-        private Employee[] _employees;
-        private Employee thisEmployee;
-
+        
+        RegularEmployee[] _employees;
+        Schedule[] _schedules;
         private NamesRow[] _tableRows;
         private LogIn _loginForm;
-        private Button x;
 
         public HRHome(LogIn loginForm)
         {
             InitializeComponent();
             _loginForm = loginForm;
-            _empControl = new EmployeeControl();
-            thisEmployee = null;
-            LoadEmployees();
-            _scheduleControl = new ScheduleControl(_empControl);
-            foreach (Schedule s in _scheduleControl.Schedules)
+            _employees = Database.GetEmployees();
+            foreach(RegularEmployee e in _employees)
+            {
+                cbAllEmployees.Items.Add(e.FirstName + " " + e.LastName);
+            }
+            _schedules = Database.GetAllSchedules();
+            foreach(Schedule s in _schedules)
             {
                 cbSchedule.Items.Add(s);
-                lbIncompleteDays.Items.Add(_scheduleControl.ScheduleStatus(s));
-
             }
-            cbPosition.Text = "Security";
+            cbPosition.Text = "All";
             this.btnChangeNeededPosition.Enabled = false;
-            this.btnGenerateSchedule.Enabled = false;
-            this.btnDeleteSchedule.Enabled = false;
-        }
-
-        public void LoadEmployees()
-        {
-            
-            List<Employee> temp = _empControl.Employees.ToList().OrderBy(p => p.LastName).ToList();
-            _employees = temp.ToArray();
-            for (int i=0;i<_employees.Length;i++)
-            {
-                this.cbEmployees.Items.Add(_employees[i].FirstName + ' ' + _employees[i].LastName);
-            }
-        }
-        public void AddEmployee(Employee temp)
-        {
-            List<Employee> temp1;
-            temp1 = _employees.ToList();
-            temp1.Add(temp);
-            _employees = temp1.ToArray();
         }
 
         private void label2_Click(object sender, EventArgs e)
@@ -69,8 +43,6 @@ namespace PRJMediaBazaar
             this.panelSchedule.Visible = false;
             this.panelSickReports.Visible = false;
             this.pnlDayOff.Visible = false;
-            this.panelEmployees.BringToFront();
-            this.panelSchedule.SendToBack();
             this.lblSchedule.ForeColor = Color.White;
             this.lblEmployees.ForeColor = Color.Gray;
             this.lblSickReports.ForeColor = Color.White;
@@ -100,7 +72,7 @@ namespace PRJMediaBazaar
             this.panelEmployees.Visible = false;
             this.panelSchedule.Visible = false;
             this.panelSickReports.Visible = false;
-
+            
             this.lblSchedule.ForeColor = Color.White;
             this.lblEmployees.ForeColor = Color.White;
             this.lblSickReports.ForeColor = Color.White;
@@ -132,10 +104,6 @@ namespace PRJMediaBazaar
             this.panelSchedule.Visible = false;
             this.panelSickReports.Visible = false;
             this.pnlDayOff.Visible = false;
-
-
-            /* LOAD DAY OFF REQUESTS */
-            LoadDayOffRequests();
         }
 
         private void lblAllEmployees_Click(object sender, EventArgs e)
@@ -145,10 +113,10 @@ namespace PRJMediaBazaar
 
         private void btnShowInfo_Click(object sender, EventArgs e)
         {
-
+           
         }
 
-        private void LoadEmployeeListboxes(Employee currentEmployee)
+        private void LoadEmployeeListboxes(RegularEmployee currentEmployee)
         {
             this.lbEmployeeInfo.Items.Clear();
             this.lbGeneralInfo.Items.Clear();
@@ -157,16 +125,15 @@ namespace PRJMediaBazaar
             this.lbEmployeeInfo.Items.Add("First Name : " + currentEmployee.FirstName);
             this.lbEmployeeInfo.Items.Add("Last Name : " + currentEmployee.LastName);
             this.lbEmployeeInfo.Items.Add("Email : " + currentEmployee.Email);
+            this.lbEmployeeInfo.Items.Add("Password : " + currentEmployee.Password);
             this.lbEmployeeInfo.Items.Add("Job Position : " + currentEmployee.JobPosition);
             this.lbEmployeeInfo.Items.Add("Salary : " + currentEmployee.Salary);
-            this.lbEmployeeInfo.Items.Add("Contract : " + currentEmployee.Contract);
-            this.lbEmployeeInfo.Items.Add("Days Off : " + currentEmployee.DaysOff);
-            this.lbEmployeeInfo.Items.Add("Contract Hours : " + currentEmployee.ContractHours);
+            this.lbEmployeeInfo.Items.Add("Promotion Points : " + currentEmployee.PromotionPoints);
+            this.lbEmployeeInfo.Items.Add("Late Points : " + currentEmployee.LatePoints);
             this.lbGeneralInfo.Items.Add("Birth Date : " + currentEmployee.BirthDate);
             this.lbGeneralInfo.Items.Add("Phone Number : " + currentEmployee.PhoneNumber);
             this.lbGeneralInfo.Items.Add("Address : " + currentEmployee.Address);
             this.lbGeneralInfo.Items.Add("Gender : " + currentEmployee.Gender);
-            this.lbGeneralInfo.Items.Add("Education : " + currentEmployee.Education);
         }
 
         private void lbEmployeeInfo_SelectedIndexChanged(object sender, EventArgs e)
@@ -195,11 +162,6 @@ namespace PRJMediaBazaar
             Schedule schedule = (Schedule)cbSchedule.SelectedItem;
             int scheduleId = schedule.Id;
             UpdateDaysCheckbox(scheduleId);
-            if (cbDay.Text == "")
-            {
-                ShiftsTable.Controls.Clear();
-                this.btnGenerateSchedule.Enabled = false;
-            }
 
         }
 
@@ -235,26 +197,13 @@ namespace PRJMediaBazaar
             {
                 LoadTableByPosition(day, cbPosition.Text);
             }
-            if (_scheduleControl.DayStatus(day) == "empty")
-            {
-                this.btnGenerateSchedule.Enabled = true;
-                this.btnDeleteSchedule.Enabled = false;
-            }
-            else
-            {
-                this.btnGenerateSchedule.Enabled = false;
-                this.btnDeleteSchedule.Enabled = true;
-            }
-
-
         }
 
 
         private void btnChangeNeededPosition_Click(object sender, EventArgs e)
         {
-
             //based on the selected position and day, open a new form to change the needed amount of that the position
-            ChangeNeededPosition form = new ChangeNeededPosition(this.cbPosition.Text, (Day)cbDay.SelectedItem, _tableRows, this, ((Schedule)cbSchedule.SelectedItem).Id, cbDay.SelectedIndex);
+            ChangeNeededPosition form = new ChangeNeededPosition(this.cbPosition.Text, (Day)cbDay.SelectedItem, _tableRows,this, ((Schedule)cbSchedule.SelectedItem).Id, cbDay.SelectedIndex);
             form.Show();
 
         }
@@ -264,10 +213,9 @@ namespace PRJMediaBazaar
         {
             try
             {
-                Duty neededAmounts = day.GetDuty(jobPosition);
-
-                EmployeeWorkday[] workdays = _scheduleControl.GetEmployeesShifts(day.WeekId, day.Id, jobPosition);
-                ShiftSeparator ssp = new ShiftSeparator(workdays, neededAmounts.MaxValue());
+                int neededJobPositionAmount = day.GetNeededPositionAmount(jobPosition);
+                EmployeeWorkday[] workdays = Database.GetEmployeesWorkdays(day.Id, jobPosition);
+                ShiftSeparator ssp = new ShiftSeparator(workdays, neededJobPositionAmount, _employees);
                 NamesRow[] namesRows = ssp.GetNamesRows();
                 _tableRows = namesRows;
 
@@ -362,34 +310,6 @@ namespace PRJMediaBazaar
                         }
                     }
 
-                    if (i + 1 > neededAmounts.MorningNeeded)
-                    {
-                        MorningShiftButton.Enabled = false;
-                        MorningShiftButton.BackColor = Color.Silver;
-                        MorningShiftButton.ForeColor = Color.Silver;
-                        MorningShiftButton.Text = "";
-
-
-                    }
-                    if (i + 1 > neededAmounts.MiddayNeeded)
-                    {
-                        MiddayShiftButton.Enabled = false;
-                        MiddayShiftButton.BackColor = Color.Silver;
-                        MiddayShiftButton.ForeColor = Color.Silver;
-                        MiddayShiftButton.Text = "";
-
-                    }
-                    if (i + 1 > neededAmounts.EveningNeeded)
-                    {
-                        EveningShiftButton.Enabled = false;
-                        EveningShiftButton.BackColor = Color.Silver;
-                        EveningShiftButton.ForeColor = Color.Silver;
-                        EveningShiftButton.Text = "";
-
-                    }
-
-
-
                     ShiftsTable.Controls.Add(JobPositionLabel, 0, ShiftsTable.RowCount - 1);
                     ShiftsTable.Controls.Add(MorningShiftButton, 1, ShiftsTable.RowCount - 1);
                     ShiftsTable.Controls.Add(MiddayShiftButton, 2, ShiftsTable.RowCount - 1);
@@ -404,7 +324,7 @@ namespace PRJMediaBazaar
                 ShiftsTable.Parent.ResumeLayout();
                 ShiftsTable.ResumeLayout();
             }
-            catch (NullReferenceException ex)
+            catch(NullReferenceException ex)
             {
                 MessageBox.Show(ex.Message);
             }
@@ -431,13 +351,13 @@ namespace PRJMediaBazaar
             };
             UnassignedShiftButton.FlatAppearance.BorderSize = 0;
             UnassignedShiftButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            UnassignedShiftButton.Click += delegate (object sender, EventArgs e) { UnassignedShiftButton_Click(sender, e, new ShiftAssigning(_scheduleControl, _empControl.GetEmployeesByPosition(jobPosition).ToList(), shift, jobPosition, this, day)); };
+            UnassignedShiftButton.Click += delegate (object sender, EventArgs e) { UnassignedShiftButton_Click(sender, e, new ShiftAssigning(day.Id, day.Date, shift, jobPosition,this,day)); };
             return UnassignedShiftButton;
 
 
         }
 
-        private Button GetAssignedShiftButton(Day day, Shift shift, string jobPosition, Employee employee)
+        private Button GetAssignedShiftButton(Day day, Shift shift, string jobPosition, RegularEmployee employee)
         {
             Button AssignedShiftButton = new Button()
             {
@@ -450,7 +370,7 @@ namespace PRJMediaBazaar
                 Location = new System.Drawing.Point(0, 0),
                 Name = "AssignedShiftButton",
                 TabIndex = 0,
-                Text = employee.FirstName + " " + employee.LastName,
+                Text = employee.FirstName + " "+ employee.LastName,
                 UseVisualStyleBackColor = true,
                 Size = new System.Drawing.Size(365, 38)
             };
@@ -467,27 +387,27 @@ namespace PRJMediaBazaar
             assigningForm.Show();
         }
 
-        private void AssignedShiftButton_Click(object sender, EventArgs e, Employee employee, Shift shift)
+        private void AssignedShiftButton_Click(object sender, EventArgs e, RegularEmployee employee, Shift shift)
         {
             ContextMenuStrip contextMenuStrip = new ContextMenuStrip();
-            contextMenuStrip.Items.Add("Remove Employee", null, delegate (object sender2, EventArgs e2) { RemoveShift(shift, employee); });
+            contextMenuStrip.Items.Add("Remove Employee", null, delegate (object sender2, EventArgs e2) { RemoveShift(shift,employee); });     
             contextMenuStrip.Show(Cursor.Position);
         }
 
-        private void RemoveShift(Shift shift, Employee employee)
+        private void RemoveShift(Shift shift, RegularEmployee employee)
         {
             DialogResult dialogResult = MessageBox.Show($"Are you sure you want to remove " +
                 $"{employee.FirstName} {employee.LastName}'s {shift.ToString()} shift?", "Confirmation", MessageBoxButtons.YesNo);
             if (dialogResult == DialogResult.Yes)
             {
-                _scheduleControl.RemoveShift(shift.ToString(), ((Day)cbDay.SelectedItem), employee);
+                Database.RemoveShift(shift, employee.Id, ((Day)cbDay.SelectedItem).Id);
             }
             LoadTableByPosition((Day)cbDay.SelectedItem, employee.JobPosition);
         }
 
         public void UpdateDaysCheckbox(int scheduleId)
         {
-            Day[] days = _scheduleControl.GetDays(scheduleId);
+            Day[] days = Database.GetDays(scheduleId);
             this.cbDay.Items.Clear();
             foreach (Day d in days)
             {
@@ -500,7 +420,7 @@ namespace PRJMediaBazaar
             Day day = (Day)cbDay.SelectedItem;
             if (this.cbPosition.Text != "All" && day != null)
             {
-
+              
                 this.lblPositionNeeded.Text = day.GetNeededPositionInfo(cbPosition.Text);
             }
             else if (this.cbPosition.Text == "All" && day != null)
@@ -509,14 +429,13 @@ namespace PRJMediaBazaar
             }
         }
 
-
-        private int GetEmptyShiftIndex(Employee morning, Employee mid, Employee evening)
+        private int GetEmptyShiftIndex(RegularEmployee morning, RegularEmployee mid, RegularEmployee evening)
         {
             if (morning != null && mid != null && evening == null)
             {
                 return 3;
             }
-            else if (morning != null && mid == null && evening != null)
+           else  if (morning != null && mid == null && evening != null)
             {
                 return 2;
             }
@@ -527,9 +446,9 @@ namespace PRJMediaBazaar
             return -1;
         }
 
-        private int GetBusyShiftIndex(Employee morning, Employee mid, Employee evening)
+        private int GetBusyShiftIndex(RegularEmployee morning, RegularEmployee mid, RegularEmployee evening)
         {
-
+          
             if (morning != null && mid == null && evening == null)
             {
                 return 1;
@@ -547,29 +466,81 @@ namespace PRJMediaBazaar
 
         private void btnAddPromotionPoints_Click(object sender, EventArgs e)
         {
-            AddEmployees addEmployees = new AddEmployees(this, _empControl, _employees.ToList());
-            addEmployees.Show();
+            try
+            { //
+                if (this.cbAllEmployees.SelectedItem == null)
+                {
+                    throw new EmptyComboBoxException("Please select an employee!");
+                }
+                String name = this.cbAllEmployees.SelectedItem.ToString();
+                RegularEmployee currentEmployee = null;
+                for (int i = 0; i < _employees.Length; i++)
+                {
+                    if (_employees[i].FirstName + " " + _employees[i].LastName == name)
+                    {
+                        currentEmployee = _employees[i];
+                        break;
+                    }
+                }
+                if (currentEmployee == null)
+                    MessageBox.Show("No employee found!");
+                else
+                {
+                    if (currentEmployee.PromotionPoints > 5)
+                        MessageBox.Show("Cannot add more promotion points!");
+                    else
+                    {
+                        currentEmployee.PromotionPoints++;
+                        int id = currentEmployee.Id;
+                        Database.AddPromotionPoints(id, 1);
+                        LoadEmployeeListboxes(currentEmployee);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("An error occured!" + ex.ToString());
+            }
         }
 
         private void btnAddLatePoints_Click(object sender, EventArgs e)
         {
-            if (thisEmployee == null)
+            try
             {
-                x = new Button();
-                x.Location = new Point(-6, -1);
-                x.Width = 556;
-                x.Height = 28;
-                x.Enabled = false;
-                x.BackColor = Color.Red;
-                x.Text = "Please select an employee!";
-                this.Controls.Add(x);
-                x.BringToFront();
-                timer1.Start();
+                if (this.cbAllEmployees.SelectedItem == null)
+                {
+                    throw new EmptyComboBoxException("Please select an employee!");
+                }
+                String name = this.cbAllEmployees.SelectedItem.ToString();
+                RegularEmployee currentEmployee = null;
+                for (int i = 0; i < _employees.Length; i++)
+                {
+                    if (_employees[i].FirstName + " " + _employees[i].LastName == name)
+                    {
+                        currentEmployee = _employees[i];
+                        break;
+                    }
+                }
+                if (currentEmployee == null)
+                    MessageBox.Show("No employee found!");
+                else
+                {
+                    if (currentEmployee.LatePoints > 5)
+                    {
+                        MessageBox.Show("Cannot add more late points!");
+                    }
+                    else
+                    {
+                        currentEmployee.LatePoints++;
+                        int id = currentEmployee.Id;
+                        Database.AddLatePoints(id, 1);
+                        LoadEmployeeListboxes(currentEmployee);
+                    }
+                }
             }
-            else
+            catch (Exception ex)
             {
-                EditNote editNote = new EditNote(thisEmployee, _empControl, this);
-                editNote.Show();
+                MessageBox.Show("An error occured!" + ex.ToString());
             }
         }
 
@@ -580,321 +551,69 @@ namespace PRJMediaBazaar
 
         private void cbAllEmployees_SelectedIndexChanged(object sender, EventArgs e)
         {
-
-        }
-
-        public void AddNoteToEmployee(Employee temp, String note)
-
-        {
-            temp.Note = note;
-        }
-        private void button1_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void panelSchedule_Paint_1(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void pnlDayOff_Paint(object sender, PaintEventArgs e)
-        {
-        }
-
-        private void btnConfirmDayOff_Click(object sender, EventArgs e)
-        {
-            /* CONFIRM DAY OFF REQUEST */
-
-            int index = lbDayOff.SelectedIndex;
-
-            if (index >= 0)
-            {
-                DayOff req = _scheduleControl.DaysOffRequests[index];
-                bool query = _scheduleControl.ConfirmDayOffRequest(req.Day_id, req.Employee_id);
-
-                if (query)
-                {
-                    _scheduleControl.DaysOffRequests.RemoveAt(index);
-                    LoadDayOffRequests();
-                    x = new Button();
-                    x.Location = new Point(-6, -1);
-                    x.Width = 556;
-                    x.Height = 28;
-                    x.Enabled = false;
-                    x.BackColor = Color.Green;
-                    x.Text = "Day off Confirmed!";
-                    this.Controls.Add(x);
-                    x.BringToFront();
-                    timer1.Start();
-                }
-                else
-                {
-
-
-                    x = new Button();
-                    x.Location = new Point(-6, -1);
-                    x.Width = 556;
-                    x.Height = 28;
-                    x.Enabled = false;
-                    x.BackColor = Color.Red;
-                    x.Text = "An error occured!";
-                    this.Controls.Add(x);
-                    x.BringToFront();
-                    timer1.Start();
-                }
-            }
-            else
-            {
-                x = new Button();
-                x.Location = new Point(-6, -1);
-                x.Width = 556;
-                x.Height = 28;
-                x.Enabled = false;
-                x.BackColor = Color.Red;
-                x.Text = "Select a day off request!";
-                this.Controls.Add(x);
-                x.BringToFront();
-                timer1.Start();
-            }
-        }
-
-        private void LoadDayOffRequests()
-        {
-            lbDayOff.Items.Clear();
-            List<DayOff> daysOff = _scheduleControl.DaysOffRequests;
-
-            for (int i = 0; i < daysOff.Count(); i++)
-            {
-                DayOff dayOff = daysOff[i];
-                int scheduleId = dayOff.Schedule_id;
-                int dayId = dayOff.Day_id;
-                int employeeId = dayOff.Employee_id;
-                string urgent;
-
-                if (dayOff.Urgent == false)
-                {
-                    urgent = "Not urgent";
-                }
-                else
-                {
-                    urgent = "Urgent";
-                }
-
-                DateTime day = dayOff.GetDayById(scheduleId, dayId).Date;
-                Employee employee = _empControl.GetEmployee(employeeId);
-
-                lbDayOff.Items.Add(day.ToString("dd/MM/yyyy") + " --> " + employee.FullName + " --> " + urgent);
-            }
-        }
-
-        private void btnDenyDayOff_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void cbSchedule_DrawItem(object sender, DrawItemEventArgs e)
-        {
-            // Draw the background 
-            e.DrawBackground();
-
-            if (e.Index < 0) { return; }
-
-            // Get the item text    
-            string text = ((ComboBox)sender).Items[e.Index].ToString();
-
-            // Determine the forecolor based on whether or not the item is selected    
-            Brush brush;
-            if (_scheduleControl.ScheduleStatus(_scheduleControl.Schedules[e.Index]) == "empty")// compare  date with your list.  
-            {
-                brush = Brushes.Red;
-            }
-            else if (_scheduleControl.ScheduleStatus(_scheduleControl.Schedules[e.Index]) == "started")
-            {
-                brush = Brushes.Yellow;
-            }
-            else
-            {
-                brush = Brushes.Green;
-            }
-
-            // Draw the text    
-            e.Graphics.DrawString(text, ((Control)sender).Font, brush, e.Bounds.X, e.Bounds.Y);
-
-        }
-
-        private void cbDay_DrawItem(object sender, DrawItemEventArgs e)
-        {
-            // Draw the background 
-            e.DrawBackground();
-
-            if (e.Index < 0) { return; }
-
-            // Get the item text    
-            string text = ((ComboBox)sender).Items[e.Index].ToString();
-            Day day = (Day)((ComboBox)sender).Items[e.Index];
-            // Determine the forecolor based on whether or not the item is selected    
-            Brush brush;
-            if (_scheduleControl.DayStatus(day) == "empty")// compare  date with your list.  
-            {
-                brush = Brushes.Red;
-            }
-            else if (_scheduleControl.DayStatus(day) == "started")
-            {
-                brush = Brushes.Yellow;
-            }
-            else
-            {
-                brush = Brushes.Green;
-            }
-
-            // Draw the text    
-            e.Graphics.DrawString(text, ((Control)sender).Font, brush, e.Bounds.X, e.Bounds.Y);
-        }
-
-        private void btnGenerateSchedule_Click(object sender, EventArgs e)
-        {
-            _scheduleControl.GenerateSchedule((Day)cbDay.SelectedItem);
-            LoadTableByPosition((Day)cbDay.SelectedItem, "Security");
-            this.btnGenerateSchedule.Enabled = false;
-        }
-
-        private void btnDeleteSchedule_Click(object sender, EventArgs e)
-        {
-            _scheduleControl.RemoveSchedule((Day)cbDay.SelectedItem);
-            LoadTableByPosition((Day)cbDay.SelectedItem, "Security");
-        }
-
-        private void timer1_Tick(object sender, EventArgs e)
-        {
-            x.Visible = false;
-            timer1.Stop();
-        }
-
-        private void btnMarkAsSeen_Click(object sender, EventArgs e)
-        {  /*
-             int index = lbSickReports.SelectedIndex;
-
-             if (index >= 0)
-             {
-                 SickDay req = _scheduleControl.SickReports[index];
-                 bool query = _scheduleControl.MarkAsSeen(req.Day_id, req.Employee_id);
-
-                 if (query)
-                 {
-                     _scheduleControl.SickReports.RemoveAt(index);
-                     LoadSickReports();
-                     req.MarkAsSeen(true);
-                     MessageBox.Show("Declaration checked");
-                 }
-                 else
-                 {
-                     MessageBox.Show("An error occurred, please try again later.");
-                 }
-             }
-             else
-             {
-                 MessageBox.Show("Please select a report to confirm");
-             }
-
-             /* void LoadSickReports()
-             {
-                 lbSickReports.Items.Clear();
-                 List<SickDay> sick_request = _scheduleControl.SickReports;
-
-                 for (int i = 0; i < sick_request.Count(); i++)
-                 {
-                     SickDay sick = sick_request[i];
-                     int scheduleId = sick.Schedule_id;
-                     int dayId = sick.Day_id;
-                     int employeeId = sick.Employee_id;
-                     string reason = sick.Description;
-                     bool seen = sick.Seen;
-
-
-                     DateTime day = sick.GetDayById(scheduleId, dayId).Date;
-                     Employee employee = _empControl.GetEmployee(employeeId);
-
-                     lbSickReports.Items.Add(day.ToString("dd/MM/yyyy") + " --> " + employee.FullName + reason + seen);
-                 }
-             } */
-        }
-
-        private void cbEmployees_SelectedIndexChanged(object sender, EventArgs e)
-        {
             try
             {
-                int ok = 0;
-                List<Employee> employees = _empControl.Employees.ToList();
-                if (this.cbEmployees.SelectedItem == null)
+
+                if (this.cbAllEmployees.SelectedItem == null)
                 {
-                    x = new Button();
-                    x.Location = new Point(-6, -1);
-                    x.Width = 556;
-                    x.Height = 28;
-                    x.Enabled = false;
-                    x.BackColor = Color.Red;
-                    x.Text = "Please select an employee!";
-                    this.Controls.Add(x);
-                    x.BringToFront();
-                    timer1.Start();
-                    throw new EmptyComboBoxException();
+                    throw new EmptyComboBoxException("Please select an employee!");
                 }
-                String input = this.cbEmployees.SelectedItem.ToString();
-                if (Regex.IsMatch(input, @"^\d+$") == true)
+                String name = this.cbAllEmployees.SelectedItem.ToString();
+                RegularEmployee currentEmployee = null;
+                for (int i = 0; i < _employees.Length; i++)
                 {
-                    int id = Convert.ToInt32(input);
-                    foreach (Employee employee in employees)
+                    if (_employees[i].FirstName + " " + _employees[i].LastName == name)
                     {
-                        if (employee.Id == id)
-                        {
-                            thisEmployee = employee;
-                            LoadEmployeeListboxes(thisEmployee);
-                            ok = 1;
-                            break;
-                        }
+                        currentEmployee = _employees[i];
+                        break;
                     }
                 }
+                if (currentEmployee == null)
+                    MessageBox.Show("No employee found!");
                 else
                 {
-                    foreach (Employee employee in employees)
-                    {
-                        if (employee.LastName == input || employee.FirstName == input || employee.FirstName + " " + employee.LastName == input)
-                        {
-                            thisEmployee = employee;
-                            LoadEmployeeListboxes(thisEmployee);
-                            ok = 1;
-                            break;
-                        }
-                    }
-
-                }
-                if (ok == 0)
-                {
-                    x = new Button();
-                    x.Location = new Point(-6, -1);
-                    x.Width = 556;
-                    x.Height = 28;
-                    x.Enabled = false;
-                    x.BackColor = Color.Red;
-                    x.Text = "No employee found!";
-                    this.Controls.Add(x);
-                    x.BringToFront();
-                    timer1.Start();
+                    LoadEmployeeListboxes(currentEmployee);
                 }
             }
             catch (Exception ex)
             {
-                x = new Button();
-                x.Location = new Point(-6, -1);
-                x.Width = 556;
-                x.Height = 28;
-                x.Enabled = false;
-                x.BackColor = Color.Red;
-                x.Text = "No employee found!";
-                this.Controls.Add(x);
-                x.BringToFront();
-                timer1.Start();
+                MessageBox.Show("An error ocurred!" + ex.ToString());
             }
+        }
+
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            int ok = 0;
+            List<RegularEmployee> employees = Database.GetEmployees().ToList();
+            String input = this.tbEmployee.Text;
+            if (Regex.IsMatch(input, @"^\d+$")==true)
+            {
+                int id = Convert.ToInt32(input);
+                foreach (RegularEmployee employee in employees)
+                {
+                    if (employee.Id == id)
+                    {
+                        LoadEmployeeListboxes(employee);
+                        ok = 1;
+                        break;
+                    }
+                }
+            }
+            else
+            {
+                foreach (RegularEmployee employee in employees)
+                {
+                    if (employee.LastName == input)
+                    {
+                        LoadEmployeeListboxes(employee);
+                        ok = 1;
+                        break;
+                    }
+                }
+                
+            }
+            if (ok == 0)
+                MessageBox.Show("No employee found with that id/last name!");
         }
     }
 }

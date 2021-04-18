@@ -7,8 +7,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Day = PRJMediaBazaar.Logic.Day;
-using PRJMediaBazaar.Logic;
 
 namespace PRJMediaBazaar
 {
@@ -36,20 +34,15 @@ namespace PRJMediaBazaar
         {
             try
             {
-                int morning = Convert.ToInt32(this.tbMorning.Text);
-                int midday = Convert.ToInt32(this.tbMidday.Text);
-                int evening = Convert.ToInt32(this.tbEvening.Text);
-
-                if (morning < 1 || morning> 10) throw new FormatException();
-                if (midday < 1 || midday > 10) throw new FormatException();
-                if (evening < 1 || evening> 10) throw new FormatException();
-                if (!AmountsCanChangeWith(morning,midday,evening)) throw new ArgumentOutOfRangeException();
+                int amount = Convert.ToInt32(this.tbAmount.Text);
+                if (amount < 1 || amount > 10) throw new FormatException();
+                if (!AmountCanChangeWith(amount)) throw new ArgumentOutOfRangeException();
 
                 DialogResult dialogResult = MessageBox.Show($"Are you sure you want to set the needed amount of " +
-              $"{_jobPositon} to:{Environment.NewLine} Morning:{morning}, Midday:{midday}, Evening:{evening}", "Confirmation", MessageBoxButtons.YesNo);
+              $"{_jobPositon} to {amount}", "Confirmation", MessageBoxButtons.YesNo);
                 if (dialogResult == DialogResult.Yes)
                 {
-                       if (_day.ChangeNeededDuties(_jobPositon, morning,midday,evening))
+                       if ( Database.ChangeNeededJobPosition(_jobPositon, amount, _day.Id))
                         {
                             _hr.UpdateDaysCheckbox(_scheduleId);
                             _hr.cbDay.SelectedIndex = _dayIndex;
@@ -67,34 +60,22 @@ namespace PRJMediaBazaar
             }
             catch(ArgumentOutOfRangeException ex)
             {
-                MessageBox.Show("The amounts you want to set should be bigger or equal than the assigned columns in the table");
+                MessageBox.Show("The amount you want to set should be bigger than the assigned rows in the table");
             }
           
         }
 
-        public bool AmountsCanChangeWith(int morning, int midday, int evening)
+        public bool AmountCanChangeWith(int amount)
         {
-            int assignedMorning = 0;
-            int assignedMidday = 0;
-            int assignedEvening = 0;
-
+            int assignedRows = 0;
             foreach (NamesRow r in _rows)
             {
-                if (r.Morning != null)
+                if (r.Morning != null || r.Midday != null || r.Evening != null)
                 {
-                    assignedMorning++;
-                }
-                if (r.Midday!= null)
-                {
-                    assignedMidday++;
-                }
-                if (r.Evening != null)
-                {
-                    assignedEvening++;
+                    assignedRows++;
                 }
             }
-
-            if (assignedMorning <= morning && assignedMidday <= midday && assignedEvening <= evening)
+            if (assignedRows < amount)
             {
                 return true;
             }

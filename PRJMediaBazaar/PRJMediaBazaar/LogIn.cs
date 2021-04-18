@@ -12,7 +12,6 @@ namespace PRJMediaBazaar
 {
     partial class LogIn : Form
     {
-        Button x;
         public LogIn()
         {
             InitializeComponent();
@@ -35,6 +34,7 @@ namespace PRJMediaBazaar
 
         private void button1_Click(object sender, EventArgs e)
         {
+
             if (this.tbUsername.Text == "hrmanager" && this.tbPassword.Text == "hrmanager")
             {
                 HRHome home = new HRHome(this);
@@ -43,16 +43,7 @@ namespace PRJMediaBazaar
             }
             else
             {
-                x = new Button();
-                x.Location = new Point(-60, -5);
-                x.Width = 556;
-                x.Height = 28;
-                x.Enabled = false;
-                x.BackColor = Color.Red;
-                x.Text = "Invalid username or password!";
-                this.Controls.Add(x);
-                x.BringToFront();
-                timer1.Start();
+                MessageBox.Show("Invalid username or password!");
             }
         }
 
@@ -63,7 +54,7 @@ namespace PRJMediaBazaar
 
         private void btnLogIn_MouseHover(object sender, EventArgs e)
         {
-
+            
         }
 
         private void btnLogIn_MouseEnter(object sender, EventArgs e)
@@ -74,12 +65,6 @@ namespace PRJMediaBazaar
         private void btnLogIn_MouseLeave(object sender, EventArgs e)
         {
             this.btnLogIn.BackColor = Color.White;
-        }
-
-        private void timer1_Tick(object sender, EventArgs e)
-        {
-            x.Visible = false;
-            timer1.Stop();
         }
     }
 }

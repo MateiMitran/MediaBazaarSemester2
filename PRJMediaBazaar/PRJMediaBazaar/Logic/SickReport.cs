@@ -8,26 +8,44 @@ using PRJMediaBazaar.Data;
 
 namespace PRJMediaBazaar.Logic
 {
-    class SickReport
+    class SickReport : ScheduleDAL
     {
 
-     
-        public Day Day { get; private set; }
-        public Employee Employee { get; private set; }
+        public int Schedule_id { get; private set; }
+        public int Day_id { get; private set; }
+        public int Employee_id { get; private set; }
         public string Description { get; private set; }
         public bool Seen { get; private set; }
 
 
-        public SickReport(Day day , Employee employee, string description, bool seen)
+        public SickReport(int scheduleId, int dayId, int employee_id, string description, bool seen)
         {
-           
-            Day = day;
-            Employee = employee;
+            Schedule_id = scheduleId;
+            Day_id = dayId;
+            Employee_id = employee_id;
             Description = description;
             Seen = seen;
         }
 
-     
+        public Day GetDayById(int scheduleId, int dayId)
+        {
+            EmployeeControl employeeControl = new EmployeeControl();
+            ScheduleControl scheduleControl = new ScheduleControl(employeeControl);
+
+            Day[] days = scheduleControl.GetDays(scheduleId);
+            Day day = new Day();
+
+            for (int i = 0; i < days.Length; i++)
+            {
+                if (days[i].Id == dayId)
+                {
+                    day = days[i];
+                    break;
+                }
+            }
+
+            return day;
+        }
 
         public void MarkAsSeen(bool seen)
         {

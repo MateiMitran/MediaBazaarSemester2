@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
 using System.ComponentModel.DataAnnotations;
@@ -79,6 +80,10 @@ namespace PRJMediaBazaar
                     x.BringToFront();
                     timer1.Start();
                     throw new InvalidEmailException();
+                }
+                if (this.tbPassword.TextLength == 0)
+                {
+                    throw new Exception();
                 }
                 String password = this.tbPassword.Text;
                 if (this.cbJobPosition.SelectedItem == null)
@@ -320,6 +325,40 @@ namespace PRJMediaBazaar
         private void timer1_Tick(object sender, EventArgs e)
         {
             x.Visible = false;
+        }
+
+        private void btnGenerate_Click(object sender, EventArgs e)
+        {
+            this.tbPassword.Text = GeneratePassword(3, 3, 3);
+        }
+        public static String GeneratePassword(int lowercase, int uppercase, int numerics)
+        {
+            String lowers = "abcdefghijklmnopqrstuvwxyz";
+            String uppers = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+            String number = "0123456789";
+
+            Random random = new Random();
+
+            String generated = "!";
+            for (int i = 1; i <= lowercase; i++)
+                generated = generated.Insert(
+                    random.Next(generated.Length),
+                    lowers[random.Next(lowers.Length - 1)].ToString()
+                );
+
+            for (int i = 1; i <= uppercase; i++)
+                generated = generated.Insert(
+                    random.Next(generated.Length),
+                    uppers[random.Next(uppers.Length - 1)].ToString()
+                );
+
+            for (int i = 1; i <= numerics; i++)
+                generated = generated.Insert(
+                    random.Next(generated.Length),
+                    number[random.Next(number.Length - 1)].ToString()
+                );
+
+            return generated.Replace("!", string.Empty);
         }
     }
 }

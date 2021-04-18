@@ -34,6 +34,7 @@ namespace PRJMediaBazaar
         {
             try
             {
+                this.tbNote.Text += " " + DateTime.Now.ToString();
                 ec.UpdateNote(this.tbNote.Text, thisEmployee.Email);
                 hr.AddNoteToEmployee(thisEmployee, this.tbNote.Text);
                 x = new Button();
@@ -54,7 +55,7 @@ namespace PRJMediaBazaar
                 x.Width = 556;
                 x.Height = 28;
                 x.Enabled = false;
-                x.BackColor = Color.Green;
+                x.BackColor = Color.Red;
                 x.Text = "An error occured!";
                 this.Controls.Add(x);
                 x.BringToFront();
