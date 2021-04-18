@@ -49,7 +49,7 @@ namespace PRJMediaBazaar.Logic
         }
         public void UpdateNote(String note,String email)
         {
-            employeeDAL.AddNoteToEmployee(note, email);
+            employeeDAL.AddNoteToEmployee(email, note);
         }
         public Employee[] Employees { get { return _employees.ToArray(); } }
 

@@ -468,6 +468,19 @@ namespace PRJMediaBazaar.Data
             return pseudos;
         }
 
+        public bool AddReasonForDenial(int employee_id, String reason)
+        {
+            String sql = "UPDATE `dayoff_requests` SET `reason`= @reason WHERE `employee_id`= @employee_id; ";
+            String[] parameters = new String[] { employee_id.ToString(), reason };
+            if(executeNonQuery (sql, parameters) != null)
+            {
+                CloseConnection();
+                return true;
+            }
+            CloseConnection();
+            return false;
+        }
+
         public List<SickReport> SelectSickReports()
         {
             string sql = "SELECT * FROM sick_reports WHERE seen = 'false'; ";

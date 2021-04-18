@@ -299,6 +299,11 @@ namespace PRJMediaBazaar.Logic
             return scheduleDAL.ConfirmDayOffRequest(dayId, empId);
         }
 
+        public void AddReason(int id, String note)
+        {
+           scheduleDAL.AddReasonForDenial(id, note);
+        }
+
         public bool MarkAsSeen(int dayId, int empId)
         {
             return scheduleDAL.ConfirmSickReport(dayId, empId);

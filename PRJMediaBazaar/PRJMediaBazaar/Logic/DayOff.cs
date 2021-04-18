@@ -8,14 +8,14 @@ using PRJMediaBazaar.Data;
 
 namespace PRJMediaBazaar.Logic
 {
-    class DayOff : ScheduleDAL
+      class DayOff : ScheduleDAL
     {
         public int Schedule_id { get; private set; }
         public int Day_id { get; private set; }
         public int Employee_id { get; private set; }
         public bool Urgent { get; private set; }
         public String Status { get; private set; }
-        public String Reason { get; private set; }
+        public String Reason { get; set; }
 
 
         public DayOff (int scheduleId, int dayId, int employee_id, bool urgent, String status, String reason)

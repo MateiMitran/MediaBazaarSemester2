@@ -18,8 +18,10 @@ namespace PRJMediaBazaar
 
         private EmployeeControl _empControl;
         private ScheduleControl _scheduleControl;
+       
         private Employee[] _employees;
         private Employee thisEmployee;
+        private DayOff thisDayOff;
 
         private NamesRow[] _tableRows;
         private LogIn _loginForm;
@@ -31,6 +33,7 @@ namespace PRJMediaBazaar
             _loginForm = loginForm;
             _empControl = new EmployeeControl();
             thisEmployee = null;
+            thisDayOff = null;
             LoadEmployees();
             _scheduleControl = new ScheduleControl(_empControl);
             foreach (Schedule s in _scheduleControl.Schedules)
@@ -588,6 +591,11 @@ namespace PRJMediaBazaar
         {
             temp.Note = note;
         }
+
+        public void AddReasonForDenial(DayOff req, String note)
+        {
+            req.Reason = note;
+        }
         private void button1_Click(object sender, EventArgs e)
         {
         }
@@ -687,9 +695,19 @@ namespace PRJMediaBazaar
             }
         }
 
-        private void btnDenyDayOff_Click(object sender, EventArgs e)
+        private void btnDenyDayOff_Click(object sender, EventArgs e) // add the button warnings that Matei did
         {
+            try
+            {
+                thisDayOff = (DayOff)lbDayOff.SelectedItem;
+                ExplainDenial explain = new ExplainDenial(thisDayOff, _scheduleControl, this);
+                explain.Show();
+            }
+            catch(Exception ex)
+            {
 
+            }
+            
         }
 
         private void cbSchedule_DrawItem(object sender, DrawItemEventArgs e)

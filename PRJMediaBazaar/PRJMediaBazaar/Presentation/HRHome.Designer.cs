@@ -156,10 +156,10 @@ namespace PRJMediaBazaar
             this.panelEmployees.Controls.Add(this.lbEmployeeInfo);
             this.panelEmployees.Controls.Add(this.lblAllEmployees);
             this.panelEmployees.Controls.Add(this.btnAddLatePoints);
-            this.panelEmployees.Location = new System.Drawing.Point(62, 11);
+            this.panelEmployees.Location = new System.Drawing.Point(63, 17);
             this.panelEmployees.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panelEmployees.Name = "panelEmployees";
-            this.panelEmployees.Size = new System.Drawing.Size(97, 37);
+            this.panelEmployees.Size = new System.Drawing.Size(84, 44);
             this.panelEmployees.TabIndex = 8;
             this.panelEmployees.Paint += new System.Windows.Forms.PaintEventHandler(this.panelEmployees_Paint);
             // 
@@ -230,10 +230,10 @@ namespace PRJMediaBazaar
             this.panelSickReports.Controls.Add(this.label7);
             this.panelSickReports.Controls.Add(this.lbSickReports);
             this.panelSickReports.Controls.Add(this.btnMarkAsSeen);
-            this.panelSickReports.Location = new System.Drawing.Point(652, 22);
+            this.panelSickReports.Location = new System.Drawing.Point(669, 17);
             this.panelSickReports.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panelSickReports.Name = "panelSickReports";
-            this.panelSickReports.Size = new System.Drawing.Size(98, 24);
+            this.panelSickReports.Size = new System.Drawing.Size(65, 32);
             this.panelSickReports.TabIndex = 24;
             this.panelSickReports.Paint += new System.Windows.Forms.PaintEventHandler(this.panelSickReports_Paint);
             // 
@@ -275,10 +275,10 @@ namespace PRJMediaBazaar
             this.pnlDayOff.Controls.Add(this.btnDenyDayOff);
             this.pnlDayOff.Controls.Add(this.btnConfirmDayOff);
             this.pnlDayOff.Controls.Add(this.lbDayOff);
-            this.pnlDayOff.Location = new System.Drawing.Point(889, 15);
+            this.pnlDayOff.Location = new System.Drawing.Point(12, 65);
             this.pnlDayOff.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pnlDayOff.Name = "pnlDayOff";
-            this.pnlDayOff.Size = new System.Drawing.Size(53, 38);
+            this.pnlDayOff.Size = new System.Drawing.Size(1082, 597);
             this.pnlDayOff.TabIndex = 24;
             this.pnlDayOff.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlDayOff_Paint);
             // 
@@ -601,7 +601,6 @@ namespace PRJMediaBazaar
             this.pnlNavbar.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.pnlNavbar.Controls.Add(this.panelEmployees);
             this.pnlNavbar.Controls.Add(this.panelSickReports);
-            this.pnlNavbar.Controls.Add(this.pnlDayOff);
             this.pnlNavbar.Controls.Add(this.panelSchedule);
             this.pnlNavbar.Controls.Add(this.lblTitle);
             this.pnlNavbar.Controls.Add(this.lblDayOffReports);
@@ -625,6 +624,7 @@ namespace PRJMediaBazaar
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1104, 679);
             this.Controls.Add(this.pnlNavbar);
+            this.Controls.Add(this.pnlDayOff);
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "HRHome";
             this.Text = "HRHome";
