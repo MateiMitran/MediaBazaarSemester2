@@ -18,6 +18,32 @@ namespace PRJMediaBazaar.Data
             _schedules = schedules;
         }
 
+        //public List<DayOff> SelectDayOffRequests()
+        //{
+        //    string sql = "SELECT * FROM dayoff_requests WHERE status = 'pending'; ";
+        //    MySqlDataReader result = executeReader(sql, null);
+
+        //    List<DayOff> pseudos = new List<DayOff>();
+        //    while (result.Read())
+        //    {
+        //        int scheduleId = Convert.ToInt32(result[0]);
+
+        //        int dayId = Convert.ToInt32(result[1]);
+        //        Day day = GetSchedule(scheduleId).GetDay(dayId);
+
+        //        int empId = Convert.ToInt32(result[2]);
+        //        Employee employee = _employees.FirstOrDefault(emp => emp.Id == empId);
+
+        //        bool urgent = Convert.ToBoolean(result[3]);
+        //        string status = result[4].ToString();
+        //        string reason = result[5].ToString();
+        //        DayOff req = new DayOff(day, employee, urgent, status, reason);
+        //        pseudos.Add(req);
+        //    }
+        //    CloseConnection();
+        //    return pseudos;
+        //}
+
         public List<DayOff> SelectDayOffRequests()
         {
             string sql = "SELECT * FROM dayoff_requests WHERE status = 'pending'; ";
@@ -26,23 +52,47 @@ namespace PRJMediaBazaar.Data
             List<DayOff> pseudos = new List<DayOff>();
             while (result.Read())
             {
-                int scheduleId = Convert.ToInt32(result[0]);
-
-                int dayId = Convert.ToInt32(result[1]);
-                Day day = GetSchedule(scheduleId).GetDay(dayId);
-
-                int empId = Convert.ToInt32(result[2]);
-                Employee employee = _employees.FirstOrDefault(emp => emp.Id == empId);
-
-                bool urgent = Convert.ToBoolean(result[3]);
-                string status = result[4].ToString();
-                string reason = result[5].ToString();
-                DayOff req = new DayOff(day, employee, urgent, status, reason);
+                int requestId = Convert.ToInt32(result[0]);
+                int scheduleId = Convert.ToInt32(result[1]);
+                int dayId = Convert.ToInt32(result[2]);
+                int employee_id = Convert.ToInt32(result[3]);
+                bool urgent = Convert.ToBoolean(result[4]);
+                string status = result[5].ToString();
+                string reason = result[6].ToString();
+                DayOff req = new DayOff(requestId, scheduleId, dayId, employee_id, urgent, status, reason);
                 pseudos.Add(req);
             }
             CloseConnection();
             return pseudos;
         }
+        public bool ConfirmDayOffRequest(int dayId, int empId)
+        {
+            string[] parameters = new string[] { dayId.ToString(), empId.ToString() };
+            string sql = "DELETE FROM dayoff_requests WHERE day_id = @dayId AND employee_id = @empId";
+
+            if (executeNonQuery(sql, parameters) != null)
+            {
+                CloseConnection();
+                return true;
+            }
+            CloseConnection();
+            return false;
+        }
+
+        public bool AddReasonForDenial(int employee_id, String reason, String denied) //1. reason, 2. status, 3. employee_id
+        {
+            String sql = "UPDATE `dayoff_requests` SET `reason`= @reason, `status`= @denied WHERE `employee_id`= @employee_id; ";
+            String[] parameters = new String[] { reason, denied, employee_id.ToString() };
+            if (executeNonQuery(sql, parameters) != null)
+            {
+                CloseConnection();
+                return true;
+            }
+            CloseConnection();
+            return false;
+        }
+
+
 
         public List<SickReport> SelectSickReports()
         {
@@ -69,19 +119,7 @@ namespace PRJMediaBazaar.Data
             return pseudos;
         }
 
-        public bool ConfirmDayOffRequest(int dayId, int empId)
-        {
-            string[] parameters = new string[] { dayId.ToString(), empId.ToString() };
-            string sql = "DELETE FROM dayoff_requests WHERE day_id = @dayId AND employee_id = @empId";
-
-            if (executeNonQuery(sql, parameters) != null)
-            {
-                CloseConnection();
-                return true;
-            }
-            CloseConnection();
-            return false;
-        }
+       
 
         public bool ConfirmSickReport(int dayId, int empId)
         {

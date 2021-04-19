@@ -242,6 +242,11 @@ namespace PRJMediaBazaar
             return labels;
         }
 
+        private void customInstaller1_AfterInstall(object sender, System.Configuration.Install.InstallEventArgs e)
+        {
+
+        }
+
 
 
 

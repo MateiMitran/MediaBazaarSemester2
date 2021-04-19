@@ -43,6 +43,11 @@ namespace PRJMediaBazaar.Logic
             return absenceDAL.ConfirmDayOffRequest(dayId, empId);
         }
 
+        public void AddReason(int id, String note)
+        {
+            absenceDAL.AddReasonForDenial(id, note, "denied");
+        }
+
         public bool MarkAsSeen(int dayId, int empId)
         {
             return absenceDAL.ConfirmSickReport(dayId, empId);
