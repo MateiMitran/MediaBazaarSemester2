@@ -10,11 +10,11 @@ namespace PRJMediaBazaar.Data
 {
      class ScheduleDAL : BaseDAL
     {
-        private EmployeeControl empControl;
 
-        public ScheduleDAL()
+        private List<Employee> _employees;
+        public ScheduleDAL(List<Employee> employees)
         {
-            empControl = new EmployeeControl();
+            _employees = employees;
         }
 
         public List<Schedule> SelectSchedules()
@@ -97,49 +97,7 @@ namespace PRJMediaBazaar.Data
 
         }
 
-        /// <summary>
-        /// takes all employees workdays, by the given job position
-        /// </summary>
-        /// <returns></returns>
-        public List<EmployeeWorkday> SelectEmployeesWorkdays(int weekId, int dayId, string jobPosition)
-        {
-           
-
-            MySqlDataReader dr = null;
-            try
-            {
-                string[] parameters = new string[] { weekId.ToString(), dayId.ToString(), jobPosition };
-                string sql = "SELECT ew.*, wh.hours FROM employees_workdays ew INNER JOIN employees e ON ew.employee_id =e.id " +
-                    "LEFT JOIN worked_hours wh ON ew.employee_id = wh.employee_id AND wh.week_id = @weekId" +
-                    " WHERE day_id = @dayId AND e.job_position =@jobPosition";
-                List<EmployeeWorkday> workdays = new List<EmployeeWorkday>();
-                dr = executeReader(sql, parameters);
-                while (dr.Read()) //add EmployeeWorkday objects to the list
-                {
-                    Employee employee = empControl.GetEmployee(Convert.ToInt32(dr[1]));
-                    Shift firstShift = (Shift)Enum.Parse(typeof(Shift), dr[2].ToString());
-                    Shift secondShift = (Shift)Enum.Parse(typeof(Shift), dr[3].ToString());
-                    bool absence = Convert.ToBoolean(dr[4]);
-                    AbsenceReason absenceReason = (AbsenceReason)Enum.Parse(typeof(AbsenceReason), dr[5].ToString());
-                    double hours;
-                    if (dr[6] == DBNull.Value) { hours = 0; }
-                    else { hours = Convert.ToDouble(dr[6]); }
-
-                    workdays.Add(new EmployeeWorkday(dayId,employee, firstShift, secondShift, absence, absenceReason, hours));
-                }
-                CloseConnection();
-                return workdays;
-            }
-            finally
-            {
-                if (dr != null)
-                {
-                    dr.Close();
-
-                }
-                CloseConnection();
-            }
-        }
+      
 
         /// <summary>
         /// takes the employees who are not absent, by the given job position
@@ -160,7 +118,9 @@ namespace PRJMediaBazaar.Data
                 List<EmployeeWorkday> workdays = new List<EmployeeWorkday>();
                 while (dr.Read()) //add EmployeeWorkday objects to the list
                 {
-                    Employee employee = empControl.GetEmployee(Convert.ToInt32(dr[1]));
+                    int empId = Convert.ToInt32(dr[1]);
+                    Employee employee = _employees.FirstOrDefault(emp => emp.Id == empId);
+
                     Shift firstShift = (Shift)Enum.Parse(typeof(Shift), dr[2].ToString());
                     Shift secondShift = (Shift)Enum.Parse(typeof(Shift), dr[3].ToString());
                     bool absence = Convert.ToBoolean(dr[4]);
@@ -197,7 +157,9 @@ namespace PRJMediaBazaar.Data
                 dr = executeReader(sql, parameters);
                 while (dr.Read())
                 {
-                    Employee employee = empControl.GetEmployee(Convert.ToInt32(dr[1]));
+                    int empId = Convert.ToInt32(dr[1]);
+                    Employee employee = _employees.FirstOrDefault(emp => emp.Id == empId);
+
                     Shift firstShift = (Shift)Enum.Parse(typeof(Shift), dr[2].ToString());
                     Shift secondShift = (Shift)Enum.Parse(typeof(Shift), dr[3].ToString());
                     bool absence = Convert.ToBoolean(dr[4]);
@@ -247,7 +209,9 @@ namespace PRJMediaBazaar.Data
                 dr = executeReader(sql, parameters);
                 if (dr.Read())
                 {
-                    Employee employee = empControl.GetEmployee(Convert.ToInt32(dr[1]));
+                    int empId = Convert.ToInt32(dr[1]);
+                    Employee employee = _employees.FirstOrDefault(emp => emp.Id == empId);
+
                     Shift firstShift = (Shift)Enum.Parse(typeof(Shift), dr[2].ToString());
                     Shift secondShift = (Shift)Enum.Parse(typeof(Shift), dr[3].ToString());
                     bool absence = Convert.ToBoolean(dr[4]);
@@ -300,7 +264,6 @@ namespace PRJMediaBazaar.Data
 
         }
 
-
         public bool InsertShift(int dayId, int employeeId, string shift)
         {
            
@@ -343,36 +306,6 @@ namespace PRJMediaBazaar.Data
             {
                 CloseConnection();
             }
-        }
-
-        public bool UpdateAbsence(int dayId, int employeeId) // !
-        {
-            string[] parameters = new string[] { "None", "None", true.ToString(), "DayOff", dayId.ToString(), employeeId.ToString() };
-            string sql = "UPDATE employees_workdays SET first_shift = @shift, second_shift = @shift, absence = @absence, absence_reason = @absenceReason" +
-                             " WHERE day_id = @dayId AND employee_id = @employeeId";
-
-            if (executeNonQuery(sql, parameters) != null)
-            {
-                CloseConnection();
-                return true;
-            }
-            CloseConnection();
-            return false;
-        }
-
-        public bool InsertAbsence(int dayId, int employeeId) // !
-        {
-            string[] parameters = new string[] { dayId.ToString(), employeeId.ToString(), "None", "None", true.ToString(), "DayOff" };
-            string sql = "INSERT INTO employees_workdays (day_id, employee_id, first_shift, second_shift, absence, absence_reason)" +
-                    " VALUES(@dayId, @employeeId, @shift, @shift, @absence, @absenceReason);";
-
-            if (executeNonQuery(sql, parameters) != null)
-            {
-                CloseConnection();
-                return true;
-            }
-            CloseConnection();
-            return false;
         }
 
         public bool UpdateHours(double hours, int weekId,int employeeId)
@@ -430,107 +363,8 @@ namespace PRJMediaBazaar.Data
             }
         }
 
-        public double SelectWorkedHours(int weekId, int employeeId)
-        {
-           
-            try
-            {
-                string[] parameters = new string[] { weekId.ToString(), employeeId.ToString() };
-                string sql = "SELECT hours FROM worked_hours WHERE week_id = @weekId AND employee_id = @employeeId";
-                double result = Convert.ToDouble(executeScalar(sql, parameters));
-                return result;
-            }
-            finally
-            {
-                CloseConnection();
-            }
+       
 
-        }
-
-        public List<DayOff> SelectDayOffRequests()
-        {
-            string sql = "SELECT * FROM dayoff_requests WHERE status = 'pending'; ";
-            MySqlDataReader result = executeReader(sql, null);
-
-            List<DayOff> pseudos = new List<DayOff>();
-            while (result.Read())
-            {
-                int requestId = Convert.ToInt32(result[0]);
-                int scheduleId = Convert.ToInt32(result[1]);
-                int dayId = Convert.ToInt32(result[2]);
-                int employee_id = Convert.ToInt32(result[3]);
-                bool urgent = Convert.ToBoolean(result[4]);
-                string status = result[5].ToString();
-                string reason = result[6].ToString();
-                DayOff req = new DayOff(requestId,scheduleId, dayId, employee_id, urgent, status, reason);
-                pseudos.Add(req);
-            }
-            CloseConnection();
-            return pseudos;
-        }
-
-        public bool AddReasonForDenial(int employee_id, String reason, String denied)
-        {
-            String sql = "UPDATE `dayoff_requests` SET `reason`= @reason, `status`= @denied WHERE `employee_id`= @employee_id; ";
-            String[] parameters = new String[] { employee_id.ToString(), reason, denied };
-            if(executeNonQuery (sql, parameters) != null)
-            {
-                CloseConnection();
-                return true;
-            }
-            CloseConnection();
-            return false;
-        }
-
-        public List<SickReport> SelectSickReports()
-        {
-            string sql = "SELECT * FROM sick_reports WHERE seen = 'false'; ";
-            MySqlDataReader result = executeReader(sql, null);
-
-            List<SickReport> pseudos = new List<SickReport>();
-            while (result.Read())
-            {
-                int scheduleId = Convert.ToInt32(result[0]);
-                int dayId = Convert.ToInt32(result[1]);
-                int employee_id = Convert.ToInt32(result[2]);
-                string description = result[3].ToString();
-                bool seen = Convert.ToBoolean(result[4]);
-                SickReport req = new SickReport(scheduleId, dayId, employee_id, description, seen);
-                pseudos.Add(req);
-            }
-            CloseConnection();
-            return pseudos;
-        }
-
-        public bool ConfirmDayOffRequest(int dayId, int empId)
-        {
-            string[] parameters = new string[] { dayId.ToString(), empId.ToString()};
-            string sql = "DELETE FROM dayoff_requests WHERE day_id = @dayId AND employee_id = @empId";
-
-            if (executeNonQuery(sql, parameters) != null)
-            {
-                CloseConnection();
-                return true;
-            }
-            CloseConnection();
-            return false;
-        }
-
-        public bool ConfirmSickReport(int dayId, int empId)
-        {
-            string[] parameters = new string[] { dayId.ToString(), empId.ToString() };
-            string sql = "DELETE FROM sick_reports WHERE day_id = @dayId AND employee_id = @empId";
-
-            if (executeNonQuery(sql, parameters) != null)
-            {
-                CloseConnection();
-                return true;
-            }
-            CloseConnection();
-            return false;
-        }
-
-        
         public EmployeePlanner SelectFirstAvailableEmployeePlanner(string position, int weekId, int dayId)
         {
             MySqlDataReader result = null;
@@ -544,7 +378,9 @@ namespace PRJMediaBazaar.Data
                  result = executeReader(sql, parameters);
                 if (result.Read())
                 {
-                    Employee employee = empControl.GetEmployee(Convert.ToInt32(result[0]));
+                    int empId = Convert.ToInt32(result[0]);
+                    Employee employee = _employees.FirstOrDefault(emp => emp.Id == empId);
+
                     double hours;
                     if (result[1] == DBNull.Value) { hours = 0; }
                     else { hours = Convert.ToDouble(result[1]); }
@@ -565,7 +401,7 @@ namespace PRJMediaBazaar.Data
 
         }
 
-        /*SELECTINT EMPLOYEE WORKDAY, JUST IN CASE*/
+        /*SELECTIN EMPLOYEE WORKDAY, JUST IN CASE*/
         ///// <summary>
         ///// takes the employee's workday
         ///// </summary>
@@ -598,7 +434,7 @@ namespace PRJMediaBazaar.Data
         //    return workday;
         //}
 
-        /*SELECTINT EMPLOYEE WORKDAY, JUST IN CASE*/
+        /*CLEAR DAYS' ASSIGNED POSITIONS, JUST IN CASE*/
         //public void ClearAssignedPositions(int dayId, int weekId)
         //{
 

@@ -12,30 +12,12 @@ namespace PRJMediaBazaar
 {
     partial class LogIn : Form
     {
-        private List<Button> buttons;
-        private List<Timer> timers;
+        Button x;
         public LogIn()
         {
-            timers = new List<Timer>();
-            buttons = new List<Button>();
             InitializeComponent();
         }
-        public void StatusFunction(String text,int x,int y,int width,int height,Color color)
-        {
-            Button newButton = new Button();
-            newButton.Location = new Point(x, y);
-            newButton.Width = width;
-            newButton.Height = height;
-            newButton.Enabled = false;
-            newButton.BackColor = color;
-            newButton.Text = text;
-            this.Controls.Add(newButton);
-            newButton.BringToFront();
-            buttons.Add(newButton);
-            Timer temp = new Timer();
-            timers.Add(temp);
-            temp.Start();
-        }
+
         private void label1_Click(object sender, EventArgs e)
         {
 
@@ -53,6 +35,8 @@ namespace PRJMediaBazaar
 
         private void button1_Click(object sender, EventArgs e)
         {
+
+
             if (this.tbUsername.Text == "hrmanager" && this.tbPassword.Text == "hrmanager")
             {
                 HRHome home = new HRHome(this);
@@ -61,7 +45,16 @@ namespace PRJMediaBazaar
             }
             else
             {
-                StatusFunction("Invalid Credentials", -60, -5, 508, 28,Color.Red);
+                x = new Button();
+                x.Location = new Point(-60, -5);
+                x.Width = 556;
+                x.Height = 28;
+                x.Enabled = false;
+                x.BackColor = Color.Red;
+                x.Text = "Invalid username or password!";
+                this.Controls.Add(x);
+                x.BringToFront();
+                timer1.Start();
             }
         }
 
@@ -87,19 +80,7 @@ namespace PRJMediaBazaar
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-           
-        }
-
-        private void godTimer_Tick(object sender, EventArgs e)
-        {
-            for (int i=0;i<timers.Count;i++)
-            {
-                if (timers[i].Enabled == true)
-                {
-                    timers[i].Enabled = false;
-                    buttons[i].Visible = false;
-                }
-            }
+            x.Visible = false;
         }
     }
 }

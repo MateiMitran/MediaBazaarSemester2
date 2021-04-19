@@ -59,8 +59,7 @@ namespace PRJMediaBazaar
             this.tbSurname = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.lblTitle = new System.Windows.Forms.Label();
-            this.godTimer = new System.Windows.Forms.Timer(this.components);
-            this.btnGenerate = new System.Windows.Forms.Button();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -269,7 +268,6 @@ namespace PRJMediaBazaar
             // 
             // tbPassword
             // 
-            this.tbPassword.Enabled = false;
             this.tbPassword.Location = new System.Drawing.Point(110, 272);
             this.tbPassword.Name = "tbPassword";
             this.tbPassword.Size = new System.Drawing.Size(191, 22);
@@ -328,27 +326,15 @@ namespace PRJMediaBazaar
             this.lblTitle.TabIndex = 1;
             this.lblTitle.Text = "Add Employee";
             // 
-            // godTimer
+            // timer1
             // 
-            this.godTimer.Interval = 2500;
-            this.godTimer.Tick += new System.EventHandler(this.godTimer_Tick);
-            // 
-            // btnGenerate
-            // 
-            this.btnGenerate.Location = new System.Drawing.Point(307, 269);
-            this.btnGenerate.Name = "btnGenerate";
-            this.btnGenerate.Size = new System.Drawing.Size(103, 30);
-            this.btnGenerate.TabIndex = 56;
-            this.btnGenerate.Text = "Generate";
-            this.btnGenerate.UseVisualStyleBackColor = true;
-            this.btnGenerate.Click += new System.EventHandler(this.btnGenerate_Click);
+            this.timer1.Interval = 1500;
             // 
             // AddEmployees
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(817, 610);
-            this.Controls.Add(this.btnGenerate);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.label12);
             this.Controls.Add(this.label11);
@@ -417,7 +403,6 @@ namespace PRJMediaBazaar
         private System.Windows.Forms.TextBox tbSurname;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label lblTitle;
-        private System.Windows.Forms.Timer godTimer;
-        private System.Windows.Forms.Button btnGenerate;
+        private System.Windows.Forms.Timer timer1;
     }
 }

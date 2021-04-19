@@ -15,67 +15,45 @@ namespace PRJMediaBazaar
 {
     partial class HRHome : Form
     {
+        private static string[] positions = new string[] { "Security", "Cashier", "Stocker", "SalesAssistant", "WarehouseManager"};
 
         private EmployeeControl _empControl;
+        private AbsenceControl _absenceControl;
         private ScheduleControl _scheduleControl;
-       
         private Employee[] _employees;
         private Employee thisEmployee;
-        private DayOff thisDayOff;
-        private List<DayOff> daysOff;
+        private Schedule _currentSchedule;
 
         private NamesRow[] _tableRows;
         private LogIn _loginForm;
-        private List<Button> buttons;
-        private List<Timer> timers;
+        private Button x;
 
         public HRHome(LogIn loginForm)
         {
             InitializeComponent();
-            buttons = new List<Button>();
-            timers = new List<Timer>();
             _loginForm = loginForm;
             _empControl = new EmployeeControl();
             thisEmployee = null;
-            thisDayOff = null;
+            _currentSchedule = null;
             LoadEmployees();
             _scheduleControl = new ScheduleControl(_empControl);
-            foreach (Schedule s in _scheduleControl.Schedules)
-            {
-                cbSchedule.Items.Add(s);
-                lbIncompleteDays.Items.Add(_scheduleControl.ScheduleStatus(s));
-
-            }
+            _absenceControl = new AbsenceControl(_scheduleControl);
             cbPosition.Text = "Security";
             this.btnChangeNeededPosition.Enabled = false;
             this.btnGenerateSchedule.Enabled = false;
             this.btnDeleteSchedule.Enabled = false;
+
+            foreach(Schedule s in _scheduleControl.Schedules)
+            {
+                this.cbSchedule.Items.Add(s);
+            }
+
         }
-        public void StatusFunction(String text, int x, int y, int width, int height, Color color)
-        {
-            Button newButton = new Button();
-            newButton.Location = new Point(x, y);
-            newButton.Width = width;
-            newButton.Height = height;
-            newButton.Enabled = false;
-            newButton.BackColor = color;
-            newButton.Text = text;
-            this.Controls.Add(newButton);
-            newButton.BringToFront();
-            buttons.Add(newButton);
-            Timer temp = new Timer();
-            timers.Add(temp);
-            temp.Start();
-        }
+
         public void LoadEmployees()
         {
-            
-            List<Employee> temp = _empControl.Employees.ToList().OrderBy(p => p.LastName).ToList();
-            _employees = temp.ToArray();
-            for (int i=0;i<_employees.Length;i++)
-            {
-                this.cbEmployees.Items.Add(_employees[i].FirstName + ' ' + _employees[i].LastName);
-            }
+            _employees = _empControl.Employees;
+
         }
         public void AddEmployee(Employee temp)
         {
@@ -91,8 +69,6 @@ namespace PRJMediaBazaar
             this.panelSchedule.Visible = false;
             this.panelSickReports.Visible = false;
             this.pnlDayOff.Visible = false;
-            this.panelEmployees.BringToFront();
-            this.panelSchedule.SendToBack();
             this.lblSchedule.ForeColor = Color.White;
             this.lblEmployees.ForeColor = Color.Gray;
             this.lblSickReports.ForeColor = Color.White;
@@ -179,6 +155,7 @@ namespace PRJMediaBazaar
             this.lbEmployeeInfo.Items.Add("First Name : " + currentEmployee.FirstName);
             this.lbEmployeeInfo.Items.Add("Last Name : " + currentEmployee.LastName);
             this.lbEmployeeInfo.Items.Add("Email : " + currentEmployee.Email);
+            this.lbEmployeeInfo.Items.Add("Password : " + currentEmployee.Password);
             this.lbEmployeeInfo.Items.Add("Job Position : " + currentEmployee.JobPosition);
             this.lbEmployeeInfo.Items.Add("Salary : " + currentEmployee.Salary);
             this.lbEmployeeInfo.Items.Add("Contract : " + currentEmployee.Contract);
@@ -222,13 +199,14 @@ namespace PRJMediaBazaar
                 ShiftsTable.Controls.Clear();
                 this.btnGenerateSchedule.Enabled = false;
             }
-
+            _currentSchedule = schedule;
+            this.ActiveControl = null;
         }
 
 
         private void cbPosition_SelectedIndexChanged(object sender, EventArgs e)
         {
-            UpdatePositionNeededLabel();
+           
             //reload the table layout panel, based on the day and position
             //if All is selected, disable the change position button.
             //enable the button if All is not selected.
@@ -245,12 +223,13 @@ namespace PRJMediaBazaar
                     this.btnChangeNeededPosition.Enabled = false;
                 }
             }
+            this.ActiveControl = null;
 
         }
 
         private void cbDay_SelectedIndexChanged(object sender, EventArgs e)
         {
-            UpdatePositionNeededLabel();
+            UpdateDaysInfoListbox();
             //if a position is selected, reload the table layout panel, based on the day and position
             Day day = (Day)this.cbDay.SelectedItem;
             if (cbPosition.Text != "All")
@@ -267,7 +246,7 @@ namespace PRJMediaBazaar
                 this.btnGenerateSchedule.Enabled = false;
                 this.btnDeleteSchedule.Enabled = true;
             }
-
+            this.ActiveControl = null;
 
         }
 
@@ -505,6 +484,7 @@ namespace PRJMediaBazaar
                 _scheduleControl.RemoveShift(shift.ToString(), ((Day)cbDay.SelectedItem), employee);
             }
             LoadTableByPosition((Day)cbDay.SelectedItem, employee.JobPosition);
+            UpdateDaysInfoListbox();
         }
 
         public void UpdateDaysCheckbox(int scheduleId)
@@ -517,18 +497,34 @@ namespace PRJMediaBazaar
             }
         }
 
-        public void UpdatePositionNeededLabel()
+        public void UpdateDaysInfoListbox()
         {
-            Day day = (Day)cbDay.SelectedItem;
-            if (this.cbPosition.Text != "All" && day != null)
+            this.lbIncompleteDays.Items.Clear();
+            if(_scheduleControl.ScheduleStatus(_currentSchedule) == "started")
             {
+                foreach (Day day in _currentSchedule.Days)
+                {
+                    if (day != null && _scheduleControl.DayStatus(day) == "started")
+                    {
+                        var difs = day.DutyDifs;
+                        string info = $"({day.Date.DayOfWeek}) {day.Date.ToString("dd-MM")}| Missing shifts:  ";
+                        foreach (string position in HRHome.positions)
+                        {
+                            int dif = difs[position];
 
-                this.lblPositionNeeded.Text = day.GetNeededPositionInfo(cbPosition.Text);
+                            if (dif > 0)
+                            {
+                                info += $"{dif} {position}/ ";
+                            }
+
+                        }
+                        this.lbIncompleteDays.Items.Add(info);
+                    }
+
+                }
             }
-            else if (this.cbPosition.Text == "All" && day != null)
-            {
-                this.lblPositionNeeded.Text = day.GetAllNeededPositionsInfo();
-            }
+            RedrawComboboxes();
+            
         }
 
 
@@ -577,7 +573,16 @@ namespace PRJMediaBazaar
         {
             if (thisEmployee == null)
             {
-                StatusFunction("Please select an employee!", -6, -1, 900, 28, Color.Red);
+                x = new Button();
+                x.Location = new Point(-6, -1);
+                x.Width = 556;
+                x.Height = 28;
+                x.Enabled = false;
+                x.BackColor = Color.Red;
+                x.Text = "Please select an employee!";
+                this.Controls.Add(x);
+                x.BringToFront();
+                timer1.Start();
             }
             else
             {
@@ -601,13 +606,52 @@ namespace PRJMediaBazaar
         {
             temp.Note = note;
         }
-
-        public void AddReasonForDenial(DayOff req, String note)
-        {
-            req.Reason = note;
-        }
         private void button1_Click(object sender, EventArgs e)
         {
+            int ok = 0;
+            List<Employee> employees = _empControl.Employees.ToList();
+            String input = this.tbEmployee.Text;
+            if (Regex.IsMatch(input, @"^\d+$") == true)
+            {
+                int id = Convert.ToInt32(input);
+                foreach (Employee employee in employees)
+                {
+                    if (employee.Id == id)
+                    {
+                        thisEmployee = employee;
+                        LoadEmployeeListboxes(thisEmployee);
+                        ok = 1;
+                        break;
+                    }
+                }
+            }
+            else
+            {
+                foreach (Employee employee in employees)
+                {
+                    if (employee.LastName == input || employee.FirstName == input || employee.FirstName + " " + employee.LastName == input)
+                    {
+                        thisEmployee = employee;
+                        LoadEmployeeListboxes(thisEmployee);
+                        ok = 1;
+                        break;
+                    }
+                }
+
+            }
+            if (ok == 0)
+            {
+                x = new Button();
+                x.Location = new Point(-6, -1);
+                x.Width = 556;
+                x.Height = 28;
+                x.Enabled = false;
+                x.BackColor = Color.Red;
+                x.Text = "No employee found!";
+                this.Controls.Add(x);
+                x.BringToFront();
+                timer1.Start();
+            }
         }
 
         private void panelSchedule_Paint_1(object sender, PaintEventArgs e)
@@ -627,38 +671,68 @@ namespace PRJMediaBazaar
 
             if (index >= 0)
             {
-                DayOff req = _scheduleControl.DaysOffRequests[index];
-                bool query = _scheduleControl.ConfirmDayOffRequest(req.Day_id, req.Employee_id);
+                DayOff req = _absenceControl.DaysOffRequests[index];
+                bool query = _absenceControl.ConfirmDayOffRequest(req.Day.Id, req.Employee.Id);
 
                 if (query)
                 {
-                    _scheduleControl.DaysOffRequests.RemoveAt(index);
+                    _absenceControl.DaysOffRequests.RemoveAt(index);
                     LoadDayOffRequests();
-                    StatusFunction("Day Off Confirmed!", -6, -1, 900, 28, Color.Green);
+                    x = new Button();
+                    x.Location = new Point(-6, -1);
+                    x.Width = 556;
+                    x.Height = 28;
+                    x.Enabled = false;
+                    x.BackColor = Color.Green;
+                    x.Text = "Day off Confirmed!";
+                    this.Controls.Add(x);
+                    x.BringToFront();
+                    timer1.Start();
                 }
                 else
                 {
-                    StatusFunction("An error occured!", -6, -1, 900, 28, Color.Red);
+
+
+                    x = new Button();
+                    x.Location = new Point(-6, -1);
+                    x.Width = 556;
+                    x.Height = 28;
+                    x.Enabled = false;
+                    x.BackColor = Color.Red;
+                    x.Text = "An error occured!";
+                    this.Controls.Add(x);
+                    x.BringToFront();
+                    timer1.Start();
                 }
             }
             else
             {
-                StatusFunction("Select a day off request!", -6, -1, 900, 28, Color.Red);
+                x = new Button();
+                x.Location = new Point(-6, -1);
+                x.Width = 556;
+                x.Height = 28;
+                x.Enabled = false;
+                x.BackColor = Color.Red;
+                x.Text = "Select a day off request!";
+                this.Controls.Add(x);
+                x.BringToFront();
+                timer1.Start();
             }
         }
 
         private void LoadDayOffRequests()
         {
             lbDayOff.Items.Clear();
-            daysOff = _scheduleControl.DaysOffRequests;
+            List<DayOff> daysOff = _absenceControl.DaysOffRequests;
+
             for (int i = 0; i < daysOff.Count(); i++)
             {
                 DayOff dayOff = daysOff[i];
-                int scheduleId = dayOff.Schedule_id;
-                int dayId = dayOff.Day_id;
-                int employeeId = dayOff.Employee_id;
+                int scheduleId = dayOff.Day.ScheduleId;
+                int dayId = dayOff.Day.Id;
+                int employeeId = dayOff.Employee.Id;
                 string urgent;
-                int requestId = dayOff.DayOffId;
+
                 if (dayOff.Urgent == false)
                 {
                     urgent = "Not urgent";
@@ -668,51 +742,18 @@ namespace PRJMediaBazaar
                     urgent = "Urgent";
                 }
 
-                DateTime day = dayOff.GetDayById(scheduleId, dayId).Date;
+                DateTime day = dayOff.Day.Date;
                 Employee employee = _empControl.GetEmployee(employeeId);
 
-                lbDayOff.Items.Add("Id : " + requestId + " | " + day.ToString("dd/MM/yyyy") + " --> " + employee.FullName + " --> " + urgent);
+                lbDayOff.Items.Add(day.ToString("dd/MM/yyyy") + " --> " + employee.FullName + " --> " + urgent);
             }
         }
 
-        private void btnDenyDayOff_Click(object sender, EventArgs e) // add the button warnings that Matei did
+        private void btnDenyDayOff_Click(object sender, EventArgs e)
         {
-            try
-            {
-                if (this.lbDayOff.SelectedItem==null)
-                {
-                    StatusFunction("Select a request!", -6, -1, 900, 28, Color.Red);
-                    throw new EmptyComboBoxException();
-                }
-                String request = this.lbDayOff.SelectedItem.ToString();
-                string x = new string(request.SkipWhile(c => !char.IsDigit(c))
-                         .TakeWhile(c => char.IsDigit(c))
-                         .ToArray());
-                int requestID = Convert.ToInt32(x);
-                foreach (DayOff temp in daysOff)
-                {
-                    if (temp.DayOffId == requestID)
-                    {
-                        thisDayOff = temp;
-                    }
-                }
-                if (thisDayOff == null)
-                {
-                    MessageBox.Show("No day off found!");
-                }
-                else
-                {
-                    ExplainDenial explain = new ExplainDenial(thisDayOff, _scheduleControl, this);
-                    explain.Show();
-                }
-                
-            }
-            catch(Exception ex)
-            {
-                MessageBox.Show("An error occured!" + ex.ToString());
-            }
-            
+
         }
+
         private void cbSchedule_DrawItem(object sender, DrawItemEventArgs e)
         {
             // Draw the background 
@@ -722,14 +763,14 @@ namespace PRJMediaBazaar
 
             // Get the item text    
             string text = ((ComboBox)sender).Items[e.Index].ToString();
-
-            // Determine the forecolor based on whether or not the item is selected    
+            string status = _scheduleControl.ScheduleStatus(_scheduleControl.Schedules[e.Index]);
+            // Determine the forecolor
             Brush brush;
-            if (_scheduleControl.ScheduleStatus(_scheduleControl.Schedules[e.Index]) == "empty")// compare  date with your list.  
+            if (status == "empty")
             {
                 brush = Brushes.Red;
             }
-            else if (_scheduleControl.ScheduleStatus(_scheduleControl.Schedules[e.Index]) == "started")
+            else if (status == "started")
             {
                 brush = Brushes.Yellow;
             }
@@ -750,16 +791,18 @@ namespace PRJMediaBazaar
 
             if (e.Index < 0) { return; }
 
+            Brush brush;
             // Get the item text    
             string text = ((ComboBox)sender).Items[e.Index].ToString();
             Day day = (Day)((ComboBox)sender).Items[e.Index];
-            // Determine the forecolor based on whether or not the item is selected    
-            Brush brush;
-            if (_scheduleControl.DayStatus(day) == "empty")// compare  date with your list.  
+
+            // Determine the forecolor
+            string status = _scheduleControl.DayStatus(day);
+            if ( status == "empty")// compare  date with your list.  
             {
                 brush = Brushes.Red;
             }
-            else if (_scheduleControl.DayStatus(day) == "started")
+            else if (status == "started")
             {
                 brush = Brushes.Yellow;
             }
@@ -787,7 +830,8 @@ namespace PRJMediaBazaar
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            
+            x.Visible = false;
+            timer1.Stop();
         }
 
         private void btnMarkAsSeen_Click(object sender, EventArgs e)
@@ -839,67 +883,61 @@ namespace PRJMediaBazaar
              } */
         }
 
-        private void cbEmployees_SelectedIndexChanged(object sender, EventArgs e)
+        private void cbPosition_DrawItem(object sender, DrawItemEventArgs e)
         {
-            try
+            // Draw the background 
+            e.DrawBackground();
+
+            if (e.Index < 0) { return; }
+
+            Brush brush = Brushes.White;
+
+            // Get the item text    
+            string text = ((ComboBox)sender).Items[e.Index].ToString();
+            Day day = (Day)cbDay.SelectedItem;
+            // Determine the forecolor
+
+            if(day != null)
             {
-                int ok = 0;
-                List<Employee> employees = _empControl.Employees.ToList();
-                if (this.cbEmployees.SelectedItem == null)
+                string status = day.PositionStatus(text);
+                if (status == "empty")
                 {
-                    StatusFunction("Please select an employee!", -6, -1, 900, 28, Color.Red);
-                    throw new EmptyComboBoxException();
+                    brush = Brushes.Red;
                 }
-                String input = this.cbEmployees.SelectedItem.ToString();
-                if (Regex.IsMatch(input, @"^\d+$") == true)
+                else if (status == "started")
                 {
-                    int id = Convert.ToInt32(input);
-                    foreach (Employee employee in employees)
-                    {
-                        if (employee.Id == id)
-                        {
-                            thisEmployee = employee;
-                            LoadEmployeeListboxes(thisEmployee);
-                            ok = 1;
-                            break;
-                        }
-                    }
+                    brush = Brushes.Yellow;
                 }
                 else
                 {
-                    foreach (Employee employee in employees)
-                    {
-                        if (employee.LastName == input || employee.FirstName == input || employee.FirstName + " " + employee.LastName == input)
-                        {
-                            thisEmployee = employee;
-                            LoadEmployeeListboxes(thisEmployee);
-                            ok = 1;
-                            break;
-                        }
-                    }
-
-                }
-                if (ok == 0)
-                {
-                    StatusFunction("No employee found!", -6, -1, 900, 28, Color.Red);
+                    brush = Brushes.Green;
                 }
             }
-            catch (Exception ex)
-            {
-                StatusFunction("No employee found!", -6, -1, 900, 28,Color.Red);
-            }
+           
+            // Draw the text    
+            e.Graphics.DrawString(text, ((Control)sender).Font, brush, e.Bounds.X, e.Bounds.Y);
         }
 
-        private void godTimer_Tick(object sender, EventArgs e)
+        private void cbSchedule_DropDownClosed(object sender, EventArgs e)
         {
-            for (int i = 0; i < timers.Count; i++)
-            {
-                if (timers[i].Enabled == true)
-                {
-                    timers[i].Enabled = false;
-                    buttons[i].Visible = false;
-                }
-            }
+            this.ActiveControl = null;
+        }
+
+        private void cbDay_DropDownClosed(object sender, EventArgs e)
+        {
+            this.ActiveControl = null;
+        }
+
+        private void cbPosition_DropDownClosed(object sender, EventArgs e)
+        {
+            this.ActiveControl = null;
+        }
+
+        private void RedrawComboboxes()
+        {
+            cbSchedule.Invalidate();
+            cbDay.Invalidate();
+            cbPosition.Invalidate();
         }
     }
 }

@@ -34,7 +34,7 @@ namespace PRJMediaBazaar
             this.panel1 = new System.Windows.Forms.Panel();
             this.lblTitle = new System.Windows.Forms.Label();
             this.btnConfirm = new System.Windows.Forms.Button();
-            this.godTimer = new System.Windows.Forms.Timer(this.components);
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -78,10 +78,9 @@ namespace PRJMediaBazaar
             this.btnConfirm.UseVisualStyleBackColor = true;
             this.btnConfirm.Click += new System.EventHandler(this.btnConfirm_Click);
             // 
-            // godTimer
+            // timer1
             // 
-            this.godTimer.Interval = 2500;
-            this.godTimer.Tick += new System.EventHandler(this.godTimer_Tick);
+            this.timer1.Interval = 1500;
             // 
             // EditNote
             // 
@@ -107,6 +106,6 @@ namespace PRJMediaBazaar
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label lblTitle;
         private System.Windows.Forms.Button btnConfirm;
-        private System.Windows.Forms.Timer godTimer;
+        private System.Windows.Forms.Timer timer1;
     }
 }

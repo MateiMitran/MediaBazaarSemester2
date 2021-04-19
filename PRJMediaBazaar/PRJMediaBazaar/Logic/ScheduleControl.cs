@@ -11,23 +11,21 @@ namespace PRJMediaBazaar.Logic
 {
     class ScheduleControl
     {
-        private List<DayOff> dayoff_req;
-        private List<SickReport> sick_req;
-        private List<Schedule> _schedules;
-        private EmployeeControl _empControl;
-        private ScheduleDAL scheduleDAL;
+
+        protected List<Schedule> _schedules;
+        protected EmployeeControl _empControl;
+        protected ScheduleDAL scheduleDAL;
 
         public ScheduleControl(EmployeeControl employeeControl)
         {
             _schedules = new List<Schedule>();
             _empControl = employeeControl;
-            scheduleDAL = new ScheduleDAL();
+            scheduleDAL = new ScheduleDAL(_empControl.GetAllEmployees());
             LoadSchedules();
-            LoadDaysOff();
         }
 
-        public List<DayOff> DaysOffRequests { get { return dayoff_req; } }
-        public List<SickReport> SickReports { get { return sick_req; } }
+        public EmployeeControl EmployeeControl{ get { return _empControl; } }
+
         public Schedule[] Schedules { get { return _schedules.ToArray(); } }
 
         private void LoadSchedules()
@@ -50,7 +48,7 @@ namespace PRJMediaBazaar.Logic
 
 
 
-        private void DecreaseAssignedPosition(Day day, string jobPosition, string shift)
+        public void DecreaseAssignedPosition(Day day, string jobPosition, string shift)
         {
             Duty duty = day.GetDuty(jobPosition);
             int morning = duty.MorningAssigned;
@@ -71,7 +69,7 @@ namespace PRJMediaBazaar.Logic
             day.ChangeAssignedDuties(jobPosition, morning, midday, evening);
         }
 
-        private void IncreaseAssignedPosition(Day day, string jobPosition, string shift)
+        public void IncreaseAssignedPosition(Day day, string jobPosition, string shift)
         {
             Duty duty = day.GetDuty(jobPosition);
             int morning = duty.MorningAssigned;
@@ -90,6 +88,11 @@ namespace PRJMediaBazaar.Logic
                     break;
             }
             day.ChangeAssignedDuties(jobPosition, morning, midday, evening);
+        }
+
+        public bool UpdateHours(double hours,int weekId,int employeeId)
+        {
+           return  scheduleDAL.UpdateHours(hours, weekId, employeeId);
         }
 
         public EmployeeWorkday[] GetEmployeesShifts(int weekId, int dayId, string jobPosition)
@@ -132,37 +135,12 @@ namespace PRJMediaBazaar.Logic
 
             }
         }
-        //public void RemoveShift(string shift, Day day,EmployeeWorkday result)
-        //{
-           
-        //    if (result != null)
-        //    {
-        //        int emptyShiftIndex = Helper.GetEmptyShiftIndex(result.FirstShift.ToString(), result.SecondShift.ToString());
-        //        if (emptyShiftIndex != -1 && !result.Absence) //if there is an empty shift, remove the row
-        //        {
-        //            scheduleDAL.DeleteShift(result.DayId, result.Employee.Id);
-                   
-        //        }
-        //        else if (emptyShiftIndex == -1 && !result.Absence)//if there is a double shift,insert None on the chosen one
-        //        {
-        //            if (result.FirstShift.ToString() == shift)
-        //            {
-        //                scheduleDAL.UpdateShift(2, "None", result.DayId, result.Employee.Id);
-                       
-        //            }
-        //            else if (result.SecondShift.ToString() == shift)
-        //            {
-        //                scheduleDAL.UpdateShift(3, "None", result.DayId, result.Employee.Id);
-                       
-        //            }
 
-        //        }
-
-        //        DecreaseAssignedPosition(day, result.Employee.JobPosition, shift);
-        //        scheduleDAL.UpdateHours(result.Hours - 4.5, day.ScheduleId, result.Employee.Id);
-        //    }
-        //}
-
+        public EmployeeWorkday GetEmployeeShift(int weekId, int dayId, int employeeId)
+        {
+            return scheduleDAL.SelectEmployeeShift(weekId, dayId, employeeId);
+        }
+     
         public void AssignShift(string shift, Employee employee, Day day, int emptyShiftIndex, double hours)
         {
             EmployeeWorkday wd = scheduleDAL.SelectEmployeeShift(day.WeekId,day.Id, employee.Id);
@@ -188,40 +166,6 @@ namespace PRJMediaBazaar.Logic
 
         }
 
-
-        public void AssignAbsence(AbsenceReason absenceReason, Employee employee, Day day)
-        {
-            EmployeeWorkday wd = scheduleDAL.SelectEmployeeShift(day.WeekId, day.Id, employee.Id);
-            if (wd != null)
-            {
-                scheduleDAL.UpdateAbsence(day.Id, employee.Id);
-                if (wd.FirstShift != Shift.None)
-                {
-                    DecreaseAssignedPosition(day, employee.JobPosition, wd.FirstShift.ToString());
-                }
-                if (wd.SecondShift != Shift.None)
-                {
-                    DecreaseAssignedPosition(day, employee.JobPosition, wd.SecondShift.ToString());
-                }
-                scheduleDAL.UpdateHours(wd.Hours, day.WeekId, employee.Id);
-            }
-            else
-            {
-                scheduleDAL.InsertAbsence(day.Id, employee.Id);
-            }
-        }
-
-
-
-        public void LoadDaysOff() // add the DayOff requests to the list 
-        {
-            dayoff_req = scheduleDAL.SelectDayOffRequests();
-        }
-
-        public void LoadSickReports()  
-        {
-            sick_req = scheduleDAL.SelectSickReports();
-        }
 
 
 
@@ -294,26 +238,11 @@ namespace PRJMediaBazaar.Logic
 
         }
 
-        public bool ConfirmDayOffRequest(int dayId, int empId)
-        {
-            return scheduleDAL.ConfirmDayOffRequest(dayId, empId);
-        }
-
-        public void AddReason(int id, String note)
-        {
-           scheduleDAL.AddReasonForDenial(id, note, "denied");
-        }
-
-        public bool MarkAsSeen(int dayId, int empId)
-        {
-            return scheduleDAL.ConfirmSickReport(dayId, empId);
-        }
 
         public void GenerateSchedule(Day day)
         {
 
-            Duty[] positions = new Duty[] { day.CashiersNeeded, day.SalesAssistantsNeeded,
-                day.SecurityNeeded, day.StockersNeeded, day.WarehouseManagersNeeded };
+            Duty[] positions = day.AllPositions;
 
             foreach (Duty p in positions)
             {

@@ -6,7 +6,6 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Web;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
 using System.ComponentModel.DataAnnotations;
@@ -21,33 +20,16 @@ namespace PRJMediaBazaar
         private EmployeeControl ec;
         private HRHome hr;
         private List<Employee> employees;
-        private List<Button> buttons;
-        private List<Timer> timers;
+        private Button x;
+        private Timer timer;
         public AddEmployees(HRHome hr, EmployeeControl ec, List<Employee> employees)
         {
             InitializeComponent();
-            timers = new List<Timer>();
-            buttons = new List<Button>();
             this.ec = ec;
             this.hr = hr;
             this.employees = employees;
         }
-        public void StatusFunction(String text, int x, int y, int width, int height, Color color)
-        {
-            Button newButton = new Button();
-            newButton.Location = new Point(x, y);
-            newButton.Width = width;
-            newButton.Height = height;
-            newButton.Enabled = false;
-            newButton.BackColor = color;
-            newButton.Text = text;
-            this.Controls.Add(newButton);
-            newButton.BringToFront();
-            buttons.Add(newButton);
-            Timer temp = new Timer();
-            timers.Add(temp);
-            temp.Start();
-        }
+
         private void btnAddEmployee_Click(object sender, EventArgs e)
         {
             try
@@ -55,61 +37,138 @@ namespace PRJMediaBazaar
                 String firstName = this.tbSurname.Text;
                 if (Regex.IsMatch(firstName, @"\d"))
                 {
-                    StatusFunction("Enter a valid first name!", -60, -5, 835, 28, Color.Red);
+                    x = new Button();
+                    x.Location = new Point(-6, -1);
+                    x.Width = 556;
+                    x.Height = 28;
+                    x.Enabled = false;
+                    x.BackColor = Color.Red;
+                    x.Text = "Enter a valid first name!";
+                    this.Controls.Add(x);
+                    x.BringToFront();
+                    timer1.Start();
                     throw new InvalidStringException();
                 }
                 String lastName = this.tbName.Text;
                 if (Regex.IsMatch(lastName, @"\d"))
                 {
-                    StatusFunction("Enter a valid last name!", -60, -5, 835, 28, Color.Red);
+                    x = new Button();
+                    x.Location = new Point(-6, -1);
+                    x.Width = 556;
+                    x.Height = 28;
+                    x.Enabled = false;
+                    x.BackColor = Color.Red;
+                    x.Text = "Enter a valid last name!";
+                    this.Controls.Add(x);
+                    x.BringToFront();
+                    timer1.Start();
                     throw new InvalidStringException();
                 }
                 DateTime birthDate = this.dtpBirthdate.Value.Date;
                 String email = this.tbEmail.Text;
                 if (CheckEmail(email) == false)
                 {
-                    StatusFunction("Enter a valid email!", -60, -5, 835, 28, Color.Red);
+                    x = new Button();
+                    x.Location = new Point(-6, -1);
+                    x.Width = 556;
+                    x.Height = 28;
+                    x.Enabled = false;
+                    x.BackColor = Color.Red;
+                    x.Text = "Enter a valid email!";
+                    this.Controls.Add(x);
+                    x.BringToFront();
+                    timer1.Start();
                     throw new InvalidEmailException();
-                }
-                if (this.tbPassword.TextLength == 0)
-                {
-                    throw new Exception();
                 }
                 String password = this.tbPassword.Text;
                 if (this.cbJobPosition.SelectedItem == null)
                 {
-                    StatusFunction("Select a job position!", -60, -5, 835, 28, Color.Red);
+                    x = new Button();
+                    x.Location = new Point(-6, -1);
+                    x.Width = 556;
+                    x.Height = 28;
+                    x.Enabled = false;
+                    x.BackColor = Color.Red;
+                    x.Text = "Select a job position!";
+                    this.Controls.Add(x);
+                    x.BringToFront();
+                    timer1.Start();
                     throw new EmptyComboBoxException();
                 }
                 String jobPosition = this.cbJobPosition.Text;
                 int phone = Convert.ToInt32(this.tbPhone.Text);
                 if (phone < 0 || this.tbPhone.Text.Length != 10)
                 {
-                    StatusFunction("Enter a valid phone!", -60, -5, 835, 28, Color.Red);
+                    x = new Button();
+                    x.Location = new Point(-6, -1);
+                    x.Width = 556;
+                    x.Height = 28;
+                    x.Enabled = false;
+                    x.BackColor = Color.Red;
+                    x.Text = "Enter a valid phone number!";
+                    this.Controls.Add(x);
+                    x.BringToFront();
+                    timer1.Start();
                     throw new NegativeInputException();
                 }
                 String address = this.tbAddress.Text;
                 if (!Regex.IsMatch(this.tbSalary.Text.ToString(), @"^\d+$"))
                 {
-                    StatusFunction("Enter a valid salary!", -60, -5, 835, 28, Color.Red);
+                    x = new Button();
+                    x.Location = new Point(-6, -1);
+                    x.Width = 556;
+                    x.Height = 28;
+                    x.Enabled = false;
+                    x.BackColor = Color.Red;
+                    x.Text = "Enter a valid salary!";
+                    this.Controls.Add(x);
+                    x.BringToFront();
+                    timer1.Start();
                     throw new InvalidIntException();
                 }
                 int salary = Convert.ToInt32(this.tbSalary.Text);
                 if (salary < 0)
                 {
-                    StatusFunction("Enter a valid salary!", -60, -5, 835, 28, Color.Red);
+                    x = new Button();
+                    x.Location = new Point(-6, -1);
+                    x.Width = 556;
+                    x.Height = 28;
+                    x.Enabled = false;
+                    x.BackColor = Color.Red;
+                    x.Text = "Enter a valid salary!";
+                    this.Controls.Add(x);
+                    x.BringToFront();
+                    timer1.Start();
                     throw new NegativeInputException();
                 }
                 if (this.cbGender.SelectedItem == null)
                 {
-                    StatusFunction("Select a gender!", -60, -5, 835, 28, Color.Red);
+                    x = new Button();
+                    x.Location = new Point(-6, -1);
+                    x.Width = 556;
+                    x.Height = 28;
+                    x.Enabled = false;
+                    x.BackColor = Color.Red;
+                    x.Text = "Select a gender!";
+                    this.Controls.Add(x);
+                    x.BringToFront();
+                    timer1.Start();
                     throw new EmptyComboBoxException();
                 }
                 String gender = this.cbGender.Text;
                 String education = this.tbEducation.Text;
                 if (Regex.IsMatch(education, @"\d"))
                 {
-                    StatusFunction("Enter a valid education!", -60, -5, 835, 28, Color.Red);
+                    x = new Button();
+                    x.Location = new Point(-6, -1);
+                    x.Width = 556;
+                    x.Height = 28;
+                    x.Enabled = false;
+                    x.BackColor = Color.Red;
+                    x.Text = "Enter a valid education!";
+                    this.Controls.Add(x);
+                    x.BringToFront();
+                    timer1.Start();
                     throw new InvalidStringException();
                 }
                 int daysOff = 30;
@@ -123,7 +182,16 @@ namespace PRJMediaBazaar
                     int id = ec.GetIDFromEmail(email);
                     hr.AddEmployee(new Employee(id, firstName, lastName, birthDate, gender, salary, email, password, jobPosition,
                                     phone, address, education, contract, daysOff, contractHours));
-                    StatusFunction("Success!", -60, -5, 835, 28, Color.Green);
+                    x = new Button();
+                    x.Location = new Point(-6, -1);
+                    x.Width = 556;
+                    x.Height = 28;
+                    x.Enabled = false;
+                    x.BackColor = Color.Green;
+                    x.Text = "Sucess!";
+                    this.Controls.Add(x);
+                    x.BringToFront();
+                    timer1.Start();
                 }
                 else if (this.rbParttime.Checked == true)
                 {
@@ -131,7 +199,16 @@ namespace PRJMediaBazaar
                     int contractHours = Convert.ToInt32(this.tbContractHours.Text);
                     if (!Regex.IsMatch(contractHours.ToString(), @"^\d+$"))
                     {
-                        StatusFunction("Enter valid contract hours!", -60, -5, 835, 28, Color.Red);
+                        x = new Button();
+                        x.Location = new Point(-6, -1);
+                        x.Width = 556;
+                        x.Height = 28;
+                        x.Enabled = false;
+                        x.BackColor = Color.Red;
+                        x.Text = "Enter a valid number for contract hours!!";
+                        this.Controls.Add(x);
+                        x.BringToFront();
+                        timer1.Start();
                         throw new InvalidIntException();
                     }
                     ec.AddAnEmployee(firstName, lastName, birthDate, email, password, jobPosition, phone, address,
@@ -139,28 +216,82 @@ namespace PRJMediaBazaar
                     int id = ec.GetIDFromEmail(email);
                     hr.AddEmployee(new Employee(id, firstName, lastName, birthDate, gender, salary, email, password, jobPosition,
                                    phone, address, education, contract, daysOff, contractHours));
-                    StatusFunction("Success!", -60, -5, 835, 28, Color.Green);
+                    x = new Button();
+                    x.Location = new Point(-6, -1);
+                    x.Width = 556;
+                    x.Height = 28;
+                    x.Enabled = false;
+                    x.BackColor = Color.Green;
+                    x.Text = "Success!";
+                    this.Controls.Add(x);
+                    x.BringToFront();
+                    timer1.Start();
                 }
             }
             catch (InvalidIntException ex)
             {
-                StatusFunction("Enter valid numbers for phone and salary!", -60, -5, 835, 28, Color.Red);
+                x = new Button();
+                x.Location = new Point(-6, -1);
+                x.Width = 556;
+                x.Height = 28;
+                x.Enabled = false;
+                x.BackColor = Color.Red;
+                x.Text = "Enter valid numbers for phone and salary and/or contract hours!";
+                this.Controls.Add(x);
+                x.BringToFront();
+                timer1.Start();
             }
             catch (EmptyComboBoxException ex)
-            {StatusFunction("Select a gender and job position!", -60, -5, 835, 28, Color.Red);
+            {
+                x = new Button();
+                x.Location = new Point(-6, -1);
+                x.Width = 556;
+                x.Height = 28;
+                x.Enabled = false;
+                x.BackColor = Color.Red;
+                x.Text = "Select a gender and job position!";
+                this.Controls.Add(x);
+                x.BringToFront();
+                timer1.Start();
             }
             catch (InvalidEmailException ex)
             {
-                StatusFunction("Enter a valid email!", -60, -5, 835, 28, Color.Red);
+                x = new Button();
+                x.Location = new Point(-6, -1);
+                x.Width = 556;
+                x.Height = 28;
+                x.Enabled = false;
+                x.BackColor = Color.Red;
+                x.Text = "Enter a valid email!";
+                this.Controls.Add(x);
+                x.BringToFront();
+                timer1.Start();
             }
             catch (InvalidStringException ex)
             {
-                StatusFunction("Enter a valid name, address and education", -60, -5, 835, 28, Color.Red);
-                
+                x = new Button();
+                x.Location = new Point(-6, -1);
+                x.Width = 556;
+                x.Height = 28;
+                x.Enabled = false;
+                x.BackColor = Color.Red;
+                x.Text = "Enter a valid name, address and education";
+                this.Controls.Add(x);
+                x.BringToFront();
+                timer1.Start();
             }
             catch (NegativeInputException ex)
             {
-                StatusFunction("Input cannot be negative!", -60, -5, 835, 28, Color.Red);
+                x = new Button();
+                x.Location = new Point(-6, -1);
+                x.Width = 556;
+                x.Height = 28;
+                x.Enabled = false;
+                x.BackColor = Color.Red;
+                x.Text = "Input cannot be negative!";
+                this.Controls.Add(x);
+                x.BringToFront();
+                timer1.Start();
             }
         }
 
@@ -188,52 +319,7 @@ namespace PRJMediaBazaar
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-        }
-
-        private void btnGenerate_Click(object sender, EventArgs e)
-        {
-            this.tbPassword.Text = GeneratePassword(3, 3, 3);
-        }
-        public static String GeneratePassword(int lowercase, int uppercase, int numerics)
-        {
-            String lowers = "abcdefghijklmnopqrstuvwxyz";
-            String uppers = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-            String number = "0123456789";
-
-            Random random = new Random();
-
-            String generated = "!";
-            for (int i = 1; i <= lowercase; i++)
-                generated = generated.Insert(
-                    random.Next(generated.Length),
-                    lowers[random.Next(lowers.Length - 1)].ToString()
-                );
-
-            for (int i = 1; i <= uppercase; i++)
-                generated = generated.Insert(
-                    random.Next(generated.Length),
-                    uppers[random.Next(uppers.Length - 1)].ToString()
-                );
-
-            for (int i = 1; i <= numerics; i++)
-                generated = generated.Insert(
-                    random.Next(generated.Length),
-                    number[random.Next(number.Length - 1)].ToString()
-                );
-
-            return generated.Replace("!", string.Empty);
-        }
-
-        private void godTimer_Tick(object sender, EventArgs e)
-        {
-            for (int i = 0; i < timers.Count; i++)
-            {
-                if (timers[i].Enabled == true)
-                {
-                    timers[i].Enabled = false;
-                    buttons[i].Visible = false;
-                }
-            }
+            x.Visible = false;
         }
     }
 }
