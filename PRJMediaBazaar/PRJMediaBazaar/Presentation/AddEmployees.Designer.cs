@@ -59,7 +59,7 @@ namespace PRJMediaBazaar
             this.tbSurname = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.lblTitle = new System.Windows.Forms.Label();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.godTimer = new System.Windows.Forms.Timer(this.components);
             this.btnGenerate = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -328,9 +328,10 @@ namespace PRJMediaBazaar
             this.lblTitle.TabIndex = 1;
             this.lblTitle.Text = "Add Employee";
             // 
-            // timer1
+            // godTimer
             // 
-            this.timer1.Interval = 1500;
+            this.godTimer.Interval = 2500;
+            this.godTimer.Tick += new System.EventHandler(this.godTimer_Tick);
             // 
             // btnGenerate
             // 
@@ -416,7 +417,7 @@ namespace PRJMediaBazaar
         private System.Windows.Forms.TextBox tbSurname;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label lblTitle;
-        private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.Timer godTimer;
         private System.Windows.Forms.Button btnGenerate;
     }
 }

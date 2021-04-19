@@ -16,15 +16,33 @@ namespace PRJMediaBazaar
         private Employee thisEmployee;
         private EmployeeControl ec;
         private HRHome hr;
-        private Button x;
+        private List<Button> buttons;
+        private List<Timer> timers;
         public EditNote(Employee thisEmployee, EmployeeControl ec, HRHome hr)
         {
             InitializeComponent();
+            buttons = new List<Button>();
+            timers = new List<Timer>();
             this.thisEmployee = thisEmployee;
             this.ec = ec;
             this.hr = hr;
         }
-
+        public void StatusFunction(String text, int x, int y, int width, int height, Color color)
+        {
+            Button newButton = new Button();
+            newButton.Location = new Point(x, y);
+            newButton.Width = width;
+            newButton.Height = height;
+            newButton.Enabled = false;
+            newButton.BackColor = color;
+            newButton.Text = text;
+            this.Controls.Add(newButton);
+            newButton.BringToFront();
+            buttons.Add(newButton);
+            Timer temp = new Timer();
+            timers.Add(temp);
+            temp.Start();
+        }
         private void EditNote_Load(object sender, EventArgs e)
         {
             this.tbNote.Text = thisEmployee.Note;
@@ -37,37 +55,30 @@ namespace PRJMediaBazaar
                 this.tbNote.Text += " " + DateTime.Now.ToString();
                 ec.UpdateNote(this.tbNote.Text, thisEmployee.Email);
                 hr.AddNoteToEmployee(thisEmployee, this.tbNote.Text);
-                x = new Button();
-                x.Location = new Point(-6, -1);
-                x.Width = 556;
-                x.Height = 28;
-                x.Enabled = false;
-                x.BackColor = Color.Green;
-                x.Text = "Success!";
-                this.Controls.Add(x);
-                x.BringToFront();
-                timer1.Start();
+                StatusFunction("Success!", -60, -5, 818, 28, Color.Green);
             }
             catch (Exception ex)
             {
-                x = new Button();
-                x.Location = new Point(-6, -1);
-                x.Width = 556;
-                x.Height = 28;
-                x.Enabled = false;
-                x.BackColor = Color.Red;
-                x.Text = "An error occured!";
-                this.Controls.Add(x);
-                x.BringToFront();
-                timer1.Start();
+                StatusFunction("An error occured!", -60, -5, 818, 28, Color.Red);
             }
 
         }
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            x.Visible = false;
-            timer1.Stop();
+            
+        }
+
+        private void godTimer_Tick(object sender, EventArgs e)
+        {
+            for (int i = 0; i < timers.Count; i++)
+            {
+                if (timers[i].Enabled == true)
+                {
+                    timers[i].Enabled = false;
+                    buttons[i].Visible = false;
+                }
+            }
         }
     }
 }

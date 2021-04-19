@@ -33,7 +33,7 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.lblTitle = new System.Windows.Forms.Label();
             this.tbExplain = new System.Windows.Forms.TextBox();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.godTimer = new System.Windows.Forms.Timer(this.components);
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -77,9 +77,10 @@
             this.tbExplain.Size = new System.Drawing.Size(776, 284);
             this.tbExplain.TabIndex = 58;
             // 
-            // timer1
+            // godTimer
             // 
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick_1);
+            this.godTimer.Interval = 2500;
+            this.godTimer.Tick += new System.EventHandler(this.timer1_Tick_1);
             // 
             // ExplainDenial
             // 
@@ -105,6 +106,6 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label lblTitle;
         private System.Windows.Forms.TextBox tbExplain;
-        private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.Timer godTimer;
     }
 }

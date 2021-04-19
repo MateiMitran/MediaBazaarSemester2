@@ -74,7 +74,7 @@ namespace PRJMediaBazaar
             this.btnDeleteSchedule = new System.Windows.Forms.Button();
             this.btnGenerateSchedule = new System.Windows.Forms.Button();
             this.pnlNavbar = new System.Windows.Forms.Panel();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.godTimer = new System.Windows.Forms.Timer(this.components);
             this.panelEmployees.SuspendLayout();
             this.panelSickReports.SuspendLayout();
             this.pnlDayOff.SuspendLayout();
@@ -156,10 +156,10 @@ namespace PRJMediaBazaar
             this.panelEmployees.Controls.Add(this.lbEmployeeInfo);
             this.panelEmployees.Controls.Add(this.lblAllEmployees);
             this.panelEmployees.Controls.Add(this.btnAddLatePoints);
-            this.panelEmployees.Location = new System.Drawing.Point(63, 17);
+            this.panelEmployees.Location = new System.Drawing.Point(0, 65);
             this.panelEmployees.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panelEmployees.Name = "panelEmployees";
-            this.panelEmployees.Size = new System.Drawing.Size(84, 44);
+            this.panelEmployees.Size = new System.Drawing.Size(1113, 614);
             this.panelEmployees.TabIndex = 8;
             this.panelEmployees.Paint += new System.Windows.Forms.PaintEventHandler(this.panelEmployees_Paint);
             // 
@@ -275,10 +275,10 @@ namespace PRJMediaBazaar
             this.pnlDayOff.Controls.Add(this.btnDenyDayOff);
             this.pnlDayOff.Controls.Add(this.btnConfirmDayOff);
             this.pnlDayOff.Controls.Add(this.lbDayOff);
-            this.pnlDayOff.Location = new System.Drawing.Point(12, 65);
+            this.pnlDayOff.Location = new System.Drawing.Point(877, 15);
             this.pnlDayOff.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pnlDayOff.Name = "pnlDayOff";
-            this.pnlDayOff.Size = new System.Drawing.Size(1082, 597);
+            this.pnlDayOff.Size = new System.Drawing.Size(128, 42);
             this.pnlDayOff.TabIndex = 24;
             this.pnlDayOff.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlDayOff_Paint);
             // 
@@ -599,7 +599,7 @@ namespace PRJMediaBazaar
             // pnlNavbar
             // 
             this.pnlNavbar.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.pnlNavbar.Controls.Add(this.panelEmployees);
+            this.pnlNavbar.Controls.Add(this.pnlDayOff);
             this.pnlNavbar.Controls.Add(this.panelSickReports);
             this.pnlNavbar.Controls.Add(this.panelSchedule);
             this.pnlNavbar.Controls.Add(this.lblTitle);
@@ -614,17 +614,19 @@ namespace PRJMediaBazaar
             this.pnlNavbar.Size = new System.Drawing.Size(1104, 59);
             this.pnlNavbar.TabIndex = 5;
             // 
-            // timer1
+            // godTimer
             // 
-            this.timer1.Interval = 1500;
+            this.godTimer.Enabled = true;
+            this.godTimer.Interval = 2500;
+            this.godTimer.Tick += new System.EventHandler(this.godTimer_Tick);
             // 
             // HRHome
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1104, 679);
+            this.Controls.Add(this.panelEmployees);
             this.Controls.Add(this.pnlNavbar);
-            this.Controls.Add(this.pnlDayOff);
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "HRHome";
             this.Text = "HRHome";
@@ -690,7 +692,7 @@ namespace PRJMediaBazaar
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Button btnGenerateSchedule;
         private System.Windows.Forms.Button btnDeleteSchedule;
-        private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.Timer godTimer;
         private System.Windows.Forms.ComboBox cbEmployees;
     }
 }
