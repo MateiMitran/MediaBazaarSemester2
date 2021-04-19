@@ -75,6 +75,7 @@
       <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.5.2\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
     </Reference>
     <Reference Include="System.Transactions" />
+    <Reference Include="System.Windows.Forms.DataVisualization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -102,16 +103,16 @@
     <Compile Include="Logic\Duty.cs" />
     <Compile Include="Logic\SickReport.cs" />
     <Compile Include="NegativeInputException.cs" />
-    <Compile Include="Presentation\EditNote.cs">
+    <Compile Include="Presentation\HRManager\EditNote.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Presentation\EditNote.Designer.cs">
+    <Compile Include="Presentation\HRManager\EditNote.Designer.cs">
       <DependentUpon>EditNote.cs</DependentUpon>
     </Compile>
-    <Compile Include="Presentation\AddEmployees.cs">
+    <Compile Include="Presentation\HRManager\AddEmployees.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Presentation\AddEmployees.Designer.cs">
+    <Compile Include="Presentation\HRManager\AddEmployees.Designer.cs">
       <DependentUpon>AddEmployees.cs</DependentUpon>
     </Compile>
     <Compile Include="Data\DayDAL.cs" />
@@ -121,26 +122,26 @@
     <Compile Include="Logic\ScheduleControl.cs" />
     <Compile Include="Logic\Helper.cs" />
     <Compile Include="Logic\ShiftSeparator.cs" />
-    <Compile Include="Presentation\ChangeNeededPosition.cs">
+    <Compile Include="Presentation\HRManager\ChangeNeededPosition.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Presentation\ChangeNeededPosition.Designer.cs">
+    <Compile Include="Presentation\HRManager\ChangeNeededPosition.Designer.cs">
       <DependentUpon>ChangeNeededPosition.cs</DependentUpon>
     </Compile>
     <Compile Include="Data\BaseDAL.cs" />
     <Compile Include="Data\EmployeeDAL.cs" />
     <Compile Include="Data\ScheduleDAL.cs" />
     <Compile Include="EmptyComboBoxException.cs" />
-    <Compile Include="Presentation\ExplainDenial.cs">
+    <Compile Include="Presentation\HRManager\ExplainDenial.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Presentation\ExplainDenial.Designer.cs">
+    <Compile Include="Presentation\HRManager\ExplainDenial.Designer.cs">
       <DependentUpon>ExplainDenial.cs</DependentUpon>
     </Compile>
-    <Compile Include="Presentation\HRHome.cs">
+    <Compile Include="Presentation\HRManager\HRHome.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Presentation\HRHome.Designer.cs">
+    <Compile Include="Presentation\HRManager\HRHome.Designer.cs">
       <DependentUpon>HRHome.cs</DependentUpon>
     </Compile>
     <Compile Include="Logic\AbsenceReason.cs" />
@@ -156,31 +157,40 @@
     <Compile Include="Presentation\LogIn.Designer.cs">
       <DependentUpon>LogIn.cs</DependentUpon>
     </Compile>
-    <Compile Include="Program.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Presentation\ShiftAssigning.cs">
+    <Compile Include="Presentation\WareHouseManager\WRHSHome.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Presentation\ShiftAssigning.Designer.cs">
+    <Compile Include="Presentation\WareHouseManager\WRHSHome.Designer.cs">
+      <DependentUpon>WRHSHome.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Presentation\HRManager\ShiftAssigning.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Presentation\HRManager\ShiftAssigning.Designer.cs">
       <DependentUpon>ShiftAssigning.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="Presentation\EditNote.resx">
+    <EmbeddedResource Include="Presentation\HRManager\EditNote.resx">
       <DependentUpon>EditNote.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Presentation\AddEmployees.resx">
+    <EmbeddedResource Include="Presentation\HRManager\AddEmployees.resx">
       <DependentUpon>AddEmployees.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Presentation\ChangeNeededPosition.resx">
+    <EmbeddedResource Include="Presentation\HRManager\ChangeNeededPosition.resx">
       <DependentUpon>ChangeNeededPosition.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Presentation\ExplainDenial.resx">
+    <EmbeddedResource Include="Presentation\HRManager\ExplainDenial.resx">
       <DependentUpon>ExplainDenial.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Presentation\HRHome.resx">
+    <EmbeddedResource Include="Presentation\HRManager\HRHome.resx">
       <DependentUpon>HRHome.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Presentation\LogIn.resx">
       <DependentUpon>LogIn.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Presentation\WareHouseManager\WRHSHome.resx">
+      <DependentUpon>WRHSHome.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -191,7 +201,7 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="Presentation\ShiftAssigning.resx">
+    <EmbeddedResource Include="Presentation\HRManager\ShiftAssigning.resx">
       <DependentUpon>ShiftAssigning.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />

@@ -8,7 +8,7 @@ using PRJMediaBazaar.Data;
 
 namespace PRJMediaBazaar.Logic
 {
-    class DayOff : ScheduleDAL
+    class DayOff
     {
         public int DayOffId { get; private set; }
         public int Schedule_id { get; private set; }

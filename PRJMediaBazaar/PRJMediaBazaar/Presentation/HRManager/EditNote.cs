@@ -6,25 +6,25 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using PRJMediaBazaar.Logic;
 using System.Windows.Forms;
+using PRJMediaBazaar.Logic;
 
 namespace PRJMediaBazaar
 {
-    partial class ExplainDenial : Form
+    partial class EditNote : Form
     {
-        private DayOff dayOff;
-        private AbsenceControl ab;
+        private Employee thisEmployee;
+        private EmployeeControl ec;
         private HRHome hr;
         private List<Button> buttons;
         private List<Timer> timers;
-        public ExplainDenial(DayOff d, AbsenceControl ab, HRHome hr)
+        public EditNote(Employee thisEmployee, EmployeeControl ec, HRHome hr)
         {
             InitializeComponent();
             buttons = new List<Button>();
             timers = new List<Timer>();
-            this.dayOff = d;
-            this.ab = ab;
+            this.thisEmployee = thisEmployee;
+            this.ec = ec;
             this.hr = hr;
         }
         public void StatusFunction(String text, int x, int y, int width, int height, Color color)
@@ -43,36 +43,32 @@ namespace PRJMediaBazaar
             timers.Add(temp);
             temp.Start();
         }
+        private void EditNote_Load(object sender, EventArgs e)
+        {
+            this.tbNote.Text = thisEmployee.Note;
+        }
 
         private void btnConfirm_Click(object sender, EventArgs e)
         {
             try
             {
-                ab.AddReason(dayOff.Employee_id, this.tbExplain.Text); // adds the reason to the db
-                //hr.AddReasonForDenial(dayOff, this.tbExplain.Text); // adds the reason to the property of the request
+                ec.UpdateNote(this.tbNote.Text, thisEmployee.Email);
+                hr.AddNoteToEmployee(thisEmployee, this.tbNote.Text);
                 StatusFunction("Success!", -60, -5, 818, 28, Color.Green);
-                tbExplain.Clear();
-                this.Hide();
-
             }
-
             catch (Exception ex)
             {
                 StatusFunction("An error occured!", -60, -5, 818, 28, Color.Red);
             }
+
         }
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-
+            
         }
 
-        private void ExplainDenial_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void timer1_Tick_1(object sender, EventArgs e)
+        private void godTimer_Tick(object sender, EventArgs e)
         {
             for (int i = 0; i < timers.Count; i++)
             {

@@ -49,18 +49,7 @@ namespace PRJMediaBazaar
             this.btnMarkAsSeen = new System.Windows.Forms.Button();
             this.pnlDayOff = new System.Windows.Forms.Panel();
             this.btnDenyDayOff = new System.Windows.Forms.Button();
-            this.btnConfirmDayOff = new System.Windows.Forms.Button();
-            this.lbDayOff = new System.Windows.Forms.ListBox();
-            this.cbDay = new System.Windows.Forms.ComboBox();
-            this.lblWeek = new System.Windows.Forms.Label();
-            this.btnChangeNeededPosition = new System.Windows.Forms.Button();
-            this.lblMorningShift = new System.Windows.Forms.Label();
-            this.lblMiddayShift = new System.Windows.Forms.Label();
-            this.lblEveningShift = new System.Windows.Forms.Label();
-            this.cbPosition = new System.Windows.Forms.ComboBox();
-            this.lblPosition = new System.Windows.Forms.Label();
             this.panelSchedule = new System.Windows.Forms.Panel();
-            this.btnDeleteSchedule = new System.Windows.Forms.Button();
             this.btnGenerateSchedule = new System.Windows.Forms.Button();
             this.lblPositionNeeded = new System.Windows.Forms.Label();
             this.lbIncompleteDays = new System.Windows.Forms.ListBox();
@@ -72,8 +61,19 @@ namespace PRJMediaBazaar
             this.ShiftsTable = new System.Windows.Forms.TableLayoutPanel();
             this.label1 = new System.Windows.Forms.Label();
             this.cbSchedule = new System.Windows.Forms.ComboBox();
+            this.lblPosition = new System.Windows.Forms.Label();
+            this.cbPosition = new System.Windows.Forms.ComboBox();
+            this.lblEveningShift = new System.Windows.Forms.Label();
+            this.lblMiddayShift = new System.Windows.Forms.Label();
+            this.lblMorningShift = new System.Windows.Forms.Label();
+            this.btnChangeNeededPosition = new System.Windows.Forms.Button();
+            this.lblWeek = new System.Windows.Forms.Label();
+            this.cbDay = new System.Windows.Forms.ComboBox();
+            this.btnDeleteSchedule = new System.Windows.Forms.Button();
+            this.btnConfirmDayOff = new System.Windows.Forms.Button();
+            this.lbDayOff = new System.Windows.Forms.ListBox();
             this.pnlNavbar = new System.Windows.Forms.Panel();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.godTimer = new System.Windows.Forms.Timer(this.components);
             this.panelEmployees.SuspendLayout();
             this.panelSickReports.SuspendLayout();
             this.pnlDayOff.SuspendLayout();
@@ -156,10 +156,10 @@ namespace PRJMediaBazaar
             this.panelEmployees.Controls.Add(this.lbEmployeeInfo);
             this.panelEmployees.Controls.Add(this.lblAllEmployees);
             this.panelEmployees.Controls.Add(this.btnAddLatePoints);
-            this.panelEmployees.Location = new System.Drawing.Point(955, 15);
+            this.panelEmployees.Location = new System.Drawing.Point(79, 10);
             this.panelEmployees.Margin = new System.Windows.Forms.Padding(3, 1, 3, 1);
             this.panelEmployees.Name = "panelEmployees";
-            this.panelEmployees.Size = new System.Drawing.Size(79, 31);
+            this.panelEmployees.Size = new System.Drawing.Size(71, 39);
             this.panelEmployees.TabIndex = 8;
             this.panelEmployees.Paint += new System.Windows.Forms.PaintEventHandler(this.panelEmployees_Paint);
             // 
@@ -240,10 +240,10 @@ namespace PRJMediaBazaar
             this.panelSickReports.Controls.Add(this.label7);
             this.panelSickReports.Controls.Add(this.lbSickReports);
             this.panelSickReports.Controls.Add(this.btnMarkAsSeen);
-            this.panelSickReports.Location = new System.Drawing.Point(795, 21);
+            this.panelSickReports.Location = new System.Drawing.Point(711, 22);
             this.panelSickReports.Margin = new System.Windows.Forms.Padding(3, 1, 3, 1);
             this.panelSickReports.Name = "panelSickReports";
-            this.panelSickReports.Size = new System.Drawing.Size(41, 28);
+            this.panelSickReports.Size = new System.Drawing.Size(49, 20);
             this.panelSickReports.TabIndex = 24;
             this.panelSickReports.Paint += new System.Windows.Forms.PaintEventHandler(this.panelSickReports_Paint);
             // 
@@ -284,10 +284,10 @@ namespace PRJMediaBazaar
             this.pnlDayOff.Controls.Add(this.btnDenyDayOff);
             this.pnlDayOff.Controls.Add(this.btnConfirmDayOff);
             this.pnlDayOff.Controls.Add(this.lbDayOff);
-            this.pnlDayOff.Location = new System.Drawing.Point(22, 69);
+            this.pnlDayOff.Location = new System.Drawing.Point(0, 64);
             this.pnlDayOff.Margin = new System.Windows.Forms.Padding(3, 1, 3, 1);
             this.pnlDayOff.Name = "pnlDayOff";
-            this.pnlDayOff.Size = new System.Drawing.Size(1125, 600);
+            this.pnlDayOff.Size = new System.Drawing.Size(1154, 605);
             this.pnlDayOff.TabIndex = 24;
             this.pnlDayOff.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlDayOff_Paint);
             // 
@@ -302,126 +302,8 @@ namespace PRJMediaBazaar
             this.btnDenyDayOff.UseVisualStyleBackColor = true;
             this.btnDenyDayOff.Click += new System.EventHandler(this.btnDenyDayOff_Click);
             // 
-            // btnConfirmDayOff
-            // 
-            this.btnConfirmDayOff.Location = new System.Drawing.Point(60, 555);
-            this.btnConfirmDayOff.Margin = new System.Windows.Forms.Padding(3, 1, 3, 1);
-            this.btnConfirmDayOff.Name = "btnConfirmDayOff";
-            this.btnConfirmDayOff.Size = new System.Drawing.Size(209, 31);
-            this.btnConfirmDayOff.TabIndex = 25;
-            this.btnConfirmDayOff.Text = "Confirm";
-            this.btnConfirmDayOff.UseVisualStyleBackColor = true;
-            this.btnConfirmDayOff.Click += new System.EventHandler(this.btnConfirmDayOff_Click);
-            // 
-            // lbDayOff
-            // 
-            this.lbDayOff.FormattingEnabled = true;
-            this.lbDayOff.ItemHeight = 16;
-            this.lbDayOff.Location = new System.Drawing.Point(79, 96);
-            this.lbDayOff.Margin = new System.Windows.Forms.Padding(3, 1, 3, 1);
-            this.lbDayOff.Name = "lbDayOff";
-            this.lbDayOff.Size = new System.Drawing.Size(1003, 420);
-            this.lbDayOff.TabIndex = 24;
-            // 
-            // cbDay
-            // 
-            this.cbDay.BackColor = System.Drawing.SystemColors.InfoText;
-            this.cbDay.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.cbDay.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbDay.FormattingEnabled = true;
-            this.cbDay.Location = new System.Drawing.Point(287, 95);
-            this.cbDay.Margin = new System.Windows.Forms.Padding(3, 1, 3, 1);
-            this.cbDay.Name = "cbDay";
-            this.cbDay.Size = new System.Drawing.Size(183, 23);
-            this.cbDay.TabIndex = 9;
-            this.cbDay.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.cbDay_DrawItem);
-            this.cbDay.SelectedIndexChanged += new System.EventHandler(this.cbDay_SelectedIndexChanged);
-            this.cbDay.DropDownClosed += new System.EventHandler(this.cbDay_DropDownClosed);
-            // 
-            // lblWeek
-            // 
-            this.lblWeek.AutoSize = true;
-            this.lblWeek.Location = new System.Drawing.Point(287, 75);
-            this.lblWeek.Name = "lblWeek";
-            this.lblWeek.Size = new System.Drawing.Size(37, 17);
-            this.lblWeek.TabIndex = 10;
-            this.lblWeek.Text = "Day:";
-            // 
-            // btnChangeNeededPosition
-            // 
-            this.btnChangeNeededPosition.Location = new System.Drawing.Point(795, 69);
-            this.btnChangeNeededPosition.Margin = new System.Windows.Forms.Padding(3, 1, 3, 1);
-            this.btnChangeNeededPosition.Name = "btnChangeNeededPosition";
-            this.btnChangeNeededPosition.Size = new System.Drawing.Size(147, 74);
-            this.btnChangeNeededPosition.TabIndex = 11;
-            this.btnChangeNeededPosition.Text = "Change needed position";
-            this.btnChangeNeededPosition.UseVisualStyleBackColor = true;
-            this.btnChangeNeededPosition.Click += new System.EventHandler(this.btnChangeNeededPosition_Click);
-            // 
-            // lblMorningShift
-            // 
-            this.lblMorningShift.AutoSize = true;
-            this.lblMorningShift.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.lblMorningShift.Location = new System.Drawing.Point(759, 545);
-            this.lblMorningShift.Name = "lblMorningShift";
-            this.lblMorningShift.Size = new System.Drawing.Size(211, 20);
-            this.lblMorningShift.TabIndex = 14;
-            this.lblMorningShift.Text = "Morning Shift : 08:00-12:30";
-            // 
-            // lblMiddayShift
-            // 
-            this.lblMiddayShift.AutoSize = true;
-            this.lblMiddayShift.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.lblMiddayShift.Location = new System.Drawing.Point(759, 576);
-            this.lblMiddayShift.Name = "lblMiddayShift";
-            this.lblMiddayShift.Size = new System.Drawing.Size(214, 20);
-            this.lblMiddayShift.TabIndex = 15;
-            this.lblMiddayShift.Text = "Midday Shift : 12:30 - 17:00";
-            // 
-            // lblEveningShift
-            // 
-            this.lblEveningShift.AutoSize = true;
-            this.lblEveningShift.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.lblEveningShift.Location = new System.Drawing.Point(759, 607);
-            this.lblEveningShift.Name = "lblEveningShift";
-            this.lblEveningShift.Size = new System.Drawing.Size(220, 20);
-            this.lblEveningShift.TabIndex = 16;
-            this.lblEveningShift.Text = "Evening Shift : 17:00 - 21:30";
-            // 
-            // cbPosition
-            // 
-            this.cbPosition.BackColor = System.Drawing.SystemColors.InfoText;
-            this.cbPosition.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.cbPosition.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbPosition.FormattingEnabled = true;
-            this.cbPosition.Items.AddRange(new object[] {
-            "Security",
-            "Cashier",
-            "Stocker",
-            "SalesAssistant",
-            "WarehouseManager"});
-            this.cbPosition.Location = new System.Drawing.Point(511, 95);
-            this.cbPosition.Margin = new System.Windows.Forms.Padding(3, 1, 3, 1);
-            this.cbPosition.Name = "cbPosition";
-            this.cbPosition.Size = new System.Drawing.Size(183, 23);
-            this.cbPosition.TabIndex = 17;
-            this.cbPosition.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.cbPosition_DrawItem);
-            this.cbPosition.SelectedIndexChanged += new System.EventHandler(this.cbPosition_SelectedIndexChanged);
-            this.cbPosition.DropDownClosed += new System.EventHandler(this.cbPosition_DropDownClosed);
-            // 
-            // lblPosition
-            // 
-            this.lblPosition.AutoSize = true;
-            this.lblPosition.Location = new System.Drawing.Point(508, 75);
-            this.lblPosition.Name = "lblPosition";
-            this.lblPosition.Size = new System.Drawing.Size(66, 17);
-            this.lblPosition.TabIndex = 18;
-            this.lblPosition.Text = "Position :";
-            // 
             // panelSchedule
             // 
-            this.panelSchedule.Controls.Add(this.btnDeleteSchedule);
-            this.panelSchedule.Controls.Add(this.pnlDayOff);
             this.panelSchedule.Controls.Add(this.btnGenerateSchedule);
             this.panelSchedule.Controls.Add(this.lblPositionNeeded);
             this.panelSchedule.Controls.Add(this.lbIncompleteDays);
@@ -440,29 +322,18 @@ namespace PRJMediaBazaar
             this.panelSchedule.Controls.Add(this.btnChangeNeededPosition);
             this.panelSchedule.Controls.Add(this.lblWeek);
             this.panelSchedule.Controls.Add(this.cbDay);
-            this.panelSchedule.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelSchedule.Location = new System.Drawing.Point(0, 0);
+            this.panelSchedule.Controls.Add(this.btnDeleteSchedule);
+            this.panelSchedule.Location = new System.Drawing.Point(275, 17);
             this.panelSchedule.Margin = new System.Windows.Forms.Padding(3, 1, 3, 1);
             this.panelSchedule.Name = "panelSchedule";
-            this.panelSchedule.Size = new System.Drawing.Size(1159, 679);
+            this.panelSchedule.Size = new System.Drawing.Size(48, 25);
             this.panelSchedule.TabIndex = 20;
             this.panelSchedule.Paint += new System.Windows.Forms.PaintEventHandler(this.panelSchedule_Paint_1);
-            // 
-            // btnDeleteSchedule
-            // 
-            this.btnDeleteSchedule.Location = new System.Drawing.Point(343, 143);
-            this.btnDeleteSchedule.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.btnDeleteSchedule.Name = "btnDeleteSchedule";
-            this.btnDeleteSchedule.Size = new System.Drawing.Size(180, 42);
-            this.btnDeleteSchedule.TabIndex = 38;
-            this.btnDeleteSchedule.Text = "Empty Schedule";
-            this.btnDeleteSchedule.UseVisualStyleBackColor = true;
-            this.btnDeleteSchedule.Click += new System.EventHandler(this.btnDeleteSchedule_Click);
             // 
             // btnGenerateSchedule
             // 
             this.btnGenerateSchedule.Location = new System.Drawing.Point(153, 143);
-            this.btnGenerateSchedule.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnGenerateSchedule.Margin = new System.Windows.Forms.Padding(4);
             this.btnGenerateSchedule.Name = "btnGenerateSchedule";
             this.btnGenerateSchedule.Size = new System.Drawing.Size(180, 42);
             this.btnGenerateSchedule.TabIndex = 38;
@@ -487,7 +358,7 @@ namespace PRJMediaBazaar
             this.lbIncompleteDays.FormattingEnabled = true;
             this.lbIncompleteDays.ItemHeight = 20;
             this.lbIncompleteDays.Location = new System.Drawing.Point(715, 214);
-            this.lbIncompleteDays.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.lbIncompleteDays.Margin = new System.Windows.Forms.Padding(4);
             this.lbIncompleteDays.Name = "lbIncompleteDays";
             this.lbIncompleteDays.Size = new System.Drawing.Size(415, 284);
             this.lbIncompleteDays.TabIndex = 35;
@@ -542,7 +413,7 @@ namespace PRJMediaBazaar
             this.PanelTableScroll.BackColor = System.Drawing.Color.Silver;
             this.PanelTableScroll.Controls.Add(this.ShiftsTable);
             this.PanelTableScroll.Location = new System.Drawing.Point(44, 209);
-            this.PanelTableScroll.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.PanelTableScroll.Margin = new System.Windows.Forms.Padding(4);
             this.PanelTableScroll.Name = "PanelTableScroll";
             this.PanelTableScroll.Size = new System.Drawing.Size(651, 452);
             this.PanelTableScroll.TabIndex = 30;
@@ -560,7 +431,7 @@ namespace PRJMediaBazaar
             this.ShiftsTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.ShiftsTable.Dock = System.Windows.Forms.DockStyle.Top;
             this.ShiftsTable.Location = new System.Drawing.Point(0, 0);
-            this.ShiftsTable.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.ShiftsTable.Margin = new System.Windows.Forms.Padding(4);
             this.ShiftsTable.Name = "ShiftsTable";
             this.ShiftsTable.RowCount = 1;
             this.ShiftsTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
@@ -591,34 +462,164 @@ namespace PRJMediaBazaar
             this.cbSchedule.SelectedIndexChanged += new System.EventHandler(this.cbSchedule_SelectedIndexChanged);
             this.cbSchedule.DropDownClosed += new System.EventHandler(this.cbSchedule_DropDownClosed);
             // 
+            // lblPosition
+            // 
+            this.lblPosition.AutoSize = true;
+            this.lblPosition.Location = new System.Drawing.Point(508, 75);
+            this.lblPosition.Name = "lblPosition";
+            this.lblPosition.Size = new System.Drawing.Size(66, 17);
+            this.lblPosition.TabIndex = 18;
+            this.lblPosition.Text = "Position :";
+            // 
+            // cbPosition
+            // 
+            this.cbPosition.BackColor = System.Drawing.SystemColors.InfoText;
+            this.cbPosition.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.cbPosition.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbPosition.FormattingEnabled = true;
+            this.cbPosition.Items.AddRange(new object[] {
+            "Security",
+            "Cashier",
+            "Stocker",
+            "SalesAssistant",
+            "WarehouseManager"});
+            this.cbPosition.Location = new System.Drawing.Point(511, 95);
+            this.cbPosition.Margin = new System.Windows.Forms.Padding(3, 1, 3, 1);
+            this.cbPosition.Name = "cbPosition";
+            this.cbPosition.Size = new System.Drawing.Size(183, 23);
+            this.cbPosition.TabIndex = 17;
+            this.cbPosition.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.cbPosition_DrawItem);
+            this.cbPosition.SelectedIndexChanged += new System.EventHandler(this.cbPosition_SelectedIndexChanged);
+            this.cbPosition.DropDownClosed += new System.EventHandler(this.cbPosition_DropDownClosed);
+            // 
+            // lblEveningShift
+            // 
+            this.lblEveningShift.AutoSize = true;
+            this.lblEveningShift.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.lblEveningShift.Location = new System.Drawing.Point(759, 607);
+            this.lblEveningShift.Name = "lblEveningShift";
+            this.lblEveningShift.Size = new System.Drawing.Size(220, 20);
+            this.lblEveningShift.TabIndex = 16;
+            this.lblEveningShift.Text = "Evening Shift : 17:00 - 21:30";
+            // 
+            // lblMiddayShift
+            // 
+            this.lblMiddayShift.AutoSize = true;
+            this.lblMiddayShift.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.lblMiddayShift.Location = new System.Drawing.Point(759, 576);
+            this.lblMiddayShift.Name = "lblMiddayShift";
+            this.lblMiddayShift.Size = new System.Drawing.Size(214, 20);
+            this.lblMiddayShift.TabIndex = 15;
+            this.lblMiddayShift.Text = "Midday Shift : 12:30 - 17:00";
+            // 
+            // lblMorningShift
+            // 
+            this.lblMorningShift.AutoSize = true;
+            this.lblMorningShift.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.lblMorningShift.Location = new System.Drawing.Point(759, 545);
+            this.lblMorningShift.Name = "lblMorningShift";
+            this.lblMorningShift.Size = new System.Drawing.Size(211, 20);
+            this.lblMorningShift.TabIndex = 14;
+            this.lblMorningShift.Text = "Morning Shift : 08:00-12:30";
+            // 
+            // btnChangeNeededPosition
+            // 
+            this.btnChangeNeededPosition.Location = new System.Drawing.Point(795, 69);
+            this.btnChangeNeededPosition.Margin = new System.Windows.Forms.Padding(3, 1, 3, 1);
+            this.btnChangeNeededPosition.Name = "btnChangeNeededPosition";
+            this.btnChangeNeededPosition.Size = new System.Drawing.Size(147, 74);
+            this.btnChangeNeededPosition.TabIndex = 11;
+            this.btnChangeNeededPosition.Text = "Change needed position";
+            this.btnChangeNeededPosition.UseVisualStyleBackColor = true;
+            this.btnChangeNeededPosition.Click += new System.EventHandler(this.btnChangeNeededPosition_Click);
+            // 
+            // lblWeek
+            // 
+            this.lblWeek.AutoSize = true;
+            this.lblWeek.Location = new System.Drawing.Point(287, 75);
+            this.lblWeek.Name = "lblWeek";
+            this.lblWeek.Size = new System.Drawing.Size(37, 17);
+            this.lblWeek.TabIndex = 10;
+            this.lblWeek.Text = "Day:";
+            // 
+            // cbDay
+            // 
+            this.cbDay.BackColor = System.Drawing.SystemColors.InfoText;
+            this.cbDay.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.cbDay.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbDay.FormattingEnabled = true;
+            this.cbDay.Location = new System.Drawing.Point(287, 95);
+            this.cbDay.Margin = new System.Windows.Forms.Padding(3, 1, 3, 1);
+            this.cbDay.Name = "cbDay";
+            this.cbDay.Size = new System.Drawing.Size(183, 23);
+            this.cbDay.TabIndex = 9;
+            this.cbDay.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.cbDay_DrawItem);
+            this.cbDay.SelectedIndexChanged += new System.EventHandler(this.cbDay_SelectedIndexChanged);
+            this.cbDay.DropDownClosed += new System.EventHandler(this.cbDay_DropDownClosed);
+            // 
+            // btnDeleteSchedule
+            // 
+            this.btnDeleteSchedule.Location = new System.Drawing.Point(343, 143);
+            this.btnDeleteSchedule.Margin = new System.Windows.Forms.Padding(4);
+            this.btnDeleteSchedule.Name = "btnDeleteSchedule";
+            this.btnDeleteSchedule.Size = new System.Drawing.Size(180, 42);
+            this.btnDeleteSchedule.TabIndex = 38;
+            this.btnDeleteSchedule.Text = "Empty Schedule";
+            this.btnDeleteSchedule.UseVisualStyleBackColor = true;
+            this.btnDeleteSchedule.Click += new System.EventHandler(this.btnDeleteSchedule_Click);
+            // 
+            // btnConfirmDayOff
+            // 
+            this.btnConfirmDayOff.Location = new System.Drawing.Point(60, 555);
+            this.btnConfirmDayOff.Margin = new System.Windows.Forms.Padding(3, 1, 3, 1);
+            this.btnConfirmDayOff.Name = "btnConfirmDayOff";
+            this.btnConfirmDayOff.Size = new System.Drawing.Size(209, 31);
+            this.btnConfirmDayOff.TabIndex = 25;
+            this.btnConfirmDayOff.Text = "Confirm";
+            this.btnConfirmDayOff.UseVisualStyleBackColor = true;
+            this.btnConfirmDayOff.Click += new System.EventHandler(this.btnConfirmDayOff_Click);
+            // 
+            // lbDayOff
+            // 
+            this.lbDayOff.FormattingEnabled = true;
+            this.lbDayOff.ItemHeight = 16;
+            this.lbDayOff.Location = new System.Drawing.Point(79, 96);
+            this.lbDayOff.Margin = new System.Windows.Forms.Padding(3, 1, 3, 1);
+            this.lbDayOff.Name = "lbDayOff";
+            this.lbDayOff.Size = new System.Drawing.Size(1003, 420);
+            this.lbDayOff.TabIndex = 24;
+            // 
             // pnlNavbar
             // 
             this.pnlNavbar.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.pnlNavbar.Controls.Add(this.panelSickReports);
-            this.pnlNavbar.Controls.Add(this.panelEmployees);
             this.pnlNavbar.Controls.Add(this.lblTitle);
             this.pnlNavbar.Controls.Add(this.lblDayOffReports);
+            this.pnlNavbar.Controls.Add(this.panelSchedule);
+            this.pnlNavbar.Controls.Add(this.panelEmployees);
             this.pnlNavbar.Controls.Add(this.lblEmployees);
             this.pnlNavbar.Controls.Add(this.lblSickReports);
             this.pnlNavbar.Controls.Add(this.lblSchedule);
             this.pnlNavbar.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlNavbar.Location = new System.Drawing.Point(0, 0);
-            this.pnlNavbar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pnlNavbar.Margin = new System.Windows.Forms.Padding(4);
             this.pnlNavbar.Name = "pnlNavbar";
             this.pnlNavbar.Size = new System.Drawing.Size(1159, 59);
             this.pnlNavbar.TabIndex = 5;
             // 
-            // timer1
+            // godTimer
             // 
-            this.timer1.Interval = 1500;
+            this.godTimer.Enabled = true;
+            this.godTimer.Interval = 2500;
+            this.godTimer.Tick += new System.EventHandler(this.godTimer_Tick);
             // 
             // HRHome
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1159, 679);
+            this.Controls.Add(this.pnlDayOff);
             this.Controls.Add(this.pnlNavbar);
-            this.Controls.Add(this.panelSchedule);
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "HRHome";
             this.Text = "HRHome";
@@ -682,7 +683,7 @@ namespace PRJMediaBazaar
         private System.Windows.Forms.TextBox tbEmployee;
         private System.Windows.Forms.Button btnGenerateSchedule;
         private System.Windows.Forms.Button btnDeleteSchedule;
-        private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.ListBox lbIncompleteDays;
+        private System.Windows.Forms.Timer godTimer;
     }
 }

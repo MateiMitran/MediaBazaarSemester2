@@ -28,10 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.btnConfirm = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.lblTitle = new System.Windows.Forms.Label();
             this.tbExplain = new System.Windows.Forms.TextBox();
+            this.godTimer = new System.Windows.Forms.Timer(this.components);
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -43,6 +45,7 @@
             this.btnConfirm.TabIndex = 63;
             this.btnConfirm.Text = "Send";
             this.btnConfirm.UseVisualStyleBackColor = true;
+            this.btnConfirm.Click += new System.EventHandler(this.btnConfirm_Click_1);
             // 
             // panel1
             // 
@@ -74,6 +77,12 @@
             this.tbExplain.Size = new System.Drawing.Size(776, 284);
             this.tbExplain.TabIndex = 61;
             // 
+            // godTimer
+            // 
+            this.godTimer.Enabled = true;
+            this.godTimer.Interval = 2500;
+            this.godTimer.Tick += new System.EventHandler(this.godTimer_Tick);
+            // 
             // ExplainDenial
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -97,5 +106,6 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label lblTitle;
         private System.Windows.Forms.TextBox tbExplain;
+        private System.Windows.Forms.Timer godTimer;
     }
 }

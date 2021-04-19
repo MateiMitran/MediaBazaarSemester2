@@ -20,9 +20,13 @@ namespace PRJMediaBazaar
         HRHome _hr;
         private int _scheduleId;
         private int _dayIndex;
+        private List<Button> buttons;
+        private List<Timer> timers;
         public ChangeNeededPosition(string jobPostion,Day day, NamesRow[] rows, HRHome hr, int  scheduleId, int dayIndex)
         {
             InitializeComponent();
+            buttons = new List<Button>();
+            timers = new List<Timer>();
             _jobPositon = jobPostion;
             _day = day;
             _rows = rows;
@@ -31,7 +35,22 @@ namespace PRJMediaBazaar
             _dayIndex = dayIndex;
             this.lblInfo.Text = $"Updating position:{jobPostion} for day: {_day.Date.ToString("dd-MM-yyyy")}";
         }
-
+        public void StatusFunction(String text, int x, int y, int width, int height, Color color)
+        {
+            Button newButton = new Button();
+            newButton.Location = new Point(x, y);
+            newButton.Width = width;
+            newButton.Height = height;
+            newButton.Enabled = false;
+            newButton.BackColor = color;
+            newButton.Text = text;
+            this.Controls.Add(newButton);
+            newButton.BringToFront();
+            buttons.Add(newButton);
+            Timer temp = new Timer();
+            timers.Add(temp);
+            temp.Start();
+        }
         private void button1_Click(object sender, EventArgs e)
         {
             try
@@ -56,18 +75,18 @@ namespace PRJMediaBazaar
                             _hr.UpdateDaysInfoListbox();
                             _hr.LoadTableByPosition((Day)_hr.cbDay.SelectedItem, _jobPositon);
                             this.Close();
-                            MessageBox.Show("Successfully updated needed amount");
+                            StatusFunction("Successfully updated!", -60, -5, 508, 28, Color.Green);
 
-                        }
+                    }
                 }
             }
             catch(FormatException ex)
             {
-                MessageBox.Show("Please enter a whole number between 1 and 10");
+                StatusFunction("Enter a number between 1 and 10", -60, -5, 508, 28, Color.Red);
             }
             catch(ArgumentOutOfRangeException ex)
             {
-                MessageBox.Show("The amounts you want to set should be bigger or equal than the assigned columns in the table");
+                StatusFunction("The amounts you want to set should be bigger or equal than the assigned columns in the table", -60, -5, 508, 28, Color.Red);
             }
           
         }
@@ -99,6 +118,18 @@ namespace PRJMediaBazaar
                 return true;
             }
             return false;
+        }
+
+        private void godTimer_Tick(object sender, EventArgs e)
+        {
+            for (int i = 0; i < timers.Count; i++)
+            {
+                if (timers[i].Enabled == true)
+                {
+                    timers[i].Enabled = false;
+                    buttons[i].Visible = false;
+                }
+            }
         }
     }
 }

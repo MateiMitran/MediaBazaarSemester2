@@ -595,16 +595,7 @@ namespace PRJMediaBazaar
         {
             if (thisEmployee == null)
             {
-                x = new Button();
-                x.Location = new Point(-6, -1);
-                x.Width = 556;
-                x.Height = 28;
-                x.Enabled = false;
-                x.BackColor = Color.Red;
-                x.Text = "Please select an employee!";
-                this.Controls.Add(x);
-                x.BringToFront();
-                timer1.Start();
+                StatusFunction("Please select an employee!", -6, -1, 900, 28, Color.Red);
             }
             else
             {
@@ -663,16 +654,7 @@ namespace PRJMediaBazaar
             }
             if (ok == 0)
             {
-                x = new Button();
-                x.Location = new Point(-6, -1);
-                x.Width = 556;
-                x.Height = 28;
-                x.Enabled = false;
-                x.BackColor = Color.Red;
-                x.Text = "No employee found!";
-                this.Controls.Add(x);
-                x.BringToFront();
-                timer1.Start();
+                StatusFunction("No employee found!", -6, -1, 900, 28, Color.Red);
             }
         }
 
@@ -700,45 +682,18 @@ namespace PRJMediaBazaar
                 {
                     _absenceControl.DaysOffRequests.RemoveAt(index);
                     LoadDayOffRequests();
-                    x = new Button();
-                    x.Location = new Point(-6, -1);
-                    x.Width = 556;
-                    x.Height = 28;
-                    x.Enabled = false;
-                    x.BackColor = Color.Green;
-                    x.Text = "Day off Confirmed!";
-                    this.Controls.Add(x);
-                    x.BringToFront();
-                    timer1.Start();
+                    StatusFunction("Day Off Confirmed!", -6, -1, 900, 28, Color.Green);
                 }
                 else
                 {
 
 
-                    x = new Button();
-                    x.Location = new Point(-6, -1);
-                    x.Width = 556;
-                    x.Height = 28;
-                    x.Enabled = false;
-                    x.BackColor = Color.Red;
-                    x.Text = "An error occured!";
-                    this.Controls.Add(x);
-                    x.BringToFront();
-                    timer1.Start();
+                    StatusFunction("An error occured!", -6, -1, 900, 28, Color.Red);
                 }
             }
             else
             {
-                x = new Button();
-                x.Location = new Point(-6, -1);
-                x.Width = 556;
-                x.Height = 28;
-                x.Enabled = false;
-                x.BackColor = Color.Red;
-                x.Text = "Select a day off request!";
-                this.Controls.Add(x);
-                x.BringToFront();
-                timer1.Start();
+                StatusFunction("Select a day off request!", -6, -1, 900, 28, Color.Red);
             }
         }
 
@@ -885,8 +840,7 @@ namespace PRJMediaBazaar
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            x.Visible = false;
-            timer1.Stop();
+            
         }
 
         private void btnMarkAsSeen_Click(object sender, EventArgs e)
@@ -993,6 +947,18 @@ namespace PRJMediaBazaar
             cbSchedule.Invalidate();
             cbDay.Invalidate();
             cbPosition.Invalidate();
+        }
+
+        private void godTimer_Tick(object sender, EventArgs e)
+        {
+            for (int i = 0; i < timers.Count; i++)
+            {
+                if (timers[i].Enabled == true)
+                {
+                    timers[i].Enabled = false;
+                    buttons[i].Visible = false;
+                }
+            }
         }
     }
 }
