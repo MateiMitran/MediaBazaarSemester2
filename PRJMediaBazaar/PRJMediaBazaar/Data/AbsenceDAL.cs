@@ -52,14 +52,19 @@ namespace PRJMediaBazaar.Data
             List<DayOff> pseudos = new List<DayOff>();
             while (result.Read())
             {
-                int requestId = Convert.ToInt32(result[0]);
-                int scheduleId = Convert.ToInt32(result[1]);
-                int dayId = Convert.ToInt32(result[2]);
-                int employee_id = Convert.ToInt32(result[3]);
-                bool urgent = Convert.ToBoolean(result[4]);
+                int scheduleId = Convert.ToInt32(result[0]);
+
+                int dayId = Convert.ToInt32(result[1]);
+                Day day = GetSchedule(scheduleId).GetDay(dayId);
+
+                int empId = Convert.ToInt32(result[2]);
+                Employee employee = _employees.FirstOrDefault(emp => emp.Id == empId);
+
+                bool urgent = Convert.ToBoolean(result[3]);
+                string reason = result[4].ToString();
                 string status = result[5].ToString();
-                string reason = result[6].ToString();
-                DayOff req = new DayOff(requestId, scheduleId, dayId, employee_id, urgent, status, reason);
+                string objection = result[6].ToString();
+                DayOff req = new DayOff( day,employee, urgent, status, reason, objection);
                 pseudos.Add(req);
             }
             CloseConnection();
@@ -79,10 +84,11 @@ namespace PRJMediaBazaar.Data
             return false;
         }
 
-        public bool AddReasonForDenial(int employee_id, String reason, String denied) //1. reason, 2. status, 3. employee_id
+        public bool DenyDayOffRequest(int empId, int dayId, string objection) //1. reason, 2. status, 3. employee_id
         {
-            String sql = "UPDATE `dayoff_requests` SET `reason`= @reason, `status`= @denied WHERE `employee_id`= @employee_id; ";
-            String[] parameters = new String[] { reason, denied, employee_id.ToString() };
+            String sql = "UPDATE `dayoff_requests` SET `objection`= @reason, `status`= 'denied' " +
+                "WHERE `employee_id`= @employee_id AND `day_id`= @dayId ; ";
+            String[] parameters = new String[] { objection, empId.ToString(),dayId.ToString()};
             if (executeNonQuery(sql, parameters) != null)
             {
                 CloseConnection();
@@ -137,8 +143,8 @@ namespace PRJMediaBazaar.Data
 
         public bool UpdateAbsence(int dayId, int employeeId) // !
         {
-            string[] parameters = new string[] { "None", "None", true.ToString(), "DayOff", dayId.ToString(), employeeId.ToString() };
-            string sql = "UPDATE employees_workdays SET first_shift = @shift, second_shift = @shift, absence = @absence, absence_reason = @absenceReason" +
+            string[] parameters = new string[] { "None", "None", 1.ToString(), "DayOff", dayId.ToString(), employeeId.ToString() };
+            string sql = "UPDATE employees_workdays SET first_shift = @shift1, second_shift = @shift2, absence = @absence, absence_reason = @absenceReason" +
                              " WHERE day_id = @dayId AND employee_id = @employeeId";
 
             if (executeNonQuery(sql, parameters) != null)
@@ -152,9 +158,9 @@ namespace PRJMediaBazaar.Data
 
         public bool InsertAbsence(int dayId, int employeeId) // !
         {
-            string[] parameters = new string[] { dayId.ToString(), employeeId.ToString(), "None", "None", true.ToString(), "DayOff" };
+            string[] parameters = new string[] { dayId.ToString(), employeeId.ToString(), "None", "None", 1.ToString(), "DayOff" };
             string sql = "INSERT INTO employees_workdays (day_id, employee_id, first_shift, second_shift, absence, absence_reason)" +
-                    " VALUES(@dayId, @employeeId, @shift, @shift, @absence, @absenceReason);";
+                    " VALUES(@dayId, @employeeId, @shift1, @shift2, @absence, @absenceReason);";
 
             if (executeNonQuery(sql, parameters) != null)
             {

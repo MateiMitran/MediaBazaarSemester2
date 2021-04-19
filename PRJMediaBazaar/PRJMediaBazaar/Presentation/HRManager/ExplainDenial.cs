@@ -44,23 +44,6 @@ namespace PRJMediaBazaar
             temp.Start();
         }
 
-        private void btnConfirm_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                ab.AddReason(dayOff.Employee_id, this.tbExplain.Text); // adds the reason to the db
-                //hr.AddReasonForDenial(dayOff, this.tbExplain.Text); // adds the reason to the property of the request
-                StatusFunction("Success!", -60, -5, 818, 28, Color.Green);
-                tbExplain.Clear();
-                this.Hide();
-
-            }
-
-            catch (Exception ex)
-            {
-                StatusFunction("An error occured!", -60, -5, 818, 28, Color.Red);
-            }
-        }
 
         private void timer1_Tick(object sender, EventArgs e)
         {
@@ -86,7 +69,17 @@ namespace PRJMediaBazaar
 
         private void btnConfirm_Click_1(object sender, EventArgs e)
         {
-
+            if(this.tbExplain.Text == "" || this.tbExplain.Text.Length < 5)
+            {
+                MessageBox.Show("Please type a reason");
+            }
+            else
+            {
+                this.ab.DenyDayOffRequest(dayOff.Employee.Id, dayOff.Day.Id, this.tbExplain.Text);
+                hr.RemoveDayOff(dayOff);
+                hr.StatusFunction("Day off denied", -6, -1, 900, 28, Color.Green);
+                this.Close();
+            }
         }
 
         private void godTimer_Tick(object sender, EventArgs e)

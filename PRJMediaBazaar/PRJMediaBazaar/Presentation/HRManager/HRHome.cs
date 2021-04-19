@@ -27,7 +27,6 @@ namespace PRJMediaBazaar
         private NamesRow[] _tableRows;
         private LogIn _loginForm;
         private Button x;
-        private DayOff thisDayOff;
 
         private List<DayOff> daysOff;
         private List<Button> buttons;
@@ -222,6 +221,7 @@ namespace PRJMediaBazaar
                 this.btnGenerateSchedule.Enabled = false;
             }
             _currentSchedule = schedule;
+            UpdateDaysInfo();
             this.ActiveControl = null;
         }
 
@@ -251,7 +251,7 @@ namespace PRJMediaBazaar
 
         private void cbDay_SelectedIndexChanged(object sender, EventArgs e)
         {
-            UpdateDaysInfoListbox();
+            
             //if a position is selected, reload the table layout panel, based on the day and position
             Day day = (Day)this.cbDay.SelectedItem;
             if (cbPosition.Text != "All")
@@ -506,7 +506,7 @@ namespace PRJMediaBazaar
                 _scheduleControl.RemoveShift(shift.ToString(), ((Day)cbDay.SelectedItem), employee);
             }
             LoadTableByPosition((Day)cbDay.SelectedItem, employee.JobPosition);
-            UpdateDaysInfoListbox();
+            UpdateDaysInfo();
         }
 
         public void UpdateDaysCheckbox(int scheduleId)
@@ -519,7 +519,7 @@ namespace PRJMediaBazaar
             }
         }
 
-        public void UpdateDaysInfoListbox()
+        public void UpdateDaysInfo()
         {
             this.lbIncompleteDays.Items.Clear();
             if(_scheduleControl.ScheduleStatus(_currentSchedule) == "started")
@@ -546,7 +546,15 @@ namespace PRJMediaBazaar
                 }
             }
             RedrawComboboxes();
-            
+           
+        }
+
+        public void RedrawComboboxes()
+        {
+            cbSchedule.Invalidate();
+            cbDay.Invalidate();
+            cbPosition.Invalidate();
+            this.ActiveControl = null;
         }
 
 
@@ -676,19 +684,23 @@ namespace PRJMediaBazaar
             if (index >= 0)
             {
                 DayOff req = _absenceControl.DaysOffRequests[index];
-                bool query = _absenceControl.ConfirmDayOffRequest(req.Day_id, req.Employee_id);
+                int shiftsRemoved = _absenceControl.ConfirmDayOffRequest(req.Employee,req.Day);
 
-                if (query)
+                if (shiftsRemoved > 0)
+                {
+                   
+                    _absenceControl.DaysOffRequests.RemoveAt(index);
+                    LoadDayOffRequests();
+                    StatusFunction("Day Off Confirmed!", -6, -1, 900, 28, Color.Green);
+                    MessageBox.Show($"Removed {shiftsRemoved.ToString()} shift/s from {req.Day.Date.ToString("dd-MM-yyyy")}'s {req.Employee.JobPosition}s " +
+                        $"+ {Environment.NewLine} Please assign new employee/s!");
+                   
+                }
+                else
                 {
                     _absenceControl.DaysOffRequests.RemoveAt(index);
                     LoadDayOffRequests();
                     StatusFunction("Day Off Confirmed!", -6, -1, 900, 28, Color.Green);
-                }
-                else
-                {
-
-
-                    StatusFunction("An error occured!", -6, -1, 900, 28, Color.Red);
                 }
             }
             else
@@ -697,31 +709,18 @@ namespace PRJMediaBazaar
             }
         }
 
+        public void RemoveDayOff(DayOff d)
+        {
+            this.lbDayOff.Items.Remove(d);
+        }
+
         private void LoadDayOffRequests()
         {
             lbDayOff.Items.Clear();
             daysOff = _absenceControl.DaysOffRequests;
-            for (int i = 0; i < daysOff.Count(); i++)
+           foreach(DayOff d in daysOff)
             {
-                DayOff dayOff = daysOff[i];
-                int scheduleId = dayOff.Schedule_id;
-                int dayId = dayOff.Day_id;
-                int employeeId = dayOff.Employee_id;
-                string urgent;
-                int requestId = dayOff.DayOffId;
-                if (dayOff.Urgent == false)
-                {
-                    urgent = "Not urgent";
-                }
-                else
-                {
-                    urgent = "Urgent";
-                }
-
-                DateTime day = dayOff.GetDayById(scheduleId, dayId).Date;
-                Employee employee = _empControl.GetEmployee(employeeId);
-
-                lbDayOff.Items.Add("Id : " + requestId + " | " + day.ToString("dd/MM/yyyy") + " --> " + employee.FullName + " --> " + urgent);
+                this.lbDayOff.Items.Add(d);
             }
         }
 
@@ -734,27 +733,11 @@ namespace PRJMediaBazaar
                     StatusFunction("Select a request!", -6, -1, 900, 28, Color.Red);
                     throw new EmptyComboBoxException();
                 }
-                String request = this.lbDayOff.SelectedItem.ToString();
-                string x = new string(request.SkipWhile(c => !char.IsDigit(c))
-                         .TakeWhile(c => char.IsDigit(c))
-                         .ToArray());
-                int requestID = Convert.ToInt32(x);
-                foreach (DayOff temp in daysOff)
-                {
-                    if (temp.DayOffId == requestID)
-                    {
-                        thisDayOff = temp;
-                    }
-                }
-                if (thisDayOff == null)
-                {
-                    MessageBox.Show("No day off found!");
-                }
+               
                 else
                 {
-                    ExplainDenial explain = new ExplainDenial(thisDayOff, _absenceControl, this);
+                    ExplainDenial explain = new ExplainDenial((DayOff)this.lbDayOff.SelectedItem, _absenceControl, this);
                     explain.Show();
-                    lbDayOff.Items.Remove(this.lbDayOff.SelectedItem);
                 }
 
             }
@@ -829,6 +812,7 @@ namespace PRJMediaBazaar
         {
             _scheduleControl.GenerateSchedule((Day)cbDay.SelectedItem);
             LoadTableByPosition((Day)cbDay.SelectedItem, "Security");
+            UpdateDaysInfo();
             this.btnGenerateSchedule.Enabled = false;
         }
 
@@ -836,6 +820,7 @@ namespace PRJMediaBazaar
         {
             _scheduleControl.RemoveSchedule((Day)cbDay.SelectedItem);
             LoadTableByPosition((Day)cbDay.SelectedItem, "Security");
+            UpdateDaysInfo();
         }
 
         private void timer1_Tick(object sender, EventArgs e)
@@ -942,12 +927,6 @@ namespace PRJMediaBazaar
             this.ActiveControl = null;
         }
 
-        private void RedrawComboboxes()
-        {
-            cbSchedule.Invalidate();
-            cbDay.Invalidate();
-            cbPosition.Invalidate();
-        }
 
         private void godTimer_Tick(object sender, EventArgs e)
         {

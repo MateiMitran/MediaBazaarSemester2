@@ -102,7 +102,7 @@ namespace PRJMediaBazaar.Logic
 
         }
 
-        public void RemoveShift(string shift, Day day, Employee employee)
+        public void RemoveShift(string shift, Day day, Employee employee, bool all = false)
         {
             EmployeeWorkday result = scheduleDAL.SelectEmployeeShift(day.WeekId,day.Id, employee.Id);
             if (result != null)
@@ -111,27 +111,38 @@ namespace PRJMediaBazaar.Logic
                 if (emptyShiftIndex != -1 && !result.Absence) //if there is an empty shift, remove the row
                 {
                     scheduleDAL.DeleteShift(day.Id, employee.Id);
-                   
+                    DecreaseAssignedPosition(day, employee.JobPosition, shift);
+                    scheduleDAL.UpdateHours(result.Hours - 4.5, day.ScheduleId, employee.Id);
+
                 }
                 else if (emptyShiftIndex == -1 && !result.Absence)//if there is a double shift,insert None on the chosen one
                 {
-                    if (result.FirstShift.ToString() == shift)
+                   if(all == false)
                     {
-                        scheduleDAL.UpdateShift(2, "None", day.Id, employee.Id);
-                      
-                    }
-                    else if (result.SecondShift.ToString() == shift)
-                    {
+                        if (result.FirstShift.ToString() == shift)
+                        {
+                            scheduleDAL.UpdateShift(2, "None", day.Id, employee.Id);
 
-                        scheduleDAL.UpdateShift(3, "None", day.Id, employee.Id);
-                        
+                        }
+                        else if (result.SecondShift.ToString() == shift)
+                        {
+
+                            scheduleDAL.UpdateShift(3, "None", day.Id, employee.Id);
+
+                        }
+                        DecreaseAssignedPosition(day, employee.JobPosition, shift);
+                        scheduleDAL.UpdateHours(result.Hours - 4.5, day.ScheduleId, employee.Id);
+                    }
+                    else
+                    {
+                        scheduleDAL.DeleteShift(day.Id, employee.Id);
+                        DecreaseAssignedPosition(day, employee.JobPosition, result.FirstShift.ToString());
+                        DecreaseAssignedPosition(day, employee.JobPosition, result.SecondShift.ToString());
+                        scheduleDAL.UpdateHours(result.Hours - 9, day.ScheduleId, employee.Id);
                     }
 
                 }
-
-
-                DecreaseAssignedPosition(day, employee.JobPosition, shift);
-                scheduleDAL.UpdateHours(result.Hours - 4.5, day.ScheduleId, employee.Id);
+               
 
             }
         }
@@ -295,7 +306,7 @@ namespace PRJMediaBazaar.Logic
                 foreach (EmployeeWorkday wd in scheduleDAL.SelectEmployeesShifts(day.WeekId,day.Id, position))
                 {
                     
-                    RemoveShift(wd.GetShift(),day,wd.Employee);
+                    RemoveShift(wd.GetShift(),day,wd.Employee, true);
                 }
             }
         }

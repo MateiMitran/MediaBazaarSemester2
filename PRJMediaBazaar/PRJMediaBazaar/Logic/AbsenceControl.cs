@@ -38,14 +38,10 @@ namespace PRJMediaBazaar.Logic
         }
 
 
-        public bool ConfirmDayOffRequest(int dayId, int empId)
-        {
-            return absenceDAL.ConfirmDayOffRequest(dayId, empId);
-        }
 
-        public void AddReason(int id, String note)
+        public void DenyDayOffRequest(int empId, int dayId, String note)
         {
-            absenceDAL.AddReasonForDenial(id, note, "denied");
+            absenceDAL.DenyDayOffRequest(empId,dayId, note);
         }
 
         public bool MarkAsSeen(int dayId, int empId)
@@ -53,27 +49,45 @@ namespace PRJMediaBazaar.Logic
             return absenceDAL.ConfirmSickReport(dayId, empId);
         }
 
-
-        public void AssignAbsence(AbsenceReason absenceReason, Employee employee, Day day)
+        /// <summary>
+        /// returns the number of shifts removed,along with the day
+        /// </summary>
+        /// <param name="absenceReason"></param>
+        /// <param name="employee"></param>
+        /// <param name="day"></param>
+        /// <returns></returns>
+        public int ConfirmDayOffRequest(Employee employee, Day day)
         {
+            absenceDAL.ConfirmDayOffRequest(day.Id, employee.Id);
+            int count = 0;
             EmployeeWorkday wd = _scheduleControl.GetEmployeeShift(day.WeekId, day.Id, employee.Id);
+
             if (wd != null)
-            {
+            {   
+                double hours = wd.Hours;
                 absenceDAL.UpdateAbsence(day.Id, employee.Id);
                 if (wd.FirstShift != Shift.None)
                 {
+                     hours -= 4.5;
                     _scheduleControl.DecreaseAssignedPosition(day, employee.JobPosition, wd.FirstShift.ToString());
+                    _scheduleControl.UpdateHours(hours, day.WeekId, wd.Employee.Id);
+                    count++;
+                   
                 }
                 if (wd.SecondShift != Shift.None)
                 {
+                     hours -= 4.5;
                     _scheduleControl.DecreaseAssignedPosition(day, employee.JobPosition, wd.SecondShift.ToString());
+                    _scheduleControl.UpdateHours(hours, day.WeekId, wd.Employee.Id);
+                    count++;
                 }
-                _scheduleControl.UpdateHours(wd.Hours, day.WeekId, employee.Id);
             }
             else
             {
                 absenceDAL.InsertAbsence(day.Id, employee.Id);
+               
             }
+            return count;
         }
 
     }

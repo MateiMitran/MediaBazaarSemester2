@@ -72,7 +72,7 @@ namespace PRJMediaBazaar
                         {
                             _hr.UpdateDaysCheckbox(_scheduleId);
                             _hr.cbDay.SelectedIndex = _dayIndex;
-                            _hr.UpdateDaysInfoListbox();
+                            _hr.UpdateDaysInfo();
                             _hr.LoadTableByPosition((Day)_hr.cbDay.SelectedItem, _jobPositon);
                             this.Close();
                             StatusFunction("Successfully updated!", -60, -5, 508, 28, Color.Green);

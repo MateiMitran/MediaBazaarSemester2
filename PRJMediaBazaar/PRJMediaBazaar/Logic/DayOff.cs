@@ -10,24 +10,21 @@ namespace PRJMediaBazaar.Logic
 {
     class DayOff
     {
-        public int DayOffId { get; private set; }
-        public int Schedule_id { get; private set; }
-        public int Day_id { get; private set; }
-        public int Employee_id { get; private set; }
+        public Day Day { get; private set; }
+        public Employee Employee { get; private set; }
         public bool Urgent { get; private set; }
         public String Status { get; private set; }
         public String Reason { get; set; }
+        public String Objection { get; private set; }
 
-
-        public DayOff(int dayOffId, int scheduleId, int dayId, int employee_id, bool urgent, String status, String reason)
+        public DayOff (Day day, Employee employee, bool urgent, String status, String reason, String objection)
         {
-            DayOffId = dayOffId;
-            Schedule_id = scheduleId;
-            Day_id = dayId;
-            Employee_id = employee_id;
+            Day = day;
+            Employee = employee;
             Urgent = urgent;
             Status = status;
             Reason = reason;
+            Objection = objection;
         }
 
         public Day GetDayById(int scheduleId, int dayId)
@@ -50,9 +47,25 @@ namespace PRJMediaBazaar.Logic
             return day;
         }
 
-        public void SetStatus(string status)
+
+        public override string ToString()
         {
-            this.Status = status;
+            string urgent;
+
+            if (Urgent == false)
+            {
+                urgent = "Not urgent";
+            }
+            else
+            {
+                urgent = "Urgent";
+            }
+            if(Reason != "")
+            {
+                return $"{Day.Date.ToString("dd/MM/yyyy")} --> {Employee.FullName} --> {urgent} --> Reason:{Reason}";
+            }
+
+            return $"{Day.Date.ToString("dd/MM/yyyy")} --> {Employee.FullName} --> {urgent}";
         }
     }
 }
