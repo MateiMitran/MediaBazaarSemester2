@@ -56,10 +56,9 @@
             // 
             this.lblPosition.AutoSize = true;
             this.lblPosition.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPosition.Location = new System.Drawing.Point(817, 265);
-            this.lblPosition.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblPosition.Location = new System.Drawing.Point(613, 215);
             this.lblPosition.Name = "lblPosition";
-            this.lblPosition.Size = new System.Drawing.Size(106, 29);
+            this.lblPosition.Size = new System.Drawing.Size(81, 24);
             this.lblPosition.TabIndex = 2;
             this.lblPosition.Text = "Position:";
             // 
@@ -67,10 +66,9 @@
             // 
             this.lblShift.AutoSize = true;
             this.lblShift.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblShift.Location = new System.Drawing.Point(817, 294);
-            this.lblShift.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblShift.Location = new System.Drawing.Point(613, 239);
             this.lblShift.Name = "lblShift";
-            this.lblShift.Size = new System.Drawing.Size(60, 29);
+            this.lblShift.Size = new System.Drawing.Size(45, 24);
             this.lblShift.TabIndex = 2;
             this.lblShift.Text = "Shift";
             // 
@@ -78,10 +76,9 @@
             // 
             this.lblDay.AutoSize = true;
             this.lblDay.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDay.Location = new System.Drawing.Point(817, 235);
-            this.lblDay.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblDay.Location = new System.Drawing.Point(613, 191);
             this.lblDay.Name = "lblDay";
-            this.lblDay.Size = new System.Drawing.Size(69, 29);
+            this.lblDay.Size = new System.Drawing.Size(53, 24);
             this.lblDay.TabIndex = 2;
             this.lblDay.Text = "Date:";
             // 
@@ -93,10 +90,9 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(32, 78);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label1.Location = new System.Drawing.Point(24, 63);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(36, 29);
+            this.label1.Size = new System.Drawing.Size(27, 24);
             this.label1.TabIndex = 2;
             this.label1.Text = "ID";
             // 
@@ -105,10 +101,9 @@
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 22F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.Color.DarkRed;
-            this.label2.Location = new System.Drawing.Point(1228, 11);
-            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label2.Location = new System.Drawing.Point(921, 9);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(409, 42);
+            this.label2.Size = new System.Drawing.Size(325, 36);
             this.label2.TabIndex = 2;
             this.label2.Text = "Unavailable Employees";
             // 
@@ -117,10 +112,9 @@
             this.PanelTableScrollAvailable.AutoScroll = true;
             this.PanelTableScrollAvailable.BackColor = System.Drawing.Color.Silver;
             this.PanelTableScrollAvailable.Controls.Add(this.AvailableTable);
-            this.PanelTableScrollAvailable.Location = new System.Drawing.Point(13, 111);
-            this.PanelTableScrollAvailable.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.PanelTableScrollAvailable.Location = new System.Drawing.Point(10, 90);
             this.PanelTableScrollAvailable.Name = "PanelTableScrollAvailable";
-            this.PanelTableScrollAvailable.Size = new System.Drawing.Size(796, 438);
+            this.PanelTableScrollAvailable.Size = new System.Drawing.Size(597, 356);
             this.PanelTableScrollAvailable.TabIndex = 31;
             // 
             // AvailableTable
@@ -138,11 +132,10 @@
             this.AvailableTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 18.18182F));
             this.AvailableTable.Dock = System.Windows.Forms.DockStyle.Top;
             this.AvailableTable.Location = new System.Drawing.Point(0, 0);
-            this.AvailableTable.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.AvailableTable.Name = "AvailableTable";
             this.AvailableTable.RowCount = 1;
             this.AvailableTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.AvailableTable.Size = new System.Drawing.Size(796, 4);
+            this.AvailableTable.Size = new System.Drawing.Size(597, 4);
             this.AvailableTable.TabIndex = 11;
             // 
             // PanelTableScrollUnavailable
@@ -150,10 +143,9 @@
             this.PanelTableScrollUnavailable.AutoScroll = true;
             this.PanelTableScrollUnavailable.BackColor = System.Drawing.Color.Silver;
             this.PanelTableScrollUnavailable.Controls.Add(this.UnavailableTable);
-            this.PanelTableScrollUnavailable.Location = new System.Drawing.Point(1057, 111);
-            this.PanelTableScrollUnavailable.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.PanelTableScrollUnavailable.Location = new System.Drawing.Point(793, 90);
             this.PanelTableScrollUnavailable.Name = "PanelTableScrollUnavailable";
-            this.PanelTableScrollUnavailable.Size = new System.Drawing.Size(761, 438);
+            this.PanelTableScrollUnavailable.Size = new System.Drawing.Size(571, 356);
             this.PanelTableScrollUnavailable.TabIndex = 31;
             // 
             // UnavailableTable
@@ -170,21 +162,19 @@
             this.UnavailableTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
             this.UnavailableTable.Dock = System.Windows.Forms.DockStyle.Top;
             this.UnavailableTable.Location = new System.Drawing.Point(0, 0);
-            this.UnavailableTable.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.UnavailableTable.Name = "UnavailableTable";
             this.UnavailableTable.RowCount = 1;
             this.UnavailableTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.UnavailableTable.Size = new System.Drawing.Size(761, 4);
+            this.UnavailableTable.Size = new System.Drawing.Size(571, 4);
             this.UnavailableTable.TabIndex = 11;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(137, 78);
-            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label3.Location = new System.Drawing.Point(103, 63);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(78, 29);
+            this.label3.Size = new System.Drawing.Size(61, 24);
             this.label3.TabIndex = 2;
             this.label3.Text = "Name";
             // 
@@ -192,10 +182,9 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(284, 78);
-            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label4.Location = new System.Drawing.Point(213, 63);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(135, 29);
+            this.label4.Size = new System.Drawing.Size(107, 24);
             this.label4.TabIndex = 2;
             this.label4.Text = "Occupation";
             // 
@@ -203,10 +192,9 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(443, 78);
-            this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label5.Location = new System.Drawing.Point(332, 63);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(97, 29);
+            this.label5.Size = new System.Drawing.Size(76, 24);
             this.label5.TabIndex = 2;
             this.label5.Text = "Worked";
             // 
@@ -214,10 +202,9 @@
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(552, 78);
-            this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label6.Location = new System.Drawing.Point(414, 63);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(102, 29);
+            this.label6.Size = new System.Drawing.Size(79, 24);
             this.label6.TabIndex = 2;
             this.label6.Text = "Contract";
             // 
@@ -225,10 +212,9 @@
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(1091, 78);
-            this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label7.Location = new System.Drawing.Point(818, 63);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(36, 29);
+            this.label7.Size = new System.Drawing.Size(27, 24);
             this.label7.TabIndex = 2;
             this.label7.Text = "ID";
             // 
@@ -236,10 +222,9 @@
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(1619, 78);
-            this.label8.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label8.Location = new System.Drawing.Point(1214, 63);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(97, 29);
+            this.label8.Size = new System.Drawing.Size(76, 24);
             this.label8.TabIndex = 2;
             this.label8.Text = "Worked";
             // 
@@ -247,10 +232,9 @@
             // 
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(1728, 78);
-            this.label9.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label9.Location = new System.Drawing.Point(1296, 63);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(102, 29);
+            this.label9.Size = new System.Drawing.Size(79, 24);
             this.label9.TabIndex = 2;
             this.label9.Text = "Contract";
             // 
@@ -258,10 +242,9 @@
             // 
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.Location = new System.Drawing.Point(1231, 78);
-            this.label10.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label10.Location = new System.Drawing.Point(923, 63);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(78, 29);
+            this.label10.Size = new System.Drawing.Size(61, 24);
             this.label10.TabIndex = 2;
             this.label10.Text = "Name";
             // 
@@ -269,10 +252,9 @@
             // 
             this.label11.AutoSize = true;
             this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.Location = new System.Drawing.Point(1416, 78);
-            this.label11.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label11.Location = new System.Drawing.Point(1062, 63);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(135, 29);
+            this.label11.Size = new System.Drawing.Size(107, 24);
             this.label11.TabIndex = 2;
             this.label11.Text = "Occupation";
             // 
@@ -281,18 +263,17 @@
             this.label12.AutoSize = true;
             this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 22F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label12.ForeColor = System.Drawing.Color.DarkGreen;
-            this.label12.Location = new System.Drawing.Point(184, 11);
-            this.label12.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label12.Location = new System.Drawing.Point(138, 9);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(365, 42);
+            this.label12.Size = new System.Drawing.Size(291, 36);
             this.label12.TabIndex = 2;
             this.label12.Text = "Available Employees";
             // 
             // ShiftAssigning
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1835, 564);
+            this.ClientSize = new System.Drawing.Size(1376, 458);
             this.Controls.Add(this.PanelTableScrollUnavailable);
             this.Controls.Add(this.PanelTableScrollAvailable);
             this.Controls.Add(this.lblDay);
@@ -310,7 +291,6 @@
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.lblPosition);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "ShiftAssigning";
             this.Text = "ShiftAssigning";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.ShiftAssigning_FormClosed);

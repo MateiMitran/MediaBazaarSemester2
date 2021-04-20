@@ -499,13 +499,10 @@ namespace PRJMediaBazaar
 
         private void RemoveShift(Shift shift, Employee employee)
         {
-            DialogResult dialogResult = MessageBox.Show($"Are you sure you want to remove " +
-                $"{employee.FirstName} {employee.LastName}'s {shift.ToString()} shift?", "Confirmation", MessageBoxButtons.YesNo);
-            if (dialogResult == DialogResult.Yes)
-            {
+           
                 _scheduleControl.RemoveShift(shift.ToString(), ((Day)cbDay.SelectedItem), employee);
-            }
             LoadTableByPosition((Day)cbDay.SelectedItem, employee.JobPosition);
+            StatusFunction($"Removed {employee.FullName}'s {shift.ToString()} shift", -6, -1, 900, 28, Color.Green);
             UpdateDaysInfo();
         }
 
@@ -936,6 +933,7 @@ namespace PRJMediaBazaar
                 {
                     timers[i].Enabled = false;
                     buttons[i].Visible = false;
+                    timers[i].Stop();
                 }
             }
         }

@@ -607,7 +607,7 @@ namespace PRJMediaBazaar
             // godTimer
             // 
             this.godTimer.Enabled = true;
-            this.godTimer.Interval = 2500;
+            this.godTimer.Interval = 3000;
             this.godTimer.Tick += new System.EventHandler(this.godTimer_Tick);
             // 
             // HRHome

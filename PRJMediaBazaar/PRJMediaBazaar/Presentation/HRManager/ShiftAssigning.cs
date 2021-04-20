@@ -22,6 +22,10 @@ namespace PRJMediaBazaar
         private List<Employee> _employees;
         private List<EmployeePlanner> _available;
         private List<EmployeePlanner> _unavailable;
+
+        private List<Button> buttons;
+        private List<Timer> timers;
+
         public ShiftAssigning(ScheduleControl scheduleControl, List<Employee> empsOnPositon, Shift shift, string jobPosition, HRHome hr, Day day)
         {
             InitializeComponent();
@@ -51,29 +55,14 @@ namespace PRJMediaBazaar
             {
                 int employeeId = ep.Employee.Id;
                 double workedHours = ep.HoursWorked;
-                DialogResult dialogResult;
-                if (ep.Employee.ContractHours < workedHours + 4.5)
-                {
-                    dialogResult = MessageBox.Show($" {ep.Employee.FullName} exceeds his contract hours. Do you still want to assign him/her for a {_shift} shift?", "Confirmation", MessageBoxButtons.YesNo);
-                }
-                else
-                {
-                    dialogResult = MessageBox.Show($"Are you sure you want to assign {ep.Employee.FullName} for a {_shift} shift?", "Confirmation", MessageBoxButtons.YesNo);
-                }
-
-                if (dialogResult == DialogResult.Yes)
-                {
+               
                     _scheduleControl.AssignShift(_shift.ToString(), ep.Employee, _day, ep.EmptyShiftIndex, workedHours + 4.5);
                     _hr.LoadTableByPosition(_day, _jobPosition);
                     _hr.ShiftsTable.Enabled = true;
                     _hr.UpdateDaysInfo();
+                    _hr.StatusFunction($"Assigned {ep.Employee.FullName} to a {_shift.ToString()} shift", -6, -1, 900, 28, Color.Green);
                     this.Close();
-                }
 
-            }
-            else
-            {
-                MessageBox.Show("Please select an employee");
             }
         }
 
@@ -245,6 +234,21 @@ namespace PRJMediaBazaar
         private void customInstaller1_AfterInstall(object sender, System.Configuration.Install.InstallEventArgs e)
         {
 
+        }
+
+       
+
+        private void godTimer_Tick(object sender, EventArgs e)
+        {
+            for (int i = 0; i < timers.Count; i++)
+            {
+                if (timers[i].Enabled == true)
+                {
+                    timers[i].Enabled = false;
+                    buttons[i].Visible = false;
+                    timers[i].Stop();
+                }
+            }
         }
 
 
