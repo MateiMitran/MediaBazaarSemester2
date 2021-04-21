@@ -95,13 +95,17 @@
   <ItemGroup>
     <Compile Include="Data\AbsenceDAL.cs" />
     <Compile Include="Data\AvailabilitiesDAL.cs" />
+    <Compile Include="Data\ItemDAL.cs" />
     <Compile Include="InvaidEmailException.cs" />
     <Compile Include="InvalidIntException.cs" />
     <Compile Include="InvalidStringException.cs" />
     <Compile Include="Logic\AbsenceControl.cs" />
     <Compile Include="Logic\DayOff.cs" />
     <Compile Include="Logic\Duty.cs" />
+    <Compile Include="Logic\Item.cs" />
+    <Compile Include="Logic\ItemControl.cs" />
     <Compile Include="Logic\SickReport.cs" />
+    <Compile Include="Logic\Specification.cs" />
     <Compile Include="NegativeInputException.cs" />
     <Compile Include="Presentation\HRManager\EditNote.cs">
       <SubType>Form</SubType>
