@@ -75,7 +75,7 @@ namespace PRJMediaBazaar
             }
             else
             {
-                this.ab.DenyDayOffRequest(dayOff.Employee.Id, dayOff.Day.Id, this.tbExplain.Text);
+                this.ab.DenyDayOffRequest(dayOff.RequestId, this.tbExplain.Text);
                 hr.RemoveDayOff(dayOff);
                 hr.StatusFunction("Day off denied", -6, -1, 900, 28, Color.Green);
                 this.Close();

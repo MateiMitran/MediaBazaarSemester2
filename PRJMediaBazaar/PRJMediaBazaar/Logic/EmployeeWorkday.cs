@@ -38,17 +38,17 @@ namespace PRJMediaBazaar.Logic
 
         public double Hours { get; private set; }
 
-        public string GetEmptyShift()
+        public string GetOccupation()
         {
             if (FirstShift.ToString() == "None" && SecondShift.ToString() != "None")
             {
-                return FirstShift.ToString();
+                return SecondShift.ToString();
             }
             else if (SecondShift.ToString() == "None" && FirstShift.ToString() != "None")
             {
-                return SecondShift.ToString();
+                return FirstShift.ToString();
             }
-            return "-1";
+            return "Double Shift";
         }
 
         public string GetBusyShift()

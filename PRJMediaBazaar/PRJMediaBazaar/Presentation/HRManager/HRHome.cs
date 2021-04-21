@@ -124,6 +124,8 @@ namespace PRJMediaBazaar
             this.lblEmployees.ForeColor = Color.White;
             this.lblSickReports.ForeColor = Color.White;
             this.lblDayOffReports.ForeColor = Color.Gray;
+
+            LoadDayOffRequests();
         }
 
         private void label3_Click(object sender, EventArgs e)
@@ -676,29 +678,16 @@ namespace PRJMediaBazaar
         {
             /* CONFIRM DAY OFF REQUEST */
 
-            int index = lbDayOff.SelectedIndex;
+            DayOff req = (DayOff)this.lbDayOff.SelectedItem;
 
-            if (index >= 0)
+            if (req != null)
             {
-                DayOff req = _absenceControl.DaysOffRequests[index];
-                int shiftsRemoved = _absenceControl.ConfirmDayOffRequest(req.Employee,req.Day);
-
-                if (shiftsRemoved > 0)
-                {
-                   
-                    _absenceControl.DaysOffRequests.RemoveAt(index);
+                
+                    _absenceControl.ConfirmDayOffRequest(req);
+                    _absenceControl.DaysOffRequests.Remove(req);
                     LoadDayOffRequests();
                     StatusFunction("Day Off Confirmed!", -6, -1, 900, 28, Color.Green);
-                    MessageBox.Show($"Removed {shiftsRemoved.ToString()} shift/s from {req.Day.Date.ToString("dd-MM-yyyy")}'s {req.Employee.JobPosition}s " +
-                        $"+ {Environment.NewLine} Please assign new employee/s!");
-                   
-                }
-                else
-                {
-                    _absenceControl.DaysOffRequests.RemoveAt(index);
-                    LoadDayOffRequests();
-                    StatusFunction("Day Off Confirmed!", -6, -1, 900, 28, Color.Green);
-                }
+                
             }
             else
             {
@@ -714,6 +703,7 @@ namespace PRJMediaBazaar
         private void LoadDayOffRequests()
         {
             lbDayOff.Items.Clear();
+            _absenceControl.LoadDaysOff();
             daysOff = _absenceControl.DaysOffRequests;
            foreach(DayOff d in daysOff)
             {

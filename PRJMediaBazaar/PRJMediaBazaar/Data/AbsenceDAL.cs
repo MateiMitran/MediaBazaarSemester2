@@ -11,11 +11,11 @@ namespace PRJMediaBazaar.Data
     class AbsenceDAL : BaseDAL
     {
         List<Employee> _employees;
-        List<Schedule> _schedules;
-        public AbsenceDAL(List<Employee> employees, List<Schedule> schedules)
+        ScheduleControl _scheduleControl;
+        public AbsenceDAL(List<Employee> employees, ScheduleControl scheduleControl)
         {
             _employees = employees;
-            _schedules = schedules;
+            _scheduleControl = scheduleControl;
         }
 
         //public List<DayOff> SelectDayOffRequests()
@@ -52,28 +52,33 @@ namespace PRJMediaBazaar.Data
             List<DayOff> pseudos = new List<DayOff>();
             while (result.Read())
             {
-                int scheduleId = Convert.ToInt32(result[0]);
+                int request_id = Convert.ToInt32(result[0]);
+                int first_dayId = Convert.ToInt32(result[1]);
+                int last_dayId = 0;
+                if(result[2] != DBNull.Value)
+                {
+                    last_dayId = Convert.ToInt32(result[2]);
+                }
 
-                int dayId = Convert.ToInt32(result[1]);
-                Day day = GetSchedule(scheduleId).GetDay(dayId);
-
-                int empId = Convert.ToInt32(result[2]);
+                int empId = Convert.ToInt32(result[3]);
                 Employee employee = _employees.FirstOrDefault(emp => emp.Id == empId);
 
-                bool urgent = Convert.ToBoolean(result[3]);
-                string reason = result[4].ToString();
-                string status = result[5].ToString();
-                string objection = result[6].ToString();
-                DayOff req = new DayOff( day,employee, urgent, status, reason, objection);
+                var shifts = GetShifts(first_dayId, last_dayId, empId);
+
+                bool urgent = Convert.ToBoolean(result[4]);
+                string reason = result[5].ToString();
+                string status = result[6].ToString();
+                string objection = result[7].ToString();
+                DayOff req = new DayOff( request_id, shifts,employee, urgent, status, reason, objection);
                 pseudos.Add(req);
             }
             CloseConnection();
             return pseudos;
         }
-        public bool ConfirmDayOffRequest(int dayId, int empId)
+        public bool ConfirmDayOffRequest(int requestId)
         {
-            string[] parameters = new string[] { dayId.ToString(), empId.ToString() };
-            string sql = "DELETE FROM dayoff_requests WHERE day_id = @dayId AND employee_id = @empId";
+            string[] parameters = new string[] { requestId.ToString() };
+            string sql = "DELETE FROM dayoff_requests WHERE request_id = @requestId";
 
             if (executeNonQuery(sql, parameters) != null)
             {
@@ -84,11 +89,11 @@ namespace PRJMediaBazaar.Data
             return false;
         }
 
-        public bool DenyDayOffRequest(int empId, int dayId, string objection) //1. reason, 2. status, 3. employee_id
+        public bool DenyDayOffRequest(int requestId, string objection) //1. reason, 2. status, 3. employee_id
         {
             String sql = "UPDATE `dayoff_requests` SET `objection`= @reason, `status`= 'denied' " +
-                "WHERE `employee_id`= @employee_id AND `day_id`= @dayId ; ";
-            String[] parameters = new String[] { objection, empId.ToString(),dayId.ToString()};
+                "WHERE `request_id`= @requestId ; ";
+            String[] parameters = new String[] { objection, requestId.ToString()};
             if (executeNonQuery(sql, parameters) != null)
             {
                 CloseConnection();
@@ -111,7 +116,7 @@ namespace PRJMediaBazaar.Data
                 int scheduleId = Convert.ToInt32(result[0]);
 
                 int dayId = Convert.ToInt32(result[1]);
-                Day day = GetSchedule(scheduleId).GetDay(dayId);
+                Day day = GetDay(dayId);
 
                 int empId = Convert.ToInt32(result[2]);
                 Employee employee = _employees.FirstOrDefault(emp => emp.Id == empId);
@@ -171,16 +176,41 @@ namespace PRJMediaBazaar.Data
             return false;
         }
 
-        public Schedule GetSchedule(int scheduleId)
+        public Day GetDay(int dayId)
         {
-            foreach (Schedule s in _schedules)
+            foreach (Schedule s in _scheduleControl.Schedules)
             {
-                if (s.Id == scheduleId)
+                foreach(Day d in s.Days)
                 {
-                    return s;
+                    if(d.Id == dayId)
+                    {
+                        return d;
+                    }
                 }
             }
             return null;
+        }
+
+
+        private Dictionary<Day,EmployeeWorkday> GetShifts(int firstDay, int lastDay, int employeeId)
+        {
+            Dictionary<Day, EmployeeWorkday> shifts = new Dictionary<Day, EmployeeWorkday>();
+            if (lastDay != 0)
+            {
+                for (int i = firstDay; i < lastDay; i++)
+                {
+                    Day day = GetDay(i);
+                    EmployeeWorkday wd = _scheduleControl.GetEmployeeShift(day.WeekId, day.Id, employeeId);
+                    shifts.Add(day, wd);
+                }
+            }
+            else
+            {
+                Day day = GetDay(firstDay);
+                EmployeeWorkday wd = _scheduleControl.GetEmployeeShift(day.WeekId, day.Id, employeeId);
+                shifts.Add(day, wd);
+            }
+            return shifts;
         }
 
 
