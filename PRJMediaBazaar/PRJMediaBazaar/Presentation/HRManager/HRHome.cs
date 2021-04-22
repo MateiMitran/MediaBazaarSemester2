@@ -74,6 +74,10 @@ namespace PRJMediaBazaar
         public void LoadEmployees()
         {
             _employees = _empControl.Employees;
+            for (int i=0;i<_employees.Length;i++)
+            {
+                this.cbEmployees.Items.Add(_employees[i].FullName);
+            }
 
         }
         public void AddEmployee(Employee temp)
@@ -628,41 +632,7 @@ namespace PRJMediaBazaar
         }
         private void button1_Click(object sender, EventArgs e)
         {
-            int ok = 0;
-            List<Employee> employees = _empControl.Employees.ToList();
-            String input = this.tbEmployee.Text;
-            if (Regex.IsMatch(input, @"^\d+$") == true)
-            {
-                int id = Convert.ToInt32(input);
-                foreach (Employee employee in employees)
-                {
-                    if (employee.Id == id)
-                    {
-                        thisEmployee = employee;
-                        LoadEmployeeListboxes(thisEmployee);
-                        ok = 1;
-                        break;
-                    }
-                }
-            }
-            else
-            {
-                foreach (Employee employee in employees)
-                {
-                    if (employee.LastName == input || employee.FirstName == input || employee.FirstName + " " + employee.LastName == input)
-                    {
-                        thisEmployee = employee;
-                        LoadEmployeeListboxes(thisEmployee);
-                        ok = 1;
-                        break;
-                    }
-                }
-
-            }
-            if (ok == 0)
-            {
-                StatusFunction("No employee found!", -6, -1, 900, 28, Color.Red);
-            }
+            
         }
 
         private void panelSchedule_Paint_1(object sender, PaintEventArgs e)
@@ -925,6 +895,30 @@ namespace PRJMediaBazaar
                     buttons[i].Visible = false;
                     timers[i].Stop();
                 }
+            }
+        }
+
+        private void tbEmployee_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cbEmployees_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                if (this.cbEmployees.SelectedItem == null)
+                {
+                    StatusFunction("Please select an employee!", -6, -1, 900, 28, Color.Red);
+                    throw new EmptyComboBoxException();
+                }
+                thisEmployee = _empControl.GetEmployeeByName(this.cbEmployees.SelectedItem.ToString());
+                LoadEmployeeListboxes(thisEmployee);
+                
+            }
+            catch (Exception ex)
+            {
+                StatusFunction("No employee found!", -6, -1, 900, 28, Color.Red);
             }
         }
     }

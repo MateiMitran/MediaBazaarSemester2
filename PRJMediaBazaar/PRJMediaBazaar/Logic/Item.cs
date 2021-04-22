@@ -21,13 +21,13 @@ namespace PRJMediaBazaar.Logic
         {
             Specifications.Add(spec);
         }
-       public int ID { get; private set; }
-       public String Name { get; private set; }
-       public String Category { get; private set; }
-       public String Subcategory { get; private set; }
-       public double Price { get; private set; }
-       public int Quantity { get; private set; }
-       public List<Specification> Specifications { get; private set; }
+       public int ID { get;  set; }
+       public String Name { get; set; }
+       public String Category { get; set; }
+       public String Subcategory { get; set; }
+       public double Price { get;  set; }
+       public int Quantity { get;  set; }
+       public List<Specification> Specifications { get;  set; }
        public double TotalPrice { get { return this.Price * this.Quantity; } }
     }
 }

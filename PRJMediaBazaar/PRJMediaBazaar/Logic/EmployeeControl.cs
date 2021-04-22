@@ -70,5 +70,17 @@ namespace PRJMediaBazaar.Logic
             }
             return null;
         }
+
+        public Employee GetEmployeeByName(String name)
+        {
+            foreach (Employee emp in _employees)
+            {
+                if (emp.FullName == name)
+                {
+                    return emp;
+                }
+            }
+            return null;
+        }
     }
 }
