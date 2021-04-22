@@ -332,3 +332,6 @@ C:\Users\Matei Mitran\Desktop\Fontys\Semester 2\Project\Media Bazaar\prj-cb05-gr
 C:\Users\Matei Mitran\Desktop\Fontys\Semester 2\Project\Media Bazaar\prj-cb05-group-5-project\PRJMediaBazaar\PRJMediaBazaar\obj\Debug\PRJMediaBazaar.WRHSHome.resources
 D:\SEMESTER 2\PRJ\prj-cb05-group-5-project\PRJMediaBazaar\PRJMediaBazaar\obj\Debug\PRJMediaBazaar.ExplainDenial.resources
 D:\SEMESTER 2\PRJ\prj-cb05-group-5-project\PRJMediaBazaar\PRJMediaBazaar\obj\Debug\PRJMediaBazaar.WRHSHome.resources
+C:\Users\Matei Mitran\Desktop\Fontys\Semester 2\Project\Media Bazaar\prj-cb05-group-5-project\PRJMediaBazaar\PRJMediaBazaar\obj\Debug\PRJMediaBazaar.ItemSpecifications.resources
+C:\Users\Matei Mitran\Desktop\Fontys\Semester 2\Project\Media Bazaar\prj-cb05-group-5-project\PRJMediaBazaar\PRJMediaBazaar\obj\Debug\PRJMediaBazaar.AddItem.resources
+C:\Users\Matei Mitran\Desktop\Fontys\Semester 2\Project\Media Bazaar\prj-cb05-group-5-project\PRJMediaBazaar\PRJMediaBazaar\obj\Debug\PRJMediaBazaar.EditItem.resources

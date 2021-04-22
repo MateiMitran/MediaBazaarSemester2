@@ -29,16 +29,20 @@ namespace PRJMediaBazaar.Data
            
             return items;
         } 
-        public void LoadSpecs() // load specs by id of product
+        public List<Specification> LoadSpecs(int itemId) // load specs by id of product
         {
             List<Specification> specs = new List<Specification>();
-            MySqlDataReader dr = executeReader("SELECT name FROM specifications;", null);
+            MySqlDataReader dr = executeReader("SELECT name,title,information FROM specifications WHERE itemID = @itemId;", null);
             while (dr.Read())
             {
                 String name = dr[0].ToString();
                 Specification temp = new Specification(name);
+                temp.AddSpecification(dr[1].ToString(), dr[2].ToString());
                 specs.Add(temp);
             }
+            CloseConnection();
+            return specs;
+            
         }
         public bool AddItem(String name, String category, String subcategory, String price, int quantity)
         {

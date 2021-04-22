@@ -93,12 +93,30 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Presentation\WareHouseManager\AddItem.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Presentation\WareHouseManager\AddItem.Designer.cs">
+      <DependentUpon>AddItem.cs</DependentUpon>
+    </Compile>
     <Compile Include="Data\AbsenceDAL.cs" />
     <Compile Include="Data\AvailabilitiesDAL.cs" />
     <Compile Include="Data\ItemDAL.cs" />
+    <Compile Include="Presentation\WareHouseManager\EditItem.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Presentation\WareHouseManager\EditItem.Designer.cs">
+      <DependentUpon>EditItem.cs</DependentUpon>
+    </Compile>
     <Compile Include="InvaidEmailException.cs" />
     <Compile Include="InvalidIntException.cs" />
     <Compile Include="InvalidStringException.cs" />
+    <Compile Include="Presentation\WareHouseManager\ItemSpecifications.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Presentation\WareHouseManager\ItemSpecifications.Designer.cs">
+      <DependentUpon>ItemSpecifications.cs</DependentUpon>
+    </Compile>
     <Compile Include="Logic\AbsenceControl.cs" />
     <Compile Include="Logic\DayOff.cs" />
     <Compile Include="Logic\Duty.cs" />
@@ -175,6 +193,15 @@
     <Compile Include="Presentation\HRManager\ShiftAssigning.Designer.cs">
       <DependentUpon>ShiftAssigning.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Presentation\WareHouseManager\AddItem.resx">
+      <DependentUpon>AddItem.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Presentation\WareHouseManager\EditItem.resx">
+      <DependentUpon>EditItem.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Presentation\WareHouseManager\ItemSpecifications.resx">
+      <DependentUpon>ItemSpecifications.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Presentation\HRManager\EditNote.resx">
       <DependentUpon>EditNote.cs</DependentUpon>
     </EmbeddedResource>

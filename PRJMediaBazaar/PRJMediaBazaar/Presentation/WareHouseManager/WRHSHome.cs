@@ -138,7 +138,7 @@ namespace PRJMediaBazaar
             }
             catch (Exception ex)
             {
-                StatusFunction("No employee found!", -6, -1, 900, 28, Color.Red);
+                StatusFunction("No item found!", -6, -1, 900, 28, Color.Red);
             }
         }
 
@@ -152,6 +152,38 @@ namespace PRJMediaBazaar
                     buttons[i].Visible = false;
                 }
             }
+        }
+
+        private void btnViewSpecs_Click(object sender, EventArgs e)
+        {
+            if (thisItem != null)
+            {
+                ItemSpecifications itemSpecifications = new ItemSpecifications(this,thisItem);
+                itemSpecifications.Show();
+            }
+            else
+                StatusFunction("No item found!", -6, -1, 900, 28, Color.Red);
+        }
+        public ItemControl GetItemControl()
+        {
+            return this.itemControl;
+        }
+
+        private void btnAddItem_Click(object sender, EventArgs e)
+        {
+            AddItem add = new AddItem();
+            add.Show();
+        }
+
+        private void btnEditItem_Click(object sender, EventArgs e)
+        {
+            if (thisItem != null)
+            {
+                EditItem edit = new EditItem(this, thisItem);
+                edit.Show();
+            }
+            else
+                StatusFunction("No item found!", -6, -1, 900, 28, Color.Red);
         }
     }
 }

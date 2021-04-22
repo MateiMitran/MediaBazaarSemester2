@@ -8,21 +8,17 @@ namespace PRJMediaBazaar.Logic
 {
     public class Specification
     {
-        String name;
-        List<String> specTitle;
-        List<String> spec;
+        
         public Specification(String name)
         {
-            this.name = name;
-            specTitle = new List<String>();
-            spec = new List<String>();
+            Name = name;
         }
         public void AddSpecification(String title,String text)
         {
-            specTitle.Add(title);
-            spec.Add(text);
+            Title = title;
+            Spec = text;
         }
-        public List<String> GetSpecifications()
+       /* public List<String> GetSpecifications()
         {
             List<String> temp = new List<String>();
             for (int i=0;i<spec.Count;i++)
@@ -30,6 +26,19 @@ namespace PRJMediaBazaar.Logic
                 temp.Add(specTitle[i] + " : " + spec[i]);
             }
             return temp;
+        } */
+
+        public String Name
+        {
+            get; private set;
+        }
+        public String Title
+        {
+            get; private set;
+        }
+        public String Spec
+        {
+            get; private set;
         }
     }
 }

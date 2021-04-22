@@ -83,5 +83,10 @@ namespace PRJMediaBazaar.Logic
             return null;
         }
 
+        public List<Specification> GetSpecificationsWithItemId(int itemId)
+        {
+            List<Specification> temp = itemDAL.LoadSpecs(itemId);
+            return temp;
+        }
     }
 }
