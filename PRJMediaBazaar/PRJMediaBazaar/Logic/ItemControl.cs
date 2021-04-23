@@ -23,10 +23,10 @@ namespace PRJMediaBazaar.Logic
         {
            this.items = itemDAL.SelectAllItems();
         }
-        public void AddAnItem(String name, String category, String subcategory, String price, int quantity)
+        public void AddAnItem(String name, String category, String subcategory, String price, int quantity, byte[] image)
         {
-            itemDAL.AddItem(name, category, subcategory, price, quantity);
-            int id = itemDAL.GetIDByName(name);
+            itemDAL.AddItem(name, category, subcategory, price, quantity, image);
+            int id = itemDAL.LastItemId();
             items.Add(new Item(id, name, category, subcategory, Convert.ToDouble(price), quantity));
         }
         public bool DeleteAnItem(int id)

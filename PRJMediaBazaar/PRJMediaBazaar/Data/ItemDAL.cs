@@ -44,14 +44,16 @@ namespace PRJMediaBazaar.Data
             return specs;
             
         }
-        public bool AddItem(String name, String category, String subcategory, String price, int quantity)
+        public bool AddItem(String name, String category, String subcategory, String price, int quantity, byte[] image)
         {
             String sql = "INSERT INTO items(name,category,subcategory,price,quantity) " +
-                        "VALUES(@id,@name,@category,@subcategory,@price,@quantity);";
+                        "VALUES(@name,@category,@subcategory,@price,@quantity);";
             String[] parameters = new String[] { name, category, subcategory, price, quantity.ToString() };
             if (executeNonQuery(sql,parameters)!=null)
             {
                 CloseConnection();
+                AddItemImage(image);
+
                 return true;
             }
             else
@@ -59,6 +61,50 @@ namespace PRJMediaBazaar.Data
                 CloseConnection();
                 return false;
             }
+        }
+
+        private void AddItemImage(byte[] image)
+        {
+            int id = LastItemId();
+            MySqlConnection conn = null;
+
+            try
+            {
+                conn = new MySqlConnection(@"server=studmysql01.fhict.local;database=dbi460221;uid=dbi460221;password=lol;AllowUserVariables=true");
+                String sql = "INSERT INTO items_images(item_id,image) " +
+                        "VALUES(@id,@image);";
+
+                MySqlCommand cmd = new MySqlCommand(sql, conn);
+                cmd.Parameters.AddWithValue("@id", id);
+                cmd.Parameters.Add("@image", MySqlDbType.Blob).Value = image;
+                conn.Open();
+                if (cmd.ExecuteNonQuery() > 0)
+                {
+                    conn.Close();
+                }
+
+            }
+            catch (MySqlException ex)
+            {
+             
+            }
+
+            finally
+            {
+                if (conn != null)
+                {
+                    conn.Close();
+                }
+            }
+
+        }
+
+        public int LastItemId()
+        {
+            string sql = "SELECT MAX(id) FROM items";
+            int id =Convert.ToInt32(executeScalar(sql, null));
+            CloseConnection();
+            return id;
         }
         public bool DeleteItem(int id)
         {
