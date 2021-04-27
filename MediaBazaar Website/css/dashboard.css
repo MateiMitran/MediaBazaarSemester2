@@ -204,13 +204,22 @@
     text-align: center;
 }
 
+#dashboard-absence #absence-wrapper form input[type="checkbox"] {
+    width: auto;
+    margin-top: 10px;
+}
+
 #dashboard-absence #absence-wrapper form input[type="submit"] {
     width: auto;
     min-width: 50%;
     font-size: 16px;
 }
 
-#dashboard-absence #absence-wrapper #day-off-form .form-group.submit {
+#dashboard-absence #absence-wrapper #day-off-form .form-group {
+    max-width: 390px;
+}
+
+#dashboard-absence #absence-wrapper #sick-report-form .form-group.submit {
     position: absolute;
     bottom: 0;
     width: 100%;

@@ -97,13 +97,19 @@
                     <form class="simple-form" method="POST" action="dashboard" id="day-off-form">
                         <h3>I need a day off</h3>
                         <div class="form-group">
-                            <label for="day-off-day">I need a day off on:</label>
-                            <input type="date" name="day-off-day" id="day-off-day" />
+                            <label for="day-off-start-day">I need some days off from:</label>
+                            <input type="date" name="day-off-start-day" id="day-off-start-day" />
+                            <input type="checkbox" value="day-off-one-day-only" id="day-off-one-day-only">
+                            <label for="day-off-one-day-only">I will be needing only one day off</label>
+                        </div>
+                        <div class="form-group">
+                            <label for="day-off-end-day">I need some days off until:</label>
+                            <input type="date" name="day-off-end-day" id="day-off-end-day" />
                         </div>
                         <div class="form-group">
                             <label for="day-off-urgency">And it is:</label>
                             <label class="select-arrow-label">
-                                <select name="day-off-urgency" id="day-off-urgency">
+                                <select name="day-off-urgency" id="day-off-urgency" required>
                                     <option value="not-urgent" selected>Not Urgent</option>
                                     <option value="urgent">Urgent</option>
                                 </select>
