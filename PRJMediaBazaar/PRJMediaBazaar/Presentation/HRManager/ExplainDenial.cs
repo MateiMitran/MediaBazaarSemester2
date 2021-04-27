@@ -6,19 +6,26 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using PRJMediaBazaar.Logic;
 using System.Windows.Forms;
 
 namespace PRJMediaBazaar
 {
-    partial class LogIn : Form
+    partial class ExplainDenial : Form
     {
+        private DayOff dayOff;
+        private AbsenceControl ab;
+        private HRHome hr;
         private List<Button> buttons;
         private List<Timer> timers;
-        public LogIn()
+        public ExplainDenial(DayOff d, AbsenceControl ab, HRHome hr)
         {
             InitializeComponent();
             buttons = new List<Button>();
             timers = new List<Timer>();
+            this.dayOff = d;
+            this.ab = ab;
+            this.hr = hr;
         }
         public void StatusFunction(String text, int x, int y, int width, int height, Color color)
         {
@@ -36,66 +43,43 @@ namespace PRJMediaBazaar
             timers.Add(temp);
             temp.Start();
         }
-        private void label1_Click(object sender, EventArgs e)
-        {
 
-        }
-
-        private void label2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-
-
-            if (this.tbUsername.Text == "hrmanager" && this.tbPassword.Text == "hrmanager")
-            {
-                HRHome home = new HRHome(this);
-                home.Show();
-                this.Hide();
-            }
-            else if (this.tbUsername.Text == "warehouse" && this.tbPassword.Text == "warehouse")
-            {
-                WRHSHome home = new WRHSHome(this);
-                home.Show();
-                this.Hide();
-            }
-            else
-            {
-                StatusFunction("Invalid Credentials", -60, -5, 508, 28, Color.Red);
-            }
-        }
-
-        private void LogIn_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void btnLogIn_MouseHover(object sender, EventArgs e)
-        {
-
-        }
-
-        private void btnLogIn_MouseEnter(object sender, EventArgs e)
-        {
-            this.btnLogIn.BackColor = Color.Bisque;
-        }
-
-        private void btnLogIn_MouseLeave(object sender, EventArgs e)
-        {
-            this.btnLogIn.BackColor = Color.White;
-        }
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            
+
+        }
+
+        private void ExplainDenial_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void timer1_Tick_1(object sender, EventArgs e)
+        {
+            for (int i = 0; i < timers.Count; i++)
+            {
+                if (timers[i].Enabled == true)
+                {
+                    timers[i].Enabled = false;
+                    buttons[i].Visible = false;
+                }
+            }
+        }
+
+        private void btnConfirm_Click_1(object sender, EventArgs e)
+        {
+            if(this.tbExplain.Text == "" || this.tbExplain.Text.Length < 5)
+            {
+                MessageBox.Show("Please type a reason");
+            }
+            else
+            {
+                this.ab.DenyDayOffRequest(dayOff.RequestId, this.tbExplain.Text);
+                hr.RemoveDayOff(dayOff);
+                hr.StatusFunction("Day off denied", -6, -1, 900, 28, Color.Green);
+                this.Close();
+            }
         }
 
         private void godTimer_Tick(object sender, EventArgs e)

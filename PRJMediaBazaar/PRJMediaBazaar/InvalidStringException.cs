@@ -8,7 +8,7 @@ namespace PRJMediaBazaar
 {
     class InvalidStringException : Exception
     {
-        public InvalidStringException(String message):base(message)
+        public InvalidStringException():base()
         {
 
         }

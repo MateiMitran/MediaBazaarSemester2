@@ -14,14 +14,14 @@ namespace PRJMediaBazaar.Logic
         private Employee[] _employees;
         private List<EmployeePlanner> _available;
         private List<EmployeePlanner> _unavailable;
-        private ScheduleDAL availabilitiesDAL;
+        private AvailabilitiesDAL availabilitiesDAL;
 
         public Availabilities(Employee[] employeesOnPosition, Day day, Shift shift)
         {
             _available = new List<EmployeePlanner>();
             _unavailable = new List<EmployeePlanner>();
             _employees = employeesOnPosition;
-            availabilitiesDAL = new ScheduleDAL();
+            availabilitiesDAL = new AvailabilitiesDAL(employeesOnPosition.ToList());
             PopulateLists(day, shift);
             
         }
@@ -34,13 +34,13 @@ namespace PRJMediaBazaar.Logic
         {
 
 
-            List<EmployeeWorkday> workdays = availabilitiesDAL.SelectEmployeesWorkdays(day.Id, _employees[0].JobPosition);
+            List<EmployeeWorkday> workdays = availabilitiesDAL.SelectEmployeesWorkdays(day.WeekId,day.Id, _employees[0].JobPosition);
             List<Employee> busyEmployees = new List<Employee>();
 
             foreach(EmployeeWorkday wd in workdays) //employees in the workdays_table
             {
                 Employee employee = wd.Employee;
-                double hoursInfo = availabilitiesDAL.SelectWorkedHours(day.WeekId, employee.Id);
+                double hoursInfo =wd.Hours;
                 if (!Convert.ToBoolean(wd.Absence)) //the employee isn't absent
                 {
                     int index = Helper.GetEmptyShiftIndex(wd.FirstShift.ToString(), wd.SecondShift.ToString());

@@ -7,18 +7,25 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using PRJMediaBazaar.Logic;
 
 namespace PRJMediaBazaar
 {
-    partial class LogIn : Form
+    partial class EditNote : Form
     {
+        private Employee thisEmployee;
+        private EmployeeControl ec;
+        private HRHome hr;
         private List<Button> buttons;
         private List<Timer> timers;
-        public LogIn()
+        public EditNote(Employee thisEmployee, EmployeeControl ec, HRHome hr)
         {
             InitializeComponent();
             buttons = new List<Button>();
             timers = new List<Timer>();
+            this.thisEmployee = thisEmployee;
+            this.ec = ec;
+            this.hr = hr;
         }
         public void StatusFunction(String text, int x, int y, int width, int height, Color color)
         {
@@ -36,61 +43,24 @@ namespace PRJMediaBazaar
             timers.Add(temp);
             temp.Start();
         }
-        private void label1_Click(object sender, EventArgs e)
+        private void EditNote_Load(object sender, EventArgs e)
         {
-
+            this.tbNote.Text = thisEmployee.Note;
         }
 
-        private void label2_Click(object sender, EventArgs e)
+        private void btnConfirm_Click(object sender, EventArgs e)
         {
-
-        }
-
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-
-
-            if (this.tbUsername.Text == "hrmanager" && this.tbPassword.Text == "hrmanager")
+            try
             {
-                HRHome home = new HRHome(this);
-                home.Show();
-                this.Hide();
+                ec.UpdateNote(this.tbNote.Text, thisEmployee.Email);
+                hr.AddNoteToEmployee(thisEmployee, this.tbNote.Text);
+                StatusFunction("Success!", -60, -5, 818, 28, Color.Green);
             }
-            else if (this.tbUsername.Text == "warehouse" && this.tbPassword.Text == "warehouse")
+            catch (Exception ex)
             {
-                WRHSHome home = new WRHSHome(this);
-                home.Show();
-                this.Hide();
+                StatusFunction("An error occured!", -60, -5, 818, 28, Color.Red);
             }
-            else
-            {
-                StatusFunction("Invalid Credentials", -60, -5, 508, 28, Color.Red);
-            }
-        }
 
-        private void LogIn_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void btnLogIn_MouseHover(object sender, EventArgs e)
-        {
-
-        }
-
-        private void btnLogIn_MouseEnter(object sender, EventArgs e)
-        {
-            this.btnLogIn.BackColor = Color.Bisque;
-        }
-
-        private void btnLogIn_MouseLeave(object sender, EventArgs e)
-        {
-            this.btnLogIn.BackColor = Color.White;
         }
 
         private void timer1_Tick(object sender, EventArgs e)

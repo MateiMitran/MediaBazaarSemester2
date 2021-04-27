@@ -8,7 +8,7 @@ namespace PRJMediaBazaar
 {
     public class EmptyComboBoxException : Exception
     {
-        public EmptyComboBoxException(String message) : base(message)
+        public EmptyComboBoxException() : base()
         {
 
         }

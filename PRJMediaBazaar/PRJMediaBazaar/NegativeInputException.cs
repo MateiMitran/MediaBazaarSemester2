@@ -8,7 +8,7 @@ namespace PRJMediaBazaar
 {
     class NegativeInputException : Exception
     {
-        public NegativeInputException(String message) : base(message)
+        public NegativeInputException() : base()
         {
 
         }

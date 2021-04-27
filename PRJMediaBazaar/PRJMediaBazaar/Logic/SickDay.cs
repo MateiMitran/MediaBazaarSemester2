@@ -4,13 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PRJMediaBazaar
+namespace PRJMediaBazaar.Logic
 {
-    class InvalidIntException : Exception
+    class SickDay
     {
-        public InvalidIntException() : base()
-        {
-
-        }
     }
 }

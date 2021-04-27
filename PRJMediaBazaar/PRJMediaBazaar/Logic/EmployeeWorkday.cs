@@ -8,34 +8,47 @@ namespace PRJMediaBazaar.Logic
 {
     class EmployeeWorkday
     {
-        public EmployeeWorkday(Employee emp, Shift firstShift, Shift secondShift, bool absence, AbsenceReason absenceReason)
+        //public EmployeeWorkday(Employee emp, Shift firstShift, Shift secondShift, bool absence, AbsenceReason absenceReason)
+        //{
+        //    Employee = emp;
+        //    FirstShift = firstShift;
+        //    SecondShift = secondShift;
+        //    Absence = absence;
+        //    AbsenceReason = AbsenceReason;
+        //}
+
+        public EmployeeWorkday(int dayId,Employee emp, Shift firstShift, Shift secondShift, bool absence, AbsenceReason absenceReason, double hours)
         {
             Employee = emp;
             FirstShift = firstShift;
             SecondShift = secondShift;
             Absence = absence;
-            AbsenceReason = AbsenceReason;
+            AbsenceReason = absenceReason;
+            Hours = hours;
+            DayId = dayId;
         }
 
 
         public Employee Employee { get; private set; }
         public Shift FirstShift { get; set; }
         public Shift SecondShift { get; set; }
-        public string JobPosition { get; set; }
         public bool Absence { get; set; }
         public AbsenceReason AbsenceReason { get; set; }
+        public int DayId { get; private set; }
 
-        public string GetEmptyShift()
+        public double Hours { get; private set; }
+
+        public string GetOccupation()
         {
             if (FirstShift.ToString() == "None" && SecondShift.ToString() != "None")
             {
-                return FirstShift.ToString();
+                return SecondShift.ToString();
             }
             else if (SecondShift.ToString() == "None" && FirstShift.ToString() != "None")
             {
-                return SecondShift.ToString();
+                return FirstShift.ToString();
             }
-            return "-1";
+            return "Double Shift";
         }
 
         public string GetBusyShift()
@@ -49,6 +62,15 @@ namespace PRJMediaBazaar.Logic
                 return FirstShift.ToString();
             }
             return "-1";
+        }
+
+        public string GetShift()
+        {
+            if(FirstShift.ToString() == "None")
+            {
+                return SecondShift.ToString();
+            }
+            return FirstShift.ToString();
         }
     }
 }

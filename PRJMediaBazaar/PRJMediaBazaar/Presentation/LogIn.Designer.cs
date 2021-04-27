@@ -29,12 +29,14 @@ namespace PRJMediaBazaar
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.lblWelcome = new System.Windows.Forms.Label();
             this.lblUsername = new System.Windows.Forms.Label();
             this.lblPassword = new System.Windows.Forms.Label();
             this.tbUsername = new System.Windows.Forms.TextBox();
             this.tbPassword = new System.Windows.Forms.TextBox();
             this.btnLogIn = new System.Windows.Forms.Button();
+            this.godTimer = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
             // 
             // lblWelcome
@@ -98,6 +100,12 @@ namespace PRJMediaBazaar
             this.btnLogIn.MouseLeave += new System.EventHandler(this.btnLogIn_MouseLeave);
             this.btnLogIn.MouseHover += new System.EventHandler(this.btnLogIn_MouseHover);
             // 
+            // godTimer
+            // 
+            this.godTimer.Enabled = true;
+            this.godTimer.Interval = 2500;
+            this.godTimer.Tick += new System.EventHandler(this.godTimer_Tick);
+            // 
             // LogIn
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -110,6 +118,8 @@ namespace PRJMediaBazaar
             this.Controls.Add(this.lblPassword);
             this.Controls.Add(this.lblUsername);
             this.Controls.Add(this.lblWelcome);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
             this.Name = "LogIn";
             this.Text = "LogIn";
             this.Load += new System.EventHandler(this.LogIn_Load);
@@ -126,6 +136,7 @@ namespace PRJMediaBazaar
         private System.Windows.Forms.TextBox tbUsername;
         private System.Windows.Forms.TextBox tbPassword;
         private System.Windows.Forms.Button btnLogIn;
+        private System.Windows.Forms.Timer godTimer;
     }
 }
 
