@@ -1,14 +1,30 @@
+/* WELCOME MESSAGE CSS */
+
+#welcome-message {
+    margin: 15px 60px 0;
+    font-size: 14px;
+}
+
+#welcome-message span {
+    font-weight: 600;
+    font-size: 16px;
+    margin-left: 2px;
+}
+
 /* DASHBOARD CSS */
 
 #dashboard-wrapper {
-    max-width: 1000px;
-    margin: 0 auto;
+    display: inline-block;
+    width: 100%;
+    margin: 0 auto 50px;
     text-align: center;
 }
 
 #dashboard-container {
     width: 100%;
+    max-width: 1000px;
     min-height: 300px;
+    margin: 0 auto;
     background-color: #fff;
     border-radius: 3px;
         -webkit-border-radius: 3px;
@@ -26,6 +42,13 @@
 
 .dashboard-content.visible {
     display: block;
+}
+
+.dashboard-content form h3 {
+    font-weight: 600;
+    color: #2b2d42;
+    font-size: 24px;
+    margin: 0 0 15px;
 }
 
 .dashboard-button:link {
@@ -112,7 +135,45 @@
 
 #dashboard-preferences form {
     margin-top: 50px;
-    margin-bottom: 0;
+    margin-bottom: 30px;
+}
+
+#dashboard-preferences #preferences-wrapper {
+    display: -webkit-box; 
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    justify-content: space-around;
+    -webkit-justify-content: space-around;
+    -moz-justify-content: space-around;
+    justify-content: space-around;
+}
+
+#dashboard-preferences #preferences-wrapper p {
+    margin-top: 20px;
+    font-size: 18px;
+}
+
+#dashboard-preferences #preferences-wrapper form {
+    position: relative;
+    margin: 20px 0 30px;
+}
+
+#dashboard-preferences #preferences-wrapper form h3 {
+    text-align: center;
+}
+
+#dashboard-preferences #preferences-wrapper form input[type="submit"] {
+    width: auto;
+    min-width: 50%;
+    font-size: 16px;
+}
+
+#dashboard-preferences #preferences-wrapper #general-form .form-group.submit {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
 }
 
 /* ABSENCE-OFF CSS */
@@ -140,11 +201,7 @@
 }
 
 #dashboard-absence #absence-wrapper form h3 {
-    font-weight: 600;
-    color: #2b2d42;
-    font-size: 24px;
     text-align: center;
-    margin: 0 0 15px;
 }
 
 #dashboard-absence #absence-wrapper form input[type="submit"] {
@@ -153,7 +210,7 @@
     font-size: 16px;
 }
 
-#dashboard-absence #absence-wrapper #sick-report-form .form-group.submit {
+#dashboard-absence #absence-wrapper #day-off-form .form-group.submit {
     position: absolute;
     bottom: 0;
     width: 100%;

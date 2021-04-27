@@ -4,6 +4,8 @@
     
     require_once('includes/header.php');
 ?>
+    <!-- WELCOME MESSAGE -->
+    <p id="welcome-message">Greetings, <span>Alexander</span></p>
     <!-- DASHBOARD -->
     <div id="dashboard-wrapper">
         <h2 class="section-title">Announcements</h2>
@@ -34,31 +36,55 @@
             </div>
             <!-- PREFERENCES -->
             <div class="dashboard-content" id="dashboard-preferences">
-                <form class="simple-form" action="dashboard" method="POST">
-                    <div class="form-group half">
-                        <label for="preferences-date">Date:</label>
-                        <input type="date" name="preferences-date" id="preferences-date" required />
-                    </div>
-                    <div class="form-group half">
-                        <label for="preferences-shift">Preferred Shift:</label>
-                        <label class="select-arrow-label">
-                            <select id="preferences-shift" name="preferences-shift" id="preferences-shift" required>
-                                <option value="morning" selected>Morning</option>
-                                <option value="midday">Midday</option>
-                                <option value="evening">Evening</option>
-                            </select>
-                        </label>
-                    </div>
-                    <div class="form-group submit">
-                        <input type="submit" name="preferences-submit" class="small-submit" value="Save" style="margin-top: 30px;" />
-                    </div>
-                </form>
+                <div id="preferences-wrapper">
+                    <form class="simple-form" action="dashboard" method="POST">
+                        <h3>Set for specific date</h3>
+                        <div class="form-group">
+                            <label for="preferences-date">Date:</label>
+                            <input type="date" name="preferences-date" id="preferences-date" required />
+                        </div>
+                        <div class="form-group">
+                            <label for="preferences-shift">Preferred Shift:</label>
+                            <label class="select-arrow-label">
+                                <select id="preferences-shift" name="preferences-shift" id="preferences-shift" required>
+                                    <option value="morning" selected>Morning</option>
+                                    <option value="midday">Midday</option>
+                                    <option value="evening">Evening</option>
+                                </select>
+                            </label>
+                        </div>
+                        <div class="form-group submit">
+                            <input type="submit" name="preferences-submit" class="small-submit" value="Save" style="margin-top: 30px;" />
+                        </div>
+                    </form>
+                    <p>OR</p>
+                    <form class="simple-form" action="dashboard" method="POST" id="general-form">
+                        <h3>Set in general</h3>
+                        <div class="form-group">
+                            <label for="general-preferences-shift">Preferred Shift:</label>
+                            <label class="select-arrow-label">
+                                <select id="general-preferences-shift" name="general-preferences-shift" id="general-preferences-shift" required>
+                                    <option value="morning" selected>Morning</option>
+                                    <option value="midday">Midday</option>
+                                    <option value="evening">Evening</option>
+                                </select>
+                            </label>
+                        </div>
+                        <div class="form-group submit">
+                            <input type="submit" name="general-preferences-submit" class="small-submit" value="Save" style="margin-top: 30px;" />
+                        </div>
+                    </form>
+                </div>
             </div>
             <!-- ABSENCE -->
             <div class="dashboard-content" id="dashboard-absence">
                 <div id="absence-wrapper">
                     <form class="simple-form" method="POST" action="dashboard" id="sick-report-form">
                         <h3>I'm feeling sick today</h3>
+                        <div class="form-group">
+                            <label for="sick-report-until-date">I will be sick until:</label>
+                            <input type="date" name="sick-report-until-date" id="sick-report-until-date" />
+                        </div>
                         <div class="form-group">
                             <label for="sick-report-symptoms">Describe your symptoms:</label>
                             <textarea name="sick-report-symptoms"></textarea>
@@ -72,7 +98,7 @@
                         <h3>I need a day off</h3>
                         <div class="form-group">
                             <label for="day-off-day">I need a day off on:</label>
-                            <input type="date" name="day-off-day" />
+                            <input type="date" name="day-off-day" id="day-off-day" />
                         </div>
                         <div class="form-group">
                             <label for="day-off-urgency">And it is:</label>

@@ -13,6 +13,7 @@ body {
 
 #body-wrapper {
     width: 100%;
+    height: auto;
 }
 
 a:link, a:visited {
