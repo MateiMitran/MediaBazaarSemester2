@@ -78,7 +78,8 @@ namespace PRJMediaBazaar.Data
         public bool ConfirmDayOffRequest(int requestId)
         {
             string[] parameters = new string[] { requestId.ToString() };
-            string sql = "DELETE FROM dayoff_requests WHERE request_id = @requestId";
+            string sql = "UPDATE `dayoff_requests` SET , `status`= 'confirmed' " +
+                "WHERE `request_id`= @requestId";
 
             if (executeNonQuery(sql, parameters) != null)
             {

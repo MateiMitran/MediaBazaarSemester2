@@ -31,10 +31,11 @@ namespace PRJMediaBazaar
         private List<DayOff> daysOff;
         private List<Button> buttons;
         private List<Timer> timers;
-
+        
         public HRHome(LogIn loginForm)
         {
             InitializeComponent();
+            ShiftAssigning.ReloadForm += new ShiftAssigning.ShiftAssigningHandler(ReloadShiftAssigningForm_Event);
             buttons = new List<Button>();
             timers = new List<Timer>();
             _loginForm = loginForm;
@@ -53,7 +54,13 @@ namespace PRJMediaBazaar
             {
                 this.cbSchedule.Items.Add(s);
             }
+            
 
+        }
+        private void ReloadShiftAssigningForm_Event(Shift shift, string jobPosition, Day day)
+        {
+            ShiftAssigning form = new ShiftAssigning(_scheduleControl, _empControl.GetEmployeesByPosition(jobPosition).ToList(), shift, jobPosition, this, day);
+            form.Show();
         }
         public void StatusFunction(String text, int x, int y, int width, int height, Color color)
         {

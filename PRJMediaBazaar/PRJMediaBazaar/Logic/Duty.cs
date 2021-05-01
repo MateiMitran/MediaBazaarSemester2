@@ -70,6 +70,20 @@ namespace PRJMediaBazaar.Logic
             }
         }
 
+        public int TotalLeftForShift(string shift)
+        {
+            switch (shift)
+            {
+                case "Morning":
+                    return MorningNeeded - MorningAssigned;
+                case "Midday":
+                    return MiddayNeeded - MiddayAssigned;
+                case "Evening":
+                    return EveningNeeded - EveningAssigned;
+            }
+            return -1;
+        }
+
         public int TotalNeeded { get {return MorningNeeded + MiddayNeeded + EveningNeeded; } }
 
     } 

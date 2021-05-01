@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Net.NetworkInformation;
 
 namespace PRJMediaBazaar
 {
@@ -54,23 +55,30 @@ namespace PRJMediaBazaar
         private void button1_Click(object sender, EventArgs e)
         {
 
-
-            if (this.tbUsername.Text == "hrmanager" && this.tbPassword.Text == "hrmanager")
+            if (VPNisON())
             {
-                HRHome home = new HRHome(this);
-                home.Show();
-                this.Hide();
-            }
-            else if (this.tbUsername.Text == "warehouse" && this.tbPassword.Text == "warehouse")
-            {
-                WRHSHome home = new WRHSHome(this);
-                home.Show();
-                this.Hide();
+                if (this.tbUsername.Text == "hrmanager" && this.tbPassword.Text == "hrmanager")
+                {
+                    HRHome home = new HRHome(this);
+                    home.Show();
+                    this.Hide();
+                }
+                else if (this.tbUsername.Text == "warehouse" && this.tbPassword.Text == "warehouse")
+                {
+                    WRHSHome home = new WRHSHome(this);
+                    home.Show();
+                    this.Hide();
+                }
+                else
+                {
+                    StatusFunction("Invalid Credentials", -60, -5, 508, 28, Color.Red);
+                }
             }
             else
             {
-                StatusFunction("Invalid Credentials", -60, -5, 508, 28, Color.Red);
+                MessageBox.Show("Please start Cisco AnyConnect!");
             }
+        
         }
 
         private void LogIn_Load(object sender, EventArgs e)
@@ -108,6 +116,13 @@ namespace PRJMediaBazaar
                     buttons[i].Visible = false;
                 }
             }
+        }
+
+        public static bool VPNisON()
+        {
+            return ((NetworkInterface.GetIsNetworkAvailable())
+                    && NetworkInterface.GetAllNetworkInterfaces()
+                                       .FirstOrDefault(ni => ni.Description.Contains("Cisco"))?.OperationalStatus == OperationalStatus.Up);
         }
     }
 }

@@ -105,6 +105,11 @@ namespace PRJMediaBazaar.Logic
             return $"Needed {jobPosition}: {amount}";
         }
 
+        public int TotalNeeded(string jobPosition, string shift)
+        {
+            return GetDuty(jobPosition).TotalLeftForShift(shift);
+        }
+
 
       
         public bool ChangeNeededDuties(string jobPosition, int morning, int midday, int evening)

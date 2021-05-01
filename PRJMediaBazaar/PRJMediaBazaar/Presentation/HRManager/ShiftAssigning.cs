@@ -14,6 +14,8 @@ namespace PRJMediaBazaar
 {
      partial class ShiftAssigning : Form
     {
+        public delegate void ShiftAssigningHandler(Shift shift, string jobPosition, Day day);
+        public static event ShiftAssigningHandler ReloadForm;
         private Shift _shift;
         private HRHome _hr;
         private Day _day;
@@ -26,6 +28,7 @@ namespace PRJMediaBazaar
         private List<Button> buttons;
         private List<Timer> timers;
 
+   
         public ShiftAssigning(ScheduleControl scheduleControl, List<Employee> empsOnPositon, Shift shift, string jobPosition, HRHome hr, Day day)
         {
             InitializeComponent();
@@ -61,8 +64,14 @@ namespace PRJMediaBazaar
                     _hr.ShiftsTable.Enabled = true;
                     _hr.UpdateDaysInfo();
                     _hr.StatusFunction($"Assigned {ep.Employee.FullName} to a {_shift.ToString()} shift", -6, -1, 900, 28, Color.Green);
-                    this.Close();
 
+                if(_day.TotalNeeded(_jobPosition,_shift.ToString()) > 0)
+                {
+                    ReloadForm?.Invoke(_shift, _jobPosition, _day);
+                }
+               
+                this.Close();
+              
             }
         }
 
