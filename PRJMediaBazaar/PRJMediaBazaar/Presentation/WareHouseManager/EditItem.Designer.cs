@@ -50,6 +50,8 @@ namespace PRJMediaBazaar
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label15 = new System.Windows.Forms.Label();
             this.textBox2 = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.tbMinimumAmount = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.tbRoomStorage)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbRoomShop)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbxItem)).BeginInit();
@@ -260,11 +262,32 @@ namespace PRJMediaBazaar
             this.textBox2.Size = new System.Drawing.Size(157, 20);
             this.textBox2.TabIndex = 30;
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label1.Location = new System.Drawing.Point(14, 307);
+            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(203, 20);
+            this.label1.TabIndex = 52;
+            this.label1.Text = "Minimum Amount In Stock :";
+            // 
+            // tbMinimumAmount
+            // 
+            this.tbMinimumAmount.Location = new System.Drawing.Point(221, 309);
+            this.tbMinimumAmount.Margin = new System.Windows.Forms.Padding(2);
+            this.tbMinimumAmount.Name = "tbMinimumAmount";
+            this.tbMinimumAmount.Size = new System.Drawing.Size(157, 20);
+            this.tbMinimumAmount.TabIndex = 51;
+            // 
             // EditItem
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(673, 398);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.tbMinimumAmount);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.tbCategory);
             this.Controls.Add(this.tbBrand);
@@ -322,5 +345,7 @@ namespace PRJMediaBazaar
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox tbMinimumAmount;
     }
 }

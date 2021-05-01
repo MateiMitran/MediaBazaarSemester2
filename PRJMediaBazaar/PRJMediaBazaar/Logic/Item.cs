@@ -8,6 +8,7 @@ namespace PRJMediaBazaar.Logic
 {
     public class Item
     {
+        //quantity is 0 when u create item
         public Item(int id, String name, String category, String brand,String model, String description
                     , double price, int quantity,int roomInWebshop, int roomInShop, int roomInStorage,
                     int minimumAmountInStock, int inWebshopAmount, int inShopAmount, int inStorageAmount)

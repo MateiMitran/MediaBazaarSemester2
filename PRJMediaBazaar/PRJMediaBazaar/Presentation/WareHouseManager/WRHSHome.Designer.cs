@@ -274,7 +274,7 @@ namespace PRJMediaBazaar
             // 
             this.pnlRestock.Controls.Add(this.btnConfirm);
             this.pnlRestock.Controls.Add(this.lbRestockRequests);
-            this.pnlRestock.Location = new System.Drawing.Point(431, 7);
+            this.pnlRestock.Location = new System.Drawing.Point(432, 11);
             this.pnlRestock.Margin = new System.Windows.Forms.Padding(2);
             this.pnlRestock.Name = "pnlRestock";
             this.pnlRestock.Size = new System.Drawing.Size(28, 28);
