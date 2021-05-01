@@ -62,54 +62,104 @@ namespace PRJMediaBazaar.Logic
             {
                 urgent = "Urgent";
             }
-            if (Reason != "")
-            {
-                info += $"{Employee.FullName} --> {urgent} --> Reason:{Reason} | ";
-            }
-            else
-            {
-                info += $"{Employee.FullName} --> {urgent} | ";
-            }
 
-            if (Shifts.Count == 1)
+            if (Status == "pending")
             {
-                info += Shifts.Keys.First().Date.ToString("dd-MM-yyyy");
-                if(Shifts.Values.First() != null)
+                if (Reason != "")
                 {
-                    info += $" Shift:{Shifts.Values.First().GetOccupation()}";
+                    info += $"{Employee.FullName} --> {urgent} --> Reason:{Reason} | ";
                 }
-            }
-            else
-            {
-                info += $"{Shifts.Keys.First().Date.ToString("dd-MM-yyyy")} - {Shifts.Keys.Last().Date.ToString("dd-MM-yyyy")} ";
-              
-                bool notNull = Shifts.Any(pair => pair.Value != null);
-
-                if (notNull)
+                else
                 {
-                    string occupation = "Shifts at: ";
-                    foreach (KeyValuePair<Day, EmployeeWorkday> kv in Shifts)
+                    info += $"{Employee.FullName} --> {urgent} | ";
+                }
+
+                if (Shifts.Count == 1)
+                {
+                    info += Shifts.Keys.First().Date.ToString("dd-MM-yyyy");
+                    if (Shifts.Values.First() != null)
                     {
-                        if (kv.Value != null)
-                        {
-                            if(Shifts.Values.Last() == kv.Value)
-                            {
-                                occupation += $"{kv.Key.Date.ToString("dd-MM")}.";
-                            }
-                            else
-                            {
-                                occupation += $"{kv.Key.Date.ToString("dd-MM")}, ";
-                            }
-                            
-                        }
+                        info += $" Shift:{Shifts.Values.First().GetOccupation()}";
                     }
-                    info += occupation;
                 }
+                else
+                {
+                    info += $"{Shifts.Keys.First().Date.ToString("dd-MM-yyyy")} - {Shifts.Keys.Last().Date.ToString("dd-MM-yyyy")} ";
+
+                    bool notNull = Shifts.Any(pair => pair.Value != null);
+
+                    if (notNull)
+                    {
+                        string occupation = "Shifts at: ";
+                        foreach (KeyValuePair<Day, EmployeeWorkday> kv in Shifts)
+                        {
+                            if (kv.Value != null)
+                            {
+                                if (Shifts.Values.Last() == kv.Value)
+                                {
+                                    occupation += $"{kv.Key.Date.ToString("dd-MM")}.";
+                                }
+                                else
+                                {
+                                    occupation += $"{kv.Key.Date.ToString("dd-MM")}, ";
+                                }
+
+                            }
+                        }
+                        info += occupation;
+                    }
+
+                }
+            }
+            
+            else if (Status == "denied")
+            {
+                string date = "";
+                if (Shifts.Count == 1)
+                {
+                    date = Shifts.Keys.First().Date.ToString("dd-MM-yyyy");
+                }
+                else
+                {
+                    date = $"{Shifts.Keys.First().Date.ToString("dd-MM-yyyy")} - {Shifts.Keys.Last().Date.ToString("dd-MM-yyyy")} ";
+
+                }
+                if (Reason != "")
+                {
+                    info = $"{Employee.FullName} --> Date/s--> {date} --> {urgent} --> Reason:{Reason} --> Objection: {Objection}";
+                }
+                else
+                {
+                    info = $"{Employee.FullName} --> Date/s--> {date} --> {urgent} --> Objection: {Objection}";
+                }
+                
+            }
+
+            else
+            {
+                string date = "";
+                if (Shifts.Count == 1)
+                {
+                    date = Shifts.Keys.First().Date.ToString("dd-MM-yyyy");
+                }
+                else
+                {
+                    date = $"{Shifts.Keys.First().Date.ToString("dd-MM-yyyy")} - {Shifts.Keys.Last().Date.ToString("dd-MM-yyyy")} ";
+
+                }
+                if (Reason != "")
+                {
+                    info = $"{Employee.FullName} --> Date/s--> {date} --> {urgent} --> Reason:{Reason}";
+                }
+                else
+                {
+                    info = $"{Employee.FullName} --> Date/s--> {date} --> {urgent}";
+                }
+
                
             }
 
-            
-            
+
             return info;
         }
     }

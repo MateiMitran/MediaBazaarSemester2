@@ -22,15 +22,25 @@ namespace PRJMediaBazaar.Logic
         {
             _scheduleControl = scheduleControl;
             absenceDAL = new AbsenceDAL(scheduleControl.EmployeeControl.GetAllEmployees(), scheduleControl);
-            LoadDaysOff();
+            LoadPendingDaysOff();
             LoadSickReports();
         }
 
 
-        public void LoadDaysOff() // add the DayOff requests to the list 
+        public void LoadPendingDaysOff() // add the DayOff requests to the list 
         {
-            dayoff_req = absenceDAL.SelectDayOffRequests();
+            dayoff_req = absenceDAL.SelectDayOffRequests("pending");
         }
+        public DayOff[] GetConfirmedDaysOff() // add the DayOff requests to the list 
+        {
+            return absenceDAL.SelectDayOffRequests("confirmed").ToArray();
+        }
+
+        public DayOff[] GetDeniedDaysOff() // add the DayOff requests to the list 
+        {
+            return absenceDAL.SelectDayOffRequests("denied").ToArray();
+        }
+
 
         public void LoadSickReports()
         {

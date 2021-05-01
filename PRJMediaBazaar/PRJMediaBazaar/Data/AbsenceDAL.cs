@@ -44,10 +44,11 @@ namespace PRJMediaBazaar.Data
         //    return pseudos;
         //}
 
-        public List<DayOff> SelectDayOffRequests()
+        public List<DayOff> SelectDayOffRequests(string status)
         {
-            string sql = "SELECT * FROM dayoff_requests WHERE status = 'pending'; ";
-            MySqlDataReader result = executeReader(sql, null);
+            string sql = "SELECT * FROM dayoff_requests WHERE status = @status; ";
+            string[] parameters = new string[] { status };
+            MySqlDataReader result = executeReader(sql, parameters);
 
             List<DayOff> pseudos = new List<DayOff>();
             while (result.Read())
@@ -67,7 +68,6 @@ namespace PRJMediaBazaar.Data
 
                 bool urgent = Convert.ToBoolean(result[4]);
                 string reason = result[5].ToString();
-                string status = result[6].ToString();
                 string objection = result[7].ToString();
                 DayOff req = new DayOff( request_id, shifts,employee, urgent, status, reason, objection);
                 pseudos.Add(req);

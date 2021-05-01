@@ -680,7 +680,7 @@ namespace PRJMediaBazaar
         private void LoadDayOffRequests()
         {
             lbDayOff.Items.Clear();
-            _absenceControl.LoadDaysOff();
+            _absenceControl.LoadPendingDaysOff();
             daysOff = _absenceControl.DaysOffRequests;
            foreach(DayOff d in daysOff)
             {
@@ -927,6 +927,19 @@ namespace PRJMediaBazaar
             {
                 StatusFunction("No employee found!", -6, -1, 900, 28, Color.Red);
             }
+        }
+
+        private void btnDeniedRequests_Click(object sender, EventArgs e)
+        {
+            RequestsOverview form = new RequestsOverview(_absenceControl.GetDeniedDaysOff(), "Denied Requests:");
+            form.Show();
+        }
+
+        private void btnConfirmedRequests_Click(object sender, EventArgs e)
+        {
+            RequestsOverview form = new RequestsOverview(_absenceControl.GetConfirmedDaysOff(), "Confirmed Requests:");
+            form.Show();
+
         }
     }
 }
