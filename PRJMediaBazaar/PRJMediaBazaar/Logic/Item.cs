@@ -8,26 +8,35 @@ namespace PRJMediaBazaar.Logic
 {
     public class Item
     {
-        public Item(int id, String name, String category, String subcategory, double price, int quantity)
+        public Item(int id, String name, String category, String brand,String model, String description
+                    , double price, int quantity,int roomInWebshop, int roomInShop, int roomInStorage,
+                    int minimumAmountInStock, int inWebshopAmount, int inShopAmount, int inStorageAmount)
         {
             ID = id;
             Name = name;
             Category = category;
-            Subcategory = subcategory;
+            Brand = brand; Model = model; Description = description;
             Price = price;
-            Quantity = quantity;
-        }
-        public void SetSpecification(Specification spec)
-        {
-            Specifications.Add(spec);
+            Quantity = quantity; RoomInWebshop = roomInWebshop; RoomInShop = roomInShop; RoomInStorage = roomInStorage;
+            MinimumAmountInStock = minimumAmountInStock; InWebshopAmount = inWebshopAmount;
+            InShopAmount = inShopAmount; InStorageAmount = inStorageAmount;
         }
        public int ID { get;  set; }
        public String Name { get; set; }
        public String Category { get; set; }
-       public String Subcategory { get; set; }
+       public String Brand { get; set; }
+       public String Model { get; set; }
+       public String Description { get; set; }
        public double Price { get;  set; }
-       public int Quantity { get;  set; }
-       public List<Specification> Specifications { get;  set; }
+       public int Quantity { get; set; }
+       public int RoomInWebshop { get; set; }
+       public int RoomInShop { get; set; }
+       public int RoomInStorage { get; set; }
+       public int MinimumAmountInStock { get; set; }
+       public int InWebshopAmount { get; set; }
+       public int InShopAmount { get; set; }
+       public int InStorageAmount { get; set; }
+       public byte[] Image { get; set; }
        public double TotalPrice { get { return this.Price * this.Quantity; } }
     }
 }

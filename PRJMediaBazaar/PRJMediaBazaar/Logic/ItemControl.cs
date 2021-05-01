@@ -23,11 +23,17 @@ namespace PRJMediaBazaar.Logic
         {
            this.items = itemDAL.SelectAllItems();
         }
-        public void AddAnItem(String name, String category, String subcategory, String price, int quantity, byte[] image)
+        public void AddAnItem(String name, String category, String brand, String model, String description
+                    , double price, int quantity, int roomInWebshop, int roomInShop, int roomInStorage,
+                    int minimumAmountInStock, int inWebshopAmount, int inShopAmount, int inStorageAmount, byte[] image)
         {
-            itemDAL.AddItem(name, category, subcategory, price, quantity, image);
+            itemDAL.AddItem(name, category, brand,model,description, price.ToString(), quantity,roomInWebshop,
+                roomInShop,roomInStorage,minimumAmountInStock,inWebshopAmount,inShopAmount,inStorageAmount,image);
             int id = itemDAL.LastItemId();
-            items.Add(new Item(id, name, category, subcategory, Convert.ToDouble(price), quantity));
+            Item temp = new Item(id, name, category, brand, model, description, price, quantity, roomInWebshop,
+                roomInShop, roomInStorage, minimumAmountInStock, inWebshopAmount, inShopAmount, inStorageAmount);
+            temp.Image = image;
+            items.Add(temp);
         }
         public bool DeleteAnItem(int id)
         {
@@ -45,9 +51,12 @@ namespace PRJMediaBazaar.Logic
             }
             return false;
         }
-        public bool UpdateAnItem(int id, String name, String category, String subcategory, String price, int quantity)
+        public bool UpdateAnItem(int id, String name, String category, String brand, String model, String description
+                    , double price, int quantity, int roomInWebshop, int roomInShop, int roomInStorage,
+                    int minimumAmountInStock, int inWebshopAmount, int inShopAmount, int inStorageAmount)
         {
-            if (itemDAL.UpdateItem(id, name, category, subcategory, price, quantity)==true)
+            if (itemDAL.UpdateItem(name, category, brand, model, description, price.ToString(), quantity, roomInWebshop,
+                roomInShop, roomInStorage, minimumAmountInStock, inWebshopAmount, inShopAmount, inStorageAmount) ==true)
             {
                 for (int i = 0; i < items.Count; i++)
                 {
@@ -55,15 +64,42 @@ namespace PRJMediaBazaar.Logic
                     {
                         items[i].Name = name;
                         items[i].Category = category;
-                        items[i].Subcategory = subcategory;
-                        items[i].Price = Convert.ToDouble(price);
+                        items[i].Brand = brand;
+                        items[i].Model = model;
+                        items[i].Description = description;
+                        items[i].Price = price;
                         items[i].Quantity = quantity;
-                        break;
+                        items[i].RoomInWebshop = roomInWebshop;
+                        items[i].RoomInShop = roomInShop;
+                        items[i].RoomInStorage = roomInStorage;
+                        items[i].MinimumAmountInStock = minimumAmountInStock;
+                        items[i].InWebshopAmount = inWebshopAmount;
+                        items[i].InShopAmount = inShopAmount;
+                        items[i].InStorageAmount = inStorageAmount;
+                        return true;
                     }
                 }
-                return true;
+                return false;
+                
             }
             return false;
+        }
+        public bool UpdateItemImage(int itemID, byte[] image)
+        {
+            if (itemDAL.UpdateItemImage(itemID, image) == true)
+            {
+                for (int i = 0; i < items.Count; i++)
+                {
+                    if (items[i].ID == itemID)
+                    {
+                        items[i].Image = image;
+                        return true;
+                    }
+                }
+                return false;
+            }
+            else
+                return false;
         }
         public List<Item> GetItems()
         {
@@ -83,10 +119,5 @@ namespace PRJMediaBazaar.Logic
             return null;
         }
 
-        public List<Specification> GetSpecificationsWithItemId(int itemId)
-        {
-            List<Specification> temp = itemDAL.LoadSpecs(itemId);
-            return temp;
-        }
     }
 }
