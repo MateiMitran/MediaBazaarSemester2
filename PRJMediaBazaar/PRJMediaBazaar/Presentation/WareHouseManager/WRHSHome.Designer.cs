@@ -60,7 +60,7 @@ namespace PRJMediaBazaar
             this.lblRestock = new System.Windows.Forms.Label();
             this.lblStatistics = new System.Windows.Forms.Label();
             this.pnlItems = new System.Windows.Forms.Panel();
-            this.btnViewSpecs = new System.Windows.Forms.Button();
+            this.pbItem = new System.Windows.Forms.PictureBox();
             this.btnEditItem = new System.Windows.Forms.Button();
             this.btnAddItem = new System.Windows.Forms.Button();
             this.cbItems = new System.Windows.Forms.ComboBox();
@@ -75,6 +75,7 @@ namespace PRJMediaBazaar
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             this.pnlRestock.SuspendLayout();
             this.pnlItems.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbItem)).BeginInit();
             this.SuspendLayout();
             // 
             // pnlNavbar
@@ -89,9 +90,8 @@ namespace PRJMediaBazaar
             this.pnlNavbar.Controls.Add(this.lblRestock);
             this.pnlNavbar.Controls.Add(this.lblStatistics);
             this.pnlNavbar.Location = new System.Drawing.Point(1, 1);
-            this.pnlNavbar.Margin = new System.Windows.Forms.Padding(4);
             this.pnlNavbar.Name = "pnlNavbar";
-            this.pnlNavbar.Size = new System.Drawing.Size(893, 59);
+            this.pnlNavbar.Size = new System.Drawing.Size(670, 48);
             this.pnlNavbar.TabIndex = 6;
             // 
             // pnlAccount
@@ -104,17 +104,19 @@ namespace PRJMediaBazaar
             this.pnlAccount.Controls.Add(this.tbVerifyNewPassword);
             this.pnlAccount.Controls.Add(this.tbCurrentPassword);
             this.pnlAccount.Controls.Add(this.tbNewPassword);
-            this.pnlAccount.Location = new System.Drawing.Point(780, 17);
+            this.pnlAccount.Location = new System.Drawing.Point(585, 14);
+            this.pnlAccount.Margin = new System.Windows.Forms.Padding(2);
             this.pnlAccount.Name = "pnlAccount";
-            this.pnlAccount.Size = new System.Drawing.Size(90, 29);
+            this.pnlAccount.Size = new System.Drawing.Size(68, 24);
             this.pnlAccount.TabIndex = 18;
             // 
             // btnLogOut
             // 
             this.btnLogOut.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnLogOut.Location = new System.Drawing.Point(32, 304);
+            this.btnLogOut.Location = new System.Drawing.Point(24, 247);
+            this.btnLogOut.Margin = new System.Windows.Forms.Padding(2);
             this.btnLogOut.Name = "btnLogOut";
-            this.btnLogOut.Size = new System.Drawing.Size(289, 34);
+            this.btnLogOut.Size = new System.Drawing.Size(217, 28);
             this.btnLogOut.TabIndex = 17;
             this.btnLogOut.Text = "Log Out";
             this.btnLogOut.UseVisualStyleBackColor = true;
@@ -122,10 +124,10 @@ namespace PRJMediaBazaar
             // btnChangePassword
             // 
             this.btnChangePassword.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.btnChangePassword.Location = new System.Drawing.Point(32, 241);
+            this.btnChangePassword.Location = new System.Drawing.Point(24, 196);
             this.btnChangePassword.Margin = new System.Windows.Forms.Padding(2);
             this.btnChangePassword.Name = "btnChangePassword";
-            this.btnChangePassword.Size = new System.Drawing.Size(289, 34);
+            this.btnChangePassword.Size = new System.Drawing.Size(217, 28);
             this.btnChangePassword.TabIndex = 16;
             this.btnChangePassword.Text = "Change Password";
             this.btnChangePassword.UseVisualStyleBackColor = true;
@@ -134,10 +136,10 @@ namespace PRJMediaBazaar
             // 
             this.lblConfirmNewPassword.AutoSize = true;
             this.lblConfirmNewPassword.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.lblConfirmNewPassword.Location = new System.Drawing.Point(28, 162);
+            this.lblConfirmNewPassword.Location = new System.Drawing.Point(21, 132);
             this.lblConfirmNewPassword.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblConfirmNewPassword.Name = "lblConfirmNewPassword";
-            this.lblConfirmNewPassword.Size = new System.Drawing.Size(190, 20);
+            this.lblConfirmNewPassword.Size = new System.Drawing.Size(156, 17);
             this.lblConfirmNewPassword.TabIndex = 13;
             this.lblConfirmNewPassword.Text = "Confirm New Password:";
             // 
@@ -145,10 +147,10 @@ namespace PRJMediaBazaar
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.label4.Location = new System.Drawing.Point(28, 29);
+            this.label4.Location = new System.Drawing.Point(21, 24);
             this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(149, 20);
+            this.label4.Size = new System.Drawing.Size(124, 17);
             this.label4.TabIndex = 14;
             this.label4.Text = "Current Password:";
             // 
@@ -156,43 +158,43 @@ namespace PRJMediaBazaar
             // 
             this.lblNewPassword.AutoSize = true;
             this.lblNewPassword.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.lblNewPassword.Location = new System.Drawing.Point(28, 96);
+            this.lblNewPassword.Location = new System.Drawing.Point(21, 78);
             this.lblNewPassword.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblNewPassword.Name = "lblNewPassword";
-            this.lblNewPassword.Size = new System.Drawing.Size(126, 20);
+            this.lblNewPassword.Size = new System.Drawing.Size(104, 17);
             this.lblNewPassword.TabIndex = 15;
             this.lblNewPassword.Text = "New Password:";
             // 
             // tbVerifyNewPassword
             // 
             this.tbVerifyNewPassword.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.tbVerifyNewPassword.Location = new System.Drawing.Point(32, 185);
+            this.tbVerifyNewPassword.Location = new System.Drawing.Point(24, 150);
             this.tbVerifyNewPassword.Margin = new System.Windows.Forms.Padding(2);
             this.tbVerifyNewPassword.Name = "tbVerifyNewPassword";
             this.tbVerifyNewPassword.PasswordChar = '*';
-            this.tbVerifyNewPassword.Size = new System.Drawing.Size(290, 26);
+            this.tbVerifyNewPassword.Size = new System.Drawing.Size(218, 23);
             this.tbVerifyNewPassword.TabIndex = 10;
             this.tbVerifyNewPassword.UseSystemPasswordChar = true;
             // 
             // tbCurrentPassword
             // 
             this.tbCurrentPassword.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.tbCurrentPassword.Location = new System.Drawing.Point(32, 52);
+            this.tbCurrentPassword.Location = new System.Drawing.Point(24, 42);
             this.tbCurrentPassword.Margin = new System.Windows.Forms.Padding(2);
             this.tbCurrentPassword.Name = "tbCurrentPassword";
             this.tbCurrentPassword.PasswordChar = '*';
-            this.tbCurrentPassword.Size = new System.Drawing.Size(290, 26);
+            this.tbCurrentPassword.Size = new System.Drawing.Size(218, 23);
             this.tbCurrentPassword.TabIndex = 11;
             this.tbCurrentPassword.UseSystemPasswordChar = true;
             // 
             // tbNewPassword
             // 
             this.tbNewPassword.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.tbNewPassword.Location = new System.Drawing.Point(32, 119);
+            this.tbNewPassword.Location = new System.Drawing.Point(24, 97);
             this.tbNewPassword.Margin = new System.Windows.Forms.Padding(2);
             this.tbNewPassword.Name = "tbNewPassword";
             this.tbNewPassword.PasswordChar = '*';
-            this.tbNewPassword.Size = new System.Drawing.Size(290, 26);
+            this.tbNewPassword.Size = new System.Drawing.Size(218, 23);
             this.tbNewPassword.TabIndex = 12;
             this.tbNewPassword.UseSystemPasswordChar = true;
             // 
@@ -202,18 +204,20 @@ namespace PRJMediaBazaar
             this.pnlStatistics.Controls.Add(this.label2);
             this.pnlStatistics.Controls.Add(this.chart2);
             this.pnlStatistics.Controls.Add(this.chart1);
-            this.pnlStatistics.Location = new System.Drawing.Point(235, 16);
+            this.pnlStatistics.Location = new System.Drawing.Point(176, 13);
+            this.pnlStatistics.Margin = new System.Windows.Forms.Padding(2);
             this.pnlStatistics.Name = "pnlStatistics";
-            this.pnlStatistics.Size = new System.Drawing.Size(50, 30);
+            this.pnlStatistics.Size = new System.Drawing.Size(38, 24);
             this.pnlStatistics.TabIndex = 11;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label3.Location = new System.Drawing.Point(540, 58);
+            this.label3.Location = new System.Drawing.Point(405, 47);
+            this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(223, 25);
+            this.label3.Size = new System.Drawing.Size(184, 20);
             this.label3.TabIndex = 10;
             this.label3.Text = "Most Expensive Items";
             // 
@@ -221,9 +225,10 @@ namespace PRJMediaBazaar
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label2.Location = new System.Drawing.Point(94, 58);
+            this.label2.Location = new System.Drawing.Point(70, 47);
+            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(167, 25);
+            this.label2.Size = new System.Drawing.Size(139, 20);
             this.label2.TabIndex = 9;
             this.label2.Text = "Most Sold Items";
             // 
@@ -233,7 +238,8 @@ namespace PRJMediaBazaar
             this.chart2.ChartAreas.Add(chartArea1);
             legend1.Name = "Legend1";
             this.chart2.Legends.Add(legend1);
-            this.chart2.Location = new System.Drawing.Point(520, 95);
+            this.chart2.Location = new System.Drawing.Point(390, 77);
+            this.chart2.Margin = new System.Windows.Forms.Padding(2);
             this.chart2.Name = "chart2";
             this.chart2.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Bright;
             series1.ChartArea = "ChartArea1";
@@ -241,7 +247,7 @@ namespace PRJMediaBazaar
             series1.Legend = "Legend1";
             series1.Name = "Series1";
             this.chart2.Series.Add(series1);
-            this.chart2.Size = new System.Drawing.Size(300, 300);
+            this.chart2.Size = new System.Drawing.Size(225, 244);
             this.chart2.TabIndex = 8;
             this.chart2.Text = "chart2";
             // 
@@ -251,7 +257,8 @@ namespace PRJMediaBazaar
             this.chart1.ChartAreas.Add(chartArea2);
             legend2.Name = "Legend1";
             this.chart1.Legends.Add(legend2);
-            this.chart1.Location = new System.Drawing.Point(53, 95);
+            this.chart1.Location = new System.Drawing.Point(40, 77);
+            this.chart1.Margin = new System.Windows.Forms.Padding(2);
             this.chart1.Name = "chart1";
             this.chart1.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Bright;
             series2.ChartArea = "ChartArea1";
@@ -259,7 +266,7 @@ namespace PRJMediaBazaar
             series2.Legend = "Legend1";
             series2.Name = "Series1";
             this.chart1.Series.Add(series2);
-            this.chart1.Size = new System.Drawing.Size(300, 300);
+            this.chart1.Size = new System.Drawing.Size(225, 244);
             this.chart1.TabIndex = 7;
             this.chart1.Text = "chart1";
             // 
@@ -267,16 +274,18 @@ namespace PRJMediaBazaar
             // 
             this.pnlRestock.Controls.Add(this.btnConfirm);
             this.pnlRestock.Controls.Add(this.lbRestockRequests);
-            this.pnlRestock.Location = new System.Drawing.Point(575, 9);
+            this.pnlRestock.Location = new System.Drawing.Point(431, 7);
+            this.pnlRestock.Margin = new System.Windows.Forms.Padding(2);
             this.pnlRestock.Name = "pnlRestock";
-            this.pnlRestock.Size = new System.Drawing.Size(37, 35);
+            this.pnlRestock.Size = new System.Drawing.Size(28, 28);
             this.pnlRestock.TabIndex = 9;
             // 
             // btnConfirm
             // 
-            this.btnConfirm.Location = new System.Drawing.Point(267, 563);
+            this.btnConfirm.Location = new System.Drawing.Point(200, 457);
+            this.btnConfirm.Margin = new System.Windows.Forms.Padding(2);
             this.btnConfirm.Name = "btnConfirm";
-            this.btnConfirm.Size = new System.Drawing.Size(373, 40);
+            this.btnConfirm.Size = new System.Drawing.Size(280, 32);
             this.btnConfirm.TabIndex = 8;
             this.btnConfirm.Text = "Confirm";
             this.btnConfirm.UseVisualStyleBackColor = true;
@@ -284,10 +293,10 @@ namespace PRJMediaBazaar
             // lbRestockRequests
             // 
             this.lbRestockRequests.FormattingEnabled = true;
-            this.lbRestockRequests.ItemHeight = 16;
-            this.lbRestockRequests.Location = new System.Drawing.Point(272, 186);
+            this.lbRestockRequests.Location = new System.Drawing.Point(204, 151);
+            this.lbRestockRequests.Margin = new System.Windows.Forms.Padding(2);
             this.lbRestockRequests.Name = "lbRestockRequests";
-            this.lbRestockRequests.Size = new System.Drawing.Size(227, 228);
+            this.lbRestockRequests.Size = new System.Drawing.Size(171, 186);
             this.lbRestockRequests.TabIndex = 7;
             // 
             // lblTitle
@@ -296,9 +305,10 @@ namespace PRJMediaBazaar
             this.lblTitle.BackColor = System.Drawing.Color.Black;
             this.lblTitle.Font = new System.Drawing.Font("Microsoft YaHei", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.lblTitle.ForeColor = System.Drawing.SystemColors.Control;
-            this.lblTitle.Location = new System.Drawing.Point(333, 9);
+            this.lblTitle.Location = new System.Drawing.Point(250, 7);
+            this.lblTitle.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblTitle.Name = "lblTitle";
-            this.lblTitle.Size = new System.Drawing.Size(206, 37);
+            this.lblTitle.Size = new System.Drawing.Size(165, 30);
             this.lblTitle.TabIndex = 0;
             this.lblTitle.Text = "Media Bazaar";
             // 
@@ -308,9 +318,10 @@ namespace PRJMediaBazaar
             this.lblAccount.BackColor = System.Drawing.Color.Black;
             this.lblAccount.Font = new System.Drawing.Font("Microsoft YaHei", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.lblAccount.ForeColor = System.Drawing.SystemColors.Control;
-            this.lblAccount.Location = new System.Drawing.Point(724, 13);
+            this.lblAccount.Location = new System.Drawing.Point(543, 11);
+            this.lblAccount.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblAccount.Name = "lblAccount";
-            this.lblAccount.Size = new System.Drawing.Size(114, 31);
+            this.lblAccount.Size = new System.Drawing.Size(90, 26);
             this.lblAccount.TabIndex = 4;
             this.lblAccount.Text = "Account";
             this.lblAccount.Click += new System.EventHandler(this.lblAccount_Click);
@@ -321,9 +332,10 @@ namespace PRJMediaBazaar
             this.lblItems.BackColor = System.Drawing.Color.Black;
             this.lblItems.Font = new System.Drawing.Font("Microsoft YaHei", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.lblItems.ForeColor = System.Drawing.SystemColors.Control;
-            this.lblItems.Location = new System.Drawing.Point(21, 13);
+            this.lblItems.Location = new System.Drawing.Point(16, 11);
+            this.lblItems.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblItems.Name = "lblItems";
-            this.lblItems.Size = new System.Drawing.Size(82, 31);
+            this.lblItems.Size = new System.Drawing.Size(65, 26);
             this.lblItems.TabIndex = 1;
             this.lblItems.Text = "Items";
             this.lblItems.Click += new System.EventHandler(this.lblItems_Click);
@@ -334,9 +346,10 @@ namespace PRJMediaBazaar
             this.lblRestock.BackColor = System.Drawing.Color.Black;
             this.lblRestock.Font = new System.Drawing.Font("Microsoft YaHei", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.lblRestock.ForeColor = System.Drawing.SystemColors.Control;
-            this.lblRestock.Location = new System.Drawing.Point(569, 13);
+            this.lblRestock.Location = new System.Drawing.Point(427, 11);
+            this.lblRestock.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblRestock.Name = "lblRestock";
-            this.lblRestock.Size = new System.Drawing.Size(109, 31);
+            this.lblRestock.Size = new System.Drawing.Size(86, 26);
             this.lblRestock.TabIndex = 3;
             this.lblRestock.Text = "Restock";
             this.lblRestock.Click += new System.EventHandler(this.lblRestock_Click);
@@ -347,42 +360,43 @@ namespace PRJMediaBazaar
             this.lblStatistics.BackColor = System.Drawing.Color.Black;
             this.lblStatistics.Font = new System.Drawing.Font("Microsoft YaHei", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.lblStatistics.ForeColor = System.Drawing.SystemColors.Control;
-            this.lblStatistics.Location = new System.Drawing.Point(163, 15);
+            this.lblStatistics.Location = new System.Drawing.Point(122, 12);
+            this.lblStatistics.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblStatistics.Name = "lblStatistics";
-            this.lblStatistics.Size = new System.Drawing.Size(122, 31);
+            this.lblStatistics.Size = new System.Drawing.Size(98, 26);
             this.lblStatistics.TabIndex = 2;
             this.lblStatistics.Text = "Statistics";
             this.lblStatistics.Click += new System.EventHandler(this.lblStatistics_Click);
             // 
             // pnlItems
             // 
-            this.pnlItems.Controls.Add(this.btnViewSpecs);
+            this.pnlItems.Controls.Add(this.pbItem);
             this.pnlItems.Controls.Add(this.btnEditItem);
             this.pnlItems.Controls.Add(this.btnAddItem);
             this.pnlItems.Controls.Add(this.cbItems);
             this.pnlItems.Controls.Add(this.label1);
             this.pnlItems.Controls.Add(this.lbItems);
             this.pnlItems.Controls.Add(this.lblInfo);
-            this.pnlItems.Location = new System.Drawing.Point(1, 67);
+            this.pnlItems.Location = new System.Drawing.Point(1, 54);
+            this.pnlItems.Margin = new System.Windows.Forms.Padding(2);
             this.pnlItems.Name = "pnlItems";
-            this.pnlItems.Size = new System.Drawing.Size(893, 610);
+            this.pnlItems.Size = new System.Drawing.Size(670, 496);
             this.pnlItems.TabIndex = 13;
             // 
-            // btnViewSpecs
+            // pbItem
             // 
-            this.btnViewSpecs.Location = new System.Drawing.Point(11, 532);
-            this.btnViewSpecs.Name = "btnViewSpecs";
-            this.btnViewSpecs.Size = new System.Drawing.Size(316, 27);
-            this.btnViewSpecs.TabIndex = 13;
-            this.btnViewSpecs.Text = "View Specifications";
-            this.btnViewSpecs.UseVisualStyleBackColor = true;
-            this.btnViewSpecs.Click += new System.EventHandler(this.btnViewSpecs_Click);
+            this.pbItem.Location = new System.Drawing.Point(277, 233);
+            this.pbItem.Name = "pbItem";
+            this.pbItem.Size = new System.Drawing.Size(234, 199);
+            this.pbItem.TabIndex = 14;
+            this.pbItem.TabStop = false;
             // 
             // btnEditItem
             // 
-            this.btnEditItem.Location = new System.Drawing.Point(369, 188);
+            this.btnEditItem.Location = new System.Drawing.Point(277, 153);
+            this.btnEditItem.Margin = new System.Windows.Forms.Padding(2);
             this.btnEditItem.Name = "btnEditItem";
-            this.btnEditItem.Size = new System.Drawing.Size(313, 27);
+            this.btnEditItem.Size = new System.Drawing.Size(235, 22);
             this.btnEditItem.TabIndex = 12;
             this.btnEditItem.Text = "Edit Current Item";
             this.btnEditItem.UseVisualStyleBackColor = true;
@@ -390,9 +404,10 @@ namespace PRJMediaBazaar
             // 
             // btnAddItem
             // 
-            this.btnAddItem.Location = new System.Drawing.Point(369, 144);
+            this.btnAddItem.Location = new System.Drawing.Point(277, 117);
+            this.btnAddItem.Margin = new System.Windows.Forms.Padding(2);
             this.btnAddItem.Name = "btnAddItem";
-            this.btnAddItem.Size = new System.Drawing.Size(313, 27);
+            this.btnAddItem.Size = new System.Drawing.Size(235, 22);
             this.btnAddItem.TabIndex = 11;
             this.btnAddItem.Text = "Add a New Item";
             this.btnAddItem.UseVisualStyleBackColor = true;
@@ -401,9 +416,10 @@ namespace PRJMediaBazaar
             // cbItems
             // 
             this.cbItems.FormattingEnabled = true;
-            this.cbItems.Location = new System.Drawing.Point(369, 44);
+            this.cbItems.Location = new System.Drawing.Point(277, 36);
+            this.cbItems.Margin = new System.Windows.Forms.Padding(2);
             this.cbItems.Name = "cbItems";
-            this.cbItems.Size = new System.Drawing.Size(313, 24);
+            this.cbItems.Size = new System.Drawing.Size(236, 21);
             this.cbItems.TabIndex = 10;
             this.cbItems.SelectedIndexChanged += new System.EventHandler(this.cbItems_SelectedIndexChanged);
             // 
@@ -411,9 +427,10 @@ namespace PRJMediaBazaar
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label1.Location = new System.Drawing.Point(364, 16);
+            this.label1.Location = new System.Drawing.Point(273, 13);
+            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(77, 25);
+            this.label1.Size = new System.Drawing.Size(64, 20);
             this.label1.TabIndex = 9;
             this.label1.Text = "Items :";
             // 
@@ -421,19 +438,21 @@ namespace PRJMediaBazaar
             // 
             this.lbItems.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.lbItems.FormattingEnabled = true;
-            this.lbItems.ItemHeight = 22;
-            this.lbItems.Location = new System.Drawing.Point(11, 44);
+            this.lbItems.ItemHeight = 17;
+            this.lbItems.Location = new System.Drawing.Point(8, 36);
+            this.lbItems.Margin = new System.Windows.Forms.Padding(2);
             this.lbItems.Name = "lbItems";
-            this.lbItems.Size = new System.Drawing.Size(316, 466);
+            this.lbItems.Size = new System.Drawing.Size(238, 378);
             this.lbItems.TabIndex = 7;
             // 
             // lblInfo
             // 
             this.lblInfo.AutoSize = true;
             this.lblInfo.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.lblInfo.Location = new System.Drawing.Point(11, 16);
+            this.lblInfo.Location = new System.Drawing.Point(8, 13);
+            this.lblInfo.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblInfo.Name = "lblInfo";
-            this.lblInfo.Size = new System.Drawing.Size(132, 25);
+            this.lblInfo.Size = new System.Drawing.Size(111, 20);
             this.lblInfo.TabIndex = 8;
             this.lblInfo.Text = "Information :";
             // 
@@ -445,11 +464,12 @@ namespace PRJMediaBazaar
             // 
             // WRHSHome
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(893, 679);
+            this.ClientSize = new System.Drawing.Size(674, 552);
             this.Controls.Add(this.pnlNavbar);
             this.Controls.Add(this.pnlItems);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "WRHSHome";
             this.Text = "WRHSHome";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.WRHSHome_FormClosing_1);
@@ -465,6 +485,7 @@ namespace PRJMediaBazaar
             this.pnlRestock.ResumeLayout(false);
             this.pnlItems.ResumeLayout(false);
             this.pnlItems.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbItem)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -502,6 +523,6 @@ namespace PRJMediaBazaar
         private System.Windows.Forms.Button btnConfirm;
         private System.Windows.Forms.ListBox lbRestockRequests;
         private System.Windows.Forms.Timer godTimer;
-        private System.Windows.Forms.Button btnViewSpecs;
+        private System.Windows.Forms.PictureBox pbItem;
     }
 }

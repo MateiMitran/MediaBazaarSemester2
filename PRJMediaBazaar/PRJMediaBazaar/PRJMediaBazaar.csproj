@@ -111,12 +111,6 @@
     <Compile Include="InvaidEmailException.cs" />
     <Compile Include="InvalidIntException.cs" />
     <Compile Include="InvalidStringException.cs" />
-    <Compile Include="Presentation\WareHouseManager\ItemSpecifications.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Presentation\WareHouseManager\ItemSpecifications.Designer.cs">
-      <DependentUpon>ItemSpecifications.cs</DependentUpon>
-    </Compile>
     <Compile Include="Logic\AbsenceControl.cs" />
     <Compile Include="Logic\DayOff.cs" />
     <Compile Include="Logic\Duty.cs" />
@@ -206,9 +200,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Presentation\WareHouseManager\EditItem.resx">
       <DependentUpon>EditItem.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Presentation\WareHouseManager\ItemSpecifications.resx">
-      <DependentUpon>ItemSpecifications.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Presentation\HRManager\EditNote.resx">
       <DependentUpon>EditNote.cs</DependentUpon>

@@ -114,7 +114,7 @@ namespace PRJMediaBazaar
         private void btnAdd_Click(object sender, EventArgs e)
         {
             byte[] img = ImageToBinary(image);
-            _itemControl.AddAnItem("testName","testCategory","testSub","100",10,img);
+          //  _itemControl.AddAnItem("testName","testCategory","testSub","100",10,img);
         }
     }
 }
