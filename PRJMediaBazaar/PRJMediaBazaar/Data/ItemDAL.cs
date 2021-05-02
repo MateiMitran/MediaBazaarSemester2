@@ -23,16 +23,15 @@ namespace PRJMediaBazaar.Data
                 String model = reader[4].ToString();
                 String description = reader[5].ToString();
                 double price = Convert.ToDouble(reader[6]);
-                int quantity = Convert.ToInt32(reader[7]);
-                int roomInWebshop = Convert.ToInt32(reader[8]);
-                int roomInShop = Convert.ToInt32(reader[9]);
-                int roomInStorage = Convert.ToInt32(reader[10]);
-                int minimumAmountInStock = Convert.ToInt32(reader[11]);
-                int inWebshopAmount = Convert.ToInt32(reader[12]);
-                int inShopAmount = Convert.ToInt32(reader[13]);
-                int inStorageAmount = Convert.ToInt32(reader[14]);
+                int roomInWebshop = Convert.ToInt32(reader[7]);
+                int roomInShop = Convert.ToInt32(reader[8]);
+                int roomInStorage = Convert.ToInt32(reader[9]);
+                int minimumAmountInStock = Convert.ToInt32(reader[10]);
+                int inWebshopAmount = Convert.ToInt32(reader[11]);
+                int inShopAmount = Convert.ToInt32(reader[12]);
+                int inStorageAmount = Convert.ToInt32(reader[13]);
 
-                Item item = new Item(id, name, category, brand, model, description, price, quantity, roomInWebshop, roomInShop,
+                Item item = new Item(id, name, category, brand, model, description, price, roomInWebshop, roomInShop,
                                      roomInStorage, minimumAmountInStock, inWebshopAmount, inShopAmount, inStorageAmount);
                 item.Image = GetItemImage(id);
                 items.Add(item);
@@ -42,15 +41,15 @@ namespace PRJMediaBazaar.Data
             return items;
         } 
         public bool AddItem(String name, String category, String brand, String model, String description
-                    , String price, int quantity, int roomInWebshop, int roomInShop, int roomInStorage,
-                    int minimumAmountInStock, int inWebshopAmount, int inShopAmount, int inStorageAmount, byte[] image)
+                    , String price, int roomInWebshop, int roomInShop, int roomInStorage,
+                    int minimumAmountInStock, byte[] image)
         {
             String sql = "INSERT INTO items(name,category,brand,model,description,price,quantity,roomInWebshop,roomInStorage,minimumAmountInStock,inWebshopAmount,inShopAmount,inStorageAmount) " +
-                        "VALUES(@name,@category,@brand,@model,@description,@price,@quantity,@roomInWebshop,@roomInStorage,@minimumAmountInStock,@inWebshopAmount,@inShopAmount,@inStorageAmount);";
-            String[] parameters = new String[] { name, category, brand,model,description,price, quantity.ToString(), 
+                        "VALUES(@name,@category,@brand,@model,@description,@price,@roomInWebshop,@roomInStorage,@minimumAmountInStock,@inWebshopAmount,@inShopAmount,@inStorageAmount);";
+            String[] parameters = new String[] { name, category, brand,model,description,price,
                                                 roomInWebshop.ToString(),roomInShop.ToString(),roomInStorage.ToString(),
-                                                minimumAmountInStock.ToString(),inWebshopAmount.ToString(),inShopAmount.ToString(),
-                                                inStorageAmount.ToString()};
+                                                minimumAmountInStock.ToString(),0.ToString(),0.ToString(),
+                                                0.ToString()};
             if (executeNonQuery(sql,parameters)!=null)
             {
                 CloseConnection();
@@ -130,19 +129,19 @@ namespace PRJMediaBazaar.Data
             }
         }
         public bool UpdateItem(String name, String category, String brand, String model, String description
-                    , String price, int quantity, int roomInWebshop, int roomInShop, int roomInStorage,
-                    int minimumAmountInStock, int inWebshopAmount, int inShopAmount, int inStorageAmount)
+                    , String price, int roomInWebshop, int roomInShop, int roomInStorage,
+                    int minimumAmountInStock, byte[] image, int id)
         {
-            String sql = "UPDATE items SET name = @name, category = @category, brand = @brand, model=@model, description = @description,price = @price, quantity = @quantity, " +
+            String sql = "UPDATE items SET name = @name, category = @category, brand = @brand, model=@model, description = @description,price = @price, " +
                          "roomInWebshop=@roomInWebshop, roomInShop = @roomInShop, roomInStorage = @roomInStorage, minimumAmountInStock = @minimumAmountInStock, " +
-                         "inWebshopAmount = @inWebshopAmount, inShopAmout = @inShopAmount, inStorageAmount = @inStorageAmount WHERE id = @id;";
-            String[] parameters = new String[] { name, category, brand,model,description,price, quantity.ToString(),
+                         "WHERE id = @id;";
+            String[] parameters = new String[] { name, category, brand,model,description,price,
                                                 roomInWebshop.ToString(),roomInShop.ToString(),roomInStorage.ToString(),
-                                                minimumAmountInStock.ToString(),inWebshopAmount.ToString(),inShopAmount.ToString(),
-                                                inStorageAmount.ToString() };
+                                                minimumAmountInStock.ToString(), id.ToString() };
             if (executeNonQuery(sql,parameters)!=null)
             {
                 CloseConnection();
+                UpdateItemImage(id, image);
                 return true;
             }
             else

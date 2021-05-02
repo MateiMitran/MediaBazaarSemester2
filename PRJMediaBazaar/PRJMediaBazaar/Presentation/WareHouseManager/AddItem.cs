@@ -29,15 +29,9 @@ namespace PRJMediaBazaar
             InitializeComponent();
             _itemControl = itemControl;
         }
-        private byte[] ImageToBinary(Image img)
-        {
-            using (var ms = new MemoryStream())
-            {
-                img.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
-                return ms.ToArray();
-            }
-        }
 
+
+        /*Drag And Drop events*/
         private void AddItem_DragEnter(object sender, DragEventArgs e)
         {
             e.Effect = DragDropEffects.Copy;
@@ -53,8 +47,6 @@ namespace PRJMediaBazaar
             else
                 e.Effect = DragDropEffects.None;
         }
-
-
         private void AddItem_DragDrop(object sender, DragEventArgs e)
         {
             if (validData)
@@ -67,23 +59,13 @@ namespace PRJMediaBazaar
                 pbxItem.Image = ScaleImage(image);
                 image = pbxItem.Image;
                 byte[] img = ImageToBinary(image);
-                MessageBox.Show($"{img.Length}");
+                MessageBox.Show($"Img size: {img.Length}");
             }
         }
-        public  Image ScaleImage(Image image)
-        {
-            int height = this.pbxItem.Height;
-            double ratio = (double)height / image.Height;
-            int newWidth = (int)(image.Width * ratio);
-            int newHeight = (int)(image.Height * ratio);
-            Bitmap newImage = new Bitmap(newWidth, newHeight);
-            using (Graphics g = Graphics.FromImage(newImage))
-            {
-                g.DrawImage(image, 0, 0, newWidth, newHeight);
-            }
-            return newImage;
-        }
-        protected void LoadImage()
+
+        /*Helping methods for the image*/
+      
+        private void LoadImage()
 
         {
             image = new Bitmap(path);
@@ -110,11 +92,47 @@ namespace PRJMediaBazaar
             }
             return ret;
         }
+        private Image ScaleImage(Image image)
+        {
+            int height = this.pbxItem.Height;
+            double ratio = (double)height / image.Height;
+            int newWidth = (int)(image.Width * ratio);
+            int newHeight = (int)(image.Height * ratio);
+            Bitmap newImage = new Bitmap(newWidth, newHeight);
+            using (Graphics g = Graphics.FromImage(newImage))
+            {
+                g.DrawImage(image, 0, 0, newWidth, newHeight);
+            }
+            return newImage;
+        }
+        private byte[] ImageToBinary(Image img)
+        {
+            using (var ms = new MemoryStream())
+            {
+                img.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
+                return ms.ToArray();
+            }
+        }
+
+        /*Functions*/
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
             byte[] img = ImageToBinary(image);
-          //  _itemControl.AddAnItem("testName","testCategory","testSub","100",10,img);
+
+            try
+            {
+                //declare all variables
+
+                //throw custom exception if img == null
+                //throw other exceptions for the other variables(empty/short strings, low values in stock, etc.)
+               
+                //add the item through itemControl.
+            }
+            catch // Catches for all thrown AND expected exceptions
+            {
+                //MessageBox.Show(ex.Message);
+            }
         }
     }
 }

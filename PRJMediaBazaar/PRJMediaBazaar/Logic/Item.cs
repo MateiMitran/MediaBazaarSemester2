@@ -10,7 +10,7 @@ namespace PRJMediaBazaar.Logic
     {
         //quantity is 0 when u create item
         public Item(int id, String name, String category, String brand,String model, String description
-                    , double price, int quantity,int roomInWebshop, int roomInShop, int roomInStorage,
+                    , double price,int roomInWebshop, int roomInShop, int roomInStorage,
                     int minimumAmountInStock, int inWebshopAmount, int inShopAmount, int inStorageAmount)
         {
             ID = id;
@@ -18,7 +18,7 @@ namespace PRJMediaBazaar.Logic
             Category = category;
             Brand = brand; Model = model; Description = description;
             Price = price;
-            Quantity = quantity; RoomInWebshop = roomInWebshop; RoomInShop = roomInShop; RoomInStorage = roomInStorage;
+            RoomInWebshop = roomInWebshop; RoomInShop = roomInShop; RoomInStorage = roomInStorage;
             MinimumAmountInStock = minimumAmountInStock; InWebshopAmount = inWebshopAmount;
             InShopAmount = inShopAmount; InStorageAmount = inStorageAmount;
         }
@@ -28,8 +28,7 @@ namespace PRJMediaBazaar.Logic
        public String Brand { get; set; }
        public String Model { get; set; }
        public String Description { get; set; }
-       public double Price { get;  set; }
-       public int Quantity { get; set; }
+       public double Price { get; set; }
        public int RoomInWebshop { get; set; }
        public int RoomInShop { get; set; }
        public int RoomInStorage { get; set; }
@@ -38,6 +37,5 @@ namespace PRJMediaBazaar.Logic
        public int InShopAmount { get; set; }
        public int InStorageAmount { get; set; }
        public byte[] Image { get; set; }
-       public double TotalPrice { get { return this.Price * this.Quantity; } }
     }
 }

@@ -82,7 +82,6 @@ namespace PRJMediaBazaar
             this.lbItems.Items.Add("Model : " + thisItem.Model);
             this.lbItems.Items.Add("Description : " + thisItem.Description);
             this.lbItems.Items.Add("Price : " + thisItem.Price + "$");
-            this.lbItems.Items.Add("Quantity : " + thisItem.Quantity);
             this.lbItems.Items.Add("Room in Webshop : " + thisItem.RoomInWebshop);
             this.lbItems.Items.Add("Room in Shop : " + thisItem.RoomInShop);
             this.lbItems.Items.Add("Room in Storage : " + thisItem.RoomInStorage);
@@ -90,7 +89,6 @@ namespace PRJMediaBazaar
             this.lbItems.Items.Add("Amount in Webshop : " + thisItem.InWebshopAmount);
             this.lbItems.Items.Add("Amount in Shop : " + thisItem.InShopAmount);
             this.lbItems.Items.Add("Amount in Storage : " + thisItem.InStorageAmount);
-            this.lbItems.Items.Add("Total Cost : " + thisItem.TotalPrice + "$");
             this.pbItem.Image = ByteToImage(image);
         }
         private void lblItems_Click(object sender, EventArgs e)

@@ -25,13 +25,13 @@ namespace PRJMediaBazaar.Logic
         }
         public void AddAnItem(String name, String category, String brand, String model, String description
                     , double price, int quantity, int roomInWebshop, int roomInShop, int roomInStorage,
-                    int minimumAmountInStock, int inWebshopAmount, int inShopAmount, int inStorageAmount, byte[] image)
+                    int minimumAmountInStock, byte[] image)
         {
-            itemDAL.AddItem(name, category, brand,model,description, price.ToString(), quantity,roomInWebshop,
-                roomInShop,roomInStorage,minimumAmountInStock,inWebshopAmount,inShopAmount,inStorageAmount,image);
+            itemDAL.AddItem(name, category, brand,model,description, price.ToString(),roomInWebshop,
+                roomInShop,roomInStorage,minimumAmountInStock,image);
             int id = itemDAL.LastItemId();
-            Item temp = new Item(id, name, category, brand, model, description, price, quantity, roomInWebshop,
-                roomInShop, roomInStorage, minimumAmountInStock, inWebshopAmount, inShopAmount, inStorageAmount);
+            Item temp = new Item(id, name, category, brand, model, description, price,roomInWebshop,
+                roomInShop, roomInStorage, minimumAmountInStock,0, 0, 0);
             temp.Image = image;
             items.Add(temp);
         }
@@ -52,11 +52,11 @@ namespace PRJMediaBazaar.Logic
             return false;
         }
         public bool UpdateAnItem(int id, String name, String category, String brand, String model, String description
-                    , double price, int quantity, int roomInWebshop, int roomInShop, int roomInStorage,
-                    int minimumAmountInStock, int inWebshopAmount, int inShopAmount, int inStorageAmount)
+                    , double price, int roomInWebshop, int roomInShop, int roomInStorage,
+                    int minimumAmountInStock, byte[] image)
         {
-            if (itemDAL.UpdateItem(name, category, brand, model, description, price.ToString(), quantity, roomInWebshop,
-                roomInShop, roomInStorage, minimumAmountInStock, inWebshopAmount, inShopAmount, inStorageAmount) ==true)
+            if (itemDAL.UpdateItem(name, category, brand, model, description, price.ToString(), roomInWebshop,
+                roomInShop, roomInStorage, minimumAmountInStock,image, id) ==true)
             {
                 for (int i = 0; i < items.Count; i++)
                 {
@@ -68,14 +68,11 @@ namespace PRJMediaBazaar.Logic
                         items[i].Model = model;
                         items[i].Description = description;
                         items[i].Price = price;
-                        items[i].Quantity = quantity;
                         items[i].RoomInWebshop = roomInWebshop;
                         items[i].RoomInShop = roomInShop;
                         items[i].RoomInStorage = roomInStorage;
                         items[i].MinimumAmountInStock = minimumAmountInStock;
-                        items[i].InWebshopAmount = inWebshopAmount;
-                        items[i].InShopAmount = inShopAmount;
-                        items[i].InStorageAmount = inStorageAmount;
+
                         return true;
                     }
                 }
