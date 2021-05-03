@@ -22,7 +22,7 @@ namespace PRJMediaBazaar.Data
                 String brand = reader[3].ToString();
                 String model = reader[4].ToString();
                 String description = reader[5].ToString();
-                double price = Convert.ToDouble(reader[6]);
+                double price = double.Parse(reader[6].ToString(), System.Globalization.CultureInfo.InvariantCulture);
                 int roomInWebshop = Convert.ToInt32(reader[7]);
                 int roomInShop = Convert.ToInt32(reader[8]);
                 int roomInStorage = Convert.ToInt32(reader[9]);
@@ -44,12 +44,27 @@ namespace PRJMediaBazaar.Data
                     , String price, int roomInWebshop, int roomInShop, int roomInStorage,
                     int minimumAmountInStock, byte[] image)
         {
-            String sql = "INSERT INTO items(name,category,brand,model,description,price,quantity,roomInWebshop,roomInStorage,minimumAmountInStock,inWebshopAmount,inShopAmount,inStorageAmount) " +
-                        "VALUES(@name,@category,@brand,@model,@description,@price,@roomInWebshop,@roomInStorage,@minimumAmountInStock,@inWebshopAmount,@inShopAmount,@inStorageAmount);";
-            String[] parameters = new String[] { name, category, brand,model,description,price,
-                                                roomInWebshop.ToString(),roomInShop.ToString(),roomInStorage.ToString(),
-                                                minimumAmountInStock.ToString(),0.ToString(),0.ToString(),
-                                                0.ToString()};
+            String sql = 
+                "INSERT INTO items(name,category,brand,model,description,price,roomInWebshop," +
+                    "roomInShop,roomInStorage,minimumAmountInStock,inWebshopAmount,inShopAmount,inStorageAmount) " +
+                "VALUES(@name,@category,@brand,@model,@description,@price,@roomInWebshop," +
+                    "@roomInShop,@roomInStorage,@minimumAmountInStock,@inWebshopAmount,@inShopAmount,@inStorageAmount);";
+
+            String[] parameters = new String[] { 
+                name, 
+                category, 
+                brand,
+                model,
+                description,
+                price,
+                roomInWebshop.ToString(),
+                roomInShop.ToString(),
+                roomInStorage.ToString(),
+                minimumAmountInStock.ToString(),
+                0.ToString(),
+                0.ToString(),
+                0.ToString()};
+
             if (executeNonQuery(sql,parameters)!=null)
             {
                 CloseConnection();

@@ -193,7 +193,7 @@ namespace PRJMediaBazaar
         {
             if (thisItem != null)
             {
-                EditItem edit = new EditItem(this, thisItem);
+                EditItem edit = new EditItem(this, thisItem, itemControl);
                 edit.Show();
             }
             else

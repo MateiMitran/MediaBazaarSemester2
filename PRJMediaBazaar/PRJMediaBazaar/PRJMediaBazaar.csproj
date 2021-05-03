@@ -93,6 +93,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="InvalidImageException.cs" />
     <Compile Include="Presentation\WareHouseManager\AddItem.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -118,20 +118,55 @@ namespace PRJMediaBazaar
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            byte[] img = ImageToBinary(image);
+            byte[] img = null;
+            if (image != null)
+            {
+                img = ImageToBinary(image);
+            }
+            
 
             try
             {
+                //if(img == null)
+                //{
+                //    throw new InvalidImageException();
+                //}
                 //declare all variables
+                List<string> erros = new List<string>();
+                string itemName = tbItemName.Text;
+                string category = tbCategory.Text;
+                string brand = tbBrand.Text;
+                string model = tbModel.Text;
+                string description = tbDescription.Text;
+                double price = Convert.ToDouble(tbPrice.Text); // investigate double.tryparse
+                int roomWebshop = Convert.ToInt32(tbRoomWebshop.Text);
+                int roomShop = Convert.ToInt32(tbRoomShop.Text);
+                int roomStorage = Convert.ToInt32(tbRoomStorage.Text);
+                int minAmount = Convert.ToInt32(tbMinimumAmount.Text);
+
+/*                if (!double.TryParse("adin", out double res))
+                {
+                    erros.Add("blabla");
+                }
+
+                if (erros.Any())
+                {
+                    throw new MyException(errors);
+                }*/
+
+                _itemControl.AddAnItem(itemName, category, brand, model, description, price,
+                    roomWebshop, roomShop, roomStorage, minAmount, img);
+
 
                 //throw custom exception if img == null
                 //throw other exceptions for the other variables(empty/short strings, low values in stock, etc.)
-               
+
                 //add the item through itemControl.
             }
-            catch // Catches for all thrown AND expected exceptions
+            catch (InvalidImageException)
+            // Catches for all thrown AND expected exceptions
             {
-                //MessageBox.Show(ex.Message);
+                MessageBox.Show("You should provide an image !");
             }
         }
     }

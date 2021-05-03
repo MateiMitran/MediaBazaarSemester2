@@ -24,7 +24,7 @@ namespace PRJMediaBazaar.Logic
            this.items = itemDAL.SelectAllItems();
         }
         public void AddAnItem(String name, String category, String brand, String model, String description
-                    , double price, int quantity, int roomInWebshop, int roomInShop, int roomInStorage,
+                    , double price, int roomInWebshop, int roomInShop, int roomInStorage,
                     int minimumAmountInStock, byte[] image)
         {
             itemDAL.AddItem(name, category, brand,model,description, price.ToString(),roomInWebshop,

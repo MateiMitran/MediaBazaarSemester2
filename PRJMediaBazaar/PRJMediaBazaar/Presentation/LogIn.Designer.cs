@@ -77,6 +77,7 @@ namespace PRJMediaBazaar
             this.tbUsername.Name = "tbUsername";
             this.tbUsername.Size = new System.Drawing.Size(197, 22);
             this.tbUsername.TabIndex = 3;
+            this.tbUsername.Text = "warehouse";
             this.tbUsername.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // tbPassword
@@ -86,6 +87,7 @@ namespace PRJMediaBazaar
             this.tbPassword.PasswordChar = '*';
             this.tbPassword.Size = new System.Drawing.Size(197, 22);
             this.tbPassword.TabIndex = 4;
+            this.tbPassword.Text = "warehouse";
             // 
             // btnLogIn
             // 
