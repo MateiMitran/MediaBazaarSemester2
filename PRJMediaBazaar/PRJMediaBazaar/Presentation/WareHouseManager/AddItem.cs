@@ -11,6 +11,7 @@ using System.IO;
 using System.Threading;
 using System.Diagnostics;
 using PRJMediaBazaar.Logic;
+using System.Globalization;
 
 namespace PRJMediaBazaar
 {
@@ -123,36 +124,40 @@ namespace PRJMediaBazaar
             {
                 img = ImageToBinary(image);
             }
-            
-
             try
             {
-                //if(img == null)
-                //{
-                //    throw new InvalidImageException();
-                //}
-                //declare all variables
-                List<string> erros = new List<string>();
+                if(img == null)
+                {
+                    throw new InvalidImageException();
+                }
+
+                List<string> errors = new List<string>();
+                Helper.ValidateInteger(tbRoomWebshop.Text, "RoomWebshop", errors);
+                Helper.ValidateInteger(tbRoomShop.Text, "RoomShop", errors);
+                Helper.ValidateInteger(tbRoomStorage.Text, "RoomStorage", errors);
+                Helper.ValidateInteger(tbMinimumAmount.Text, "MinimumAmount", errors);
+                Helper.ValidateString(tbItemName.Text, "ItemName", errors);
+                Helper.ValidateString(tbCategory.Text, "Category", errors);
+                Helper.ValidateString(tbBrand.Text, "Brand", errors);
+                Helper.ValidateString(tbModel.Text, "Model", errors);
+                Helper.ValidateString(tbDescription.Text, "Description", errors);
+                Helper.ValidateDouble(tbPrice.Text, "Price", errors);
+
+                if (errors.Any())
+                {
+                    throw new InputException(errors);
+                }
                 string itemName = tbItemName.Text;
                 string category = tbCategory.Text;
                 string brand = tbBrand.Text;
                 string model = tbModel.Text;
                 string description = tbDescription.Text;
-                double price = Convert.ToDouble(tbPrice.Text); // investigate double.tryparse
+                tbPrice.Text = tbPrice.Text.Replace('.', ',');
+                double price = Helper.ToDouble(tbPrice.Text); // investigate double.tryparse
                 int roomWebshop = Convert.ToInt32(tbRoomWebshop.Text);
                 int roomShop = Convert.ToInt32(tbRoomShop.Text);
                 int roomStorage = Convert.ToInt32(tbRoomStorage.Text);
                 int minAmount = Convert.ToInt32(tbMinimumAmount.Text);
-
-/*                if (!double.TryParse("adin", out double res))
-                {
-                    erros.Add("blabla");
-                }
-
-                if (erros.Any())
-                {
-                    throw new MyException(errors);
-                }*/
 
                 _itemControl.AddAnItem(itemName, category, brand, model, description, price,
                     roomWebshop, roomShop, roomStorage, minAmount, img);
@@ -164,10 +169,14 @@ namespace PRJMediaBazaar
                 //add the item through itemControl.
             }
             catch (InvalidImageException)
-            // Catches for all thrown AND expected exceptions
             {
                 MessageBox.Show("You should provide an image !");
             }
+            catch (InputException ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+            
         }
     }
 }

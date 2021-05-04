@@ -87,6 +87,7 @@ namespace PRJMediaBazaar.Data
             try
             {
                 conn = new MySqlConnection(@"server=studmysql01.fhict.local;database=dbi460221;uid=dbi460221;password=lol;AllowUserVariables=true");
+                //conn = new MySqlConnection("datasource = 127.0.0.1; port = 3306; username = root; password =; database = dbi460221;");
                 String sql = "INSERT INTO items_images(item_id,image) " +
                         "VALUES(@id,@image);";
 
@@ -148,9 +149,9 @@ namespace PRJMediaBazaar.Data
                     int minimumAmountInStock, byte[] image, int id)
         {
             String sql = "UPDATE items SET name = @name, category = @category, brand = @brand, model=@model, description = @description,price = @price, " +
-                         "roomInWebshop=@roomInWebshop, roomInShop = @roomInShop, roomInStorage = @roomInStorage, minimumAmountInStock = @minimumAmountInStock, " +
+                         "roomInWebshop=@roomInWebshop, roomInShop = @roomInShop, roomInStorage = @roomInStorage, minimumAmountInStock = @minimumAmountInStock " +
                          "WHERE id = @id;";
-            String[] parameters = new String[] { name, category, brand,model,description,price,
+            String[] parameters = new String[] { name, category, brand,model,description,price.ToString(),
                                                 roomInWebshop.ToString(),roomInShop.ToString(),roomInStorage.ToString(),
                                                 minimumAmountInStock.ToString(), id.ToString() };
             if (executeNonQuery(sql,parameters)!=null)
@@ -171,6 +172,7 @@ namespace PRJMediaBazaar.Data
             try
             {
                 conn = new MySqlConnection(@"server=studmysql01.fhict.local;database=dbi460221;uid=dbi460221;password=lol;AllowUserVariables=true");
+                //conn = new MySqlConnection("datasource = 127.0.0.1; port = 3306; username = root; password =; database = dbi460221;");
                 String sql = "UPDATE items_images SET image = @image WHERE item_id = @itemID";
                 MySqlCommand cmd = new MySqlCommand(sql, conn);
                 cmd.Parameters.AddWithValue("@itemID", itemID);

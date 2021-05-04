@@ -32,6 +32,23 @@ namespace PRJMediaBazaar
         {
             try
             {
+                List<string> errors = new List<string>();
+                Helper.ValidateInteger(tbRoomWebshop.Text, "RoomWebshop", errors);
+                Helper.ValidateInteger(tbRoomShop.Text, "RoomShop", errors);
+                Helper.ValidateInteger(tbRoomStorage.Text, "RoomStorage", errors);
+                Helper.ValidateInteger(tbMinimumAmount.Text, "MinimumAmount", errors);
+                Helper.ValidateString(tbName.Text, "ItemName", errors);
+                Helper.ValidateString(tbCategory.Text, "Category", errors);
+                Helper.ValidateString(tbBrand.Text, "Brand", errors);
+                Helper.ValidateString(tbModel.Text, "Model", errors);
+                Helper.ValidateString(tbDescription.Text, "Description", errors);
+                Helper.ValidateDouble(tbPrice.Text, "Price", errors);
+
+                if (errors.Any())
+                {
+                    throw new InputException(errors);
+                }
+
                 byte[] image = null;
                 int id = x.ID;
                 string itemName = tbName.Text;
@@ -49,12 +66,11 @@ namespace PRJMediaBazaar
                     roomWebshop, roomShop, roomStorage, minAmount, image);
 
             }
-            catch (Exception ex)
+            catch (InputException ex)
             {
-                
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(ex.ToString());
             }
-            
+
         }
     }
 }
