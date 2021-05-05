@@ -2,10 +2,14 @@
     // START SESSION AND INCLUDE REQUIRED FILES
     session_start();
 
-    require_once('database.php');
-    require_once('auth-functions.php');
-    require_once('query-functions.php');
+    require_once('helper-methods.php');
 
-    $successMessages = [];
-    $errorMessages = [];
+    // SET UP SUCCESS / ERROR MESSAGES
+    if(!isset($_SESSION['successMessages'])) {
+        $_SESSION['successMessages'] = [];
+    }
+
+    if(!isset($_SESSION['errorMessages'])) {
+        $_SESSION['errorMessages'] = [];
+    }
 ?>

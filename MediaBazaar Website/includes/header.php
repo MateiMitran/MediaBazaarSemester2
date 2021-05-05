@@ -1,4 +1,9 @@
 <?php
+    // AUTOLOAD REQUIRED CLASSES
+    spl_autoload_register(function($class) {
+        include('./classes/' . $class . '.php');
+    });
+
     require_once('initialize.php');
 
     // INCLUDE REQUIRED FUNCTIONALITY FILES
@@ -9,12 +14,6 @@
         foreach($functionalityRequirements as $functionality) {
             require_once('functionality/' . $functionality . '.php');
         }
-    }
-
-    // GET LOGIN SUCCESS MESSAGE
-    if(!empty($_SESSION['login_message'])) {
-        array_push($successMessages, $_SESSION['login_message']);
-        unset($_SESSION['login_message']);
     }
 ?>
 <!DOCTYPE html>
@@ -44,32 +43,34 @@
     <!-- ERROR MESSAGES -->
     <div id="messages-container">
         <ul id="success-messages">
-        <?php 
-            if(!empty($successMessages)) {
-                foreach($successMessages as $message) {
-        ?>
-                <li>
-                    <p><?php echo $message; ?></p>
-                    <i class="fal fa-times"></i>
-                </li>
-        <?php
+            <?php 
+                if(!empty($_SESSION['successMessages'])) {
+                    foreach($_SESSION['successMessages'] as $message) {
+            ?>
+                    <li>
+                        <p><?php echo $message; ?></p>
+                        <i><ion-icon name="close-outline"></ion-icon></i>
+                    </li>
+            <?php
+                    }
+                    $_SESSION['successMessages'] = [];
                 }
-            }
-        ?>
+            ?>
         </ul>
         <ul id="error-messages">
-        <?php 
-            if(!empty($errorMessages)) {
-                foreach($errorMessages as $message) {
-        ?>
-                <li>
-                    <p><?php echo $message; ?></p>
-                    <i class="fal fa-times"></i>
-                </li>
-        <?php
+            <?php 
+                if(!empty($_SESSION['errorMessages'])) {
+                    foreach($_SESSION['errorMessages'] as $message) {
+            ?>
+                    <li>
+                        <p><?php echo $message; ?></p>
+                        <i><ion-icon name="close-outline"></ion-icon></i>
+                    </li>
+            <?php
+                    }
+                    $_SESSION['errorMessages'] = [];
                 }
-            }
-        ?>
+            ?>
         </ul>
     </div>
     <!-- TOP NAV -->
