@@ -1,6 +1,4 @@
 <?php
-require_once('Employee.php');
-
 class LoginEmployee extends Database {
     public function login($email, $password) {
         $sql = "SELECT * FROM employees WHERE email = '$email'";

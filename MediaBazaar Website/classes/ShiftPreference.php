@@ -1,6 +1,10 @@
 <?php
-class ShiftPreference extends Database {
-    public function setGeneralShiftPreference($userId, $date, $preference) {
-        
+abstract class ShiftPreference extends Database {
+    protected $userId;
+    protected $preference;
+
+    public function __construct($userId, $preference) {
+        $this->userId = $userId;
+        $this->preference = $preference;
     }
 }

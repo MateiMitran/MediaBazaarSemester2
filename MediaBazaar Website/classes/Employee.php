@@ -35,4 +35,8 @@ class Employee extends Database {
         $this->contract_hours = $contract_hours;
         $this->notes = $notes;
     }
+
+    public function getId() {
+        return $this->id;
+    }
 }

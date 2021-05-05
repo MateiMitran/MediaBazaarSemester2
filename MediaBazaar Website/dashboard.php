@@ -38,15 +38,25 @@
             <div class="dashboard-content" id="dashboard-preferences">
                 <div id="preferences-wrapper">
                     <form class="simple-form" action="dashboard" method="POST">
-                        <h3>Set for specific date</h3>
+                        <h3>Set for specific day</h3>
                         <div class="form-group">
-                            <label for="preferences-date">Date:</label>
-                            <input type="date" name="preferences-date" id="preferences-date" required />
+                            <label for="specific-preferences-day">Day:</label>
+                            <label class="select-arrow-label">
+                                <select name="specific-preferences-day" id="specific-preferences-day">
+                                    <option value="monday">Monday</option>
+                                    <option value="tuesday">Tuesday</option>
+                                    <option value="wednesday">Wednesday</option>
+                                    <option value="thursday">Thursday</option>
+                                    <option value="friday">Friday</option>
+                                    <option value="saturday">Saturday</option>
+                                    <option value="sunday">Sunday</option>
+                                </select>
+                            </label>
                         </div>
                         <div class="form-group">
-                            <label for="preferences-shift">Preferred Shift:</label>
+                            <label for="specific-preferences-shift">Preferred Shift:</label>
                             <label class="select-arrow-label">
-                                <select id="preferences-shift" name="preferences-shift" id="preferences-shift" required>
+                                <select name="specific-preferences-shift" id="specific-preferences-shift" required>
                                     <option value="morning" selected>Morning</option>
                                     <option value="midday">Midday</option>
                                     <option value="evening">Evening</option>
@@ -54,7 +64,7 @@
                             </label>
                         </div>
                         <div class="form-group submit">
-                            <input type="submit" name="preferences-submit" class="small-submit" value="Save" style="margin-top: 30px;" />
+                            <input type="submit" name="specific-preferences-submit" class="small-submit" value="Save" style="margin-top: 30px;" />
                         </div>
                     </form>
                     <p>OR</p>
