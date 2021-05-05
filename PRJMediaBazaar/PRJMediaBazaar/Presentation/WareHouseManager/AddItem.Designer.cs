@@ -29,6 +29,7 @@ namespace PRJMediaBazaar
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.tbItemName = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.tbPrice = new System.Windows.Forms.TextBox();
@@ -52,6 +53,7 @@ namespace PRJMediaBazaar
             this.label10 = new System.Windows.Forms.Label();
             this.tbMinimumAmount = new System.Windows.Forms.TextBox();
             this.label11 = new System.Windows.Forms.Label();
+            this.godTimer = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.tbRoomWebshop)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbxItem)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbRoomShop)).BeginInit();
@@ -281,6 +283,12 @@ namespace PRJMediaBazaar
             this.label11.TabIndex = 30;
             this.label11.Text = "Minimum Amount In Stock :";
             // 
+            // godTimer
+            // 
+            this.godTimer.Enabled = true;
+            this.godTimer.Interval = 2500;
+            this.godTimer.Tick += new System.EventHandler(this.godTimer_Tick);
+            // 
             // AddItem
             // 
             this.AllowDrop = true;
@@ -349,5 +357,6 @@ namespace PRJMediaBazaar
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.TextBox tbMinimumAmount;
         private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Timer godTimer;
     }
 }

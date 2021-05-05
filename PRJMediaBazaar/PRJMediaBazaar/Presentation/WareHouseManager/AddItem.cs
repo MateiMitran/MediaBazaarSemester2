@@ -5,7 +5,6 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
 using System.Threading;
@@ -23,14 +22,34 @@ namespace PRJMediaBazaar
         private Image image;
         private Thread getImageThread;
         private ItemControl _itemControl;
-        
+
+        private List<Button> buttons;
+        private List<System.Windows.Forms.Timer> timers;
+
 
         public AddItem(ItemControl itemControl)
         {
             InitializeComponent();
             _itemControl = itemControl;
+            buttons = new List<Button>();
+            timers = new List<System.Windows.Forms.Timer>();
         }
-
+        public void StatusFunction(String text, int x, int y, int width, int height, Color color)
+        {
+            Button newButton = new Button();
+            newButton.Location = new Point(x, y);
+            newButton.Width = width;
+            newButton.Height = height;
+            newButton.Enabled = false;
+            newButton.BackColor = color;
+            newButton.Text = text;
+            this.Controls.Add(newButton);
+            newButton.BringToFront();
+            buttons.Add(newButton);
+            System.Windows.Forms.Timer temp = new System.Windows.Forms.Timer();
+            timers.Add(temp);
+            temp.Start();
+        }
 
         /*Drag And Drop events*/
         private void AddItem_DragEnter(object sender, DragEventArgs e)
@@ -60,14 +79,13 @@ namespace PRJMediaBazaar
                 pbxItem.Image = ScaleImage(image);
                 image = pbxItem.Image;
                 byte[] img = ImageToBinary(image);
-                MessageBox.Show($"Img size: {img.Length}");
+                //MessageBox.Show($"Img size: {img.Length}");
             }
         }
 
         /*Helping methods for the image*/
       
         private void LoadImage()
-
         {
             image = new Bitmap(path);
         }
@@ -161,7 +179,7 @@ namespace PRJMediaBazaar
 
                 _itemControl.AddAnItem(itemName, category, brand, model, description, price,
                     roomWebshop, roomShop, roomStorage, minAmount, img);
-
+                StatusFunction("Item added!", -6, -1, 900, 28, Color.Red);
 
                 //throw custom exception if img == null
                 //throw other exceptions for the other variables(empty/short strings, low values in stock, etc.)
@@ -170,13 +188,24 @@ namespace PRJMediaBazaar
             }
             catch (InvalidImageException)
             {
-                MessageBox.Show("You should provide an image !");
+                StatusFunction("You should provide an image !", -6, -1, 900, 28, Color.Red);
             }
             catch (InputException ex)
             {
-                MessageBox.Show(ex.ToString());
+                StatusFunction(ex.ToString(), -6, -1, 900, 28, Color.Red);
             }
             
+        }
+        private void godTimer_Tick(object sender, EventArgs e)
+        {
+            for (int i = 0; i < buttons.Count; i++)
+            {
+                if (timers[i].Enabled == true)
+                {
+                    timers[i].Enabled = false;
+                    buttons[i].Visible = false;
+                }
+            }
         }
     }
 }

@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using PRJMediaBazaar.Logic;
 using System.IO;
+using System.Threading;
 
 namespace PRJMediaBazaar
 {
@@ -21,7 +22,7 @@ namespace PRJMediaBazaar
         private Item[] items;
 
         private List<Button> buttons;
-        private List<Timer> timers;
+        private List<System.Windows.Forms.Timer> timers;
         public WRHSHome(LogIn login)
         {
             InitializeComponent();
@@ -29,7 +30,7 @@ namespace PRJMediaBazaar
             this.login = login;
             itemControl = new ItemControl();
             buttons = new List<Button>();
-            timers = new List<Timer>();
+            timers = new List<System.Windows.Forms.Timer>();
             LoadItemsLESGOO();
         }
         public void StatusFunction(String text, int x, int y, int width, int height, Color color)
@@ -44,12 +45,15 @@ namespace PRJMediaBazaar
             this.Controls.Add(newButton);
             newButton.BringToFront();
             buttons.Add(newButton);
-            Timer temp = new Timer();
+            System.Windows.Forms.Timer temp = new System.Windows.Forms.Timer();
             timers.Add(temp);
             temp.Start();
         }
         public void LoadItemsLESGOO()
         {
+            this.lbItems.Items.Clear();
+            this.cbItems.Text = null;
+            this.cbItems.Items.Clear();
             items = itemControl.Items;
             for (int i=0;i<items.Length;i++)
             {
