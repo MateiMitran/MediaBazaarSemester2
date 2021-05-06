@@ -7,4 +7,12 @@ abstract class ShiftPreference extends Database {
         $this->userId = $userId;
         $this->preference = $preference;
     }
+
+    public function getUserId() {
+        return $this->userId;
+    }
+
+    public function getPreference() {
+        return $this->preference;
+    }
 }

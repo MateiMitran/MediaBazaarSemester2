@@ -57,6 +57,7 @@
                             <label for="specific-preferences-shift">Preferred Shift:</label>
                             <label class="select-arrow-label">
                                 <select name="specific-preferences-shift" id="specific-preferences-shift" required>
+                                    <option value="none">None</option>
                                     <option value="morning" selected>Morning</option>
                                     <option value="midday">Midday</option>
                                     <option value="evening">Evening</option>
@@ -74,6 +75,7 @@
                             <label for="general-preferences-shift">Preferred Shift:</label>
                             <label class="select-arrow-label">
                                 <select id="general-preferences-shift" name="general-preferences-shift" id="general-preferences-shift" required>
+                                    <option value="none">None</option>
                                     <option value="morning" selected>Morning</option>
                                     <option value="midday">Midday</option>
                                     <option value="evening">Evening</option>
