@@ -43,4 +43,20 @@ class Employee extends Database {
     public function getFirstName() {
         return $this->first_name;
     }
+
+    public function getLastName() {
+        return $this->last_name;
+    }
+
+    public function getGender() {
+        return $this->gender;
+    }
+
+    public function getBirthDate() {
+        return $this->birth_date;
+    }
+
+    public function getEmail() {
+        return $this->email;
+    }
 }

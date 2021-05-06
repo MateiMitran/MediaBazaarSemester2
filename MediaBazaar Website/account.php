@@ -1,5 +1,7 @@
 <?php
     $page = 'account';
+    $functionalityRequirements = ['account-functionality'];
+    
     require_once('includes/header.php');
 ?>
     <!-- LOGIN FORM -->
@@ -7,23 +9,23 @@
         <h2 class="section-title">Account Preferences</h2>
         <div class="form-group half">
             <label for="preferences-first-name">First Name:</label>
-            <input type="text" name="preferences-first-name" id="preferences-first-name" value="Alexander">
+            <input type="text" name="preferences-first-name" id="preferences-first-name" value="<?php echo ucfirst(strtolower($user->getFirstName())); ?>">
         </div>
         <div class="form-group half">
             <label for="preferences-last-name">Last Name:</label>
-            <input type="text" name="preferences-last-name" id="preferences-last-name" value="Bogdanov">
+            <input type="text" name="preferences-last-name" id="preferences-last-name" value="<?php echo ucfirst(strtolower($user->getLastName())); ?>">
         </div>
         <div class="form-group half">
-            <label for="preferences-sex">Sex:</label>
-            <input type="text" name="preferences-sex" id="preferences-sex" value="Male" disabled>
+            <label for="preferences-gender">Sex:</label>
+            <input type="text" name="preferences-gender" id="preferences-gender" value="<?php echo ucfirst(strtolower($user->getGender())); ?>" disabled>
         </div>
         <div class="form-group half">
             <label for="preferences-birth-date">Birth Date:</label>
-            <input type="text" name="preferences-birth-date" id="preferences-birth-date" value="21-02-2001" disabled>
+            <input type="text" name="preferences-birth-date" id="preferences-birth-date" value="<?php echo $user->getBirthDate(); ?>" disabled>
         </div>
         <div class="form-group full">
             <label for="preferences-email">Email:</label>
-            <input type="email" name="preferences-email" id="preferences-email" value="test@gmail.com" disabled>
+            <input type="email" name="preferences-email" id="preferences-email" value="<?php echo $user->getEmail(); ?>" disabled>
         </div>
         <div class="form-group full">
             <label for="preferences-new-password">New Password:</label>
