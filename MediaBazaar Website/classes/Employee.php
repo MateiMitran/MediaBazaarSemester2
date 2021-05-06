@@ -59,4 +59,20 @@ class Employee extends Database {
     public function getEmail() {
         return $this->email;
     }
+
+    public function getPassword() {
+        return $this->password;
+    }
+
+    public function setFirstName($firstName) {
+        $this->first_name = $firstName;
+    }
+
+    public function setLastName($lastName) {
+        $this->last_name = $lastName;
+    }
+
+    public function setPassword($password) {
+        $this->password = $password;
+    }
 }
