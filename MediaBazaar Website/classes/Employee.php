@@ -39,4 +39,8 @@ class Employee extends Database {
     public function getId() {
         return $this->id;
     }
+
+    public function getFirstName() {
+        return $this->first_name;
+    }
 }

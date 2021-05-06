@@ -5,7 +5,7 @@
     require_once('includes/header.php');
 ?>
     <!-- WELCOME MESSAGE -->
-    <p id="welcome-message">Greetings, <span>Alexander</span></p>
+    <p id="welcome-message">Greetings, <span><?php echo $_SESSION['user']->getFirstName(); ?></span></p>
     <!-- DASHBOARD -->
     <div id="dashboard-wrapper">
         <h2 class="section-title">Announcements</h2>

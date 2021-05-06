@@ -5,7 +5,7 @@ class LoginEmployee extends Database {
         $query = Database::connect()->prepare($sql);
         $query->execute([$email]);
 
-        $result = (array)$query->fetch();
+        $result = $query->fetch(PDO::FETCH_ASSOC);
         $count = $query->rowCount();
 
         if($query != false) {
@@ -14,6 +14,7 @@ class LoginEmployee extends Database {
                 if($result['password'] === $password) {
                     // Correct password
                     $result = array_values($result);
+
                     $user = new Employee(...$result);
 
                     $_SESSION['user'] = $user;
