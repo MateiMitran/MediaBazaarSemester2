@@ -33,7 +33,7 @@ namespace PRJMediaBazaar.Data
 
                 Item item = new Item(id, name, category, brand, model, description, price, roomInWebshop, roomInShop,
                                      roomInStorage, minimumAmountInStock, inWebshopAmount, inShopAmount, inStorageAmount);
-                item.Image = GetItemImage(id);
+              //  item.Image = GetItemImage(id);
                 items.Add(item);
             }
             CloseConnection();
@@ -120,6 +120,7 @@ namespace PRJMediaBazaar.Data
             String sql = "SELECT image FROM items_images WHERE item_id = @itemID;";
             String[] parameters = new String[] { itemID.ToString() };
             byte[] image = (byte[])executeScalar(sql, parameters);
+            CloseConnection();
             return image;
         }
         public int LastItemId()

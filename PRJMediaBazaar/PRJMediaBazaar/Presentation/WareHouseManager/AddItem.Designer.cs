@@ -48,12 +48,12 @@ namespace PRJMediaBazaar
             this.tbRoomShop = new System.Windows.Forms.NumericUpDown();
             this.label9 = new System.Windows.Forms.Label();
             this.tbRoomStorage = new System.Windows.Forms.NumericUpDown();
-            this.tbBrand = new System.Windows.Forms.TextBox();
-            this.tbCategory = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
             this.tbMinimumAmount = new System.Windows.Forms.TextBox();
             this.label11 = new System.Windows.Forms.Label();
             this.godTimer = new System.Windows.Forms.Timer(this.components);
+            this.cbCategory = new System.Windows.Forms.ComboBox();
+            this.cbBrand = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.tbRoomWebshop)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbxItem)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbRoomShop)).BeginInit();
@@ -237,22 +237,6 @@ namespace PRJMediaBazaar
             this.tbRoomStorage.Size = new System.Drawing.Size(156, 20);
             this.tbRoomStorage.TabIndex = 25;
             // 
-            // tbBrand
-            // 
-            this.tbBrand.Location = new System.Drawing.Point(115, 84);
-            this.tbBrand.Margin = new System.Windows.Forms.Padding(2);
-            this.tbBrand.Name = "tbBrand";
-            this.tbBrand.Size = new System.Drawing.Size(157, 20);
-            this.tbBrand.TabIndex = 26;
-            // 
-            // tbCategory
-            // 
-            this.tbCategory.Location = new System.Drawing.Point(114, 56);
-            this.tbCategory.Margin = new System.Windows.Forms.Padding(2);
-            this.tbCategory.Name = "tbCategory";
-            this.tbCategory.Size = new System.Drawing.Size(157, 20);
-            this.tbCategory.TabIndex = 27;
-            // 
             // label10
             // 
             this.label10.AutoSize = true;
@@ -289,17 +273,40 @@ namespace PRJMediaBazaar
             this.godTimer.Interval = 2500;
             this.godTimer.Tick += new System.EventHandler(this.godTimer_Tick);
             // 
+            // cbCategory
+            // 
+            this.cbCategory.FormattingEnabled = true;
+            this.cbCategory.Items.AddRange(new object[] {
+            "Electronics",
+            "Fashion",
+            "Furniture",
+            "Sports and Outdoors",
+            "Software"});
+            this.cbCategory.Location = new System.Drawing.Point(114, 56);
+            this.cbCategory.Name = "cbCategory";
+            this.cbCategory.Size = new System.Drawing.Size(157, 21);
+            this.cbCategory.TabIndex = 31;
+            this.cbCategory.SelectedIndexChanged += new System.EventHandler(this.cbCategory_SelectedIndexChanged);
+            // 
+            // cbBrand
+            // 
+            this.cbBrand.FormattingEnabled = true;
+            this.cbBrand.Location = new System.Drawing.Point(114, 86);
+            this.cbBrand.Name = "cbBrand";
+            this.cbBrand.Size = new System.Drawing.Size(157, 21);
+            this.cbBrand.TabIndex = 32;
+            // 
             // AddItem
             // 
             this.AllowDrop = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(661, 401);
+            this.Controls.Add(this.cbBrand);
+            this.Controls.Add(this.cbCategory);
             this.Controls.Add(this.label11);
             this.Controls.Add(this.tbMinimumAmount);
             this.Controls.Add(this.label10);
-            this.Controls.Add(this.tbCategory);
-            this.Controls.Add(this.tbBrand);
             this.Controls.Add(this.tbRoomStorage);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.tbRoomShop);
@@ -352,11 +359,11 @@ namespace PRJMediaBazaar
         private System.Windows.Forms.NumericUpDown tbRoomShop;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.NumericUpDown tbRoomStorage;
-        private System.Windows.Forms.TextBox tbBrand;
-        private System.Windows.Forms.TextBox tbCategory;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.TextBox tbMinimumAmount;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Timer godTimer;
+        private System.Windows.Forms.ComboBox cbCategory;
+        private System.Windows.Forms.ComboBox cbBrand;
     }
 }

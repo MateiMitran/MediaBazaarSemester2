@@ -21,6 +21,7 @@ namespace PRJMediaBazaar.Logic
             RoomInWebshop = roomInWebshop; RoomInShop = roomInShop; RoomInStorage = roomInStorage;
             MinimumAmountInStock = minimumAmountInStock; InWebshopAmount = inWebshopAmount;
             InShopAmount = inShopAmount; InStorageAmount = inStorageAmount;
+            Image = null;
         }
        public int ID { get;  set; }
        public String Name { get; set; }

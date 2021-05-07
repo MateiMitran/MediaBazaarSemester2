@@ -93,6 +93,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Logic\Restock.cs" />
+    <Compile Include="Logic\StockControl.cs" />
+    <Compile Include="Presentation\Stocker\StockerHome.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Presentation\Stocker\StockerHome.Designer.cs">
+      <DependentUpon>StockerHome.cs</DependentUpon>
+    </Compile>
     <Compile Include="InputException.cs" />
     <Compile Include="InvalidDoubleException.cs" />
     <Compile Include="InvalidImageException.cs" />
@@ -195,6 +203,12 @@
     <Compile Include="Presentation\HRManager\RequestsOverview.Designer.cs">
       <DependentUpon>RequestsOverview.cs</DependentUpon>
     </Compile>
+    <Compile Include="Presentation\Cashier\CashierHome.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Presentation\Cashier\CashierHome.Designer.cs">
+      <DependentUpon>CashierHome.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Presentation\HRManager\RequestsOverview.resx">
       <DependentUpon>RequestsOverview.cs</DependentUpon>
     </EmbeddedResource>
@@ -236,6 +250,12 @@
     </Compile>
     <EmbeddedResource Include="Presentation\HRManager\ShiftAssigning.resx">
       <DependentUpon>ShiftAssigning.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Presentation\Cashier\CashierHome.resx">
+      <DependentUpon>CashierHome.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Presentation\Stocker\StockerHome.resx">
+      <DependentUpon>StockerHome.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">

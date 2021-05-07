@@ -69,6 +69,18 @@ namespace PRJMediaBazaar
                     home.Show();
                     this.Hide();
                 }
+                else if (this.tbUsername.Text == "cashier" && this.tbPassword.Text == "cashier")
+                {
+                    CashierHome home = new CashierHome(this);
+                    home.Show();
+                    this.Hide();
+                }
+                else if (this.tbUsername.Text == "stocker" && this.tbPassword.Text == "stocker")
+                {
+                    StockerHome home = new StockerHome(this);
+                    home.Show();
+                    this.Hide();
+                }
                 else
                 {
                     StatusFunction("Invalid Credentials", -60, -5, 508, 28, Color.Red);

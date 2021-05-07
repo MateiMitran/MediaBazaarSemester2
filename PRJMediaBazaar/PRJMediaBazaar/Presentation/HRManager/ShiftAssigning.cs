@@ -32,6 +32,8 @@ namespace PRJMediaBazaar
         public ShiftAssigning(ScheduleControl scheduleControl, List<Employee> empsOnPositon, Shift shift, string jobPosition, HRHome hr, Day day)
         {
             InitializeComponent();
+            buttons = new List<Button>();
+            timers = new List<Timer>();
             _shift = shift;
             _jobPosition = jobPosition;
             _hr = hr;

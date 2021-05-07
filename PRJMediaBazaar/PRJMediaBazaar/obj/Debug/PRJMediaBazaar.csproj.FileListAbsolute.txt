@@ -429,3 +429,5 @@ C:\Users\Aleksej\Desktop\Projects\MediaBazar\prj-cb05-group-5-project\PRJMediaBa
 C:\Users\Aleksej\Desktop\Projects\MediaBazar\prj-cb05-group-5-project\PRJMediaBazaar\PRJMediaBazaar\obj\Debug\PRJMediaBazaar.csproj.CopyComplete
 C:\Users\Aleksej\Desktop\Projects\MediaBazar\prj-cb05-group-5-project\PRJMediaBazaar\PRJMediaBazaar\obj\Debug\PRJMediaBazaar.exe
 C:\Users\Aleksej\Desktop\Projects\MediaBazar\prj-cb05-group-5-project\PRJMediaBazaar\PRJMediaBazaar\obj\Debug\PRJMediaBazaar.pdb
+C:\Users\matei\Desktop\Fontys\Semester 2\Project\Media Bazaar\prj-cb05-group-5-project\PRJMediaBazaar\PRJMediaBazaar\obj\Debug\PRJMediaBazaar.StockerHome.resources
+C:\Users\matei\Desktop\Fontys\Semester 2\Project\Media Bazaar\prj-cb05-group-5-project\PRJMediaBazaar\PRJMediaBazaar\obj\Debug\PRJMediaBazaar.CashierHome.resources

@@ -104,6 +104,10 @@ namespace PRJMediaBazaar.Logic
         }
         public Item[] Items { get { return this.items.ToArray(); } }
 
+        public byte[] GetItemImage(int itemID)
+        {
+            return this.itemDAL.GetItemImage(itemID);
+        }
         public Item GetItemByIdAndName(String idAndName)
         {
             for (int i=0;i<items.Count;i++)

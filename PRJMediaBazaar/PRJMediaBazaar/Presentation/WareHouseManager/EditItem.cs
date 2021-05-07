@@ -68,7 +68,7 @@ namespace PRJMediaBazaar
         }
         private void EditItem_Load(object sender, EventArgs e)
         {
-            byte[] image = x.Image;
+            byte[] image = _itemControl.GetItemImage(x.ID);
             this.tbName.Text = x.Name;
             this.tbCategory.Text = x.Category;
             this.tbBrand.Text = x.Brand;

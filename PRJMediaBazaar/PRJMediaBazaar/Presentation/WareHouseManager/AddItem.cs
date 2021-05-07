@@ -155,8 +155,8 @@ namespace PRJMediaBazaar
                 Helper.ValidateInteger(tbRoomStorage.Text, "RoomStorage", errors);
                 Helper.ValidateInteger(tbMinimumAmount.Text, "MinimumAmount", errors);
                 Helper.ValidateString(tbItemName.Text, "ItemName", errors);
-                Helper.ValidateString(tbCategory.Text, "Category", errors);
-                Helper.ValidateString(tbBrand.Text, "Brand", errors);
+                Helper.ValidateString(cbCategory.Text, "Category", errors);
+                Helper.ValidateString(cbBrand.Text, "Brand", errors);
                 Helper.ValidateString(tbModel.Text, "Model", errors);
                 Helper.ValidateString(tbDescription.Text, "Description", errors);
                 Helper.ValidateDouble(tbPrice.Text, "Price", errors);
@@ -166,8 +166,8 @@ namespace PRJMediaBazaar
                     throw new InputException(errors);
                 }
                 string itemName = tbItemName.Text;
-                string category = tbCategory.Text;
-                string brand = tbBrand.Text;
+                string category = this.cbCategory.Text;
+                string brand = this.cbBrand.Text;
                 string model = tbModel.Text;
                 string description = tbDescription.Text;
                 tbPrice.Text = tbPrice.Text.Replace('.', ',');
@@ -205,6 +205,32 @@ namespace PRJMediaBazaar
                     timers[i].Enabled = false;
                     buttons[i].Visible = false;
                 }
+            }
+        }
+
+        private void cbCategory_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            this.cbBrand.Items.Clear();
+            this.cbBrand.Text = null;
+            switch (this.cbCategory.SelectedItem.ToString())
+            {
+                case ("Electronics"):
+                    this.cbBrand.Items.AddRange(new String[] { "Asus", "Samsung","Acer","LG","Hama","Apple","Microsoft"});
+                    break;
+                case ("Fashion"):
+                    this.cbBrand.Items.AddRange(new String[] { "Balenciaga", "Versace", "Palm Angels", "Louis Vuitton", "Off-White", "Nike", "Addidas" });
+                    break;
+                case ("Furniture"):
+                    this.cbBrand.Items.AddRange(new String[] { "Ikea", "Poly & Bark", "Thuma", "RH" });
+                    break;
+                case ("Sports and Outdoors"):
+                    this.cbBrand.Items.AddRange(new String[] { "Addidas", "Nike", "Under Armour", "Salomon", "Puma", "Rebook" });
+                    break;
+                case ("Software"):
+                    this.cbBrand.Items.AddRange(new String[] { "Microsoft", "Apple", "Steam", "IBM" });
+                    break;
+                default:
+                    break;
             }
         }
     }

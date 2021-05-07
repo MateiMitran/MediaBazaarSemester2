@@ -60,24 +60,8 @@ namespace PRJMediaBazaar
                 this.cbItems.Items.Add(items[i].ID + " : " + items[i].Name);
             }
         }
-        public static Bitmap ByteToImage(byte[] blob)
-        {
-            MemoryStream mStream = new MemoryStream();
-            byte[] pData = blob;
-            if (pData != null)
-            {
-                mStream.Write(pData, 0, Convert.ToInt32(pData.Length));
-                Bitmap bm = new Bitmap(mStream, false);
-                mStream.Dispose();
-                return bm;
-            }
-            else
-                return null;
-            
-        }
         public void LoadItemInformationLESGOO()
         {
-            byte[] image = thisItem.Image;
             this.lbItems.Items.Clear();
             this.lbItems.Items.Add("ID : " + thisItem.ID);
             this.lbItems.Items.Add("Name : " + thisItem.Name);
@@ -93,7 +77,6 @@ namespace PRJMediaBazaar
             this.lbItems.Items.Add("Amount in Webshop : " + thisItem.InWebshopAmount);
             this.lbItems.Items.Add("Amount in Shop : " + thisItem.InShopAmount);
             this.lbItems.Items.Add("Amount in Storage : " + thisItem.InStorageAmount);
-            this.pbItem.Image = ByteToImage(image);
         }
         private void lblItems_Click(object sender, EventArgs e)
         {

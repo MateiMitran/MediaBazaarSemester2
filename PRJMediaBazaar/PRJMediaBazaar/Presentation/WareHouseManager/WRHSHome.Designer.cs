@@ -30,12 +30,12 @@ namespace PRJMediaBazaar
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend4 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.pnlNavbar = new System.Windows.Forms.Panel();
             this.pnlAccount = new System.Windows.Forms.Panel();
             this.btnLogOut = new System.Windows.Forms.Button();
@@ -51,16 +51,15 @@ namespace PRJMediaBazaar
             this.label2 = new System.Windows.Forms.Label();
             this.chart2 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
-            this.pnlRestock = new System.Windows.Forms.Panel();
-            this.btnConfirm = new System.Windows.Forms.Button();
-            this.lbRestockRequests = new System.Windows.Forms.ListBox();
             this.lblTitle = new System.Windows.Forms.Label();
             this.lblAccount = new System.Windows.Forms.Label();
             this.lblItems = new System.Windows.Forms.Label();
             this.lblRestock = new System.Windows.Forms.Label();
             this.lblStatistics = new System.Windows.Forms.Label();
+            this.pnlRestock = new System.Windows.Forms.Panel();
+            this.btnConfirm = new System.Windows.Forms.Button();
+            this.lbRestockRequests = new System.Windows.Forms.ListBox();
             this.pnlItems = new System.Windows.Forms.Panel();
-            this.pbItem = new System.Windows.Forms.PictureBox();
             this.btnEditItem = new System.Windows.Forms.Button();
             this.btnAddItem = new System.Windows.Forms.Button();
             this.cbItems = new System.Windows.Forms.ComboBox();
@@ -75,7 +74,6 @@ namespace PRJMediaBazaar
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             this.pnlRestock.SuspendLayout();
             this.pnlItems.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pbItem)).BeginInit();
             this.SuspendLayout();
             // 
             // pnlNavbar
@@ -204,10 +202,10 @@ namespace PRJMediaBazaar
             this.pnlStatistics.Controls.Add(this.label2);
             this.pnlStatistics.Controls.Add(this.chart2);
             this.pnlStatistics.Controls.Add(this.chart1);
-            this.pnlStatistics.Location = new System.Drawing.Point(176, 13);
+            this.pnlStatistics.Location = new System.Drawing.Point(165, 10);
             this.pnlStatistics.Margin = new System.Windows.Forms.Padding(2);
             this.pnlStatistics.Name = "pnlStatistics";
-            this.pnlStatistics.Size = new System.Drawing.Size(38, 24);
+            this.pnlStatistics.Size = new System.Drawing.Size(81, 26);
             this.pnlStatistics.TabIndex = 11;
             // 
             // label3
@@ -234,70 +232,41 @@ namespace PRJMediaBazaar
             // 
             // chart2
             // 
-            chartArea1.Name = "ChartArea1";
-            this.chart2.ChartAreas.Add(chartArea1);
-            legend1.Name = "Legend1";
-            this.chart2.Legends.Add(legend1);
+            chartArea3.Name = "ChartArea1";
+            this.chart2.ChartAreas.Add(chartArea3);
+            legend3.Name = "Legend1";
+            this.chart2.Legends.Add(legend3);
             this.chart2.Location = new System.Drawing.Point(390, 77);
             this.chart2.Margin = new System.Windows.Forms.Padding(2);
             this.chart2.Name = "chart2";
             this.chart2.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Bright;
-            series1.ChartArea = "ChartArea1";
-            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Pie;
-            series1.Legend = "Legend1";
-            series1.Name = "Series1";
-            this.chart2.Series.Add(series1);
+            series3.ChartArea = "ChartArea1";
+            series3.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Pie;
+            series3.Legend = "Legend1";
+            series3.Name = "Series1";
+            this.chart2.Series.Add(series3);
             this.chart2.Size = new System.Drawing.Size(225, 244);
             this.chart2.TabIndex = 8;
             this.chart2.Text = "chart2";
             // 
             // chart1
             // 
-            chartArea2.Name = "ChartArea1";
-            this.chart1.ChartAreas.Add(chartArea2);
-            legend2.Name = "Legend1";
-            this.chart1.Legends.Add(legend2);
+            chartArea4.Name = "ChartArea1";
+            this.chart1.ChartAreas.Add(chartArea4);
+            legend4.Name = "Legend1";
+            this.chart1.Legends.Add(legend4);
             this.chart1.Location = new System.Drawing.Point(40, 77);
             this.chart1.Margin = new System.Windows.Forms.Padding(2);
             this.chart1.Name = "chart1";
             this.chart1.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Bright;
-            series2.ChartArea = "ChartArea1";
-            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Pie;
-            series2.Legend = "Legend1";
-            series2.Name = "Series1";
-            this.chart1.Series.Add(series2);
+            series4.ChartArea = "ChartArea1";
+            series4.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Pie;
+            series4.Legend = "Legend1";
+            series4.Name = "Series1";
+            this.chart1.Series.Add(series4);
             this.chart1.Size = new System.Drawing.Size(225, 244);
             this.chart1.TabIndex = 7;
             this.chart1.Text = "chart1";
-            // 
-            // pnlRestock
-            // 
-            this.pnlRestock.Controls.Add(this.btnConfirm);
-            this.pnlRestock.Controls.Add(this.lbRestockRequests);
-            this.pnlRestock.Location = new System.Drawing.Point(432, 11);
-            this.pnlRestock.Margin = new System.Windows.Forms.Padding(2);
-            this.pnlRestock.Name = "pnlRestock";
-            this.pnlRestock.Size = new System.Drawing.Size(28, 28);
-            this.pnlRestock.TabIndex = 9;
-            // 
-            // btnConfirm
-            // 
-            this.btnConfirm.Location = new System.Drawing.Point(200, 457);
-            this.btnConfirm.Margin = new System.Windows.Forms.Padding(2);
-            this.btnConfirm.Name = "btnConfirm";
-            this.btnConfirm.Size = new System.Drawing.Size(280, 32);
-            this.btnConfirm.TabIndex = 8;
-            this.btnConfirm.Text = "Confirm";
-            this.btnConfirm.UseVisualStyleBackColor = true;
-            // 
-            // lbRestockRequests
-            // 
-            this.lbRestockRequests.FormattingEnabled = true;
-            this.lbRestockRequests.Location = new System.Drawing.Point(204, 151);
-            this.lbRestockRequests.Margin = new System.Windows.Forms.Padding(2);
-            this.lbRestockRequests.Name = "lbRestockRequests";
-            this.lbRestockRequests.Size = new System.Drawing.Size(171, 186);
-            this.lbRestockRequests.TabIndex = 7;
             // 
             // lblTitle
             // 
@@ -368,28 +337,48 @@ namespace PRJMediaBazaar
             this.lblStatistics.Text = "Statistics";
             this.lblStatistics.Click += new System.EventHandler(this.lblStatistics_Click);
             // 
+            // pnlRestock
+            // 
+            this.pnlRestock.Controls.Add(this.btnConfirm);
+            this.pnlRestock.Controls.Add(this.lbRestockRequests);
+            this.pnlRestock.Location = new System.Drawing.Point(475, 10);
+            this.pnlRestock.Margin = new System.Windows.Forms.Padding(2);
+            this.pnlRestock.Name = "pnlRestock";
+            this.pnlRestock.Size = new System.Drawing.Size(38, 35);
+            this.pnlRestock.TabIndex = 9;
+            // 
+            // btnConfirm
+            // 
+            this.btnConfirm.Location = new System.Drawing.Point(200, 457);
+            this.btnConfirm.Margin = new System.Windows.Forms.Padding(2);
+            this.btnConfirm.Name = "btnConfirm";
+            this.btnConfirm.Size = new System.Drawing.Size(280, 32);
+            this.btnConfirm.TabIndex = 8;
+            this.btnConfirm.Text = "Confirm";
+            this.btnConfirm.UseVisualStyleBackColor = true;
+            // 
+            // lbRestockRequests
+            // 
+            this.lbRestockRequests.FormattingEnabled = true;
+            this.lbRestockRequests.Location = new System.Drawing.Point(66, 64);
+            this.lbRestockRequests.Margin = new System.Windows.Forms.Padding(2);
+            this.lbRestockRequests.Name = "lbRestockRequests";
+            this.lbRestockRequests.Size = new System.Drawing.Size(46, 17);
+            this.lbRestockRequests.TabIndex = 7;
+            // 
             // pnlItems
             // 
-            this.pnlItems.Controls.Add(this.pbItem);
             this.pnlItems.Controls.Add(this.btnEditItem);
             this.pnlItems.Controls.Add(this.btnAddItem);
             this.pnlItems.Controls.Add(this.cbItems);
             this.pnlItems.Controls.Add(this.label1);
             this.pnlItems.Controls.Add(this.lbItems);
             this.pnlItems.Controls.Add(this.lblInfo);
-            this.pnlItems.Location = new System.Drawing.Point(1, 54);
+            this.pnlItems.Location = new System.Drawing.Point(1, 50);
             this.pnlItems.Margin = new System.Windows.Forms.Padding(2);
             this.pnlItems.Name = "pnlItems";
-            this.pnlItems.Size = new System.Drawing.Size(670, 496);
+            this.pnlItems.Size = new System.Drawing.Size(670, 500);
             this.pnlItems.TabIndex = 13;
-            // 
-            // pbItem
-            // 
-            this.pbItem.Location = new System.Drawing.Point(277, 233);
-            this.pbItem.Name = "pbItem";
-            this.pbItem.Size = new System.Drawing.Size(234, 199);
-            this.pbItem.TabIndex = 14;
-            this.pbItem.TabStop = false;
             // 
             // btnEditItem
             // 
@@ -485,7 +474,6 @@ namespace PRJMediaBazaar
             this.pnlRestock.ResumeLayout(false);
             this.pnlItems.ResumeLayout(false);
             this.pnlItems.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pbItem)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -523,6 +511,5 @@ namespace PRJMediaBazaar
         private System.Windows.Forms.Button btnConfirm;
         private System.Windows.Forms.ListBox lbRestockRequests;
         private System.Windows.Forms.Timer godTimer;
-        private System.Windows.Forms.PictureBox pbItem;
     }
 }
