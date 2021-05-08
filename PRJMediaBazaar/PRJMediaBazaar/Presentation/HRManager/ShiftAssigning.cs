@@ -102,7 +102,7 @@ namespace PRJMediaBazaar
 
                 Button Assign = new Button()
                 {
-                    BackColor = System.Drawing.Color.LightCyan,
+                    BackColor = Color.LightCyan,
                     Cursor = System.Windows.Forms.Cursors.Hand,
                     FlatStyle = System.Windows.Forms.FlatStyle.Flat,
                     Dock = DockStyle.Fill,
@@ -114,6 +114,11 @@ namespace PRJMediaBazaar
                     Text = "Assign",
                     UseVisualStyleBackColor = true
                 };
+
+                if(ep.PreferedShift == _shift.ToString())
+                {
+                    Assign.BackColor = Color.Green;
+                }
                Assign.FlatAppearance.BorderSize = 0;
                Assign.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
                Assign.Click += delegate (object sender, EventArgs e) { Assign_Click(sender, e, ep); };

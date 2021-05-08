@@ -337,7 +337,6 @@ C:\Users\Matei Mitran\Desktop\Fontys\Semester 2\Project\Media Bazaar\prj-cb05-gr
 C:\Users\Matei Mitran\Desktop\Fontys\Semester 2\Project\Media Bazaar\prj-cb05-group-5-project\PRJMediaBazaar\PRJMediaBazaar\obj\Debug\PRJMediaBazaar.EditItem.resources
 D:\SEMESTER 2\PRJ\prj-cb05-group-5-project\PRJMediaBazaar\PRJMediaBazaar\obj\Debug\PRJMediaBazaar.AddItem.resources
 D:\SEMESTER 2\PRJ\prj-cb05-group-5-project\PRJMediaBazaar\PRJMediaBazaar\obj\Debug\PRJMediaBazaar.EditItem.resources
-D:\SEMESTER 2\PRJ\prj-cb05-group-5-project\PRJMediaBazaar\PRJMediaBazaar\obj\Debug\PRJMediaBazaar.ItemSpecifications.resources
 D:\SEMESTER 2\PRJ\prj-cb05-group-5-project\PRJMediaBazaar\PRJMediaBazaar\obj\Debug\PRJMediaBazaar.RequestsOverview.resources
 C:\Users\matei\Desktop\Fontys\Semester 2\Project\Media Bazaar\prj-cb05-group-5-project\PRJMediaBazaar\PRJMediaBazaar\obj\Debug\PRJMediaBazaar.csprojAssemblyReference.cache
 C:\Users\matei\Desktop\Fontys\Semester 2\Project\Media Bazaar\prj-cb05-group-5-project\PRJMediaBazaar\PRJMediaBazaar\obj\Debug\PRJMediaBazaar.RequestsOverview.resources
@@ -431,3 +430,5 @@ C:\Users\Aleksej\Desktop\Projects\MediaBazar\prj-cb05-group-5-project\PRJMediaBa
 C:\Users\Aleksej\Desktop\Projects\MediaBazar\prj-cb05-group-5-project\PRJMediaBazaar\PRJMediaBazaar\obj\Debug\PRJMediaBazaar.pdb
 C:\Users\matei\Desktop\Fontys\Semester 2\Project\Media Bazaar\prj-cb05-group-5-project\PRJMediaBazaar\PRJMediaBazaar\obj\Debug\PRJMediaBazaar.StockerHome.resources
 C:\Users\matei\Desktop\Fontys\Semester 2\Project\Media Bazaar\prj-cb05-group-5-project\PRJMediaBazaar\PRJMediaBazaar\obj\Debug\PRJMediaBazaar.CashierHome.resources
+D:\SEMESTER 2\PRJ\prj-cb05-group-5-project\PRJMediaBazaar\PRJMediaBazaar\obj\Debug\PRJMediaBazaar.CashierHome.resources
+D:\SEMESTER 2\PRJ\prj-cb05-group-5-project\PRJMediaBazaar\PRJMediaBazaar\obj\Debug\PRJMediaBazaar.StockerHome.resources

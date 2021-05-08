@@ -47,6 +47,8 @@ namespace PRJMediaBazaar
             this.lbSickReports = new System.Windows.Forms.ListBox();
             this.btnMarkAsSeen = new System.Windows.Forms.Button();
             this.pnlDayOff = new System.Windows.Forms.Panel();
+            this.btnConfirmedRequests = new System.Windows.Forms.Button();
+            this.btnDeniedRequests = new System.Windows.Forms.Button();
             this.label6 = new System.Windows.Forms.Label();
             this.btnDenyDayOff = new System.Windows.Forms.Button();
             this.btnConfirmDayOff = new System.Windows.Forms.Button();
@@ -74,8 +76,6 @@ namespace PRJMediaBazaar
             this.btnDeleteSchedule = new System.Windows.Forms.Button();
             this.pnlNavbar = new System.Windows.Forms.Panel();
             this.godTimer = new System.Windows.Forms.Timer(this.components);
-            this.btnDeniedRequests = new System.Windows.Forms.Button();
-            this.btnConfirmedRequests = new System.Windows.Forms.Button();
             this.panelEmployees.SuspendLayout();
             this.panelSickReports.SuspendLayout();
             this.pnlDayOff.SuspendLayout();
@@ -283,12 +283,32 @@ namespace PRJMediaBazaar
             this.pnlDayOff.Controls.Add(this.btnDenyDayOff);
             this.pnlDayOff.Controls.Add(this.btnConfirmDayOff);
             this.pnlDayOff.Controls.Add(this.lbDayOff);
-            this.pnlDayOff.Location = new System.Drawing.Point(11, 52);
+            this.pnlDayOff.Location = new System.Drawing.Point(11, 428);
             this.pnlDayOff.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
             this.pnlDayOff.Name = "pnlDayOff";
-            this.pnlDayOff.Size = new System.Drawing.Size(847, 490);
+            this.pnlDayOff.Size = new System.Drawing.Size(95, 114);
             this.pnlDayOff.TabIndex = 24;
             this.pnlDayOff.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlDayOff_Paint);
+            // 
+            // btnConfirmedRequests
+            // 
+            this.btnConfirmedRequests.Location = new System.Drawing.Point(137, 31);
+            this.btnConfirmedRequests.Name = "btnConfirmedRequests";
+            this.btnConfirmedRequests.Size = new System.Drawing.Size(110, 26);
+            this.btnConfirmedRequests.TabIndex = 28;
+            this.btnConfirmedRequests.Text = "Confirmed Requests";
+            this.btnConfirmedRequests.UseVisualStyleBackColor = true;
+            this.btnConfirmedRequests.Click += new System.EventHandler(this.btnConfirmedRequests_Click);
+            // 
+            // btnDeniedRequests
+            // 
+            this.btnDeniedRequests.Location = new System.Drawing.Point(21, 30);
+            this.btnDeniedRequests.Name = "btnDeniedRequests";
+            this.btnDeniedRequests.Size = new System.Drawing.Size(110, 26);
+            this.btnDeniedRequests.TabIndex = 28;
+            this.btnDeniedRequests.Text = "Denied Requests";
+            this.btnDeniedRequests.UseVisualStyleBackColor = true;
+            this.btnDeniedRequests.Click += new System.EventHandler(this.btnDeniedRequests_Click);
             // 
             // label6
             // 
@@ -352,10 +372,10 @@ namespace PRJMediaBazaar
             this.panelSchedule.Controls.Add(this.lblWeek);
             this.panelSchedule.Controls.Add(this.cbDay);
             this.panelSchedule.Controls.Add(this.btnDeleteSchedule);
-            this.panelSchedule.Location = new System.Drawing.Point(305, 18);
+            this.panelSchedule.Location = new System.Drawing.Point(11, 52);
             this.panelSchedule.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
             this.panelSchedule.Name = "panelSchedule";
-            this.panelSchedule.Size = new System.Drawing.Size(46, 27);
+            this.panelSchedule.Size = new System.Drawing.Size(855, 489);
             this.panelSchedule.TabIndex = 20;
             this.panelSchedule.Paint += new System.Windows.Forms.PaintEventHandler(this.panelSchedule_Paint_1);
             // 
@@ -596,7 +616,6 @@ namespace PRJMediaBazaar
             // pnlNavbar
             // 
             this.pnlNavbar.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.pnlNavbar.Controls.Add(this.panelSchedule);
             this.pnlNavbar.Controls.Add(this.panelEmployees);
             this.pnlNavbar.Controls.Add(this.panelSickReports);
             this.pnlNavbar.Controls.Add(this.lblTitle);
@@ -616,31 +635,12 @@ namespace PRJMediaBazaar
             this.godTimer.Interval = 3000;
             this.godTimer.Tick += new System.EventHandler(this.godTimer_Tick);
             // 
-            // btnDeniedRequests
-            // 
-            this.btnDeniedRequests.Location = new System.Drawing.Point(21, 30);
-            this.btnDeniedRequests.Name = "btnDeniedRequests";
-            this.btnDeniedRequests.Size = new System.Drawing.Size(110, 26);
-            this.btnDeniedRequests.TabIndex = 28;
-            this.btnDeniedRequests.Text = "Denied Requests";
-            this.btnDeniedRequests.UseVisualStyleBackColor = true;
-            this.btnDeniedRequests.Click += new System.EventHandler(this.btnDeniedRequests_Click);
-            // 
-            // btnConfirmedRequests
-            // 
-            this.btnConfirmedRequests.Location = new System.Drawing.Point(137, 31);
-            this.btnConfirmedRequests.Name = "btnConfirmedRequests";
-            this.btnConfirmedRequests.Size = new System.Drawing.Size(110, 26);
-            this.btnConfirmedRequests.TabIndex = 28;
-            this.btnConfirmedRequests.Text = "Confirmed Requests";
-            this.btnConfirmedRequests.UseVisualStyleBackColor = true;
-            this.btnConfirmedRequests.Click += new System.EventHandler(this.btnConfirmedRequests_Click);
-            // 
             // HRHome
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(869, 552);
+            this.Controls.Add(this.panelSchedule);
             this.Controls.Add(this.pnlDayOff);
             this.Controls.Add(this.pnlNavbar);
             this.Margin = new System.Windows.Forms.Padding(2);

@@ -80,5 +80,56 @@ namespace PRJMediaBazaar.Data
             }
 
         }
+
+        public string GetPrefferedShift(int employeeId, DateTime date)
+        {
+            try
+            {
+                string table = "";
+                switch (date.DayOfWeek)
+                {
+                    case DayOfWeek.Monday:
+                        table = "monday";
+                        break;
+
+                    case DayOfWeek.Tuesday:
+                        table = "tuesday";
+                        break;
+
+                    case DayOfWeek.Wednesday:
+                        table = "wednesday";
+                        break;
+
+                    case DayOfWeek.Thursday:
+                        table = "thursday";
+                        break;
+
+                    case DayOfWeek.Friday:
+                        table = "friday";
+                        break;
+
+                    case DayOfWeek.Saturday:
+                        table = "saturday";
+                        break;
+
+                    case DayOfWeek.Sunday:
+                        table = "sunday";
+                        break;
+                }
+                string sql = $"SELECT {table} FROM employees_preferences WHERE employee_id = @id";
+                string[] parameters = new string[] { employeeId.ToString() };
+                Object result = executeScalar(sql, parameters);
+                if (result != null)
+                {
+                    return result.ToString();
+                }
+                return "";
+            }
+            finally
+            {
+                CloseConnection();
+            }
+           
+        }
     }
 }

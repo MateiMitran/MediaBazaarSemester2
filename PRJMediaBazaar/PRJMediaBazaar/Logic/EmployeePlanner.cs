@@ -12,6 +12,7 @@ namespace PRJMediaBazaar.Logic
         public string Occupation { get; set; }
         public int EmptyShiftIndex { get; set; }
         public double HoursWorked { get; set; }
+        public string PreferedShift { get; set; }
 
         public EmployeePlanner(Employee emp, string occupation, int emptyShiftIndex, double hoursWorked)
         {

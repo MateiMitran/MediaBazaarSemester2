@@ -56,6 +56,7 @@ namespace PRJMediaBazaar.Logic
                     {
 
                         EmployeePlanner ea = new EmployeePlanner(employee, busyShift, index, hoursInfo);
+                        ea.PreferedShift = availabilitiesDAL.GetPrefferedShift(employee.Id, day.Date);
                         _available.Add(ea);
                     }
                     else // the double shift is invalid
@@ -80,6 +81,7 @@ namespace PRJMediaBazaar.Logic
                 {
                     double hoursInfo = availabilitiesDAL.SelectWorkedHours(day.WeekId, employee.Id);
                     EmployeePlanner ea = new EmployeePlanner(employee, "None", -1, hoursInfo);
+                    ea.PreferedShift = availabilitiesDAL.GetPrefferedShift(employee.Id, day.Date);
                     _available.Add(ea);
                 }
             }
