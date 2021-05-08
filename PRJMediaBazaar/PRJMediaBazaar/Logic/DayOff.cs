@@ -29,25 +29,6 @@ namespace PRJMediaBazaar.Logic
             Objection = objection;
         }
 
-        public Day GetDayById(int scheduleId, int dayId)
-        {
-            EmployeeControl employeeControl = new EmployeeControl();
-            ScheduleControl scheduleControl = new ScheduleControl(employeeControl);
-
-            Day[] days = scheduleControl.GetDays(scheduleId);
-            Day day = new Day();
-
-            for (int i = 0; i < days.Length; i++)
-            {
-                if (days[i].Id == dayId)
-                {
-                    day = days[i];
-                    break;
-                }
-            }
-
-            return day;
-        }
 
 
         public override string ToString()

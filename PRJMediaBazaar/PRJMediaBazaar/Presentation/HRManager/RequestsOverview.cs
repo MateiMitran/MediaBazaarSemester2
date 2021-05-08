@@ -12,12 +12,12 @@ namespace PRJMediaBazaar
 {
      partial class RequestsOverview : Form
     {
-        private DayOff[] _requests;
-        public RequestsOverview(DayOff[] requests, string info)
+        private string[] _requests;
+        public RequestsOverview(string[] requests, string info)
         {
             InitializeComponent();
             _requests = requests;
-            foreach(DayOff r in _requests)
+            foreach(string r in _requests)
             {
                 listBox1.Items.Add(r);
             }

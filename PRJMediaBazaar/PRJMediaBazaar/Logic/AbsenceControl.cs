@@ -23,7 +23,7 @@ namespace PRJMediaBazaar.Logic
             _scheduleControl = scheduleControl;
             absenceDAL = new AbsenceDAL(scheduleControl.EmployeeControl.GetAllEmployees(), scheduleControl);
             LoadPendingDaysOff();
-            LoadSickReports();
+            LoadNewSickReports();
         }
 
 
@@ -31,20 +31,43 @@ namespace PRJMediaBazaar.Logic
         {
             dayoff_req = absenceDAL.SelectDayOffRequests("pending");
         }
-        public DayOff[] GetConfirmedDaysOff() // add the DayOff requests to the list 
+        public string[] GetConfirmedDaysOff() // add the DayOff requests to the list 
         {
-            return absenceDAL.SelectDayOffRequests("confirmed").ToArray();
+            List<DayOff> requests = absenceDAL.SelectDayOffRequests("confirmed");
+            List<string> strings = new List<string>();
+            foreach (DayOff d in requests)
+            {
+                strings.Add(d.ToString());
+            }
+            return strings.ToArray();
         }
 
-        public DayOff[] GetDeniedDaysOff() // add the DayOff requests to the list 
+        public string[] GetDeniedDaysOff() // add the DayOff requests to the list 
         {
-            return absenceDAL.SelectDayOffRequests("denied").ToArray();
+            List<DayOff> requests = absenceDAL.SelectDayOffRequests("denied");
+            List<string> strings = new List<string>();
+           foreach(DayOff d in requests)
+            {
+                strings.Add(d.ToString());
+            }
+            return strings.ToArray();
         }
 
 
-        public void LoadSickReports()
+        public void LoadNewSickReports()
         {
-            sick_req = absenceDAL.SelectSickReports();
+            sick_req = absenceDAL.SelectSickReports(0);
+        }
+
+        public string[] GetOldSickReports()
+        {
+            List<SickReport> reps = absenceDAL.SelectSickReports(1);
+            List<string> strings = new List<string>();
+            foreach (SickReport r in reps)
+            {
+                strings.Add(r.ToString());
+            }
+            return strings.ToArray();
         }
 
 
@@ -54,9 +77,9 @@ namespace PRJMediaBazaar.Logic
             absenceDAL.DenyDayOffRequest(requestId, note);
         }
 
-        public bool MarkAsSeen(int dayId, int empId)
+        public bool MarkAsSeen(int reportId)
         {
-            return absenceDAL.ConfirmSickReport(dayId, empId);
+            return absenceDAL.ConfirmSickReport(reportId);
         }
 
         /// <summary>

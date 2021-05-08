@@ -43,9 +43,10 @@ namespace PRJMediaBazaar
             this.lblAllEmployees = new System.Windows.Forms.Label();
             this.btnAddLatePoints = new System.Windows.Forms.Button();
             this.panelSickReports = new System.Windows.Forms.Panel();
+            this.btnMarkAsSeen = new System.Windows.Forms.Button();
+            this.btnOldReports = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
             this.lbSickReports = new System.Windows.Forms.ListBox();
-            this.btnMarkAsSeen = new System.Windows.Forms.Button();
             this.pnlDayOff = new System.Windows.Forms.Panel();
             this.btnConfirmedRequests = new System.Windows.Forms.Button();
             this.btnDeniedRequests = new System.Windows.Forms.Button();
@@ -56,7 +57,6 @@ namespace PRJMediaBazaar
             this.panelSchedule = new System.Windows.Forms.Panel();
             this.btnGenerateSchedule = new System.Windows.Forms.Button();
             this.lblPositionNeeded = new System.Windows.Forms.Label();
-            this.lbIncompleteDays = new System.Windows.Forms.ListBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -235,45 +235,55 @@ namespace PRJMediaBazaar
             // 
             // panelSickReports
             // 
+            this.panelSickReports.Controls.Add(this.btnMarkAsSeen);
+            this.panelSickReports.Controls.Add(this.btnOldReports);
             this.panelSickReports.Controls.Add(this.label7);
             this.panelSickReports.Controls.Add(this.lbSickReports);
-            this.panelSickReports.Controls.Add(this.btnMarkAsSeen);
-            this.panelSickReports.Location = new System.Drawing.Point(533, 18);
+            this.panelSickReports.Location = new System.Drawing.Point(11, 55);
             this.panelSickReports.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
             this.panelSickReports.Name = "panelSickReports";
-            this.panelSickReports.Size = new System.Drawing.Size(37, 16);
+            this.panelSickReports.Size = new System.Drawing.Size(857, 487);
             this.panelSickReports.TabIndex = 24;
             this.panelSickReports.Paint += new System.Windows.Forms.PaintEventHandler(this.panelSickReports_Paint);
+            // 
+            // btnMarkAsSeen
+            // 
+            this.btnMarkAsSeen.Location = new System.Drawing.Point(340, 439);
+            this.btnMarkAsSeen.Name = "btnMarkAsSeen";
+            this.btnMarkAsSeen.Size = new System.Drawing.Size(114, 26);
+            this.btnMarkAsSeen.TabIndex = 29;
+            this.btnMarkAsSeen.Text = "Mark As Seen";
+            this.btnMarkAsSeen.UseVisualStyleBackColor = true;
+            this.btnMarkAsSeen.Click += new System.EventHandler(this.btnMarkAsSeen_Click_1);
+            // 
+            // btnOldReports
+            // 
+            this.btnOldReports.Location = new System.Drawing.Point(50, 60);
+            this.btnOldReports.Name = "btnOldReports";
+            this.btnOldReports.Size = new System.Drawing.Size(114, 26);
+            this.btnOldReports.TabIndex = 29;
+            this.btnOldReports.Text = "Old Reports";
+            this.btnOldReports.UseVisualStyleBackColor = true;
+            this.btnOldReports.Click += new System.EventHandler(this.btnOldReports_Click);
             // 
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 22F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(338, 201);
+            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.Location = new System.Drawing.Point(358, 62);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(173, 36);
+            this.label7.Size = new System.Drawing.Size(119, 24);
             this.label7.TabIndex = 28;
-            this.label7.Text = "Sick reports";
+            this.label7.Text = "New Reports";
             // 
             // lbSickReports
             // 
             this.lbSickReports.FormattingEnabled = true;
-            this.lbSickReports.Location = new System.Drawing.Point(59, 59);
+            this.lbSickReports.Location = new System.Drawing.Point(50, 93);
             this.lbSickReports.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
             this.lbSickReports.Name = "lbSickReports";
             this.lbSickReports.Size = new System.Drawing.Size(751, 342);
             this.lbSickReports.TabIndex = 21;
-            // 
-            // btnMarkAsSeen
-            // 
-            this.btnMarkAsSeen.Location = new System.Drawing.Point(368, 428);
-            this.btnMarkAsSeen.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
-            this.btnMarkAsSeen.Name = "btnMarkAsSeen";
-            this.btnMarkAsSeen.Size = new System.Drawing.Size(159, 44);
-            this.btnMarkAsSeen.TabIndex = 23;
-            this.btnMarkAsSeen.Text = "Mark report as seen";
-            this.btnMarkAsSeen.UseVisualStyleBackColor = true;
-            this.btnMarkAsSeen.Click += new System.EventHandler(this.btnMarkAsSeen_Click);
             // 
             // pnlDayOff
             // 
@@ -283,10 +293,10 @@ namespace PRJMediaBazaar
             this.pnlDayOff.Controls.Add(this.btnDenyDayOff);
             this.pnlDayOff.Controls.Add(this.btnConfirmDayOff);
             this.pnlDayOff.Controls.Add(this.lbDayOff);
-            this.pnlDayOff.Location = new System.Drawing.Point(11, 428);
+            this.pnlDayOff.Location = new System.Drawing.Point(11, 52);
             this.pnlDayOff.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
             this.pnlDayOff.Name = "pnlDayOff";
-            this.pnlDayOff.Size = new System.Drawing.Size(95, 114);
+            this.pnlDayOff.Size = new System.Drawing.Size(855, 490);
             this.pnlDayOff.TabIndex = 24;
             this.pnlDayOff.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlDayOff_Paint);
             // 
@@ -355,7 +365,6 @@ namespace PRJMediaBazaar
             // 
             this.panelSchedule.Controls.Add(this.btnGenerateSchedule);
             this.panelSchedule.Controls.Add(this.lblPositionNeeded);
-            this.panelSchedule.Controls.Add(this.lbIncompleteDays);
             this.panelSchedule.Controls.Add(this.label4);
             this.panelSchedule.Controls.Add(this.label3);
             this.panelSchedule.Controls.Add(this.label2);
@@ -372,10 +381,10 @@ namespace PRJMediaBazaar
             this.panelSchedule.Controls.Add(this.lblWeek);
             this.panelSchedule.Controls.Add(this.cbDay);
             this.panelSchedule.Controls.Add(this.btnDeleteSchedule);
-            this.panelSchedule.Location = new System.Drawing.Point(11, 52);
+            this.panelSchedule.Location = new System.Drawing.Point(0, 53);
             this.panelSchedule.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
             this.panelSchedule.Name = "panelSchedule";
-            this.panelSchedule.Size = new System.Drawing.Size(855, 489);
+            this.panelSchedule.Size = new System.Drawing.Size(878, 488);
             this.panelSchedule.TabIndex = 20;
             this.panelSchedule.Paint += new System.Windows.Forms.PaintEventHandler(this.panelSchedule_Paint_1);
             // 
@@ -398,16 +407,6 @@ namespace PRJMediaBazaar
             this.lblPositionNeeded.Size = new System.Drawing.Size(131, 20);
             this.lblPositionNeeded.TabIndex = 36;
             this.lblPositionNeeded.Text = "Position needed: ";
-            // 
-            // lbIncompleteDays
-            // 
-            this.lbIncompleteDays.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbIncompleteDays.FormattingEnabled = true;
-            this.lbIncompleteDays.ItemHeight = 16;
-            this.lbIncompleteDays.Location = new System.Drawing.Point(536, 174);
-            this.lbIncompleteDays.Name = "lbIncompleteDays";
-            this.lbIncompleteDays.Size = new System.Drawing.Size(312, 212);
-            this.lbIncompleteDays.TabIndex = 35;
             // 
             // label4
             // 
@@ -617,7 +616,6 @@ namespace PRJMediaBazaar
             // 
             this.pnlNavbar.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.pnlNavbar.Controls.Add(this.panelEmployees);
-            this.pnlNavbar.Controls.Add(this.panelSickReports);
             this.pnlNavbar.Controls.Add(this.lblTitle);
             this.pnlNavbar.Controls.Add(this.lblDayOffReports);
             this.pnlNavbar.Controls.Add(this.lblEmployees);
@@ -643,6 +641,7 @@ namespace PRJMediaBazaar
             this.Controls.Add(this.panelSchedule);
             this.Controls.Add(this.pnlDayOff);
             this.Controls.Add(this.pnlNavbar);
+            this.Controls.Add(this.panelSickReports);
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "HRHome";
             this.Text = "HRHome";
@@ -685,7 +684,6 @@ namespace PRJMediaBazaar
         private System.Windows.Forms.Label lblPosition;
         private System.Windows.Forms.Panel panelSchedule;
         private System.Windows.Forms.ListBox lbSickReports;
-        private System.Windows.Forms.Button btnMarkAsSeen;
         private System.Windows.Forms.Panel panelSickReports;
         private System.Windows.Forms.Panel pnlDayOff;
         private System.Windows.Forms.Button btnDenyDayOff;
@@ -702,14 +700,15 @@ namespace PRJMediaBazaar
         private System.Windows.Forms.Label lblPositionNeeded;
         public System.Windows.Forms.TableLayoutPanel ShiftsTable;
         public System.Windows.Forms.ComboBox cbDay;
-        private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Button btnGenerateSchedule;
         private System.Windows.Forms.Button btnDeleteSchedule;
-        private System.Windows.Forms.ListBox lbIncompleteDays;
         private System.Windows.Forms.Timer godTimer;
         private System.Windows.Forms.ComboBox cbEmployees;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Button btnConfirmedRequests;
         private System.Windows.Forms.Button btnDeniedRequests;
+        private System.Windows.Forms.Button btnOldReports;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Button btnMarkAsSeen;
     }
 }

@@ -15,7 +15,7 @@ namespace PRJMediaBazaar
 {
     partial class HRHome : Form
     {
-        private static string[] positions = new string[] { "Security", "Cashier", "Stocker", "SalesAssistant", "WarehouseManager"};
+        private static string[] positions = new string[] { "Security", "Cashier", "Stocker", "SalesAssistant", "WarehouseManager" };
 
         private EmployeeControl _empControl;
         private AbsenceControl _absenceControl;
@@ -29,9 +29,10 @@ namespace PRJMediaBazaar
         private Button x;
 
         private List<DayOff> daysOff;
+        private List<SickReport> sickReports;
         private List<Button> buttons;
         private List<Timer> timers;
-        
+
         public HRHome(LogIn loginForm)
         {
             InitializeComponent();
@@ -50,11 +51,23 @@ namespace PRJMediaBazaar
             this.btnGenerateSchedule.Enabled = false;
             this.btnDeleteSchedule.Enabled = false;
 
-            foreach(Schedule s in _scheduleControl.Schedules)
+            foreach (Schedule s in _scheduleControl.Schedules)
             {
                 this.cbSchedule.Items.Add(s);
             }
-            
+            LoadDayOffRequests();
+            LoadSickReports();
+
+            if (sickReports.Count > 0)
+            {
+                MessageBox.Show("New Sick Reports! Please check which shifts are dismissed and re-assign other employees!");
+                this.lblSickReports.BackColor = Color.Red;
+            }
+            if (daysOff.Count > 0)
+            {
+                this.lblDayOffReports.BackColor = Color.Red;
+            }
+
 
         }
         private void ReloadShiftAssigningForm_Event(Shift shift, string jobPosition, Day day)
@@ -81,7 +94,7 @@ namespace PRJMediaBazaar
         public void LoadEmployees()
         {
             _employees = _empControl.Employees;
-            for (int i=0;i<_employees.Length;i++)
+            for (int i = 0; i < _employees.Length; i++)
             {
                 this.cbEmployees.Items.Add(_employees[i].FullName);
             }
@@ -164,10 +177,6 @@ namespace PRJMediaBazaar
             this.panelSchedule.Visible = false;
             this.panelSickReports.Visible = false;
             this.pnlDayOff.Visible = false;
-
-
-            /* LOAD DAY OFF REQUESTS */
-            LoadDayOffRequests();
         }
 
         private void lblAllEmployees_Click(object sender, EventArgs e)
@@ -241,7 +250,7 @@ namespace PRJMediaBazaar
 
         private void cbPosition_SelectedIndexChanged(object sender, EventArgs e)
         {
-           
+
             //reload the table layout panel, based on the day and position
             //if All is selected, disable the change position button.
             //enable the button if All is not selected.
@@ -264,7 +273,7 @@ namespace PRJMediaBazaar
 
         private void cbDay_SelectedIndexChanged(object sender, EventArgs e)
         {
-            
+
             //if a position is selected, reload the table layout panel, based on the day and position
             Day day = (Day)this.cbDay.SelectedItem;
             if (cbPosition.Text != "All")
@@ -512,8 +521,8 @@ namespace PRJMediaBazaar
 
         private void RemoveShift(Shift shift, Employee employee)
         {
-           
-                _scheduleControl.RemoveShift(shift.ToString(), ((Day)cbDay.SelectedItem), employee);
+
+            _scheduleControl.RemoveShift(shift.ToString(), ((Day)cbDay.SelectedItem), employee);
             LoadTableByPosition((Day)cbDay.SelectedItem, employee.JobPosition);
             StatusFunction($"Removed {employee.FullName}'s {shift.ToString()} shift", -6, -1, 900, 28, Color.Green);
             UpdateDaysInfo();
@@ -529,37 +538,8 @@ namespace PRJMediaBazaar
             }
         }
 
+
         public void UpdateDaysInfo()
-        {
-            this.lbIncompleteDays.Items.Clear();
-            if(_scheduleControl.ScheduleStatus(_currentSchedule) == "started")
-            {
-                foreach (Day day in _currentSchedule.Days)
-                {
-                    if (day != null && _scheduleControl.DayStatus(day) == "started")
-                    {
-                        var difs = day.DutyDifs;
-                        string info = $"({day.Date.DayOfWeek}) {day.Date.ToString("dd-MM")}| Missing shifts:  ";
-                        foreach (string position in HRHome.positions)
-                        {
-                            int dif = difs[position];
-
-                            if (dif > 0)
-                            {
-                                info += $"{dif} {position}/ ";
-                            }
-
-                        }
-                        this.lbIncompleteDays.Items.Add(info);
-                    }
-
-                }
-            }
-            RedrawComboboxes();
-           
-        }
-
-        public void RedrawComboboxes()
         {
             cbSchedule.Invalidate();
             cbDay.Invalidate();
@@ -651,6 +631,14 @@ namespace PRJMediaBazaar
         {
         }
 
+        public void CheckDayOffLabel()
+        {
+            if (this.lbDayOff.Items.Count == 0)
+            {
+                this.lblDayOffReports.BackColor = Color.Black;
+            }
+        }
+
         private void btnConfirmDayOff_Click(object sender, EventArgs e)
         {
             /* CONFIRM DAY OFF REQUEST */
@@ -670,6 +658,11 @@ namespace PRJMediaBazaar
             {
                 StatusFunction("Select a day off request!", -6, -1, 900, 28, Color.Red);
             }
+
+            if (this.lbDayOff.Items.Count == 0)
+            {
+                this.lblDayOffReports.BackColor = Color.Black;
+            }
         }
 
         public void RemoveDayOff(DayOff d)
@@ -685,6 +678,17 @@ namespace PRJMediaBazaar
            foreach(DayOff d in daysOff)
             {
                 this.lbDayOff.Items.Add(d);
+            }
+        }
+
+        private void LoadSickReports()
+        {
+            lbSickReports.Items.Clear();
+            _absenceControl.LoadNewSickReports();
+            sickReports = _absenceControl.SickReports;
+            foreach (SickReport sr in sickReports)
+            {
+                this.lbSickReports.Items.Add(sr);
             }
         }
 
@@ -787,60 +791,7 @@ namespace PRJMediaBazaar
             UpdateDaysInfo();
         }
 
-        private void timer1_Tick(object sender, EventArgs e)
-        {
-            
-        }
-
-        private void btnMarkAsSeen_Click(object sender, EventArgs e)
-        {  /*
-             int index = lbSickReports.SelectedIndex;
-
-             if (index >= 0)
-             {
-                 SickDay req = _scheduleControl.SickReports[index];
-                 bool query = _scheduleControl.MarkAsSeen(req.Day_id, req.Employee_id);
-
-                 if (query)
-                 {
-                     _scheduleControl.SickReports.RemoveAt(index);
-                     LoadSickReports();
-                     req.MarkAsSeen(true);
-                     MessageBox.Show("Declaration checked");
-                 }
-                 else
-                 {
-                     MessageBox.Show("An error occurred, please try again later.");
-                 }
-             }
-             else
-             {
-                 MessageBox.Show("Please select a report to confirm");
-             }
-
-             /* void LoadSickReports()
-             {
-                 lbSickReports.Items.Clear();
-                 List<SickDay> sick_request = _scheduleControl.SickReports;
-
-                 for (int i = 0; i < sick_request.Count(); i++)
-                 {
-                     SickDay sick = sick_request[i];
-                     int scheduleId = sick.Schedule_id;
-                     int dayId = sick.Day_id;
-                     int employeeId = sick.Employee_id;
-                     string reason = sick.Description;
-                     bool seen = sick.Seen;
-
-
-                     DateTime day = sick.GetDayById(scheduleId, dayId).Date;
-                     Employee employee = _empControl.GetEmployee(employeeId);
-
-                     lbSickReports.Items.Add(day.ToString("dd/MM/yyyy") + " --> " + employee.FullName + reason + seen);
-                 }
-             } */
-        }
-
+    
         private void cbPosition_DrawItem(object sender, DrawItemEventArgs e)
         {
             // Draw the background 
@@ -940,6 +891,28 @@ namespace PRJMediaBazaar
             RequestsOverview form = new RequestsOverview(_absenceControl.GetConfirmedDaysOff(), "Confirmed Requests:");
             form.Show();
 
+        }
+
+        private void btnOldReports_Click(object sender, EventArgs e)
+        {
+            RequestsOverview form = new RequestsOverview(_absenceControl.GetOldSickReports(), "Old Reports:");
+            form.Show();
+        }
+
+        private void btnMarkAsSeen_Click_1(object sender, EventArgs e)
+        {
+            SickReport report = (SickReport)this.lbSickReports.SelectedItem;
+            if(report != null)
+            {
+                _absenceControl.MarkAsSeen(report.ReportId);
+                lbSickReports.Items.Remove(report);
+                report.MarkAsSeen();
+                if(this.lbSickReports.Items.Count == 0)
+                {
+                    this.lblSickReports.BackColor = Color.Black;
+                }
+            }
+           
         }
     }
 }

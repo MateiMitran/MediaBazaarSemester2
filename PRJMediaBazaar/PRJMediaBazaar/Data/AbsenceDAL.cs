@@ -78,7 +78,7 @@ namespace PRJMediaBazaar.Data
         public bool ConfirmDayOffRequest(int requestId)
         {
             string[] parameters = new string[] { requestId.ToString() };
-            string sql = "UPDATE `dayoff_requests` SET , `status`= 'confirmed' " +
+            string sql = "UPDATE `dayoff_requests` SET  `status`= 'confirmed', `emp_seen`= 0 " +
                 "WHERE `request_id`= @requestId";
 
             if (executeNonQuery(sql, parameters) != null)
@@ -92,7 +92,7 @@ namespace PRJMediaBazaar.Data
 
         public bool DenyDayOffRequest(int requestId, string objection) //1. reason, 2. status, 3. employee_id
         {
-            String sql = "UPDATE `dayoff_requests` SET `objection`= @reason, `status`= 'denied' " +
+            String sql = "UPDATE `dayoff_requests` SET `objection`= @reason, `status`= 'denied', `emp_seen`= 0 " +
                 "WHERE `request_id`= @requestId ; ";
             String[] parameters = new String[] { objection, requestId.ToString()};
             if (executeNonQuery(sql, parameters) != null)
@@ -106,25 +106,23 @@ namespace PRJMediaBazaar.Data
 
 
 
-        public List<SickReport> SelectSickReports()
+        public List<SickReport> SelectSickReports(int seen)
         {
-            string sql = "SELECT * FROM sick_reports WHERE seen = 'false'; ";
-            MySqlDataReader result = executeReader(sql, null);
+            string sql = "SELECT * FROM sick_reports WHERE hr_seen = @seen; ";
+            MySqlDataReader result = executeReader(sql, new string[] { seen.ToString()});
 
             List<SickReport> pseudos = new List<SickReport>();
             while (result.Read())
             {
-                int scheduleId = Convert.ToInt32(result[0]);
-
-                int dayId = Convert.ToInt32(result[1]);
-                Day day = GetDay(dayId);
-
-                int empId = Convert.ToInt32(result[2]);
+                int reportId = Convert.ToInt32(result[0]);
+                int empId = Convert.ToInt32(result[3]);
                 Employee employee = _employees.FirstOrDefault(emp => emp.Id == empId);
-
-                string description = result[3].ToString();
-                bool seen = Convert.ToBoolean(result[4]);
-                SickReport req = new SickReport(day, employee, description, seen);
+                string description = result[4].ToString();
+                int first_dayId = Convert.ToInt32(result[1]);
+                int last_dayId = Convert.ToInt32(result[2]);
+                var shifts = GetShifts(first_dayId, last_dayId, empId);
+                
+                SickReport req = new SickReport(reportId,shifts, employee, description, Convert.ToBoolean(seen));
                 pseudos.Add(req);
             }
             CloseConnection();
@@ -133,10 +131,10 @@ namespace PRJMediaBazaar.Data
 
        
 
-        public bool ConfirmSickReport(int dayId, int empId)
+        public bool ConfirmSickReport(int reportId)
         {
-            string[] parameters = new string[] { dayId.ToString(), empId.ToString() };
-            string sql = "DELETE FROM sick_reports WHERE day_id = @dayId AND employee_id = @empId";
+            string[] parameters = new string[] { reportId.ToString() };
+            string sql = "UPDATE sick_reports SET hr_seen =  1 WHERE sick_report_id = @reportId";
 
             if (executeNonQuery(sql, parameters) != null)
             {

@@ -55,6 +55,8 @@ namespace PRJMediaBazaar
 
         }
 
+     
+
         private void timer1_Tick_1(object sender, EventArgs e)
         {
             for (int i = 0; i < timers.Count; i++)
@@ -79,6 +81,7 @@ namespace PRJMediaBazaar
                 hr.RemoveDayOff(dayOff);
                 hr.StatusFunction("Day off denied", -6, -1, 900, 28, Color.Green);
                 this.Close();
+                hr.CheckDayOffLabel();
             }
         }
 

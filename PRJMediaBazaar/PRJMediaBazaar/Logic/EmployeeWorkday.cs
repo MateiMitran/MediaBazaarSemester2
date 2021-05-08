@@ -27,6 +27,15 @@ namespace PRJMediaBazaar.Logic
             Hours = hours;
             DayId = dayId;
         }
+        public EmployeeWorkday(int dayId, Employee emp, Shift firstShift, Shift secondShift, bool absence, AbsenceReason absenceReason)
+        {
+            Employee = emp;
+            FirstShift = firstShift;
+            SecondShift = secondShift;
+            Absence = absence;
+            AbsenceReason = absenceReason;
+            DayId = dayId;
+        }
 
 
         public Employee Employee { get; private set; }
