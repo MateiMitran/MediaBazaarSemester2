@@ -1,7 +1,7 @@
 <?php
 class LoginEmployee extends Database {
     public function login($email, $password) {
-        $sql = "SELECT * FROM employees WHERE email = '$email'";
+        $sql = "SELECT * FROM employees WHERE email = ?";
         $query = Database::connect()->prepare($sql);
         $query->execute([$email]);
 
