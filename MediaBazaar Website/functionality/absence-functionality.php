@@ -3,7 +3,7 @@ $valid_urgency_values = ['not-urgent', 'urgent'];
 
 // DAY OFF REQUEST
 if(isset($_POST['day-off-submit'])) {
-    if(isset($_POST['start-day']) && DateTime::createFromFormat('Y-m-d', $_POST['start-day']) !== false) {
+    if(isset($_POST['start-day']) && DateTime::createFromFormat('Y-m-d', $_POST['start-day']) !== false && DateTime::createFromFormat('Y-m-d', $_POST['start-day']) > DateTime::createFromFormat('Y-m-d', date('Y-m-d'))) {
         $startDay = $_POST['start-day'];
         $endDay = null;
 

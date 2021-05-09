@@ -115,7 +115,7 @@
                             <input type="checkbox" name="one-day-only" value="one-day-only" id="one-day-only">
                             <label for="one-day-only">I will be needing only one day off</label>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group" id="end-day-form-group">
                             <label for="end-day">I need some days off until:</label>
                             <input type="date" name="end-day" id="end-day" />
                         </div>
