@@ -14,6 +14,12 @@ $(document).ready(function() {
 
     // HIDE END DATE INPUT IN ABSENCE TAB
 
+    if($('#day-off-form #one-day-only:checked').length > 0) {
+        $('#end-day-form-group').css('display', 'none');
+    } else {
+        $('#end-day-form-group').css('display', 'block');
+    }
+
     $('#day-off-form #one-day-only').click(function() {
         if($('#day-off-form #one-day-only:checked').length > 0) {
             $('#end-day-form-group').css('display', 'none');

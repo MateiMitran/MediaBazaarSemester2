@@ -64,6 +64,10 @@ class Employee extends Database {
         return $this->password;
     }
 
+    public function getJobPosition() {
+        return $this->job_position;
+    }
+
     public function setFirstName($firstName) {
         $this->first_name = $firstName;
     }

@@ -15,4 +15,16 @@ class EmployeeWorkday extends Database {
         $this->absence = $absence;
         $this->absence_reason = $absence_reason;
     }
+
+    public function getDayId() {
+        return $this->day_id;
+    }
+
+    public function getFirstShift() {
+        return $this->first_shift;
+    }
+
+    public function getSecondShift() {
+        return $this->second_shift;
+    }
 }

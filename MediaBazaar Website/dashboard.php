@@ -94,12 +94,12 @@
                     <form class="simple-form" method="POST" action="dashboard" id="sick-report-form">
                         <h3>I'm feeling sick today</h3>
                         <div class="form-group">
-                            <label for="sick-report-until-date">I will be sick until:</label>
-                            <input type="date" name="sick-report-until-date" id="sick-report-until-date" />
+                            <label for="until-date">I will be sick until:</label>
+                            <input type="date" name="until-date" id="until-date" />
                         </div>
                         <div class="form-group">
-                            <label for="sick-report-symptoms">Describe your symptoms:</label>
-                            <textarea name="sick-report-symptoms"></textarea>
+                            <label for="symptoms">Describe your symptoms:</label>
+                            <textarea name="symptoms" id="symptoms"></textarea>
                         </div>
                         <div class="form-group submit">
                             <input type="submit" class="small-submit" name="sick-report-submit" value="Submit" />
@@ -112,7 +112,7 @@
                             <label for="start-day">I need some days off from:</label>
                             <input type="date" name="start-day" id="start-day" />
 
-                            <input type="checkbox" name="one-day-only" value="one-day-only" id="one-day-only">
+                            <input type="checkbox" name="one-day-only" value="one-day-only" id="one-day-only" checked>
                             <label for="one-day-only">I will be needing only one day off</label>
                         </div>
                         <div class="form-group" id="end-day-form-group">
@@ -130,7 +130,7 @@
                         </div>
                         <div class="form-group">
                             <label for="reason">I need a day off because:</label>
-                            <textarea name="reason"></textarea>
+                            <textarea name="reason" id="reason"></textarea>
                         </div>
                         <div class="form-group submit">
                             <input type="submit" class="small-submit" name="day-off-submit" value="Request day off" />

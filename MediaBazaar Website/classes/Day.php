@@ -35,4 +35,28 @@ class Day extends Database {
     public function getId() {
         return $this->id;
     }
+
+    public function getWeekId() {
+        return $this->week_id;
+    }
+
+    public function getSecurityAssigned() {
+        return $this->security_assigned;
+    }
+
+    public function getCashiersAssigned() {
+        return $this->cashiers_assigned;
+    }
+
+    public function getStockersAssigned() {
+        return $this->stockers_assigned;
+    }
+
+    public function getSalesAssistantsAssigned() {
+        return $this->sales_assistants_assigned;
+    }
+
+    public function getWarehouseManagersAssigned() {
+        return $this->warehouse_managers_assigned;
+    }
 }
