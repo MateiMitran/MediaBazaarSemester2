@@ -56,9 +56,6 @@ namespace PRJMediaBazaar
             this.lblItems = new System.Windows.Forms.Label();
             this.lblRestock = new System.Windows.Forms.Label();
             this.lblStatistics = new System.Windows.Forms.Label();
-            this.pnlRestock = new System.Windows.Forms.Panel();
-            this.btnConfirm = new System.Windows.Forms.Button();
-            this.lbRestockRequests = new System.Windows.Forms.ListBox();
             this.pnlItems = new System.Windows.Forms.Panel();
             this.btnEditItem = new System.Windows.Forms.Button();
             this.btnAddItem = new System.Windows.Forms.Button();
@@ -66,14 +63,17 @@ namespace PRJMediaBazaar
             this.label1 = new System.Windows.Forms.Label();
             this.lbItems = new System.Windows.Forms.ListBox();
             this.lblInfo = new System.Windows.Forms.Label();
+            this.pnlRestock = new System.Windows.Forms.Panel();
+            this.btnConfirm = new System.Windows.Forms.Button();
+            this.lbRestockRequests = new System.Windows.Forms.ListBox();
             this.godTimer = new System.Windows.Forms.Timer(this.components);
             this.pnlNavbar.SuspendLayout();
             this.pnlAccount.SuspendLayout();
             this.pnlStatistics.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chart2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
-            this.pnlRestock.SuspendLayout();
             this.pnlItems.SuspendLayout();
+            this.pnlRestock.SuspendLayout();
             this.SuspendLayout();
             // 
             // pnlNavbar
@@ -102,7 +102,7 @@ namespace PRJMediaBazaar
             this.pnlAccount.Controls.Add(this.tbVerifyNewPassword);
             this.pnlAccount.Controls.Add(this.tbCurrentPassword);
             this.pnlAccount.Controls.Add(this.tbNewPassword);
-            this.pnlAccount.Location = new System.Drawing.Point(585, 14);
+            this.pnlAccount.Location = new System.Drawing.Point(637, 12);
             this.pnlAccount.Margin = new System.Windows.Forms.Padding(2);
             this.pnlAccount.Name = "pnlAccount";
             this.pnlAccount.Size = new System.Drawing.Size(68, 24);
@@ -202,10 +202,10 @@ namespace PRJMediaBazaar
             this.pnlStatistics.Controls.Add(this.label2);
             this.pnlStatistics.Controls.Add(this.chart2);
             this.pnlStatistics.Controls.Add(this.chart1);
-            this.pnlStatistics.Location = new System.Drawing.Point(165, 10);
+            this.pnlStatistics.Location = new System.Drawing.Point(69, 2);
             this.pnlStatistics.Margin = new System.Windows.Forms.Padding(2);
             this.pnlStatistics.Name = "pnlStatistics";
-            this.pnlStatistics.Size = new System.Drawing.Size(81, 26);
+            this.pnlStatistics.Size = new System.Drawing.Size(52, 20);
             this.pnlStatistics.TabIndex = 11;
             // 
             // label3
@@ -301,7 +301,7 @@ namespace PRJMediaBazaar
             this.lblItems.BackColor = System.Drawing.Color.Black;
             this.lblItems.Font = new System.Drawing.Font("Microsoft YaHei", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.lblItems.ForeColor = System.Drawing.SystemColors.Control;
-            this.lblItems.Location = new System.Drawing.Point(16, 11);
+            this.lblItems.Location = new System.Drawing.Point(10, 11);
             this.lblItems.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblItems.Name = "lblItems";
             this.lblItems.Size = new System.Drawing.Size(65, 26);
@@ -336,35 +336,6 @@ namespace PRJMediaBazaar
             this.lblStatistics.TabIndex = 2;
             this.lblStatistics.Text = "Statistics";
             this.lblStatistics.Click += new System.EventHandler(this.lblStatistics_Click);
-            // 
-            // pnlRestock
-            // 
-            this.pnlRestock.Controls.Add(this.btnConfirm);
-            this.pnlRestock.Controls.Add(this.lbRestockRequests);
-            this.pnlRestock.Location = new System.Drawing.Point(475, 10);
-            this.pnlRestock.Margin = new System.Windows.Forms.Padding(2);
-            this.pnlRestock.Name = "pnlRestock";
-            this.pnlRestock.Size = new System.Drawing.Size(38, 35);
-            this.pnlRestock.TabIndex = 9;
-            // 
-            // btnConfirm
-            // 
-            this.btnConfirm.Location = new System.Drawing.Point(200, 457);
-            this.btnConfirm.Margin = new System.Windows.Forms.Padding(2);
-            this.btnConfirm.Name = "btnConfirm";
-            this.btnConfirm.Size = new System.Drawing.Size(280, 32);
-            this.btnConfirm.TabIndex = 8;
-            this.btnConfirm.Text = "Confirm";
-            this.btnConfirm.UseVisualStyleBackColor = true;
-            // 
-            // lbRestockRequests
-            // 
-            this.lbRestockRequests.FormattingEnabled = true;
-            this.lbRestockRequests.Location = new System.Drawing.Point(66, 64);
-            this.lbRestockRequests.Margin = new System.Windows.Forms.Padding(2);
-            this.lbRestockRequests.Name = "lbRestockRequests";
-            this.lbRestockRequests.Size = new System.Drawing.Size(46, 17);
-            this.lbRestockRequests.TabIndex = 7;
             // 
             // pnlItems
             // 
@@ -445,6 +416,35 @@ namespace PRJMediaBazaar
             this.lblInfo.TabIndex = 8;
             this.lblInfo.Text = "Information :";
             // 
+            // pnlRestock
+            // 
+            this.pnlRestock.Controls.Add(this.btnConfirm);
+            this.pnlRestock.Controls.Add(this.lbRestockRequests);
+            this.pnlRestock.Location = new System.Drawing.Point(517, 2);
+            this.pnlRestock.Margin = new System.Windows.Forms.Padding(2);
+            this.pnlRestock.Name = "pnlRestock";
+            this.pnlRestock.Size = new System.Drawing.Size(22, 20);
+            this.pnlRestock.TabIndex = 9;
+            // 
+            // btnConfirm
+            // 
+            this.btnConfirm.Location = new System.Drawing.Point(200, 457);
+            this.btnConfirm.Margin = new System.Windows.Forms.Padding(2);
+            this.btnConfirm.Name = "btnConfirm";
+            this.btnConfirm.Size = new System.Drawing.Size(280, 32);
+            this.btnConfirm.TabIndex = 8;
+            this.btnConfirm.Text = "Confirm";
+            this.btnConfirm.UseVisualStyleBackColor = true;
+            // 
+            // lbRestockRequests
+            // 
+            this.lbRestockRequests.FormattingEnabled = true;
+            this.lbRestockRequests.Location = new System.Drawing.Point(66, 64);
+            this.lbRestockRequests.Margin = new System.Windows.Forms.Padding(2);
+            this.lbRestockRequests.Name = "lbRestockRequests";
+            this.lbRestockRequests.Size = new System.Drawing.Size(536, 303);
+            this.lbRestockRequests.TabIndex = 7;
+            // 
             // godTimer
             // 
             this.godTimer.Enabled = true;
@@ -471,9 +471,9 @@ namespace PRJMediaBazaar
             this.pnlStatistics.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chart2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
-            this.pnlRestock.ResumeLayout(false);
             this.pnlItems.ResumeLayout(false);
             this.pnlItems.PerformLayout();
+            this.pnlRestock.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
