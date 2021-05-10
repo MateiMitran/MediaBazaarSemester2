@@ -196,7 +196,7 @@ namespace PRJMediaBazaar.Data
             Dictionary<Day, EmployeeWorkday> shifts = new Dictionary<Day, EmployeeWorkday>();
             if (lastDay != 0)
             {
-                for (int i = firstDay; i < lastDay; i++)
+                for (int i = firstDay; i <= lastDay; i++)
                 {
                     Day day = GetDay(i);
                     EmployeeWorkday wd = _scheduleControl.GetEmployeeShift(day.WeekId, day.Id, employeeId);
