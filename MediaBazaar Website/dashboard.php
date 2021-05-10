@@ -32,7 +32,81 @@
             </div>
             <!-- SCHEDULE -->
             <div class="dashboard-content" id="dashboard-schedule">
-                <p>Schedule</p>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Monday</th>
+                            <th>Tuesday</th>
+                            <th>Wednesday</th>
+                            <th>Thursday</th>
+                            <th>Friday</th>
+                            <th>Saturday</th>
+                            <th>Sunday</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <span class="schedule-cell-date">May 5th</span>
+                                <span class="schedule-cell-shift">Morning</span>
+                            </td>
+                            <td>
+                                <span class="schedule-cell-date">May 6th</span>
+                                <span class="schedule-cell-shift">None</span>
+                            </td>
+                            <td>
+                                <span class="schedule-cell-date">May 7th</span>
+                                <span class="schedule-cell-shift">Morning & Midday</span>
+                            </td>
+                            <td>
+                                <span class="schedule-cell-date">May 8th</span>
+                                <span class="schedule-cell-shift">Evening</span>
+                            </td>
+                            <td>
+                                <span class="schedule-cell-date">May 9th</span>
+                                <span class="schedule-cell-shift">None</span>
+                            </td>
+                            <td>
+                                <span class="schedule-cell-date">May 10th</span>
+                                <span class="schedule-cell-shift">Midday & Evening</span>
+                            </td>
+                            <td>
+                                <span class="schedule-cell-date">May 11th</span>
+                                <span class="schedule-cell-shift">Midday</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span class="schedule-cell-date">May 5th</span>
+                                <span class="schedule-cell-shift">Morning</span>
+                            </td>
+                            <td>
+                                <span class="schedule-cell-date">May 6th</span>
+                                <span class="schedule-cell-shift">None</span>
+                            </td>
+                            <td>
+                                <span class="schedule-cell-date">May 7th</span>
+                                <span class="schedule-cell-shift">Morning & Midday</span>
+                            </td>
+                            <td>
+                                <span class="schedule-cell-date">May 8th</span>
+                                <span class="schedule-cell-shift">Evening</span>
+                            </td>
+                            <td>
+                                <span class="schedule-cell-date">May 9th</span>
+                                <span class="schedule-cell-shift">None</span>
+                            </td>
+                            <td>
+                                <span class="schedule-cell-date">May 10th</span>
+                                <span class="schedule-cell-shift">Midday & Evening</span>
+                            </td>
+                            <td>
+                                <span class="schedule-cell-date">May 11th</span>
+                                <span class="schedule-cell-shift">Midday</span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
             <!-- PREFERENCES -->
             <div class="dashboard-content" id="dashboard-preferences">

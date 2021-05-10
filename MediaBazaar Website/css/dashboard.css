@@ -131,6 +131,39 @@
     background-color: #fff;
 }
 
+/* SCHEDULE CSS */
+
+#dashboard-schedule table {
+    width: 100%;
+}
+
+#dashboard-schedule table, #dashboard-schedule th, #dashboard-schedule td {
+    border: 1px solid #ccc;
+    border-collapse: collapse;
+    padding: 10px;
+}
+
+#dashboard-schedule table th {
+    text-align: center;
+    font-weight: 400;
+    color: #fff;
+    background-color: #2b2d42;
+}
+
+#dashboard-schedule table tr td {
+    text-align: center;
+}
+
+#dashboard-schedule table tr td .schedule-cell-date {
+    display: block;
+    color: red;
+    margin-bottom: 5px;
+}
+
+#dashboard-schedule table tr td .schedule-cell-shift {
+    display: block;
+}
+
 /* PREFERENCES CSS */
 
 #dashboard-preferences form {

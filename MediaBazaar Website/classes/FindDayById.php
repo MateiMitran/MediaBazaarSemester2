@@ -1,9 +1,9 @@
 <?php
-class FindDayByDate extends Database {
-    public function findDay($date) {
-        $sql = "SELECT * FROM days WHERE date = ?";
+class FindDayById extends Database {
+    public function findDay($dayId) {
+        $sql = "SELECT * FROM days WHERE id = ?";
         $query = Database::connect()->prepare($sql);
-        $query->execute([$date]);
+        $query->execute([$dayId]);
 
         $result = $query->fetch(PDO::FETCH_ASSOC);
         $count = $query->rowCount();
@@ -16,7 +16,6 @@ class FindDayByDate extends Database {
 
             return $day;
         } else {
-            errorMessage('No day was found with given date');
             return false;
         }
     }

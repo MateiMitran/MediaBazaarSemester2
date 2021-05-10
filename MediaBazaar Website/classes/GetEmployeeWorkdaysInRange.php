@@ -20,7 +20,6 @@ class GetEmployeeWorkdaysInRange extends Database {
 
             return $days;
         } else {
-            errorMessage('Could not find employee workdays within the given range');
             return false;
         }
     }
