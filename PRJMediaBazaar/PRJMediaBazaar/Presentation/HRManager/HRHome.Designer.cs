@@ -162,10 +162,10 @@ namespace PRJMediaBazaar
             this.panelEmployees.Controls.Add(this.lbEmployeeInfo);
             this.panelEmployees.Controls.Add(this.lblAllEmployees);
             this.panelEmployees.Controls.Add(this.btnAddLatePoints);
-            this.panelEmployees.Location = new System.Drawing.Point(422, 19);
+            this.panelEmployees.Location = new System.Drawing.Point(0, 52);
             this.panelEmployees.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
             this.panelEmployees.Name = "panelEmployees";
-            this.panelEmployees.Size = new System.Drawing.Size(33, 19);
+            this.panelEmployees.Size = new System.Drawing.Size(868, 490);
             this.panelEmployees.TabIndex = 8;
             this.panelEmployees.Paint += new System.Windows.Forms.PaintEventHandler(this.panelEmployees_Paint);
             // 
@@ -615,7 +615,6 @@ namespace PRJMediaBazaar
             // pnlNavbar
             // 
             this.pnlNavbar.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.pnlNavbar.Controls.Add(this.panelEmployees);
             this.pnlNavbar.Controls.Add(this.lblTitle);
             this.pnlNavbar.Controls.Add(this.lblDayOffReports);
             this.pnlNavbar.Controls.Add(this.lblEmployees);
@@ -638,6 +637,7 @@ namespace PRJMediaBazaar
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(869, 552);
+            this.Controls.Add(this.panelEmployees);
             this.Controls.Add(this.panelSchedule);
             this.Controls.Add(this.pnlDayOff);
             this.Controls.Add(this.pnlNavbar);
