@@ -52,6 +52,8 @@ namespace PRJMediaBazaar
         {
             try
             {
+                string newLine = Environment.NewLine;
+                this.tbNote.Text += " " + DateTime.Now.ToString() + newLine;
                 ec.UpdateNote(this.tbNote.Text, thisEmployee.Email);
                 hr.AddNoteToEmployee(thisEmployee, this.tbNote.Text);
                 StatusFunction("Success!", -60, -5, 818, 28, Color.Green);
