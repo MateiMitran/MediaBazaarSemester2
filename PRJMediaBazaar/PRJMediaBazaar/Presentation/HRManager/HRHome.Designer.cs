@@ -165,7 +165,7 @@ namespace PRJMediaBazaar
             this.panelEmployees.Location = new System.Drawing.Point(0, 52);
             this.panelEmployees.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
             this.panelEmployees.Name = "panelEmployees";
-            this.panelEmployees.Size = new System.Drawing.Size(868, 490);
+            this.panelEmployees.Size = new System.Drawing.Size(869, 490);
             this.panelEmployees.TabIndex = 8;
             this.panelEmployees.Paint += new System.Windows.Forms.PaintEventHandler(this.panelEmployees_Paint);
             // 

@@ -122,7 +122,7 @@ namespace PRJMediaBazaar
                                     salary, gender, education, contract, daysOff, contractHours);
                     int id = ec.GetIDFromEmail(email);
                     hr.AddEmployee(new Employee(id, firstName, lastName, birthDate, gender, salary, email, password, jobPosition,
-                                    phone, address, education, contract, daysOff, contractHours));
+                                    phone, address, education, contract, daysOff, contractHours, daysOff));
                     StatusFunction("Success!", -60, -5, 835, 28, Color.Green);
                 }
                 else if (this.rbParttime.Checked == true)
@@ -138,7 +138,7 @@ namespace PRJMediaBazaar
                                     salary, gender, education, contract, daysOff, contractHours);
                     int id = ec.GetIDFromEmail(email);
                     hr.AddEmployee(new Employee(id, firstName, lastName, birthDate, gender, salary, email, password, jobPosition,
-                                   phone, address, education, contract, daysOff, contractHours));
+                                   phone, address, education, contract, daysOff, contractHours, daysOff));
                     StatusFunction("Success!", -60, -5, 835, 28, Color.Green);
                 }
             }

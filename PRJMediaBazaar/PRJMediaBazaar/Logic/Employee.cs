@@ -12,7 +12,7 @@ namespace PRJMediaBazaar.Logic
         public Employee(int id, string firstName, string lastName, DateTime birthDate,
            string gender, double salary, string email, string password,
           string jobPosition, int phoneNumber, string address, string education, string contract,
-            int daysOff, int contractHours)
+            int daysOff, int contractHours, int daysOffLeft)
         {
             Id = id;
             FirstName = firstName;
@@ -29,6 +29,7 @@ namespace PRJMediaBazaar.Logic
             Contract = contract;
             DaysOff = daysOff;
             ContractHours = contractHours;
+            DaysOffLeft = daysOffLeft;
         }
 
         public Employee(int id, string firstName, string lastName, string jobPosition)
@@ -55,7 +56,7 @@ namespace PRJMediaBazaar.Logic
         public String Contract { get; set; }
         public int DaysOff { get; set; }
         public int ContractHours { get; set; }
-
+        public int DaysOffLeft { get; set; }
         public String Note { get; set; }       
     }
 }

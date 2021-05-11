@@ -175,6 +175,18 @@ namespace PRJMediaBazaar.Data
             return false;
         }
 
+        public void UpdateDaysOffLeft(int employeeId, int daysOffLeft)
+        {
+            string[] parameters = new string[] {daysOffLeft.ToString(), employeeId.ToString()};
+            string sql = "UPDATE employees SET DaysOffLeft = @daysOffLeft WHERE id = @empId";
+
+            if (executeNonQuery(sql, parameters) != null)
+            {
+                CloseConnection();
+            }
+            CloseConnection();
+        }
+
         public Day GetDay(int dayId)
         {
             foreach (Schedule s in _scheduleControl.Schedules)

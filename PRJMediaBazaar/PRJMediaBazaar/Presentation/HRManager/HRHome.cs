@@ -198,12 +198,12 @@ namespace PRJMediaBazaar
             this.lbEmployeeInfo.Items.Add("First Name : " + currentEmployee.FirstName);
             this.lbEmployeeInfo.Items.Add("Last Name : " + currentEmployee.LastName);
             this.lbEmployeeInfo.Items.Add("Email : " + currentEmployee.Email);
-            this.lbEmployeeInfo.Items.Add("Password : " + currentEmployee.Password);
             this.lbEmployeeInfo.Items.Add("Job Position : " + currentEmployee.JobPosition);
             this.lbEmployeeInfo.Items.Add("Salary : " + currentEmployee.Salary);
             this.lbEmployeeInfo.Items.Add("Contract : " + currentEmployee.Contract);
-            this.lbEmployeeInfo.Items.Add("Days Off : " + currentEmployee.DaysOff);
+            this.lbEmployeeInfo.Items.Add($"Days Off :{currentEmployee.DaysOffLeft} left, {currentEmployee.DaysOff} allowed");
             this.lbEmployeeInfo.Items.Add("Contract Hours : " + currentEmployee.ContractHours);
+
             this.lbGeneralInfo.Items.Add("Birth Date : " + currentEmployee.BirthDate);
             this.lbGeneralInfo.Items.Add("Phone Number : " + currentEmployee.PhoneNumber);
             this.lbGeneralInfo.Items.Add("Address : " + currentEmployee.Address);
@@ -290,6 +290,7 @@ namespace PRJMediaBazaar
                 this.btnGenerateSchedule.Enabled = false;
                 this.btnDeleteSchedule.Enabled = true;
             }
+            cbPosition.Invalidate();
             this.ActiveControl = null;
 
         }

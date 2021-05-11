@@ -45,7 +45,7 @@ namespace PRJMediaBazaar.Logic
         {
             employeeDAL.AddEmployee(firstName, lastName, birthDate, email, password, jobPosition, phoneNumber, address, salary, gender, education, contract, daysOff, contractHours);
             int id = employeeDAL.GetIDByEmail(email);
-            _employees.Add(new Employee(id, firstName, lastName, birthDate,gender,salary,email,password,jobPosition,phoneNumber,address,education,contract,daysOff,contractHours));
+            _employees.Add(new Employee(id, firstName, lastName, birthDate,gender,salary,email,password,jobPosition,phoneNumber,address,education,contract,daysOff,contractHours, daysOff));
         }
         public void UpdateNote(String note,String email)
         {

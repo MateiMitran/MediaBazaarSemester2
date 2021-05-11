@@ -32,7 +32,8 @@ namespace PRJMediaBazaar.Data
                 int daysOff = Convert.ToInt32(dr[13]);
                 int contractHours = Convert.ToInt32(dr[14]);
                 String note = dr[15].ToString();
-                Employee temp = new Employee(id, firstName, lastName, birthDate, gender, salary, email, password, jobPosition, phoneNumber, address, education, contract, daysOff, contractHours);
+                int daysOffLeft = Convert.ToInt32(dr[16]);
+                Employee temp = new Employee(id, firstName, lastName, birthDate, gender, salary, email, password, jobPosition, phoneNumber, address, education, contract, daysOff, contractHours, daysOffLeft);
                 temp.Note = note;
                 employees.Add(temp);
             }

@@ -93,6 +93,7 @@ namespace PRJMediaBazaar.Logic
         {
             bool set = false;
             double hours = 0;
+            int count = 0;
             foreach (KeyValuePair<Day, EmployeeWorkday> kv in request.Shifts)
             {
                 Day day = kv.Key;
@@ -127,8 +128,11 @@ namespace PRJMediaBazaar.Logic
                 {
                     absenceDAL.InsertAbsence(day.Id, employee.Id);
                 }
+                count++;
             }
-
+            Employee emp = request.Employee;
+            emp.DaysOffLeft = emp.DaysOff - count;
+            absenceDAL.UpdateDaysOffLeft(emp.Id, emp.DaysOffLeft);
         }
 
     }
