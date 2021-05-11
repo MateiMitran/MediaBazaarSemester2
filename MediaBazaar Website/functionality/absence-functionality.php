@@ -140,6 +140,11 @@ else if(isset($_POST['sick-report-submit'])) {
                             $firstShift = $day->getFirstShift();
                             $secondShift = $day->getSecondShift();
 
+                            // REMOVE DAY IDS OF DAYS WITH EMPLOYEE WORK DAY 
+                            if(($key = array_search($id, $dayIds)) !== false) {
+                                unset($dayIds[$key]);
+                            }
+
                             $hours = 0;
 
                             $dayShifts[$id] = [];
@@ -159,84 +164,98 @@ else if(isset($_POST['sick-report-submit'])) {
                             array_push($weekIds[$id], $hours);
                         }
 
-                        $updateAbsence = new UpdateAbsenceInEmployeeWorkdays();
-                        
-                        if($updateAbsence->updateAbsence($dayIds, $_SESSION['user']->getId(), 'Sick')) {
-                            // SUCCESSFULLY UPDATED ABSENCE IN EMPLOYEE_WORKDAYS
-                            // UPDATE EMPLOYEE WORKED HOURS
+                        // CREATE ABSENCE EMPLOYEE WORK DAYS FOR MISSING DAYS
+                        $createSickWorkday = new CreateSickEmployeeWorkday();
+                        $successfulCreationOfSickWorkdays = 0;
+
+                        foreach($dayIds as $day) {
+                            if($createSickWorkday->createWorkday($day, $_SESSION['user']->getId())) {
+                                $successfulCreationOfSickWorkdays++;
+                            }
+                        }
+
+                        if($successfulCreationOfSickWorkdays == count($dayIds)) {
+                            $updateAbsence = new UpdateAbsenceInEmployeeWorkdays();
                             
-                            $weekHours = [];
-
-                            foreach($weekIds as $week) {
-                                $weekId = $week[0];
-                                $hours = $week[1];
-        
-                                $weekHours[$weekId] += $hours;
-                            }
-        
-                            $decreaseHours = new DecreaseEmployeeWorkedHours();
-        
-                            foreach($weekHours as $key => $value) {
-                                $workedHours = new WorkedHours($key, $_SESSION['user']->getId(), $value);
+                            if($updateAbsence->updateAbsence($dayIds, $_SESSION['user']->getId(), 'Sick')) {
+                                // SUCCESSFULLY UPDATED ABSENCE IN EMPLOYEE_WORKDAYS
+                                // UPDATE EMPLOYEE WORKED HOURS
                                 
-                                if($value > 0) {
-                                    $decreaseHours->decreaseHours($workedHours);
-                                }
-                            }
+                                $weekHours = [];
 
-                            // UPDATE ASSIGNED SHIFTS
-                            $updateAssignedShifts = new UpdateAssignedShiftsInDay();
-                            $successfulUpdateToShifts = 0;
-        
-                            foreach($days as $day) {
-                                $id = $day->getId();
-                                $position = strtolower($_SESSION['user']->getJobPosition());
-                                $value;
-        
-                                if($position == 'security') {
-                                    $position = 'security_assigned';
-                                    $value = $day->getSecurityAssigned();
-                                } else if($position == 'cashier') {
-                                    $position = 'cashiers_assigned';
-                                    $value = $day->getCashiersAssigned();
-                                } else if($position == 'stocker') {
-                                    $position = 'stockers_assigned';
-                                    $value = $day->getStockersAssigned();
-                                } else if($position == 'salesassistant') {
-                                    $position = 'sales_assistants_assigned';
-                                    $value = $day->getSalesAssistantsAssigned();
-                                } else if($position == 'warehousemanager') {
-                                    $position = 'warehouse_managers_assigned';
-                                    $value = $day->getWarehouseManagersAssigned();
+                                foreach($weekIds as $week) {
+                                    $weekId = $week[0];
+                                    $hours = $week[1];
+            
+                                    $weekHours[$weekId] += $hours;
                                 }
-        
-                                $values = explode(' ', $value);
-        
-                                foreach($dayShifts[$id] as $shift) {
-                                    if(strtolower($shift) == 'morning') {
-                                        $values[0] -= 1;
-                                    } else if(strtolower($shift) == 'midday') {
-                                        $values[1] -= 1;
-                                    } else if(strtolower($shift) == 'evening') {
-                                        $values[2] -= 1;
+            
+                                $decreaseHours = new DecreaseEmployeeWorkedHours();
+            
+                                foreach($weekHours as $key => $value) {
+                                    $workedHours = new WorkedHours($key, $_SESSION['user']->getId(), $value);
+                                    
+                                    if($value > 0) {
+                                        $decreaseHours->decreaseHours($workedHours);
                                     }
                                 }
-        
-                                $newValue = implode(' ', $values);
-        
-                                if($updateAssignedShifts->updateShift($id, $position, $newValue)) {
-                                    $successfulUpdateToShifts++;   
+
+                                // UPDATE ASSIGNED SHIFTS
+                                $updateAssignedShifts = new UpdateAssignedShiftsInDay();
+                                $successfulUpdateToShifts = 0;
+            
+                                foreach($days as $day) {
+                                    $id = $day->getId();
+                                    $position = strtolower($_SESSION['user']->getJobPosition());
+                                    $value;
+            
+                                    if($position == 'security') {
+                                        $position = 'security_assigned';
+                                        $value = $day->getSecurityAssigned();
+                                    } else if($position == 'cashier') {
+                                        $position = 'cashiers_assigned';
+                                        $value = $day->getCashiersAssigned();
+                                    } else if($position == 'stocker') {
+                                        $position = 'stockers_assigned';
+                                        $value = $day->getStockersAssigned();
+                                    } else if($position == 'salesassistant') {
+                                        $position = 'sales_assistants_assigned';
+                                        $value = $day->getSalesAssistantsAssigned();
+                                    } else if($position == 'warehousemanager') {
+                                        $position = 'warehouse_managers_assigned';
+                                        $value = $day->getWarehouseManagersAssigned();
+                                    }
+            
+                                    $values = explode(' ', $value);
+            
+                                    foreach($dayShifts[$id] as $shift) {
+                                        if(strtolower($shift) == 'morning') {
+                                            $values[0] -= 1;
+                                        } else if(strtolower($shift) == 'midday') {
+                                            $values[1] -= 1;
+                                        } else if(strtolower($shift) == 'evening') {
+                                            $values[2] -= 1;
+                                        }
+                                    }
+            
+                                    $newValue = implode(' ', $values);
+            
+                                    if($updateAssignedShifts->updateShift($id, $position, $newValue)) {
+                                        $successfulUpdateToShifts++;   
+                                    }
                                 }
-                            }
-        
-                            // CHECK IF SUBMISSION SUCCESSFUL
-                            if($successfulUpdateToShifts == count($days)) {
-                                successMessage('Successfully submitted report');
+            
+                                // CHECK IF SUBMISSION SUCCESSFUL
+                                if($successfulUpdateToShifts == count($days)) {
+                                    successMessage('Successfully submitted report');
+                                } else {
+                                    errorMessage('An error occurred, please try again later');
+                                }
                             } else {
-                                errorMessage('An error occurred, please try again later');
+                                errorMessage('Could not update employee shifts, please try again later');
                             }
                         } else {
-                            errorMessage('Could not update employee shifts, please try again later');
+                            errorMessage('An error occurred whilst updating your workdays, please try again later');
                         }
                     } else {
                         errorMessage('An error occurred, please try again later');
