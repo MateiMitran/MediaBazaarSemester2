@@ -1,0 +1,9 @@
+Passwords:
+~Human Resources Manager :
+Username : hrmanager
+Password : hrmanager
+~Warehouse Manager :
+Username : warehouse
+Password : warehouse
+
+Functionalities to Test : Adding/Updating items, Sick Reports and Day off Reports

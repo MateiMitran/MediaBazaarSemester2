@@ -88,6 +88,7 @@ namespace PRJMediaBazaar
             this.lblStatistics.ForeColor = Color.White;
             this.lblRestock.ForeColor = Color.White;
             this.lblAccount.ForeColor = Color.White;
+            this.pnlItems.BringToFront();
         }
 
         private void lblStatistics_Click(object sender, EventArgs e)
@@ -112,6 +113,7 @@ namespace PRJMediaBazaar
             this.lblStatistics.ForeColor = Color.White;
             this.lblRestock.ForeColor = Color.Gray;
             this.lblAccount.ForeColor = Color.White;
+            this.pnlRestock.BringToFront();
         }
 
         private void lblAccount_Click(object sender, EventArgs e)
