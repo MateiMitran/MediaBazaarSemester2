@@ -3,9 +3,9 @@ class GetDaysInRange extends Database {
     public function getDays($startDate, $endDate) {
         $sql = "SELECT * FROM days WHERE date BETWEEN ? AND ?";
         $query = Database::connect()->prepare($sql);
-        $query->execute(['2021-04-26', '2021-05-09']);
+        $query->execute([$startDate, $endDate]);
 
-        $results = $query->fetchAll();
+        $results = $query->fetchAll(PDO::FETCH_ASSOC);
         $count = $query->rowCount();
 
         if($query != false && $count >= 1) {
@@ -14,8 +14,9 @@ class GetDaysInRange extends Database {
 
             foreach($results as $r) {
                 $dayValues = array_values($r);
-
+                
                 $day = new Day(...$dayValues);
+
                 array_push($days, $day);
             }
 

@@ -33,9 +33,23 @@ class Schedule extends Database {
 
         foreach($this->days as $day) {
             array_push($ids, $day->getId());
-
-            return $ids;
         }
+
+        return $ids;
+    }
+
+    public function getWeekIds() {
+        $ids = [];
+
+        foreach($this->days as $day) {
+            $weekId = $day->getWeekId();
+
+            if(!in_array($weekId, $ids)) {
+                array_push($ids, $weekId);
+            }
+        }
+
+        return $ids;
     }
     
     public function getWorkDays() {

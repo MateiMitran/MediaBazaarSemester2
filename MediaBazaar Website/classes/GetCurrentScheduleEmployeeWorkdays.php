@@ -1,13 +1,13 @@
 <?php
 class GetCurrentScheduleEmployeeWorkdays extends Database {
     public function getWorkdays($employeeId, $schedule) {
-        $dayIds = $schedule->getDayIds();
+        $dayIds = $schedule->getDayIds();        
 
         $sql = "SELECT * FROM employees_workdays WHERE day_id IN (". implode(',', $dayIds) . ") AND employee_id = ?";
         $query = Database::connect()->prepare($sql);
         $query->execute([$employeeId]);
 
-        $results = $query->fetchAll();
+        $results = $query->fetchAll(PDO::FETCH_ASSOC);
         $count = $query->rowCount();
 
         if($query != false) {

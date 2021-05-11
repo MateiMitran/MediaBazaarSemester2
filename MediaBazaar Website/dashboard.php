@@ -1,6 +1,6 @@
 <?php
     $page = 'dashboard';
-    $functionalityRequirements = ['preferences-functionality', 'absence-functionality'];
+    $functionalityRequirements = ['preferences-functionality', 'absence-functionality', 'schedule-functionality'];
     
     require_once('includes/header.php');
 ?>
@@ -46,64 +46,26 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td>
-                                <span class="schedule-cell-date">May 5th</span>
-                                <span class="schedule-cell-shift">Morning</span>
-                            </td>
-                            <td>
-                                <span class="schedule-cell-date">May 6th</span>
-                                <span class="schedule-cell-shift">None</span>
-                            </td>
-                            <td>
-                                <span class="schedule-cell-date">May 7th</span>
-                                <span class="schedule-cell-shift">Morning & Midday</span>
-                            </td>
-                            <td>
-                                <span class="schedule-cell-date">May 8th</span>
-                                <span class="schedule-cell-shift">Evening</span>
-                            </td>
-                            <td>
-                                <span class="schedule-cell-date">May 9th</span>
-                                <span class="schedule-cell-shift">None</span>
-                            </td>
-                            <td>
-                                <span class="schedule-cell-date">May 10th</span>
-                                <span class="schedule-cell-shift">Midday & Evening</span>
-                            </td>
-                            <td>
-                                <span class="schedule-cell-date">May 11th</span>
-                                <span class="schedule-cell-shift">Midday</span>
-                            </td>
+                            <?php foreach($scheduleDaysWeekOne as $key => $value) { 
+                                $day = $value[0];
+                                $shifts = $value[1];
+                            ?>
+                                <td>
+                                    <span class="schedule-cell-date"><?php echo $day->getReadableDateWithoutYear(); ?></span>
+                                    <span class="schedule-cell-shift"><?php echo $shifts; ?></span>
+                                </td>
+                            <?php } ?>
                         </tr>
                         <tr>
-                            <td>
-                                <span class="schedule-cell-date">May 5th</span>
-                                <span class="schedule-cell-shift">Morning</span>
-                            </td>
-                            <td>
-                                <span class="schedule-cell-date">May 6th</span>
-                                <span class="schedule-cell-shift">None</span>
-                            </td>
-                            <td>
-                                <span class="schedule-cell-date">May 7th</span>
-                                <span class="schedule-cell-shift">Morning & Midday</span>
-                            </td>
-                            <td>
-                                <span class="schedule-cell-date">May 8th</span>
-                                <span class="schedule-cell-shift">Evening</span>
-                            </td>
-                            <td>
-                                <span class="schedule-cell-date">May 9th</span>
-                                <span class="schedule-cell-shift">None</span>
-                            </td>
-                            <td>
-                                <span class="schedule-cell-date">May 10th</span>
-                                <span class="schedule-cell-shift">Midday & Evening</span>
-                            </td>
-                            <td>
-                                <span class="schedule-cell-date">May 11th</span>
-                                <span class="schedule-cell-shift">Midday</span>
-                            </td>
+                            <?php foreach($scheduleDaysWeekTwo as $key => $value) { 
+                                $dayTwo = $value[0];
+                                $shiftsTwo = $value[1];
+                            ?>
+                                <td>
+                                    <span class="schedule-cell-date"><?php echo $day->getReadableDateWithoutYear(); ?></span>
+                                    <span class="schedule-cell-shift"><?php echo $shifts; ?></span>
+                                </td>
+                            <?php } ?>
                         </tr>
                     </tbody>
                 </table>
@@ -216,7 +178,7 @@
         <a href="javascript:void(0)" class="dashboard-button" id="dashboard-button-announcements" page="dashboard-announcements">
             Announcements
         </a>
-        <a href="javascript:void(0)" class="dashboard-button" id="dashboard-button-schedule" page="dashboard-schedule">
+        <a href="javascript:void(0)" class="dashboard-button" id="dashboard-button-schedule" page="dashboard-schedule" onclick="loadSchedule();">
             Schedule
         </a>
         <a href="javascript:void(0)" class="dashboard-button" id="dashboard-button-preferences" page="dashboard-preferences">

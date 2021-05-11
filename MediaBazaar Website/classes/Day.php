@@ -44,6 +44,10 @@ class Day extends Database {
         return date("F jS, Y", strtotime($this->date));
     }
 
+    public function getReadableDateWithoutYear() {
+        return date("F jS", strtotime($this->date));
+    }
+
     public function getWeekId() {
         return $this->week_id;
     }

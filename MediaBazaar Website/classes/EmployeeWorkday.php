@@ -27,4 +27,18 @@ class EmployeeWorkday extends Database {
     public function getSecondShift() {
         return $this->second_shift;
     }
+
+    public function getShiftsString() {
+        $str = "";
+
+        if(strtolower($this->first_shift) != 'none') {
+            $str .= $this->first_shift;
+        }
+
+        if(strtolower($this->second_shift) != 'none') {
+            $str .= " & " . $this->second_shift;
+        }
+
+        return $str;
+    }
 }
