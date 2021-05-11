@@ -112,21 +112,27 @@ namespace PRJMediaBazaar
                     StatusFunction("Enter a valid education!", -60, -5, 835, 28, Color.Red);
                     throw new InvalidStringException();
                 }
-                int daysOff = 30;
+                
 
                 if (this.rbFulltime.Checked == true)
                 {
                     String contract = this.rbFulltime.Text;
-                    int contractHours = 40;
                     ec.AddAnEmployee(firstName, lastName, birthDate, email, password, jobPosition, phone, address,
-                                    salary, gender, education, contract, daysOff, contractHours);
+                                    salary, gender, education, contract, 30, 40, 30);
                     int id = ec.GetIDFromEmail(email);
                     hr.AddEmployee(new Employee(id, firstName, lastName, birthDate, gender, salary, email, password, jobPosition,
-                                    phone, address, education, contract, daysOff, contractHours, daysOff));
+                                    phone, address, education, contract, 30, 40, 30));
+                    hr.AddNameToCB(firstName + ' ' + lastName);
                     StatusFunction("Success!", -60, -5, 835, 28, Color.Green);
                 }
                 else if (this.rbParttime.Checked == true)
                 {
+                    int daysOff = Convert.ToInt32(this.tbDaysOffLeft.Text);
+                    if (!Regex.IsMatch(daysOff.ToString(), @"^\d+$"))
+                    {
+                        StatusFunction("Enter valid days off left!", -60, -5, 835, 28, Color.Red);
+                        throw new InvalidIntException();
+                    }
                     String contract = this.rbParttime.Text;
                     int contractHours = Convert.ToInt32(this.tbContractHours.Text);
                     if (!Regex.IsMatch(contractHours.ToString(), @"^\d+$"))
@@ -135,10 +141,11 @@ namespace PRJMediaBazaar
                         throw new InvalidIntException();
                     }
                     ec.AddAnEmployee(firstName, lastName, birthDate, email, password, jobPosition, phone, address,
-                                    salary, gender, education, contract, daysOff, contractHours);
+                                    salary, gender, education, contract, daysOff, contractHours, daysOff);
                     int id = ec.GetIDFromEmail(email);
                     hr.AddEmployee(new Employee(id, firstName, lastName, birthDate, gender, salary, email, password, jobPosition,
                                    phone, address, education, contract, daysOff, contractHours, daysOff));
+                    hr.AddNameToCB(firstName + ' ' + lastName);
                     StatusFunction("Success!", -60, -5, 835, 28, Color.Green);
                 }
             }
@@ -170,6 +177,8 @@ namespace PRJMediaBazaar
             {
                 this.tbContractHours.Visible = false;
                 this.label12.Visible = false;
+                this.label13.Visible = false;
+                this.tbDaysOffLeft.Visible = false;
             }
         }
 
@@ -179,6 +188,8 @@ namespace PRJMediaBazaar
             {
                 this.tbContractHours.Visible = true;
                 this.label12.Visible = true;
+                this.label13.Visible = true;
+                this.tbDaysOffLeft.Visible = true;
             }
         }
         private bool CheckEmail(String email)

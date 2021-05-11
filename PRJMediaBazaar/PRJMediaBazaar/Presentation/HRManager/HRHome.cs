@@ -70,6 +70,10 @@ namespace PRJMediaBazaar
 
 
         }
+        public void AddNameToCB(String name)
+        {
+            this.cbEmployees.Items.Add(name);
+        }
         private void ReloadShiftAssigningForm_Event(Shift shift, string jobPosition, Day day)
         {
             ShiftAssigning form = new ShiftAssigning(_scheduleControl, _empControl.GetEmployeesByPosition(jobPosition).ToList(), shift, jobPosition, this, day);

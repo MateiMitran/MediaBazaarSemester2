@@ -60,122 +60,137 @@ namespace PRJMediaBazaar
             this.panel1 = new System.Windows.Forms.Panel();
             this.lblTitle = new System.Windows.Forms.Label();
             this.godTimer = new System.Windows.Forms.Timer(this.components);
+            this.tbDaysOffLeft = new System.Windows.Forms.TextBox();
+            this.label13 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(175, 413);
+            this.label12.Location = new System.Drawing.Point(131, 336);
+            this.label12.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(115, 17);
+            this.label12.Size = new System.Drawing.Size(87, 13);
             this.label12.TabIndex = 54;
             this.label12.Text = "Contract Hours : ";
             // 
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(434, 272);
+            this.label11.Location = new System.Drawing.Point(326, 221);
+            this.label11.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(83, 17);
+            this.label11.Size = new System.Drawing.Size(64, 13);
             this.label11.TabIndex = 53;
             this.label11.Text = "Education : ";
             // 
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(448, 239);
+            this.label10.Location = new System.Drawing.Point(336, 194);
+            this.label10.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(68, 17);
+            this.label10.Size = new System.Drawing.Size(51, 13);
             this.label10.TabIndex = 52;
             this.label10.Text = "Gender : ";
             // 
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(460, 203);
+            this.label9.Location = new System.Drawing.Point(345, 165);
+            this.label9.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(60, 17);
+            this.label9.Size = new System.Drawing.Size(45, 13);
             this.label9.TabIndex = 51;
             this.label9.Text = "Salary : ";
             // 
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(446, 161);
+            this.label8.Location = new System.Drawing.Point(334, 131);
+            this.label8.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(68, 17);
+            this.label8.Size = new System.Drawing.Size(51, 13);
             this.label8.TabIndex = 50;
             this.label8.Text = "Address :";
             // 
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(460, 127);
+            this.label7.Location = new System.Drawing.Point(345, 103);
+            this.label7.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(57, 17);
+            this.label7.Size = new System.Drawing.Size(44, 13);
             this.label7.TabIndex = 49;
             this.label7.Text = "Phone :";
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(27, 308);
+            this.label6.Location = new System.Drawing.Point(20, 250);
+            this.label6.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(89, 17);
+            this.label6.Size = new System.Drawing.Size(67, 13);
             this.label6.TabIndex = 48;
             this.label6.Text = "JobPosition :";
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(27, 272);
+            this.label5.Location = new System.Drawing.Point(20, 221);
+            this.label5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(77, 17);
+            this.label5.Size = new System.Drawing.Size(59, 13);
             this.label5.TabIndex = 47;
             this.label5.Text = "Password :";
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(35, 243);
+            this.label4.Location = new System.Drawing.Point(26, 197);
+            this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(50, 17);
+            this.label4.Size = new System.Drawing.Size(38, 13);
             this.label4.TabIndex = 46;
             this.label4.Text = "Email :";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(27, 206);
+            this.label3.Location = new System.Drawing.Point(20, 167);
+            this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(77, 17);
+            this.label3.Size = new System.Drawing.Size(58, 13);
             this.label3.TabIndex = 45;
             this.label3.Text = "Birthdate : ";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(35, 164);
+            this.label2.Location = new System.Drawing.Point(26, 133);
+            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(57, 17);
+            this.label2.Size = new System.Drawing.Size(44, 13);
             this.label2.TabIndex = 44;
             this.label2.Text = "Name : ";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(35, 127);
+            this.label1.Location = new System.Drawing.Point(26, 103);
+            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(73, 17);
+            this.label1.Size = new System.Drawing.Size(55, 13);
             this.label1.TabIndex = 43;
             this.label1.Text = "Surname :";
             // 
             // btnAddEmployee
             // 
-            this.btnAddEmployee.Location = new System.Drawing.Point(237, 507);
+            this.btnAddEmployee.Location = new System.Drawing.Point(178, 412);
+            this.btnAddEmployee.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnAddEmployee.Name = "btnAddEmployee";
-            this.btnAddEmployee.Size = new System.Drawing.Size(374, 49);
+            this.btnAddEmployee.Size = new System.Drawing.Size(280, 40);
             this.btnAddEmployee.TabIndex = 42;
             this.btnAddEmployee.Text = "Add Employee";
             this.btnAddEmployee.UseVisualStyleBackColor = true;
@@ -183,18 +198,20 @@ namespace PRJMediaBazaar
             // 
             // tbContractHours
             // 
-            this.tbContractHours.Location = new System.Drawing.Point(296, 410);
+            this.tbContractHours.Location = new System.Drawing.Point(222, 333);
+            this.tbContractHours.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.tbContractHours.Name = "tbContractHours";
-            this.tbContractHours.Size = new System.Drawing.Size(191, 22);
+            this.tbContractHours.Size = new System.Drawing.Size(144, 20);
             this.tbContractHours.TabIndex = 41;
             // 
             // rbParttime
             // 
             this.rbParttime.AutoSize = true;
             this.rbParttime.Checked = true;
-            this.rbParttime.Location = new System.Drawing.Point(441, 364);
+            this.rbParttime.Location = new System.Drawing.Point(331, 296);
+            this.rbParttime.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.rbParttime.Name = "rbParttime";
-            this.rbParttime.Size = new System.Drawing.Size(81, 21);
+            this.rbParttime.Size = new System.Drawing.Size(63, 17);
             this.rbParttime.TabIndex = 40;
             this.rbParttime.TabStop = true;
             this.rbParttime.Text = "Parttime";
@@ -204,9 +221,10 @@ namespace PRJMediaBazaar
             // rbFulltime
             // 
             this.rbFulltime.AutoSize = true;
-            this.rbFulltime.Location = new System.Drawing.Point(296, 364);
+            this.rbFulltime.Location = new System.Drawing.Point(222, 296);
+            this.rbFulltime.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.rbFulltime.Name = "rbFulltime";
-            this.rbFulltime.Size = new System.Drawing.Size(77, 21);
+            this.rbFulltime.Size = new System.Drawing.Size(60, 17);
             this.rbFulltime.TabIndex = 39;
             this.rbFulltime.Text = "Fulltime";
             this.rbFulltime.UseVisualStyleBackColor = true;
@@ -214,9 +232,10 @@ namespace PRJMediaBazaar
             // 
             // tbEducation
             // 
-            this.tbEducation.Location = new System.Drawing.Point(522, 272);
+            this.tbEducation.Location = new System.Drawing.Point(392, 221);
+            this.tbEducation.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.tbEducation.Name = "tbEducation";
-            this.tbEducation.Size = new System.Drawing.Size(191, 22);
+            this.tbEducation.Size = new System.Drawing.Size(144, 20);
             this.tbEducation.TabIndex = 38;
             // 
             // cbGender
@@ -226,30 +245,34 @@ namespace PRJMediaBazaar
             "Male",
             "Female",
             "Other"});
-            this.cbGender.Location = new System.Drawing.Point(522, 236);
+            this.cbGender.Location = new System.Drawing.Point(392, 192);
+            this.cbGender.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.cbGender.Name = "cbGender";
-            this.cbGender.Size = new System.Drawing.Size(121, 24);
+            this.cbGender.Size = new System.Drawing.Size(92, 21);
             this.cbGender.TabIndex = 37;
             // 
             // tbSalary
             // 
-            this.tbSalary.Location = new System.Drawing.Point(522, 203);
+            this.tbSalary.Location = new System.Drawing.Point(392, 165);
+            this.tbSalary.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.tbSalary.Name = "tbSalary";
-            this.tbSalary.Size = new System.Drawing.Size(191, 22);
+            this.tbSalary.Size = new System.Drawing.Size(144, 20);
             this.tbSalary.TabIndex = 36;
             // 
             // tbAddress
             // 
-            this.tbAddress.Location = new System.Drawing.Point(522, 161);
+            this.tbAddress.Location = new System.Drawing.Point(392, 131);
+            this.tbAddress.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.tbAddress.Name = "tbAddress";
-            this.tbAddress.Size = new System.Drawing.Size(191, 22);
+            this.tbAddress.Size = new System.Drawing.Size(144, 20);
             this.tbAddress.TabIndex = 35;
             // 
             // tbPhone
             // 
-            this.tbPhone.Location = new System.Drawing.Point(522, 124);
+            this.tbPhone.Location = new System.Drawing.Point(392, 101);
+            this.tbPhone.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.tbPhone.Name = "tbPhone";
-            this.tbPhone.Size = new System.Drawing.Size(191, 22);
+            this.tbPhone.Size = new System.Drawing.Size(144, 20);
             this.tbPhone.TabIndex = 34;
             // 
             // cbJobPosition
@@ -261,48 +284,54 @@ namespace PRJMediaBazaar
             "WarehouseManager",
             "SalesAssistant",
             "Stocker"});
-            this.cbJobPosition.Location = new System.Drawing.Point(122, 305);
+            this.cbJobPosition.Location = new System.Drawing.Point(92, 248);
+            this.cbJobPosition.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.cbJobPosition.Name = "cbJobPosition";
-            this.cbJobPosition.Size = new System.Drawing.Size(191, 24);
+            this.cbJobPosition.Size = new System.Drawing.Size(144, 21);
             this.cbJobPosition.TabIndex = 33;
             // 
             // tbPassword
             // 
-            this.tbPassword.Location = new System.Drawing.Point(110, 272);
+            this.tbPassword.Location = new System.Drawing.Point(82, 221);
+            this.tbPassword.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.tbPassword.Name = "tbPassword";
-            this.tbPassword.Size = new System.Drawing.Size(191, 22);
+            this.tbPassword.Size = new System.Drawing.Size(144, 20);
             this.tbPassword.TabIndex = 32;
             // 
             // tbEmail
             // 
-            this.tbEmail.Location = new System.Drawing.Point(110, 240);
+            this.tbEmail.Location = new System.Drawing.Point(82, 195);
+            this.tbEmail.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.tbEmail.Name = "tbEmail";
-            this.tbEmail.Size = new System.Drawing.Size(191, 22);
+            this.tbEmail.Size = new System.Drawing.Size(144, 20);
             this.tbEmail.TabIndex = 31;
             // 
             // dtpBirthdate
             // 
             this.dtpBirthdate.CustomFormat = "yyyy-MM-dd";
             this.dtpBirthdate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpBirthdate.Location = new System.Drawing.Point(110, 203);
+            this.dtpBirthdate.Location = new System.Drawing.Point(82, 165);
+            this.dtpBirthdate.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.dtpBirthdate.Name = "dtpBirthdate";
             this.dtpBirthdate.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.dtpBirthdate.Size = new System.Drawing.Size(191, 22);
+            this.dtpBirthdate.Size = new System.Drawing.Size(144, 20);
             this.dtpBirthdate.TabIndex = 30;
             this.dtpBirthdate.Value = new System.DateTime(2021, 3, 31, 18, 53, 18, 0);
             // 
             // tbName
             // 
-            this.tbName.Location = new System.Drawing.Point(110, 161);
+            this.tbName.Location = new System.Drawing.Point(82, 131);
+            this.tbName.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.tbName.Name = "tbName";
-            this.tbName.Size = new System.Drawing.Size(191, 22);
+            this.tbName.Size = new System.Drawing.Size(144, 20);
             this.tbName.TabIndex = 29;
             // 
             // tbSurname
             // 
-            this.tbSurname.Location = new System.Drawing.Point(110, 124);
+            this.tbSurname.Location = new System.Drawing.Point(82, 101);
+            this.tbSurname.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.tbSurname.Name = "tbSurname";
-            this.tbSurname.Size = new System.Drawing.Size(191, 22);
+            this.tbSurname.Size = new System.Drawing.Size(144, 20);
             this.tbSurname.TabIndex = 28;
             // 
             // panel1
@@ -310,8 +339,9 @@ namespace PRJMediaBazaar
             this.panel1.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.panel1.Controls.Add(this.lblTitle);
             this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(835, 63);
+            this.panel1.Size = new System.Drawing.Size(626, 51);
             this.panel1.TabIndex = 55;
             // 
             // lblTitle
@@ -320,9 +350,10 @@ namespace PRJMediaBazaar
             this.lblTitle.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.lblTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.lblTitle.ForeColor = System.Drawing.Color.White;
-            this.lblTitle.Location = new System.Drawing.Point(311, 15);
+            this.lblTitle.Location = new System.Drawing.Point(233, 12);
+            this.lblTitle.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblTitle.Name = "lblTitle";
-            this.lblTitle.Size = new System.Drawing.Size(212, 32);
+            this.lblTitle.Size = new System.Drawing.Size(167, 26);
             this.lblTitle.TabIndex = 1;
             this.lblTitle.Text = "Add Employee";
             // 
@@ -332,11 +363,31 @@ namespace PRJMediaBazaar
             this.godTimer.Interval = 2500;
             this.godTimer.Tick += new System.EventHandler(this.godTimer_Tick);
             // 
+            // tbDaysOffLeft
+            // 
+            this.tbDaysOffLeft.Location = new System.Drawing.Point(222, 362);
+            this.tbDaysOffLeft.Margin = new System.Windows.Forms.Padding(2);
+            this.tbDaysOffLeft.Name = "tbDaysOffLeft";
+            this.tbDaysOffLeft.Size = new System.Drawing.Size(144, 20);
+            this.tbDaysOffLeft.TabIndex = 56;
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(143, 365);
+            this.label13.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(75, 13);
+            this.label13.TabIndex = 57;
+            this.label13.Text = "Days Off Left :";
+            // 
             // AddEmployees
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(817, 610);
+            this.ClientSize = new System.Drawing.Size(613, 496);
+            this.Controls.Add(this.label13);
+            this.Controls.Add(this.tbDaysOffLeft);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.label12);
             this.Controls.Add(this.label11);
@@ -365,6 +416,7 @@ namespace PRJMediaBazaar
             this.Controls.Add(this.dtpBirthdate);
             this.Controls.Add(this.tbName);
             this.Controls.Add(this.tbSurname);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "AddEmployees";
             this.Text = "AddEmployees";
             this.panel1.ResumeLayout(false);
@@ -406,5 +458,7 @@ namespace PRJMediaBazaar
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label lblTitle;
         private System.Windows.Forms.Timer godTimer;
+        private System.Windows.Forms.TextBox tbDaysOffLeft;
+        private System.Windows.Forms.Label label13;
     }
 }
