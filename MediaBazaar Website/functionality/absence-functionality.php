@@ -110,6 +110,7 @@ else if(isset($_POST['sick-report-submit'])) {
         
                         $days = [];
                         $dayIds = [];
+                        $updateAbsenceDayIds = [];
                         $weekIds = [];
                         $dayShifts = [];
         
@@ -143,6 +144,7 @@ else if(isset($_POST['sick-report-submit'])) {
                             // REMOVE DAY IDS OF DAYS WITH EMPLOYEE WORK DAY 
                             if(($key = array_search($id, $dayIds)) !== false) {
                                 unset($dayIds[$key]);
+                                array_push($updateAbsenceDayIds, $id);
                             }
 
                             $hours = 0;
@@ -177,7 +179,7 @@ else if(isset($_POST['sick-report-submit'])) {
                         if($successfulCreationOfSickWorkdays == count($dayIds)) {
                             $updateAbsence = new UpdateAbsenceInEmployeeWorkdays();
                             
-                            if($updateAbsence->updateAbsence($dayIds, $_SESSION['user']->getId(), 'Sick')) {
+                            if($updateAbsence->updateAbsence($updateAbsenceDayIds, $_SESSION['user']->getId(), 'Sick')) {
                                 // SUCCESSFULLY UPDATED ABSENCE IN EMPLOYEE_WORKDAYS
                                 // UPDATE EMPLOYEE WORKED HOURS
                                 
@@ -248,6 +250,12 @@ else if(isset($_POST['sick-report-submit'])) {
                                 // CHECK IF SUBMISSION SUCCESSFUL
                                 if($successfulUpdateToShifts == count($days)) {
                                     successMessage('Successfully submitted report');
+
+                                    // UPDATE CURRENT SCHEDULE
+                                    $updateSchedule = new UpdateCurrentSchedule();
+                                    $updateSchedule->updateSchedule();
+
+                                    successMessage('Successfully updated schedule');
                                 } else {
                                     errorMessage('An error occurred, please try again later');
                                 }

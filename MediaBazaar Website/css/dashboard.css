@@ -23,7 +23,6 @@
 #dashboard-container {
     width: 100%;
     max-width: 1000px;
-    min-height: 300px;
     margin: 0 auto;
     background-color: #fff;
     border-radius: 3px;
@@ -157,7 +156,7 @@
 #dashboard-schedule table tr td .schedule-cell-date {
     display: block;
     color: #8d99ae;
-    margin-bottom: 5px;
+    margin-bottom: 10px;
 }
 
 #dashboard-schedule table tr td .schedule-cell-shift {

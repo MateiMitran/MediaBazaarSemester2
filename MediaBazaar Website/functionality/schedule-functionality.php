@@ -36,14 +36,16 @@ foreach($dateRange as $date){
 
         if($pos !== false) {
             array_push($scheduleDaysWeekOne[$dayId], $scheduleWorkdayDayIdShifts[$dayId]);
-        } else {
-            array_push($scheduleDaysWeekOne[$dayId], 'None');
         }
     } else if($weekId == $weekTwoId) {
+        $scheduleDaysWeekTwo[$dayId] = [];
+
+        array_push($scheduleDaysWeekTwo[$dayId], $day);
+
         if($pos !== false) {
-            $scheduleDaysWeekTwo[$dayId] = $scheduleWorkdayDayIdShifts[$dayId];
-        } else {
-            $scheduleDaysWeekTwo[$dayId] = 'None';
+            array_push($scheduleDaysWeekTwo[$dayId], $scheduleWorkdayDayIdShifts[$dayId]);
         }
     }
 }
+
+// var_dump($_SESSION['schedule']->getEndDate());

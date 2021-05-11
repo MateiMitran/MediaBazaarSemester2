@@ -52,18 +52,18 @@
                             ?>
                                 <td>
                                     <span class="schedule-cell-date"><?php echo $day->getReadableDateWithoutYear(); ?></span>
-                                    <span class="schedule-cell-shift"><?php echo $shifts; ?></span>
+                                    <span class="schedule-cell-shift"><?php echo (!is_null($shifts) && !empty($shifts)) ? $shifts : 'None'; ?></span>
                                 </td>
                             <?php } ?>
                         </tr>
                         <tr>
-                            <?php foreach($scheduleDaysWeekTwo as $key => $value) { 
-                                $dayTwo = $value[0];
-                                $shiftsTwo = $value[1];
+                            <?php foreach($scheduleDaysWeekTwo as $key => $value) {
+                                $day = $value[0];
+                                $shifts = $value[1];
                             ?>
                                 <td>
                                     <span class="schedule-cell-date"><?php echo $day->getReadableDateWithoutYear(); ?></span>
-                                    <span class="schedule-cell-shift"><?php echo $shifts; ?></span>
+                                    <span class="schedule-cell-shift"><?php echo (!is_null($shifts) && !empty($shifts)) ? $shifts : 'None'; ?></span>
                                 </td>
                             <?php } ?>
                         </tr>
