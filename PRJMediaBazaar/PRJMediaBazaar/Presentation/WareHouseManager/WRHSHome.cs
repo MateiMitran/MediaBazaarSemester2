@@ -174,7 +174,7 @@ namespace PRJMediaBazaar
 
         private void btnAddItem_Click(object sender, EventArgs e)
         {
-            AddItem add = new AddItem(itemControl);
+            AddItem add = new AddItem(this, itemControl);
             add.Show();
         }
 

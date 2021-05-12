@@ -22,17 +22,18 @@ namespace PRJMediaBazaar
         private Image image;
         private Thread getImageThread;
         private ItemControl _itemControl;
-
+        private WRHSHome _wh;
         private List<Button> buttons;
         private List<System.Windows.Forms.Timer> timers;
 
 
-        public AddItem(ItemControl itemControl)
+        public AddItem(WRHSHome wh, ItemControl itemControl)
         {
             InitializeComponent();
             _itemControl = itemControl;
             buttons = new List<Button>();
             timers = new List<System.Windows.Forms.Timer>();
+            _wh = wh;
         }
         public void StatusFunction(String text, int x, int y, int width, int height, Color color)
         {
@@ -179,6 +180,7 @@ namespace PRJMediaBazaar
 
                 _itemControl.AddAnItem(itemName, category, brand, model, description, price,
                     roomWebshop, roomShop, roomStorage, minAmount, img);
+                _wh.LoadItemsLESGOO();
                 StatusFunction("Item added!", -6, -1, 900, 28, Color.Red);
 
                 //throw custom exception if img == null
