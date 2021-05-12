@@ -130,7 +130,7 @@ namespace PRJMediaBazaar
                     int daysOff = Convert.ToInt32(this.tbDaysOffLeft.Text);
                     if (!Regex.IsMatch(daysOff.ToString(), @"^\d+$"))
                     {
-                        StatusFunction("Enter valid days off left!", -60, -5, 835, 28, Color.Red);
+                        StatusFunction("Enter valid days off!", -60, -5, 835, 28, Color.Red);
                         throw new InvalidIntException();
                     }
                     String contract = this.rbParttime.Text;
