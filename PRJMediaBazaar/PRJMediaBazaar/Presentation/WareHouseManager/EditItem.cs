@@ -103,7 +103,7 @@ namespace PRJMediaBazaar
                     throw new InputException(errors);
                 }
 
-                byte[] img = null;
+                byte[] img = ImageToBinary(this.pbxCurrentImage.Image);
                 int id = x.ID;
                 string itemName = tbName.Text;
                 string category = tbCategory.Text;
@@ -115,12 +115,10 @@ namespace PRJMediaBazaar
                 int roomShop = Convert.ToInt32(tbRoomShop.Text);
                 int roomStorage = Convert.ToInt32(tbRoomStorage.Text);
                 int minAmount = Convert.ToInt32(tbMinimumAmount.Text);
-
+               
                 _itemControl.UpdateAnItem(id, itemName, category, brand, model, description, price,
                     roomWebshop, roomShop, roomStorage, minAmount, img);
                 wh.LoadItemsLESGOO();
-               img = ImageToBinary(image);
-               _itemControl.UpdateItemImage(id, img);
                 StatusFunction("Item updated!", -6, -1, 900, 28, Color.Green);
 
             }
