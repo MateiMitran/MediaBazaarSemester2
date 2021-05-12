@@ -1,6 +1,6 @@
 <?php
     $page = 'dashboard';
-    $functionalityRequirements = ['preferences-functionality', 'absence-functionality'];
+    $functionalityRequirements = ['preferences-functionality', 'absence-functionality', 'schedule-functionality'];
     
     require_once('includes/header.php');
 ?>
@@ -32,7 +32,43 @@
             </div>
             <!-- SCHEDULE -->
             <div class="dashboard-content" id="dashboard-schedule">
-                <p>Schedule</p>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Monday</th>
+                            <th>Tuesday</th>
+                            <th>Wednesday</th>
+                            <th>Thursday</th>
+                            <th>Friday</th>
+                            <th>Saturday</th>
+                            <th>Sunday</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <?php foreach($scheduleDaysWeekOne as $key => $value) { 
+                                $day = $value[0];
+                                $shifts = $value[1];
+                            ?>
+                                <td>
+                                    <span class="schedule-cell-date"><?php echo $day->getReadableDateWithoutYear(); ?></span>
+                                    <span class="schedule-cell-shift"><?php echo (!is_null($shifts) && !empty($shifts)) ? $shifts : 'None'; ?></span>
+                                </td>
+                            <?php } ?>
+                        </tr>
+                        <tr>
+                            <?php foreach($scheduleDaysWeekTwo as $key => $value) {
+                                $day = $value[0];
+                                $shifts = $value[1];
+                            ?>
+                                <td>
+                                    <span class="schedule-cell-date"><?php echo $day->getReadableDateWithoutYear(); ?></span>
+                                    <span class="schedule-cell-shift"><?php echo (!is_null($shifts) && !empty($shifts)) ? $shifts : 'None'; ?></span>
+                                </td>
+                            <?php } ?>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
             <!-- PREFERENCES -->
             <div class="dashboard-content" id="dashboard-preferences">
@@ -142,7 +178,7 @@
         <a href="javascript:void(0)" class="dashboard-button" id="dashboard-button-announcements" page="dashboard-announcements">
             Announcements
         </a>
-        <a href="javascript:void(0)" class="dashboard-button" id="dashboard-button-schedule" page="dashboard-schedule">
+        <a href="javascript:void(0)" class="dashboard-button" id="dashboard-button-schedule" page="dashboard-schedule" onclick="loadSchedule();">
             Schedule
         </a>
         <a href="javascript:void(0)" class="dashboard-button" id="dashboard-button-preferences" page="dashboard-preferences">

@@ -16,7 +16,7 @@ class FindDayByDate extends Database {
 
             return $day;
         } else {
-            errorMessage('An error occurred, please try again later');
+            errorMessage('No day was found with given date');
             return false;
         }
     }

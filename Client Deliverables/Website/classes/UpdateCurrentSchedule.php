@@ -1,12 +1,6 @@
 <?php
-if(isset($_POST['submit']) && isset($_POST['email']) && isset($_POST['password'])) {
-    $email = $_POST['email'];
-    $password = $_POST['password'];
-
-    // LOGIN USER
-    $login = new LoginEmployee();
-
-    if($login->login($email, $password)) {
+class UpdateCurrentSchedule extends Database {
+    public function updateSchedule() {
         // GET CURRENT SCHEDULE
         $getCurrentSchedule = new GetCurrentSchedule();
         $currentSchedule = $getCurrentSchedule->getSchedule(date('Y-m-d'));
@@ -27,9 +21,6 @@ if(isset($_POST['submit']) && isset($_POST['email']) && isset($_POST['password']
             foreach($scheduleWorkDays as $workDay) {
                 $_SESSION['schedule']->addWorkDay($workDay);
             }
-            
-            successMessage('Successfully logged in');
-            redirect_to('/dashboard');
         }
     }
 }
