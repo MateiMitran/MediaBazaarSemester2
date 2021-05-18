@@ -36,6 +36,7 @@ namespace PRJMediaBazaar
             this.lblEmployees = new System.Windows.Forms.Label();
             this.lblTitle = new System.Windows.Forms.Label();
             this.panelEmployees = new System.Windows.Forms.Panel();
+            this.lblWelcome = new System.Windows.Forms.Label();
             this.cbEmployees = new System.Windows.Forms.ComboBox();
             this.lbGeneralInfo = new System.Windows.Forms.ListBox();
             this.btnAddPromotionPoints = new System.Windows.Forms.Button();
@@ -76,7 +77,6 @@ namespace PRJMediaBazaar
             this.btnDeleteSchedule = new System.Windows.Forms.Button();
             this.pnlNavbar = new System.Windows.Forms.Panel();
             this.godTimer = new System.Windows.Forms.Timer(this.components);
-            this.lblWelcome = new System.Windows.Forms.Label();
             this.panelEmployees.SuspendLayout();
             this.panelSickReports.SuspendLayout();
             this.pnlDayOff.SuspendLayout();
@@ -172,8 +172,19 @@ namespace PRJMediaBazaar
             this.panelEmployees.TabIndex = 8;
             this.panelEmployees.Paint += new System.Windows.Forms.PaintEventHandler(this.panelEmployees_Paint);
             // 
+            // lblWelcome
+            // 
+            this.lblWelcome.AutoSize = true;
+            this.lblWelcome.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblWelcome.Location = new System.Drawing.Point(236, 13);
+            this.lblWelcome.Name = "lblWelcome";
+            this.lblWelcome.Size = new System.Drawing.Size(0, 24);
+            this.lblWelcome.TabIndex = 24;
+            // 
             // cbEmployees
             // 
+            this.cbEmployees.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.cbEmployees.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cbEmployees.FormattingEnabled = true;
             this.cbEmployees.Location = new System.Drawing.Point(506, 73);
             this.cbEmployees.Margin = new System.Windows.Forms.Padding(2);
@@ -637,15 +648,6 @@ namespace PRJMediaBazaar
             this.godTimer.Enabled = true;
             this.godTimer.Interval = 3000;
             this.godTimer.Tick += new System.EventHandler(this.godTimer_Tick);
-            // 
-            // lblWelcome
-            // 
-            this.lblWelcome.AutoSize = true;
-            this.lblWelcome.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblWelcome.Location = new System.Drawing.Point(236, 13);
-            this.lblWelcome.Name = "lblWelcome";
-            this.lblWelcome.Size = new System.Drawing.Size(0, 24);
-            this.lblWelcome.TabIndex = 24;
             // 
             // HRHome
             // 

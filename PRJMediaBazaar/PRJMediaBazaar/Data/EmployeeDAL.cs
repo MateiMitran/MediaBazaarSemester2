@@ -68,9 +68,19 @@ namespace PRJMediaBazaar.Data
         {
             String sql = "SELECT job_position FROM employees WHERE email=@email AND password=@password;";
             String[] parameters = new string[] { email, password };
-            String job = executeScalar(sql, parameters).ToString();
-            CloseConnection();
-            return job;
+            if (executeScalar(sql, parameters) == null)
+            {
+                CloseConnection();
+                return "lol";
+            }
+            else
+            {
+                CloseConnection();
+                String job = executeScalar(sql, parameters).ToString();
+                CloseConnection();
+                return job;
+            }
+            
         }
         public bool AddNoteToEmployee(String email,String note)
         {
