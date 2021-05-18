@@ -21,6 +21,7 @@ namespace PRJMediaBazaar.Logic
         private void LoadEmployees()
         {       
             _employees = employeeDAL.SelectAll();
+            _employees = _employees.OrderBy(p => p.LastName).ToList();
         }
 
         public List<Employee> GetAllEmployees()
@@ -81,6 +82,15 @@ namespace PRJMediaBazaar.Logic
                 }
             }
             return null;
+        }
+
+        public String Login(String email,String password)
+        {
+            return employeeDAL.LogInWithEmailAndPassword(email, password);
+        }
+        public Employee GetEmployeeByEmailAndPassword(String email,String password)
+        {
+            return employeeDAL.GetHRManagerByEmailAndPassword(email, password);
         }
     }
 }

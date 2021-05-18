@@ -12,7 +12,7 @@ namespace PRJMediaBazaar.Data
     {
         public List<Employee> SelectAll()
         {
-           MySqlDataReader dr = executeReader("SELECT * FROM employees;", null);
+            MySqlDataReader dr = executeReader("SELECT * FROM `employees` WHERE `job_position` != 'HRManager';", null);
             List<Employee> employees = new List<Employee>();
             while (dr.Read())
             {
@@ -64,7 +64,14 @@ namespace PRJMediaBazaar.Data
             CloseConnection();
             return id;
         }
-
+        public String LogInWithEmailAndPassword(String email,String password)
+        {
+            String sql = "SELECT job_position FROM employees WHERE email=@email AND password=@password;";
+            String[] parameters = new string[] { email, password };
+            String job = executeScalar(sql, parameters).ToString();
+            CloseConnection();
+            return job;
+        }
         public bool AddNoteToEmployee(String email,String note)
         {
             String sql = "UPDATE `employees` SET `Notes`= @note WHERE `email`= @email;";
@@ -77,6 +84,32 @@ namespace PRJMediaBazaar.Data
             CloseConnection();
             return false;
         }
-
+        public Employee GetHRManagerByEmailAndPassword(String email, String password)
+        {
+            String[] parameters = new String[] { email, password };
+            MySqlDataReader dr = executeReader("SELECT * FROM employees WHERE email=@email AND password=@password;",parameters);
+            while (dr.Read())
+            {
+                int id = Convert.ToInt32(dr[0]);
+                String firstName = dr[1].ToString();
+                String lastName = dr[2].ToString();
+                DateTime birthDate = Convert.ToDateTime(dr[3]);
+                String jobPosition = dr[6].ToString();
+                int phoneNumber = Convert.ToInt32(dr[7]);
+                String address = dr[8].ToString();
+                double salary = Convert.ToDouble(dr[9]);
+                String gender = dr[10].ToString();
+                String education = dr[11].ToString();
+                String contract = dr[12].ToString();
+                int daysOff = Convert.ToInt32(dr[13]);
+                int contractHours = Convert.ToInt32(dr[14]);
+                String note = dr[15].ToString();
+                int daysOffLeft = Convert.ToInt32(dr[16]);
+                Employee temp = new Employee(id, firstName, lastName, birthDate, gender, salary, email, password, jobPosition, phoneNumber, address, education, contract, daysOff, contractHours, daysOffLeft);
+                temp.Note = note;
+                return temp;
+            }
+            return null;
+        }
     }
 }

@@ -16,9 +16,10 @@ namespace PRJMediaBazaar
         private Employee thisEmployee;
         private EmployeeControl ec;
         private HRHome hr;
+        private Employee HRManager;
         private List<Button> buttons;
         private List<Timer> timers;
-        public EditNote(Employee thisEmployee, EmployeeControl ec, HRHome hr)
+        public EditNote(Employee thisEmployee, EmployeeControl ec, HRHome hr,Employee HRManager)
         {
             InitializeComponent();
             buttons = new List<Button>();
@@ -26,6 +27,7 @@ namespace PRJMediaBazaar
             this.thisEmployee = thisEmployee;
             this.ec = ec;
             this.hr = hr;
+            this.HRManager = HRManager;
         }
         public void StatusFunction(String text, int x, int y, int width, int height, Color color)
         {
@@ -53,7 +55,7 @@ namespace PRJMediaBazaar
             try
             {
                 string newLine = Environment.NewLine;
-                this.tbNote.Text += " " + DateTime.Now.ToString() + newLine;
+                this.tbNote.Text += " " + DateTime.Now.ToString() + " by " + this.HRManager.FullName + newLine;
                 ec.UpdateNote(this.tbNote.Text, thisEmployee.Email);
                 hr.AddNoteToEmployee(thisEmployee, this.tbNote.Text);
                 StatusFunction("Success!", -60, -5, 818, 28, Color.Green);

@@ -45,6 +45,8 @@ namespace PRJMediaBazaar
             this.panelSickReports = new System.Windows.Forms.Panel();
             this.btnMarkAsSeen = new System.Windows.Forms.Button();
             this.btnOldReports = new System.Windows.Forms.Button();
+            this.label7 = new System.Windows.Forms.Label();
+            this.lbSickReports = new System.Windows.Forms.ListBox();
             this.pnlDayOff = new System.Windows.Forms.Panel();
             this.btnConfirmedRequests = new System.Windows.Forms.Button();
             this.btnDeniedRequests = new System.Windows.Forms.Button();
@@ -52,8 +54,6 @@ namespace PRJMediaBazaar
             this.btnDenyDayOff = new System.Windows.Forms.Button();
             this.btnConfirmDayOff = new System.Windows.Forms.Button();
             this.lbDayOff = new System.Windows.Forms.ListBox();
-            this.label7 = new System.Windows.Forms.Label();
-            this.lbSickReports = new System.Windows.Forms.ListBox();
             this.panelSchedule = new System.Windows.Forms.Panel();
             this.btnGenerateSchedule = new System.Windows.Forms.Button();
             this.lblPositionNeeded = new System.Windows.Forms.Label();
@@ -76,6 +76,7 @@ namespace PRJMediaBazaar
             this.btnDeleteSchedule = new System.Windows.Forms.Button();
             this.pnlNavbar = new System.Windows.Forms.Panel();
             this.godTimer = new System.Windows.Forms.Timer(this.components);
+            this.lblWelcome = new System.Windows.Forms.Label();
             this.panelEmployees.SuspendLayout();
             this.panelSickReports.SuspendLayout();
             this.pnlDayOff.SuspendLayout();
@@ -156,6 +157,7 @@ namespace PRJMediaBazaar
             // 
             // panelEmployees
             // 
+            this.panelEmployees.Controls.Add(this.lblWelcome);
             this.panelEmployees.Controls.Add(this.cbEmployees);
             this.panelEmployees.Controls.Add(this.lbGeneralInfo);
             this.panelEmployees.Controls.Add(this.btnAddPromotionPoints);
@@ -205,7 +207,7 @@ namespace PRJMediaBazaar
             this.lbEmployeeInfo.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.lbEmployeeInfo.FormattingEnabled = true;
             this.lbEmployeeInfo.ItemHeight = 20;
-            this.lbEmployeeInfo.Location = new System.Drawing.Point(45, 57);
+            this.lbEmployeeInfo.Location = new System.Drawing.Point(11, 81);
             this.lbEmployeeInfo.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
             this.lbEmployeeInfo.Name = "lbEmployeeInfo";
             this.lbEmployeeInfo.Size = new System.Drawing.Size(452, 344);
@@ -267,6 +269,25 @@ namespace PRJMediaBazaar
             this.btnOldReports.Text = "Old Reports";
             this.btnOldReports.UseVisualStyleBackColor = true;
             this.btnOldReports.Click += new System.EventHandler(this.btnOldReports_Click);
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.Location = new System.Drawing.Point(364, 99);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(119, 24);
+            this.label7.TabIndex = 28;
+            this.label7.Text = "New Reports";
+            // 
+            // lbSickReports
+            // 
+            this.lbSickReports.FormattingEnabled = true;
+            this.lbSickReports.Location = new System.Drawing.Point(56, 130);
+            this.lbSickReports.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
+            this.lbSickReports.Name = "lbSickReports";
+            this.lbSickReports.Size = new System.Drawing.Size(751, 342);
+            this.lbSickReports.TabIndex = 21;
             // 
             // pnlDayOff
             // 
@@ -344,25 +365,6 @@ namespace PRJMediaBazaar
             this.lbDayOff.Name = "lbDayOff";
             this.lbDayOff.Size = new System.Drawing.Size(753, 342);
             this.lbDayOff.TabIndex = 24;
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(364, 99);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(119, 24);
-            this.label7.TabIndex = 28;
-            this.label7.Text = "New Reports";
-            // 
-            // lbSickReports
-            // 
-            this.lbSickReports.FormattingEnabled = true;
-            this.lbSickReports.Location = new System.Drawing.Point(56, 130);
-            this.lbSickReports.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
-            this.lbSickReports.Name = "lbSickReports";
-            this.lbSickReports.Size = new System.Drawing.Size(751, 342);
-            this.lbSickReports.TabIndex = 21;
             // 
             // panelSchedule
             // 
@@ -636,6 +638,15 @@ namespace PRJMediaBazaar
             this.godTimer.Interval = 3000;
             this.godTimer.Tick += new System.EventHandler(this.godTimer_Tick);
             // 
+            // lblWelcome
+            // 
+            this.lblWelcome.AutoSize = true;
+            this.lblWelcome.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblWelcome.Location = new System.Drawing.Point(236, 13);
+            this.lblWelcome.Name = "lblWelcome";
+            this.lblWelcome.Size = new System.Drawing.Size(0, 24);
+            this.lblWelcome.TabIndex = 24;
+            // 
             // HRHome
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -714,5 +725,6 @@ namespace PRJMediaBazaar
         private System.Windows.Forms.Button btnOldReports;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Button btnMarkAsSeen;
+        private System.Windows.Forms.Label lblWelcome;
     }
 }

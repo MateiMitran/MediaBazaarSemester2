@@ -8,6 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Net.NetworkInformation;
+using MySql.Data.MySqlClient;
+using PRJMediaBazaar.Logic;
 
 namespace PRJMediaBazaar
 {
@@ -15,11 +17,13 @@ namespace PRJMediaBazaar
     {
         private List<Button> buttons;
         private List<Timer> timers;
+        private EmployeeControl emp;
         public LogIn()
         {
             InitializeComponent();
             buttons = new List<Button>();
             timers = new List<Timer>();
+            emp = new EmployeeControl();
         }
         public void StatusFunction(String text, int x, int y, int width, int height, Color color)
         {
@@ -57,9 +61,10 @@ namespace PRJMediaBazaar
 
             if (VPNisON())
             {
-                if (this.tbUsername.Text == "hrmanager" && this.tbPassword.Text == "hrmanager")
+                if (emp.Login(this.tbUsername.Text,this.tbPassword.Text)=="HRManager")
                 {
-                    HRHome home = new HRHome(this);
+                    Employee hrmanager = emp.GetEmployeeByEmailAndPassword(this.tbUsername.Text, this.tbPassword.Text);
+                    HRHome home = new HRHome(this,emp,hrmanager);
                     home.Show();
                     this.Hide();
                 }

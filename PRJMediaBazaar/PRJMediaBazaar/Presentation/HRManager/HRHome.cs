@@ -22,6 +22,7 @@ namespace PRJMediaBazaar
         private ScheduleControl _scheduleControl;
         private Employee[] _employees;
         private Employee thisEmployee;
+        private Employee HRManager;
         private Schedule _currentSchedule;
 
         private NamesRow[] _tableRows;
@@ -33,14 +34,15 @@ namespace PRJMediaBazaar
         private List<Button> buttons;
         private List<Timer> timers;
 
-        public HRHome(LogIn loginForm)
+        public HRHome(LogIn loginForm,EmployeeControl _empControl,Employee HRManager)
         {
             InitializeComponent();
             ShiftAssigning.ReloadForm += new ShiftAssigning.ShiftAssigningHandler(ReloadShiftAssigningForm_Event);
             buttons = new List<Button>();
             timers = new List<Timer>();
             _loginForm = loginForm;
-            _empControl = new EmployeeControl();
+            this._empControl = _empControl;
+            this.HRManager = HRManager;
             thisEmployee = null;
             _currentSchedule = null;
             LoadEmployees();
@@ -50,7 +52,7 @@ namespace PRJMediaBazaar
             this.btnChangeNeededPosition.Enabled = false;
             this.btnGenerateSchedule.Enabled = false;
             this.btnDeleteSchedule.Enabled = false;
-
+            this.lblWelcome.Text = "Welcome, " + HRManager.FullName + "!";
             foreach (Schedule s in _scheduleControl.Schedules)
             {
                 this.cbSchedule.Items.Add(s);
@@ -602,7 +604,7 @@ namespace PRJMediaBazaar
             }
             else
             {
-                EditNote editNote = new EditNote(thisEmployee, _empControl, this);
+                EditNote editNote = new EditNote(thisEmployee, _empControl, this,this.HRManager);
                 editNote.Show();
             }
         }
