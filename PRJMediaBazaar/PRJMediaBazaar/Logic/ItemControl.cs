@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 using PRJMediaBazaar.Data;
 using MySql.Data.MySqlClient;
 
+
 namespace PRJMediaBazaar.Logic
 {
-    class ItemControl
+    class ItemControl : IItemControlDTO
     {
         private List<Item> items;
         private ItemDAL itemDAL;

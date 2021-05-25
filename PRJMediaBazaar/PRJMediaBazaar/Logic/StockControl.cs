@@ -8,12 +8,12 @@ namespace PRJMediaBazaar.Logic
 {
     class StockControl
     {
-        private List<Restock> restocks;
+        private List<Restock> restockRequests;
         private List<Item> items;
-        // private RestockDAL restockDAL;
+        IItemControlDTO ItemControl;
         public StockControl()
         {
-            restocks = new List<Restock>();
+            restockRequests = new List<Restock>();
             items = new List<Item>();
         }
         public void LoadRestockRequests()
@@ -21,6 +21,11 @@ namespace PRJMediaBazaar.Logic
 
         }
         public void MarkRequestAsFinished(int id)
+        {
+
+        }
+
+        public bool UpdateInStockQuantity()
         {
 
         }
