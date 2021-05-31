@@ -43,8 +43,6 @@ namespace PRJMediaBazaar
             this.label6 = new System.Windows.Forms.Label();
             this.pbxCurrentImage = new System.Windows.Forms.PictureBox();
             this.btnUpdateItem = new System.Windows.Forms.Button();
-            this.tbRoomWebshop = new System.Windows.Forms.NumericUpDown();
-            this.label11 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
@@ -59,7 +57,6 @@ namespace PRJMediaBazaar
             ((System.ComponentModel.ISupportInitialize)(this.tbRoomStorage)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbRoomShop)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbxCurrentImage)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbRoomWebshop)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbxNewImage)).BeginInit();
             this.SuspendLayout();
             // 
@@ -188,25 +185,6 @@ namespace PRJMediaBazaar
             this.btnUpdateItem.UseVisualStyleBackColor = true;
             this.btnUpdateItem.Click += new System.EventHandler(this.btnUpdateItem_Click);
             // 
-            // tbRoomWebshop
-            // 
-            this.tbRoomWebshop.Location = new System.Drawing.Point(158, 227);
-            this.tbRoomWebshop.Margin = new System.Windows.Forms.Padding(2);
-            this.tbRoomWebshop.Name = "tbRoomWebshop";
-            this.tbRoomWebshop.Size = new System.Drawing.Size(156, 20);
-            this.tbRoomWebshop.TabIndex = 37;
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label11.Location = new System.Drawing.Point(4, 224);
-            this.label11.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(150, 20);
-            this.label11.TabIndex = 36;
-            this.label11.Text = "Room In Webshop :";
-            // 
             // label12
             // 
             this.label12.AutoSize = true;
@@ -334,8 +312,6 @@ namespace PRJMediaBazaar
             this.Controls.Add(this.label6);
             this.Controls.Add(this.pbxCurrentImage);
             this.Controls.Add(this.btnUpdateItem);
-            this.Controls.Add(this.tbRoomWebshop);
-            this.Controls.Add(this.label11);
             this.Controls.Add(this.label12);
             this.Controls.Add(this.label13);
             this.Controls.Add(this.label14);
@@ -351,7 +327,6 @@ namespace PRJMediaBazaar
             ((System.ComponentModel.ISupportInitialize)(this.tbRoomStorage)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbRoomShop)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbxCurrentImage)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbRoomWebshop)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbxNewImage)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -373,8 +348,6 @@ namespace PRJMediaBazaar
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.PictureBox pbxCurrentImage;
         private System.Windows.Forms.Button btnUpdateItem;
-        private System.Windows.Forms.NumericUpDown tbRoomWebshop;
-        private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label label14;

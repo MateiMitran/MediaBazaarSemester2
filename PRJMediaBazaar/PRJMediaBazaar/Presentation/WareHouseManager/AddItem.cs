@@ -151,7 +151,6 @@ namespace PRJMediaBazaar
                 }
 
                 List<string> errors = new List<string>();
-                Helper.ValidateInteger(tbRoomWebshop.Text, "RoomWebshop", errors);
                 Helper.ValidateInteger(tbRoomShop.Text, "RoomShop", errors);
                 Helper.ValidateInteger(tbRoomStorage.Text, "RoomStorage", errors);
                 Helper.ValidateInteger(tbMinimumAmount.Text, "MinimumAmount", errors);
@@ -173,13 +172,12 @@ namespace PRJMediaBazaar
                 string description = tbDescription.Text;
                 tbPrice.Text = tbPrice.Text.Replace('.', ',');
                 double price = Helper.ToDouble(tbPrice.Text); // investigate double.tryparse
-                int roomWebshop = Convert.ToInt32(tbRoomWebshop.Text);
                 int roomShop = Convert.ToInt32(tbRoomShop.Text);
                 int roomStorage = Convert.ToInt32(tbRoomStorage.Text);
                 int minAmount = Convert.ToInt32(tbMinimumAmount.Text);
 
                 _itemControl.AddAnItem(itemName, category, brand, model, description, price,
-                    roomWebshop, roomShop, roomStorage, minAmount, img);
+                    roomShop, roomStorage, minAmount, img);
                 _wh.LoadItemsLESGOO();
                 StatusFunction("Item added!", -6, -1, 900, 28, Color.Red);
 

@@ -70,11 +70,9 @@ namespace PRJMediaBazaar
             this.lbItems.Items.Add("Model : " + thisItem.Model);
             this.lbItems.Items.Add("Description : " + thisItem.Description);
             this.lbItems.Items.Add("Price : " + thisItem.Price + "$");
-            this.lbItems.Items.Add("Room in Webshop : " + thisItem.RoomInWebshop);
             this.lbItems.Items.Add("Room in Shop : " + thisItem.RoomInShop);
             this.lbItems.Items.Add("Room in Storage : " + thisItem.RoomInStorage);
             this.lbItems.Items.Add("Minimum Amount in Stock : " + thisItem.MinimumAmountInStock);
-            this.lbItems.Items.Add("Amount in Webshop : " + thisItem.InWebshopAmount);
             this.lbItems.Items.Add("Amount in Shop : " + thisItem.InShopAmount);
             this.lbItems.Items.Add("Amount in Storage : " + thisItem.InStorageAmount);
         }

@@ -25,14 +25,14 @@ namespace PRJMediaBazaar.Logic
            this.items = itemDAL.SelectAllItems();
         }
         public void AddAnItem(String name, String category, String brand, String model, String description
-                    , double price, int roomInWebshop, int roomInShop, int roomInStorage,
+                    , double price, int roomInShop, int roomInStorage,
                     int minimumAmountInStock, byte[] image)
         {
-            itemDAL.AddItem(name, category, brand,model,description, price.ToString(),roomInWebshop,
+            itemDAL.AddItem(name, category, brand,model,description, price.ToString(),
                 roomInShop,roomInStorage,minimumAmountInStock,image);
             int id = itemDAL.LastItemId();
-            Item temp = new Item(id, name, category, brand, model, description, price,roomInWebshop,
-                roomInShop, roomInStorage, minimumAmountInStock,0, 0, 0);
+            Item temp = new Item(id, name, category, brand, model, description, price,
+                roomInShop, roomInStorage, minimumAmountInStock,0, 0);
             temp.Image = image;
             items.Add(temp);
         }
@@ -53,10 +53,10 @@ namespace PRJMediaBazaar.Logic
             return false;
         }
         public bool UpdateAnItem(int id, String name, String category, String brand, String model, String description
-                    , double price, int roomInWebshop, int roomInShop, int roomInStorage,
+                    , double price, int roomInShop, int roomInStorage,
                     int minimumAmountInStock, byte[] image)
         {
-            if (itemDAL.UpdateItem(name, category, brand, model, description, price.ToString(), roomInWebshop,
+            if (itemDAL.UpdateItem(name, category, brand, model, description, price.ToString(), 
                 roomInShop, roomInStorage, minimumAmountInStock,image, id) ==true)
             {
                 for (int i = 0; i < items.Count; i++)
@@ -69,7 +69,6 @@ namespace PRJMediaBazaar.Logic
                         items[i].Model = model;
                         items[i].Description = description;
                         items[i].Price = price;
-                        items[i].RoomInWebshop = roomInWebshop;
                         items[i].RoomInShop = roomInShop;
                         items[i].RoomInStorage = roomInStorage;
                         items[i].MinimumAmountInStock = minimumAmountInStock;

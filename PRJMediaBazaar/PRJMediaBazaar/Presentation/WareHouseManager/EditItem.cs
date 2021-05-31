@@ -75,7 +75,6 @@ namespace PRJMediaBazaar
             this.tbModel.Text = x.Model;
             this.tbDescription.Text = x.Description;
             this.tbPrice.Text = x.Price.ToString();
-            this.tbRoomWebshop.Value = x.RoomInWebshop;
             this.tbRoomShop.Value = x.RoomInShop;
             this.tbRoomStorage.Value = x.RoomInStorage;
             this.tbMinimumAmount.Text = x.MinimumAmountInStock.ToString();
@@ -87,7 +86,6 @@ namespace PRJMediaBazaar
             try
             {
                 List<string> errors = new List<string>();
-                Helper.ValidateInteger(tbRoomWebshop.Text, "RoomWebshop", errors);
                 Helper.ValidateInteger(tbRoomShop.Text, "RoomShop", errors);
                 Helper.ValidateInteger(tbRoomStorage.Text, "RoomStorage", errors);
                 Helper.ValidateInteger(tbMinimumAmount.Text, "MinimumAmount", errors);
@@ -111,13 +109,12 @@ namespace PRJMediaBazaar
                 string model = tbModel.Text;
                 string description = tbDescription.Text;
                 double price = Convert.ToDouble(tbPrice.Text);
-                int roomWebshop = Convert.ToInt32(tbRoomWebshop.Text);
                 int roomShop = Convert.ToInt32(tbRoomShop.Text);
                 int roomStorage = Convert.ToInt32(tbRoomStorage.Text);
                 int minAmount = Convert.ToInt32(tbMinimumAmount.Text);
                
                 _itemControl.UpdateAnItem(id, itemName, category, brand, model, description, price,
-                    roomWebshop, roomShop, roomStorage, minAmount, img);
+                     roomShop, roomStorage, minAmount, img);
                 wh.LoadItemsLESGOO();
                 StatusFunction("Item updated!", -6, -1, 900, 28, Color.Green);
 
