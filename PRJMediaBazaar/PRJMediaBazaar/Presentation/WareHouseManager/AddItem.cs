@@ -156,6 +156,7 @@ namespace PRJMediaBazaar
                 Helper.ValidateInteger(tbMinimumAmount.Text, "MinimumAmount", errors);
                 Helper.ValidateString(tbItemName.Text, "ItemName", errors);
                 Helper.ValidateString(cbCategory.Text, "Category", errors);
+                Helper.ValidateString(cbSubcategory.Text, "Subcategory", errors);
                 Helper.ValidateString(cbBrand.Text, "Brand", errors);
                 Helper.ValidateString(tbModel.Text, "Model", errors);
                 Helper.ValidateString(tbDescription.Text, "Description", errors);
@@ -167,6 +168,7 @@ namespace PRJMediaBazaar
                 }
                 string itemName = tbItemName.Text;
                 string category = this.cbCategory.Text;
+                string subcategory = this.cbSubcategory.Text;
                 string brand = this.cbBrand.Text;
                 string model = tbModel.Text;
                 string description = tbDescription.Text;
@@ -176,7 +178,7 @@ namespace PRJMediaBazaar
                 int roomStorage = Convert.ToInt32(tbRoomStorage.Text);
                 int minAmount = Convert.ToInt32(tbMinimumAmount.Text);
 
-                _itemControl.AddAnItem(itemName, category, brand, model, description, price,
+                _itemControl.AddAnItem(itemName, category,subcategory ,brand, model, description, price,
                     roomShop, roomStorage, minAmount, img);
                 _wh.LoadItemsLESGOO();
                 StatusFunction("Item added!", -6, -1, 900, 28, Color.Red);
@@ -215,7 +217,34 @@ namespace PRJMediaBazaar
             switch (this.cbCategory.SelectedItem.ToString())
             {
                 case ("Electronics"):
+                    //this.cbSubcategory.Items.AddRange(new String[] {)
                     this.cbBrand.Items.AddRange(new String[] { "Asus", "Samsung","Acer","LG","Hama","Apple","Microsoft"});
+                    break;
+                case ("Fashion"):
+                    this.cbBrand.Items.AddRange(new String[] { "Balenciaga", "Versace", "Palm Angels", "Louis Vuitton", "Off-White", "Nike", "Addidas" });
+                    break;
+                case ("Furniture"):
+                    this.cbBrand.Items.AddRange(new String[] { "Ikea", "Poly & Bark", "Thuma", "RH" });
+                    break;
+                case ("Sports and Outdoors"):
+                    this.cbBrand.Items.AddRange(new String[] { "Addidas", "Nike", "Under Armour", "Salomon", "Puma", "Rebook" });
+                    break;
+                case ("Software"):
+                    this.cbBrand.Items.AddRange(new String[] { "Microsoft", "Apple", "Steam", "IBM" });
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        private void cbSubcategory_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            this.cbBrand.Items.Clear();
+            this.cbBrand.Text = null;
+            switch (this.cbSubcategory.SelectedItem.ToString())
+            {
+                case ("Electronics"):
+                    this.cbBrand.Items.AddRange(new String[] { "Asus", "Samsung", "Acer", "LG", "Hama", "Apple", "Microsoft" });
                     break;
                 case ("Fashion"):
                     this.cbBrand.Items.AddRange(new String[] { "Balenciaga", "Versace", "Palm Angels", "Louis Vuitton", "Off-White", "Nike", "Addidas" });

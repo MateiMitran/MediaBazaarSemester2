@@ -19,6 +19,7 @@ namespace PRJMediaBazaar.Data
                 int id = Convert.ToInt32(reader[0]);
                 String name = reader[1].ToString();
                 String category = reader[2].ToString();
+                String subcategory = reader[3].ToString();
                 String brand = reader[3].ToString();
                 String model = reader[4].ToString();
                 String description = reader[5].ToString();
@@ -29,7 +30,7 @@ namespace PRJMediaBazaar.Data
                 int inShopAmount = Convert.ToInt32(reader[10]);
                 int inStorageAmount = Convert.ToInt32(reader[11]);
 
-                Item item = new Item(id, name, category, brand, model, description, price, roomInShop,
+                Item item = new Item(id, name, category, subcategory ,brand, model, description, price, roomInShop,
                                      roomInStorage, minimumAmountInStock, inShopAmount, inStorageAmount);
               //  item.Image = GetItemImage(id);
                 items.Add(item);
@@ -38,19 +39,20 @@ namespace PRJMediaBazaar.Data
            
             return items;
         } 
-        public bool AddItem(String name, String category, String brand, String model, String description
+        public bool AddItem(String name, String category,String subcategory ,String brand, String model, String description
                     , String price, int roomInShop, int roomInStorage,
                     int minimumAmountInStock, byte[] image)
         {
             String sql = 
-                "INSERT INTO items(name,category,brand,model,description,price," +
+                "INSERT INTO items(name,category,subcategory,brand,model,description,price," +
                     "roomInShop,roomInStorage,minimumAmountInStock,inShopAmount,inStorageAmount) " +
-                "VALUES(@name,@category,@brand,@model,@description,@price," +
+                "VALUES(@name,@category,@subcategory,@brand,@model,@description,@price," +
                     "@roomInShop,@roomInStorage,@minimumAmountInStock,@inShopAmount,@inStorageAmount);";
 
             String[] parameters = new String[] { 
                 name, 
                 category, 
+                subcategory,
                 brand,
                 model,
                 description,
@@ -142,14 +144,14 @@ namespace PRJMediaBazaar.Data
                 return false;
             }
         }
-        public bool UpdateItem(String name, String category, String brand, String model, String description
+        public bool UpdateItem(String name, String category,String subcategory ,String brand, String model, String description
                     , String price, int roomInShop, int roomInStorage,
                     int minimumAmountInStock, byte[] image, int id)
         {
-            String sql = "UPDATE items SET name = @name, category = @category, brand = @brand, model=@model, description = @description,price = @price, " +
+            String sql = "UPDATE items SET name = @name, category = @category,subcategory = @subcategory ,brand = @brand, model=@model, description = @description,price = @price, " +
                          "roomInShop = @roomInShop, roomInStorage = @roomInStorage, minimumAmountInStock = @minimumAmountInStock " +
                          "WHERE id = @id;";
-            String[] parameters = new String[] { name, category, brand,model,description,price.ToString(),
+            String[] parameters = new String[] { name, category, subcategory ,brand,model,description,price.ToString(),
                                                 roomInShop.ToString(),roomInStorage.ToString(),
                                                 minimumAmountInStock.ToString(), id.ToString() };
             if (executeNonQuery(sql,parameters)!=null)
@@ -210,40 +212,116 @@ namespace PRJMediaBazaar.Data
 
         public List<String> GetCategories()
         {
-            List<String> categories = new List<String>();
-            String sql = "SELECT DISTINCT category FROM items;";
-            MySqlDataReader dr = executeReader(sql, null);
-            while (dr.Read())
+            string sql = null;
+            MySqlDataReader dr = null;
+            try
             {
-                categories.Add(dr[0].ToString());
+                List<String> categories = new List<String>();
+                 sql = "SELECT DISTINCT category FROM items;";
+                 dr = executeReader(sql, null);
+                while (dr.Read())
+                {
+                    categories.Add(dr[0].ToString());
+                }
+                return categories;
             }
-            return categories;
+            finally
+            {
+                if (dr != null)
+                {
+                    dr.Close();
+
+                }
+                CloseConnection();
+            }
+           
+        }
+
+        public List<String> GetSubcategories()
+        {
+            string sql = null;
+            MySqlDataReader dr = null;
+            try
+            {
+                List<String> subcategories = new List<String>();
+                sql = "SELECT DISTINCT subcategory FROM items;";
+                dr = executeReader(sql, null);
+                while (dr.Read())
+                {
+                    subcategories.Add(dr[0].ToString());
+                }
+                return subcategories;
+            }
+            finally
+            {
+                if (dr != null)
+                {
+                    dr.Close();
+
+                }
+                CloseConnection();
+            }
+
         }
 
         public List<String> GetBrandsByCategory(String category)
         {
-            List<String> brands = new List<String>();
-            String sql = "SELECT DISTINCT brand FROM items WHERE category = @category;";
-            String[] parameters = new String[] { category }; 
-            MySqlDataReader dr = executeReader(sql, parameters);
-            while (dr.Read())
+            string sql = null;
+            MySqlDataReader dr = null;
+            try
             {
-                brands.Add(dr[0].ToString());
+                List<String> brands = new List<String>();
+                 sql = "SELECT DISTINCT brand FROM items WHERE category = @category;";
+                String[] parameters = new String[] { category };
+                 dr = executeReader(sql, parameters);
+                while (dr.Read())
+                {
+                    brands.Add(dr[0].ToString());
+                }
+                return brands;
             }
-            return brands;
+            finally
+            {
+                if (dr != null)
+                {
+                    dr.Close();
+
+                }
+                CloseConnection();
+            }
+
+
+            
         }
 
         public List<String> GetModelsByBrand(String brand)
         {
-            List<String> models = new List<String>();
-            String sql = "SELECT DISTINCT model FROM items WHERE brand = @brand;";
-            String[] parameters = new String[] { brand };
-            MySqlDataReader dr = executeReader(sql, parameters);
-            while (dr.Read())
+            string sql = null;
+            MySqlDataReader dr = null;
+            try
             {
-                models.Add(dr[0].ToString());
+                List<String> models = new List<String>();
+                 sql = "SELECT DISTINCT model FROM items WHERE brand = @brand;";
+                String[] parameters = new String[] { brand };
+                 dr = executeReader(sql, parameters);
+                while (dr.Read())
+                {
+                    models.Add(dr[0].ToString());
+                }
+
+                return models;
             }
-            return models;
+
+            finally
+            {
+                if (dr != null)
+                {
+                    dr.Close();
+
+                }
+                CloseConnection();
+            }
+   
         }
     }
 }

@@ -9,13 +9,14 @@ namespace PRJMediaBazaar.Logic
     public class Item
     {
         //quantity is 0 when u create item
-        public Item(int id, String name, String category, String brand,String model, String description
+        public Item(int id, String name, String category, String subcatgeory ,String brand,String model, String description
                     , double price, int roomInShop, int roomInStorage,
                     int minimumAmountInStock, int inShopAmount, int inStorageAmount)
         {
             ID = id;
             Name = name;
             Category = category;
+            Subcategory = subcatgeory;
             Brand = brand; Model = model; Description = description;
             Price = price;
              RoomInShop = roomInShop; RoomInStorage = roomInStorage;
@@ -26,6 +27,7 @@ namespace PRJMediaBazaar.Logic
        public int ID { get;  set; }
        public String Name { get; set; }
        public String Category { get; set; }
+        public String Subcategory { get; set; }
        public String Brand { get; set; }
        public String Model { get; set; }
        public String Description { get; set; }
@@ -40,7 +42,7 @@ namespace PRJMediaBazaar.Logic
 
         public override string ToString()
         {
-            return "ID : " + ID + " Name : " + Name + " Category : " + Category + " Brand : " + Brand + " Model : " + Model
+            return "ID : " + ID + " Name : " + Name + " Category : " + Category + " Subcategory : " + Subcategory + " Brand : " + Brand + " Model : " + Model
                 + " Description : " + Description + " Price : " + Price + " $ " + "Room in Shop : " + RoomInShop + " Room in Storage : " + RoomInStorage
                 + " Minimum Amount in Stock : " + MinimumAmountInStock + " Amount in Shop : " + InShopAmount + " Amount in Storage : " + InStorageAmount;
         }

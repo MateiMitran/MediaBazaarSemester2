@@ -131,7 +131,7 @@ namespace PRJMediaBazaar
             }
             this.cbBrands.Enabled = true;
             List<String> brands = this.itemControl.GetBrands(this.cbCategories.SelectedItem.ToString());
-            this.cbBrands.Items.AddRange(brands.ToArray());
+            this.cbBrands.Items.AddRange(brands.ToArray()); //?
         }
 
         private void godTimer_Tick(object sender, EventArgs e)
@@ -169,30 +169,42 @@ namespace PRJMediaBazaar
 
         private void cbBrands_SelectedIndexChanged(object sender, EventArgs e)
         {
-            this.lbItems.Items.Clear();
-            this.cbModels.SelectedItem = null;
-            foreach (Item temp in allItems)
+            if (this.cbBrands.SelectedItem != null)
             {
-                if (temp.Brand == this.cbBrands.SelectedItem.ToString())
+                this.lbItems.Items.Clear();
+                this.cbModels.SelectedItem = null;
+                foreach (Item temp in allItems)
                 {
-                    this.lbItems.Items.Add(temp.ToString());
+                    if (temp.Brand == this.cbBrands.SelectedItem.ToString())
+                    {
+                        this.lbItems.Items.Add(temp.ToString());
+                    }
                 }
+                this.cbModels.Enabled = true;
+                List<String> models = this.itemControl.GetModels(this.cbBrands.SelectedItem.ToString());
+                this.cbModels.Items.AddRange(models.ToArray());
+
             }
-            this.cbModels.Enabled = true;
-            List<String> models = this.itemControl.GetModels(this.cbBrands.SelectedItem.ToString());
-            this.cbModels.Items.AddRange(models.ToArray());
+           
         }
 
         private void cbModels_SelectedIndexChanged(object sender, EventArgs e)
         {
-            this.lbItems.Items.Clear();
-            foreach(Item temp in allItems)
+            if (this.cbModels.SelectedItem != null)
             {
-                if (temp.Model == this.cbModels.SelectedItem.ToString())
+                this.lbItems.Items.Clear();
+                foreach (Item temp in allItems)
                 {
-                    this.lbItems.Items.Add(temp.ToString());
+
+                    if (temp.Model == this.cbModels.SelectedItem.ToString())
+                    {
+                        this.lbItems.Items.Add(temp.ToString());
+
+                    }
                 }
             }
+
+            
         }
     }
 }

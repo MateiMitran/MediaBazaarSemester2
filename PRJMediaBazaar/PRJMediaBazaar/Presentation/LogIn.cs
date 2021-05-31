@@ -23,7 +23,7 @@ namespace PRJMediaBazaar
             InitializeComponent();
             buttons = new List<Button>();
             timers = new List<Timer>();
-            emp = new EmployeeControl();
+            
         }
         public void StatusFunction(String text, int x, int y, int width, int height, Color color)
         {
@@ -61,6 +61,7 @@ namespace PRJMediaBazaar
 
             if (VPNisON())
             {
+                emp = new EmployeeControl();
                     if (emp.Login(this.tbUsername.Text, this.tbPassword.Text) == "HRManager")
                     {
                         Employee hrmanager = emp.GetEmployeeByEmailAndPassword(this.tbUsername.Text, this.tbPassword.Text);
