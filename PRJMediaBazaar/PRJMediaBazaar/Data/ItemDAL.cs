@@ -207,5 +207,43 @@ namespace PRJMediaBazaar.Data
             CloseConnection();
             return id;
         }
+
+        public List<String> GetCategories()
+        {
+            List<String> categories = new List<String>();
+            String sql = "SELECT DISTINCT category FROM items;";
+            MySqlDataReader dr = executeReader(sql, null);
+            while (dr.Read())
+            {
+                categories.Add(dr[0].ToString());
+            }
+            return categories;
+        }
+
+        public List<String> GetBrandsByCategory(String category)
+        {
+            List<String> brands = new List<String>();
+            String sql = "SELECT DISTINCT brand FROM items WHERE category = @category;";
+            String[] parameters = new String[] { category }; 
+            MySqlDataReader dr = executeReader(sql, parameters);
+            while (dr.Read())
+            {
+                brands.Add(dr[0].ToString());
+            }
+            return brands;
+        }
+
+        public List<String> GetModelsByBrand(String brand)
+        {
+            List<String> models = new List<String>();
+            String sql = "SELECT DISTINCT model FROM items WHERE brand = @brand;";
+            String[] parameters = new String[] { brand };
+            MySqlDataReader dr = executeReader(sql, parameters);
+            while (dr.Read())
+            {
+                models.Add(dr[0].ToString());
+            }
+            return models;
+        }
     }
 }

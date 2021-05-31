@@ -25,9 +25,9 @@ namespace PRJMediaBazaar.Logic
 
         }
 
-        public bool UpdateInStockQuantity()
-        {
+       // public bool UpdateInStockQuantity()
+     //   {
 
-        }
+       // }
     }
 }

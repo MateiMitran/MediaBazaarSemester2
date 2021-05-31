@@ -9,7 +9,7 @@ using MySql.Data.MySqlClient;
 
 namespace PRJMediaBazaar.Logic
 {
-    class ItemControl : IItemControlDTO
+    class ItemControl //: IItemControlDTO
     {
         private List<Item> items;
         private ItemDAL itemDAL;
@@ -98,6 +98,10 @@ namespace PRJMediaBazaar.Logic
             else
                 return false;
         }
+        public List<String> GetCategories()
+        {
+            return itemDAL.GetCategories();
+        }
         public List<Item> GetItems()
         {
             return this.items;
@@ -118,6 +122,14 @@ namespace PRJMediaBazaar.Logic
                 }
             }
             return null;
+        }
+        public List<String> GetBrands(String category)
+        {
+            return itemDAL.GetBrandsByCategory(category);
+        }
+        public List<String> GetModels(String brand)
+        {
+            return itemDAL.GetModelsByBrand(brand);
         }
 
     }

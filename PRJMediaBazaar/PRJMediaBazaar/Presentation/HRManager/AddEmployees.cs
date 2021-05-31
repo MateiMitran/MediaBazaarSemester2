@@ -145,7 +145,7 @@ namespace PRJMediaBazaar
                     int id = ec.GetIDFromEmail(email);
                     hr.AddEmployee(new Employee(id, firstName, lastName, birthDate, gender, salary, email, password, jobPosition,
                                    phone, address, education, contract, daysOff, contractHours, daysOff));
-                    hr.AddNameToCB(firstName + ' ' + lastName);
+                  //  hr.AddNameToCB(firstName + ' ' + lastName);
                     StatusFunction("Success!", -60, -5, 835, 28, Color.Green);
                 }
             }

@@ -36,5 +36,13 @@ namespace PRJMediaBazaar.Logic
        public int InShopAmount { get; set; }
        public int InStorageAmount { get; set; }
        public byte[] Image { get; set; }
+
+
+        public override string ToString()
+        {
+            return "ID : " + ID + " Name : " + Name + " Category : " + Category + " Brand : " + Brand + " Model : " + Model
+                + " Description : " + Description + " Price : " + Price + " $ " + "Room in Shop : " + RoomInShop + " Room in Storage : " + RoomInStorage
+                + " Minimum Amount in Stock : " + MinimumAmountInStock + " Amount in Shop : " + InShopAmount + " Amount in Storage : " + InStorageAmount;
+        }
     }
 }

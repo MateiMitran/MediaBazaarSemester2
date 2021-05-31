@@ -21,6 +21,7 @@ namespace PRJMediaBazaar
 
         private Item[] items;
 
+        List<Item> allItems;
         private List<Button> buttons;
         private List<System.Windows.Forms.Timer> timers;
         public WRHSHome(LogIn login)
@@ -31,6 +32,7 @@ namespace PRJMediaBazaar
             itemControl = new ItemControl();
             buttons = new List<Button>();
             timers = new List<System.Windows.Forms.Timer>();
+            allItems = itemControl.GetItems();
             LoadItemsLESGOO();
         }
         public void StatusFunction(String text, int x, int y, int width, int height, Color color)
@@ -51,30 +53,8 @@ namespace PRJMediaBazaar
         }
         public void LoadItemsLESGOO()
         {
-            this.lbItems.Items.Clear();
-            this.cbItems.Text = null;
-            this.cbItems.Items.Clear();
-            items = itemControl.Items;
-            for (int i=0;i<items.Length;i++)
-            {
-                this.cbItems.Items.Add(items[i].ID + " : " + items[i].Name);
-            }
-        }
-        public void LoadItemInformationLESGOO()
-        {
-            this.lbItems.Items.Clear();
-            this.lbItems.Items.Add("ID : " + thisItem.ID);
-            this.lbItems.Items.Add("Name : " + thisItem.Name);
-            this.lbItems.Items.Add("Category : " + thisItem.Category);
-            this.lbItems.Items.Add("Brand : " + thisItem.Brand);
-            this.lbItems.Items.Add("Model : " + thisItem.Model);
-            this.lbItems.Items.Add("Description : " + thisItem.Description);
-            this.lbItems.Items.Add("Price : " + thisItem.Price + "$");
-            this.lbItems.Items.Add("Room in Shop : " + thisItem.RoomInShop);
-            this.lbItems.Items.Add("Room in Storage : " + thisItem.RoomInStorage);
-            this.lbItems.Items.Add("Minimum Amount in Stock : " + thisItem.MinimumAmountInStock);
-            this.lbItems.Items.Add("Amount in Shop : " + thisItem.InShopAmount);
-            this.lbItems.Items.Add("Amount in Storage : " + thisItem.InStorageAmount);
+            List<String> categories = this.itemControl.GetCategories();
+            this.cbCategories.Items.AddRange(categories.ToArray());
         }
         private void lblItems_Click(object sender, EventArgs e)
         {
@@ -136,22 +116,22 @@ namespace PRJMediaBazaar
             login.Close();
         }
 
-        private void cbItems_SelectedIndexChanged(object sender, EventArgs e)
+        private void cbCategories_SelectedIndexChanged(object sender, EventArgs e)
         {
-            try
+            
+            this.lbItems.Items.Clear();
+            this.cbBrands.SelectedItem = null;
+            this.cbModels.SelectedItem = null;
+            foreach (Item temp in allItems)
             {
-                if (this.cbItems.SelectedItem == null)
+                if (temp.Category == this.cbCategories.SelectedItem.ToString())
                 {
-                    StatusFunction("Please select an item!", -6, -1, 900, 28, Color.Red);
-                    throw new EmptyComboBoxException();
+                    this.lbItems.Items.Add(temp.ToString());
                 }
-                thisItem = itemControl.GetItemByIdAndName(this.cbItems.SelectedItem.ToString());
-                LoadItemInformationLESGOO();
             }
-            catch (Exception ex)
-            {
-                StatusFunction("No item found!", -6, -1, 900, 28, Color.Red);
-            }
+            this.cbBrands.Enabled = true;
+            List<String> brands = this.itemControl.GetBrands(this.cbCategories.SelectedItem.ToString());
+            this.cbBrands.Items.AddRange(brands.ToArray());
         }
 
         private void godTimer_Tick(object sender, EventArgs e)
@@ -185,6 +165,34 @@ namespace PRJMediaBazaar
             }
             else
                 StatusFunction("No item found!", -6, -1, 900, 28, Color.Red);
+        }
+
+        private void cbBrands_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            this.lbItems.Items.Clear();
+            this.cbModels.SelectedItem = null;
+            foreach (Item temp in allItems)
+            {
+                if (temp.Brand == this.cbBrands.SelectedItem.ToString())
+                {
+                    this.lbItems.Items.Add(temp.ToString());
+                }
+            }
+            this.cbModels.Enabled = true;
+            List<String> models = this.itemControl.GetModels(this.cbBrands.SelectedItem.ToString());
+            this.cbModels.Items.AddRange(models.ToArray());
+        }
+
+        private void cbModels_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            this.lbItems.Items.Clear();
+            foreach(Item temp in allItems)
+            {
+                if (temp.Model == this.cbModels.SelectedItem.ToString())
+                {
+                    this.lbItems.Items.Add(temp.ToString());
+                }
+            }
         }
     }
 }
