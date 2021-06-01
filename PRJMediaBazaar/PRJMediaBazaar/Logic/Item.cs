@@ -42,9 +42,12 @@ namespace PRJMediaBazaar.Logic
 
         public override string ToString()
         {
-            return "ID : " + ID + " Name : " + Name + " Category : " + Category + " Subcategory : " + Subcategory + " Brand : " + Brand + " Model : " + Model
-                + " Description : " + Description + " Price : " + Price + " $ " + "Room in Shop : " + RoomInShop + " Room in Storage : " + RoomInStorage
-                + " Minimum Amount in Stock : " + MinimumAmountInStock + " Amount in Shop : " + InShopAmount + " Amount in Storage : " + InStorageAmount;
+            //return "ID : " + ID + " Name : " + Name + " Category : " + Category + " Subcategory : " + Subcategory + " Brand : " + Brand + " Model : " + Model
+            //    + " Description : " + Description + " Price : " + Price + " $ " + "Room in Shop : " + RoomInShop + " Room in Storage : " + RoomInStorage
+            //    + " Minimum Amount in Stock : " + MinimumAmountInStock + " Amount in Shop : " + InShopAmount + " Amount in Storage : " + InStorageAmount;
+
+
+            return "ID : " + ID + "    Name : " + Name + "    Model : " + Model + "    Price : " + Price;
         }
     }
 }

@@ -20,15 +20,15 @@ namespace PRJMediaBazaar.Data
                 String name = reader[1].ToString();
                 String category = reader[2].ToString();
                 String subcategory = reader[3].ToString();
-                String brand = reader[3].ToString();
-                String model = reader[4].ToString();
-                String description = reader[5].ToString();
-                double price = double.Parse(reader[6].ToString(), System.Globalization.CultureInfo.InvariantCulture);
-                int roomInShop = Convert.ToInt32(reader[7]);
-                int roomInStorage = Convert.ToInt32(reader[8]);
-                int minimumAmountInStock = Convert.ToInt32(reader[9]);
-                int inShopAmount = Convert.ToInt32(reader[10]);
-                int inStorageAmount = Convert.ToInt32(reader[11]);
+                String brand = reader[4].ToString();
+                String model = reader[5].ToString();
+                String description = reader[6].ToString();
+                double price = double.Parse(reader[7].ToString(), System.Globalization.CultureInfo.InvariantCulture);
+                int roomInShop = Convert.ToInt32(reader[8]);
+                int roomInStorage = Convert.ToInt32(reader[9]);
+                int minimumAmountInStock = Convert.ToInt32(reader[10]);
+                int inShopAmount = Convert.ToInt32(reader[11]);
+                int inStorageAmount = Convert.ToInt32(reader[12]);
 
                 Item item = new Item(id, name, category, subcategory ,brand, model, description, price, roomInShop,
                                      roomInStorage, minimumAmountInStock, inShopAmount, inStorageAmount);
@@ -237,15 +237,16 @@ namespace PRJMediaBazaar.Data
            
         }
 
-        public List<String> GetSubcategories()
+        public List<String> GetSubcategoriesByCategory(String category)
         {
             string sql = null;
             MySqlDataReader dr = null;
             try
             {
                 List<String> subcategories = new List<String>();
-                sql = "SELECT DISTINCT subcategory FROM items;";
-                dr = executeReader(sql, null);
+                sql = "SELECT DISTINCT subcategory FROM items  WHERE category = @category;";
+                String[] parameters = new String[] { category };
+                dr = executeReader(sql, parameters);
                 while (dr.Read())
                 {
                     subcategories.Add(dr[0].ToString());
@@ -264,15 +265,15 @@ namespace PRJMediaBazaar.Data
 
         }
 
-        public List<String> GetBrandsByCategory(String category)
+        public List<String> GetBrandsBySubcategory(String subcategory)
         {
             string sql = null;
             MySqlDataReader dr = null;
             try
             {
                 List<String> brands = new List<String>();
-                 sql = "SELECT DISTINCT brand FROM items WHERE category = @category;";
-                String[] parameters = new String[] { category };
+                 sql = "SELECT DISTINCT brand FROM items WHERE subcategory = @subcategory;";
+                String[] parameters = new String[] { subcategory };
                  dr = executeReader(sql, parameters);
                 while (dr.Read())
                 {

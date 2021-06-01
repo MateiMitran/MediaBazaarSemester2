@@ -120,8 +120,8 @@ namespace PRJMediaBazaar
         {
             
             this.lbItems.Items.Clear();
-            this.cbBrands.SelectedItem = null;
-            this.cbModels.SelectedItem = null;
+            this.cbSubcategory.SelectedItem = null;
+            this.cbBrand.SelectedItem = null;
             foreach (Item temp in allItems)
             {
                 if (temp.Category == this.cbCategories.SelectedItem.ToString())
@@ -129,9 +129,9 @@ namespace PRJMediaBazaar
                     this.lbItems.Items.Add(temp.ToString());
                 }
             }
-            this.cbBrands.Enabled = true;
-            List<String> brands = this.itemControl.GetBrands(this.cbCategories.SelectedItem.ToString());
-            this.cbBrands.Items.AddRange(brands.ToArray()); //?
+            this.cbSubcategory.Enabled = true;
+            List<String> subcategories = this.itemControl.GetSubcategories(this.cbCategories.SelectedItem.ToString());
+            this.cbSubcategory.Items.AddRange(subcategories.ToArray()); 
         }
 
         private void godTimer_Tick(object sender, EventArgs e)
@@ -167,44 +167,94 @@ namespace PRJMediaBazaar
                 StatusFunction("No item found!", -6, -1, 900, 28, Color.Red);
         }
 
-        private void cbBrands_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (this.cbBrands.SelectedItem != null)
-            {
-                this.lbItems.Items.Clear();
-                this.cbModels.SelectedItem = null;
-                foreach (Item temp in allItems)
-                {
-                    if (temp.Brand == this.cbBrands.SelectedItem.ToString())
-                    {
-                        this.lbItems.Items.Add(temp.ToString());
-                    }
-                }
-                this.cbModels.Enabled = true;
-                List<String> models = this.itemControl.GetModels(this.cbBrands.SelectedItem.ToString());
-                this.cbModels.Items.AddRange(models.ToArray());
+        //private void cbBrands_SelectedIndexChanged(object sender, EventArgs e)
+        //{
+        //    if (this.cbModel.SelectedItem != null)
+        //    {
+        //        this.lbItems.Items.Clear();
+        //        this.cbModel.SelectedItem = null;
+        //        foreach (Item temp in allItems)
+        //        {
+        //            if (temp.Subcategory == this.cbBrandd.SelectedItem.ToString())
+        //            {
+        //                this.lbItems.Items.Add(temp.ToString());
+        //            }
+        //        }
+        //        this.cbModel.Enabled = true;
+        //        List<String> models = this.itemControl.GetModels(this.cbBrandd.SelectedItem.ToString());
+        //        this.cbModel.Items.AddRange(models.ToArray());
 
-            }
+        //    }
            
-        }
+        //}
 
-        private void cbModels_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (this.cbModels.SelectedItem != null)
-            {
-                this.lbItems.Items.Clear();
-                foreach (Item temp in allItems)
-                {
+        //private void cbModels_SelectedIndexChanged(object sender, EventArgs e)
+        //{
+        //    if (this.cbBrandd.SelectedItem != null)
+        //    {
+        //        this.lbItems.Items.Clear();
+        //        foreach (Item temp in allItems)
+        //        {
 
-                    if (temp.Model == this.cbModels.SelectedItem.ToString())
-                    {
-                        this.lbItems.Items.Add(temp.ToString());
+        //            if (temp.Model == this.cbModel.SelectedItem.ToString())
+        //            {
+        //                this.lbItems.Items.Add(temp.ToString());
 
-                    }
-                }
-            }
+        //            }
+        //        }
+        //    }
 
             
+        //}
+
+        private void label5_Click(object sender, EventArgs e)
+        {
+
+        }
+
+
+
+
+
+
+
+
+
+        private void cbSubcategory_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (this.cbSubcategory.SelectedItem != null)
+            {
+                this.lbItems.Items.Clear();
+                this.cbBrand.SelectedItem = null;
+                foreach (Item temp in allItems)
+                {
+                    if (temp.Subcategory == this.cbSubcategory.SelectedItem.ToString())
+                    {
+                        this.lbItems.Items.Add(temp.ToString());
+                    }
+                }
+                this.cbBrand.Enabled = true;
+                List<String> brands = this.itemControl.GetBrands(this.cbSubcategory.SelectedItem.ToString());
+                this.cbBrand.Items.AddRange(brands.ToArray());
+
+            }
+        }
+
+        private void cbBrand_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (this.cbBrand.SelectedItem != null)
+            {
+                this.lbItems.Items.Clear();
+                foreach (Item temp in allItems)
+                {
+
+                    if (temp.Brand == this.cbBrand.SelectedItem.ToString())
+                    {
+                        this.lbItems.Items.Add(temp.ToString());
+
+                    }
+                }
+            }
         }
     }
 }

@@ -213,23 +213,28 @@ namespace PRJMediaBazaar
         private void cbCategory_SelectedIndexChanged(object sender, EventArgs e)
         {
             this.cbBrand.Items.Clear();
+            this.cbSubcategory.Items.Clear();
             this.cbBrand.Text = null;
             switch (this.cbCategory.SelectedItem.ToString())
             {
                 case ("Electronics"):
-                    //this.cbSubcategory.Items.AddRange(new String[] {)
+                    this.cbSubcategory.Items.AddRange(new String[] { "Laptop", "Desktop", "Monitor", "TV", "Phone", "Smart-Watch"});
                     this.cbBrand.Items.AddRange(new String[] { "Asus", "Samsung","Acer","LG","Hama","Apple","Microsoft"});
                     break;
                 case ("Fashion"):
+                    this.cbSubcategory.Items.AddRange(new String[] { "T-Shirt", "Jacket", "Dress", "Shoe", "Pants", "Hoodie" });
                     this.cbBrand.Items.AddRange(new String[] { "Balenciaga", "Versace", "Palm Angels", "Louis Vuitton", "Off-White", "Nike", "Addidas" });
                     break;
                 case ("Furniture"):
+                    this.cbSubcategory.Items.AddRange(new String[] { "Table", "Chair", "Sofa", "Armchair", "Desk", "Bench" });
                     this.cbBrand.Items.AddRange(new String[] { "Ikea", "Poly & Bark", "Thuma", "RH" });
                     break;
                 case ("Sports and Outdoors"):
+                    this.cbSubcategory.Items.AddRange(new String[] { "Ball", "Racket", "Disk", "Net", "Rod", "Skateboard" });
                     this.cbBrand.Items.AddRange(new String[] { "Addidas", "Nike", "Under Armour", "Salomon", "Puma", "Rebook" });
                     break;
                 case ("Software"):
+                    this.cbSubcategory.Items.AddRange(new String[] { "Windows", "Linux", "Mac", "NOD32", "BitDefender", "Avast" });
                     this.cbBrand.Items.AddRange(new String[] { "Microsoft", "Apple", "Steam", "IBM" });
                     break;
                 default:
@@ -239,28 +244,7 @@ namespace PRJMediaBazaar
 
         private void cbSubcategory_SelectedIndexChanged(object sender, EventArgs e)
         {
-            this.cbBrand.Items.Clear();
-            this.cbBrand.Text = null;
-            switch (this.cbSubcategory.SelectedItem.ToString())
-            {
-                case ("Electronics"):
-                    this.cbBrand.Items.AddRange(new String[] { "Asus", "Samsung", "Acer", "LG", "Hama", "Apple", "Microsoft" });
-                    break;
-                case ("Fashion"):
-                    this.cbBrand.Items.AddRange(new String[] { "Balenciaga", "Versace", "Palm Angels", "Louis Vuitton", "Off-White", "Nike", "Addidas" });
-                    break;
-                case ("Furniture"):
-                    this.cbBrand.Items.AddRange(new String[] { "Ikea", "Poly & Bark", "Thuma", "RH" });
-                    break;
-                case ("Sports and Outdoors"):
-                    this.cbBrand.Items.AddRange(new String[] { "Addidas", "Nike", "Under Armour", "Salomon", "Puma", "Rebook" });
-                    break;
-                case ("Software"):
-                    this.cbBrand.Items.AddRange(new String[] { "Microsoft", "Apple", "Steam", "IBM" });
-                    break;
-                default:
-                    break;
-            }
+            
         }
     }
 }

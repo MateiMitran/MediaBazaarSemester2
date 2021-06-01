@@ -70,9 +70,10 @@ namespace PRJMediaBazaar
         {
             byte[] image = _itemControl.GetItemImage(x.ID);
             this.tbName.Text = x.Name;
-            this.tbCategory.Text = x.Category;
-            this.tbBrand.Text = x.Brand;
-            this.tbModel.Text = x.Model;
+            this.cbCategory.Text = x.Category;
+            this.cbSubcategory.Text = x.Subcategory; // maybe make method to get trait by name
+            this.cbBrand.Text = x.Brand; // maybe make method to get trait by name
+            this.tbModel.Text = x.Model; // maybe make method to get trait by name
             this.tbDescription.Text = x.Description;
             this.tbPrice.Text = x.Price.ToString();
             this.tbRoomShop.Value = x.RoomInShop;
@@ -90,8 +91,8 @@ namespace PRJMediaBazaar
                 Helper.ValidateInteger(tbRoomStorage.Text, "RoomStorage", errors);
                 Helper.ValidateInteger(tbMinimumAmount.Text, "MinimumAmount", errors);
                 Helper.ValidateString(tbName.Text, "ItemName", errors);
-                Helper.ValidateString(tbCategory.Text, "Category", errors);
-                Helper.ValidateString(tbBrand.Text, "Brand", errors);
+                Helper.ValidateString(cbCategory.Text, "Category", errors);
+                Helper.ValidateString(cbCategory.Text, "Brand", errors);
                 Helper.ValidateString(tbModel.Text, "Model", errors);
                 Helper.ValidateString(tbDescription.Text, "Description", errors);
                 Helper.ValidateDouble(tbPrice.Text, "Price", errors);
@@ -104,8 +105,9 @@ namespace PRJMediaBazaar
                 byte[] img = ImageToBinary(this.pbxCurrentImage.Image);
                 int id = x.ID;
                 string itemName = tbName.Text;
-                string category = tbCategory.Text;
-                string brand = tbBrand.Text;
+                string category = cbCategory.SelectedItem.ToString();
+                string subcategory = cbSubcategory.SelectedItem.ToString();
+                string brand = cbBrand.SelectedItem.ToString();
                 string model = tbModel.Text;
                 string description = tbDescription.Text;
                 double price = Convert.ToDouble(tbPrice.Text);
@@ -113,7 +115,7 @@ namespace PRJMediaBazaar
                 int roomStorage = Convert.ToInt32(tbRoomStorage.Text);
                 int minAmount = Convert.ToInt32(tbMinimumAmount.Text);
                
-                _itemControl.UpdateAnItem(id, itemName, category, brand, model, description, price,
+                _itemControl.UpdateAnItem(id, itemName, category, subcategory ,brand, model, description, price,
                      roomShop, roomStorage, minAmount, img);
                 wh.LoadItemsLESGOO();
                 StatusFunction("Item updated!", -6, -1, 900, 28, Color.Green);
@@ -213,6 +215,39 @@ namespace PRJMediaBazaar
             {
                 img.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
                 return ms.ToArray();
+            }
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            this.cbBrand.Items.Clear();
+            this.cbBrand.Text = null;
+            this.cbSubcategory.Items.Clear();
+            this.cbSubcategory.Text = null;
+            switch (this.cbCategory.SelectedItem.ToString())
+            {
+                case ("Electronics"):
+                    this.cbSubcategory.Items.AddRange(new String[] { "Laptop", "Desktop", "Monitor", "TV", "Phone", "Smart-Watch" });
+                    this.cbBrand.Items.AddRange(new String[] { "Asus", "Samsung", "Acer", "LG", "Hama", "Apple", "Microsoft" });
+                    break;
+                case ("Fashion"):
+                    this.cbSubcategory.Items.AddRange(new String[] { "T-Shirt", "Jacket", "Dress", "Shoe", "Pants", "Hoodie" });
+                    this.cbBrand.Items.AddRange(new String[] { "Balenciaga", "Versace", "Palm Angels", "Louis Vuitton", "Off-White", "Nike", "Addidas" });
+                    break;
+                case ("Furniture"):
+                    this.cbSubcategory.Items.AddRange(new String[] { "Table", "Chair", "Sofa", "Armchair", "Desk", "Bench" });
+                    this.cbBrand.Items.AddRange(new String[] { "Ikea", "Poly & Bark", "Thuma", "RH" });
+                    break;
+                case ("Sports and Outdoors"):
+                    this.cbSubcategory.Items.AddRange(new String[] { "Ball", "Racket", "Disk", "Net", "Rod", "Skateboard" });
+                    this.cbBrand.Items.AddRange(new String[] { "Addidas", "Nike", "Under Armour", "Salomon", "Puma", "Rebook" });
+                    break;
+                case ("Software"):
+                    this.cbSubcategory.Items.AddRange(new String[] { "Windows", "Linux", "Mac", "NOD32", "BitDefender", "Avast" });
+                    this.cbBrand.Items.AddRange(new String[] { "Microsoft", "Apple", "Steam", "IBM" });
+                    break;
+                default:
+                    break;
             }
         }
     }

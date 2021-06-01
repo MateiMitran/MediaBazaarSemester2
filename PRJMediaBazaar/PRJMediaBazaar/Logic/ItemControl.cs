@@ -104,10 +104,6 @@ namespace PRJMediaBazaar.Logic
             return itemDAL.GetCategories();
         }
 
-        public List<String> GetSubcategories()
-        {
-            return itemDAL.GetSubcategories();
-        }
         public List<Item> GetItems()
         {
             return this.items;
@@ -129,13 +125,18 @@ namespace PRJMediaBazaar.Logic
             }
             return null;
         }
-        public List<String> GetBrands(String category)
+        public List<String> GetBrands(String subcategory)
         {
-            return itemDAL.GetBrandsByCategory(category);
+            return itemDAL.GetBrandsBySubcategory(subcategory);
         }
         public List<String> GetModels(String brand)
         {
             return itemDAL.GetModelsByBrand(brand);
+        }
+
+        public List<String> GetSubcategories(String category)
+        {
+            return itemDAL.GetSubcategoriesByCategory(category);
         }
 
     }
