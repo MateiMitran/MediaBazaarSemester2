@@ -24,14 +24,14 @@ namespace PRJMediaBazaar.Logic
         {
            this.items = itemDAL.SelectAllItems();
         }
-        public void AddAnItem(String name, String category, String subcategory ,String brand, String model, String description
-                    , double price, int roomInShop, int roomInStorage,
+        public void AddAnItem(String category, String subcategory ,String brand, String model, String description, double stock_price
+                    , double price, String restock_state, int roomInShop, int roomInStorage,
                     int minimumAmountInStock, byte[] image)
         {
-            itemDAL.AddItem(name, category,subcategory ,brand,model,description, price.ToString(),
+            itemDAL.AddItem(category,subcategory ,brand,model,description,stock_price.ToString(), price.ToString(), restock_state,
                 roomInShop,roomInStorage,minimumAmountInStock,image);
             int id = itemDAL.LastItemId();
-            Item temp = new Item(id, name, category,subcategory ,brand, model, description, price,
+            Item temp = new Item(id, category,subcategory ,brand, model, description, stock_price, price, restock_state,
                 roomInShop, roomInStorage, minimumAmountInStock,0, 0);
             temp.Image = image;
             items.Add(temp);
@@ -52,24 +52,25 @@ namespace PRJMediaBazaar.Logic
             }
             return false;
         }
-        public bool UpdateAnItem(int id, String name, String category, String subcategory ,String brand, String model, String description
-                    , double price, int roomInShop, int roomInStorage,
+        public bool UpdateAnItem(int id, String category, String subcategory ,String brand, String model, String description, double stock_price
+                    , double price, String restock_state, int roomInShop, int roomInStorage,
                     int minimumAmountInStock, byte[] image)
         {
-            if (itemDAL.UpdateItem(name, category, subcategory, brand, model, description, price.ToString(), 
+            if (itemDAL.UpdateItem(category, subcategory, brand, model, description, stock_price.ToString() , price.ToString(), restock_state,
                 roomInShop, roomInStorage, minimumAmountInStock,image, id) ==true)
             {
                 for (int i = 0; i < items.Count; i++)
                 {
                     if (items[i].ID == id)
                     {
-                        items[i].Name = name;
                         items[i].Category = category;
                         items[i].Subcategory = subcategory;
                         items[i].Brand = brand;
                         items[i].Model = model;
                         items[i].Description = description;
+                        items[i].Stock_Price = stock_price;
                         items[i].Price = price;
+                        items[i].Restock_State = restock_state;
                         items[i].RoomInShop = roomInShop;
                         items[i].RoomInStorage = roomInStorage;
                         items[i].MinimumAmountInStock = minimumAmountInStock;

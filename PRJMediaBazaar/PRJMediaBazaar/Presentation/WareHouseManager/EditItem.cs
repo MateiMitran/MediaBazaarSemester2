@@ -69,12 +69,12 @@ namespace PRJMediaBazaar
         private void EditItem_Load(object sender, EventArgs e)
         {
             byte[] image = _itemControl.GetItemImage(x.ID);
-            this.tbName.Text = x.Name;
             this.cbCategory.Text = x.Category;
             this.cbSubcategory.Text = x.Subcategory; // maybe make method to get trait by name
             this.cbBrand.Text = x.Brand; // maybe make method to get trait by name
             this.tbModel.Text = x.Model; // maybe make method to get trait by name
             this.tbDescription.Text = x.Description;
+            this.tbStockPrice.Text = x.Stock_Price.ToString();
             this.tbPrice.Text = x.Price.ToString();
             this.tbRoomShop.Value = x.RoomInShop;
             this.tbRoomStorage.Value = x.RoomInStorage;
@@ -90,10 +90,10 @@ namespace PRJMediaBazaar
                 Helper.ValidateInteger(tbRoomShop.Text, "RoomShop", errors);
                 Helper.ValidateInteger(tbRoomStorage.Text, "RoomStorage", errors);
                 Helper.ValidateInteger(tbMinimumAmount.Text, "MinimumAmount", errors);
-                Helper.ValidateString(tbName.Text, "ItemName", errors);
                 Helper.ValidateString(cbCategory.Text, "Category", errors);
                 Helper.ValidateString(cbCategory.Text, "Brand", errors);
                 Helper.ValidateString(tbModel.Text, "Model", errors);
+                Helper.ValidateString(tbStockPrice.Text, "Stock_Price", errors);
                 Helper.ValidateString(tbDescription.Text, "Description", errors);
                 Helper.ValidateDouble(tbPrice.Text, "Price", errors);
 
@@ -104,18 +104,26 @@ namespace PRJMediaBazaar
 
                 byte[] img = ImageToBinary(this.pbxCurrentImage.Image);
                 int id = x.ID;
-                string itemName = tbName.Text;
                 string category = cbCategory.SelectedItem.ToString();
                 string subcategory = cbSubcategory.SelectedItem.ToString();
                 string brand = cbBrand.SelectedItem.ToString();
                 string model = tbModel.Text;
                 string description = tbDescription.Text;
+                double stock_price = Convert.ToDouble(this.tbStockPrice.Text);
                 double price = Convert.ToDouble(tbPrice.Text);
                 int roomShop = Convert.ToInt32(tbRoomShop.Text);
                 int roomStorage = Convert.ToInt32(tbRoomStorage.Text);
                 int minAmount = Convert.ToInt32(tbMinimumAmount.Text);
-               
-                _itemControl.UpdateAnItem(id, itemName, category, subcategory ,brand, model, description, price,
+                String restock_state = "manager";
+                if (stock_price > (3 * price) / 5)
+                {
+                    throw new Exception("Stock Price needs to be at least 60% of Selling Price!");
+                }
+                if (roomShop > roomStorage / 2)
+                {
+                    throw new Exception("Room in shop needs to be less than 50% of room in storage!");
+                }
+                _itemControl.UpdateAnItem(id, category, subcategory ,brand, model, description,stock_price, price, restock_state,
                      roomShop, roomStorage, minAmount, img);
                 wh.LoadItemsLESGOO();
                 StatusFunction("Item updated!", -6, -1, 900, 28, Color.Green);
@@ -125,7 +133,10 @@ namespace PRJMediaBazaar
             {
                 StatusFunction(ex.ToString(), -6, -1, 900, 28, Color.Red);
             }
-
+            catch (Exception ex)
+            {
+                StatusFunction(ex.Message, -6, -1, 900, 28, Color.Red);
+            }
         }
 
         private void godTimer_Tick(object sender, EventArgs e)

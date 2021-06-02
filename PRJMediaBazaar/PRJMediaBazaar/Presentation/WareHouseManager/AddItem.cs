@@ -154,10 +154,10 @@ namespace PRJMediaBazaar
                 Helper.ValidateInteger(tbRoomShop.Text, "RoomShop", errors);
                 Helper.ValidateInteger(tbRoomStorage.Text, "RoomStorage", errors);
                 Helper.ValidateInteger(tbMinimumAmount.Text, "MinimumAmount", errors);
-                Helper.ValidateString(tbItemName.Text, "ItemName", errors);
                 Helper.ValidateString(cbCategory.Text, "Category", errors);
                 Helper.ValidateString(cbSubcategory.Text, "Subcategory", errors);
                 Helper.ValidateString(cbBrand.Text, "Brand", errors);
+                Helper.ValidateString(tbStockPrice.Text, "Stock_Price", errors);
                 Helper.ValidateString(tbModel.Text, "Model", errors);
                 Helper.ValidateString(tbDescription.Text, "Description", errors);
                 Helper.ValidateDouble(tbPrice.Text, "Price", errors);
@@ -166,7 +166,6 @@ namespace PRJMediaBazaar
                 {
                     throw new InputException(errors);
                 }
-                string itemName = tbItemName.Text;
                 string category = this.cbCategory.Text;
                 string subcategory = this.cbSubcategory.Text;
                 string brand = this.cbBrand.Text;
@@ -174,11 +173,20 @@ namespace PRJMediaBazaar
                 string description = tbDescription.Text;
                 tbPrice.Text = tbPrice.Text.Replace('.', ',');
                 double price = Helper.ToDouble(tbPrice.Text); // investigate double.tryparse
+                double stock_price = Helper.ToDouble(tbStockPrice.Text);
+                String restock_state = "manager";
                 int roomShop = Convert.ToInt32(tbRoomShop.Text);
                 int roomStorage = Convert.ToInt32(tbRoomStorage.Text);
                 int minAmount = Convert.ToInt32(tbMinimumAmount.Text);
-
-                _itemControl.AddAnItem(itemName, category,subcategory ,brand, model, description, price,
+                if (stock_price > (3 * price) / 5)
+                {
+                    throw new Exception("Stock Price needs to be at least 60% of Selling Price!");
+                }
+                if (roomShop > roomStorage/2)
+                {
+                    throw new Exception("Room in shop needs to be less than 50% of room in storage!");
+                }
+                _itemControl.AddAnItem(category,subcategory ,brand, model, description,stock_price ,price,restock_state,
                     roomShop, roomStorage, minAmount, img);
                 _wh.LoadItemsLESGOO();
                 StatusFunction("Item added!", -6, -1, 900, 28, Color.Red);
@@ -195,6 +203,10 @@ namespace PRJMediaBazaar
             catch (InputException ex)
             {
                 StatusFunction(ex.ToString(), -6, -1, 900, 28, Color.Red);
+            }
+            catch (Exception ex)
+            {
+                StatusFunction(ex.Message, -6, -1, 900, 28, Color.Red);
             }
             
         }
