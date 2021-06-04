@@ -52,8 +52,10 @@ namespace PRJMediaBazaar.Logic
 
         public string RestockInfo()
         {
-            return $"(ID: {ID}) {Name}";
+            return $"(ID: {ID} ) {Name}, To restock: {AmountToRestock} x {Stock_Price} euro ";
         }
+
+     
 
         public void ChangeRestockAmount(int newAmount)
         {

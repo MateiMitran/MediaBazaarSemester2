@@ -18,9 +18,9 @@ namespace PRJMediaBazaar
         private ItemControl itemControl;
         private LogIn login;
         private Item thisItem;
-
         private Item[] items;
 
+        private Restock restock;
         List<Item> allItems;
         private List<Button> buttons;
         private List<System.Windows.Forms.Timer> timers;
@@ -34,17 +34,21 @@ namespace PRJMediaBazaar
             timers = new List<System.Windows.Forms.Timer>();
             allItems = itemControl.GetItems();
             LoadItemsLESGOO();
+            restock = new Restock(itemControl.GetItemsByState("manager").ToList());
             LoadRestockingList();
         }
 
         public void LoadRestockingList()
         {
             this.lbRestockRequests.Items.Clear();
-            foreach(Item i in itemControl.GetItemsByState("manager"))
+            foreach(Item i in restock.GetItemsForRestock())
             {
                 lbRestockRequests.Items.Add(i.RestockInfo());
             }
+            this.lblTotalRestockCost.Text = restock.GetTotalCost().ToString() + " euro";
         }
+
+   
         public void StatusFunction(String text, int x, int y, int width, int height, Color color)
         {
             Button newButton = new Button();
@@ -269,6 +273,24 @@ namespace PRJMediaBazaar
 
         private void pnlItems_Paint(object sender, PaintEventArgs e)
         {
+
+        }
+
+        private void btnEditAmount_Click(object sender, EventArgs e)
+        {
+            if (this.lbRestockRequests.SelectedItem != null)
+            {
+                string info = this.lbRestockRequests.SelectedItem.ToString();
+                string[] cut = info.Split(' ');
+                int id = Convert.ToInt32(cut[1]);
+                Item item = itemControl.GetItem(id);
+                PRJMediaBazaar.Presentation.WareHouseManager.EditRestock form = new Presentation.WareHouseManager.EditRestock(item,this);
+                form.Show();
+            }
+            else
+            {
+                MessageBox.Show("Please selet an item");
+            }
 
         }
     }

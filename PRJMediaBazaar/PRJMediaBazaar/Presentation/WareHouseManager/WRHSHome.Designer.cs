@@ -30,13 +30,18 @@ namespace PRJMediaBazaar
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend4 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.pnlNavbar = new System.Windows.Forms.Panel();
+            this.lblTitle = new System.Windows.Forms.Label();
+            this.lblAccount = new System.Windows.Forms.Label();
+            this.lblItems = new System.Windows.Forms.Label();
+            this.lblRestock = new System.Windows.Forms.Label();
+            this.lblStatistics = new System.Windows.Forms.Label();
             this.pnlAccount = new System.Windows.Forms.Panel();
             this.btnLogOut = new System.Windows.Forms.Button();
             this.btnChangePassword = new System.Windows.Forms.Button();
@@ -54,11 +59,6 @@ namespace PRJMediaBazaar
             this.pnlRestock = new System.Windows.Forms.Panel();
             this.btnConfirm = new System.Windows.Forms.Button();
             this.lbRestockRequests = new System.Windows.Forms.ListBox();
-            this.lblTitle = new System.Windows.Forms.Label();
-            this.lblAccount = new System.Windows.Forms.Label();
-            this.lblItems = new System.Windows.Forms.Label();
-            this.lblRestock = new System.Windows.Forms.Label();
-            this.lblStatistics = new System.Windows.Forms.Label();
             this.pnlItems = new System.Windows.Forms.Panel();
             this.label8 = new System.Windows.Forms.Label();
             this.cbBrand = new System.Windows.Forms.ComboBox();
@@ -71,6 +71,8 @@ namespace PRJMediaBazaar
             this.lbItems = new System.Windows.Forms.ListBox();
             this.lblInfo = new System.Windows.Forms.Label();
             this.godTimer = new System.Windows.Forms.Timer(this.components);
+            this.btnEditAmount = new System.Windows.Forms.Button();
+            this.lblTotalRestockCost = new System.Windows.Forms.Label();
             this.pnlNavbar.SuspendLayout();
             this.pnlAccount.SuspendLayout();
             this.pnlStatistics.SuspendLayout();
@@ -83,6 +85,7 @@ namespace PRJMediaBazaar
             // pnlNavbar
             // 
             this.pnlNavbar.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.pnlNavbar.Controls.Add(this.pnlAccount);
             this.pnlNavbar.Controls.Add(this.lblTitle);
             this.pnlNavbar.Controls.Add(this.lblAccount);
             this.pnlNavbar.Controls.Add(this.lblItems);
@@ -94,6 +97,75 @@ namespace PRJMediaBazaar
             this.pnlNavbar.Size = new System.Drawing.Size(674, 48);
             this.pnlNavbar.TabIndex = 6;
             // 
+            // lblTitle
+            // 
+            this.lblTitle.AutoSize = true;
+            this.lblTitle.BackColor = System.Drawing.Color.Black;
+            this.lblTitle.Font = new System.Drawing.Font("Microsoft YaHei", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.lblTitle.ForeColor = System.Drawing.SystemColors.Control;
+            this.lblTitle.Location = new System.Drawing.Point(250, 7);
+            this.lblTitle.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblTitle.Name = "lblTitle";
+            this.lblTitle.Size = new System.Drawing.Size(165, 30);
+            this.lblTitle.TabIndex = 0;
+            this.lblTitle.Text = "Media Bazaar";
+            // 
+            // lblAccount
+            // 
+            this.lblAccount.AutoSize = true;
+            this.lblAccount.BackColor = System.Drawing.Color.Black;
+            this.lblAccount.Font = new System.Drawing.Font("Microsoft YaHei", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.lblAccount.ForeColor = System.Drawing.SystemColors.Control;
+            this.lblAccount.Location = new System.Drawing.Point(543, 11);
+            this.lblAccount.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblAccount.Name = "lblAccount";
+            this.lblAccount.Size = new System.Drawing.Size(90, 26);
+            this.lblAccount.TabIndex = 4;
+            this.lblAccount.Text = "Account";
+            this.lblAccount.Click += new System.EventHandler(this.lblAccount_Click);
+            // 
+            // lblItems
+            // 
+            this.lblItems.AutoSize = true;
+            this.lblItems.BackColor = System.Drawing.Color.Black;
+            this.lblItems.Font = new System.Drawing.Font("Microsoft YaHei", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.lblItems.ForeColor = System.Drawing.SystemColors.Control;
+            this.lblItems.Location = new System.Drawing.Point(10, 11);
+            this.lblItems.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblItems.Name = "lblItems";
+            this.lblItems.Size = new System.Drawing.Size(65, 26);
+            this.lblItems.TabIndex = 1;
+            this.lblItems.Text = "Items";
+            this.lblItems.Click += new System.EventHandler(this.lblItems_Click);
+            // 
+            // lblRestock
+            // 
+            this.lblRestock.AutoSize = true;
+            this.lblRestock.BackColor = System.Drawing.Color.Black;
+            this.lblRestock.Font = new System.Drawing.Font("Microsoft YaHei", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.lblRestock.ForeColor = System.Drawing.SystemColors.Control;
+            this.lblRestock.Location = new System.Drawing.Point(427, 11);
+            this.lblRestock.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblRestock.Name = "lblRestock";
+            this.lblRestock.Size = new System.Drawing.Size(86, 26);
+            this.lblRestock.TabIndex = 3;
+            this.lblRestock.Text = "Restock";
+            this.lblRestock.Click += new System.EventHandler(this.lblRestock_Click);
+            // 
+            // lblStatistics
+            // 
+            this.lblStatistics.AutoSize = true;
+            this.lblStatistics.BackColor = System.Drawing.Color.Black;
+            this.lblStatistics.Font = new System.Drawing.Font("Microsoft YaHei", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.lblStatistics.ForeColor = System.Drawing.SystemColors.Control;
+            this.lblStatistics.Location = new System.Drawing.Point(122, 12);
+            this.lblStatistics.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblStatistics.Name = "lblStatistics";
+            this.lblStatistics.Size = new System.Drawing.Size(98, 26);
+            this.lblStatistics.TabIndex = 2;
+            this.lblStatistics.Text = "Statistics";
+            this.lblStatistics.Click += new System.EventHandler(this.lblStatistics_Click);
+            // 
             // pnlAccount
             // 
             this.pnlAccount.Controls.Add(this.btnLogOut);
@@ -104,11 +176,10 @@ namespace PRJMediaBazaar
             this.pnlAccount.Controls.Add(this.tbVerifyNewPassword);
             this.pnlAccount.Controls.Add(this.tbCurrentPassword);
             this.pnlAccount.Controls.Add(this.tbNewPassword);
-            this.pnlAccount.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlAccount.Location = new System.Drawing.Point(0, 48);
+            this.pnlAccount.Location = new System.Drawing.Point(79, 12);
             this.pnlAccount.Margin = new System.Windows.Forms.Padding(2);
             this.pnlAccount.Name = "pnlAccount";
-            this.pnlAccount.Size = new System.Drawing.Size(674, 504);
+            this.pnlAccount.Size = new System.Drawing.Size(60, 30);
             this.pnlAccount.TabIndex = 18;
             // 
             // btnLogOut
@@ -236,44 +307,46 @@ namespace PRJMediaBazaar
             // 
             // chart2
             // 
-            chartArea3.Name = "ChartArea1";
-            this.chart2.ChartAreas.Add(chartArea3);
-            legend3.Name = "Legend1";
-            this.chart2.Legends.Add(legend3);
+            chartArea1.Name = "ChartArea1";
+            this.chart2.ChartAreas.Add(chartArea1);
+            legend1.Name = "Legend1";
+            this.chart2.Legends.Add(legend1);
             this.chart2.Location = new System.Drawing.Point(390, 77);
             this.chart2.Margin = new System.Windows.Forms.Padding(2);
             this.chart2.Name = "chart2";
             this.chart2.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Bright;
-            series3.ChartArea = "ChartArea1";
-            series3.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Pie;
-            series3.Legend = "Legend1";
-            series3.Name = "Series1";
-            this.chart2.Series.Add(series3);
+            series1.ChartArea = "ChartArea1";
+            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Pie;
+            series1.Legend = "Legend1";
+            series1.Name = "Series1";
+            this.chart2.Series.Add(series1);
             this.chart2.Size = new System.Drawing.Size(225, 244);
             this.chart2.TabIndex = 8;
             this.chart2.Text = "chart2";
             // 
             // chart1
             // 
-            chartArea4.Name = "ChartArea1";
-            this.chart1.ChartAreas.Add(chartArea4);
-            legend4.Name = "Legend1";
-            this.chart1.Legends.Add(legend4);
+            chartArea2.Name = "ChartArea1";
+            this.chart1.ChartAreas.Add(chartArea2);
+            legend2.Name = "Legend1";
+            this.chart1.Legends.Add(legend2);
             this.chart1.Location = new System.Drawing.Point(40, 77);
             this.chart1.Margin = new System.Windows.Forms.Padding(2);
             this.chart1.Name = "chart1";
             this.chart1.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Bright;
-            series4.ChartArea = "ChartArea1";
-            series4.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Pie;
-            series4.Legend = "Legend1";
-            series4.Name = "Series1";
-            this.chart1.Series.Add(series4);
+            series2.ChartArea = "ChartArea1";
+            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Pie;
+            series2.Legend = "Legend1";
+            series2.Name = "Series1";
+            this.chart1.Series.Add(series2);
             this.chart1.Size = new System.Drawing.Size(225, 244);
             this.chart1.TabIndex = 7;
             this.chart1.Text = "chart1";
             // 
             // pnlRestock
             // 
+            this.pnlRestock.Controls.Add(this.lblTotalRestockCost);
+            this.pnlRestock.Controls.Add(this.btnEditAmount);
             this.pnlRestock.Controls.Add(this.btnConfirm);
             this.pnlRestock.Controls.Add(this.lbRestockRequests);
             this.pnlRestock.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -285,7 +358,7 @@ namespace PRJMediaBazaar
             // 
             // btnConfirm
             // 
-            this.btnConfirm.Location = new System.Drawing.Point(200, 457);
+            this.btnConfirm.Location = new System.Drawing.Point(55, 434);
             this.btnConfirm.Margin = new System.Windows.Forms.Padding(2);
             this.btnConfirm.Name = "btnConfirm";
             this.btnConfirm.Size = new System.Drawing.Size(280, 32);
@@ -296,80 +369,11 @@ namespace PRJMediaBazaar
             // lbRestockRequests
             // 
             this.lbRestockRequests.FormattingEnabled = true;
-            this.lbRestockRequests.Location = new System.Drawing.Point(66, 64);
+            this.lbRestockRequests.Location = new System.Drawing.Point(55, 109);
             this.lbRestockRequests.Margin = new System.Windows.Forms.Padding(2);
             this.lbRestockRequests.Name = "lbRestockRequests";
             this.lbRestockRequests.Size = new System.Drawing.Size(536, 303);
             this.lbRestockRequests.TabIndex = 7;
-            // 
-            // lblTitle
-            // 
-            this.lblTitle.AutoSize = true;
-            this.lblTitle.BackColor = System.Drawing.Color.Black;
-            this.lblTitle.Font = new System.Drawing.Font("Microsoft YaHei", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.lblTitle.ForeColor = System.Drawing.SystemColors.Control;
-            this.lblTitle.Location = new System.Drawing.Point(250, 7);
-            this.lblTitle.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.lblTitle.Name = "lblTitle";
-            this.lblTitle.Size = new System.Drawing.Size(165, 30);
-            this.lblTitle.TabIndex = 0;
-            this.lblTitle.Text = "Media Bazaar";
-            // 
-            // lblAccount
-            // 
-            this.lblAccount.AutoSize = true;
-            this.lblAccount.BackColor = System.Drawing.Color.Black;
-            this.lblAccount.Font = new System.Drawing.Font("Microsoft YaHei", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.lblAccount.ForeColor = System.Drawing.SystemColors.Control;
-            this.lblAccount.Location = new System.Drawing.Point(543, 11);
-            this.lblAccount.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.lblAccount.Name = "lblAccount";
-            this.lblAccount.Size = new System.Drawing.Size(90, 26);
-            this.lblAccount.TabIndex = 4;
-            this.lblAccount.Text = "Account";
-            this.lblAccount.Click += new System.EventHandler(this.lblAccount_Click);
-            // 
-            // lblItems
-            // 
-            this.lblItems.AutoSize = true;
-            this.lblItems.BackColor = System.Drawing.Color.Black;
-            this.lblItems.Font = new System.Drawing.Font("Microsoft YaHei", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.lblItems.ForeColor = System.Drawing.SystemColors.Control;
-            this.lblItems.Location = new System.Drawing.Point(10, 11);
-            this.lblItems.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.lblItems.Name = "lblItems";
-            this.lblItems.Size = new System.Drawing.Size(65, 26);
-            this.lblItems.TabIndex = 1;
-            this.lblItems.Text = "Items";
-            this.lblItems.Click += new System.EventHandler(this.lblItems_Click);
-            // 
-            // lblRestock
-            // 
-            this.lblRestock.AutoSize = true;
-            this.lblRestock.BackColor = System.Drawing.Color.Black;
-            this.lblRestock.Font = new System.Drawing.Font("Microsoft YaHei", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.lblRestock.ForeColor = System.Drawing.SystemColors.Control;
-            this.lblRestock.Location = new System.Drawing.Point(427, 11);
-            this.lblRestock.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.lblRestock.Name = "lblRestock";
-            this.lblRestock.Size = new System.Drawing.Size(86, 26);
-            this.lblRestock.TabIndex = 3;
-            this.lblRestock.Text = "Restock";
-            this.lblRestock.Click += new System.EventHandler(this.lblRestock_Click);
-            // 
-            // lblStatistics
-            // 
-            this.lblStatistics.AutoSize = true;
-            this.lblStatistics.BackColor = System.Drawing.Color.Black;
-            this.lblStatistics.Font = new System.Drawing.Font("Microsoft YaHei", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.lblStatistics.ForeColor = System.Drawing.SystemColors.Control;
-            this.lblStatistics.Location = new System.Drawing.Point(122, 12);
-            this.lblStatistics.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.lblStatistics.Name = "lblStatistics";
-            this.lblStatistics.Size = new System.Drawing.Size(98, 26);
-            this.lblStatistics.TabIndex = 2;
-            this.lblStatistics.Text = "Statistics";
-            this.lblStatistics.Click += new System.EventHandler(this.lblStatistics_Click);
             // 
             // pnlItems
             // 
@@ -513,12 +517,30 @@ namespace PRJMediaBazaar
             this.godTimer.Interval = 2500;
             this.godTimer.Tick += new System.EventHandler(this.godTimer_Tick);
             // 
+            // btnEditAmount
+            // 
+            this.btnEditAmount.Location = new System.Drawing.Point(450, 417);
+            this.btnEditAmount.Name = "btnEditAmount";
+            this.btnEditAmount.Size = new System.Drawing.Size(139, 31);
+            this.btnEditAmount.TabIndex = 9;
+            this.btnEditAmount.Text = "Edit Amount";
+            this.btnEditAmount.UseVisualStyleBackColor = true;
+            this.btnEditAmount.Click += new System.EventHandler(this.btnEditAmount_Click);
+            // 
+            // lblTotalRestockCost
+            // 
+            this.lblTotalRestockCost.AutoSize = true;
+            this.lblTotalRestockCost.Location = new System.Drawing.Point(77, 419);
+            this.lblTotalRestockCost.Name = "lblTotalRestockCost";
+            this.lblTotalRestockCost.Size = new System.Drawing.Size(57, 13);
+            this.lblTotalRestockCost.TabIndex = 10;
+            this.lblTotalRestockCost.Text = "Total cost:";
+            // 
             // WRHSHome
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(674, 552);
-            this.Controls.Add(this.pnlAccount);
             this.Controls.Add(this.pnlNavbar);
             this.Controls.Add(this.pnlRestock);
             this.Controls.Add(this.pnlStatistics);
@@ -537,6 +559,7 @@ namespace PRJMediaBazaar
             ((System.ComponentModel.ISupportInitialize)(this.chart2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
             this.pnlRestock.ResumeLayout(false);
+            this.pnlRestock.PerformLayout();
             this.pnlItems.ResumeLayout(false);
             this.pnlItems.PerformLayout();
             this.ResumeLayout(false);
@@ -580,5 +603,7 @@ namespace PRJMediaBazaar
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.ComboBox cbBrand;
         private System.Windows.Forms.ComboBox cbSubcategory;
+        private System.Windows.Forms.Label lblTotalRestockCost;
+        private System.Windows.Forms.Button btnEditAmount;
     }
 }
