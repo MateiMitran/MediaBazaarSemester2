@@ -50,80 +50,10 @@ namespace PRJMediaBazaar
         {
 
         }
-
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-
-            if (VPNisON())
-            {
-                emp = new EmployeeControl();
-                    if (emp.Login(this.tbUsername.Text, this.tbPassword.Text) == "HRManager")
-                    {
-                        Employee hrmanager = emp.GetEmployeeByEmailAndPassword(this.tbUsername.Text, this.tbPassword.Text);
-                        HRHome home = new HRHome(this, emp, hrmanager);
-                        home.Show();
-                        this.Hide();
-                    }
-                    else if (emp.Login(this.tbUsername.Text, this.tbPassword.Text) == "WarehouseManager")
-                    {
-                        WRHSHome home = new WRHSHome(this);
-                        home.Show();
-                        this.Hide();
-                    }
-                    else if (emp.Login(this.tbUsername.Text, this.tbPassword.Text) == "Cashier")
-                    {
-                        CashierHome home = new CashierHome(this);
-                        home.Show();
-                        this.Hide();
-                    }
-                    else if (emp.Login(this.tbUsername.Text, this.tbPassword.Text) == "Stocker")
-                    {
-                        StockerHome home = new StockerHome(this);
-                        home.Show();
-                        this.Hide();
-                    }
-                    else
-                    {
-                        StatusFunction("Invalid Credentials", -60, -5, 508, 28, Color.Red);
-                    }
-            }
-            else
-            {
-                MessageBox.Show("Please start Cisco AnyConnect!");
-            }
-        
-        }
-
         private void LogIn_Load(object sender, EventArgs e)
         {
 
         }
-
-        private void btnLogIn_MouseHover(object sender, EventArgs e)
-        {
-
-        }
-
-        private void btnLogIn_MouseEnter(object sender, EventArgs e)
-        {
-            this.btnLogIn.BackColor = Color.Bisque;
-        }
-
-        private void btnLogIn_MouseLeave(object sender, EventArgs e)
-        {
-            this.btnLogIn.BackColor = Color.White;
-        }
-
-        private void timer1_Tick(object sender, EventArgs e)
-        {
-            
-        }
-
         private void godTimer_Tick(object sender, EventArgs e)
         {
             for (int i = 0; i < timers.Count; i++)
@@ -141,6 +71,47 @@ namespace PRJMediaBazaar
             return ((NetworkInterface.GetIsNetworkAvailable())
                     && NetworkInterface.GetAllNetworkInterfaces()
                                        .FirstOrDefault(ni => ni.Description.Contains("Cisco"))?.OperationalStatus == OperationalStatus.Up);
+        }
+
+        private void btnLogIn_Click(object sender, EventArgs e)
+        {
+            if (VPNisON())
+            {
+                emp = new EmployeeControl();
+                if (emp.Login(this.tbUsername.Text, this.tbPassword.Text) == "HRManager")
+                {
+                    Employee hrmanager = emp.GetEmployeeByEmailAndPassword(this.tbUsername.Text, this.tbPassword.Text);
+                    HRHome home = new HRHome(this, emp, hrmanager);
+                    home.Show();
+                    this.Hide();
+                }
+                else if (emp.Login(this.tbUsername.Text, this.tbPassword.Text) == "WarehouseManager")
+                {
+                    WRHSHome home = new WRHSHome(this);
+                    home.Show();
+                    this.Hide();
+                }
+                else if (emp.Login(this.tbUsername.Text, this.tbPassword.Text) == "Cashier")
+                {
+                    CashierHome home = new CashierHome(this);
+                    home.Show();
+                    this.Hide();
+                }
+                else if (emp.Login(this.tbUsername.Text, this.tbPassword.Text) == "Stocker")
+                {
+                    StockerHome home = new StockerHome(this);
+                    home.Show();
+                    this.Hide();
+                }
+                else
+                {
+                    StatusFunction("Invalid Credentials", -60, -5, 508, 28, Color.Red);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Please start Cisco AnyConnect!");
+            }
         }
     }
 }

@@ -30,14 +30,12 @@ namespace PRJMediaBazaar
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.tbPrice = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.btnAdd = new System.Windows.Forms.Button();
             this.pbxItem = new System.Windows.Forms.PictureBox();
             this.label6 = new System.Windows.Forms.Label();
-            this.tbModel = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
             this.tbDescription = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
@@ -45,7 +43,6 @@ namespace PRJMediaBazaar
             this.label9 = new System.Windows.Forms.Label();
             this.tbRoomStorage = new System.Windows.Forms.NumericUpDown();
             this.label10 = new System.Windows.Forms.Label();
-            this.tbMinimumAmount = new System.Windows.Forms.TextBox();
             this.label11 = new System.Windows.Forms.Label();
             this.godTimer = new System.Windows.Forms.Timer(this.components);
             this.cbCategory = new System.Windows.Forms.ComboBox();
@@ -53,19 +50,14 @@ namespace PRJMediaBazaar
             this.cbSubcategory = new System.Windows.Forms.ComboBox();
             this.label5 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.tbStockPrice = new System.Windows.Forms.TextBox();
+            this.tbModel = new MaterialSkin.Controls.MaterialSingleLineTextField();
+            this.tbStockPrice = new MaterialSkin.Controls.MaterialSingleLineTextField();
+            this.tbMinimumAmount = new MaterialSkin.Controls.MaterialSingleLineTextField();
+            this.tbPrice = new MaterialSkin.Controls.MaterialSingleLineTextField();
             ((System.ComponentModel.ISupportInitialize)(this.pbxItem)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbRoomShop)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbRoomStorage)).BeginInit();
             this.SuspendLayout();
-            // 
-            // tbPrice
-            // 
-            this.tbPrice.Location = new System.Drawing.Point(156, 232);
-            this.tbPrice.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.tbPrice.Name = "tbPrice";
-            this.tbPrice.Size = new System.Drawing.Size(157, 20);
-            this.tbPrice.TabIndex = 5;
             // 
             // label2
             // 
@@ -93,7 +85,7 @@ namespace PRJMediaBazaar
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label4.Location = new System.Drawing.Point(100, 230);
+            this.label4.Location = new System.Drawing.Point(100, 239);
             this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(52, 20);
@@ -103,8 +95,8 @@ namespace PRJMediaBazaar
             // btnAdd
             // 
             this.btnAdd.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAdd.Location = new System.Drawing.Point(18, 347);
-            this.btnAdd.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnAdd.Location = new System.Drawing.Point(32, 356);
+            this.btnAdd.Margin = new System.Windows.Forms.Padding(2);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(605, 34);
             this.btnAdd.TabIndex = 16;
@@ -131,14 +123,6 @@ namespace PRJMediaBazaar
             this.label6.TabIndex = 18;
             this.label6.Text = "Model : ";
             // 
-            // tbModel
-            // 
-            this.tbModel.Location = new System.Drawing.Point(114, 124);
-            this.tbModel.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.tbModel.Name = "tbModel";
-            this.tbModel.Size = new System.Drawing.Size(158, 20);
-            this.tbModel.TabIndex = 19;
-            // 
             // label7
             // 
             this.label7.AutoSize = true;
@@ -153,7 +137,7 @@ namespace PRJMediaBazaar
             // tbDescription
             // 
             this.tbDescription.Location = new System.Drawing.Point(112, 158);
-            this.tbDescription.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tbDescription.Margin = new System.Windows.Forms.Padding(2);
             this.tbDescription.Multiline = true;
             this.tbDescription.Name = "tbDescription";
             this.tbDescription.ScrollBars = System.Windows.Forms.ScrollBars.Horizontal;
@@ -164,7 +148,7 @@ namespace PRJMediaBazaar
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label8.Location = new System.Drawing.Point(28, 253);
+            this.label8.Location = new System.Drawing.Point(90, 277);
             this.label8.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(124, 20);
@@ -173,8 +157,8 @@ namespace PRJMediaBazaar
             // 
             // tbRoomShop
             // 
-            this.tbRoomShop.Location = new System.Drawing.Point(156, 256);
-            this.tbRoomShop.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tbRoomShop.Location = new System.Drawing.Point(219, 277);
+            this.tbRoomShop.Margin = new System.Windows.Forms.Padding(2);
             this.tbRoomShop.Name = "tbRoomShop";
             this.tbRoomShop.Size = new System.Drawing.Size(156, 20);
             this.tbRoomShop.TabIndex = 23;
@@ -183,7 +167,7 @@ namespace PRJMediaBazaar
             // 
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label9.Location = new System.Drawing.Point(9, 277);
+            this.label9.Location = new System.Drawing.Point(72, 297);
             this.label9.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(143, 20);
@@ -192,8 +176,8 @@ namespace PRJMediaBazaar
             // 
             // tbRoomStorage
             // 
-            this.tbRoomStorage.Location = new System.Drawing.Point(156, 280);
-            this.tbRoomStorage.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tbRoomStorage.Location = new System.Drawing.Point(219, 301);
+            this.tbRoomStorage.Margin = new System.Windows.Forms.Padding(2);
             this.tbRoomStorage.Name = "tbRoomStorage";
             this.tbRoomStorage.Size = new System.Drawing.Size(156, 20);
             this.tbRoomStorage.TabIndex = 25;
@@ -209,19 +193,11 @@ namespace PRJMediaBazaar
             this.label10.TabIndex = 28;
             this.label10.Text = "Drag Picture of An Item Here :";
             // 
-            // tbMinimumAmount
-            // 
-            this.tbMinimumAmount.Location = new System.Drawing.Point(216, 313);
-            this.tbMinimumAmount.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.tbMinimumAmount.Name = "tbMinimumAmount";
-            this.tbMinimumAmount.Size = new System.Drawing.Size(157, 20);
-            this.tbMinimumAmount.TabIndex = 29;
-            // 
             // label11
             // 
             this.label11.AutoSize = true;
             this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label11.Location = new System.Drawing.Point(9, 311);
+            this.label11.Location = new System.Drawing.Point(12, 331);
             this.label11.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(203, 20);
@@ -294,13 +270,73 @@ namespace PRJMediaBazaar
             this.label1.TabIndex = 35;
             this.label1.Text = "Stock Price :";
             // 
+            // tbModel
+            // 
+            this.tbModel.Depth = 0;
+            this.tbModel.Hint = "";
+            this.tbModel.Location = new System.Drawing.Point(112, 124);
+            this.tbModel.MaxLength = 32767;
+            this.tbModel.MouseState = MaterialSkin.MouseState.HOVER;
+            this.tbModel.Name = "tbModel";
+            this.tbModel.PasswordChar = '\0';
+            this.tbModel.SelectedText = "";
+            this.tbModel.SelectionLength = 0;
+            this.tbModel.SelectionStart = 0;
+            this.tbModel.Size = new System.Drawing.Size(201, 23);
+            this.tbModel.TabIndex = 37;
+            this.tbModel.TabStop = false;
+            this.tbModel.UseSystemPasswordChar = false;
+            // 
             // tbStockPrice
             // 
-            this.tbStockPrice.Location = new System.Drawing.Point(156, 208);
-            this.tbStockPrice.Margin = new System.Windows.Forms.Padding(2);
+            this.tbStockPrice.Depth = 0;
+            this.tbStockPrice.Hint = "";
+            this.tbStockPrice.Location = new System.Drawing.Point(156, 210);
+            this.tbStockPrice.MaxLength = 32767;
+            this.tbStockPrice.MouseState = MaterialSkin.MouseState.HOVER;
             this.tbStockPrice.Name = "tbStockPrice";
-            this.tbStockPrice.Size = new System.Drawing.Size(157, 20);
-            this.tbStockPrice.TabIndex = 36;
+            this.tbStockPrice.PasswordChar = '\0';
+            this.tbStockPrice.SelectedText = "";
+            this.tbStockPrice.SelectionLength = 0;
+            this.tbStockPrice.SelectionStart = 0;
+            this.tbStockPrice.Size = new System.Drawing.Size(201, 23);
+            this.tbStockPrice.TabIndex = 38;
+            this.tbStockPrice.TabStop = false;
+            this.tbStockPrice.UseSystemPasswordChar = false;
+            // 
+            // tbMinimumAmount
+            // 
+            this.tbMinimumAmount.Depth = 0;
+            this.tbMinimumAmount.Hint = "";
+            this.tbMinimumAmount.Location = new System.Drawing.Point(219, 331);
+            this.tbMinimumAmount.MaxLength = 32767;
+            this.tbMinimumAmount.MouseState = MaterialSkin.MouseState.HOVER;
+            this.tbMinimumAmount.Name = "tbMinimumAmount";
+            this.tbMinimumAmount.PasswordChar = '\0';
+            this.tbMinimumAmount.SelectedText = "";
+            this.tbMinimumAmount.SelectionLength = 0;
+            this.tbMinimumAmount.SelectionStart = 0;
+            this.tbMinimumAmount.Size = new System.Drawing.Size(201, 23);
+            this.tbMinimumAmount.TabIndex = 39;
+            this.tbMinimumAmount.TabStop = false;
+            this.tbMinimumAmount.UseSystemPasswordChar = false;
+            // 
+            // tbPrice
+            // 
+            this.tbPrice.Depth = 0;
+            this.tbPrice.Hint = "";
+            this.tbPrice.Location = new System.Drawing.Point(156, 239);
+            this.tbPrice.MaxLength = 32767;
+            this.tbPrice.MouseState = MaterialSkin.MouseState.HOVER;
+            this.tbPrice.Name = "tbPrice";
+            this.tbPrice.PasswordChar = '\0';
+            this.tbPrice.SelectedText = "";
+            this.tbPrice.SelectionLength = 0;
+            this.tbPrice.SelectionStart = 0;
+            this.tbPrice.Size = new System.Drawing.Size(201, 23);
+            this.tbPrice.TabIndex = 40;
+            this.tbPrice.TabStop = false;
+            this.tbPrice.UseSystemPasswordChar = false;
             // 
             // AddItem
             // 
@@ -308,14 +344,16 @@ namespace PRJMediaBazaar
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(661, 401);
+            this.Controls.Add(this.tbPrice);
+            this.Controls.Add(this.tbMinimumAmount);
             this.Controls.Add(this.tbStockPrice);
+            this.Controls.Add(this.tbModel);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.cbSubcategory);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.cbBrand);
             this.Controls.Add(this.cbCategory);
             this.Controls.Add(this.label11);
-            this.Controls.Add(this.tbMinimumAmount);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.tbRoomStorage);
             this.Controls.Add(this.label9);
@@ -323,15 +361,13 @@ namespace PRJMediaBazaar
             this.Controls.Add(this.label8);
             this.Controls.Add(this.tbDescription);
             this.Controls.Add(this.label7);
-            this.Controls.Add(this.tbModel);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.pbxItem);
             this.Controls.Add(this.btnAdd);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.tbPrice);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "AddItem";
             this.Text = "AddItem";
             this.DragDrop += new System.Windows.Forms.DragEventHandler(this.AddItem_DragDrop);
@@ -345,14 +381,12 @@ namespace PRJMediaBazaar
         }
 
         #endregion
-        private System.Windows.Forms.TextBox tbPrice;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button btnAdd;
         private System.Windows.Forms.PictureBox pbxItem;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.TextBox tbModel;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TextBox tbDescription;
         private System.Windows.Forms.Label label8;
@@ -360,7 +394,6 @@ namespace PRJMediaBazaar
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.NumericUpDown tbRoomStorage;
         private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.TextBox tbMinimumAmount;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Timer godTimer;
         private System.Windows.Forms.ComboBox cbCategory;
@@ -368,6 +401,9 @@ namespace PRJMediaBazaar
         private System.Windows.Forms.ComboBox cbSubcategory;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox tbStockPrice;
+        private MaterialSkin.Controls.MaterialSingleLineTextField tbModel;
+        private MaterialSkin.Controls.MaterialSingleLineTextField tbStockPrice;
+        private MaterialSkin.Controls.MaterialSingleLineTextField tbMinimumAmount;
+        private MaterialSkin.Controls.MaterialSingleLineTextField tbPrice;
     }
 }

@@ -33,17 +33,17 @@ namespace PRJMediaBazaar
             this.lblWelcome = new System.Windows.Forms.Label();
             this.lblUsername = new System.Windows.Forms.Label();
             this.lblPassword = new System.Windows.Forms.Label();
-            this.tbUsername = new System.Windows.Forms.TextBox();
-            this.tbPassword = new System.Windows.Forms.TextBox();
-            this.btnLogIn = new System.Windows.Forms.Button();
             this.godTimer = new System.Windows.Forms.Timer(this.components);
+            this.tbUsername = new MaterialSkin.Controls.MaterialSingleLineTextField();
+            this.tbPassword = new MaterialSkin.Controls.MaterialSingleLineTextField();
+            this.btnLogIn = new MaterialSkin.Controls.MaterialRaisedButton();
             this.SuspendLayout();
             // 
             // lblWelcome
             // 
             this.lblWelcome.AutoSize = true;
             this.lblWelcome.Font = new System.Drawing.Font("Malgun Gothic", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblWelcome.Location = new System.Drawing.Point(78, 15);
+            this.lblWelcome.Location = new System.Drawing.Point(58, 19);
             this.lblWelcome.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblWelcome.Name = "lblWelcome";
             this.lblWelcome.Size = new System.Drawing.Size(298, 30);
@@ -74,43 +74,59 @@ namespace PRJMediaBazaar
             this.lblPassword.TabIndex = 2;
             this.lblPassword.Text = "Password :";
             // 
-            // tbUsername
-            // 
-            this.tbUsername.Location = new System.Drawing.Point(156, 91);
-            this.tbUsername.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.tbUsername.Name = "tbUsername";
-            this.tbUsername.Size = new System.Drawing.Size(149, 20);
-            this.tbUsername.TabIndex = 3;
-            this.tbUsername.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
-            // 
-            // tbPassword
-            // 
-            this.tbPassword.Location = new System.Drawing.Point(156, 120);
-            this.tbPassword.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.tbPassword.Name = "tbPassword";
-            this.tbPassword.PasswordChar = '*';
-            this.tbPassword.Size = new System.Drawing.Size(149, 20);
-            this.tbPassword.TabIndex = 4;
-            // 
-            // btnLogIn
-            // 
-            this.btnLogIn.Location = new System.Drawing.Point(30, 179);
-            this.btnLogIn.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.btnLogIn.Name = "btnLogIn";
-            this.btnLogIn.Size = new System.Drawing.Size(352, 28);
-            this.btnLogIn.TabIndex = 5;
-            this.btnLogIn.Text = "Log In";
-            this.btnLogIn.UseVisualStyleBackColor = true;
-            this.btnLogIn.Click += new System.EventHandler(this.button1_Click);
-            this.btnLogIn.MouseEnter += new System.EventHandler(this.btnLogIn_MouseEnter);
-            this.btnLogIn.MouseLeave += new System.EventHandler(this.btnLogIn_MouseLeave);
-            this.btnLogIn.MouseHover += new System.EventHandler(this.btnLogIn_MouseHover);
-            // 
             // godTimer
             // 
             this.godTimer.Enabled = true;
             this.godTimer.Interval = 2500;
             this.godTimer.Tick += new System.EventHandler(this.godTimer_Tick);
+            // 
+            // tbUsername
+            // 
+            this.tbUsername.Depth = 0;
+            this.tbUsername.Hint = "";
+            this.tbUsername.Location = new System.Drawing.Point(156, 89);
+            this.tbUsername.MaxLength = 32767;
+            this.tbUsername.MouseState = MaterialSkin.MouseState.HOVER;
+            this.tbUsername.Name = "tbUsername";
+            this.tbUsername.PasswordChar = '\0';
+            this.tbUsername.SelectedText = "";
+            this.tbUsername.SelectionLength = 0;
+            this.tbUsername.SelectionStart = 0;
+            this.tbUsername.Size = new System.Drawing.Size(207, 23);
+            this.tbUsername.TabIndex = 6;
+            this.tbUsername.TabStop = false;
+            this.tbUsername.UseSystemPasswordChar = false;
+            // 
+            // tbPassword
+            // 
+            this.tbPassword.Depth = 0;
+            this.tbPassword.Hint = "";
+            this.tbPassword.Location = new System.Drawing.Point(156, 117);
+            this.tbPassword.MaxLength = 32767;
+            this.tbPassword.MouseState = MaterialSkin.MouseState.HOVER;
+            this.tbPassword.Name = "tbPassword";
+            this.tbPassword.PasswordChar = '*';
+            this.tbPassword.SelectedText = "";
+            this.tbPassword.SelectionLength = 0;
+            this.tbPassword.SelectionStart = 0;
+            this.tbPassword.Size = new System.Drawing.Size(207, 23);
+            this.tbPassword.TabIndex = 7;
+            this.tbPassword.TabStop = false;
+            this.tbPassword.UseSystemPasswordChar = false;
+            // 
+            // btnLogIn
+            // 
+            this.btnLogIn.Depth = 0;
+            this.btnLogIn.Icon = null;
+            this.btnLogIn.Location = new System.Drawing.Point(178, 172);
+            this.btnLogIn.MouseState = MaterialSkin.MouseState.HOVER;
+            this.btnLogIn.Name = "btnLogIn";
+            this.btnLogIn.Primary = true;
+            this.btnLogIn.Size = new System.Drawing.Size(158, 32);
+            this.btnLogIn.TabIndex = 8;
+            this.btnLogIn.Text = "Log In";
+            this.btnLogIn.UseVisualStyleBackColor = true;
+            this.btnLogIn.Click += new System.EventHandler(this.btnLogIn_Click);
             // 
             // LogIn
             // 
@@ -125,7 +141,7 @@ namespace PRJMediaBazaar
             this.Controls.Add(this.lblUsername);
             this.Controls.Add(this.lblWelcome);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.MaximizeBox = false;
             this.Name = "LogIn";
             this.Text = "LogIn";
@@ -140,10 +156,10 @@ namespace PRJMediaBazaar
         private System.Windows.Forms.Label lblWelcome;
         private System.Windows.Forms.Label lblUsername;
         private System.Windows.Forms.Label lblPassword;
-        private System.Windows.Forms.TextBox tbUsername;
-        private System.Windows.Forms.TextBox tbPassword;
-        private System.Windows.Forms.Button btnLogIn;
         private System.Windows.Forms.Timer godTimer;
+        private MaterialSkin.Controls.MaterialSingleLineTextField tbUsername;
+        private MaterialSkin.Controls.MaterialSingleLineTextField tbPassword;
+        private MaterialSkin.Controls.MaterialRaisedButton btnLogIn;
     }
 }
 
