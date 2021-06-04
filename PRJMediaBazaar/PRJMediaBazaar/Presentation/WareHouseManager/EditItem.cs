@@ -102,11 +102,11 @@ namespace PRJMediaBazaar
                     throw new InputException(errors);
                 }
 
-                byte[] img = ImageToBinary(this.pbxCurrentImage.Image);
+                byte[] img = ImageToBinary(this.pbxNewImage.Image);
                 int id = x.ID;
-                string category = cbCategory.SelectedItem.ToString();
-                string subcategory = cbSubcategory.SelectedItem.ToString();
-                string brand = cbBrand.SelectedItem.ToString();
+                string category = cbCategory.Text;
+                string subcategory = cbSubcategory.Text;
+                string brand = cbBrand.Text;
                 string model = tbModel.Text;
                 string description = tbDescription.Text;
                 double stock_price = Convert.ToDouble(this.tbStockPrice.Text);

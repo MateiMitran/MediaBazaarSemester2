@@ -529,3 +529,4 @@ C:\Users\Ionut Popa\Desktop\proj\prj-cb05-group-5-project\PRJMediaBazaar\PRJMedi
 C:\Users\matei\Desktop\Fontys\Semester 2\Project\Project\prj-cb05-group-5-project\PRJMediaBazaar\PRJMediaBazaar\bin\Debug\MaterialSkin.dll
 D:\SEMESTER 2\PRJ\prj-cb05-group-5-project\PRJMediaBazaar\PRJMediaBazaar\bin\Debug\MaterialSkin.dll
 D:\SEMESTER 2\PRJ\prj-cb05-group-5-project\PRJMediaBazaar\PRJMediaBazaar\obj\Debug\PRJMediaBazaar.Presentation.WareHouseManager.EditRestock.resources
+C:\Users\matei\Desktop\Fontys\Semester 2\Project\Project\prj-cb05-group-5-project\PRJMediaBazaar\PRJMediaBazaar\obj\Debug\PRJMediaBazaar.Presentation.WareHouseManager.EditRestock.resources

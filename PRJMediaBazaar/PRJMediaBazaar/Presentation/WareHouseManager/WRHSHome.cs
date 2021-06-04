@@ -172,13 +172,24 @@ namespace PRJMediaBazaar
 
         private void btnEditItem_Click(object sender, EventArgs e)
         {
-            if (thisItem != null)
-            {
-                EditItem edit = new EditItem(this, thisItem, itemControl);
-                edit.Show();
-            }
+            if (this.lbItems.SelectedItem == null)
+                StatusFunction("Select an item!", -6, -1, 900, 28, Color.Red);
             else
-                StatusFunction("No item found!", -6, -1, 900, 28, Color.Red);
+            {
+                string id1 = new string(this.lbItems.SelectedItem.ToString().SkipWhile(c => !char.IsDigit(c))
+                        .TakeWhile(c => char.IsDigit(c))
+                        .ToArray());
+                int id = Convert.ToInt32(id1);
+                thisItem = this.itemControl.GetItem(id);
+                if (thisItem != null)
+                {
+                    EditItem edit = new EditItem(this, thisItem, itemControl);
+                    edit.Show();
+                }
+                else
+                    StatusFunction("No item found!", -6, -1, 900, 28, Color.Red);
+            }
+           
         }
 
         //private void cbBrands_SelectedIndexChanged(object sender, EventArgs e)
