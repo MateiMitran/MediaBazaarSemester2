@@ -9,7 +9,7 @@ using MySql.Data.MySqlClient;
 
 namespace PRJMediaBazaar.Logic
 {
-    class ItemControl 
+    class ItemControl : IRestockData
     {
         private List<Item> items;
         private ItemDAL itemDAL;

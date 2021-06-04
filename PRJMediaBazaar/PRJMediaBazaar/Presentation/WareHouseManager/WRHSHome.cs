@@ -20,7 +20,7 @@ namespace PRJMediaBazaar
         private Item thisItem;
         private Item[] items;
 
-        private Restock restock;
+        public static Restock restock;
         List<Item> allItems;
         private List<Button> buttons;
         private List<System.Windows.Forms.Timer> timers;
@@ -34,7 +34,7 @@ namespace PRJMediaBazaar
             timers = new List<System.Windows.Forms.Timer>();
             allItems = itemControl.GetItems();
             LoadItemsLESGOO();
-            restock = new Restock(itemControl.GetItemsByState("manager").ToList());
+            restock = new Restock(itemControl);
             LoadRestockingList();
         }
 

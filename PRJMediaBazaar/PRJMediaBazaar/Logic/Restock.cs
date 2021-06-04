@@ -8,25 +8,20 @@ namespace PRJMediaBazaar.Logic
 {
     class Restock
     {
-        public static List<Item> itemsToRestock;
+        private IRestockData _itemControl;
+        private Item[] itemsToRestock;
 
-        public Restock(List<Item> items)
+        public Restock(IRestockData itemControl)
         {
-            itemsToRestock = new List<Item>();
-            if(items != null)
-            {
-                itemsToRestock = items;
-            }
-        }
-
-        public void AddItemForRestock(Item item)
-        {
-            itemsToRestock.Add(item);
+            _itemControl = itemControl;
+           
         }
 
         public Item[] GetItemsForRestock()
         {
-            return itemsToRestock.ToArray();
+            itemsToRestock = _itemControl.GetItemsByState("manager");
+            return itemsToRestock;
+
         }
 
         public double GetTotalCost()

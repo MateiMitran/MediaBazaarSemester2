@@ -189,6 +189,8 @@ namespace PRJMediaBazaar
                 _itemControl.AddAnItem(category,subcategory ,brand, model, description,stock_price ,price,restock_state,
                     roomShop, roomStorage, minAmount, img);
                 _wh.LoadItemsLESGOO();
+                _wh.LoadRestockingList();
+
                 StatusFunction("Item added!", -6, -1, 900, 28, Color.Red);
 
                 //throw custom exception if img == null
