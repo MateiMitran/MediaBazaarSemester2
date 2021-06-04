@@ -37,6 +37,8 @@ namespace PRJMediaBazaar
         public HRHome(LogIn loginForm,EmployeeControl _empControl,Employee HRManager)
         {
             InitializeComponent();
+            this.btnAddEmployee.AutoSize = false;
+            this.btnEditEmployee.AutoSize = false;
             ShiftAssigning.ReloadForm += new ShiftAssigning.ShiftAssigningHandler(ReloadShiftAssigningForm_Event);
             buttons = new List<Button>();
             timers = new List<Timer>();

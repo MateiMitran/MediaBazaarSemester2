@@ -85,12 +85,12 @@ namespace PRJMediaBazaar
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label4.Location = new System.Drawing.Point(100, 239);
+            this.label4.Location = new System.Drawing.Point(48, 242);
             this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(52, 20);
+            this.label4.Size = new System.Drawing.Size(103, 20);
             this.label4.TabIndex = 9;
-            this.label4.Text = "Price :";
+            this.label4.Text = "Selling Price :";
             // 
             // btnAdd
             // 

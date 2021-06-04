@@ -34,6 +34,16 @@ namespace PRJMediaBazaar
             timers = new List<System.Windows.Forms.Timer>();
             allItems = itemControl.GetItems();
             LoadItemsLESGOO();
+            LoadRestockingList();
+        }
+
+        public void LoadRestockingList()
+        {
+            this.lbRestockRequests.Items.Clear();
+            foreach(Item i in itemControl.GetItemsByState("manager"))
+            {
+                lbRestockRequests.Items.Add(i.RestockInfo());
+            }
         }
         public void StatusFunction(String text, int x, int y, int width, int height, Color color)
         {
@@ -255,6 +265,11 @@ namespace PRJMediaBazaar
                     }
                 }
             }
+        }
+
+        private void pnlItems_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }

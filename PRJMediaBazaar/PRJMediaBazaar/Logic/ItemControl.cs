@@ -24,6 +24,20 @@ namespace PRJMediaBazaar.Logic
         {
            this.items = itemDAL.SelectAllItems();
         }
+
+        public Item[] GetItemsByState(string state)
+        {
+            List<Item> temp = new List<Item>();
+            foreach(Item i in items)
+            {
+                if(i.Restock_State == state)
+                {
+                    temp.Add(i);
+                }
+            }
+            return temp.ToArray();
+        }
+
         public void AddAnItem(String category, String subcategory ,String brand, String model, String description, double stock_price
                     , double price, String restock_state, int roomInShop, int roomInStorage,
                     int minimumAmountInStock, byte[] image)

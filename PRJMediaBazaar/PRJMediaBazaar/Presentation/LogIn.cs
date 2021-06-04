@@ -23,6 +23,7 @@ namespace PRJMediaBazaar
             InitializeComponent();
             buttons = new List<Button>();
             timers = new List<Timer>();
+         
             
         }
         public void StatusFunction(String text, int x, int y, int width, int height, Color color)

@@ -23,9 +23,10 @@ namespace PRJMediaBazaar.Logic
             MinimumAmountInStock = minimumAmountInStock; 
             InShopAmount = inShopAmount; InStorageAmount = inStorageAmount;
             Image = null;
+            AmountToRestock = GetMaxFreeSpaceInStorage();
         }
        public int ID { get;  set; }
-       public String Name { get { return this.Category + " " + this.Subcategory + " " + this.Brand + " " + this.Model; } }
+       public String Name { get { return  this.Subcategory + " " + this.Brand + " " + this.Model; } }
        public String Category { get; set; }
         public String Subcategory { get; set; }
        public String Brand { get; set; }
@@ -40,6 +41,25 @@ namespace PRJMediaBazaar.Logic
        public int InShopAmount { get; set; }
        public int InStorageAmount { get; set; }
        public byte[] Image { get; set; }
+       public int AmountToRestock { get; set; }
+
+      public int GetMaxFreeSpaceInStorage()
+        {
+            return RoomInStorage - InStorageAmount;
+        }
+
+        public int TotalAmount { get { return InShopAmount + InStorageAmount; } }
+
+        public string RestockInfo()
+        {
+            return $"(ID: {ID}) {Name}";
+        }
+
+        public void ChangeRestockAmount(int newAmount)
+        {
+            AmountToRestock = newAmount;
+        }
+      
 
 
         public override string ToString()
