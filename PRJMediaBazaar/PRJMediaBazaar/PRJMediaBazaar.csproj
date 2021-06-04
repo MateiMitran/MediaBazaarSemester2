@@ -96,6 +96,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IRestockData.cs" />
     <Compile Include="Logic\Restock.cs" />
     <Compile Include="Presentation\Stocker\StockerHome.cs">
       <SubType>Form</SubType>
