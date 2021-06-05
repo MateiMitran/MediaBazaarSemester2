@@ -8,6 +8,7 @@ namespace PRJMediaBazaar.Logic
 {
     public class Item
     {
+        private int scannedAmount;
         //quantity is 0 when u create item
         public Item(int id, String category, String subcatgeory ,String brand,String model, String description,
                     double stock_price, double price, String restock_state,int roomInShop, int roomInStorage,
@@ -24,6 +25,7 @@ namespace PRJMediaBazaar.Logic
             InShopAmount = inShopAmount; InStorageAmount = inStorageAmount;
             Image = null;
             AmountToRestock = GetMaxFreeSpaceInStorage();
+            scannedAmount = 0;
         }
        public int ID { get;  set; }
        public String Name { get { return  this.Subcategory + " " + this.Brand + " " + this.Model; } }
@@ -42,6 +44,7 @@ namespace PRJMediaBazaar.Logic
        public int InStorageAmount { get; set; }
        public byte[] Image { get; set; }
        public int AmountToRestock { get; set; }
+        public int ScanedAmount { get; set; }
 
       public int GetMaxFreeSpaceInStorage()
         {

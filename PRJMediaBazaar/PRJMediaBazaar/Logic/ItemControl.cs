@@ -22,9 +22,9 @@ namespace PRJMediaBazaar.Logic
         }
         public void LoadItems()
         {
-           this.items = itemDAL.SelectAllItems();
+            this.items = itemDAL.SelectAllItems();
         }
-        
+
 
         public Item GetItem(int id)
         {
@@ -34,15 +34,17 @@ namespace PRJMediaBazaar.Logic
         public Item[] GetItemsByState(string state)
         {
             List<Item> temp = new List<Item>();
-            foreach(Item i in items)
+            foreach (Item i in items)
             {
-                if(i.Restock_State == state)
+                if (i.Restock_State == state)
                 {
                     temp.Add(i);
                 }
             }
             return temp.ToArray();
         }
+
+        
 
         public void AddAnItem(String category, String subcategory ,String brand, String model, String description, double stock_price
                     , double price, String restock_state, int roomInShop, int roomInStorage,
@@ -107,6 +109,11 @@ namespace PRJMediaBazaar.Logic
         public bool NewRestock(Restock restock, int managerId)
         {
             return itemDAL.InsertNewRestock(restock, managerId);
+        }
+
+        public bool NewOrder(Order order, int cashieerId)
+        {
+            return itemDAL.InsertNewOrder(order, cashieerId);
         }
         public bool UpdateItemImage(int itemID, byte[] image)
         {

@@ -261,6 +261,97 @@ namespace PRJMediaBazaar.Data
             }
         }
 
+        //..................................................
+
+        private int LastOrderId()
+        {
+            string sql = "SELECT MAX(id) FROM orders";
+            int id = Convert.ToInt32(executeScalar(sql, null));
+            CloseConnection();
+            return id;
+        }
+
+
+       private bool UpdateItemShopQuantity(int itemId, int newInShopAmount)
+        {
+            try
+            {
+                String sql = "UPDATE items SET restock_state = @state, inShopAmount = @amount  " +
+                       "WHERE id = @id;";
+                String[] parameters = new String[] { "stable", newInShopAmount.ToString(), itemId.ToString() };
+                if (executeNonQuery(sql, parameters) != null)
+                {
+                    CloseConnection();
+                    return true;
+                }
+                else
+                {
+                    CloseConnection();
+                    return false;
+                }
+            }
+            finally
+            {
+                CloseConnection();
+            }
+
+        }
+
+
+        private bool InsertOrderItem(int orderId, int itemId, int orderAmount)
+        {
+            try
+            {
+                String sql = "INSERT INTO orders_items VALUES(@orderId, @itemId, @quantity) ;";
+                String[] parameters = new String[] { orderId.ToString(), itemId.ToString(), orderAmount.ToString() };
+                if (executeNonQuery(sql, parameters) != null)
+                {
+                    CloseConnection();
+                    return true;
+                }
+                else
+                {
+                    CloseConnection();
+                    return false;
+                }
+            }
+            finally
+            {
+                CloseConnection();
+            }
+        }
+
+
+        public bool InsertNewOrder(Order order, int cashierId)
+        {
+            try
+            {
+                String sql = "INSERT INTO orders (cashier_id, date, total_price) VALUES(@cashierId, @date, @totalPrice) ;";
+                String[] parameters = new String[] { cashierId.ToString(), DateTime.Now.ToString(), order.GetTotalPrice().ToString() };
+                if (executeNonQuery(sql, parameters) != null)
+                {
+                    CloseConnection();
+                    int orderId = LastRestockId();
+                    foreach (Item i in order.BoughtItems)
+                    {
+                        InsertOrderItem(orderId, i.ID, i.ScanedAmount);
+                        int newInStorage =i.InShopAmount; // not correct 
+                        UpdateItemShopQuantity(i.ID, newInStorage);
+                    }
+                    return true;
+                }
+                else
+                {
+                    CloseConnection();
+                    return false;
+                }
+            }
+            finally
+            {
+                CloseConnection();
+            }
+        }
+
 
         public bool UpdateItemImage(int itemID, byte[] image)
         {
