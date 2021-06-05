@@ -112,7 +112,7 @@ namespace PRJMediaBazaar.Data
             }
             catch (MySqlException ex)
             {
-             
+                conn.Close();
             }
 
             finally
@@ -319,6 +319,7 @@ namespace PRJMediaBazaar.Data
                 {
                     categories.Add(dr[0].ToString());
                 }
+                CloseConnection();
                 return categories;
             }
             finally
@@ -347,6 +348,7 @@ namespace PRJMediaBazaar.Data
                 {
                     subcategories.Add(dr[0].ToString());
                 }
+                CloseConnection();
                 return subcategories;
             }
             finally
@@ -375,6 +377,7 @@ namespace PRJMediaBazaar.Data
                 {
                     brands.Add(dr[0].ToString());
                 }
+                CloseConnection();
                 return brands;
             }
             finally
@@ -405,7 +408,7 @@ namespace PRJMediaBazaar.Data
                 {
                     models.Add(dr[0].ToString());
                 }
-
+                CloseConnection();
                 return models;
             }
 
