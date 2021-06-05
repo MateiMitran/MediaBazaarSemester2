@@ -44,13 +44,15 @@ namespace PRJMediaBazaar.Data
                     , String price, String restock_state,int roomInShop, int roomInStorage,
                     int minimumAmountInStock, byte[] image)
         {
-            String sql = 
-                "INSERT INTO items(category,subcategory,brand,model,description,stock_price,price,restock_state" +
-                    "roomInShop,roomInStorage,minimumAmountInStock,inShopAmount,inStorageAmount) " +
-                "VALUES(@category,@subcategory,@brand,@model,@description,@stock_price,@price,@restock_state," +
-                    "@roomInShop,@roomInStorage,@minimumAmountInStock,@inShopAmount,@inStorageAmount);";
+            try
+            {
+                String sql =
+               "INSERT INTO items(category,subcategory,brand,model,description,stock_price,price,restock_state" +
+                   "roomInShop,roomInStorage,minimumAmountInStock,inShopAmount,inStorageAmount) " +
+               "VALUES(@category,@subcategory,@brand,@model,@description,@stock_price,@price,@restock_state," +
+                   "@roomInShop,@roomInStorage,@minimumAmountInStock,@inShopAmount,@inStorageAmount);";
 
-            String[] parameters = new String[] {
+                String[] parameters = new String[] {
                 category,
                 subcategory,
                 brand,
@@ -66,18 +68,24 @@ namespace PRJMediaBazaar.Data
                 0.ToString(),
                 0.ToString()};
 
-            if (executeNonQuery(sql,parameters)!=null)
-            {
-                CloseConnection();
-                AddItemImage(image);
+                if (executeNonQuery(sql, parameters) != null)
+                {
+                    CloseConnection();
+                    AddItemImage(image);
 
-                return true;
+                    return true;
+                }
+                else
+                {
+                    CloseConnection();
+                    return false;
+                }
             }
-            else
+            finally
             {
                 CloseConnection();
-                return false;
             }
+           
         }
 
         private void AddItemImage(byte[] image)
@@ -168,6 +176,92 @@ namespace PRJMediaBazaar.Data
                 return false;
             }
         }
+        private int LastRestockId()
+        {
+            string sql = "SELECT MAX(id) FROM restocks";
+            int id = Convert.ToInt32(executeScalar(sql, null));
+            CloseConnection();
+            return id;
+        }
+        private bool UpdateItemStorageQuantity(int itemId, int newInStorageAmount)
+        {
+            try
+            {
+                String sql = "UPDATE items SET restock_state = @state, inStorageAmount = @amount  " +
+                       "WHERE id = @id;";
+                String[] parameters = new String[] {"stable", newInStorageAmount.ToString(), itemId.ToString()};
+                if (executeNonQuery(sql, parameters) != null)
+                {
+                    CloseConnection();
+                    return true;
+                }
+                else
+                {
+                    CloseConnection();
+                    return false;
+                }
+            }
+            finally
+            {
+                CloseConnection();
+            }
+           
+        }
+
+        private bool InsertRestockItem(int restockId, int itemId, int restockAmount)
+        {
+            try
+            {
+                String sql = "INSERT INTO restocks_items VALUES(@restockId, @itemId, @quantity) ;";
+                String[] parameters = new String[] {restockId.ToString(), itemId.ToString(), restockAmount.ToString() };
+                if (executeNonQuery(sql, parameters) != null)
+                {
+                    CloseConnection();
+                    return true;
+                }
+                else
+                {
+                    CloseConnection();
+                    return false;
+                }
+            }
+            finally
+            {
+                CloseConnection();
+            }
+        }
+
+        public bool InsertNewRestock(Restock restock, int managerId)
+        {
+            try
+            {
+                String sql = "INSERT INTO restocks (manager_id, date, total_price) VALUES(@managerId, @date, @totalPrice) ;";
+                String[] parameters = new String[] { managerId.ToString(), DateTime.Now.ToString(), restock.GetTotalCost().ToString()};
+                if (executeNonQuery(sql, parameters) != null)
+                {
+                    CloseConnection();
+                    int restockId = LastRestockId();
+                    foreach(Item i in restock.GetItemsForRestock())
+                    {
+                        InsertRestockItem(restockId, i.ID, i.AmountToRestock);
+                        int newInStorage = i.InStorageAmount + i.AmountToRestock;
+                        UpdateItemStorageQuantity(i.ID, newInStorage);
+                    }
+                    return true;
+                }
+                else
+                {
+                    CloseConnection();
+                    return false;
+                }
+            }
+            finally
+            {
+                CloseConnection();
+            }
+        }
+
+
         public bool UpdateItemImage(int itemID, byte[] image)
         {
             MySqlConnection conn = null;

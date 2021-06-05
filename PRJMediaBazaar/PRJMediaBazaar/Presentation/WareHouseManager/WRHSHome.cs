@@ -19,12 +19,13 @@ namespace PRJMediaBazaar
         private LogIn login;
         private Item thisItem;
         private Item[] items;
+        private Employee manager;
 
         public static Restock restock;
         List<Item> allItems;
         private List<Button> buttons;
         private List<System.Windows.Forms.Timer> timers;
-        public WRHSHome(LogIn login)
+        public WRHSHome(LogIn login, Employee whmanager)
         {
             InitializeComponent();
             this.lblItems.ForeColor = Color.Gray;
@@ -36,6 +37,7 @@ namespace PRJMediaBazaar
             LoadItemsLESGOO();
             restock = new Restock(itemControl);
             LoadRestockingList();
+            manager = whmanager;
         }
 
         public void LoadRestockingList()
@@ -303,6 +305,23 @@ namespace PRJMediaBazaar
                 MessageBox.Show("Please selet an item");
             }
 
+        }
+
+        private void btnConfirm_Click(object sender, EventArgs e)
+        {
+            if(restock.GetItemsForRestock().Count() >= 5)
+            {
+                itemControl.NewRestock(restock, manager.Id);
+                restock = null;
+                restock = new Restock(itemControl);
+                StatusFunction("Successfully sent restock", -6, -1, 900, 28, Color.Green);
+                LoadRestockingList();
+                
+            }
+            else
+            {
+                StatusFunction("Items to restock should be at least 5", -6, -1, 900, 28, Color.Red);
+            }
         }
     }
 }

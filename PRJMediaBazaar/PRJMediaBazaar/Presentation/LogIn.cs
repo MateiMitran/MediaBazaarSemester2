@@ -88,7 +88,8 @@ namespace PRJMediaBazaar
                 }
                 else if (emp.Login(this.tbUsername.Text, this.tbPassword.Text) == "WarehouseManager")
                 {
-                    WRHSHome home = new WRHSHome(this);
+                    Employee whmanager = emp.GetEmployeeByEmailAndPassword(this.tbUsername.Text, this.tbPassword.Text);
+                    WRHSHome home = new WRHSHome(this,whmanager);
                     home.Show();
                     this.Hide();
                 }

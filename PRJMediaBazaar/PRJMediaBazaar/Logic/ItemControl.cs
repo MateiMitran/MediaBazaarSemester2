@@ -103,6 +103,11 @@ namespace PRJMediaBazaar.Logic
             }
             return false;
         }
+
+        public bool NewRestock(Restock restock, int managerId)
+        {
+            return itemDAL.InsertNewRestock(restock, managerId);
+        }
         public bool UpdateItemImage(int itemID, byte[] image)
         {
             if (itemDAL.UpdateItemImage(itemID, image) == true)

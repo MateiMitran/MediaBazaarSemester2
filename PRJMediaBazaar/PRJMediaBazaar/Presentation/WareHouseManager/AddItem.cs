@@ -192,7 +192,10 @@ namespace PRJMediaBazaar
                 _wh.LoadRestockingList();
 
                 StatusFunction("Item added!", -6, -1, 900, 28, Color.Red);
-
+                if(WRHSHome.restock == null)
+                {
+                    WRHSHome.restock = new Restock(_wh.GetItemControl());
+                }
                 //throw custom exception if img == null
                 //throw other exceptions for the other variables(empty/short strings, low values in stock, etc.)
 
