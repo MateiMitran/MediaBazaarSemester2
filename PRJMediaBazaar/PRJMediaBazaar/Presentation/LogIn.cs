@@ -95,7 +95,7 @@ namespace PRJMediaBazaar
                 }
                 else if (emp.Login(this.tbUsername.Text, this.tbPassword.Text) == "Cashier")
                 {
-                    Employee casheer = emp.GetEmployeeByEmailAndPassword(this.tbPassword.Text, this.tbPassword.Text);
+                    Employee casheer = emp.GetEmployeeByEmailAndPassword(this.tbUsername.Text, this.tbPassword.Text);
                     CashierHome home = new CashierHome(this, casheer);
                     home.Show();
                     this.Hide();

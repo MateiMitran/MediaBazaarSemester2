@@ -331,10 +331,10 @@ namespace PRJMediaBazaar.Data
                 if (executeNonQuery(sql, parameters) != null)
                 {
                     CloseConnection();
-                    int orderId = LastRestockId();
+                    int orderId = LastOrderId();
                     foreach (Item i in order.BoughtItems)
                     {
-                        InsertOrderItem(orderId, i.ID, i.ScanedAmount);
+                        InsertOrderItem(orderId, i.ID, i.ScannedAmount);
                         int newInStorage =i.InShopAmount; // not correct 
                         UpdateItemShopQuantity(i.ID, newInStorage);
                     }

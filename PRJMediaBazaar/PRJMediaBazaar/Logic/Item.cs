@@ -25,7 +25,7 @@ namespace PRJMediaBazaar.Logic
             InShopAmount = inShopAmount; InStorageAmount = inStorageAmount;
             Image = null;
             AmountToRestock = GetMaxFreeSpaceInStorage();
-            scannedAmount = 0;
+            ScannedAmount = 0;
         }
        public int ID { get;  set; }
        public String Name { get { return  this.Subcategory + " " + this.Brand + " " + this.Model; } }
@@ -44,7 +44,7 @@ namespace PRJMediaBazaar.Logic
        public int InStorageAmount { get; set; }
        public byte[] Image { get; set; }
        public int AmountToRestock { get; set; }
-        public int ScanedAmount { get; set; }
+        public int ScannedAmount { get ; set; }
 
       public int GetMaxFreeSpaceInStorage()
         {

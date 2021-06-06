@@ -11,12 +11,12 @@ namespace PRJMediaBazaar.Logic
         
         private List<Item> boughtItems;
 
-        public Order()
+        public Order(List<Item> itemsToBuy)
         {
-            boughtItems = new List<Item>();
+            boughtItems = itemsToBuy;
         }
 
-        public List<Item> BoughtItems { get; }
+        public List<Item> BoughtItems { get { return this.boughtItems; } }
 
         public void AddItemToOrder(Item item)
         {
@@ -39,7 +39,7 @@ namespace PRJMediaBazaar.Logic
 
             foreach (Item i in boughtItems)
             {
-                value += i.ScanedAmount * i.Price;
+                value += i.ScannedAmount * i.Price;
             }
             return value;
         }

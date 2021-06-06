@@ -45,6 +45,24 @@ namespace PRJMediaBazaar
             LoadItemsLESGOO();
         }
 
+
+        public void StatusFunction(String text, int x, int y, int width, int height, Color color)
+        {
+            Button newButton = new Button();
+            newButton.Location = new Point(x, y);
+            newButton.Width = width;
+            newButton.Height = height;
+            newButton.Enabled = false;
+            newButton.BackColor = color;
+            newButton.Text = text;
+            this.Controls.Add(newButton);
+            newButton.BringToFront();
+            buttons.Add(newButton);
+            System.Windows.Forms.Timer temp = new System.Windows.Forms.Timer();
+            timers.Add(temp);
+            temp.Start();
+        }
+
         private void label1_Click(object sender, EventArgs e)
         {
             this.Hide();
@@ -129,13 +147,13 @@ namespace PRJMediaBazaar
                         }
                         if (ok==1)
                         {
-                            this.thisItem.ScanedAmount = ammount;
+                            this.thisItem.ScannedAmount = ammount;
                             this.scannedItems.Add(this.thisItem);
                             DisplayScannedItems();
                         }
                         else
                         {
-                            this.thisItem.ScanedAmount += ammount;
+                            this.thisItem.ScannedAmount += ammount;
                             DisplayScannedItems();
                         }
                     }
@@ -158,8 +176,8 @@ namespace PRJMediaBazaar
             this.lbScannedItems.Items.Clear();
             foreach (Item item in this.scannedItems)
             {
-               this.lbScannedItems.Items.Add($"{item.ToString()} x{item.ScanedAmount}");
-                price += item.ScanedAmount * item.Price;
+               this.lbScannedItems.Items.Add($"{item.ToString()} x{item.ScannedAmount}");
+                price += item.ScannedAmount * item.Price;
             }
             this.lblTotalPrice.Text = "Total Price: " + price.ToString() + '$';
         }
@@ -167,6 +185,23 @@ namespace PRJMediaBazaar
         private void tbQuantity_ValueChanged(object sender, EventArgs e)
         {
    
+        }
+
+        private void btnSell_Click(object sender, EventArgs e)
+        {
+            if (this.scannedItems.Count() > 0)
+            {
+                Order order = new Order(this.scannedItems);
+                itemControl.NewOrder(order, cashier.Id);
+                this.lbScannedItems.Items.Clear();
+                StatusFunction("Successfully placed order!", -6, -1, 900, 28, Color.Green);
+
+            }
+
+            else
+            {
+                StatusFunction("No items scanned!", -6, -1, 900, 28, Color.Red);
+            }
         }
     }
 }
