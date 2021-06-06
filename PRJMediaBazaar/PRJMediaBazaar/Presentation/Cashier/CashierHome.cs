@@ -20,8 +20,9 @@ namespace PRJMediaBazaar
         private Item thisItem;
         private Item[] items;
         private Employee cashier;
-        List<Item> scannedItems;
-        List<Item> allItems;
+        private List<Item> scannedItems;
+        private List<Item> allItems;
+        private int ok = 1;
 
         private List<Button> buttons;
         private List<System.Windows.Forms.Timer> timers;
@@ -100,6 +101,7 @@ namespace PRJMediaBazaar
            
             try
             {
+                ok = 1;
                 //this.thisItem = (Item)this.lbAllItems.SelectedItem;
                 string id1 = new string(this.lbAllItems.SelectedItem.ToString().SkipWhile(c => !char.IsDigit(c))
                        .TakeWhile(c => char.IsDigit(c))
@@ -117,22 +119,28 @@ namespace PRJMediaBazaar
                 {
                     if (this.thisItem.InShopAmount >= this.ammount)
                     {
-
                         foreach (Item itemx in this.scannedItems)
                         {
                             if (thisItem.ID == itemx.ID)
                             {
-                                MessageBox.Show("Item already scanned!");
+                                ok = 0;
                             }
 
                         }
-
-
-                        this.thisItem.ScanedAmount = ammount;
-                        this.scannedItems.Add(this.thisItem);
-                        DisplayScannedItems(this.thisItem);
-
+                        if (ok==1)
+                        {
+                            this.thisItem.ScanedAmount = ammount;
+                            this.scannedItems.Add(this.thisItem);
+                            DisplayScannedItems();
+                        }
+                        else
+                        {
+                            this.thisItem.ScanedAmount += ammount;
+                            DisplayScannedItems();
+                        }
                     }
+                    else
+                        MessageBox.Show("Amount selected must be smaller than in shop amount!");
                 }
 
                 
@@ -144,15 +152,16 @@ namespace PRJMediaBazaar
             
         }
 
-        private void DisplayScannedItems(Item x)
+        private void DisplayScannedItems()
         {
+            double price=0;
+            this.lbScannedItems.Items.Clear();
             foreach (Item item in this.scannedItems)
             {
-                if (item.ID == x.ID)
-                {
-                    this.lbScannedItems.Items.Add($"{x.ToString()} x{x.ScanedAmount}");
-                }
+               this.lbScannedItems.Items.Add($"{item.ToString()} x{item.ScanedAmount}");
+                price += item.ScanedAmount * item.Price;
             }
+            this.lblTotalPrice.Text = "Total Price: " + price.ToString() + '$';
         }
 
         private void tbQuantity_ValueChanged(object sender, EventArgs e)
