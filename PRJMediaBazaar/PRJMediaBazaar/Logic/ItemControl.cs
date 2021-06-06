@@ -136,8 +136,9 @@ namespace PRJMediaBazaar.Logic
 
         public bool MoveItemToShop(Item item)
         {
-            int newInShopAmount = item.InShopAmount + item.GetMovingAmount();
-            int newInStorageAmount = item.InStorageAmount - item.GetMovingAmount();
+            int movingAmount = item.GetMovingAmount();
+            int newInShopAmount = item.InShopAmount + movingAmount;
+            int newInStorageAmount = item.InStorageAmount -movingAmount;
             item.InShopAmount = newInShopAmount;
             item.InStorageAmount = newInStorageAmount;
             if (itemDAL.UpdateItemAmounts(item.ID, newInShopAmount, newInStorageAmount))
