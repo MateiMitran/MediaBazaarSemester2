@@ -141,6 +141,18 @@ namespace PRJMediaBazaar.Logic
         {
             return this.items;
         }
+        public List<Item> GetAvailableItems()
+        {
+            List<Item> temp = new List<Item>();
+            foreach(Item item in this.items)
+            {
+                if(item.InShopAmount > 0)
+                {
+                    temp.Add(item);
+                }
+            }
+            return temp;
+        }
         public Item[] Items { get { return this.items.ToArray(); } }
 
         public byte[] GetItemImage(int itemID)

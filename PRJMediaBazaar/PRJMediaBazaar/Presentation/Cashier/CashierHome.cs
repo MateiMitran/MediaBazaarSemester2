@@ -37,7 +37,7 @@ namespace PRJMediaBazaar
             itemControl = new ItemControl();
             buttons = new List<Button>();
             timers = new List<System.Windows.Forms.Timer>();
-            allItems = itemControl.GetItems();
+            allItems = itemControl.GetAvailableItems();
             scannedItems = new List<Item>();
             cashier = salesman;
             ammount = 0;
@@ -121,48 +121,56 @@ namespace PRJMediaBazaar
             {
                 ok = 1;
                 //this.thisItem = (Item)this.lbAllItems.SelectedItem;
-                string id1 = new string(this.lbAllItems.SelectedItem.ToString().SkipWhile(c => !char.IsDigit(c))
+                if(this.lbAllItems.SelectedItem != null)
+                {
+                    string id1 = new string(this.lbAllItems.SelectedItem.ToString().SkipWhile(c => !char.IsDigit(c))
                        .TakeWhile(c => char.IsDigit(c))
                        .ToArray());
-                int id = Convert.ToInt32(id1);
-                thisItem = this.itemControl.GetItem(id);
-                
+                    int id = Convert.ToInt32(id1);
+                    thisItem = this.itemControl.GetItem(id);
 
-                this.ammount = Convert.ToInt32(this.tbQuantity.Value);
-                if (this.ammount == 0)
-                {
-                    MessageBox.Show("Select amount biger than 0!");
+
+                    this.ammount = Convert.ToInt32(this.tbQuantity.Value);
+                    if (this.ammount == 0)
+                    {
+                        MessageBox.Show("Select amount biger than 0!");
+                    }
+                    else
+                    {
+                        if (this.thisItem.InShopAmount >= this.ammount + thisItem.ScannedAmount)
+                        {
+                            foreach (Item itemx in this.scannedItems)
+                            {
+                                if (thisItem.ID == itemx.ID)
+                                {
+                                    ok = 0;
+                                }
+
+                            }
+                            if (ok == 1)
+                            {
+                                this.thisItem.ScannedAmount = ammount;
+                                this.scannedItems.Add(this.thisItem);
+                                DisplayScannedItems();
+                            }
+                            else
+                            {
+                                this.thisItem.ScannedAmount += ammount;
+                                DisplayScannedItems();
+                            }
+                        }
+                        else
+                            MessageBox.Show("Amount selected must be smaller than in shop amount!");
+                    }
+
+
                 }
                 else
                 {
-                    if (this.thisItem.InShopAmount >= this.ammount)
-                    {
-                        foreach (Item itemx in this.scannedItems)
-                        {
-                            if (thisItem.ID == itemx.ID)
-                            {
-                                ok = 0;
-                            }
-
-                        }
-                        if (ok==1)
-                        {
-                            this.thisItem.ScannedAmount = ammount;
-                            this.scannedItems.Add(this.thisItem);
-                            DisplayScannedItems();
-                        }
-                        else
-                        {
-                            this.thisItem.ScannedAmount += ammount;
-                            DisplayScannedItems();
-                        }
-                    }
-                    else
-                        MessageBox.Show("Amount selected must be smaller than in shop amount!");
+                    MessageBox.Show("Please select an item");
                 }
-
-                
             }
+                
             catch(Exception ex)
             {
                 MessageBox.Show("Error!");
@@ -195,7 +203,8 @@ namespace PRJMediaBazaar
                 itemControl.NewOrder(order, cashier.Id);
                 this.lbScannedItems.Items.Clear();
                 StatusFunction("Successfully placed order!", -6, -1, 900, 28, Color.Green);
-
+                allItems = itemControl.GetAvailableItems();
+                scannedItems = new List<Item>();
             }
 
             else

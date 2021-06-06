@@ -12,33 +12,41 @@ namespace PRJMediaBazaar.Data
     {
         public List<Item> SelectAllItems()
         {
-            List<Item> items = new List<Item>();
-            MySqlDataReader reader = executeReader("SELECT * FROM items;", null);
-            while (reader.Read())
+            try
             {
-                int id = Convert.ToInt32(reader[0]);
-                String category = reader[1].ToString();
-                String subcategory = reader[2].ToString();
-                String brand = reader[3].ToString();
-                String model = reader[4].ToString();
-                String description = reader[5].ToString();
-                double stock_price = double.Parse(reader[6].ToString(), System.Globalization.CultureInfo.InvariantCulture);
-                double price = double.Parse(reader[7].ToString(), System.Globalization.CultureInfo.InvariantCulture);
-                String restock_state = reader[8].ToString();
-                int roomInShop = Convert.ToInt32(reader[9]);
-                int roomInStorage = Convert.ToInt32(reader[10]);
-                int minimumAmountInStock = Convert.ToInt32(reader[11]);
-                int inShopAmount = Convert.ToInt32(reader[12]);
-                int inStorageAmount = Convert.ToInt32(reader[13]);
+                List<Item> items = new List<Item>();
+                MySqlDataReader reader = executeReader("SELECT * FROM items;", null);
+                while (reader.Read())
+                {
+                    int id = Convert.ToInt32(reader[0]);
+                    String category = reader[1].ToString();
+                    String subcategory = reader[2].ToString();
+                    String brand = reader[3].ToString();
+                    String model = reader[4].ToString();
+                    String description = reader[5].ToString();
+                    double stock_price = double.Parse(reader[6].ToString(), System.Globalization.CultureInfo.InvariantCulture);
+                    double price = double.Parse(reader[7].ToString(), System.Globalization.CultureInfo.InvariantCulture);
+                    String restock_state = reader[8].ToString();
+                    int roomInShop = Convert.ToInt32(reader[9]);
+                    int roomInStorage = Convert.ToInt32(reader[10]);
+                    int minimumAmountInStock = Convert.ToInt32(reader[11]);
+                    int inShopAmount = Convert.ToInt32(reader[12]);
+                    int inStorageAmount = Convert.ToInt32(reader[13]);
 
-                Item item = new Item(id, category, subcategory ,brand, model, description, stock_price, price, restock_state, roomInShop,
-                                     roomInStorage, minimumAmountInStock, inShopAmount, inStorageAmount);
-              //  item.Image = GetItemImage(id);
-                items.Add(item);
+                    Item item = new Item(id, category, subcategory, brand, model, description, stock_price, price, restock_state, roomInShop,
+                                         roomInStorage, minimumAmountInStock, inShopAmount, inStorageAmount);
+                    //  item.Image = GetItemImage(id);
+                    items.Add(item);
+                }
+                CloseConnection();
+
+                return items;
             }
-            CloseConnection();
+            finally
+            {
+                CloseConnection();
+            }
            
-            return items;
         } 
         public bool AddItem(String category,String subcategory ,String brand, String model, String description, String stock_price
                     , String price, String restock_state,int roomInShop, int roomInStorage,
@@ -47,7 +55,7 @@ namespace PRJMediaBazaar.Data
             try
             {
                 String sql =
-               "INSERT INTO items(category,subcategory,brand,model,description,stock_price,price,restock_state" +
+               "INSERT INTO items(category,subcategory,brand,model,description,stock_price,price,restock_state," +
                    "roomInShop,roomInStorage,minimumAmountInStock,inShopAmount,inStorageAmount) " +
                "VALUES(@category,@subcategory,@brand,@model,@description,@stock_price,@price,@restock_state," +
                    "@roomInShop,@roomInStorage,@minimumAmountInStock,@inShopAmount,@inStorageAmount);";
@@ -58,13 +66,12 @@ namespace PRJMediaBazaar.Data
                 brand,
                 model,
                 description,
-                stock_price,
-                price,
-                restock_state,
+                stock_price.ToString(),
+                price.ToString(),
+                restock_state.ToString(),
                 roomInShop.ToString(),
                 roomInStorage.ToString(),
                 minimumAmountInStock.ToString(),
-                0.ToString(),
                 0.ToString(),
                 0.ToString()};
 
@@ -158,23 +165,31 @@ namespace PRJMediaBazaar.Data
                     , String price, String restock_state,int roomInShop, int roomInStorage,
                     int minimumAmountInStock, byte[] image, int id)
         {
-            String sql = "UPDATE items SET category = @category,subcategory = @subcategory ,brand = @brand, model=@model, description = @description, stock_price=@stock_price , price = @price, restock_state=@restock_state , " +
-                         "roomInShop = @roomInShop, roomInStorage = @roomInStorage, minimumAmountInStock = @minimumAmountInStock " +
-                         "WHERE id = @id;";
-            String[] parameters = new String[] { category, subcategory ,brand,model,description,stock_price,price.ToString(),restock_state,
+            try
+            {
+                String sql = "UPDATE items SET category = @category,subcategory = @subcategory ,brand = @brand, model=@model, description = @description, stock_price=@stock_price , price = @price, restock_state=@restock_state , " +
+                        "roomInShop = @roomInShop, roomInStorage = @roomInStorage, minimumAmountInStock = @minimumAmountInStock " +
+                        "WHERE id = @id;";
+                String[] parameters = new String[] { category, subcategory ,brand,model,description,stock_price,price.ToString(),restock_state,
                                                 roomInShop.ToString(),roomInStorage.ToString(),
                                                 minimumAmountInStock.ToString(), id.ToString() };
-            if (executeNonQuery(sql,parameters)!=null)
+                if (executeNonQuery(sql, parameters) != null)
+                {
+                    CloseConnection();
+                    UpdateItemImage(id, image);
+                    return true;
+                }
+                else
+                {
+                    CloseConnection();
+                    return false;
+                }
+            }
+            finally
             {
                 CloseConnection();
-                UpdateItemImage(id, image);
-                return true;
             }
-            else
-            {
-                CloseConnection();
-                return false;
-            }
+           
         }
         private int LastRestockId()
         {
@@ -276,9 +291,12 @@ namespace PRJMediaBazaar.Data
         {
             try
             {
-                String sql = "UPDATE items SET restock_state = @state, inShopAmount = @amount  " +
+              
+                    String sql = "UPDATE items SET inShopAmount = @amount  " +
                        "WHERE id = @id;";
-                String[] parameters = new String[] { "stable", newInShopAmount.ToString(), itemId.ToString() };
+                    String[] parameters = new String[] { newInShopAmount.ToString(), itemId.ToString() };
+              
+               
                 if (executeNonQuery(sql, parameters) != null)
                 {
                     CloseConnection();
@@ -335,8 +353,10 @@ namespace PRJMediaBazaar.Data
                     foreach (Item i in order.BoughtItems)
                     {
                         InsertOrderItem(orderId, i.ID, i.ScannedAmount);
-                        int newInStorage =i.InShopAmount; // not correct 
-                        UpdateItemShopQuantity(i.ID, newInStorage);
+                        int newInShop =i.InShopAmount - i.ScannedAmount;
+                        UpdateItemShopQuantity(i.ID, newInShop);
+                        i.InShopAmount = newInShop;
+                        i.ScannedAmount = 0;
                     }
                     return true;
                 }

@@ -209,10 +209,10 @@ namespace PRJMediaBazaar
             {
                 StatusFunction(ex.ToString(), -6, -1, 900, 28, Color.Red);
             }
-            catch (Exception ex)
-            {
-                StatusFunction(ex.Message, -6, -1, 900, 28, Color.Red);
-            }
+            //catch (Exception ex)
+            //{
+            //    StatusFunction(ex.Message, -6, -1, 900, 28, Color.Red);
+            //}
             
         }
         private void godTimer_Tick(object sender, EventArgs e)

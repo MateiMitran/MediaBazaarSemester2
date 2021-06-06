@@ -16,7 +16,7 @@ namespace PRJMediaBazaar
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new LogIn());
+            Application.Run(new PRJMediaBazaar.Presentation.StartupForm());
         }
     }
 }

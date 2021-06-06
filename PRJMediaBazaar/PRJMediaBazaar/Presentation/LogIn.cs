@@ -22,9 +22,7 @@ namespace PRJMediaBazaar
         {
             InitializeComponent();
             buttons = new List<Button>();
-            timers = new List<Timer>();
-         
-            
+            timers = new List<Timer>();            
         }
         public void StatusFunction(String text, int x, int y, int width, int height, Color color)
         {
@@ -53,7 +51,7 @@ namespace PRJMediaBazaar
         }
         private void LogIn_Load(object sender, EventArgs e)
         {
-
+           
         }
         private void godTimer_Tick(object sender, EventArgs e)
         {
