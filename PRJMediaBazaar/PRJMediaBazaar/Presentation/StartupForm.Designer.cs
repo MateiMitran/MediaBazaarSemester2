@@ -73,6 +73,7 @@
             this.Controls.Add(this.btnSingleLogin);
             this.Name = "StartupForm";
             this.Text = "StartupForm";
+            this.Load += new System.EventHandler(this.StartupForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

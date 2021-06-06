@@ -15,6 +15,7 @@ namespace PRJMediaBazaar
 {
      partial class CashierHome : Form
     {
+        public static event PRJMediaBazaar.Presentation.EventHandlerVoid UpdateStockerInfo;
         private ItemControl itemControl;
         private LogIn login;
         private Item thisItem;
@@ -29,19 +30,19 @@ namespace PRJMediaBazaar
 
         private int ammount;
 
-        public CashierHome(LogIn login, Employee salesman)
+        public CashierHome(LogIn login, Employee salesman, ItemControl control)
         {
             InitializeComponent();
             this.login = login;
 
-            itemControl = new ItemControl();
+            itemControl = control;
             buttons = new List<Button>();
             timers = new List<System.Windows.Forms.Timer>();
             allItems = itemControl.GetAvailableItems();
             scannedItems = new List<Item>();
             cashier = salesman;
             ammount = 0;
-
+            StockerHome.UpdateCashierInfo += LoadItemsLESGOO;
             LoadItemsLESGOO();
         }
 
@@ -205,6 +206,7 @@ namespace PRJMediaBazaar
                 StatusFunction("Successfully placed order!", -6, -1, 900, 28, Color.Green);
                 allItems = itemControl.GetAvailableItems();
                 scannedItems = new List<Item>();
+                UpdateStockerInfo?.Invoke();
             }
 
             else

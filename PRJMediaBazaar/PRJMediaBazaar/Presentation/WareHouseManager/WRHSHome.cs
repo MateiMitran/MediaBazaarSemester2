@@ -25,12 +25,12 @@ namespace PRJMediaBazaar
         List<Item> allItems;
         private List<Button> buttons;
         private List<System.Windows.Forms.Timer> timers;
-        public WRHSHome(LogIn login, Employee whmanager)
+        public WRHSHome(LogIn login, Employee whmanager, ItemControl itemControl)
         {
             InitializeComponent();
             this.lblItems.ForeColor = Color.Gray;
             this.login = login;
-            itemControl = new ItemControl();
+            this.itemControl = itemControl;
             buttons = new List<Button>();
             timers = new List<System.Windows.Forms.Timer>();
             allItems = itemControl.GetItems();
@@ -38,6 +38,7 @@ namespace PRJMediaBazaar
             restock = new Restock(itemControl);
             LoadRestockingList();
             manager = whmanager;
+            StockerHome.UpdateWarehouseInfo += LoadRestockingList;
         }
 
         public void LoadRestockingList()

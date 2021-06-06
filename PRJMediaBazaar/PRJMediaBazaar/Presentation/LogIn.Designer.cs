@@ -116,13 +116,15 @@ namespace PRJMediaBazaar
             // 
             // btnLogIn
             // 
+            this.btnLogIn.AutoSize = true;
+            this.btnLogIn.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.btnLogIn.Depth = 0;
             this.btnLogIn.Icon = null;
             this.btnLogIn.Location = new System.Drawing.Point(178, 172);
             this.btnLogIn.MouseState = MaterialSkin.MouseState.HOVER;
             this.btnLogIn.Name = "btnLogIn";
             this.btnLogIn.Primary = true;
-            this.btnLogIn.Size = new System.Drawing.Size(158, 32);
+            this.btnLogIn.Size = new System.Drawing.Size(64, 36);
             this.btnLogIn.TabIndex = 8;
             this.btnLogIn.Text = "Log In";
             this.btnLogIn.UseVisualStyleBackColor = true;
@@ -145,6 +147,7 @@ namespace PRJMediaBazaar
             this.MaximizeBox = false;
             this.Name = "LogIn";
             this.Text = "LogIn";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.LogIn_FormClosed);
             this.Load += new System.EventHandler(this.LogIn_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

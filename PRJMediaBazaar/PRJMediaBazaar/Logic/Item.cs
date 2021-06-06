@@ -51,11 +51,39 @@ namespace PRJMediaBazaar.Logic
             return RoomInStorage - InStorageAmount;
         }
 
+        public int GetAvailableSpaceInShop()
+        {
+            return RoomInShop - InShopAmount;
+        }
+
+        public int GetMovingAmount()
+        {
+            int sum = 0;
+            if(InStorageAmount > 0)
+            {
+                int moving = InStorageAmount - GetAvailableSpaceInShop();
+                if(moving < 0)
+                {
+                    sum = InStorageAmount;
+                }
+                else
+                {
+                    sum = GetAvailableSpaceInShop();
+                }
+            }
+            return sum;
+        }
+
         public int TotalAmount { get { return InShopAmount + InStorageAmount; } }
 
         public string RestockInfo()
         {
             return $"(ID: {ID} ) {Name}, To restock: {AmountToRestock} x {Stock_Price} euro ";
+        }
+
+        public string MovingInfo()
+        {
+            return $"(ID: {ID} ) {Name}, Available spaces: {GetAvailableSpaceInShop()}, Can move:{GetMovingAmount()}";
         }
 
      

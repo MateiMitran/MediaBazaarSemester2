@@ -18,11 +18,17 @@ namespace PRJMediaBazaar
         private List<Button> buttons;
         private List<Timer> timers;
         private EmployeeControl emp;
-        public LogIn()
+        private ItemControl _itemControl;
+        private PRJMediaBazaar.Presentation.StartupForm _startup;
+        public LogIn(PRJMediaBazaar.Presentation.StartupForm startup, ItemControl itemControl, string username, string pass )
         {
             InitializeComponent();
             buttons = new List<Button>();
-            timers = new List<Timer>();            
+            timers = new List<Timer>();
+            _itemControl = itemControl;
+            _startup = startup;
+            this.tbUsername.Text = username;
+            this.tbPassword.Text = pass;
         }
         public void StatusFunction(String text, int x, int y, int width, int height, Color color)
         {
@@ -87,20 +93,22 @@ namespace PRJMediaBazaar
                 else if (emp.Login(this.tbUsername.Text, this.tbPassword.Text) == "WarehouseManager")
                 {
                     Employee whmanager = emp.GetEmployeeByEmailAndPassword(this.tbUsername.Text, this.tbPassword.Text);
-                    WRHSHome home = new WRHSHome(this,whmanager);
+                    WRHSHome home = new WRHSHome(this,whmanager, _itemControl);
                     home.Show();
                     this.Hide();
+
                 }
                 else if (emp.Login(this.tbUsername.Text, this.tbPassword.Text) == "Cashier")
                 {
                     Employee casheer = emp.GetEmployeeByEmailAndPassword(this.tbUsername.Text, this.tbPassword.Text);
-                    CashierHome home = new CashierHome(this, casheer);
+                    CashierHome home = new CashierHome(this, casheer, _itemControl);
                     home.Show();
                     this.Hide();
                 }
                 else if (emp.Login(this.tbUsername.Text, this.tbPassword.Text) == "Stocker")
                 {
-                    StockerHome home = new StockerHome(this);
+                    Employee stocker = emp.GetEmployeeByEmailAndPassword(this.tbUsername.Text, this.tbPassword.Text);
+                    StockerHome home = new StockerHome(this,stocker, _itemControl);
                     home.Show();
                     this.Hide();
                 }
@@ -113,6 +121,11 @@ namespace PRJMediaBazaar
             {
                 MessageBox.Show("Please start Cisco AnyConnect!");
             }
+        }
+
+        private void LogIn_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            _startup.RemoveLogin(this);
         }
     }
 }

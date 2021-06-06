@@ -260,6 +260,7 @@ namespace PRJMediaBazaar.Data
                     {
                         InsertRestockItem(restockId, i.ID, i.AmountToRestock);
                         int newInStorage = i.InStorageAmount + i.AmountToRestock;
+                        i.Restock_State = "stable";
                         UpdateItemStorageQuantity(i.ID, newInStorage);
                     }
                     return true;
@@ -297,6 +298,33 @@ namespace PRJMediaBazaar.Data
                     String[] parameters = new String[] { newInShopAmount.ToString(), itemId.ToString() };
               
                
+                if (executeNonQuery(sql, parameters) != null)
+                {
+                    CloseConnection();
+                    return true;
+                }
+                else
+                {
+                    CloseConnection();
+                    return false;
+                }
+            }
+            finally
+            {
+                CloseConnection();
+            }
+
+        }
+
+        public bool UpdateItemState(int itemId,string  state)
+        {
+            try
+            {
+                String sql = "UPDATE items SET restock_state = @state " +
+                   "WHERE id = @id;";
+                String[] parameters = new String[] { state, itemId.ToString() };
+
+
                 if (executeNonQuery(sql, parameters) != null)
                 {
                     CloseConnection();
@@ -372,6 +400,32 @@ namespace PRJMediaBazaar.Data
             }
         }
 
+        public bool UpdateItemAmounts(int itemId, int newInShopAmount, int newInStorageAmount)
+        {
+            try
+            {
+                String sql = "UPDATE items SET inShopAmount = @inShopAmount, inStorageAmount = @inStorageAmount  " +
+                   "WHERE id = @id;";
+                String[] parameters = new String[] { newInShopAmount.ToString(),newInShopAmount.ToString(), itemId.ToString() };
+
+
+                if (executeNonQuery(sql, parameters) != null)
+                {
+                    CloseConnection();
+                    return true;
+                }
+                else
+                {
+                    CloseConnection();
+                    return false;
+                }
+            }
+            finally
+            {
+                CloseConnection();
+            }
+
+        }
 
         public bool UpdateItemImage(int itemID, byte[] image)
         {

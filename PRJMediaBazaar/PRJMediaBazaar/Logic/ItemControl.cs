@@ -44,7 +44,30 @@ namespace PRJMediaBazaar.Logic
             return temp.ToArray();
         }
 
-        
+        public Item[] GetItemsForMovingToShop()
+        {
+            List<Item> temp = new List<Item>();
+            foreach (Item i in items)
+            {
+                if (i.InShopAmount < i.RoomInShop && i.GetMovingAmount() > 0)
+                {
+                    temp.Add(i);
+                }
+            }
+            return temp.ToArray();
+        }
+
+        public Item GetItemByMovingInfo(string info)
+        {
+            return items.FirstOrDefault(i => i.MovingInfo() == info);
+        }
+
+        public Item GetItemByRestockInfo(string info)
+        {
+            return items.FirstOrDefault(i => i.RestockInfo() == info);
+        }
+
+
 
         public void AddAnItem(String category, String subcategory ,String brand, String model, String description, double stock_price
                     , double price, String restock_state, int roomInShop, int roomInStorage,
@@ -111,27 +134,35 @@ namespace PRJMediaBazaar.Logic
             return itemDAL.InsertNewRestock(restock, managerId);
         }
 
+        public bool MoveItemToShop(Item item)
+        {
+            int newInShopAmount = item.InShopAmount + item.GetMovingAmount();
+            int newInStorageAmount = item.InStorageAmount - item.GetMovingAmount();
+            item.InShopAmount = newInShopAmount;
+            item.InStorageAmount = newInStorageAmount;
+            if (itemDAL.UpdateItemAmounts(item.ID, newInShopAmount, newInStorageAmount))
+            {
+                if (item.InStorageAmount <= item.MinimumAmountInStock && item.Restock_State != "stocker")
+                {
+                    item.Restock_State = "stocker";
+                    return itemDAL.UpdateItemState(item.ID, "stocker");
+                }
+            }
+            return false;
+
+        }
+
+        public bool SendToManager(Item item)
+        {
+            item.Restock_State = "manager";
+            return itemDAL.UpdateItemState(item.ID, "manager");
+        }
+
         public bool NewOrder(Order order, int cashieerId)
         {
             return itemDAL.InsertNewOrder(order, cashieerId);
         }
-        public bool UpdateItemImage(int itemID, byte[] image)
-        {
-            if (itemDAL.UpdateItemImage(itemID, image) == true)
-            {
-                for (int i = 0; i < items.Count; i++)
-                {
-                    if (items[i].ID == itemID)
-                    {
-                        items[i].Image = image;
-                        return true;
-                    }
-                }
-                return false;
-            }
-            else
-                return false;
-        }
+      
         public List<String> GetCategories()
         {
             return itemDAL.GetCategories();
