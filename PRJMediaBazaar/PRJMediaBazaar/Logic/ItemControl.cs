@@ -141,6 +141,7 @@ namespace PRJMediaBazaar.Logic
             int newInStorageAmount = item.InStorageAmount -movingAmount;
             item.InShopAmount = newInShopAmount;
             item.InStorageAmount = newInStorageAmount;
+            item.AmountToRestock = item.GetMaxFreeSpaceInStorage();
             if (itemDAL.UpdateItemAmounts(item.ID, newInShopAmount, newInStorageAmount))
             {
                 if (item.InStorageAmount <= item.MinimumAmountInStock && item.Restock_State != "stocker")

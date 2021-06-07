@@ -29,6 +29,7 @@ namespace PRJMediaBazaar
             this.pnlDashboard.Visible = true;
             this.pnlDashboard.BringToFront();
             CashierHome.UpdateStockerInfo += UpdateAvailableForMovingListbox;
+            WRHSHome.UpdateInfo += UpdateAvailableForMovingListbox;
             UpdateAvailableForMovingListbox();
             UpdateRestockRequestListbox();
            
@@ -55,7 +56,7 @@ namespace PRJMediaBazaar
 
         private void btnMoveItems_Click(object sender, EventArgs e)
         {
-            if(this.lbSpacesInShop.Items.Count >= 2)
+            if(this.lbSpacesInShop.Items.Count > 0)
             {
                 foreach (string info in this.lbSpacesInShop.Items)
                 {
@@ -68,7 +69,7 @@ namespace PRJMediaBazaar
             }
             else
             {
-                MessageBox.Show("There must be at least 2 items in order to move them");
+                MessageBox.Show("No items to move");
             }
            
         }
@@ -76,7 +77,7 @@ namespace PRJMediaBazaar
 
         private void btnSendRestocks_Click(object sender, EventArgs e)
         {
-            if (this.lbRestocks.Items.Count > 3)
+            if (this.lbRestocks.Items.Count > 0)
             {
                 foreach (string info in this.lbRestocks.Items)
                 {
@@ -89,7 +90,7 @@ namespace PRJMediaBazaar
             }
             else
             {
-                MessageBox.Show("There must be at least 3 items in order to send the restock request");
+                MessageBox.Show("No items to send a restock");
             }
            
         }
@@ -98,7 +99,14 @@ namespace PRJMediaBazaar
         {
             _login.Close();
         }
-      
+
+        private void lbSpacesInShop_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if(this.lbSpacesInShop.SelectedIndex >= 0)
+            {
+                Item item = _itemControl.GetItemByRestockInfo(lbSpacesInShop.SelectedItem.ToString());
+            }
+        }
 
     }
 }

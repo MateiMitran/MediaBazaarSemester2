@@ -19,7 +19,6 @@ namespace PRJMediaBazaar
         private ItemControl itemControl;
         private LogIn login;
         private Item thisItem;
-        private Item[] items;
         private Employee cashier;
         private List<Item> scannedItems;
         private List<Item> allItems;
@@ -44,6 +43,7 @@ namespace PRJMediaBazaar
             ammount = 0;
             StockerHome.UpdateCashierInfo += LoadItemsLESGOO;
             LoadItemsLESGOO();
+            WRHSHome.UpdateInfo += LoadItemsLESGOO;
         }
 
 
@@ -77,6 +77,8 @@ namespace PRJMediaBazaar
 
         public void LoadItemsLESGOO()
         {
+            allItems = itemControl.GetAvailableItems();
+            this.cbCategory.Items.Clear();
             List<String> categories = this.itemControl.GetCategories();
             this.cbCategory.Items.AddRange(categories.ToArray());
         }
@@ -95,6 +97,7 @@ namespace PRJMediaBazaar
             }
             this.cbSubcategory.Enabled = true;
             List<String> subcategories = this.itemControl.GetSubcategories(this.cbCategory.SelectedItem.ToString());
+            this.cbSubcategory.Items.Clear();
             this.cbSubcategory.Items.AddRange(subcategories.ToArray());
         }
 

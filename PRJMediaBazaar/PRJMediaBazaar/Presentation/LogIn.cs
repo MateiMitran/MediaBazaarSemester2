@@ -80,8 +80,8 @@ namespace PRJMediaBazaar
 
         private void btnLogIn_Click(object sender, EventArgs e)
         {
-            if (VPNisON())
-            {
+            //if (VPNisON())
+            //{
                 emp = new EmployeeControl();
                 if (emp.Login(this.tbUsername.Text, this.tbPassword.Text) == "HRManager")
                 {
@@ -116,11 +116,11 @@ namespace PRJMediaBazaar
                 {
                     StatusFunction("Invalid Credentials", -60, -5, 508, 28, Color.Red);
                 }
-            }
-            else
-            {
-                MessageBox.Show("Please start Cisco AnyConnect!");
-            }
+            //}
+            //else
+            //{
+            //    MessageBox.Show("Please start Cisco AnyConnect!");
+            //}
         }
 
         private void LogIn_FormClosed(object sender, FormClosedEventArgs e)

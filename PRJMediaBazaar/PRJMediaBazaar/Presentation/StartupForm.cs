@@ -37,21 +37,21 @@ namespace PRJMediaBazaar.Presentation
 
         private void btnSingleLogin_Click(object sender, EventArgs e)
         {
-            if (VPNisON())
-            {
+            //if (VPNisON())
+            //{
                 ItemControl itemControl = new ItemControl();
                 LogIn first = new LogIn(this,itemControl, "","");
                 forms.Add(first);
                 first.Show();
                 this.Hide();
-            }
+            //}
            
         }
 
         private void btnMultipleLogin_Click(object sender, EventArgs e)
         {
-            if (VPNisON())
-            {
+            //if (VPNisON())
+            //{
                 ItemControl itemControl = new ItemControl();
                 LogIn first = new LogIn(this, itemControl, credentials.ElementAt(0).Key,credentials.ElementAt(0).Value );
                 LogIn second = new LogIn(this, itemControl, credentials.ElementAt(1).Key, credentials.ElementAt(1).Value);
@@ -65,7 +65,7 @@ namespace PRJMediaBazaar.Presentation
 
 
                 this.Hide();
-            }
+            //}
           
         }
 

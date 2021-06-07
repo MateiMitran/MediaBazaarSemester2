@@ -78,7 +78,7 @@ namespace PRJMediaBazaar.Logic
 
         public string RestockInfo()
         {
-            return $"(ID: {ID} ) {Name}, To restock: {AmountToRestock} x {Stock_Price} euro ";
+            return $"(ID: {ID} ) {Name}, To restock: {AmountToRestock}, inStorage: {InStorageAmount} inShop: {InShopAmount}";
         }
 
         public string MovingInfo()
@@ -86,13 +86,7 @@ namespace PRJMediaBazaar.Logic
             return $"(ID: {ID} ) {Name}, Available spaces: {GetAvailableSpaceInShop()}, Can move:{GetMovingAmount()}";
         }
 
-     
-
-        public void ChangeRestockAmount(int newAmount)
-        {
-            AmountToRestock = newAmount;
-        }
-      
+   
 
 
         public override string ToString()

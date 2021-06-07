@@ -261,6 +261,8 @@ namespace PRJMediaBazaar.Data
                         InsertRestockItem(restockId, i.ID, i.AmountToRestock);
                         int newInStorage = i.InStorageAmount + i.AmountToRestock;
                         i.Restock_State = "stable";
+                        i.InStorageAmount = newInStorage;
+                        i.AmountToRestock = 0;
                         UpdateItemStorageQuantity(i.ID, newInStorage);
                     }
                     return true;

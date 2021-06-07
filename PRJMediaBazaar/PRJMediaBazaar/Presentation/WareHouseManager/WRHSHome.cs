@@ -15,6 +15,8 @@ namespace PRJMediaBazaar
 {
      partial class WRHSHome : Form
     {
+        public static event PRJMediaBazaar.Presentation.EventHandlerVoid UpdateInfo;
+
         private ItemControl itemControl;
         private LogIn login;
         private Item thisItem;
@@ -310,18 +312,18 @@ namespace PRJMediaBazaar
 
         private void btnConfirm_Click(object sender, EventArgs e)
         {
-            if(restock.GetItemsForRestock().Count() >= 5)
+            if(restock.GetItemsForRestock().Count() > 0)
             {
                 itemControl.NewRestock(restock, manager.Id);
                 restock = null;
                 restock = new Restock(itemControl);
                 StatusFunction("Successfully sent restock", -6, -1, 900, 28, Color.Green);
                 LoadRestockingList();
-                
+                UpdateInfo?.Invoke();
             }
             else
             {
-                StatusFunction("Items to restock should be at least 5", -6, -1, 900, 28, Color.Red);
+                StatusFunction("No items for restock", -6, -1, 900, 28, Color.Red);
             }
         }
     }

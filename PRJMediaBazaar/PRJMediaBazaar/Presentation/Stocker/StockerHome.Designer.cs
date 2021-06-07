@@ -36,7 +36,6 @@ namespace PRJMediaBazaar
             this.btnMoveItems = new MaterialSkin.Controls.MaterialRaisedButton();
             this.materialLabel2 = new MaterialSkin.Controls.MaterialLabel();
             this.materialLabel1 = new MaterialSkin.Controls.MaterialLabel();
-            this.lbItemInfo = new System.Windows.Forms.ListBox();
             this.lbRestocks = new System.Windows.Forms.ListBox();
             this.lbSpacesInShop = new System.Windows.Forms.ListBox();
             this.pnlNavbar.SuspendLayout();
@@ -72,7 +71,6 @@ namespace PRJMediaBazaar
             this.pnlDashboard.Controls.Add(this.btnMoveItems);
             this.pnlDashboard.Controls.Add(this.materialLabel2);
             this.pnlDashboard.Controls.Add(this.materialLabel1);
-            this.pnlDashboard.Controls.Add(this.lbItemInfo);
             this.pnlDashboard.Controls.Add(this.lbRestocks);
             this.pnlDashboard.Controls.Add(this.lbSpacesInShop);
             this.pnlDashboard.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -87,7 +85,7 @@ namespace PRJMediaBazaar
             this.btnSendRestocks.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.btnSendRestocks.Depth = 0;
             this.btnSendRestocks.Icon = null;
-            this.btnSendRestocks.Location = new System.Drawing.Point(1001, 292);
+            this.btnSendRestocks.Location = new System.Drawing.Point(853, 318);
             this.btnSendRestocks.MouseState = MaterialSkin.MouseState.HOVER;
             this.btnSendRestocks.Name = "btnSendRestocks";
             this.btnSendRestocks.Primary = true;
@@ -103,7 +101,7 @@ namespace PRJMediaBazaar
             this.btnMoveItems.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.btnMoveItems.Depth = 0;
             this.btnMoveItems.Icon = null;
-            this.btnMoveItems.Location = new System.Drawing.Point(520, 222);
+            this.btnMoveItems.Location = new System.Drawing.Point(191, 330);
             this.btnMoveItems.MouseState = MaterialSkin.MouseState.HOVER;
             this.btnMoveItems.Name = "btnMoveItems";
             this.btnMoveItems.Primary = true;
@@ -117,12 +115,12 @@ namespace PRJMediaBazaar
             // 
             this.materialLabel2.AutoSize = true;
             this.materialLabel2.Depth = 0;
-            this.materialLabel2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
+            this.materialLabel2.Font = new System.Drawing.Font("Roboto", 11F);
             this.materialLabel2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.materialLabel2.Location = new System.Drawing.Point(888, 57);
+            this.materialLabel2.Location = new System.Drawing.Point(849, 84);
             this.materialLabel2.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel2.Name = "materialLabel2";
-            this.materialLabel2.Size = new System.Drawing.Size(157, 24);
+            this.materialLabel2.Size = new System.Drawing.Size(127, 19);
             this.materialLabel2.TabIndex = 14;
             this.materialLabel2.Text = "Restock Request:";
             // 
@@ -130,33 +128,23 @@ namespace PRJMediaBazaar
             // 
             this.materialLabel1.AutoSize = true;
             this.materialLabel1.Depth = 0;
-            this.materialLabel1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
+            this.materialLabel1.Font = new System.Drawing.Font("Roboto", 11F);
             this.materialLabel1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.materialLabel1.Location = new System.Drawing.Point(23, 57);
             this.materialLabel1.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel1.Name = "materialLabel1";
-            this.materialLabel1.Size = new System.Drawing.Size(207, 24);
+            this.materialLabel1.Size = new System.Drawing.Size(169, 19);
             this.materialLabel1.TabIndex = 14;
             this.materialLabel1.Text = "Available spots in shop:";
-            // 
-            // lbItemInfo
-            // 
-            this.lbItemInfo.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbItemInfo.FormattingEnabled = true;
-            this.lbItemInfo.ItemHeight = 18;
-            this.lbItemInfo.Location = new System.Drawing.Point(520, 84);
-            this.lbItemInfo.Name = "lbItemInfo";
-            this.lbItemInfo.Size = new System.Drawing.Size(211, 112);
-            this.lbItemInfo.TabIndex = 13;
             // 
             // lbRestocks
             // 
             this.lbRestocks.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbRestocks.FormattingEnabled = true;
             this.lbRestocks.ItemHeight = 16;
-            this.lbRestocks.Location = new System.Drawing.Point(892, 84);
+            this.lbRestocks.Location = new System.Drawing.Point(671, 116);
             this.lbRestocks.Name = "lbRestocks";
-            this.lbRestocks.Size = new System.Drawing.Size(404, 196);
+            this.lbRestocks.Size = new System.Drawing.Size(545, 196);
             this.lbRestocks.TabIndex = 9;
             // 
             // lbSpacesInShop
@@ -168,6 +156,7 @@ namespace PRJMediaBazaar
             this.lbSpacesInShop.Name = "lbSpacesInShop";
             this.lbSpacesInShop.Size = new System.Drawing.Size(487, 244);
             this.lbSpacesInShop.TabIndex = 9;
+            this.lbSpacesInShop.SelectedIndexChanged += new System.EventHandler(this.lbSpacesInShop_SelectedIndexChanged);
             // 
             // StockerHome
             // 
@@ -194,7 +183,6 @@ namespace PRJMediaBazaar
         private MaterialSkin.Controls.MaterialRaisedButton btnMoveItems;
         private MaterialSkin.Controls.MaterialLabel materialLabel2;
         private MaterialSkin.Controls.MaterialLabel materialLabel1;
-        private System.Windows.Forms.ListBox lbItemInfo;
         private System.Windows.Forms.ListBox lbRestocks;
     }
 }
