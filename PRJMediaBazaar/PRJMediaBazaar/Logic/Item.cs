@@ -78,12 +78,14 @@ namespace PRJMediaBazaar.Logic
 
         public string RestockInfo()
         {
-            return $"(ID: {ID} ) {Name}, To restock: {AmountToRestock}, inStorage: {InStorageAmount} inShop: {InShopAmount}";
+            //return $"(ID: {ID} ) {Name}, To restock: {AmountToRestock}, inStorage: {InStorageAmount} inShop: {InShopAmount}";
+            return $"(ID: {ID} ){Name},    Needed → {AmountToRestock}     In warehouse → {InStorageAmount}     On shelves → {InShopAmount}";
         }
 
         public string MovingInfo()
         {
-            return $"(ID: {ID} ) {Name}, Available spaces: {GetAvailableSpaceInShop()}, Can move:{GetMovingAmount()}";
+            //return $"(ID: {ID} ) {Name}, Available spaces: {GetAvailableSpaceInShop()}, Can move:{GetMovingAmount()}";
+            return $"(ID: {ID} ){Name},    Can be added → {GetAvailableSpaceInShop()},   Quantity available → {GetMovingAmount()}";
         }
 
    

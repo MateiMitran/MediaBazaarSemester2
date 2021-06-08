@@ -29,6 +29,7 @@ namespace PRJMediaBazaar
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.lbScannedItems = new System.Windows.Forms.ListBox();
             this.lbAllItems = new System.Windows.Forms.ListBox();
             this.pnlNavbar = new System.Windows.Forms.Panel();
@@ -44,6 +45,7 @@ namespace PRJMediaBazaar
             this.lblTotalPrice = new System.Windows.Forms.Label();
             this.btnSell = new System.Windows.Forms.Button();
             this.label6 = new System.Windows.Forms.Label();
+            this.godTimer = new System.Windows.Forms.Timer(this.components);
             this.pnlNavbar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tbQuantity)).BeginInit();
             this.SuspendLayout();
@@ -53,7 +55,7 @@ namespace PRJMediaBazaar
             this.lbScannedItems.FormattingEnabled = true;
             this.lbScannedItems.ItemHeight = 16;
             this.lbScannedItems.Location = new System.Drawing.Point(16, 138);
-            this.lbScannedItems.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.lbScannedItems.Margin = new System.Windows.Forms.Padding(4);
             this.lbScannedItems.Name = "lbScannedItems";
             this.lbScannedItems.Size = new System.Drawing.Size(511, 404);
             this.lbScannedItems.TabIndex = 0;
@@ -63,7 +65,7 @@ namespace PRJMediaBazaar
             this.lbAllItems.FormattingEnabled = true;
             this.lbAllItems.ItemHeight = 16;
             this.lbAllItems.Location = new System.Drawing.Point(588, 138);
-            this.lbAllItems.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.lbAllItems.Margin = new System.Windows.Forms.Padding(4);
             this.lbAllItems.Name = "lbAllItems";
             this.lbAllItems.Size = new System.Drawing.Size(507, 404);
             this.lbAllItems.TabIndex = 1;
@@ -74,7 +76,7 @@ namespace PRJMediaBazaar
             this.pnlNavbar.Controls.Add(this.lblLogOut);
             this.pnlNavbar.Controls.Add(this.lblTitle);
             this.pnlNavbar.Location = new System.Drawing.Point(-3, -2);
-            this.pnlNavbar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pnlNavbar.Margin = new System.Windows.Forms.Padding(4);
             this.pnlNavbar.Name = "pnlNavbar";
             this.pnlNavbar.Size = new System.Drawing.Size(1140, 58);
             this.pnlNavbar.TabIndex = 7;
@@ -108,7 +110,7 @@ namespace PRJMediaBazaar
             // 
             this.cbCategory.FormattingEnabled = true;
             this.cbCategory.Location = new System.Drawing.Point(588, 105);
-            this.cbCategory.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cbCategory.Margin = new System.Windows.Forms.Padding(4);
             this.cbCategory.Name = "cbCategory";
             this.cbCategory.Size = new System.Drawing.Size(189, 24);
             this.cbCategory.TabIndex = 8;
@@ -118,7 +120,7 @@ namespace PRJMediaBazaar
             // 
             this.cbSubcategory.FormattingEnabled = true;
             this.cbSubcategory.Location = new System.Drawing.Point(789, 105);
-            this.cbSubcategory.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cbSubcategory.Margin = new System.Windows.Forms.Padding(4);
             this.cbSubcategory.Name = "cbSubcategory";
             this.cbSubcategory.Size = new System.Drawing.Size(189, 24);
             this.cbSubcategory.TabIndex = 9;
@@ -160,17 +162,18 @@ namespace PRJMediaBazaar
             // tbQuantity
             // 
             this.tbQuantity.Location = new System.Drawing.Point(677, 546);
-            this.tbQuantity.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tbQuantity.Margin = new System.Windows.Forms.Padding(4);
             this.tbQuantity.Name = "tbQuantity";
-            this.tbQuantity.Size = new System.Drawing.Size(69, 22);
+            this.tbQuantity.Size = new System.Drawing.Size(100, 22);
             this.tbQuantity.TabIndex = 14;
             this.tbQuantity.ValueChanged += new System.EventHandler(this.tbQuantity_ValueChanged);
             // 
             // btnScan
             // 
             this.btnScan.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnScan.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.btnScan.Location = new System.Drawing.Point(588, 578);
-            this.btnScan.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnScan.Margin = new System.Windows.Forms.Padding(4);
             this.btnScan.Name = "btnScan";
             this.btnScan.Size = new System.Drawing.Size(392, 46);
             this.btnScan.TabIndex = 15;
@@ -193,7 +196,7 @@ namespace PRJMediaBazaar
             // 
             this.btnSell.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSell.Location = new System.Drawing.Point(16, 578);
-            this.btnSell.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnSell.Margin = new System.Windows.Forms.Padding(4);
             this.btnSell.Name = "btnSell";
             this.btnSell.Size = new System.Drawing.Size(392, 46);
             this.btnSell.TabIndex = 17;
@@ -211,6 +214,10 @@ namespace PRJMediaBazaar
             this.label6.Size = new System.Drawing.Size(145, 20);
             this.label6.TabIndex = 18;
             this.label6.Text = "Scanned Items :";
+            // 
+            // godTimer
+            // 
+            this.godTimer.Tick += new System.EventHandler(this.godTimer_Tick);
             // 
             // CashierHome
             // 
@@ -230,7 +237,7 @@ namespace PRJMediaBazaar
             this.Controls.Add(this.pnlNavbar);
             this.Controls.Add(this.lbAllItems);
             this.Controls.Add(this.lbScannedItems);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "CashierHome";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.StockerHome_FormClosing);
             this.pnlNavbar.ResumeLayout(false);
@@ -258,5 +265,6 @@ namespace PRJMediaBazaar
         private System.Windows.Forms.Label lblTotalPrice;
         private System.Windows.Forms.Button btnSell;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Timer godTimer;
     }
 }

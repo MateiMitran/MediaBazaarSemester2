@@ -47,7 +47,7 @@ namespace PRJMediaBazaar
         }
 
 
-        public void StatusFunction(String text, int x, int y, int width, int height, Color color)
+        public void StatusFunction(String text, int x, int y, int width, int height, Color color, Color foreColor)
         {
             Button newButton = new Button();
             newButton.Location = new Point(x, y);
@@ -55,6 +55,7 @@ namespace PRJMediaBazaar
             newButton.Height = height;
             newButton.Enabled = false;
             newButton.BackColor = color;
+            newButton.ForeColor = ForeColor;
             newButton.Text = text;
             this.Controls.Add(newButton);
             newButton.BringToFront();
@@ -206,7 +207,7 @@ namespace PRJMediaBazaar
                 Order order = new Order(this.scannedItems);
                 itemControl.NewOrder(order, cashier.Id);
                 this.lbScannedItems.Items.Clear();
-                StatusFunction("Successfully placed order!", -6, -1, 900, 28, Color.Green);
+                StatusFunction("Successfully placed order!", -6, -1, 900, 28, Color.Green, Color.Yellow);
                 allItems = itemControl.GetAvailableItems();
                 scannedItems = new List<Item>();
                 UpdateStockerInfo?.Invoke();
@@ -214,7 +215,19 @@ namespace PRJMediaBazaar
 
             else
             {
-                StatusFunction("No items scanned!", -6, -1, 900, 28, Color.Red);
+                StatusFunction("No items scanned!", -6, -1, 900, 28, Color.Red, Color.Black);
+            }
+        }
+
+        private void godTimer_Tick(object sender, EventArgs e)
+        {
+            for (int i = 0; i < timers.Count; i++)
+            {
+                if (timers[i].Enabled == true)
+                {
+                    timers[i].Enabled = false;
+                    buttons[i].Visible = false;
+                }
             }
         }
     }

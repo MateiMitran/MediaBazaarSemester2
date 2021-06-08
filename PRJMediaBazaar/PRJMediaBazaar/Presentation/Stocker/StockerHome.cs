@@ -15,6 +15,7 @@ namespace PRJMediaBazaar
     {
         public static event  PRJMediaBazaar.Presentation.EventHandlerVoid UpdateWarehouseInfo;
         public static event PRJMediaBazaar.Presentation.EventHandlerVoid UpdateCashierInfo;
+        public static event PRJMediaBazaar.Presentation.EventHandlerVoid ChangeColorLabel;
 
         private Employee _stocker;
         private ItemControl _itemControl;
@@ -87,6 +88,7 @@ namespace PRJMediaBazaar
                 UpdateRestockRequestListbox();
                 UpdateAvailableForMovingListbox();
                 UpdateWarehouseInfo?.Invoke();
+                ChangeColorLabel?.Invoke();
             }
             else
             {

@@ -41,6 +41,8 @@ namespace PRJMediaBazaar
             LoadRestockingList();
             manager = whmanager;
             StockerHome.UpdateWarehouseInfo += LoadRestockingList;
+            StockerHome.ChangeColorLabel += ChangeColor;
+      
         }
 
         public void LoadRestockingList()
@@ -51,6 +53,20 @@ namespace PRJMediaBazaar
                 lbRestockRequests.Items.Add(i.RestockInfo());
             }
             this.lblTotalRestockCost.Text = restock.GetTotalCost().ToString() + " euro";
+
+            if (restock.GetItemsForRestock().Count() > 0)
+            {
+                if (this.lblRestock.ForeColor == Color.Gray)
+                {
+                    this.lblRestock.ForeColor = Color.Red;
+                }
+                this.lblRestock.ForeColor = Color.Red;
+            }
+        }
+
+        public void ChangeColor()
+        {
+            this.lblRestock.ForeColor = Color.Red;
         }
 
    
@@ -320,6 +336,15 @@ namespace PRJMediaBazaar
                 StatusFunction("Successfully sent restock", -6, -1, 900, 28, Color.Green);
                 LoadRestockingList();
                 UpdateInfo?.Invoke();
+                if (this.lblRestock.ForeColor == Color.Red)
+                {
+                    this.lblRestock.ForeColor = Color.White;
+                }
+
+                if (restock.GetItemsForRestock().Count() == 0)
+                {
+                    this.lblRestock.BackColor = Color.Black;
+                }
             }
             else
             {
