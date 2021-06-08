@@ -534,3 +534,4 @@ C:\Users\Ionut Popa\Desktop\proj\prj-cb05-group-5-project\PRJMediaBazaar\PRJMedi
 C:\Users\Ionut Popa\Desktop\proj\prj-cb05-group-5-project\PRJMediaBazaar\PRJMediaBazaar\obj\Debug\PRJMediaBazaar.Presentation.WareHouseManager.EditRestock.resources
 D:\SEMESTER 2\PRJ\prj-cb05-group-5-project\PRJMediaBazaar\PRJMediaBazaar\obj\Debug\PRJMediaBazaar.Presentation.StartupForm.resources
 C:\Users\Ionut Popa\Desktop\proj\prj-cb05-group-5-project\PRJMediaBazaar\PRJMediaBazaar\obj\Debug\PRJMediaBazaar.Presentation.StartupForm.resources
+C:\Users\matei\Desktop\Fontys\Semester 2\Project\Project\prj-cb05-group-5-project\PRJMediaBazaar\PRJMediaBazaar\obj\Debug\PRJMediaBazaar.Presentation.StartupForm.resources
