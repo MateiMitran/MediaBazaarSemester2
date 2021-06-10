@@ -1,6 +1,6 @@
 <?php
     $page = 'dashboard';
-    $functionalityRequirements = ['preferences-functionality', 'absence-functionality', 'schedule-functionality'];
+    $functionalityRequirements = ['preferences-functionality', 'absence-functionality', 'schedule-functionality', 'announcements-functionality'];
     
     require_once('includes/header.php');
 ?>
@@ -13,21 +13,25 @@
             <!-- ANNOUNCEMENTS -->
             <div class="dashboard-content visible" id="dashboard-announcements">
                 <ul>
+                <?php 
+                    if(!empty($announcements)) {
+                        foreach($announcements as $a) {
+                ?>
                     <li>
-                        this is a random announcement
+                        <span><?php
+                            if(is_null($a['objection']) && $a['status'] == 'confirmed') {
+                                echo 'Day off request from <span class="semi-bold">' . $a['start_date'] . '</span> until <span class="semi-bold">' . $a['end_date'] . '</span> is <span class="color-success">approved</span>!';
+                            } else {
+                                echo 'Day off request from <span class="semi-bold">' . $a['start_date'] . '</span> until <span class="semi-bold">' . $a['end_date'] . '</span> is <span class="color-failure">denied</span>! <br> <span class="semi-bold">Objection:</span> ' . $a['objection'];
+                            }
+                        ?>
+                        </span>
+                        <i class="announcement-dismiss" id="<?php echo $a['request_id']; ?>"><ion-icon name="close-outline"></ion-icon></i>
                     </li>
-                    <li>
-                        hello world
-                    </li>
-                    <li>
-                        this is a test
-                    </li>
-                    <li>
-                        this is a test
-                    </li>
-                    <li>
-                        this is a test
-                    </li>
+                <?php
+                        }
+                    } 
+                ?>
                 </ul>
             </div>
             <!-- SCHEDULE -->

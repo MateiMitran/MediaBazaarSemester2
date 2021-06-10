@@ -105,29 +105,35 @@
 /* ANNOUNCEMENTS CSS */
 
 #dashboard-announcements {
-    margin-top: -16px;
+    height: 265px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
 }
 
 #dashboard-announcements ul {
-    padding: 0;
     list-style-type: none;
+    margin: 0;
+    padding: 0;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    overflow: hidden;
 }
 
 #dashboard-announcements ul li{
+    position: relative;
     padding: 15px 20px;
-    border-top: 1px solid #eee;
+    border-bottom: 1px solid #eee;
 }
 
-#dashboard-announcements ul li:first-of-type {
-    border-top: none;
-}
-
-#dashboard-announcements ul li:nth-of-type(1n) {
-    background-color: #f3f3f3;
-}
-
-#dashboard-announcements ul li:nth-of-type(2n) {
-    background-color: #fff;
+#dashboard-announcements ul li i {
+    position: absolute;
+    font-size: 18px;
+    right: 20px;
+    top: 50%;
+    margin-top: -9px;
+    cursor: pointer;
 }
 
 /* SCHEDULE CSS */

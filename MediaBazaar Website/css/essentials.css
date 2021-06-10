@@ -24,10 +24,22 @@ input {
     font-family: 'Open Sans', sans-serif;
 }
 
+.semi-bold {
+    font-weight: 600;
+}
+
 .clearfix::after {
     content: "";
     clear: both;
     display: table;
+}
+
+.color-success {
+    color: #4cb77c;
+}
+
+.color-failure {
+    color: #e8384b;
 }
 
 /* MESSAGES CSS */

@@ -25,8 +25,9 @@
     <!-- GOOGLE FONTS -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
-    <!-- FONTAWESOME -->
-    <script src="https://kit.fontawesome.com/3073970c9d.js" crossorigin="anonymous"></script>
+    <!-- IONICONS -->
+    <script type="module" src="https://unpkg.com/ionicons@5.4.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule="" src="https://unpkg.com/ionicons@5.4.0/dist/ionicons/ionicons.js"></script>
     <!-- CSS IMPORTS -->
     <link rel="stylesheet" href="../css/essentials.css" type="text/css">
     <?php

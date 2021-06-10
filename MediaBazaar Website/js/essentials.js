@@ -10,9 +10,9 @@ $(document).ready(function() {
     $("#messages-container ul li i").click(function() {
         let parentLi = $(this).parent()
 
-        $(parentLi).slideUp();
+        $(parentLi).slideUp()
     })
 
     // AUTOMATICALLY CLOSE SUCCESS MESSAGES AFTER 3 SECONDS
-    $("#messages-container #success-messages li").delay(3000).slideUp(500);
+    $("#messages-container #success-messages li").delay(3000).slideUp(500)
 })
