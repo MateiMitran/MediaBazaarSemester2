@@ -30,7 +30,8 @@ namespace PRJMediaBazaar
             this.pnlDashboard.Visible = true;
             this.pnlDashboard.BringToFront();
             CashierHome.UpdateStockerInfo += UpdateAvailableForMovingListbox;
-            WRHSHome.UpdateInfo += UpdateAvailableForMovingListbox;
+            WRHSHome.SendRestockForCheck += LoadRestockApprovals;
+
             UpdateAvailableForMovingListbox();
             UpdateRestockRequestListbox();
            
@@ -43,6 +44,11 @@ namespace PRJMediaBazaar
             {
                 this.lbSpacesInShop.Items.Add(i.MovingInfo());
             }
+        }
+
+        public void LoadRestockApprovals(Restock restock)
+        {
+            //load all the 
         }
 
         private void UpdateRestockRequestListbox()

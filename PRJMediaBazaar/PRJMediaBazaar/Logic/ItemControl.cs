@@ -36,7 +36,7 @@ namespace PRJMediaBazaar.Logic
             List<Item> temp = new List<Item>();
             foreach (Item i in items)
             {
-                if (i.Restock_State == state)
+                if (i.Restock_State == state && i.Missing == false)
                 {
                     temp.Add(i);
                 }

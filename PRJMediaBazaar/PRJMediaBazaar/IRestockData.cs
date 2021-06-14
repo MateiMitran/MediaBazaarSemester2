@@ -7,7 +7,7 @@ using PRJMediaBazaar.Logic;
 
 namespace PRJMediaBazaar
 {
-    interface IRestockData
+    public interface IRestockData
     {
         Item[] GetItemsByState(string state);
     }

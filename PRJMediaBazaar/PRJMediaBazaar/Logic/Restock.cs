@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PRJMediaBazaar.Logic
 {
-    class Restock
+     public class Restock
     {
         private IRestockData _itemControl;
         private Item[] itemsToRestock;

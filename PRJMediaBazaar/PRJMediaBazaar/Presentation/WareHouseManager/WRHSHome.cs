@@ -15,7 +15,7 @@ namespace PRJMediaBazaar
 {
      partial class WRHSHome : Form
     {
-        public static event PRJMediaBazaar.Presentation.EventHandlerVoid UpdateInfo;
+        public static event PRJMediaBazaar.Presentation.RestockHandler SendRestockForCheck;
 
         private ItemControl itemControl;
         private LogIn login;
@@ -378,7 +378,7 @@ namespace PRJMediaBazaar
                     restock = new Restock(itemControl);
                     StatusFunction("Successfully sent restock", -6, -1, 900, 28, Color.Green);
                     LoadRestockingList();
-                    UpdateInfo?.Invoke();
+                    SendRestockForCheck?.Invoke(restock);
                     if (this.lblRestock.ForeColor == Color.Red)
                     {
                         this.lblRestock.ForeColor = Color.White;

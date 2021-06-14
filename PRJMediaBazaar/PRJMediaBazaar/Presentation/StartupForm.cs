@@ -13,6 +13,7 @@ using System.Net.NetworkInformation;
 namespace PRJMediaBazaar.Presentation
 {
     public delegate void EventHandlerVoid();
+    public delegate void RestockHandler(Restock restock);
     partial class StartupForm : Form
     {
         private Dictionary<string, string> credentials;
