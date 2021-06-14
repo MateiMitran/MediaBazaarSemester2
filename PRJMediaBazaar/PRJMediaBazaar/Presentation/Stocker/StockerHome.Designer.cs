@@ -30,6 +30,7 @@ namespace PRJMediaBazaar
         private void InitializeComponent()
         {
             this.pnlNavbar = new System.Windows.Forms.Panel();
+            this.lblLogOut = new System.Windows.Forms.Label();
             this.lblTitle = new System.Windows.Forms.Label();
             this.pnlDashboard = new System.Windows.Forms.Panel();
             this.label7 = new System.Windows.Forms.Label();
@@ -46,7 +47,6 @@ namespace PRJMediaBazaar
             this.btnSendRestocks = new MaterialSkin.Controls.MaterialRaisedButton();
             this.lbRestocks = new System.Windows.Forms.ListBox();
             this.materialLabel2 = new MaterialSkin.Controls.MaterialLabel();
-            this.lblLogOut = new System.Windows.Forms.Label();
             this.pnlNavbar.SuspendLayout();
             this.pnlDashboard.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -63,6 +63,20 @@ namespace PRJMediaBazaar
             this.pnlNavbar.Size = new System.Drawing.Size(1308, 48);
             this.pnlNavbar.TabIndex = 8;
             // 
+            // lblLogOut
+            // 
+            this.lblLogOut.AutoSize = true;
+            this.lblLogOut.BackColor = System.Drawing.Color.Black;
+            this.lblLogOut.Font = new System.Drawing.Font("Microsoft YaHei", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.lblLogOut.ForeColor = System.Drawing.SystemColors.Control;
+            this.lblLogOut.Location = new System.Drawing.Point(1195, 9);
+            this.lblLogOut.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblLogOut.Name = "lblLogOut";
+            this.lblLogOut.Size = new System.Drawing.Size(102, 30);
+            this.lblLogOut.TabIndex = 22;
+            this.lblLogOut.Text = "Log Out";
+            this.lblLogOut.Click += new System.EventHandler(this.lblLogOut_Click);
+            // 
             // lblTitle
             // 
             this.lblTitle.AutoSize = true;
@@ -78,7 +92,7 @@ namespace PRJMediaBazaar
             // 
             // pnlDashboard
             // 
-            this.pnlDashboard.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.pnlDashboard.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.pnlDashboard.Controls.Add(this.label7);
             this.pnlDashboard.Controls.Add(this.label5);
             this.pnlDashboard.Controls.Add(this.label6);
@@ -116,7 +130,7 @@ namespace PRJMediaBazaar
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.BackColor = System.Drawing.Color.HotPink;
+            this.label6.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.Location = new System.Drawing.Point(756, 441);
             this.label6.Name = "label6";
@@ -138,7 +152,7 @@ namespace PRJMediaBazaar
             // 
             // panel1
             // 
-            this.panel1.BackColor = System.Drawing.Color.DarkOrange;
+            this.panel1.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.panel1.Controls.Add(this.label4);
             this.panel1.Controls.Add(this.label2);
             this.panel1.Controls.Add(this.label1);
@@ -259,20 +273,6 @@ namespace PRJMediaBazaar
             this.materialLabel2.Size = new System.Drawing.Size(258, 19);
             this.materialLabel2.TabIndex = 14;
             this.materialLabel2.Text = "Send restock request for these items";
-            // 
-            // lblLogOut
-            // 
-            this.lblLogOut.AutoSize = true;
-            this.lblLogOut.BackColor = System.Drawing.Color.Black;
-            this.lblLogOut.Font = new System.Drawing.Font("Microsoft YaHei", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.lblLogOut.ForeColor = System.Drawing.SystemColors.Control;
-            this.lblLogOut.Location = new System.Drawing.Point(1195, 9);
-            this.lblLogOut.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.lblLogOut.Name = "lblLogOut";
-            this.lblLogOut.Size = new System.Drawing.Size(102, 30);
-            this.lblLogOut.TabIndex = 22;
-            this.lblLogOut.Text = "Log Out";
-            this.lblLogOut.Click += new System.EventHandler(this.lblLogOut_Click);
             // 
             // StockerHome
             // 

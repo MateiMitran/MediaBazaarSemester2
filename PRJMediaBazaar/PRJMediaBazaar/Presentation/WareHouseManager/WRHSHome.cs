@@ -42,7 +42,9 @@ namespace PRJMediaBazaar
             manager = whmanager;
             StockerHome.UpdateWarehouseInfo += LoadRestockingList;
             StockerHome.ChangeColorLabel += ChangeColor;
-      
+            this.cbCategories_Restock.Items.AddRange(this.itemControl.GetCategories().ToArray());
+            this.cbSubcategory_Restocks.Enabled = false;
+           
         }
 
         public void LoadRestockingList()
@@ -63,7 +65,46 @@ namespace PRJMediaBazaar
                 this.lblRestock.ForeColor = Color.Red;
             }
         }
-
+        public void LoadRestockingList(String category)
+        {
+            this.lbRestockRequests.Items.Clear();
+            foreach(Item i in restock.GetItemsForRestock())
+            {
+                if (i.Category == category)
+                {
+                    lbRestockRequests.Items.Add(i.RestockInfo());
+                }
+            }
+            this.lblTotalRestockCost.Text = restock.GetTotalCost().ToString() + " euro";
+            if (restock.GetItemsForRestock().Count() > 0)
+            {
+                if (this.lblRestock.ForeColor == Color.Gray)
+                {
+                    this.lblRestock.ForeColor = Color.Red;
+                }
+                this.lblRestock.ForeColor = Color.Red;
+            }
+        }
+        public void LoadRestockingListBySubcategory(String subcategory)
+        {
+            this.lbRestockRequests.Items.Clear();
+            foreach (Item i in restock.GetItemsForRestock())
+            {
+                if (i.Subcategory == subcategory)
+                {
+                    lbRestockRequests.Items.Add(i.RestockInfo());
+                }
+            }
+            this.lblTotalRestockCost.Text = restock.GetTotalCost().ToString() + " euro";
+            if (restock.GetItemsForRestock().Count() > 0)
+            {
+                if (this.lblRestock.ForeColor == Color.Gray)
+                {
+                    this.lblRestock.ForeColor = Color.Red;
+                }
+                this.lblRestock.ForeColor = Color.Red;
+            }
+        }
         public void ChangeColor()
         {
             this.lblRestock.ForeColor = Color.Red;
@@ -328,28 +369,65 @@ namespace PRJMediaBazaar
 
         private void btnConfirm_Click(object sender, EventArgs e)
         {
-            if(restock.GetItemsForRestock().Count() > 0)
+            if (this.lbRestockRequests.SelectedItem == null && this.cbCategories_Restock.Text == "")
             {
-                itemControl.NewRestock(restock, manager.Id);
-                restock = null;
-                restock = new Restock(itemControl);
-                StatusFunction("Successfully sent restock", -6, -1, 900, 28, Color.Green);
-                LoadRestockingList();
-                UpdateInfo?.Invoke();
-                if (this.lblRestock.ForeColor == Color.Red)
+                if (restock.GetItemsForRestock().Count() > 0)
                 {
-                    this.lblRestock.ForeColor = Color.White;
-                }
+                    itemControl.NewRestock(restock, manager.Id);
+                    restock = null;
+                    restock = new Restock(itemControl);
+                    StatusFunction("Successfully sent restock", -6, -1, 900, 28, Color.Green);
+                    LoadRestockingList();
+                    UpdateInfo?.Invoke();
+                    if (this.lblRestock.ForeColor == Color.Red)
+                    {
+                        this.lblRestock.ForeColor = Color.White;
+                    }
 
-                if (restock.GetItemsForRestock().Count() == 0)
+                    if (restock.GetItemsForRestock().Count() == 0)
+                    {
+                        this.lblRestock.BackColor = Color.Black;
+                    }
+                }
+                else
                 {
-                    this.lblRestock.BackColor = Color.Black;
+                    StatusFunction("No items for restock", -6, -1, 900, 28, Color.Red);
                 }
             }
             else
             {
-                StatusFunction("No items for restock", -6, -1, 900, 28, Color.Red);
+                this.lbRestockRequests.Items.Remove(this.lbRestockRequests.SelectedItem);
+                StatusFunction("Successfully sent restock", -6, -1, 900, 28, Color.Green);
             }
+            
+        }
+
+        private void cbCategories_Restock_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            LoadRestockingList(this.cbCategories_Restock.Text);
+            this.cbSubcategory_Restocks.Enabled = true;
+            this.cbSubcategory_Restocks.Items.Clear();
+            this.cbSubcategory_Restocks.Items.AddRange(this.itemControl.GetSubcategories(this.cbCategories_Restock.Text).ToArray());
+        }
+
+        private void cbSubcategory_Restocks_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            LoadRestockingListBySubcategory(this.cbSubcategory_Restocks.Text);
+        }
+
+        private void lblCancel_Click(object sender, EventArgs e)
+        {
+            LoadRestockingList();
+            this.cbCategories_Restock.Text = "";
+            this.cbSubcategory_Restocks.Text = "";
+        }
+
+        private void label10_Click(object sender, EventArgs e)
+        {
+            this.cbBrand.Text = "";
+            this.cbCategories.Text = "";
+            this.cbSubcategory.Text = "";
+            this.lbItems.Items.Clear();
         }
     }
 }

@@ -113,7 +113,7 @@ namespace PRJMediaBazaar
         private void lblLogOut_Click(object sender, EventArgs e)
         {
             this.Hide();
-            login.Show();
+            _login.Show();
         }
     }
 }

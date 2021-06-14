@@ -39,9 +39,10 @@
             // 
             // btnConfirm
             // 
-            this.btnConfirm.Location = new System.Drawing.Point(292, 385);
+            this.btnConfirm.Location = new System.Drawing.Point(219, 313);
+            this.btnConfirm.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnConfirm.Name = "btnConfirm";
-            this.btnConfirm.Size = new System.Drawing.Size(201, 42);
+            this.btnConfirm.Size = new System.Drawing.Size(151, 34);
             this.btnConfirm.TabIndex = 63;
             this.btnConfirm.Text = "Send";
             this.btnConfirm.UseVisualStyleBackColor = true;
@@ -51,9 +52,10 @@
             // 
             this.panel1.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.panel1.Controls.Add(this.lblTitle);
-            this.panel1.Location = new System.Drawing.Point(1, 13);
+            this.panel1.Location = new System.Drawing.Point(1, 11);
+            this.panel1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(835, 63);
+            this.panel1.Size = new System.Drawing.Size(626, 51);
             this.panel1.TabIndex = 62;
             // 
             // lblTitle
@@ -62,19 +64,21 @@
             this.lblTitle.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.lblTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.lblTitle.ForeColor = System.Drawing.Color.White;
-            this.lblTitle.Location = new System.Drawing.Point(238, 17);
+            this.lblTitle.Location = new System.Drawing.Point(178, 14);
+            this.lblTitle.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblTitle.Name = "lblTitle";
-            this.lblTitle.Size = new System.Drawing.Size(330, 32);
+            this.lblTitle.Size = new System.Drawing.Size(257, 26);
             this.lblTitle.TabIndex = 1;
             this.lblTitle.Text = "Give short explanation:";
             // 
             // tbExplain
             // 
             this.tbExplain.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.tbExplain.Location = new System.Drawing.Point(12, 82);
+            this.tbExplain.Location = new System.Drawing.Point(9, 67);
+            this.tbExplain.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.tbExplain.Multiline = true;
             this.tbExplain.Name = "tbExplain";
-            this.tbExplain.Size = new System.Drawing.Size(776, 284);
+            this.tbExplain.Size = new System.Drawing.Size(583, 232);
             this.tbExplain.TabIndex = 61;
             // 
             // godTimer
@@ -85,12 +89,14 @@
             // 
             // ExplainDenial
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.ClientSize = new System.Drawing.Size(600, 366);
             this.Controls.Add(this.btnConfirm);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.tbExplain);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "ExplainDenial";
             this.Text = "ExplainDenial";
             this.panel1.ResumeLayout(false);

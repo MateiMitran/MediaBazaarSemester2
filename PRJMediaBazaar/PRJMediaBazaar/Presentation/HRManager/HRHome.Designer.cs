@@ -51,7 +51,6 @@ namespace PRJMediaBazaar
             this.label7 = new System.Windows.Forms.Label();
             this.lbSickReports = new System.Windows.Forms.ListBox();
             this.pnlDayOff = new System.Windows.Forms.Panel();
-            this.materialFlatButton1 = new MaterialSkin.Controls.MaterialFlatButton();
             this.btnConfirmedRequests = new MaterialSkin.Controls.MaterialRaisedButton();
             this.btnDeniedRequests = new MaterialSkin.Controls.MaterialRaisedButton();
             this.sd = new MaterialSkin.Controls.MaterialRaisedButton();
@@ -160,7 +159,7 @@ namespace PRJMediaBazaar
             // 
             // panelEmployees
             // 
-            this.panelEmployees.BackColor = System.Drawing.SystemColors.AppWorkspace;
+            this.panelEmployees.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.panelEmployees.Controls.Add(this.materialLabel3);
             this.panelEmployees.Controls.Add(this.materialLabel2);
             this.panelEmployees.Controls.Add(this.materialLabel1);
@@ -219,6 +218,7 @@ namespace PRJMediaBazaar
             // 
             // btnEditEmployee
             // 
+            this.btnEditEmployee.AutoSize = true;
             this.btnEditEmployee.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.btnEditEmployee.Depth = 0;
             this.btnEditEmployee.Icon = null;
@@ -226,13 +226,14 @@ namespace PRJMediaBazaar
             this.btnEditEmployee.MouseState = MaterialSkin.MouseState.HOVER;
             this.btnEditEmployee.Name = "btnEditEmployee";
             this.btnEditEmployee.Primary = true;
-            this.btnEditEmployee.Size = new System.Drawing.Size(239, 36);
+            this.btnEditEmployee.Size = new System.Drawing.Size(89, 36);
             this.btnEditEmployee.TabIndex = 26;
             this.btnEditEmployee.Text = "Edit note";
             this.btnEditEmployee.Click += new System.EventHandler(this.btnEditEmployee_Click);
             // 
             // btnAddEmployee
             // 
+            this.btnAddEmployee.AutoSize = true;
             this.btnAddEmployee.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.btnAddEmployee.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.btnAddEmployee.Depth = 0;
@@ -241,7 +242,7 @@ namespace PRJMediaBazaar
             this.btnAddEmployee.MouseState = MaterialSkin.MouseState.HOVER;
             this.btnAddEmployee.Name = "btnAddEmployee";
             this.btnAddEmployee.Primary = true;
-            this.btnAddEmployee.Size = new System.Drawing.Size(141, 36);
+            this.btnAddEmployee.Size = new System.Drawing.Size(121, 36);
             this.btnAddEmployee.TabIndex = 25;
             this.btnAddEmployee.Text = "Add employee";
             this.btnAddEmployee.UseVisualStyleBackColor = false;
@@ -291,6 +292,7 @@ namespace PRJMediaBazaar
             // 
             // panelSickReports
             // 
+            this.panelSickReports.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.panelSickReports.Controls.Add(this.btnMarkAsSeen);
             this.panelSickReports.Controls.Add(this.btnOldReports);
             this.panelSickReports.Controls.Add(this.label7);
@@ -305,9 +307,10 @@ namespace PRJMediaBazaar
             // 
             // btnMarkAsSeen
             // 
-            this.btnMarkAsSeen.Location = new System.Drawing.Point(346, 476);
+            this.btnMarkAsSeen.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnMarkAsSeen.Location = new System.Drawing.Point(358, 490);
             this.btnMarkAsSeen.Name = "btnMarkAsSeen";
-            this.btnMarkAsSeen.Size = new System.Drawing.Size(114, 26);
+            this.btnMarkAsSeen.Size = new System.Drawing.Size(147, 52);
             this.btnMarkAsSeen.TabIndex = 29;
             this.btnMarkAsSeen.Text = "Mark As Seen";
             this.btnMarkAsSeen.UseVisualStyleBackColor = true;
@@ -344,8 +347,7 @@ namespace PRJMediaBazaar
             // 
             // pnlDayOff
             // 
-            this.pnlDayOff.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.pnlDayOff.Controls.Add(this.materialFlatButton1);
+            this.pnlDayOff.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.pnlDayOff.Controls.Add(this.btnConfirmedRequests);
             this.pnlDayOff.Controls.Add(this.btnDeniedRequests);
             this.pnlDayOff.Controls.Add(this.sd);
@@ -359,23 +361,6 @@ namespace PRJMediaBazaar
             this.pnlDayOff.Size = new System.Drawing.Size(869, 564);
             this.pnlDayOff.TabIndex = 24;
             this.pnlDayOff.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlDayOff_Paint);
-            // 
-            // materialFlatButton1
-            // 
-            this.materialFlatButton1.AutoSize = true;
-            this.materialFlatButton1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.materialFlatButton1.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.materialFlatButton1.Depth = 0;
-            this.materialFlatButton1.Icon = null;
-            this.materialFlatButton1.Location = new System.Drawing.Point(283, 497);
-            this.materialFlatButton1.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.materialFlatButton1.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialFlatButton1.Name = "materialFlatButton1";
-            this.materialFlatButton1.Primary = false;
-            this.materialFlatButton1.Size = new System.Drawing.Size(181, 36);
-            this.materialFlatButton1.TabIndex = 33;
-            this.materialFlatButton1.Text = "materialFlatButton1";
-            this.materialFlatButton1.UseVisualStyleBackColor = false;
             // 
             // btnConfirmedRequests
             // 
@@ -465,6 +450,7 @@ namespace PRJMediaBazaar
             // 
             // panelSchedule
             // 
+            this.panelSchedule.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.panelSchedule.Controls.Add(this.btnGenerateSchedule);
             this.panelSchedule.Controls.Add(this.lblPositionNeeded);
             this.panelSchedule.Controls.Add(this.label4);
@@ -816,6 +802,5 @@ namespace PRJMediaBazaar
         private MaterialSkin.Controls.MaterialRaisedButton btnConfirmDayOff;
         private MaterialSkin.Controls.MaterialRaisedButton btnConfirmedRequests;
         private MaterialSkin.Controls.MaterialRaisedButton btnDeniedRequests;
-        private MaterialSkin.Controls.MaterialFlatButton materialFlatButton1;
     }
 }

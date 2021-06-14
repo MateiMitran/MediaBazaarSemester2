@@ -41,10 +41,11 @@ namespace PRJMediaBazaar
             // tbNote
             // 
             this.tbNote.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.tbNote.Location = new System.Drawing.Point(12, 69);
+            this.tbNote.Location = new System.Drawing.Point(9, 56);
+            this.tbNote.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.tbNote.Multiline = true;
             this.tbNote.Name = "tbNote";
-            this.tbNote.Size = new System.Drawing.Size(776, 284);
+            this.tbNote.Size = new System.Drawing.Size(583, 232);
             this.tbNote.TabIndex = 0;
             // 
             // panel1
@@ -52,8 +53,9 @@ namespace PRJMediaBazaar
             this.panel1.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.panel1.Controls.Add(this.lblTitle);
             this.panel1.Location = new System.Drawing.Point(1, 0);
+            this.panel1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(835, 63);
+            this.panel1.Size = new System.Drawing.Size(626, 51);
             this.panel1.TabIndex = 56;
             // 
             // lblTitle
@@ -62,17 +64,19 @@ namespace PRJMediaBazaar
             this.lblTitle.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.lblTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.lblTitle.ForeColor = System.Drawing.Color.White;
-            this.lblTitle.Location = new System.Drawing.Point(346, 18);
+            this.lblTitle.Location = new System.Drawing.Point(260, 15);
+            this.lblTitle.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblTitle.Name = "lblTitle";
-            this.lblTitle.Size = new System.Drawing.Size(141, 32);
+            this.lblTitle.Size = new System.Drawing.Size(111, 26);
             this.lblTitle.TabIndex = 1;
             this.lblTitle.Text = "Edit Note";
             // 
             // btnConfirm
             // 
-            this.btnConfirm.Location = new System.Drawing.Point(312, 376);
+            this.btnConfirm.Location = new System.Drawing.Point(234, 306);
+            this.btnConfirm.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnConfirm.Name = "btnConfirm";
-            this.btnConfirm.Size = new System.Drawing.Size(201, 42);
+            this.btnConfirm.Size = new System.Drawing.Size(151, 34);
             this.btnConfirm.TabIndex = 57;
             this.btnConfirm.Text = "Confirm";
             this.btnConfirm.UseVisualStyleBackColor = true;
@@ -86,12 +90,14 @@ namespace PRJMediaBazaar
             // 
             // EditNote
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.ClientSize = new System.Drawing.Size(600, 366);
             this.Controls.Add(this.btnConfirm);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.tbNote);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "EditNote";
             this.Text = "EditNote";
             this.Load += new System.EventHandler(this.EditNote_Load);
