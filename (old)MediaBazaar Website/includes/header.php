@@ -15,16 +15,6 @@
             require_once('functionality/' . $functionality . '.php');
         }
     }
-
-    $user = null;
-    $position = "";
-
-    if(!empty($_SESSION['user'])){
-
-     $user = $_SESSION['user'];
-     $position = $user->getJobPosition();
-
-    }    
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -86,32 +76,32 @@
     </div>
     <!-- TOP NAV -->
     <nav id="top-nav">
-    <?php 
-    if($position != null){
-
-      if($position == "WarehouseManager"){
-
-      include("navbar/whmanager_navbar.php");
-      }
-      else if($position == "HRManager"){
-
-      include("navbar/hrmanager_navbar.php");
-      }
-      else{
-          include("navbar/employee_navbar.php");
-      }
-
-    }
-
-      else{
+        <a href="/dashboard" id="logo"><span>Media</span>Bazaar</a>
+        <?php
+            if($page == 'dashboard' || $page == 'account') {
         ?>
-         <a href="/login" id="logo"><span>Media</span>Bazaar</a>
+            <ul>
+                <li>
+                    <a href="/dashboard">Dashboard</a>
+                </li><li>
+                    <a href="/account">Account</a>
+                </li>
+                <li>
+                    <form method="POST">
+                        <input type="submit" name="logout" id="top-nav-sign-in-button" value="Log Out">
+                    </form>
+                </li>
+            </ul>
+        <?php
+            } else {
+        
+        ?>
             <ul>
                 <li>
                     <a href="/login" id="top-nav-sign-in-button">Sign In</a>
                 </li>
             </ul>
         <?php
-    }
+            }
         ?>
     </nav>

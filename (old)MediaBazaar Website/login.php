@@ -19,4 +19,4 @@
             <input type="submit" name="submit" value="Log In">
         </div>
     </form>
-<?php require_once('includes/footer.php'); ?>
+<?php require_once('includes/footer.php'); ?>1
