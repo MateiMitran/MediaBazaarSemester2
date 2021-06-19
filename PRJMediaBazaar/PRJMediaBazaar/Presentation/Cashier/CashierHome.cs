@@ -43,7 +43,7 @@ namespace PRJMediaBazaar
             ammount = 0;
             StockerHome.UpdateCashierInfo += LoadItemsLESGOO;
             LoadItemsLESGOO();
-            WRHSHome.UpdateInfo += LoadItemsLESGOO;
+            //WRHSHome.UpdateInfo += LoadItemsLESGOO;
         }
 
 

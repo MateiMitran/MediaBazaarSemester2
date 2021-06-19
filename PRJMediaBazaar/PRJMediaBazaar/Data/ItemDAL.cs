@@ -198,7 +198,7 @@ namespace PRJMediaBazaar.Data
             CloseConnection();
             return id;
         }
-        private bool UpdateItemStorageQuantity(int itemId, int newInStorageAmount)
+        public bool UpdateItemStorageQuantity(int itemId, int newInStorageAmount)
         {
             try
             {
@@ -259,11 +259,8 @@ namespace PRJMediaBazaar.Data
                     foreach(Item i in restock.GetItemsForRestock())
                     {
                         InsertRestockItem(restockId, i.ID, i.AmountToRestock);
-                        int newInStorage = i.InStorageAmount + i.AmountToRestock;
-                        i.Restock_State = "stable";
-                        i.InStorageAmount = newInStorage;
-                        i.AmountToRestock = 0;
-                        UpdateItemStorageQuantity(i.ID, newInStorage);
+                        //i.Restock_State = "checking";
+                        
                     }
                     return true;
                 }

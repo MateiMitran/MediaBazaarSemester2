@@ -13,9 +13,12 @@ using System.Threading;
 
 namespace PRJMediaBazaar
 {
+    //public delegate void Xhandler();
      partial class WRHSHome : Form
     {
         public static event PRJMediaBazaar.Presentation.RestockHandler SendRestockForCheck;
+        //public static event Xhandler SendRestockForCheck;
+
 
         private ItemControl itemControl;
         private LogIn login;
@@ -369,37 +372,68 @@ namespace PRJMediaBazaar
 
         private void btnConfirm_Click(object sender, EventArgs e)
         {
-            if (this.lbRestockRequests.SelectedItem == null && this.cbCategories_Restock.Text == "")
-            {
-                if (restock.GetItemsForRestock().Count() > 0)
-                {
-                    itemControl.NewRestock(restock, manager.Id);
-                    restock = null;
-                    restock = new Restock(itemControl);
-                    StatusFunction("Successfully sent restock", -6, -1, 900, 28, Color.Green);
-                    LoadRestockingList();
-                    SendRestockForCheck?.Invoke(restock);
-                    if (this.lblRestock.ForeColor == Color.Red)
-                    {
-                        this.lblRestock.ForeColor = Color.White;
-                    }
+            //if (this.lbRestockRequests.SelectedItem == null && this.cbCategories_Restock.Text == "")
+            //{
+            //    if (restock.GetItemsForRestock().Count() > 0)
+            //    {
+            //        itemControl.NewRestock(restock, manager.Id);
+            //        restock = null;
+            //        restock = new Restock(itemControl);
 
-                    if (restock.GetItemsForRestock().Count() == 0)
-                    {
-                        this.lblRestock.BackColor = Color.Black;
-                    }
-                }
-                else
-                {
-                    StatusFunction("No items for restock", -6, -1, 900, 28, Color.Red);
-                }
+                   
+            //        StatusFunction("Successfully sent restock", -6, -1, 900, 28, Color.Green);
+                   
+            //        SendRestockForCheck?.Invoke(restock);
+
+            //        restock = null;
+            //        restock = new Restock(itemControl);
+
+            //        LoadRestockingList();
+
+
+            //        if (this.lblRestock.ForeColor == Color.Red)
+            //        {
+            //            this.lblRestock.ForeColor = Color.White;
+            //        }
+
+            //        if (restock.GetItemsForRestock().Count() == 0)
+            //        {
+            //            this.lblRestock.BackColor = Color.Black;
+            //        }
+            //    }
+            //    else
+            //    {
+            //        StatusFunction("No items for restock", -6, -1, 900, 28, Color.Red);
+            //    }
+            //}
+            //else
+            //{
+            //    this.lbRestockRequests.Items.Remove(this.lbRestockRequests.SelectedItem);
+            //    StatusFunction("Successfully sent restock", -6, -1, 900, 28, Color.Green);
+            //}
+
+
+            //............
+
+            if (restock.GetItemsForRestock().Count() > 0)
+            {
+                itemControl.NewRestock(restock, manager.Id);
+
+
+
+                SendRestockForCheck?.Invoke(restock);
+                restock = null;
+                restock = new Restock(itemControl);
+                StatusFunction("Successfully sent restock", -6, -1, 900, 28, Color.Green);
+                LoadRestockingList();
+               
             }
             else
             {
-                this.lbRestockRequests.Items.Remove(this.lbRestockRequests.SelectedItem);
-                StatusFunction("Successfully sent restock", -6, -1, 900, 28, Color.Green);
+                StatusFunction("No items for restock", -6, -1, 900, 28, Color.Red);
             }
-            
+
+
         }
 
         private void cbCategories_Restock_SelectedIndexChanged(object sender, EventArgs e)
@@ -428,6 +462,11 @@ namespace PRJMediaBazaar
             this.cbCategories.Text = "";
             this.cbSubcategory.Text = "";
             this.lbItems.Items.Clear();
+        }
+
+        private void pnlNavbar_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }

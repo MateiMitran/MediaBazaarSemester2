@@ -20,6 +20,7 @@ namespace PRJMediaBazaar.Logic
         public Item[] GetItemsForRestock()
         {
             itemsToRestock = _itemControl.GetItemsByState("manager");
+            //itemsToRestock = _itemControl.GetItemsByState("checking");
             return itemsToRestock;
 
         }

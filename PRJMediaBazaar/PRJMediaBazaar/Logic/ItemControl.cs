@@ -44,6 +44,20 @@ namespace PRJMediaBazaar.Logic
             return temp.ToArray();
         }
 
+        public Item[] GetMissingItemsByState(string state)
+        {
+            List<Item> temp = new List<Item>();
+            foreach (Item i in items)
+            {
+                if (i.Restock_State == state && i.Missing == false)
+                {
+                    temp.Add(i);
+                }
+            }
+            return temp.ToArray();
+        }
+
+
         public Item[] GetItemsForMovingToShop()
         {
             List<Item> temp = new List<Item>();
@@ -65,6 +79,21 @@ namespace PRJMediaBazaar.Logic
         public Item GetItemByRestockInfo(string info)
         {
             return items.FirstOrDefault(i => i.RestockInfo() == info);
+        }
+
+        public Item GetItemByExpectedRestockInfo(string info)
+        {
+            return items.FirstOrDefault(i => i.ExpectedRestockInfo() == info);
+        }
+
+        public Item GetItemByWaitingInfo(string info)
+        {
+            return items.FirstOrDefault(i => i.WaitingInfo() == info);
+        }
+
+        public Item GetItemByExpectedInfo(string info)
+        {
+            return items.FirstOrDefault(i => i.ArrivedInfo() == info);
         }
 
 
@@ -205,6 +234,11 @@ namespace PRJMediaBazaar.Logic
         public List<String> GetSubcategories(String category)
         {
             return itemDAL.GetSubcategoriesByCategory(category);
+        }
+
+        public void UpdateItemStorageQuantity(int id, int amount)
+        {
+            itemDAL.UpdateItemStorageQuantity(id, amount);
         }
 
     }

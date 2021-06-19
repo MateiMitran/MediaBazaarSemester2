@@ -44,6 +44,7 @@ namespace PRJMediaBazaar.Presentation.WareHouseManager
                 if (newAMount <= _item.GetMaxFreeSpaceInStorage())
                 {
                     _item.AmountToRestock = newAMount;
+                   
                     _whs.LoadRestockingList();
                     this.Close();
                 }
@@ -51,7 +52,7 @@ namespace PRJMediaBazaar.Presentation.WareHouseManager
                 {
                     MessageBox.Show("Not enough available space in storage");
                 }
-            }
+            } 
 
           
         }
