@@ -363,7 +363,7 @@ namespace PRJMediaBazaar
                 Item i = _itemControl.GetItemByExpectedInfo(this.lbExpRestocks.SelectedItem.ToString());
 
                 int newInStorage = i.InStorageAmount + i.AmountToRestock;
-                i.Restock_State = "stable";
+                _itemControl.UpdateItemState(i, "stable");
                 i.InStorageAmount = newInStorage;
                 i.AmountToRestock = 0;
                 _itemControl.UpdateItemStorageQuantity(i.ID, newInStorage);
@@ -418,10 +418,11 @@ namespace PRJMediaBazaar
 
                 int expected = i.AmountToRestock;
                 int arrivedNumber = Convert.ToInt32(this.tbActuallyArrived.Text);
-                
+                _itemControl.UpdateItemState(i, "stable");
+
                 //if (arrivedNumber >= expected)
                 //{
-                    int arrived = arrivedNumber;
+                int arrived = arrivedNumber;
                     int missing = expected - arrived;
                     int newInStorage = i.InStorageAmount + arrived;
                     i.InStorageAmount = newInStorage;

@@ -188,6 +188,12 @@ namespace PRJMediaBazaar.Logic
             return itemDAL.UpdateItemState(item.ID, "manager");
         }
 
+        public bool UpdateItemState(Item item, string newState)
+        {
+            item.Restock_State = newState;
+            return itemDAL.UpdateItemState(item.ID, newState);
+        }
+
         public bool NewOrder(Order order, int cashieerId)
         {
             return itemDAL.InsertNewOrder(order, cashieerId);
