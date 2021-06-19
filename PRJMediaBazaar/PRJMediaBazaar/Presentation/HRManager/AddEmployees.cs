@@ -76,12 +76,17 @@ namespace PRJMediaBazaar
                     throw new Exception();
                 }
                 String password = this.tbPassword.Text;
-                if (this.cbJobPosition.SelectedItem == null)
+                if (this.cbJobPosition.SelectedItem == null )
                 {
                     StatusFunction("Select a job position!", -60, -5, 835, 28, Color.Red);
                     throw new EmptyComboBoxException();
                 }
                 String jobPosition = this.cbJobPosition.Text;
+                if (this.tbPhone.Text.Length == 0 )
+                {
+                    StatusFunction("Enter a valid phone!", -60, -5, 835, 28, Color.Red);
+                    throw new InvalidIntException();
+                }    
                 int phone = Convert.ToInt32(this.tbPhone.Text);
                 if (phone < 0 || this.tbPhone.Text.Length != 10)
                 {

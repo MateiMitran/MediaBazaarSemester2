@@ -42,9 +42,9 @@
             this.btnSingleLogin.MouseState = MaterialSkin.MouseState.HOVER;
             this.btnSingleLogin.Name = "btnSingleLogin";
             this.btnSingleLogin.Primary = true;
-            this.btnSingleLogin.Size = new System.Drawing.Size(103, 36);
+            this.btnSingleLogin.Size = new System.Drawing.Size(111, 36);
             this.btnSingleLogin.TabIndex = 1;
-            this.btnSingleLogin.Text = "Singe Login";
+            this.btnSingleLogin.Text = "Single Login";
             this.btnSingleLogin.UseVisualStyleBackColor = true;
             this.btnSingleLogin.Click += new System.EventHandler(this.btnSingleLogin_Click);
             // 

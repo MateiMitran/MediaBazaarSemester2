@@ -563,7 +563,6 @@ C:\Users\matei\Desktop\Fontys\Semester 2\Project\ThisIsProject\prj-cb05-group-5-
 C:\Users\matei\Desktop\Fontys\Semester 2\Project\ThisIsProject\prj-cb05-group-5-project\PRJMediaBazaar\PRJMediaBazaar\bin\Debug\System.Memory.xml
 C:\Users\matei\Desktop\Fontys\Semester 2\Project\ThisIsProject\prj-cb05-group-5-project\PRJMediaBazaar\PRJMediaBazaar\bin\Debug\System.Numerics.Vectors.xml
 C:\Users\matei\Desktop\Fontys\Semester 2\Project\ThisIsProject\prj-cb05-group-5-project\PRJMediaBazaar\PRJMediaBazaar\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
-C:\Users\matei\Desktop\Fontys\Semester 2\Project\ThisIsProject\prj-cb05-group-5-project\PRJMediaBazaar\PRJMediaBazaar\obj\Debug\PRJMediaBazaar.csprojAssemblyReference.cache
 C:\Users\matei\Desktop\Fontys\Semester 2\Project\ThisIsProject\prj-cb05-group-5-project\PRJMediaBazaar\PRJMediaBazaar\obj\Debug\PRJMediaBazaar.RequestsOverview.resources
 C:\Users\matei\Desktop\Fontys\Semester 2\Project\ThisIsProject\prj-cb05-group-5-project\PRJMediaBazaar\PRJMediaBazaar\obj\Debug\PRJMediaBazaar.Presentation.StartupForm.resources
 C:\Users\matei\Desktop\Fontys\Semester 2\Project\ThisIsProject\prj-cb05-group-5-project\PRJMediaBazaar\PRJMediaBazaar\obj\Debug\PRJMediaBazaar.AddItem.resources
@@ -585,3 +584,4 @@ C:\Users\matei\Desktop\Fontys\Semester 2\Project\ThisIsProject\prj-cb05-group-5-
 C:\Users\matei\Desktop\Fontys\Semester 2\Project\ThisIsProject\prj-cb05-group-5-project\PRJMediaBazaar\PRJMediaBazaar\obj\Debug\PRJMediaBazaar.csproj.CopyComplete
 C:\Users\matei\Desktop\Fontys\Semester 2\Project\ThisIsProject\prj-cb05-group-5-project\PRJMediaBazaar\PRJMediaBazaar\obj\Debug\PRJMediaBazaar.exe
 C:\Users\matei\Desktop\Fontys\Semester 2\Project\ThisIsProject\prj-cb05-group-5-project\PRJMediaBazaar\PRJMediaBazaar\obj\Debug\PRJMediaBazaar.pdb
+C:\Users\matei\Desktop\Fontys\Semester 2\Project\ThisIsProject\prj-cb05-group-5-project\PRJMediaBazaar\PRJMediaBazaar\obj\Debug\PRJMediaBazaar.csproj.AssemblyReference.cache

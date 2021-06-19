@@ -56,7 +56,7 @@ namespace PRJMediaBazaar.Presentation.WareHouseManager
 
             if (errors.Any())
             {
-                StatusFunction("Please enter a valid number!", -6, -1, 900, 28, Color.Red);
+                StatusFunction("Please enter a valid number!", -6, -1, 700, 28, Color.Red);
             }
             else
             {
@@ -70,7 +70,7 @@ namespace PRJMediaBazaar.Presentation.WareHouseManager
                 }
                 else
                 {
-                    StatusFunction("Not enough available space in storage!", -6, -1, 900, 28, Color.Red);
+                    StatusFunction("Not enough available space in storage!", -6, -1, 700, 28, Color.Red);
                 }
             } 
 

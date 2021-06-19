@@ -96,7 +96,7 @@ namespace PRJMediaBazaar
                 _wh.LoadItemsLESGOO();
                 _wh.LoadRestockingList();
 
-                StatusFunction("Item added!", -6, -1, 900, 28, Color.Green);
+                StatusFunction("Item added!", -6, -1, 700, 28, Color.Green);
                 if(WRHSHome.restock == null)
                 {
                     WRHSHome.restock = new Restock(_wh.GetItemControl());
@@ -108,11 +108,11 @@ namespace PRJMediaBazaar
             }
             catch (InputException ex)
             {
-                StatusFunction(ex.ToString(), -6, -1, 900, 28, Color.Red);
+                StatusFunction(ex.ToString(), -6, -1, 700, 28, Color.Red);
             }
             catch (Exception ex)
             {
-                StatusFunction(ex.Message, -6, -1, 900, 28, Color.Red);
+                StatusFunction(ex.Message, -6, -1, 700, 28, Color.Red);
             }
             
         }

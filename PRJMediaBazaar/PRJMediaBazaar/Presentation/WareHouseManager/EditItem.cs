@@ -104,16 +104,16 @@ namespace PRJMediaBazaar
                 _itemControl.UpdateAnItem(id, category, subcategory ,brand, model, description,stock_price, price, restock_state,
                      roomShop, roomStorage, minAmount);
                 wh.LoadItemsLESGOO();
-                StatusFunction("Item updated!", -6, -1, 900, 28, Color.Green);
+                StatusFunction("Item updated!", -6, -1, 700, 28, Color.Green);
 
             }
             catch (InputException ex)
             {
-                StatusFunction(ex.ToString(), -6, -1, 900, 28, Color.Red);
+                StatusFunction(ex.ToString(), -6, -1, 700, 28, Color.Red);
             }
             catch (Exception ex)
             {
-                StatusFunction(ex.Message, -6, -1, 900, 28, Color.Red);
+                StatusFunction(ex.Message, -6, -1, 700, 28, Color.Red);
             }
         }
 

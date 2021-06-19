@@ -75,18 +75,18 @@ namespace PRJMediaBazaar
                             _hr.UpdateDaysInfo();
                             _hr.LoadTableByPosition((Day)_hr.cbDay.SelectedItem, _jobPositon);
                             this.Close();
-                            StatusFunction("Successfully updated!", -60, -5, 508, 28, Color.Green);
+                            StatusFunction("Successfully updated!", -60, -5, 600, 28, Color.Green);
 
                     }
                 }
             }
             catch(FormatException ex)
             {
-                StatusFunction("Enter a number between 1 and 10", -60, -5, 508, 28, Color.Red);
+                StatusFunction("Enter a number between 1 and 10", -60, -5, 600, 28, Color.Red);
             }
             catch(ArgumentOutOfRangeException ex)
             {
-                StatusFunction("The amounts you want to set should be bigger or equal than the assigned columns in the table", -60, -5, 508, 28, Color.Red);
+                StatusFunction("The amounts you want to set should be bigger or equal than the assigned columns in the table", -60, -5, 600, 28, Color.Red);
             }
           
         }

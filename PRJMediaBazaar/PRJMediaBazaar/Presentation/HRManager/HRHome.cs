@@ -66,7 +66,7 @@ namespace PRJMediaBazaar
 
             if (sickReports.Count > 0)
             {
-                MessageBox.Show("New Sick Reports! Please check which shifts are dismissed and re-assign other employees!");
+          //      MessageBox.Show("New Sick Reports! Please check which shifts are dismissed and re-assign other employees!");
                 this.lblSickReports.BackColor = Color.Red;
             }
             if (daysOff.Count > 0)
@@ -816,7 +816,9 @@ namespace PRJMediaBazaar
                     this.lblSickReports.BackColor = Color.Black;
                 }
             }
-           
+            else
+                StatusFunction("Please select a sick report!", -6, -1, 900, 28, Color.Red);
+
         }
 
         private void btnAddEmployee_Click(object sender, EventArgs e)
@@ -868,7 +870,6 @@ namespace PRJMediaBazaar
                 if (this.lbDayOff.SelectedItem == null)
                 {
                     StatusFunction("Select a request!", -6, -1, 900, 28, Color.Red);
-                    throw new EmptyComboBoxException();
                 }
 
                 else
