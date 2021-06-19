@@ -50,7 +50,7 @@ namespace PRJMediaBazaar.Data
         } 
         public bool AddItem(String category,String subcategory ,String brand, String model, String description, String stock_price
                     , String price, String restock_state,int roomInShop, int roomInStorage,
-                    int minimumAmountInStock, byte[] image)
+                    int minimumAmountInStock)
         {
             try
             {
@@ -78,7 +78,6 @@ namespace PRJMediaBazaar.Data
                 if (executeNonQuery(sql, parameters) != null)
                 {
                     CloseConnection();
-                    AddItemImage(image);
 
                     return true;
                 }
@@ -95,7 +94,7 @@ namespace PRJMediaBazaar.Data
            
         }
 
-        private void AddItemImage(byte[] image)
+      /*  private void AddItemImage(byte[] image)
         {
             int id = LastItemId();
             MySqlConnection conn = null;
@@ -130,15 +129,15 @@ namespace PRJMediaBazaar.Data
                 }
             }
 
-        }
-        public byte[] GetItemImage(int itemID)
+        } */
+       /* public byte[] GetItemImage(int itemID)
         {
             String sql = "SELECT image FROM items_images WHERE item_id = @itemID;";
             String[] parameters = new String[] { itemID.ToString() };
             byte[] image = (byte[])executeScalar(sql, parameters);
             CloseConnection();
             return image;
-        }
+        } */
         public int LastItemId()
         {
             string sql = "SELECT MAX(id) FROM items";
@@ -163,7 +162,7 @@ namespace PRJMediaBazaar.Data
         }
         public bool UpdateItem(String category,String subcategory ,String brand, String model, String description, String stock_price
                     , String price, String restock_state,int roomInShop, int roomInStorage,
-                    int minimumAmountInStock, byte[] image, int id)
+                    int minimumAmountInStock, int id)
         {
             try
             {
@@ -176,7 +175,6 @@ namespace PRJMediaBazaar.Data
                 if (executeNonQuery(sql, parameters) != null)
                 {
                     CloseConnection();
-                    UpdateItemImage(id, image);
                     return true;
                 }
                 else
@@ -426,7 +424,7 @@ namespace PRJMediaBazaar.Data
 
         }
 
-        public bool UpdateItemImage(int itemID, byte[] image)
+       /* public bool UpdateItemImage(int itemID, byte[] image)
         {
             MySqlConnection conn = null;
             try
@@ -460,7 +458,7 @@ namespace PRJMediaBazaar.Data
                     conn.Close();
                 }
             }
-        }
+        } */
         public int GetIDByName(String name)
         {
             String sql = "SELECT id FROM items WHERE name = @name;";

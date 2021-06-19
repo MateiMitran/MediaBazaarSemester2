@@ -65,12 +65,6 @@ namespace PRJMediaBazaar
             temp.Start();
         }
 
-        private void label1_Click(object sender, EventArgs e)
-        {
-            this.Hide();
-            login.Show();
-        }
-
         private void StockerHome_FormClosing(object sender, FormClosingEventArgs e)
         {
             login.Close();
@@ -138,7 +132,7 @@ namespace PRJMediaBazaar
                     this.ammount = Convert.ToInt32(this.tbQuantity.Value);
                     if (this.ammount == 0)
                     {
-                        MessageBox.Show("Select amount biger than 0!");
+                        StatusFunction("Select an amount bigger than 0!", -6, -1, 900, 28, Color.Red, Color.Black);
                     }
                     else
                     {
@@ -165,20 +159,20 @@ namespace PRJMediaBazaar
                             }
                         }
                         else
-                            MessageBox.Show("Amount selected must be smaller than in shop amount!");
+                             StatusFunction("Amount selected must be smaller than in shop amount!", -6, -1, 900, 28, Color.Red, Color.Black);
                     }
 
 
                 }
                 else
                 {
-                    MessageBox.Show("Please select an item");
+                    StatusFunction("Please select an item!", -6, -1, 900, 28, Color.Red, Color.Black);
                 }
             }
                 
             catch(Exception ex)
             {
-                MessageBox.Show("Error!");
+                StatusFunction("Error", -6, -1, 900, 28, Color.Red, Color.Black);
             }
             
         }
@@ -229,6 +223,12 @@ namespace PRJMediaBazaar
                     buttons[i].Visible = false;
                 }
             }
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            login.Show();
         }
     }
 }

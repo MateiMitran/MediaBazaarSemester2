@@ -37,6 +37,8 @@ namespace PRJMediaBazaar
             this.tbUsername = new MaterialSkin.Controls.MaterialSingleLineTextField();
             this.tbPassword = new MaterialSkin.Controls.MaterialSingleLineTextField();
             this.btnLogIn = new MaterialSkin.Controls.MaterialRaisedButton();
+            this.label8 = new System.Windows.Forms.Label();
+            this.lblTitle1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // lblWelcome
@@ -46,9 +48,9 @@ namespace PRJMediaBazaar
             this.lblWelcome.Location = new System.Drawing.Point(58, 19);
             this.lblWelcome.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblWelcome.Name = "lblWelcome";
-            this.lblWelcome.Size = new System.Drawing.Size(298, 30);
+            this.lblWelcome.Size = new System.Drawing.Size(140, 30);
             this.lblWelcome.TabIndex = 0;
-            this.lblWelcome.Text = "Welcome to Media Bazaar!";
+            this.lblWelcome.Text = "Welcome to";
             this.lblWelcome.Click += new System.EventHandler(this.label1_Click);
             // 
             // lblUsername
@@ -130,12 +132,40 @@ namespace PRJMediaBazaar
             this.btnLogIn.UseVisualStyleBackColor = true;
             this.btnLogIn.Click += new System.EventHandler(this.btnLogIn_Click);
             // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.label8.Font = new System.Drawing.Font("Microsoft YaHei", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label8.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(35)))), ((int)(((byte)(60)))));
+            this.label8.Location = new System.Drawing.Point(275, 19);
+            this.label8.Margin = new System.Windows.Forms.Padding(0);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(108, 30);
+            this.label8.TabIndex = 10;
+            this.label8.Text = "BAZAAR";
+            // 
+            // lblTitle1
+            // 
+            this.lblTitle1.AutoSize = true;
+            this.lblTitle1.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.lblTitle1.Font = new System.Drawing.Font("Microsoft YaHei", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.lblTitle1.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.lblTitle1.Location = new System.Drawing.Point(193, 20);
+            this.lblTitle1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblTitle1.Name = "lblTitle1";
+            this.lblTitle1.Size = new System.Drawing.Size(90, 30);
+            this.lblTitle1.TabIndex = 9;
+            this.lblTitle1.Text = "MEDIA";
+            // 
             // LogIn
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.ClientSize = new System.Drawing.Size(407, 242);
+            this.Controls.Add(this.label8);
+            this.Controls.Add(this.lblTitle1);
             this.Controls.Add(this.btnLogIn);
             this.Controls.Add(this.tbPassword);
             this.Controls.Add(this.tbUsername);
@@ -163,6 +193,8 @@ namespace PRJMediaBazaar
         private MaterialSkin.Controls.MaterialSingleLineTextField tbUsername;
         private MaterialSkin.Controls.MaterialSingleLineTextField tbPassword;
         private MaterialSkin.Controls.MaterialRaisedButton btnLogIn;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label lblTitle1;
     }
 }
 

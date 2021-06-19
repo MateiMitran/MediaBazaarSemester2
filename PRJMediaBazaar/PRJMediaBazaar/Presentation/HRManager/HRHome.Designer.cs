@@ -30,11 +30,12 @@ namespace PRJMediaBazaar
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(HRHome));
             this.lblDayOffReports = new System.Windows.Forms.Label();
             this.lblSickReports = new System.Windows.Forms.Label();
             this.lblSchedule = new System.Windows.Forms.Label();
             this.lblEmployees = new System.Windows.Forms.Label();
-            this.lblTitle = new System.Windows.Forms.Label();
+            this.lblTitle1 = new System.Windows.Forms.Label();
             this.panelEmployees = new System.Windows.Forms.Panel();
             this.materialLabel3 = new MaterialSkin.Controls.MaterialLabel();
             this.materialLabel2 = new MaterialSkin.Controls.MaterialLabel();
@@ -51,10 +52,10 @@ namespace PRJMediaBazaar
             this.label7 = new System.Windows.Forms.Label();
             this.lbSickReports = new System.Windows.Forms.ListBox();
             this.pnlDayOff = new System.Windows.Forms.Panel();
-            this.btnConfirmedRequests = new MaterialSkin.Controls.MaterialRaisedButton();
-            this.btnDeniedRequests = new MaterialSkin.Controls.MaterialRaisedButton();
-            this.sd = new MaterialSkin.Controls.MaterialRaisedButton();
-            this.btnConfirmDayOff = new MaterialSkin.Controls.MaterialRaisedButton();
+            this.button2 = new System.Windows.Forms.Button();
+            this.btnShowConfirmedReq = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
+            this.btnConfirm = new System.Windows.Forms.Button();
             this.label6 = new System.Windows.Forms.Label();
             this.lbDayOff = new System.Windows.Forms.ListBox();
             this.panelSchedule = new System.Windows.Forms.Panel();
@@ -78,6 +79,8 @@ namespace PRJMediaBazaar
             this.cbDay = new System.Windows.Forms.ComboBox();
             this.btnDeleteSchedule = new System.Windows.Forms.Button();
             this.pnlNavbar = new System.Windows.Forms.Panel();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.label8 = new System.Windows.Forms.Label();
             this.godTimer = new System.Windows.Forms.Timer(this.components);
             this.panelEmployees.SuspendLayout();
             this.panelSickReports.SuspendLayout();
@@ -85,18 +88,19 @@ namespace PRJMediaBazaar
             this.panelSchedule.SuspendLayout();
             this.PanelTableScroll.SuspendLayout();
             this.pnlNavbar.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // lblDayOffReports
             // 
             this.lblDayOffReports.AutoSize = true;
-            this.lblDayOffReports.BackColor = System.Drawing.Color.Black;
-            this.lblDayOffReports.Font = new System.Drawing.Font("Microsoft YaHei", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.lblDayOffReports.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(45)))), ((int)(((byte)(66)))));
+            this.lblDayOffReports.Font = new System.Drawing.Font("Microsoft YaHei", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.lblDayOffReports.ForeColor = System.Drawing.SystemColors.Control;
-            this.lblDayOffReports.Location = new System.Drawing.Point(607, 14);
+            this.lblDayOffReports.Location = new System.Drawing.Point(634, 18);
             this.lblDayOffReports.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblDayOffReports.Name = "lblDayOffReports";
-            this.lblDayOffReports.Size = new System.Drawing.Size(167, 26);
+            this.lblDayOffReports.Size = new System.Drawing.Size(124, 20);
             this.lblDayOffReports.TabIndex = 4;
             this.lblDayOffReports.Text = "Day Off Reports";
             this.lblDayOffReports.Click += new System.EventHandler(this.label5_Click);
@@ -104,13 +108,12 @@ namespace PRJMediaBazaar
             // lblSickReports
             // 
             this.lblSickReports.AutoSize = true;
-            this.lblSickReports.BackColor = System.Drawing.Color.Black;
-            this.lblSickReports.Font = new System.Drawing.Font("Microsoft YaHei", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.lblSickReports.Font = new System.Drawing.Font("Microsoft YaHei", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.lblSickReports.ForeColor = System.Drawing.SystemColors.Control;
-            this.lblSickReports.Location = new System.Drawing.Point(473, 12);
+            this.lblSickReports.Location = new System.Drawing.Point(502, 18);
             this.lblSickReports.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblSickReports.Name = "lblSickReports";
-            this.lblSickReports.Size = new System.Drawing.Size(130, 26);
+            this.lblSickReports.Size = new System.Drawing.Size(100, 20);
             this.lblSickReports.TabIndex = 3;
             this.lblSickReports.Text = "Sick Reports";
             this.lblSickReports.Click += new System.EventHandler(this.label4_Click);
@@ -118,13 +121,13 @@ namespace PRJMediaBazaar
             // lblSchedule
             // 
             this.lblSchedule.AutoSize = true;
-            this.lblSchedule.BackColor = System.Drawing.Color.Black;
-            this.lblSchedule.Font = new System.Drawing.Font("Microsoft YaHei", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.lblSchedule.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(45)))), ((int)(((byte)(66)))));
+            this.lblSchedule.Font = new System.Drawing.Font("Microsoft YaHei", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.lblSchedule.ForeColor = System.Drawing.SystemColors.Control;
-            this.lblSchedule.Location = new System.Drawing.Point(172, 12);
+            this.lblSchedule.Location = new System.Drawing.Point(401, 17);
             this.lblSchedule.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblSchedule.Name = "lblSchedule";
-            this.lblSchedule.Size = new System.Drawing.Size(98, 26);
+            this.lblSchedule.Size = new System.Drawing.Size(76, 20);
             this.lblSchedule.TabIndex = 2;
             this.lblSchedule.Text = "Schedule";
             this.lblSchedule.Click += new System.EventHandler(this.label3_Click);
@@ -132,34 +135,34 @@ namespace PRJMediaBazaar
             // lblEmployees
             // 
             this.lblEmployees.AutoSize = true;
-            this.lblEmployees.BackColor = System.Drawing.Color.Black;
-            this.lblEmployees.Font = new System.Drawing.Font("Microsoft YaHei", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.lblEmployees.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(45)))), ((int)(((byte)(66)))));
+            this.lblEmployees.Font = new System.Drawing.Font("Microsoft YaHei", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.lblEmployees.ForeColor = System.Drawing.SystemColors.Control;
-            this.lblEmployees.Location = new System.Drawing.Point(28, 12);
+            this.lblEmployees.Location = new System.Drawing.Point(275, 17);
             this.lblEmployees.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblEmployees.Name = "lblEmployees";
-            this.lblEmployees.Size = new System.Drawing.Size(115, 26);
+            this.lblEmployees.Size = new System.Drawing.Size(88, 20);
             this.lblEmployees.TabIndex = 1;
             this.lblEmployees.Text = "Employees";
             this.lblEmployees.Click += new System.EventHandler(this.label2_Click);
             // 
-            // lblTitle
+            // lblTitle1
             // 
-            this.lblTitle.AutoSize = true;
-            this.lblTitle.BackColor = System.Drawing.Color.Black;
-            this.lblTitle.Font = new System.Drawing.Font("Microsoft YaHei", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.lblTitle.ForeColor = System.Drawing.SystemColors.Control;
-            this.lblTitle.Location = new System.Drawing.Point(300, 9);
-            this.lblTitle.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.lblTitle.Name = "lblTitle";
-            this.lblTitle.Size = new System.Drawing.Size(165, 30);
-            this.lblTitle.TabIndex = 0;
-            this.lblTitle.Text = "Media Bazaar";
-            this.lblTitle.Click += new System.EventHandler(this.label1_Click);
+            this.lblTitle1.AutoSize = true;
+            this.lblTitle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(45)))), ((int)(((byte)(66)))));
+            this.lblTitle1.Font = new System.Drawing.Font("Microsoft YaHei", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.lblTitle1.ForeColor = System.Drawing.SystemColors.Control;
+            this.lblTitle1.Location = new System.Drawing.Point(5, 10);
+            this.lblTitle1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblTitle1.Name = "lblTitle1";
+            this.lblTitle1.Size = new System.Drawing.Size(90, 30);
+            this.lblTitle1.TabIndex = 0;
+            this.lblTitle1.Text = "MEDIA";
+            this.lblTitle1.Click += new System.EventHandler(this.label1_Click);
             // 
             // panelEmployees
             // 
-            this.panelEmployees.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.panelEmployees.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.panelEmployees.Controls.Add(this.materialLabel3);
             this.panelEmployees.Controls.Add(this.materialLabel2);
             this.panelEmployees.Controls.Add(this.materialLabel1);
@@ -292,7 +295,7 @@ namespace PRJMediaBazaar
             // 
             // panelSickReports
             // 
-            this.panelSickReports.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.panelSickReports.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.panelSickReports.Controls.Add(this.btnMarkAsSeen);
             this.panelSickReports.Controls.Add(this.btnOldReports);
             this.panelSickReports.Controls.Add(this.label7);
@@ -308,9 +311,9 @@ namespace PRJMediaBazaar
             // btnMarkAsSeen
             // 
             this.btnMarkAsSeen.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnMarkAsSeen.Location = new System.Drawing.Point(358, 490);
+            this.btnMarkAsSeen.Location = new System.Drawing.Point(311, 490);
             this.btnMarkAsSeen.Name = "btnMarkAsSeen";
-            this.btnMarkAsSeen.Size = new System.Drawing.Size(147, 52);
+            this.btnMarkAsSeen.Size = new System.Drawing.Size(249, 32);
             this.btnMarkAsSeen.TabIndex = 29;
             this.btnMarkAsSeen.Text = "Mark As Seen";
             this.btnMarkAsSeen.UseVisualStyleBackColor = true;
@@ -347,11 +350,11 @@ namespace PRJMediaBazaar
             // 
             // pnlDayOff
             // 
-            this.pnlDayOff.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.pnlDayOff.Controls.Add(this.btnConfirmedRequests);
-            this.pnlDayOff.Controls.Add(this.btnDeniedRequests);
-            this.pnlDayOff.Controls.Add(this.sd);
-            this.pnlDayOff.Controls.Add(this.btnConfirmDayOff);
+            this.pnlDayOff.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.pnlDayOff.Controls.Add(this.button2);
+            this.pnlDayOff.Controls.Add(this.btnShowConfirmedReq);
+            this.pnlDayOff.Controls.Add(this.button1);
+            this.pnlDayOff.Controls.Add(this.btnConfirm);
             this.pnlDayOff.Controls.Add(this.label6);
             this.pnlDayOff.Controls.Add(this.lbDayOff);
             this.pnlDayOff.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -362,78 +365,55 @@ namespace PRJMediaBazaar
             this.pnlDayOff.TabIndex = 24;
             this.pnlDayOff.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlDayOff_Paint);
             // 
-            // btnConfirmedRequests
+            // button2
             // 
-            this.btnConfirmedRequests.AutoSize = true;
-            this.btnConfirmedRequests.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnConfirmedRequests.Depth = 0;
-            this.btnConfirmedRequests.Icon = null;
-            this.btnConfirmedRequests.Location = new System.Drawing.Point(688, 75);
-            this.btnConfirmedRequests.MouseState = MaterialSkin.MouseState.HOVER;
-            this.btnConfirmedRequests.Name = "btnConfirmedRequests";
-            this.btnConfirmedRequests.Primary = true;
-            this.btnConfirmedRequests.Size = new System.Drawing.Size(169, 36);
-            this.btnConfirmedRequests.TabIndex = 32;
-            this.btnConfirmedRequests.Text = "Confirmed Requests";
-            this.btnConfirmedRequests.UseVisualStyleBackColor = true;
-            this.btnConfirmedRequests.Click += new System.EventHandler(this.btnConfirmedRequests_Click_1);
+            this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button2.Location = new System.Drawing.Point(54, 84);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(175, 36);
+            this.button2.TabIndex = 36;
+            this.button2.Text = "Denied Requests";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
-            // btnDeniedRequests
+            // btnShowConfirmedReq
             // 
-            this.btnDeniedRequests.AutoSize = true;
-            this.btnDeniedRequests.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnDeniedRequests.Depth = 0;
-            this.btnDeniedRequests.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.btnDeniedRequests.Icon = null;
-            this.btnDeniedRequests.Location = new System.Drawing.Point(12, 80);
-            this.btnDeniedRequests.MouseState = MaterialSkin.MouseState.HOVER;
-            this.btnDeniedRequests.Name = "btnDeniedRequests";
-            this.btnDeniedRequests.Primary = true;
-            this.btnDeniedRequests.Size = new System.Drawing.Size(139, 36);
-            this.btnDeniedRequests.TabIndex = 31;
-            this.btnDeniedRequests.Text = "Denied Requests";
-            this.btnDeniedRequests.UseVisualStyleBackColor = true;
-            this.btnDeniedRequests.Click += new System.EventHandler(this.btnDeniedRequests_Click_1);
-            this.btnDeniedRequests.MouseEnter += new System.EventHandler(this.btnDeniedRequests_MouseEnter);
+            this.btnShowConfirmedReq.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnShowConfirmedReq.Location = new System.Drawing.Point(632, 84);
+            this.btnShowConfirmedReq.Name = "btnShowConfirmedReq";
+            this.btnShowConfirmedReq.Size = new System.Drawing.Size(175, 36);
+            this.btnShowConfirmedReq.TabIndex = 35;
+            this.btnShowConfirmedReq.Text = "Confirmed Requests";
+            this.btnShowConfirmedReq.UseVisualStyleBackColor = true;
+            this.btnShowConfirmedReq.Click += new System.EventHandler(this.btnShowConfirmedReq_Click);
             // 
-            // sd
+            // button1
             // 
-            this.sd.AutoSize = true;
-            this.sd.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.sd.Depth = 0;
-            this.sd.Icon = null;
-            this.sd.Location = new System.Drawing.Point(759, 505);
-            this.sd.MouseState = MaterialSkin.MouseState.HOVER;
-            this.sd.Name = "sd";
-            this.sd.Primary = true;
-            this.sd.Size = new System.Drawing.Size(56, 36);
-            this.sd.TabIndex = 30;
-            this.sd.Text = "Deny";
-            this.sd.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.sd.UseVisualStyleBackColor = true;
-            this.sd.Click += new System.EventHandler(this.sd_Click);
+            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.Location = new System.Drawing.Point(667, 487);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(140, 35);
+            this.button1.TabIndex = 34;
+            this.button1.Text = "Deny";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click_1);
             // 
-            // btnConfirmDayOff
+            // btnConfirm
             // 
-            this.btnConfirmDayOff.AutoSize = true;
-            this.btnConfirmDayOff.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnConfirmDayOff.Depth = 0;
-            this.btnConfirmDayOff.Icon = null;
-            this.btnConfirmDayOff.Location = new System.Drawing.Point(62, 497);
-            this.btnConfirmDayOff.MouseState = MaterialSkin.MouseState.HOVER;
-            this.btnConfirmDayOff.Name = "btnConfirmDayOff";
-            this.btnConfirmDayOff.Primary = true;
-            this.btnConfirmDayOff.Size = new System.Drawing.Size(81, 36);
-            this.btnConfirmDayOff.TabIndex = 29;
-            this.btnConfirmDayOff.Text = "Confirm";
-            this.btnConfirmDayOff.UseVisualStyleBackColor = true;
-            this.btnConfirmDayOff.Click += new System.EventHandler(this.btnConfirmDayOff_Click_1);
+            this.btnConfirm.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnConfirm.Location = new System.Drawing.Point(54, 483);
+            this.btnConfirm.Name = "btnConfirm";
+            this.btnConfirm.Size = new System.Drawing.Size(140, 35);
+            this.btnConfirm.TabIndex = 33;
+            this.btnConfirm.Text = "Confirm";
+            this.btnConfirm.UseVisualStyleBackColor = true;
+            this.btnConfirm.Click += new System.EventHandler(this.btnConfirm_Click);
             // 
             // label6
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(362, 92);
+            this.label6.Location = new System.Drawing.Point(364, 60);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(165, 24);
             this.label6.TabIndex = 27;
@@ -441,16 +421,18 @@ namespace PRJMediaBazaar
             // 
             // lbDayOff
             // 
+            this.lbDayOff.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbDayOff.FormattingEnabled = true;
-            this.lbDayOff.Location = new System.Drawing.Point(62, 122);
+            this.lbDayOff.ItemHeight = 20;
+            this.lbDayOff.Location = new System.Drawing.Point(54, 127);
             this.lbDayOff.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
             this.lbDayOff.Name = "lbDayOff";
-            this.lbDayOff.Size = new System.Drawing.Size(753, 342);
+            this.lbDayOff.Size = new System.Drawing.Size(753, 324);
             this.lbDayOff.TabIndex = 24;
             // 
             // panelSchedule
             // 
-            this.panelSchedule.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.panelSchedule.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.panelSchedule.Controls.Add(this.btnGenerateSchedule);
             this.panelSchedule.Controls.Add(this.lblPositionNeeded);
             this.panelSchedule.Controls.Add(this.label4);
@@ -540,7 +522,7 @@ namespace PRJMediaBazaar
             // PanelTableScroll
             // 
             this.PanelTableScroll.AutoScroll = true;
-            this.PanelTableScroll.BackColor = System.Drawing.Color.Silver;
+            this.PanelTableScroll.BackColor = System.Drawing.Color.White;
             this.PanelTableScroll.Controls.Add(this.ShiftsTable);
             this.PanelTableScroll.Location = new System.Drawing.Point(55, 186);
             this.PanelTableScroll.Name = "PanelTableScroll";
@@ -703,8 +685,10 @@ namespace PRJMediaBazaar
             // 
             // pnlNavbar
             // 
-            this.pnlNavbar.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.pnlNavbar.Controls.Add(this.lblTitle);
+            this.pnlNavbar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(45)))), ((int)(((byte)(66)))));
+            this.pnlNavbar.Controls.Add(this.pictureBox1);
+            this.pnlNavbar.Controls.Add(this.label8);
+            this.pnlNavbar.Controls.Add(this.lblTitle1);
             this.pnlNavbar.Controls.Add(this.lblDayOffReports);
             this.pnlNavbar.Controls.Add(this.lblEmployees);
             this.pnlNavbar.Controls.Add(this.lblSickReports);
@@ -714,6 +698,29 @@ namespace PRJMediaBazaar
             this.pnlNavbar.Name = "pnlNavbar";
             this.pnlNavbar.Size = new System.Drawing.Size(869, 48);
             this.pnlNavbar.TabIndex = 5;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+            this.pictureBox1.Location = new System.Drawing.Point(804, 17);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(24, 23);
+            this.pictureBox1.TabIndex = 30;
+            this.pictureBox1.TabStop = false;
+            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(45)))), ((int)(((byte)(66)))));
+            this.label8.Font = new System.Drawing.Font("Microsoft YaHei", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label8.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(35)))), ((int)(((byte)(60)))));
+            this.label8.Location = new System.Drawing.Point(88, 10);
+            this.label8.Margin = new System.Windows.Forms.Padding(0);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(108, 30);
+            this.label8.TabIndex = 5;
+            this.label8.Text = "BAZAAR";
             // 
             // godTimer
             // 
@@ -748,6 +755,7 @@ namespace PRJMediaBazaar
             this.PanelTableScroll.PerformLayout();
             this.pnlNavbar.ResumeLayout(false);
             this.pnlNavbar.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -757,7 +765,7 @@ namespace PRJMediaBazaar
         private System.Windows.Forms.Label lblSickReports;
         private System.Windows.Forms.Label lblSchedule;
         private System.Windows.Forms.Label lblEmployees;
-        private System.Windows.Forms.Label lblTitle;
+        private System.Windows.Forms.Label lblTitle1;
         private System.Windows.Forms.ListBox lbGeneralInfo;
         private System.Windows.Forms.ListBox lbEmployeeInfo;
         private System.Windows.Forms.Panel panelEmployees;
@@ -798,9 +806,11 @@ namespace PRJMediaBazaar
         private MaterialSkin.Controls.MaterialLabel materialLabel3;
         private MaterialSkin.Controls.MaterialLabel materialLabel2;
         private MaterialSkin.Controls.MaterialLabel materialLabel1;
-        private MaterialSkin.Controls.MaterialRaisedButton sd;
-        private MaterialSkin.Controls.MaterialRaisedButton btnConfirmDayOff;
-        private MaterialSkin.Controls.MaterialRaisedButton btnConfirmedRequests;
-        private MaterialSkin.Controls.MaterialRaisedButton btnDeniedRequests;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Button btnConfirm;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnShowConfirmedReq;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }

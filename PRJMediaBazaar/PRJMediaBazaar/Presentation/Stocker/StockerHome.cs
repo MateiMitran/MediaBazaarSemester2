@@ -21,13 +21,13 @@ namespace PRJMediaBazaar
         private ItemControl _itemControl;
         private Item selectedItem;
         LogIn _login;
-        private List<System.Windows.Forms.Timer> timers;
+        private List<Timer> timers;
 
         private List<Button> buttons;
         public StockerHome(LogIn login, Employee stocker, ItemControl itemControl)
         {
             InitializeComponent();
-            this.lblRefill.ForeColor = Color.Gray;
+            this.lblRR.ForeColor = Color.Gray;
 
             this.lbQuantity.Visible = false;
             this.tbActuallyArrived.Visible = false;
@@ -74,7 +74,7 @@ namespace PRJMediaBazaar
             this.Controls.Add(newButton);
             newButton.BringToFront();
             buttons.Add(newButton);
-            System.Windows.Forms.Timer temp = new System.Windows.Forms.Timer();
+            Timer temp = new Timer();
             timers.Add(temp);
             temp.Start();
         }
@@ -172,7 +172,7 @@ namespace PRJMediaBazaar
             }
             else
             {
-                MessageBox.Show("No items to move");
+                StatusFunction("No items to move!", -6, -1, 1000, 28, Color.Red);
             }
            
         }
@@ -194,7 +194,7 @@ namespace PRJMediaBazaar
             }
             else
             {
-                MessageBox.Show("No items to send a restock");
+                StatusFunction("No items to send restocks!", -6, -1, 1000, 28, Color.Red);
             }
            
         }
@@ -301,7 +301,7 @@ namespace PRJMediaBazaar
                 UpdateRestockRequestListbox();
                 LoadAllWaitingItems();
 
-                StatusFunction("Quantity added to said item!", -6, -1, 900, 28, Color.Green);
+                StatusFunction("Quantity added to said item!", -6, -1, 1000, 28, Color.Green);
 
 
 
@@ -310,7 +310,7 @@ namespace PRJMediaBazaar
             }
             else
             {
-                MessageBox.Show("No item selected");
+                StatusFunction("No Selected Item!", -6, -1, 1000, 28, Color.Red);
             }
 
 
@@ -348,7 +348,7 @@ namespace PRJMediaBazaar
             }
             else
             {
-                MessageBox.Show("No items to send a restock");
+                StatusFunction("No items to send a restock!", -6, -1, 1000, 28, Color.Red);
             }
         }
 
@@ -375,12 +375,12 @@ namespace PRJMediaBazaar
                 LoadAllExpectedItems();
                 //LoadAllWaitingItems();// !!!!!!!!!!
 
-                StatusFunction("Item restocked!", -6, -1, 900, 28, Color.Green);
+                StatusFunction("Item restocked!", -6, -1, 1000, 28, Color.Green);
             }
 
             else
             {
-                StatusFunction("No Selected Item!", -6, -1, 900, 28, Color.Red);
+                StatusFunction("No Selected Item!", -6, -1, 1000, 28, Color.Red);
             }
         }
 
@@ -406,7 +406,7 @@ namespace PRJMediaBazaar
 
             else
             {
-                MessageBox.Show("Please selet an item");
+                StatusFunction("Please select an item!", -6, -1, 1000, 28, Color.Red);
             }
         }
 
@@ -443,7 +443,7 @@ namespace PRJMediaBazaar
                     LoadAllWaitingItems();// !!!!!!!!!!
                                           //MoveItemToWaitingList(i);
 
-                    StatusFunction("Item sent to Waiting List!", -6, -1, 900, 28, Color.Green);
+                    StatusFunction("Item sent to Waiting List!", -6, -1, 1000, 28, Color.Green);
                // }
                 //else
                 //{
@@ -455,7 +455,7 @@ namespace PRJMediaBazaar
             }
             else
             {
-                StatusFunction("Error occured!", -6, -1, 900, 28, Color.Green);
+                StatusFunction("Error occured!", -6, -1, 1000, 28, Color.Green);
             }
             
         }
@@ -476,17 +476,6 @@ namespace PRJMediaBazaar
                 }
             }
         }
-
-        private void label8_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void lbExpRestocks_SelectedIndexChanged(object sender, EventArgs e)
-        {
-           
-        }
-
         private void lblexpectedRestocks_Click(object sender, EventArgs e)
         {
             this.pnlExpectedRestocks.Visible = true;
@@ -501,6 +490,12 @@ namespace PRJMediaBazaar
 
             this.pnlExpectedRestocks.BringToFront();
             this.pnlNavbar.BringToFront();
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            _login.Show();
         }
     }
 }

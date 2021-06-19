@@ -16,11 +16,7 @@ namespace PRJMediaBazaar
 {
     partial class AddItem : Form
     {
-        private bool validData;
 
-        private string path;
-        private Image image;
-        private Thread getImageThread;
         private ItemControl _itemControl;
         private WRHSHome _wh;
         private List<Button> buttons;
@@ -51,105 +47,14 @@ namespace PRJMediaBazaar
             timers.Add(temp);
             temp.Start();
         }
-
-        /*Drag And Drop events*/
-        private void AddItem_DragEnter(object sender, DragEventArgs e)
-        {
-            e.Effect = DragDropEffects.Copy;
-            string filename;
-            validData = GetFilename(out filename, e);
-            if (validData)
-            {
-                path = filename;
-                getImageThread = new Thread(new ThreadStart(LoadImage));
-                getImageThread.Start();
-                e.Effect = DragDropEffects.Copy;
-            }
-            else
-                e.Effect = DragDropEffects.None;
-        }
-        private void AddItem_DragDrop(object sender, DragEventArgs e)
-        {
-            if (validData)
-            {
-                while (getImageThread.IsAlive)
-                {
-                    Application.DoEvents();
-                    Thread.Sleep(0);
-                }
-                pbxItem.Image = ScaleImage(image);
-                image = pbxItem.Image;
-                byte[] img = ImageToBinary(image);
-                //MessageBox.Show($"Img size: {img.Length}");
-            }
-        }
-
-        /*Helping methods for the image*/
-      
-        private void LoadImage()
-        {
-            image = new Bitmap(path);
-        }
-        private bool GetFilename(out string filename, DragEventArgs e)
-        {
-            bool ret = false;
-            filename = String.Empty;
-            if ((e.AllowedEffect & DragDropEffects.Copy) == DragDropEffects.Copy)
-            {
-                Array data = ((IDataObject)e.Data).GetData("FileDrop") as Array;
-                if (data != null)
-                {
-                    if ((data.Length == 1) && (data.GetValue(0) is String))
-                    {
-                        filename = ((string[])data)[0];
-                        string ext = Path.GetExtension(filename).ToLower();
-                        if ((ext == ".jpg") || (ext == ".png") || (ext == ".bmp"))
-                        {
-                            ret = true;
-                        }
-                    }
-                }
-            }
-            return ret;
-        }
-        private Image ScaleImage(Image image)
-        {
-            int height = this.pbxItem.Height;
-            double ratio = (double)height / image.Height;
-            int newWidth = (int)(image.Width * ratio);
-            int newHeight = (int)(image.Height * ratio);
-            Bitmap newImage = new Bitmap(newWidth, newHeight);
-            using (Graphics g = Graphics.FromImage(newImage))
-            {
-                g.DrawImage(image, 0, 0, newWidth, newHeight);
-            }
-            return newImage;
-        }
-        private byte[] ImageToBinary(Image img)
-        {
-            using (var ms = new MemoryStream())
-            {
-                img.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
-                return ms.ToArray();
-            }
-        }
-
         /*Functions*/
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            byte[] img = null;
-            if (image != null)
-            {
-                img = ImageToBinary(image);
-            }
+            
             try
             {
-                if(img == null)
-                {
-                    throw new InvalidImageException();
-                }
-
+                
                 List<string> errors = new List<string>();
                 Helper.ValidateInteger(tbRoomShop.Text, "RoomShop", errors);
                 Helper.ValidateInteger(tbRoomStorage.Text, "RoomStorage", errors);
@@ -187,11 +92,11 @@ namespace PRJMediaBazaar
                     throw new Exception("Room in shop needs to be less than 50% of room in storage!");
                 }
                 _itemControl.AddAnItem(category,subcategory ,brand, model, description,stock_price ,price,restock_state,
-                    roomShop, roomStorage, minAmount, img);
+                    roomShop, roomStorage, minAmount);
                 _wh.LoadItemsLESGOO();
                 _wh.LoadRestockingList();
 
-                StatusFunction("Item added!", -6, -1, 900, 28, Color.Red);
+                StatusFunction("Item added!", -6, -1, 900, 28, Color.Green);
                 if(WRHSHome.restock == null)
                 {
                     WRHSHome.restock = new Restock(_wh.GetItemControl());
@@ -201,18 +106,14 @@ namespace PRJMediaBazaar
 
                 //add the item through itemControl.
             }
-            catch (InvalidImageException)
-            {
-                StatusFunction("You should provide an image !", -6, -1, 900, 28, Color.Red);
-            }
             catch (InputException ex)
             {
                 StatusFunction(ex.ToString(), -6, -1, 900, 28, Color.Red);
             }
-            //catch (Exception ex)
-            //{
-            //    StatusFunction(ex.Message, -6, -1, 900, 28, Color.Red);
-            //}
+            catch (Exception ex)
+            {
+                StatusFunction(ex.Message, -6, -1, 900, 28, Color.Red);
+            }
             
         }
         private void godTimer_Tick(object sender, EventArgs e)

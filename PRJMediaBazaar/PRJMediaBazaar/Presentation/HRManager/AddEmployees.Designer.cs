@@ -62,6 +62,8 @@ namespace PRJMediaBazaar
             this.godTimer = new System.Windows.Forms.Timer(this.components);
             this.tbDaysOffLeft = new System.Windows.Forms.TextBox();
             this.label13 = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
+            this.lblTitle1 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -187,6 +189,7 @@ namespace PRJMediaBazaar
             // 
             // btnAddEmployee
             // 
+            this.btnAddEmployee.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAddEmployee.Location = new System.Drawing.Point(178, 412);
             this.btnAddEmployee.Margin = new System.Windows.Forms.Padding(2);
             this.btnAddEmployee.Name = "btnAddEmployee";
@@ -336,7 +339,9 @@ namespace PRJMediaBazaar
             // 
             // panel1
             // 
-            this.panel1.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(45)))), ((int)(((byte)(66)))));
+            this.panel1.Controls.Add(this.label14);
+            this.panel1.Controls.Add(this.lblTitle1);
             this.panel1.Controls.Add(this.lblTitle);
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Margin = new System.Windows.Forms.Padding(2);
@@ -347,10 +352,10 @@ namespace PRJMediaBazaar
             // lblTitle
             // 
             this.lblTitle.AutoSize = true;
-            this.lblTitle.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.lblTitle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(45)))), ((int)(((byte)(66)))));
             this.lblTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.lblTitle.ForeColor = System.Drawing.Color.White;
-            this.lblTitle.Location = new System.Drawing.Point(233, 12);
+            this.lblTitle.Location = new System.Drawing.Point(242, 12);
             this.lblTitle.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblTitle.Name = "lblTitle";
             this.lblTitle.Size = new System.Drawing.Size(167, 26);
@@ -381,11 +386,37 @@ namespace PRJMediaBazaar
             this.label13.TabIndex = 57;
             this.label13.Text = "Days Off  :";
             // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(45)))), ((int)(((byte)(66)))));
+            this.label14.Font = new System.Drawing.Font("Microsoft YaHei", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label14.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(35)))), ((int)(((byte)(60)))));
+            this.label14.Location = new System.Drawing.Point(85, 9);
+            this.label14.Margin = new System.Windows.Forms.Padding(0);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(108, 30);
+            this.label14.TabIndex = 7;
+            this.label14.Text = "BAZAAR";
+            // 
+            // lblTitle1
+            // 
+            this.lblTitle1.AutoSize = true;
+            this.lblTitle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(45)))), ((int)(((byte)(66)))));
+            this.lblTitle1.Font = new System.Drawing.Font("Microsoft YaHei", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.lblTitle1.ForeColor = System.Drawing.SystemColors.Control;
+            this.lblTitle1.Location = new System.Drawing.Point(2, 9);
+            this.lblTitle1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblTitle1.Name = "lblTitle1";
+            this.lblTitle1.Size = new System.Drawing.Size(90, 30);
+            this.lblTitle1.TabIndex = 6;
+            this.lblTitle1.Text = "MEDIA";
+            // 
             // AddEmployees
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.ClientSize = new System.Drawing.Size(613, 496);
             this.Controls.Add(this.label13);
             this.Controls.Add(this.tbDaysOffLeft);
@@ -461,5 +492,7 @@ namespace PRJMediaBazaar
         private System.Windows.Forms.Timer godTimer;
         private System.Windows.Forms.TextBox tbDaysOffLeft;
         private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Label lblTitle1;
     }
 }

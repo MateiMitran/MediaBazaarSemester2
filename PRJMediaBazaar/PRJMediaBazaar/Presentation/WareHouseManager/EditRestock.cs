@@ -16,11 +16,16 @@ namespace PRJMediaBazaar.Presentation.WareHouseManager
         private Item _item;
         private ItemControl _itemControl;
         private WRHSHome _whs;
+        private List<Button> buttons;
+        private List<Timer> timers;
         public EditRestock(Item item, WRHSHome whs)
         {
             InitializeComponent();
             _item = item;
             _whs = whs;
+
+            buttons = new List<Button>();
+            timers = new List<Timer>();
 
             this.lblItemInfo.Text = _item.ToString();
             this.lbItemInfo.Items.Add($"Available in shop: {_item.InShopAmount}/{_item.RoomInShop} items");
@@ -28,7 +33,22 @@ namespace PRJMediaBazaar.Presentation.WareHouseManager
             this.lbItemInfo.Items.Add($"MAX to restock: {_item.GetMaxFreeSpaceInStorage()} items");
             this.tbOldAmount.Text = _item.AmountToRestock.ToString();
         }
-
+        public void StatusFunction(String text, int x, int y, int width, int height, Color color)
+        {
+            Button newButton = new Button();
+            newButton.Location = new Point(x, y);
+            newButton.Width = width;
+            newButton.Height = height;
+            newButton.Enabled = false;
+            newButton.BackColor = color;
+            newButton.Text = text;
+            this.Controls.Add(newButton);
+            newButton.BringToFront();
+            buttons.Add(newButton);
+            Timer temp = new Timer();
+            timers.Add(temp);
+            temp.Start();
+        }
         private void btnChangeAmount_Click(object sender, EventArgs e)
         {
             List<string> errors = new List<string>();
@@ -36,7 +56,7 @@ namespace PRJMediaBazaar.Presentation.WareHouseManager
 
             if (errors.Any())
             {
-                MessageBox.Show("Please enter valid number");
+                StatusFunction("Please enter a valid number!", -6, -1, 900, 28, Color.Red);
             }
             else
             {
@@ -50,11 +70,23 @@ namespace PRJMediaBazaar.Presentation.WareHouseManager
                 }
                 else
                 {
-                    MessageBox.Show("Not enough available space in storage");
+                    StatusFunction("Not enough available space in storage!", -6, -1, 900, 28, Color.Red);
                 }
             } 
 
           
+        }
+
+        private void godTimer_Tick(object sender, EventArgs e)
+        {
+            for (int i = 0; i < buttons.Count; i++)
+            {
+                if (timers[i].Enabled == true)
+                {
+                    timers[i].Enabled = false;
+                    buttons[i].Visible = false;
+                }
+            }
         }
     }
 }

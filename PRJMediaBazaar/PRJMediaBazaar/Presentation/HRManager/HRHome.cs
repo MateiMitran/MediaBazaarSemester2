@@ -61,6 +61,8 @@ namespace PRJMediaBazaar
             }
             LoadDayOffRequests();
             LoadSickReports();
+            
+
 
             if (sickReports.Count > 0)
             {
@@ -580,36 +582,15 @@ namespace PRJMediaBazaar
             }
             return -1;
         }
-
-        private void btnAddPromotionPoints_Click(object sender, EventArgs e)
-        {
-           
-        }
-
-        private void btnAddLatePoints_Click(object sender, EventArgs e)
-        {
-        }
-
         private void HRHome_FormClosing(object sender, FormClosingEventArgs e)
         {
             _loginForm.Close();
         }
-
-        private void cbAllEmployees_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
         public void AddNoteToEmployee(Employee temp, String note)
 
         {
             temp.Note = note;
         }
-        private void button1_Click(object sender, EventArgs e)
-        {
-            
-        }
-
         private void panelSchedule_Paint_1(object sender, PaintEventArgs e)
         {
 
@@ -658,12 +639,6 @@ namespace PRJMediaBazaar
                 this.lbSickReports.Items.Add(sr);
             }
         }
-
-        private void btnDenyDayOff_Click(object sender, EventArgs e)
-        {
-           
-        }
-
         private void cbSchedule_DrawItem(object sender, DrawItemEventArgs e)
         {
             // Draw the background 
@@ -804,12 +779,6 @@ namespace PRJMediaBazaar
                 }
             }
         }
-
-        private void tbEmployee_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void cbEmployees_SelectedIndexChanged(object sender, EventArgs e)
         {
             try
@@ -828,21 +797,9 @@ namespace PRJMediaBazaar
                 StatusFunction("No employee found!", -6, -1, 900, 28, Color.Red);
             }
         }
-
-        private void btnDeniedRequests_Click(object sender, EventArgs e)
-        {
-           
-        }
-
-        private void btnConfirmedRequests_Click(object sender, EventArgs e)
-        {
-           
-
-        }
-
         private void btnOldReports_Click(object sender, EventArgs e)
         {
-            RequestsOverview form = new RequestsOverview(_absenceControl.GetOldSickReports(), "Old Reports:");
+            RequestsOverview form = new RequestsOverview(_absenceControl.GetOldSickReports(), "Old Reports");
             form.Show();
         }
 
@@ -880,11 +837,8 @@ namespace PRJMediaBazaar
                 editNote.Show();
             }
         }
-
-        private void btnConfirmDayOff_Click_1(object sender, EventArgs e)
+        private void btnConfirm_Click(object sender, EventArgs e)
         {
-            /* CONFIRM DAY OFF REQUEST */
-
             DayOff req = (DayOff)this.lbDayOff.SelectedItem;
 
             if (req != null)
@@ -907,7 +861,7 @@ namespace PRJMediaBazaar
             }
         }
 
-        private void sd_Click(object sender, EventArgs e)
+        private void button1_Click_1(object sender, EventArgs e)
         {
             try
             {
@@ -926,25 +880,26 @@ namespace PRJMediaBazaar
             }
             catch (Exception ex)
             {
-
+                StatusFunction("An error has occured!", -6, -1, 900, 28, Color.Red);
             }
         }
 
-        private void btnDeniedRequests_Click_1(object sender, EventArgs e)
+        private void btnShowConfirmedReq_Click(object sender, EventArgs e)
         {
-            RequestsOverview form = new RequestsOverview(_absenceControl.GetDeniedDaysOff(), "Denied Requests:");
+            RequestsOverview form = new RequestsOverview(_absenceControl.GetConfirmedDaysOff(), "Confirmed Requests");
             form.Show();
         }
 
-        private void btnConfirmedRequests_Click_1(object sender, EventArgs e)
+        private void button2_Click(object sender, EventArgs e)
         {
-            RequestsOverview form = new RequestsOverview(_absenceControl.GetConfirmedDaysOff(), "Confirmed Requests:");
+            RequestsOverview form = new RequestsOverview(_absenceControl.GetDeniedDaysOff(), "Denied Requests");
             form.Show();
         }
 
-        private void btnDeniedRequests_MouseEnter(object sender, EventArgs e)
+        private void pictureBox1_Click(object sender, EventArgs e)
         {
-            this.btnDeniedRequests.ForeColor = Color.Red;
+            this.Hide();
+            _loginForm.Show();
         }
     }
 }

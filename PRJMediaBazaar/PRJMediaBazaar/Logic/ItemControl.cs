@@ -100,14 +100,13 @@ namespace PRJMediaBazaar.Logic
 
         public void AddAnItem(String category, String subcategory ,String brand, String model, String description, double stock_price
                     , double price, String restock_state, int roomInShop, int roomInStorage,
-                    int minimumAmountInStock, byte[] image)
+                    int minimumAmountInStock)
         {
             itemDAL.AddItem(category,subcategory ,brand,model,description,stock_price.ToString(), price.ToString(), restock_state,
-                roomInShop,roomInStorage,minimumAmountInStock,image);
+                roomInShop,roomInStorage,minimumAmountInStock);
             int id = itemDAL.LastItemId();
             Item temp = new Item(id, category,subcategory ,brand, model, description, stock_price, price, restock_state,
                 roomInShop, roomInStorage, minimumAmountInStock,0, 0);
-            temp.Image = image;
             items.Add(temp);
         }
         public bool DeleteAnItem(int id)
@@ -128,10 +127,10 @@ namespace PRJMediaBazaar.Logic
         }
         public bool UpdateAnItem(int id, String category, String subcategory ,String brand, String model, String description, double stock_price
                     , double price, String restock_state, int roomInShop, int roomInStorage,
-                    int minimumAmountInStock, byte[] image)
+                    int minimumAmountInStock)
         {
             if (itemDAL.UpdateItem(category, subcategory, brand, model, description, stock_price.ToString() , price.ToString(), restock_state,
-                roomInShop, roomInStorage, minimumAmountInStock,image, id) ==true)
+                roomInShop, roomInStorage, minimumAmountInStock, id) ==true)
             {
                 for (int i = 0; i < items.Count; i++)
                 {
@@ -216,12 +215,6 @@ namespace PRJMediaBazaar.Logic
             return temp;
         }
         public Item[] Items { get { return this.items.ToArray(); } }
-
-        public byte[] GetItemImage(int itemID)
-        {
-            return this.itemDAL.GetItemImage(itemID);
-        }
-      
         public List<String> GetBrands(String subcategory)
         {
             return itemDAL.GetBrandsBySubcategory(subcategory);

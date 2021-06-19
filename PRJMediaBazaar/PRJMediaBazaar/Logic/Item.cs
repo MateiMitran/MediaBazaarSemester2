@@ -24,7 +24,6 @@ namespace PRJMediaBazaar.Logic
              RoomInShop = roomInShop; RoomInStorage = roomInStorage;
             MinimumAmountInStock = minimumAmountInStock; 
             InShopAmount = inShopAmount; InStorageAmount = inStorageAmount;
-            Image = null;
             AmountToRestock = GetMaxFreeSpaceInStorage();
             ScannedAmount = 0;
             Missing = false;
@@ -44,7 +43,6 @@ namespace PRJMediaBazaar.Logic
        public int MinimumAmountInStock { get; set; }
        public int InShopAmount { get; set; }
        public int InStorageAmount { get; set; }
-       public byte[] Image { get; set; }
        public int AmountToRestock { get; set; }
         public int ScannedAmount { get ; set; }
         public bool Missing { get; set; }

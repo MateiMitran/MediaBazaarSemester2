@@ -110,7 +110,7 @@
             // PanelTableScrollAvailable
             // 
             this.PanelTableScrollAvailable.AutoScroll = true;
-            this.PanelTableScrollAvailable.BackColor = System.Drawing.Color.Silver;
+            this.PanelTableScrollAvailable.BackColor = System.Drawing.Color.White;
             this.PanelTableScrollAvailable.Controls.Add(this.AvailableTable);
             this.PanelTableScrollAvailable.Location = new System.Drawing.Point(10, 90);
             this.PanelTableScrollAvailable.Name = "PanelTableScrollAvailable";
@@ -141,7 +141,7 @@
             // PanelTableScrollUnavailable
             // 
             this.PanelTableScrollUnavailable.AutoScroll = true;
-            this.PanelTableScrollUnavailable.BackColor = System.Drawing.Color.Silver;
+            this.PanelTableScrollUnavailable.BackColor = System.Drawing.Color.White;
             this.PanelTableScrollUnavailable.Controls.Add(this.UnavailableTable);
             this.PanelTableScrollUnavailable.Location = new System.Drawing.Point(793, 90);
             this.PanelTableScrollUnavailable.Name = "PanelTableScrollUnavailable";
@@ -273,6 +273,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.ClientSize = new System.Drawing.Size(1376, 458);
             this.Controls.Add(this.PanelTableScrollUnavailable);
             this.Controls.Add(this.PanelTableScrollAvailable);

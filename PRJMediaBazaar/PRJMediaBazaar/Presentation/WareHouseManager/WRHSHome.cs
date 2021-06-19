@@ -45,8 +45,8 @@ namespace PRJMediaBazaar
             manager = whmanager;
             StockerHome.UpdateWarehouseInfo += LoadRestockingList;
             StockerHome.ChangeColorLabel += ChangeColor;
-            this.cbCategories_Restock.Items.AddRange(this.itemControl.GetCategories().ToArray());
-            this.cbSubcategory_Restocks.Enabled = false;
+            this.pnlItems.BringToFront();
+            this.pnlNavbar.BringToFront();
            
         }
 
@@ -61,11 +61,7 @@ namespace PRJMediaBazaar
 
             if (restock.GetItemsForRestock().Count() > 0)
             {
-                if (this.lblRestock.ForeColor == Color.Gray)
-                {
-                    this.lblRestock.ForeColor = Color.Red;
-                }
-                this.lblRestock.ForeColor = Color.Red;
+                this.lblRestock.BackColor = Color.Red;
             }
         }
         public void LoadRestockingList(String category)
@@ -101,16 +97,12 @@ namespace PRJMediaBazaar
             this.lblTotalRestockCost.Text = restock.GetTotalCost().ToString() + " euro";
             if (restock.GetItemsForRestock().Count() > 0)
             {
-                if (this.lblRestock.ForeColor == Color.Gray)
-                {
-                    this.lblRestock.ForeColor = Color.Red;
-                }
-                this.lblRestock.ForeColor = Color.Red;
+                this.lblRestock.BackColor = Color.Red;
             }
         }
         public void ChangeColor()
         {
-            this.lblRestock.ForeColor = Color.Red;
+            this.lblRestock.BackColor = Color.Red;
         }
 
    
@@ -132,57 +124,47 @@ namespace PRJMediaBazaar
         }
         public void LoadItemsLESGOO()
         {
+            this.cbCategories.Items.Clear();
             List<String> categories = this.itemControl.GetCategories();
             this.cbCategories.Items.AddRange(categories.ToArray());
         }
         private void lblItems_Click(object sender, EventArgs e)
         {
             this.pnlItems.Visible = true;
-            this.pnlStatistics.Visible = false;
             this.pnlRestock.Visible = false;
-            this.pnlAccount.Visible = false;
             this.lblItems.ForeColor = Color.Gray;
-            this.lblStatistics.ForeColor = Color.White;
             this.lblRestock.ForeColor = Color.White;
-            this.lblAccount.ForeColor = Color.White;
+
             this.pnlItems.BringToFront();
+            this.pnlNavbar.BringToFront();
         }
 
         private void lblStatistics_Click(object sender, EventArgs e)
         {
             this.pnlItems.Visible = false;
-            this.pnlStatistics.Visible = true;
             this.pnlRestock.Visible = false;
-            this.pnlAccount.Visible = false;
             this.lblItems.ForeColor = Color.White;
-            this.lblStatistics.ForeColor = Color.Gray;
             this.lblRestock.ForeColor = Color.White;
-            this.lblAccount.ForeColor = Color.White;
         }
 
         private void lblRestock_Click(object sender, EventArgs e)
         {
             this.pnlItems.Visible = false;
-            this.pnlStatistics.Visible = false;
             this.pnlRestock.Visible = true;
-            this.pnlAccount.Visible = false;
+
             this.lblItems.ForeColor = Color.White;
-            this.lblStatistics.ForeColor = Color.White;
             this.lblRestock.ForeColor = Color.Gray;
-            this.lblAccount.ForeColor = Color.White;
+
             this.pnlRestock.BringToFront();
+            this.pnlNavbar.BringToFront();
         }
 
         private void lblAccount_Click(object sender, EventArgs e)
         {
             this.pnlItems.Visible = false;
-            this.pnlStatistics.Visible = false;
             this.pnlRestock.Visible = false;
-            this.pnlAccount.Visible = true;
             this.lblItems.ForeColor = Color.White;
-            this.lblStatistics.ForeColor = Color.White;
             this.lblRestock.ForeColor = Color.White;
-            this.lblAccount.ForeColor = Color.Gray;
         }
 
         private void WRHSHome_Load(object sender, EventArgs e)
@@ -365,7 +347,7 @@ namespace PRJMediaBazaar
             }
             else
             {
-                MessageBox.Show("Please selet an item");
+                StatusFunction("Please select an item!", -6, -1, 900, 28, Color.Red);
             }
 
         }
@@ -436,26 +418,6 @@ namespace PRJMediaBazaar
 
         }
 
-        private void cbCategories_Restock_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            LoadRestockingList(this.cbCategories_Restock.Text);
-            this.cbSubcategory_Restocks.Enabled = true;
-            this.cbSubcategory_Restocks.Items.Clear();
-            this.cbSubcategory_Restocks.Items.AddRange(this.itemControl.GetSubcategories(this.cbCategories_Restock.Text).ToArray());
-        }
-
-        private void cbSubcategory_Restocks_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            LoadRestockingListBySubcategory(this.cbSubcategory_Restocks.Text);
-        }
-
-        private void lblCancel_Click(object sender, EventArgs e)
-        {
-            LoadRestockingList();
-            this.cbCategories_Restock.Text = "";
-            this.cbSubcategory_Restocks.Text = "";
-        }
-
         private void label10_Click(object sender, EventArgs e)
         {
             this.cbBrand.Text = "";
@@ -464,9 +426,10 @@ namespace PRJMediaBazaar
             this.lbItems.Items.Clear();
         }
 
-        private void pnlNavbar_Paint(object sender, PaintEventArgs e)
+        private void pictureBox1_Click(object sender, EventArgs e)
         {
-
+            this.Hide();
+            login.Show();
         }
     }
 }
