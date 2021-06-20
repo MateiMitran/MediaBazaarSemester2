@@ -258,7 +258,8 @@ namespace PRJMediaBazaar.Data
                     {
                         InsertRestockItem(restockId, i.ID, i.AmountToRestock);
                         i.Restock_State = "checking";
-                        
+                        UpdateItemState(i.ID, "checking");
+
                     }
                     return true;
                 }
