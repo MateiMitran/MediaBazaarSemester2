@@ -248,8 +248,9 @@ namespace PRJMediaBazaar.Data
         {
             try
             {
+                string format = "yyyy-MM-dd";
                 String sql = "INSERT INTO restocks (manager_id, date, total_price) VALUES(@managerId, @date, @totalPrice) ;";
-                String[] parameters = new String[] { managerId.ToString(), DateTime.Now.ToString(), restock.GetTotalCost().ToString()};
+                String[] parameters = new String[] { managerId.ToString(), DateTime.Now.Date.ToString(format), restock.GetTotalCost().ToString()};
                 if (executeNonQuery(sql, parameters) != null)
                 {
                     CloseConnection();
@@ -370,8 +371,9 @@ namespace PRJMediaBazaar.Data
         {
             try
             {
+                string format = "yyyy-MM-dd";
                 String sql = "INSERT INTO orders (cashier_id, date, total_price) VALUES(@cashierId, @date, @totalPrice) ;";
-                String[] parameters = new String[] { cashierId.ToString(), DateTime.Now.ToString(), order.GetTotalPrice().ToString() };
+                String[] parameters = new String[] { cashierId.ToString(), DateTime.Now.Date.ToString(format), order.GetTotalPrice().ToString() };
                 if (executeNonQuery(sql, parameters) != null)
                 {
                     CloseConnection();
