@@ -184,6 +184,9 @@ namespace PRJMediaBazaar
             // 
             // btnScan
             // 
+            this.btnScan.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(151)))), ((int)(((byte)(172)))));
+            this.btnScan.FlatAppearance.BorderSize = 0;
+            this.btnScan.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnScan.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnScan.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.btnScan.Location = new System.Drawing.Point(429, 470);
@@ -191,7 +194,7 @@ namespace PRJMediaBazaar
             this.btnScan.Size = new System.Drawing.Size(393, 37);
             this.btnScan.TabIndex = 15;
             this.btnScan.Text = "Scan";
-            this.btnScan.UseVisualStyleBackColor = true;
+            this.btnScan.UseVisualStyleBackColor = false;
             this.btnScan.Click += new System.EventHandler(this.btnScan_Click);
             // 
             // lblTotalPrice
@@ -206,13 +209,17 @@ namespace PRJMediaBazaar
             // 
             // btnSell
             // 
+            this.btnSell.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(151)))), ((int)(((byte)(172)))));
+            this.btnSell.FlatAppearance.BorderSize = 0;
+            this.btnSell.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSell.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSell.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.btnSell.Location = new System.Drawing.Point(12, 470);
             this.btnSell.Name = "btnSell";
             this.btnSell.Size = new System.Drawing.Size(398, 37);
             this.btnSell.TabIndex = 17;
             this.btnSell.Text = "Sell";
-            this.btnSell.UseVisualStyleBackColor = true;
+            this.btnSell.UseVisualStyleBackColor = false;
             this.btnSell.Click += new System.EventHandler(this.btnSell_Click);
             // 
             // label6
@@ -250,6 +257,8 @@ namespace PRJMediaBazaar
             this.Controls.Add(this.pnlNavbar);
             this.Controls.Add(this.lbAllItems);
             this.Controls.Add(this.lbScannedItems);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
             this.Name = "CashierHome";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.StockerHome_FormClosing);
             this.pnlNavbar.ResumeLayout(false);

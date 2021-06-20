@@ -71,6 +71,8 @@
             this.ClientSize = new System.Drawing.Size(311, 97);
             this.Controls.Add(this.btnMultipleLogin);
             this.Controls.Add(this.btnSingleLogin);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
             this.Name = "StartupForm";
             this.Text = "StartupForm";
             this.Load += new System.EventHandler(this.StartupForm_Load);

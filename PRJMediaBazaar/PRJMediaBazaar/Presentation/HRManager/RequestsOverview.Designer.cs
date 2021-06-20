@@ -103,6 +103,8 @@
             this.ClientSize = new System.Drawing.Size(800, 397);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.listBox1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
             this.Name = "RequestsOverview";
             this.Text = "RequestsOverview";
             this.panel1.ResumeLayout(false);

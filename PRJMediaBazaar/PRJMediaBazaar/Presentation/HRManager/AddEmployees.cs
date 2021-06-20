@@ -82,7 +82,7 @@ namespace PRJMediaBazaar
                     throw new EmptyComboBoxException();
                 }
                 String jobPosition = this.cbJobPosition.Text;
-                if (this.tbPhone.Text.Length == 0 )
+                if (this.tbPhone.Text.Length == 0 || !Regex.IsMatch(this.tbPhone.Text, @"^\d+$"))
                 {
                     StatusFunction("Enter a valid phone!", -60, -5, 835, 28, Color.Red);
                     throw new InvalidIntException();

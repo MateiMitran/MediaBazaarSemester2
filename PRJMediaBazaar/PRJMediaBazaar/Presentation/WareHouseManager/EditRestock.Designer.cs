@@ -215,6 +215,8 @@
             this.Controls.Add(this.tbOldAmount);
             this.Controls.Add(this.materialLabel1);
             this.Controls.Add(this.lblItemInfo);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
             this.Name = "EditRestock";
             this.Text = "EditRestock";
             this.panel1.ResumeLayout(false);

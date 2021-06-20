@@ -55,6 +55,7 @@ namespace PRJMediaBazaar
             this.materialLabel1 = new MaterialSkin.Controls.MaterialLabel();
             this.btnMoveItems = new MaterialSkin.Controls.MaterialRaisedButton();
             this.pnlExpectedRestocks = new System.Windows.Forms.Panel();
+            this.label10 = new System.Windows.Forms.Label();
             this.lbQuantity = new System.Windows.Forms.Label();
             this.btnConfirm = new System.Windows.Forms.Button();
             this.tbActuallyArrived = new System.Windows.Forms.TextBox();
@@ -66,7 +67,6 @@ namespace PRJMediaBazaar
             this.btnMissingStockArrived = new MaterialSkin.Controls.MaterialRaisedButton();
             this.lbWL = new System.Windows.Forms.ListBox();
             this.godTimer = new System.Windows.Forms.Timer(this.components);
-            this.label10 = new System.Windows.Forms.Label();
             this.pnlNavbar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.pnlDashboard.SuspendLayout();
@@ -384,6 +384,16 @@ namespace PRJMediaBazaar
             this.pnlExpectedRestocks.Size = new System.Drawing.Size(984, 643);
             this.pnlExpectedRestocks.TabIndex = 9;
             // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label10.Location = new System.Drawing.Point(12, 80);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(141, 18);
+            this.label10.TabIndex = 12;
+            this.label10.Text = "Expected Restocks:";
+            // 
             // lbQuantity
             // 
             this.lbQuantity.AutoSize = true;
@@ -396,12 +406,16 @@ namespace PRJMediaBazaar
             // 
             // btnConfirm
             // 
+            this.btnConfirm.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(151)))), ((int)(((byte)(172)))));
+            this.btnConfirm.FlatAppearance.BorderSize = 0;
+            this.btnConfirm.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnConfirm.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnConfirm.Location = new System.Drawing.Point(593, 293);
             this.btnConfirm.Name = "btnConfirm";
-            this.btnConfirm.Size = new System.Drawing.Size(271, 25);
+            this.btnConfirm.Size = new System.Drawing.Size(271, 30);
             this.btnConfirm.TabIndex = 4;
             this.btnConfirm.Text = "Confirm";
-            this.btnConfirm.UseVisualStyleBackColor = true;
+            this.btnConfirm.UseVisualStyleBackColor = false;
             this.btnConfirm.Click += new System.EventHandler(this.btnConfirm_Click);
             // 
             // tbActuallyArrived
@@ -431,6 +445,7 @@ namespace PRJMediaBazaar
             // 
             this.btnQArrived.AutoSize = true;
             this.btnQArrived.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnQArrived.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(151)))), ((int)(((byte)(172)))));
             this.btnQArrived.Depth = 0;
             this.btnQArrived.Icon = null;
             this.btnQArrived.Location = new System.Drawing.Point(593, 129);
@@ -440,7 +455,7 @@ namespace PRJMediaBazaar
             this.btnQArrived.Size = new System.Drawing.Size(174, 36);
             this.btnQArrived.TabIndex = 1;
             this.btnQArrived.Text = "all quantity arrived";
-            this.btnQArrived.UseVisualStyleBackColor = true;
+            this.btnQArrived.UseVisualStyleBackColor = false;
             this.btnQArrived.Click += new System.EventHandler(this.btnQArrived_Click);
             // 
             // lbExpRestocks
@@ -507,16 +522,6 @@ namespace PRJMediaBazaar
             this.godTimer.Interval = 2500;
             this.godTimer.Tick += new System.EventHandler(this.godTimer_Tick);
             // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.Location = new System.Drawing.Point(12, 80);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(141, 18);
-            this.label10.TabIndex = 12;
-            this.label10.Text = "Expected Restocks:";
-            // 
             // StockerHome
             // 
             this.ClientSize = new System.Drawing.Size(984, 643);
@@ -525,6 +530,8 @@ namespace PRJMediaBazaar
             this.Controls.Add(this.pnRR);
             this.Controls.Add(this.pnlWaitingList);
             this.Controls.Add(this.pnlExpectedRestocks);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
             this.Name = "StockerHome";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.StockerHome_FormClosing);
             this.pnlNavbar.ResumeLayout(false);

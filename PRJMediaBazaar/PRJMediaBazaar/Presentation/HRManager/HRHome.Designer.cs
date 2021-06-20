@@ -310,23 +310,30 @@ namespace PRJMediaBazaar
             // 
             // btnMarkAsSeen
             // 
-            this.btnMarkAsSeen.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnMarkAsSeen.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(151)))), ((int)(((byte)(172)))));
+            this.btnMarkAsSeen.FlatAppearance.BorderSize = 0;
+            this.btnMarkAsSeen.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnMarkAsSeen.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnMarkAsSeen.Location = new System.Drawing.Point(311, 490);
             this.btnMarkAsSeen.Name = "btnMarkAsSeen";
             this.btnMarkAsSeen.Size = new System.Drawing.Size(249, 32);
             this.btnMarkAsSeen.TabIndex = 29;
             this.btnMarkAsSeen.Text = "Mark As Seen";
-            this.btnMarkAsSeen.UseVisualStyleBackColor = true;
+            this.btnMarkAsSeen.UseVisualStyleBackColor = false;
             this.btnMarkAsSeen.Click += new System.EventHandler(this.btnMarkAsSeen_Click_1);
             // 
             // btnOldReports
             // 
+            this.btnOldReports.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(151)))), ((int)(((byte)(172)))));
+            this.btnOldReports.FlatAppearance.BorderSize = 0;
+            this.btnOldReports.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnOldReports.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnOldReports.Location = new System.Drawing.Point(56, 97);
             this.btnOldReports.Name = "btnOldReports";
             this.btnOldReports.Size = new System.Drawing.Size(114, 26);
             this.btnOldReports.TabIndex = 29;
             this.btnOldReports.Text = "Old Reports";
-            this.btnOldReports.UseVisualStyleBackColor = true;
+            this.btnOldReports.UseVisualStyleBackColor = false;
             this.btnOldReports.Click += new System.EventHandler(this.btnOldReports_Click);
             // 
             // label7
@@ -367,46 +374,58 @@ namespace PRJMediaBazaar
             // 
             // button2
             // 
+            this.button2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(151)))), ((int)(((byte)(172)))));
+            this.button2.FlatAppearance.BorderSize = 0;
+            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button2.Location = new System.Drawing.Point(54, 84);
+            this.button2.Location = new System.Drawing.Point(54, 81);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(175, 36);
             this.button2.TabIndex = 36;
             this.button2.Text = "Denied Requests";
-            this.button2.UseVisualStyleBackColor = true;
+            this.button2.UseVisualStyleBackColor = false;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // btnShowConfirmedReq
             // 
+            this.btnShowConfirmedReq.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(151)))), ((int)(((byte)(172)))));
+            this.btnShowConfirmedReq.FlatAppearance.BorderSize = 0;
+            this.btnShowConfirmedReq.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnShowConfirmedReq.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnShowConfirmedReq.Location = new System.Drawing.Point(632, 84);
             this.btnShowConfirmedReq.Name = "btnShowConfirmedReq";
             this.btnShowConfirmedReq.Size = new System.Drawing.Size(175, 36);
             this.btnShowConfirmedReq.TabIndex = 35;
             this.btnShowConfirmedReq.Text = "Confirmed Requests";
-            this.btnShowConfirmedReq.UseVisualStyleBackColor = true;
+            this.btnShowConfirmedReq.UseVisualStyleBackColor = false;
             this.btnShowConfirmedReq.Click += new System.EventHandler(this.btnShowConfirmedReq_Click);
             // 
             // button1
             // 
+            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(151)))), ((int)(((byte)(172)))));
+            this.button1.FlatAppearance.BorderSize = 0;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button1.Location = new System.Drawing.Point(667, 487);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(140, 35);
             this.button1.TabIndex = 34;
             this.button1.Text = "Deny";
-            this.button1.UseVisualStyleBackColor = true;
+            this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click_1);
             // 
             // btnConfirm
             // 
+            this.btnConfirm.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(151)))), ((int)(((byte)(172)))));
+            this.btnConfirm.FlatAppearance.BorderSize = 0;
+            this.btnConfirm.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnConfirm.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnConfirm.Location = new System.Drawing.Point(54, 483);
             this.btnConfirm.Name = "btnConfirm";
             this.btnConfirm.Size = new System.Drawing.Size(140, 35);
             this.btnConfirm.TabIndex = 33;
             this.btnConfirm.Text = "Confirm";
-            this.btnConfirm.UseVisualStyleBackColor = true;
+            this.btnConfirm.UseVisualStyleBackColor = false;
             this.btnConfirm.Click += new System.EventHandler(this.btnConfirm_Click);
             // 
             // label6
@@ -461,12 +480,15 @@ namespace PRJMediaBazaar
             // 
             // btnGenerateSchedule
             // 
+            this.btnGenerateSchedule.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(151)))), ((int)(((byte)(172)))));
+            this.btnGenerateSchedule.FlatAppearance.BorderSize = 0;
+            this.btnGenerateSchedule.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnGenerateSchedule.Location = new System.Drawing.Point(137, 123);
             this.btnGenerateSchedule.Name = "btnGenerateSchedule";
             this.btnGenerateSchedule.Size = new System.Drawing.Size(135, 34);
             this.btnGenerateSchedule.TabIndex = 38;
             this.btnGenerateSchedule.Text = "Generate Schedule";
-            this.btnGenerateSchedule.UseVisualStyleBackColor = true;
+            this.btnGenerateSchedule.UseVisualStyleBackColor = false;
             this.btnGenerateSchedule.Click += new System.EventHandler(this.btnGenerateSchedule_Click);
             // 
             // lblPositionNeeded
@@ -639,13 +661,16 @@ namespace PRJMediaBazaar
             // 
             // btnChangeNeededPosition
             // 
+            this.btnChangeNeededPosition.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(151)))), ((int)(((byte)(172)))));
+            this.btnChangeNeededPosition.FlatAppearance.BorderSize = 0;
+            this.btnChangeNeededPosition.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnChangeNeededPosition.Location = new System.Drawing.Point(618, 63);
             this.btnChangeNeededPosition.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
             this.btnChangeNeededPosition.Name = "btnChangeNeededPosition";
             this.btnChangeNeededPosition.Size = new System.Drawing.Size(110, 60);
             this.btnChangeNeededPosition.TabIndex = 11;
             this.btnChangeNeededPosition.Text = "Change needed position";
-            this.btnChangeNeededPosition.UseVisualStyleBackColor = true;
+            this.btnChangeNeededPosition.UseVisualStyleBackColor = false;
             this.btnChangeNeededPosition.Click += new System.EventHandler(this.btnChangeNeededPosition_Click);
             // 
             // lblWeek
@@ -675,12 +700,15 @@ namespace PRJMediaBazaar
             // 
             // btnDeleteSchedule
             // 
+            this.btnDeleteSchedule.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(151)))), ((int)(((byte)(172)))));
+            this.btnDeleteSchedule.FlatAppearance.BorderSize = 0;
+            this.btnDeleteSchedule.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnDeleteSchedule.Location = new System.Drawing.Point(279, 123);
             this.btnDeleteSchedule.Name = "btnDeleteSchedule";
             this.btnDeleteSchedule.Size = new System.Drawing.Size(135, 34);
             this.btnDeleteSchedule.TabIndex = 38;
             this.btnDeleteSchedule.Text = "Empty Schedule";
-            this.btnDeleteSchedule.UseVisualStyleBackColor = true;
+            this.btnDeleteSchedule.UseVisualStyleBackColor = false;
             this.btnDeleteSchedule.Click += new System.EventHandler(this.btnDeleteSchedule_Click);
             // 
             // pnlNavbar
@@ -738,7 +766,9 @@ namespace PRJMediaBazaar
             this.Controls.Add(this.pnlDayOff);
             this.Controls.Add(this.panelSchedule);
             this.Controls.Add(this.panelSickReports);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Margin = new System.Windows.Forms.Padding(2);
+            this.MaximizeBox = false;
             this.Name = "HRHome";
             this.Text = "HRHome";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.HRHome_FormClosing);

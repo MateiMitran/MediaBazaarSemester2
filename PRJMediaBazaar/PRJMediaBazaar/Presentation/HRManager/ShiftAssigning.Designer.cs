@@ -292,6 +292,8 @@
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.lblPosition);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
             this.Name = "ShiftAssigning";
             this.Text = "ShiftAssigning";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.ShiftAssigning_FormClosed);

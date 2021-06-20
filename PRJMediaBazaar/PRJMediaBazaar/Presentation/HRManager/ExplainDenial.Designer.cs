@@ -31,23 +31,26 @@
             this.components = new System.ComponentModel.Container();
             this.btnConfirm = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.tbExplain = new System.Windows.Forms.TextBox();
-            this.godTimer = new System.Windows.Forms.Timer(this.components);
             this.label8 = new System.Windows.Forms.Label();
             this.lblTitle1 = new System.Windows.Forms.Label();
+            this.tbExplain = new System.Windows.Forms.TextBox();
+            this.godTimer = new System.Windows.Forms.Timer(this.components);
             this.label1 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnConfirm
             // 
+            this.btnConfirm.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(151)))), ((int)(((byte)(172)))));
+            this.btnConfirm.FlatAppearance.BorderSize = 0;
+            this.btnConfirm.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnConfirm.Location = new System.Drawing.Point(231, 330);
             this.btnConfirm.Margin = new System.Windows.Forms.Padding(2);
             this.btnConfirm.Name = "btnConfirm";
             this.btnConfirm.Size = new System.Drawing.Size(151, 34);
             this.btnConfirm.TabIndex = 63;
             this.btnConfirm.Text = "Send";
-            this.btnConfirm.UseVisualStyleBackColor = true;
+            this.btnConfirm.UseVisualStyleBackColor = false;
             this.btnConfirm.Click += new System.EventHandler(this.btnConfirm_Click_1);
             // 
             // panel1
@@ -60,22 +63,6 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(602, 48);
             this.panel1.TabIndex = 62;
-            // 
-            // tbExplain
-            // 
-            this.tbExplain.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.tbExplain.Location = new System.Drawing.Point(6, 85);
-            this.tbExplain.Margin = new System.Windows.Forms.Padding(2);
-            this.tbExplain.Multiline = true;
-            this.tbExplain.Name = "tbExplain";
-            this.tbExplain.Size = new System.Drawing.Size(583, 232);
-            this.tbExplain.TabIndex = 61;
-            // 
-            // godTimer
-            // 
-            this.godTimer.Enabled = true;
-            this.godTimer.Interval = 2500;
-            this.godTimer.Tick += new System.EventHandler(this.godTimer_Tick);
             // 
             // label8
             // 
@@ -103,6 +90,22 @@
             this.lblTitle1.TabIndex = 64;
             this.lblTitle1.Text = "MEDIA";
             // 
+            // tbExplain
+            // 
+            this.tbExplain.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.tbExplain.Location = new System.Drawing.Point(6, 85);
+            this.tbExplain.Margin = new System.Windows.Forms.Padding(2);
+            this.tbExplain.Multiline = true;
+            this.tbExplain.Name = "tbExplain";
+            this.tbExplain.Size = new System.Drawing.Size(583, 232);
+            this.tbExplain.TabIndex = 61;
+            // 
+            // godTimer
+            // 
+            this.godTimer.Enabled = true;
+            this.godTimer.Interval = 2500;
+            this.godTimer.Tick += new System.EventHandler(this.godTimer_Tick);
+            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -117,13 +120,15 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.ClientSize = new System.Drawing.Size(600, 366);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btnConfirm);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.tbExplain);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Margin = new System.Windows.Forms.Padding(2);
+            this.MaximizeBox = false;
             this.Name = "ExplainDenial";
             this.Text = "ExplainDenial";
             this.panel1.ResumeLayout(false);

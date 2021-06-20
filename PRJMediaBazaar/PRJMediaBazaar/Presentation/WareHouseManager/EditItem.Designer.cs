@@ -53,9 +53,9 @@ namespace PRJMediaBazaar
             this.label3 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.pnlNavBar = new System.Windows.Forms.Panel();
+            this.lblTitle = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.lblTitle1 = new System.Windows.Forms.Label();
-            this.lblTitle = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.tbRoomStorage)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbRoomShop)).BeginInit();
             this.pnlNavBar.SuspendLayout();
@@ -63,6 +63,9 @@ namespace PRJMediaBazaar
             // 
             // btnUpdateItem
             // 
+            this.btnUpdateItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(151)))), ((int)(((byte)(172)))));
+            this.btnUpdateItem.FlatAppearance.BorderSize = 0;
+            this.btnUpdateItem.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnUpdateItem.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnUpdateItem.Location = new System.Drawing.Point(29, 421);
             this.btnUpdateItem.Margin = new System.Windows.Forms.Padding(2);
@@ -70,7 +73,7 @@ namespace PRJMediaBazaar
             this.btnUpdateItem.Size = new System.Drawing.Size(441, 34);
             this.btnUpdateItem.TabIndex = 38;
             this.btnUpdateItem.Text = "Update Item";
-            this.btnUpdateItem.UseVisualStyleBackColor = true;
+            this.btnUpdateItem.UseVisualStyleBackColor = false;
             this.btnUpdateItem.Click += new System.EventHandler(this.btnUpdateItem_Click);
             // 
             // godTimer
@@ -331,6 +334,19 @@ namespace PRJMediaBazaar
             this.pnlNavBar.Size = new System.Drawing.Size(545, 46);
             this.pnlNavBar.TabIndex = 75;
             // 
+            // lblTitle
+            // 
+            this.lblTitle.AutoSize = true;
+            this.lblTitle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(45)))), ((int)(((byte)(66)))));
+            this.lblTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.lblTitle.ForeColor = System.Drawing.Color.White;
+            this.lblTitle.Location = new System.Drawing.Point(231, 12);
+            this.lblTitle.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblTitle.Name = "lblTitle";
+            this.lblTitle.Size = new System.Drawing.Size(108, 26);
+            this.lblTitle.TabIndex = 76;
+            this.lblTitle.Text = "Edit Item";
+            // 
             // label2
             // 
             this.label2.AutoSize = true;
@@ -356,19 +372,6 @@ namespace PRJMediaBazaar
             this.lblTitle1.Size = new System.Drawing.Size(90, 30);
             this.lblTitle1.TabIndex = 37;
             this.lblTitle1.Text = "MEDIA";
-            // 
-            // lblTitle
-            // 
-            this.lblTitle.AutoSize = true;
-            this.lblTitle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(45)))), ((int)(((byte)(66)))));
-            this.lblTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.lblTitle.ForeColor = System.Drawing.Color.White;
-            this.lblTitle.Location = new System.Drawing.Point(231, 12);
-            this.lblTitle.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.lblTitle.Name = "lblTitle";
-            this.lblTitle.Size = new System.Drawing.Size(108, 26);
-            this.lblTitle.TabIndex = 76;
-            this.lblTitle.Text = "Edit Item";
             // 
             // EditItem
             // 
@@ -399,7 +402,9 @@ namespace PRJMediaBazaar
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label12);
             this.Controls.Add(this.btnUpdateItem);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Margin = new System.Windows.Forms.Padding(2);
+            this.MaximizeBox = false;
             this.Name = "EditItem";
             this.Text = "EditItem";
             this.Load += new System.EventHandler(this.EditItem_Load);

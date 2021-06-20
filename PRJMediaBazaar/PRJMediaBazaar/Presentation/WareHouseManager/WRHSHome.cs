@@ -63,6 +63,10 @@ namespace PRJMediaBazaar
             {
                 this.lblRestock.BackColor = Color.Red;
             }
+            else
+            {
+                this.lblRestock.BackColor = Color.FromArgb(43, 45, 66);
+            }
         }
         public void LoadRestockingList(String category)
         {

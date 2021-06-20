@@ -178,24 +178,31 @@ namespace PRJMediaBazaar
             // 
             // btnEditAmount
             // 
+            this.btnEditAmount.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(151)))), ((int)(((byte)(172)))));
+            this.btnEditAmount.FlatAppearance.BorderSize = 0;
+            this.btnEditAmount.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnEditAmount.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnEditAmount.Location = new System.Drawing.Point(497, 440);
             this.btnEditAmount.Name = "btnEditAmount";
             this.btnEditAmount.Size = new System.Drawing.Size(139, 31);
             this.btnEditAmount.TabIndex = 9;
             this.btnEditAmount.Text = "Edit Amount";
-            this.btnEditAmount.UseVisualStyleBackColor = true;
+            this.btnEditAmount.UseVisualStyleBackColor = false;
             this.btnEditAmount.Click += new System.EventHandler(this.btnEditAmount_Click);
             // 
             // btnConfirm
             // 
-            this.btnConfirm.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnConfirm.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(151)))), ((int)(((byte)(172)))));
+            this.btnConfirm.FlatAppearance.BorderSize = 0;
+            this.btnConfirm.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnConfirm.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnConfirm.Location = new System.Drawing.Point(30, 486);
             this.btnConfirm.Margin = new System.Windows.Forms.Padding(2);
             this.btnConfirm.Name = "btnConfirm";
             this.btnConfirm.Size = new System.Drawing.Size(606, 32);
             this.btnConfirm.TabIndex = 8;
             this.btnConfirm.Text = "Confirm";
-            this.btnConfirm.UseVisualStyleBackColor = true;
+            this.btnConfirm.UseVisualStyleBackColor = false;
             this.btnConfirm.Click += new System.EventHandler(this.btnConfirm_Click);
             // 
             // lbRestockRequests
@@ -289,7 +296,8 @@ namespace PRJMediaBazaar
             // 
             // btnEditItem
             // 
-            this.btnEditItem.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.btnEditItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(151)))), ((int)(((byte)(172)))));
+            this.btnEditItem.FlatAppearance.BorderSize = 0;
             this.btnEditItem.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnEditItem.Location = new System.Drawing.Point(277, 222);
             this.btnEditItem.Margin = new System.Windows.Forms.Padding(2);
@@ -302,7 +310,8 @@ namespace PRJMediaBazaar
             // 
             // btnAddItem
             // 
-            this.btnAddItem.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.btnAddItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(151)))), ((int)(((byte)(172)))));
+            this.btnAddItem.FlatAppearance.BorderSize = 0;
             this.btnAddItem.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAddItem.Location = new System.Drawing.Point(277, 187);
             this.btnAddItem.Margin = new System.Windows.Forms.Padding(2);

@@ -96,6 +96,9 @@ namespace PRJMediaBazaar
             // 
             // btnAdd
             // 
+            this.btnAdd.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(151)))), ((int)(((byte)(172)))));
+            this.btnAdd.FlatAppearance.BorderSize = 0;
+            this.btnAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAdd.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAdd.Location = new System.Drawing.Point(41, 421);
             this.btnAdd.Margin = new System.Windows.Forms.Padding(2);
@@ -103,7 +106,7 @@ namespace PRJMediaBazaar
             this.btnAdd.Size = new System.Drawing.Size(435, 34);
             this.btnAdd.TabIndex = 16;
             this.btnAdd.Text = "Add Item";
-            this.btnAdd.UseVisualStyleBackColor = true;
+            this.btnAdd.UseVisualStyleBackColor = false;
             this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
             // label6
@@ -401,7 +404,9 @@ namespace PRJMediaBazaar
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Margin = new System.Windows.Forms.Padding(2);
+            this.MaximizeBox = false;
             this.Name = "AddItem";
             this.Text = "AddItem";
             ((System.ComponentModel.ISupportInitialize)(this.tbRoomShop)).EndInit();
