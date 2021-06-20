@@ -133,12 +133,12 @@ namespace PRJMediaBazaar
             this.lblexpectedRestocks.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(45)))), ((int)(((byte)(66)))));
             this.lblexpectedRestocks.Font = new System.Drawing.Font("Microsoft YaHei", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.lblexpectedRestocks.ForeColor = System.Drawing.SystemColors.Control;
-            this.lblexpectedRestocks.Location = new System.Drawing.Point(771, 16);
+            this.lblexpectedRestocks.Location = new System.Drawing.Point(760, 17);
             this.lblexpectedRestocks.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblexpectedRestocks.Name = "lblexpectedRestocks";
-            this.lblexpectedRestocks.Size = new System.Drawing.Size(77, 20);
+            this.lblexpectedRestocks.Size = new System.Drawing.Size(121, 20);
             this.lblexpectedRestocks.TabIndex = 32;
-            this.lblexpectedRestocks.Text = "Expected";
+            this.lblexpectedRestocks.Text = "Expected Items";
             this.lblexpectedRestocks.Click += new System.EventHandler(this.lblexpectedRestocks_Click);
             // 
             // lblWaitingList
