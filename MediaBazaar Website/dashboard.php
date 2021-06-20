@@ -3,6 +3,10 @@
     $functionalityRequirements = ['preferences-functionality', 'absence-functionality', 'schedule-functionality', 'announcements-functionality'];
     
     require_once('includes/header.php');
+
+    if($position == "HRManager" || $position == "CEO"){
+        redirect_to('/account');
+    }
 ?>
     <!-- WELCOME MESSAGE -->
     <p id="welcome-message">Greetings, <span><?php echo $_SESSION['user']->getFirstName(); ?></span></p>

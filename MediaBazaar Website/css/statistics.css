@@ -88,3 +88,9 @@
 h3 {
   text-align: center;
 }
+
+/*CHARTS*/
+.chart-container {
+  padding: 4%;
+  margin: auto;
+}
