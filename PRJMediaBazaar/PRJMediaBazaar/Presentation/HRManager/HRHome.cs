@@ -604,7 +604,7 @@ namespace PRJMediaBazaar
         {
             if (this.lbDayOff.Items.Count == 0)
             {
-                this.lblDayOffReports.BackColor = Color.Black;
+                this.lblDayOffReports.BackColor = Color.FromArgb(43, 45, 66);
             }
         }
 
@@ -813,7 +813,7 @@ namespace PRJMediaBazaar
                 report.MarkAsSeen();
                 if(this.lbSickReports.Items.Count == 0)
                 {
-                    this.lblSickReports.BackColor = Color.Black;
+                    this.lblSickReports.BackColor = Color.FromArgb(43, 45, 66);
                 }
             }
             else
@@ -856,11 +856,6 @@ namespace PRJMediaBazaar
             {
                 StatusFunction("Select a day off request!", -6, -1, 900, 28, Color.Red);
             }
-
-            if (this.lbDayOff.Items.Count == 0)
-            {
-                this.lblDayOffReports.BackColor = Color.Black;
-            }
         }
 
         private void button1_Click_1(object sender, EventArgs e)
@@ -876,6 +871,10 @@ namespace PRJMediaBazaar
                 {
                     ExplainDenial explain = new ExplainDenial((DayOff)this.lbDayOff.SelectedItem, _absenceControl, this);
                     explain.Show();
+                }
+                if (this.lbDayOff.Items.Count == 0)
+                {
+                    this.lblDayOffReports.BackColor = Color.FromArgb(43, 45, 66);
                 }
 
             }

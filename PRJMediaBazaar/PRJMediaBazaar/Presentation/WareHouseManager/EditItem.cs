@@ -104,6 +104,7 @@ namespace PRJMediaBazaar
                 _itemControl.UpdateAnItem(id, category, subcategory ,brand, model, description,stock_price, price, restock_state,
                      roomShop, roomStorage, minAmount);
                 wh.LoadItemsLESGOO();
+                wh.ChangeComboBoxes();
                 StatusFunction("Item updated!", -6, -1, 700, 28, Color.Green);
 
             }
@@ -155,6 +156,10 @@ namespace PRJMediaBazaar
                 case ("Software"):
                     this.cbSubcategory.Items.AddRange(new String[] { "Windows", "Linux", "Mac", "NOD32", "BitDefender", "Avast" });
                     this.cbBrand.Items.AddRange(new String[] { "Microsoft", "Apple", "Steam", "IBM" });
+                    break;
+                case ("Accessories"):
+                    this.cbSubcategory.Items.AddRange(new String[] { "Controller", "Flash drive", "Microphone", "Cable", "Printer", "eBook" });
+                    this.cbBrand.Items.AddRange(new String[] { "Microsoft", "Samsung", "Playstation", "XBox" });
                     break;
                 default:
                     break;

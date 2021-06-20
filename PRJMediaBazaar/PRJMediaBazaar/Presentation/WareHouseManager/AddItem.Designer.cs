@@ -204,7 +204,8 @@ namespace PRJMediaBazaar
             "Fashion",
             "Furniture",
             "Sports and Outdoors",
-            "Software"});
+            "Software",
+            "Accessories"});
             this.cbCategory.Location = new System.Drawing.Point(219, 80);
             this.cbCategory.Name = "cbCategory";
             this.cbCategory.Size = new System.Drawing.Size(158, 21);

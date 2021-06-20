@@ -183,20 +183,28 @@ namespace PRJMediaBazaar
 
         private void cbCategories_SelectedIndexChanged(object sender, EventArgs e)
         {
-            
-            this.lbItems.Items.Clear();
-            this.cbSubcategory.SelectedItem = null;
-            this.cbBrand.SelectedItem = null;
-            foreach (Item temp in allItems)
+            try
             {
-                if (temp.Category == this.cbCategories.SelectedItem.ToString())
+                this.lbItems.Items.Clear();
+                this.cbSubcategory.SelectedItem = null;
+                this.cbBrand.SelectedItem = null;
+                this.cbSubcategory.Items.Clear();
+                this.cbBrand.Items.Clear();
+                foreach (Item temp in allItems)
                 {
-                    this.lbItems.Items.Add(temp.ToString());
+                    if (temp.Category == this.cbCategories.SelectedItem.ToString())
+                    {
+                        this.lbItems.Items.Add(temp.ToString());
+                    }
                 }
+                this.cbSubcategory.Enabled = true;
+                List<String> subcategories = this.itemControl.GetSubcategories(this.cbCategories.SelectedItem.ToString());
+                this.cbSubcategory.Items.AddRange(subcategories.ToArray());
             }
-            this.cbSubcategory.Enabled = true;
-            List<String> subcategories = this.itemControl.GetSubcategories(this.cbCategories.SelectedItem.ToString());
-            this.cbSubcategory.Items.AddRange(subcategories.ToArray()); 
+            catch (Exception ex)
+            {
+                StatusFunction("An error occured!", -6, -1, 900, 28, Color.Red);
+            }
         }
 
         private void godTimer_Tick(object sender, EventArgs e)
@@ -293,43 +301,63 @@ namespace PRJMediaBazaar
 
 
 
-
+        public void ChangeComboBoxes()
+        {
+            this.cbSubcategory.Enabled = false;
+            this.cbBrand.Enabled = false;
+            this.lbItems.Items.Clear();
+            this.cbCategories.Text = "";
+        }
 
 
         private void cbSubcategory_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (this.cbSubcategory.SelectedItem != null)
+            try
             {
-                this.lbItems.Items.Clear();
-                this.cbBrand.SelectedItem = null;
-                foreach (Item temp in allItems)
+                if (this.cbSubcategory.SelectedItem != null)
                 {
-                    if (temp.Subcategory == this.cbSubcategory.SelectedItem.ToString())
+                    this.lbItems.Items.Clear();
+                    this.cbBrand.SelectedItem = null;
+                    this.cbBrand.Items.Clear();
+                    foreach (Item temp in allItems)
                     {
-                        this.lbItems.Items.Add(temp.ToString());
+                        if (temp.Subcategory == this.cbSubcategory.SelectedItem.ToString() && temp.Category == this.cbCategories.SelectedItem.ToString())
+                        {
+                            this.lbItems.Items.Add(temp.ToString());
+                        }
                     }
-                }
-                this.cbBrand.Enabled = true;
-                List<String> brands = this.itemControl.GetBrands(this.cbSubcategory.SelectedItem.ToString());
-                this.cbBrand.Items.AddRange(brands.ToArray());
+                    this.cbBrand.Enabled = true;
+                    List<String> brands = this.itemControl.GetBrands(this.cbSubcategory.SelectedItem.ToString());
+                    this.cbBrand.Items.AddRange(brands.ToArray());
 
+                }
+            }
+            catch (Exception ex)
+            {
+                StatusFunction("An error occured!", -6, -1, 900, 28, Color.Red);
             }
         }
 
         private void cbBrand_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (this.cbBrand.SelectedItem != null)
+            try
             {
-                this.lbItems.Items.Clear();
-                foreach (Item temp in allItems)
+                if (this.cbBrand.SelectedItem != null)
                 {
-
-                    if (temp.Brand == this.cbBrand.SelectedItem.ToString())
+                    this.lbItems.Items.Clear();
+                    foreach (Item temp in allItems)
                     {
-                        this.lbItems.Items.Add(temp.ToString());
 
+                        if (temp.Brand == this.cbBrand.SelectedItem.ToString() && temp.Subcategory == this.cbSubcategory.SelectedItem.ToString())
+                        {
+                            this.lbItems.Items.Add(temp.ToString());
+                        }
                     }
                 }
+            }
+            catch (Exception ex)
+            {
+                StatusFunction("An error occured!", -6, -1, 900, 28, Color.Red);
             }
         }
 
@@ -427,6 +455,8 @@ namespace PRJMediaBazaar
             this.cbBrand.Text = "";
             this.cbCategories.Text = "";
             this.cbSubcategory.Text = "";
+            this.cbBrand.Enabled = false;
+            this.cbSubcategory.Enabled = false;
             this.lbItems.Items.Clear();
         }
 

@@ -78,7 +78,10 @@ namespace PRJMediaBazaar.Logic
 
         public Item GetItemByRestockInfo(string info)
         {
-            return items.FirstOrDefault(i => i.RestockInfo() == info);
+            String id = new String(info.SkipWhile(c => !char.IsDigit(c))
+                         .TakeWhile(c => char.IsDigit(c))
+                         .ToArray());
+            return this.GetItem(Convert.ToInt32(id));
         }
 
         public Item GetItemByExpectedRestockInfo(string info)

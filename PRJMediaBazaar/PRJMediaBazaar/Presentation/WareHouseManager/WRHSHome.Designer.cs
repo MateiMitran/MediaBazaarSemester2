@@ -209,6 +209,7 @@ namespace PRJMediaBazaar
             // 
             this.lbRestockRequests.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbRestockRequests.FormattingEnabled = true;
+            this.lbRestockRequests.HorizontalScrollbar = true;
             this.lbRestockRequests.ItemHeight = 18;
             this.lbRestockRequests.Location = new System.Drawing.Point(30, 142);
             this.lbRestockRequests.Margin = new System.Windows.Forms.Padding(2);
@@ -262,6 +263,8 @@ namespace PRJMediaBazaar
             // 
             // cbBrand
             // 
+            this.cbBrand.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.cbBrand.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cbBrand.Enabled = false;
             this.cbBrand.FormattingEnabled = true;
             this.cbBrand.Location = new System.Drawing.Point(519, 151);
@@ -273,6 +276,8 @@ namespace PRJMediaBazaar
             // 
             // cbSubcategory
             // 
+            this.cbSubcategory.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.cbSubcategory.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cbSubcategory.Enabled = false;
             this.cbSubcategory.FormattingEnabled = true;
             this.cbSubcategory.Location = new System.Drawing.Point(397, 151);
@@ -299,6 +304,7 @@ namespace PRJMediaBazaar
             this.btnEditItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(151)))), ((int)(((byte)(172)))));
             this.btnEditItem.FlatAppearance.BorderSize = 0;
             this.btnEditItem.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnEditItem.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnEditItem.Location = new System.Drawing.Point(277, 222);
             this.btnEditItem.Margin = new System.Windows.Forms.Padding(2);
             this.btnEditItem.Name = "btnEditItem";
@@ -313,6 +319,7 @@ namespace PRJMediaBazaar
             this.btnAddItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(151)))), ((int)(((byte)(172)))));
             this.btnAddItem.FlatAppearance.BorderSize = 0;
             this.btnAddItem.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAddItem.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAddItem.Location = new System.Drawing.Point(277, 187);
             this.btnAddItem.Margin = new System.Windows.Forms.Padding(2);
             this.btnAddItem.Name = "btnAddItem";
@@ -324,6 +331,8 @@ namespace PRJMediaBazaar
             // 
             // cbCategories
             // 
+            this.cbCategories.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.cbCategories.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cbCategories.FormattingEnabled = true;
             this.cbCategories.Location = new System.Drawing.Point(276, 151);
             this.cbCategories.Margin = new System.Windows.Forms.Padding(2);

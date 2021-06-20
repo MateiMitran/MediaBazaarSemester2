@@ -173,10 +173,10 @@ namespace PRJMediaBazaar
             this.panelEmployees.Controls.Add(this.lbGeneralInfo);
             this.panelEmployees.Controls.Add(this.lbEmployeeInfo);
             this.panelEmployees.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelEmployees.Location = new System.Drawing.Point(0, 48);
+            this.panelEmployees.Location = new System.Drawing.Point(0, 0);
             this.panelEmployees.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
             this.panelEmployees.Name = "panelEmployees";
-            this.panelEmployees.Size = new System.Drawing.Size(869, 516);
+            this.panelEmployees.Size = new System.Drawing.Size(869, 564);
             this.panelEmployees.TabIndex = 8;
             this.panelEmployees.Paint += new System.Windows.Forms.PaintEventHandler(this.panelEmployees_Paint);
             // 
@@ -285,6 +285,7 @@ namespace PRJMediaBazaar
             // 
             this.lbEmployeeInfo.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.lbEmployeeInfo.FormattingEnabled = true;
+            this.lbEmployeeInfo.HorizontalScrollbar = true;
             this.lbEmployeeInfo.ItemHeight = 20;
             this.lbEmployeeInfo.Location = new System.Drawing.Point(11, 81);
             this.lbEmployeeInfo.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
@@ -348,11 +349,14 @@ namespace PRJMediaBazaar
             // 
             // lbSickReports
             // 
+            this.lbSickReports.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbSickReports.FormattingEnabled = true;
+            this.lbSickReports.HorizontalScrollbar = true;
+            this.lbSickReports.ItemHeight = 18;
             this.lbSickReports.Location = new System.Drawing.Point(56, 130);
             this.lbSickReports.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
             this.lbSickReports.Name = "lbSickReports";
-            this.lbSickReports.Size = new System.Drawing.Size(751, 342);
+            this.lbSickReports.Size = new System.Drawing.Size(751, 328);
             this.lbSickReports.TabIndex = 21;
             // 
             // pnlDayOff
@@ -442,6 +446,7 @@ namespace PRJMediaBazaar
             // 
             this.lbDayOff.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbDayOff.FormattingEnabled = true;
+            this.lbDayOff.HorizontalScrollbar = true;
             this.lbDayOff.ItemHeight = 20;
             this.lbDayOff.Location = new System.Drawing.Point(54, 127);
             this.lbDayOff.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
@@ -721,7 +726,6 @@ namespace PRJMediaBazaar
             this.pnlNavbar.Controls.Add(this.lblEmployees);
             this.pnlNavbar.Controls.Add(this.lblSickReports);
             this.pnlNavbar.Controls.Add(this.lblSchedule);
-            this.pnlNavbar.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlNavbar.Location = new System.Drawing.Point(0, 0);
             this.pnlNavbar.Name = "pnlNavbar";
             this.pnlNavbar.Size = new System.Drawing.Size(869, 48);
@@ -761,11 +765,11 @@ namespace PRJMediaBazaar
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(869, 564);
-            this.Controls.Add(this.panelEmployees);
             this.Controls.Add(this.pnlNavbar);
             this.Controls.Add(this.pnlDayOff);
             this.Controls.Add(this.panelSchedule);
             this.Controls.Add(this.panelSickReports);
+            this.Controls.Add(this.panelEmployees);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Margin = new System.Windows.Forms.Padding(2);
             this.MaximizeBox = false;

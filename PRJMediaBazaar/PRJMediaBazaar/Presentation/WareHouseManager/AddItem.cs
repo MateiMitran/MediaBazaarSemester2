@@ -96,7 +96,7 @@ namespace PRJMediaBazaar
                 _wh.LoadItemsLESGOO();
                 _wh.LoadRestockingList();
 
-                StatusFunction("Item added!", -6, -1, 700, 28, Color.Green);
+                _wh.ChangeComboBoxes();
                 if(WRHSHome.restock == null)
                 {
                     WRHSHome.restock = new Restock(_wh.GetItemControl());
@@ -105,6 +105,7 @@ namespace PRJMediaBazaar
                 //throw other exceptions for the other variables(empty/short strings, low values in stock, etc.)
 
                 //add the item through itemControl.
+                StatusFunction("Item added!", -6, -1, 700, 28, Color.Green);
             }
             catch (InputException ex)
             {
@@ -154,6 +155,10 @@ namespace PRJMediaBazaar
                 case ("Software"):
                     this.cbSubcategory.Items.AddRange(new String[] { "Windows", "Linux", "Mac", "NOD32", "BitDefender", "Avast" });
                     this.cbBrand.Items.AddRange(new String[] { "Microsoft", "Apple", "Steam", "IBM" });
+                    break;
+                case ("Accessories"):
+                    this.cbSubcategory.Items.AddRange(new String[] { "Controller", "Flash drive", "Microphone", "Cable", "Printer", "eBook" });
+                    this.cbBrand.Items.AddRange(new String[] { "Microsoft", "Samsung", "Playstation", "XBox" });
                     break;
                 default:
                     break;

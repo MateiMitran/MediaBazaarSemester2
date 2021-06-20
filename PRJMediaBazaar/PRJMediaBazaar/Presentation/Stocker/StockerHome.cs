@@ -421,9 +421,9 @@ namespace PRJMediaBazaar
                 int arrivedNumber = Convert.ToInt32(this.tbActuallyArrived.Text);
                 _itemControl.UpdateItemState(i, "stable");
 
-                //if (arrivedNumber < expected)
-                //{
-                int arrived = arrivedNumber;
+                if (arrivedNumber < expected && arrivedNumber>0)
+                {
+                    int arrived = arrivedNumber;
                     int missing = expected - arrived;
                     int newInStorage = i.InStorageAmount + arrived;
                     i.InStorageAmount = newInStorage;
@@ -446,11 +446,11 @@ namespace PRJMediaBazaar
                                           //MoveItemToWaitingList(i);
 
                     StatusFunction("Item sent to Waiting List!", -6, -1, 1000, 28, Color.Green);
-               // }
-                //else
-                //{
-                    //MessageBox.Show("Arrived quantity cannot be bigger than expected!");
-                //}
+                }
+                else
+                {
+                    StatusFunction("Arrived number must be positive and smaller than expected", -6, -1, 1000, 28, Color.Red);
+                }
 
                 this.tbActuallyArrived.Clear();
 

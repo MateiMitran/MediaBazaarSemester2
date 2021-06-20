@@ -87,7 +87,7 @@ namespace PRJMediaBazaar
             {
                 if (temp.Category == this.cbCategory.SelectedItem.ToString())
                 {
-                    this.lbAllItems.Items.Add(temp.ToString());
+                    this.lbAllItems.Items.Add(temp.CashierInfo());
                 }
             }
             this.cbSubcategory.Enabled = true;
@@ -106,7 +106,7 @@ namespace PRJMediaBazaar
 
                     if (temp.Subcategory == this.cbSubcategory.SelectedItem.ToString())
                     {
-                        this.lbAllItems.Items.Add(temp.ToString());
+                        this.lbAllItems.Items.Add(temp.CashierInfo());
 
                     }
                 }

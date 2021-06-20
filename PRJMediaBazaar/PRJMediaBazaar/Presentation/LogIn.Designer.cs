@@ -86,7 +86,7 @@ namespace PRJMediaBazaar
             // 
             this.tbUsername.Depth = 0;
             this.tbUsername.Hint = "";
-            this.tbUsername.Location = new System.Drawing.Point(156, 89);
+            this.tbUsername.Location = new System.Drawing.Point(165, 89);
             this.tbUsername.MaxLength = 32767;
             this.tbUsername.MouseState = MaterialSkin.MouseState.HOVER;
             this.tbUsername.Name = "tbUsername";
@@ -103,7 +103,7 @@ namespace PRJMediaBazaar
             // 
             this.tbPassword.Depth = 0;
             this.tbPassword.Hint = "";
-            this.tbPassword.Location = new System.Drawing.Point(156, 117);
+            this.tbPassword.Location = new System.Drawing.Point(165, 118);
             this.tbPassword.MaxLength = 32767;
             this.tbPassword.MouseState = MaterialSkin.MouseState.HOVER;
             this.tbPassword.Name = "tbPassword";

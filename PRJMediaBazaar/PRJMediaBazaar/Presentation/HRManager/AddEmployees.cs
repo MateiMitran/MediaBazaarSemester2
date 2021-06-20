@@ -132,19 +132,20 @@ namespace PRJMediaBazaar
                 }
                 else if (this.rbParttime.Checked == true)
                 {
-                    int daysOff = Convert.ToInt32(this.tbDaysOffLeft.Text);
-                    if (!Regex.IsMatch(daysOff.ToString(), @"^\d+$"))
+                    if (!Regex.IsMatch(this.tbDaysOffLeft.Text, @"^\d+$") || Convert.ToInt32(this.tbDaysOffLeft.Text)<1)
                     {
                         StatusFunction("Enter valid days off!", -60, -5, 835, 28, Color.Red);
                         throw new InvalidIntException();
                     }
+                    int daysOff = Convert.ToInt32(this.tbDaysOffLeft.Text);
                     String contract = this.rbParttime.Text;
-                    int contractHours = Convert.ToInt32(this.tbContractHours.Text);
-                    if (!Regex.IsMatch(contractHours.ToString(), @"^\d+$"))
+                    if (!Regex.IsMatch(this.tbContractHours.Text, @"^\d+$") || Convert.ToInt32(this.tbContractHours.Text)<1 || Convert.ToInt32(this.tbContractHours.Text)>39)
                     {
                         StatusFunction("Enter valid contract hours!", -60, -5, 835, 28, Color.Red);
                         throw new InvalidIntException();
                     }
+                    int contractHours = Convert.ToInt32(this.tbContractHours.Text);
+                    
                     ec.AddAnEmployee(firstName, lastName, birthDate, email, password, jobPosition, phone, address,
                                     salary, gender, education, contract, daysOff, contractHours, daysOff);
                     int id = ec.GetIDFromEmail(email);
@@ -156,7 +157,15 @@ namespace PRJMediaBazaar
             }
             catch (InvalidIntException ex)
             {
-                StatusFunction("Enter valid numbers for phone and salary!", -60, -5, 835, 28, Color.Red);
+                if (this.rbParttime.Checked == true)
+                {
+                    StatusFunction("Enter valid numbers for phone,salary,contract hours and days off!", -60, -5, 835, 28, Color.Red);
+                }
+                else
+                {
+                    StatusFunction("Enter valid numbers for phone and salary!", -60, -5, 835, 28, Color.Red);
+                }
+                
             }
             catch (EmptyComboBoxException ex)
             {

@@ -130,7 +130,7 @@ namespace PRJMediaBazaar
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(20, 250);
+            this.label6.Location = new System.Drawing.Point(12, 253);
             this.label6.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(67, 13);
@@ -246,6 +246,7 @@ namespace PRJMediaBazaar
             // 
             // cbGender
             // 
+            this.cbGender.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbGender.FormattingEnabled = true;
             this.cbGender.Items.AddRange(new object[] {
             "Male",
@@ -283,14 +284,16 @@ namespace PRJMediaBazaar
             // 
             // cbJobPosition
             // 
+            this.cbJobPosition.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbJobPosition.FormattingEnabled = true;
             this.cbJobPosition.Items.AddRange(new object[] {
             "Security",
             "Cashier",
             "WarehouseManager",
             "SalesAssistant",
-            "Stocker"});
-            this.cbJobPosition.Location = new System.Drawing.Point(92, 248);
+            "Stocker",
+            "HRManager"});
+            this.cbJobPosition.Location = new System.Drawing.Point(82, 250);
             this.cbJobPosition.Margin = new System.Windows.Forms.Padding(2);
             this.cbJobPosition.Name = "cbJobPosition";
             this.cbJobPosition.Size = new System.Drawing.Size(144, 21);
