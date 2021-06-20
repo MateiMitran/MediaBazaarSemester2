@@ -169,6 +169,7 @@ namespace PRJMediaBazaar
                 UpdateRestockRequestListbox();
                 UpdateAvailableForMovingListbox();
                 UpdateCashierInfo?.Invoke();
+                StatusFunction("Items moved!", -6, -1, 1000, 28, Color.Green);
             }
             else
             {
@@ -346,6 +347,7 @@ namespace PRJMediaBazaar
                 UpdateAvailableForMovingListbox();
                 UpdateWarehouseInfo?.Invoke();
                 ChangeColorLabel?.Invoke();
+                StatusFunction("Restock sent!", -6, -1, 1000, 28, Color.Green);
             }
             else
             {
