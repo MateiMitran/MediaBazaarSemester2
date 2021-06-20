@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PRJMediaBazaar.Logic
 {
-     public class Restock
+    public class Restock
     {
         private IRestockData _itemControl;
         private Item[] itemsToRestock;
@@ -14,7 +14,7 @@ namespace PRJMediaBazaar.Logic
         public Restock(IRestockData itemControl)
         {
             _itemControl = itemControl;
-           
+
         }
 
         public Item[] GetItemsForRestock()
@@ -23,6 +23,12 @@ namespace PRJMediaBazaar.Logic
             //itemsToRestock = _itemControl.GetItemsByState("checking");
             return itemsToRestock;
 
+        }
+
+        public Item[] GetItemsForExpected()
+        {
+            itemsToRestock = _itemControl.GetItemsByState("checking");
+            return itemsToRestock;
         }
 
         public double GetTotalCost()

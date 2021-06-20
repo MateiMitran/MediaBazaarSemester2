@@ -93,10 +93,10 @@ namespace PRJMediaBazaar
         {
             //load all the 
             this.lbExpRestocks.Items.Clear();
-            foreach (Item i in restock.GetItemsForRestock())
+            foreach (Item i in restock.GetItemsForExpected())
             {
                 this.lbExpRestocks.Items.Add(i.ArrivedInfo());
-                i.IsInChecking = true;
+                //i.IsInChecking = true;
             }
             //MessageBox.Show("Triggered");
 
@@ -107,7 +107,7 @@ namespace PRJMediaBazaar
             this.lbExpRestocks.Items.Clear();
             foreach (Item i in _itemControl.GetItems())
             {
-                if (i.IsInChecking == true)
+                if (i.Restock_State == "checking") //i.IsInChecking == true
                 {
                     this.lbExpRestocks.Items.Add(i.ArrivedInfo());
                 }
@@ -278,7 +278,7 @@ namespace PRJMediaBazaar
 
         }
 
-        private void materialRaisedButton1_Click(object sender, EventArgs e) // Refill waiting item and move to shop
+        private void materialRaisedButton1_Click(object sender, EventArgs e) // Refill Waiting Item and move It to shop
         {
             if (this.lbWL.SelectedItem != null)
             {
@@ -291,6 +291,7 @@ namespace PRJMediaBazaar
                 i.MissingAmmount = 0;
                 i.Missing = false;
                 i.IsInWaiting = false;
+                _itemControl.UpdateItemState(i, "stable"); // added
 
 
                 _itemControl.UpdateItemStorageQuantity(i.ID, newInStorage);
@@ -352,7 +353,7 @@ namespace PRJMediaBazaar
             }
         }
 
-        private void btnQArrived_Click(object sender, EventArgs e)
+        private void btnQArrived_Click(object sender, EventArgs e) // Approve Expected Item
         {
             if (this.lbExpRestocks.SelectedItem != null)
             {
@@ -366,8 +367,8 @@ namespace PRJMediaBazaar
                 _itemControl.UpdateItemState(i, "stable");
                 i.InStorageAmount = newInStorage;
                 i.AmountToRestock = 0;
-                _itemControl.UpdateItemStorageQuantity(i.ID, newInStorage);
-                i.IsInChecking = false;
+                _itemControl.UpdateItemStorageQuantity(i.ID, newInStorage); // for updating the database?
+                //i.IsInChecking = false;
                 //i.IsInWaiting = true;
 
                 UpdateAvailableForMovingListbox();
@@ -420,7 +421,7 @@ namespace PRJMediaBazaar
                 int arrivedNumber = Convert.ToInt32(this.tbActuallyArrived.Text);
                 _itemControl.UpdateItemState(i, "stable");
 
-                //if (arrivedNumber >= expected)
+                //if (arrivedNumber < expected)
                 //{
                 int arrived = arrivedNumber;
                     int missing = expected - arrived;
@@ -428,7 +429,7 @@ namespace PRJMediaBazaar
                     i.InStorageAmount = newInStorage;
                     i.MissingAmmount = missing;
                     i.Missing = true;
-                    i.IsInChecking = false;
+                    //i.IsInChecking = false;
                     i.IsInWaiting = true;
 
 
