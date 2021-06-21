@@ -363,10 +363,11 @@ namespace PRJMediaBazaar
             this.pnlDayOff.Controls.Add(this.btnConfirm);
             this.pnlDayOff.Controls.Add(this.label6);
             this.pnlDayOff.Controls.Add(this.lbDayOff);
-            this.pnlDayOff.Location = new System.Drawing.Point(735, 468);
+            this.pnlDayOff.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlDayOff.Location = new System.Drawing.Point(0, 0);
             this.pnlDayOff.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
             this.pnlDayOff.Name = "pnlDayOff";
-            this.pnlDayOff.Size = new System.Drawing.Size(134, 96);
+            this.pnlDayOff.Size = new System.Drawing.Size(869, 564);
             this.pnlDayOff.TabIndex = 24;
             this.pnlDayOff.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlDayOff_Paint);
             // 
