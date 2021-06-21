@@ -124,6 +124,8 @@ namespace PRJMediaBazaar
             // 
             // cbCategory
             // 
+            this.cbCategory.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.cbCategory.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cbCategory.FormattingEnabled = true;
             this.cbCategory.Location = new System.Drawing.Point(429, 85);
             this.cbCategory.Name = "cbCategory";
@@ -133,6 +135,8 @@ namespace PRJMediaBazaar
             // 
             // cbSubcategory
             // 
+            this.cbSubcategory.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.cbSubcategory.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cbSubcategory.FormattingEnabled = true;
             this.cbSubcategory.Location = new System.Drawing.Point(592, 85);
             this.cbSubcategory.Name = "cbSubcategory";

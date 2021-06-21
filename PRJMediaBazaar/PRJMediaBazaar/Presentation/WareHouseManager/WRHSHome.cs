@@ -307,6 +307,8 @@ namespace PRJMediaBazaar
             this.cbBrand.Enabled = false;
             this.lbItems.Items.Clear();
             this.cbCategories.Text = "";
+            this.cbSubcategory.Text = "";
+            this.cbBrand.Text = "";
         }
 
 

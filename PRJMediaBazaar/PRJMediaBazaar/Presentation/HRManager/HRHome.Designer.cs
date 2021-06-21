@@ -37,11 +37,11 @@ namespace PRJMediaBazaar
             this.lblEmployees = new System.Windows.Forms.Label();
             this.lblTitle1 = new System.Windows.Forms.Label();
             this.panelEmployees = new System.Windows.Forms.Panel();
+            this.button4 = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
             this.materialLabel3 = new MaterialSkin.Controls.MaterialLabel();
             this.materialLabel2 = new MaterialSkin.Controls.MaterialLabel();
             this.materialLabel1 = new MaterialSkin.Controls.MaterialLabel();
-            this.btnEditEmployee = new MaterialSkin.Controls.MaterialRaisedButton();
-            this.btnAddEmployee = new MaterialSkin.Controls.MaterialRaisedButton();
             this.lblWelcome = new System.Windows.Forms.Label();
             this.cbEmployees = new System.Windows.Forms.ComboBox();
             this.lbGeneralInfo = new System.Windows.Forms.ListBox();
@@ -60,7 +60,6 @@ namespace PRJMediaBazaar
             this.lbDayOff = new System.Windows.Forms.ListBox();
             this.panelSchedule = new System.Windows.Forms.Panel();
             this.btnGenerateSchedule = new System.Windows.Forms.Button();
-            this.lblPositionNeeded = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -163,11 +162,11 @@ namespace PRJMediaBazaar
             // panelEmployees
             // 
             this.panelEmployees.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.panelEmployees.Controls.Add(this.button4);
+            this.panelEmployees.Controls.Add(this.button3);
             this.panelEmployees.Controls.Add(this.materialLabel3);
             this.panelEmployees.Controls.Add(this.materialLabel2);
             this.panelEmployees.Controls.Add(this.materialLabel1);
-            this.panelEmployees.Controls.Add(this.btnEditEmployee);
-            this.panelEmployees.Controls.Add(this.btnAddEmployee);
             this.panelEmployees.Controls.Add(this.lblWelcome);
             this.panelEmployees.Controls.Add(this.cbEmployees);
             this.panelEmployees.Controls.Add(this.lbGeneralInfo);
@@ -179,6 +178,34 @@ namespace PRJMediaBazaar
             this.panelEmployees.Size = new System.Drawing.Size(869, 564);
             this.panelEmployees.TabIndex = 8;
             this.panelEmployees.Paint += new System.Windows.Forms.PaintEventHandler(this.panelEmployees_Paint);
+            // 
+            // button4
+            // 
+            this.button4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(151)))), ((int)(((byte)(172)))));
+            this.button4.FlatAppearance.BorderSize = 0;
+            this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button4.Location = new System.Drawing.Point(506, 158);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(175, 23);
+            this.button4.TabIndex = 38;
+            this.button4.Text = "Edit Note";
+            this.button4.UseVisualStyleBackColor = false;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
+            // 
+            // button3
+            // 
+            this.button3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(151)))), ((int)(((byte)(172)))));
+            this.button3.FlatAppearance.BorderSize = 0;
+            this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button3.Location = new System.Drawing.Point(506, 119);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(175, 23);
+            this.button3.TabIndex = 37;
+            this.button3.Text = "Add Employee";
+            this.button3.UseVisualStyleBackColor = false;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // materialLabel3
             // 
@@ -218,38 +245,6 @@ namespace PRJMediaBazaar
             this.materialLabel1.Size = new System.Drawing.Size(95, 19);
             this.materialLabel1.TabIndex = 27;
             this.materialLabel1.Text = "Information :";
-            // 
-            // btnEditEmployee
-            // 
-            this.btnEditEmployee.AutoSize = true;
-            this.btnEditEmployee.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnEditEmployee.Depth = 0;
-            this.btnEditEmployee.Icon = null;
-            this.btnEditEmployee.Location = new System.Drawing.Point(506, 159);
-            this.btnEditEmployee.MouseState = MaterialSkin.MouseState.HOVER;
-            this.btnEditEmployee.Name = "btnEditEmployee";
-            this.btnEditEmployee.Primary = true;
-            this.btnEditEmployee.Size = new System.Drawing.Size(89, 36);
-            this.btnEditEmployee.TabIndex = 26;
-            this.btnEditEmployee.Text = "Edit note";
-            this.btnEditEmployee.Click += new System.EventHandler(this.btnEditEmployee_Click);
-            // 
-            // btnAddEmployee
-            // 
-            this.btnAddEmployee.AutoSize = true;
-            this.btnAddEmployee.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnAddEmployee.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.btnAddEmployee.Depth = 0;
-            this.btnAddEmployee.Icon = null;
-            this.btnAddEmployee.Location = new System.Drawing.Point(506, 109);
-            this.btnAddEmployee.MouseState = MaterialSkin.MouseState.HOVER;
-            this.btnAddEmployee.Name = "btnAddEmployee";
-            this.btnAddEmployee.Primary = true;
-            this.btnAddEmployee.Size = new System.Drawing.Size(121, 36);
-            this.btnAddEmployee.TabIndex = 25;
-            this.btnAddEmployee.Text = "Add employee";
-            this.btnAddEmployee.UseVisualStyleBackColor = false;
-            this.btnAddEmployee.Click += new System.EventHandler(this.btnAddEmployee_Click);
             // 
             // lblWelcome
             // 
@@ -382,7 +377,7 @@ namespace PRJMediaBazaar
             this.button2.FlatAppearance.BorderSize = 0;
             this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button2.Location = new System.Drawing.Point(54, 81);
+            this.button2.Location = new System.Drawing.Point(54, 85);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(175, 36);
             this.button2.TabIndex = 36;
@@ -436,7 +431,7 @@ namespace PRJMediaBazaar
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(364, 60);
+            this.label6.Location = new System.Drawing.Point(348, 61);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(165, 24);
             this.label6.TabIndex = 27;
@@ -458,7 +453,6 @@ namespace PRJMediaBazaar
             // 
             this.panelSchedule.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.panelSchedule.Controls.Add(this.btnGenerateSchedule);
-            this.panelSchedule.Controls.Add(this.lblPositionNeeded);
             this.panelSchedule.Controls.Add(this.label4);
             this.panelSchedule.Controls.Add(this.label3);
             this.panelSchedule.Controls.Add(this.label2);
@@ -488,6 +482,7 @@ namespace PRJMediaBazaar
             this.btnGenerateSchedule.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(151)))), ((int)(((byte)(172)))));
             this.btnGenerateSchedule.FlatAppearance.BorderSize = 0;
             this.btnGenerateSchedule.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnGenerateSchedule.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnGenerateSchedule.Location = new System.Drawing.Point(137, 123);
             this.btnGenerateSchedule.Name = "btnGenerateSchedule";
             this.btnGenerateSchedule.Size = new System.Drawing.Size(135, 34);
@@ -495,16 +490,6 @@ namespace PRJMediaBazaar
             this.btnGenerateSchedule.Text = "Generate Schedule";
             this.btnGenerateSchedule.UseVisualStyleBackColor = false;
             this.btnGenerateSchedule.Click += new System.EventHandler(this.btnGenerateSchedule_Click);
-            // 
-            // lblPositionNeeded
-            // 
-            this.lblPositionNeeded.AutoSize = true;
-            this.lblPositionNeeded.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPositionNeeded.Location = new System.Drawing.Point(614, 124);
-            this.lblPositionNeeded.Name = "lblPositionNeeded";
-            this.lblPositionNeeded.Size = new System.Drawing.Size(131, 20);
-            this.lblPositionNeeded.TabIndex = 36;
-            this.lblPositionNeeded.Text = "Position needed: ";
             // 
             // label4
             // 
@@ -669,6 +654,7 @@ namespace PRJMediaBazaar
             this.btnChangeNeededPosition.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(151)))), ((int)(((byte)(172)))));
             this.btnChangeNeededPosition.FlatAppearance.BorderSize = 0;
             this.btnChangeNeededPosition.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnChangeNeededPosition.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnChangeNeededPosition.Location = new System.Drawing.Point(618, 63);
             this.btnChangeNeededPosition.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
             this.btnChangeNeededPosition.Name = "btnChangeNeededPosition";
@@ -708,6 +694,7 @@ namespace PRJMediaBazaar
             this.btnDeleteSchedule.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(151)))), ((int)(((byte)(172)))));
             this.btnDeleteSchedule.FlatAppearance.BorderSize = 0;
             this.btnDeleteSchedule.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnDeleteSchedule.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnDeleteSchedule.Location = new System.Drawing.Point(279, 123);
             this.btnDeleteSchedule.Name = "btnDeleteSchedule";
             this.btnDeleteSchedule.Size = new System.Drawing.Size(135, 34);
@@ -823,7 +810,6 @@ namespace PRJMediaBazaar
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Panel PanelTableScroll;
-        private System.Windows.Forms.Label lblPositionNeeded;
         public System.Windows.Forms.TableLayoutPanel ShiftsTable;
         public System.Windows.Forms.ComboBox cbDay;
         private System.Windows.Forms.Button btnGenerateSchedule;
@@ -835,8 +821,6 @@ namespace PRJMediaBazaar
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Button btnMarkAsSeen;
         private System.Windows.Forms.Label lblWelcome;
-        private MaterialSkin.Controls.MaterialRaisedButton btnAddEmployee;
-        private MaterialSkin.Controls.MaterialRaisedButton btnEditEmployee;
         private MaterialSkin.Controls.MaterialLabel materialLabel3;
         private MaterialSkin.Controls.MaterialLabel materialLabel2;
         private MaterialSkin.Controls.MaterialLabel materialLabel1;
@@ -846,5 +830,7 @@ namespace PRJMediaBazaar
         private System.Windows.Forms.Button btnShowConfirmedReq;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button button3;
     }
 }

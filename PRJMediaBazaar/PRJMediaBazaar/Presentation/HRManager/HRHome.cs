@@ -37,8 +37,6 @@ namespace PRJMediaBazaar
         public HRHome(LogIn loginForm,EmployeeControl _empControl,Employee HRManager)
         {
             InitializeComponent();
-            this.btnAddEmployee.AutoSize = false;
-            this.btnEditEmployee.AutoSize = false;
             ShiftAssigning.ReloadForm += new ShiftAssigning.ShiftAssigningHandler(ReloadShiftAssigningForm_Event);
             buttons = new List<Button>();
             timers = new List<Timer>();
@@ -52,8 +50,11 @@ namespace PRJMediaBazaar
             _absenceControl = new AbsenceControl(_scheduleControl);
             cbPosition.Text = "Security";
             this.btnChangeNeededPosition.Enabled = false;
+            this.btnChangeNeededPosition.BackColor = Color.Gray;
             this.btnGenerateSchedule.Enabled = false;
+            this.btnGenerateSchedule.BackColor = Color.Gray;
             this.btnDeleteSchedule.Enabled = false;
+            this.btnDeleteSchedule.BackColor = Color.Gray;
             this.lblWelcome.Text = "Welcome, " + HRManager.FullName + "!";
             foreach (Schedule s in _scheduleControl.Schedules)
             {
@@ -240,6 +241,7 @@ namespace PRJMediaBazaar
             {
                 ShiftsTable.Controls.Clear();
                 this.btnGenerateSchedule.Enabled = false;
+                this.btnGenerateSchedule.BackColor = Color.Gray;
             }
             _currentSchedule = schedule;
             UpdateDaysInfo();
@@ -260,10 +262,12 @@ namespace PRJMediaBazaar
                 {
                     LoadTableByPosition(day, cbPosition.Text);
                     this.btnChangeNeededPosition.Enabled = true;
+                    this.btnChangeNeededPosition.BackColor = Color.FromArgb(139, 151, 172);
                 }
                 else
                 {
                     this.btnChangeNeededPosition.Enabled = false;
+                    this.btnChangeNeededPosition.BackColor = Color.Gray;
                 }
             }
             this.ActiveControl = null;
@@ -282,12 +286,16 @@ namespace PRJMediaBazaar
             if (_scheduleControl.DayStatus(day) == "empty")
             {
                 this.btnGenerateSchedule.Enabled = true;
+                this.btnGenerateSchedule.BackColor = Color.FromArgb(139, 151, 172);
                 this.btnDeleteSchedule.Enabled = false;
+                this.btnDeleteSchedule.BackColor = Color.Gray;
             }
             else
             {
                 this.btnGenerateSchedule.Enabled = false;
+                this.btnGenerateSchedule.BackColor = Color.Gray;
                 this.btnDeleteSchedule.Enabled = true;
+                this.btnDeleteSchedule.BackColor = Color.FromArgb(139, 151, 172);
             }
             cbPosition.Invalidate();
             this.ActiveControl = null;
@@ -706,6 +714,7 @@ namespace PRJMediaBazaar
             LoadTableByPosition((Day)cbDay.SelectedItem, "Security");
             UpdateDaysInfo();
             this.btnGenerateSchedule.Enabled = false;
+            this.btnGenerateSchedule.BackColor = Color.Gray;
         }
 
         private void btnDeleteSchedule_Click(object sender, EventArgs e)
@@ -900,6 +909,25 @@ namespace PRJMediaBazaar
         {
             this.Hide();
             _loginForm.Show();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            AddEmployees addEmployees = new AddEmployees(this, _empControl, _employees.ToList());
+            addEmployees.Show();
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            if (thisEmployee == null)
+            {
+                StatusFunction("Please select an employee!", -6, -1, 900, 28, Color.Red);
+            }
+            else
+            {
+                EditNote editNote = new EditNote(thisEmployee, _empControl, this, this.HRManager);
+                editNote.Show();
+            }
         }
     }
 }
