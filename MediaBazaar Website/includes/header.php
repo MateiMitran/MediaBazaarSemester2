@@ -23,7 +23,6 @@
 
      $user = $_SESSION['user'];
      $position = $user->getJobPosition();
-
     }    
 ?>
 <!DOCTYPE html>
@@ -44,6 +43,13 @@
         if($page == 'dashboard') {
     ?>
         <link rel="stylesheet" href="../css/dashboard.css" type="text/css">
+    <?php
+        }
+    ?>
+    <?php
+        if($position == 'HRManager' || $position == 'WarehouseManager' || $position == 'CEO' ) {
+    ?>
+        <link rel="stylesheet" href="../css/statistics.css" type="text/css">
     <?php
         }
     ?>

@@ -7,9 +7,7 @@
                 </li>
                 <div class = "subnav-content">
                     <div class = "subnav-links">
-                <a href="#">Worked Hours</a>
-                <a href="#">Top Employees</a>
-              <a href="#">Salaries</a>
+                <a href="stats_departments">Departments</a>
             </div>
                 </div>
                 </div>
