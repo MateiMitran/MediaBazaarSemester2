@@ -1,6 +1,6 @@
 <?php
+error_reporting(E_ERROR | E_PARSE);
 $valid_urgency_values = ['not-urgent', 'urgent'];
-
 // DAY OFF REQUEST
 if(isset($_POST['day-off-submit'])) {
     if(isset($_POST['start-day']) && DateTime::createFromFormat('Y-m-d', $_POST['start-day']) !== false && DateTime::createFromFormat('Y-m-d', $_POST['start-day']) > DateTime::createFromFormat('Y-m-d', date('Y-m-d'))) {
@@ -132,10 +132,6 @@ else if(isset($_POST['sick-report-submit'])) {
                         $getEmployeeWorkdays = new GetEmployeeWorkdaysInRange();
                         $employeeWorkdays = $getEmployeeWorkdays->getEmployeeWorkDays($dayIds, $_SESSION['user']->getId());
 
-                        if($employeeWorkdays == false) {
-                            errorMessage('Schedule was not updated as no employee workdays were found within the given range');
-                        }
-
                         foreach($employeeWorkdays as $day) {
                             $id = $day->getDayId();
                             $firstShift = $day->getFirstShift();
@@ -248,16 +244,14 @@ else if(isset($_POST['sick-report-submit'])) {
                                 }
             
                                 // CHECK IF SUBMISSION SUCCESSFUL
-                                if($successfulUpdateToShifts == count($days)) {
-                                    successMessage('Successfully submitted report');
-
+                                if(!empty($days) && $successfulUpdateToShifts == count($days)) {
+                                    successMessage('Successfully submitted report and updated schedule');
                                     // UPDATE CURRENT SCHEDULE
                                     $updateSchedule = new UpdateCurrentSchedule();
                                     $updateSchedule->updateSchedule();
-
-                                    successMessage('Successfully updated schedule');
-                                } else {
-                                    errorMessage('An error occurred, please try again later');
+                                } 
+                                else {
+                                    successMessage('Successfully submitted report');
                                 }
                             } else {
                                 errorMessage('Could not update employee shifts, please try again later');

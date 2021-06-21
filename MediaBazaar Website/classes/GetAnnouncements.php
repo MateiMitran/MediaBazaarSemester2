@@ -8,16 +8,21 @@ class GetAnnouncements extends Database {
 
         $announcements = [];
         $findDay = new FindDayById;
+        $lastDay = false;
+        if($result != null){
 
-        foreach($result as $r) {
+            foreach($result as $r) {
             $firstDay = $findDay->findDay($r['first_day_id'])->getReadableDateWithoutYear();
+            if($r['last_day_id'] != false){
             $lastDay = $findDay->findDay($r['last_day_id'])->getReadableDateWithoutYear();
+            }
 
             $newAnnouncement = $r;
             $newAnnouncement['start_date'] = $firstDay;
             $newAnnouncement['end_date'] = $lastDay;
 
             array_push($announcements, $newAnnouncement);
+        }
         }
 
         return $announcements;

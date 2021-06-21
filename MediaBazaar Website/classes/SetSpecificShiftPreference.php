@@ -1,11 +1,23 @@
 <?php
 class SetSpecificShiftPreference extends Database {
+
+    private function IsSet($userId){
+         $sql = "SELECT * FROM employees_preferences WHERE employee_id = ? ";
+         $query = Database::connect()->prepare($sql);
+         $result = $query->execute([$userId]);
+         if($result == null){
+             return false;
+         }
+         return true;
+    }
+
     public function setShiftPreference($specificShiftPreference) {
         $userId = $specificShiftPreference->getUserId();
         $preference = $specificShiftPreference->getPreference();
         $day = $specificShiftPreference->getDayOfWeek();
-
-        $sql;
+        
+        if(!IsSet($userId)){
+         $sql;
 
         if($day == 'monday') {
             $sql = "INSERT INTO employees_preferences (employee_id, monday) VALUES (?, ?)";
@@ -27,5 +39,7 @@ class SetSpecificShiftPreference extends Database {
         $result = $query->execute([$userId, $preference]);
 
         return $result;
+        }
+        return 0;
     }
 }

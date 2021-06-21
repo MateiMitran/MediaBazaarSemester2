@@ -7,8 +7,8 @@
                 </li>
                 <div class = "subnav-content">
                     <div class = "subnav-links">
-                <a href="#">Restocks</a>
-                <a href="#">Market</a>
+                <a href="/stats_restocks">Restocks</a>
+                <a href="/stats_market">Market</a>
               <a href="#">Products</a>
             </div>
                 </div>

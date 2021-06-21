@@ -3,6 +3,8 @@
     $functionalityRequirements = ['preferences-functionality', 'absence-functionality', 'schedule-functionality', 'announcements-functionality'];
     
     require_once('includes/header.php');
+    error_reporting(E_ERROR | E_PARSE);
+    ini_set('display_errors', 0);
 
     if($position == "HRManager" || $position == "CEO"){
         redirect_to('/account');
