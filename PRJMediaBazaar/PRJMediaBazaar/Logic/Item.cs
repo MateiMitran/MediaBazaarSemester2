@@ -116,7 +116,7 @@ namespace PRJMediaBazaar.Logic
    
         public String CashierInfo()
         {
-            return "ID : " + ID + " | Title : " + Name + " | Price : " + Price;
+            return "ID : " + ID + " | Title : " + Name + " | Price : " + Price + "€";
         }
         public override string ToString()
         {
@@ -125,7 +125,7 @@ namespace PRJMediaBazaar.Logic
             //    + " Minimum Amount in Stock : " + MinimumAmountInStock + " Amount in Shop : " + InShopAmount + " Amount in Storage : " + InStorageAmount;
 
 
-            return "ID : " + ID + " | Title : " + Name + " | Price : " + Price + " | Stock Price : " + Stock_Price;
+            return "ID : " + ID + " | Title : " + Name + " | Price : " + Price + "€ | Stock Price : " + Stock_Price + "€";
         }
     }
 }
