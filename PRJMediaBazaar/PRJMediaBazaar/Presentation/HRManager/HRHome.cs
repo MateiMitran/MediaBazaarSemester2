@@ -80,7 +80,8 @@ namespace PRJMediaBazaar
         public void AddNameToCB(String name)
         {
             this.cbEmployees.Items.Add(name);
-           // List<String> items = this.cbEmployees.Items.ToString();
+            // List<String> items = this.cbEmployees.Items.ToString();
+
         }
         private void ReloadShiftAssigningForm_Event(Shift shift, string jobPosition, Day day)
         {
