@@ -1,5 +1,6 @@
 <?php
     $page = 'dashboard';
+    $content = '';
     $functionalityRequirements = ['preferences-functionality', 'absence-functionality', 'schedule-functionality', 'announcements-functionality'];
     
     require_once('includes/header.php');

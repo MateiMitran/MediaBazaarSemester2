@@ -7,7 +7,7 @@
 ?>
 
     <div id="statistics-wrapper">
-        <h2 class="section-title">Statistics: Market</h2>
+        <h2 class="section-title">Statistics: Market Overall</h2>
                     <div class ="charts-wrapper">
                      <div class="chart-container" style="position: relative; height:40vh; width:80vw">
                              <canvas id="yearlySales"></canvas>
@@ -21,8 +21,4 @@
     </div>
 <?php require_once('includes/footer.php'); ?>
 
-
-<?php
- require_once('charts/charts.php')
-?>
  

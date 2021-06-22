@@ -1,12 +1,13 @@
 <?php
     $page = 'statistics';
+    $content = '';
     $functionalityRequirements = ['login-functionality'];
     
     require_once('includes/header.php');
 ?>
 
     <div id="statistics-wrapper">
-        <h2 class="section-title">Statistics: Topic</h2>
+        <h2 class="section-title">Statistics: Departments</h2>
                     <div class ="charts-wrapper">
                        <div class="chart-container" style="position: relative; height:40vh; width:80vw">
                              <canvas id="salariesChart"></canvas>
@@ -31,7 +32,4 @@
     </div>
 <?php require_once('includes/footer.php'); ?>
 
-<?php
- require_once('charts/charts.php')
-?>
  

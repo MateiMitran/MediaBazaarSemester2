@@ -1,5 +1,7 @@
 <?php
     $page = 'account';
+    $content = '';
+
     $functionalityRequirements = ['account-functionality'];
     
     require_once('includes/header.php');

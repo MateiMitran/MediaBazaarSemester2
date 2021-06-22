@@ -51,7 +51,7 @@ class WHStatisticsManager extends Database{
         return $this->array_flatten($categories);
     }
 
-    function Subcategories(){
+    function Subcategories($category){
         $parameters = [];
         array_push($parameters, $category);
         $query = "SELECT DISTINCT subcategory FROM items WHERE category = ?";
@@ -101,6 +101,29 @@ class WHStatisticsManager extends Database{
 		GROUP BY i.category";
         return json_encode($this->QueryToArray($query));
         
+    }
+
+    function TopSoldSubcategoriesFromCategory($category, $limit){
+        $parameters = [];
+        array_push($parameters, $category);
+
+        $query = "SELECT i.subcategory as Subcategory, SUM(oi.order_quantity) as Amount 
+		FROM orders_items oi 
+		INNER JOIN items i ON oi.item_id = i.id
+ 		WHERE i.category = ?
+		GROUP BY i.subcategory ORDER BY SUM(order_quantity) DESC LIMIT ".$limit;
+         return json_encode($this->QueryToArray($query, $parameters));
+    }
+
+    function TopSoldBrandsFromSubcategory($subcategory, $limit){
+        $parameters = [];
+        array_push($parameters, $subcategory);
+
+        $query = "SELECT i.brand as Brand, SUM(oi.order_quantity) as Amount 
+		FROM orders_items oi INNER JOIN items i ON oi.item_id = i.id 
+		WHERE i.subcategory = ?
+		GROUP BY i.brand ORDER BY SUM(order_quantity) DESC LIMIT ".$limit;
+        return json_encode($this->QueryToArray($query, $parameters));
     }
 
 

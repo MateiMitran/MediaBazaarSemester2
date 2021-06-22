@@ -8,10 +8,26 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 <script src="../js/essentials.js"></script>
 
-<!--CHARTS-->
+
+  <?php
+    if($page == 'statistics') {
+?>
      <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
- <script type="text/javascript" src="js/charts-config.js"></script>
- 
+     <script type="text/javascript" src="js/charts-config.js"></script>
+<?php
+
+        if($content != 'variety'){
+        require_once('charts/charts.php');
+       }
+}
+    if($content == 'variety') {
+?>
+     <script type="text/javascript" src="js/categories-variety.js"></script>
+     <script type="text/javascript" src="js/statistics-variety.js"></script>
+<?php
+    }
+?>
+
 <?php
     if($page == 'dashboard') {
 ?>
