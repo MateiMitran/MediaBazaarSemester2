@@ -22,8 +22,18 @@
     if(!empty($_SESSION['user'])){
 
      $user = $_SESSION['user'];
+     $position = 'ceo';
+     if($user != 'ceo'){
      $position = $user->getJobPosition();
-    }    
+     }
+    }
+    
+    if($position == "HRManager" && $page == 'dashboard'){
+        redirect_to('/account');
+    }
+    else if($position == "ceo" && $page == 'dashboard'){
+        redirect_to('/stats_ceo_expenses');
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -47,11 +57,11 @@
         }
     ?>
     <?php
-        if($position == 'HRManager' || $position == 'WarehouseManager' || $position == 'CEO' ) {
+        if($position == 'HRManager' || $position == 'WarehouseManager' || $position == 'ceo' ) {
     ?>
         <link rel="stylesheet" href="../css/statistics.css" type="text/css">
     <?php
-        }
+   }
     ?>
 </head>
 <body>
@@ -102,6 +112,9 @@
       else if($position == "HRManager"){
 
       include("navbar/hrmanager_navbar.php");
+      }
+      else if($position =="ceo"){
+          include("navbar/ceo_navbar.php");
       }
       else{
           include("navbar/employee_navbar.php");

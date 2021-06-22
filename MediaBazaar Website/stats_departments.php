@@ -1,6 +1,6 @@
 <?php
     $page = 'statistics';
-    $content = '';
+    $content = 'departments';
     $functionalityRequirements = ['login-functionality'];
     
     require_once('includes/header.php');

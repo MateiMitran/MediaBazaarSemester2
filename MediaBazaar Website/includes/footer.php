@@ -26,9 +26,6 @@
      <script type="text/javascript" src="js/statistics-variety.js"></script>
 <?php
     }
-?>
-
-<?php
     if($page == 'dashboard') {
 ?>
     <script src="../js/dashboard.js"></script>

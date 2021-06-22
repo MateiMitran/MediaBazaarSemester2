@@ -1,5 +1,5 @@
 <?php
-if($position == "HRManager"){
+if($content == "departments"){
     $manager = new HRStatisticsManager();
     $salaries = json_encode($manager->GetAverageSalaryPerDepartment());
     $hrsPerDeptY = json_encode($manager->GetHoursPerDepartmentForYear());
@@ -14,8 +14,9 @@ if($position == "HRManager"){
  require_once('charts/hr_charts/topEmpsChart.php');
  require_once('charts/hr_charts/whPerMonth.php');
 }
-else if($position == "WarehouseManager"){
-    $manager = new WHStatisticsManager();
+
+else if($content == 'market' || $content =='restocks'){
+        $manager = new WHStatisticsManager();
       
     if($content == 'market'){
         $monthlySales = $manager->MonthlySales();
@@ -36,7 +37,29 @@ else if($position == "WarehouseManager"){
 
 }
 
-else if($position == "CEO"){
+else if($position = "ceo"){
+  $manager = new CEOStatisticsManager();
+ $revenuePerMonth = $manager->RevenuePerMonth();
+ $totalSpendingPerMonth = $manager->TotalSpendingPerMonth();
 
+    if($content == 'expenses'){
+        
+        $marketSpendingPerMonth = $manager->MarketSpendingPerMonth();
+        $spendingPerDepartment = $manager->SpendingPerDepartment();
+
+        require_once('charts/ceo_charts/TotalSpendingPerMonth.php');
+        require_once('charts/ceo_charts/MarketSpendingPerMonth.php');
+        require_once('charts/ceo_charts/SpendingPerDepartment.php');
+        
+    }
+    else if($content == 'revenue'){
+        
+         $revenuePerCategory = $manager->RevenuePerCategory();
+
+          require_once('charts/ceo_charts/RevenuePerMonth.php');
+          require_once('charts/ceo_charts/RevenuePerCategory.php');
+
+    }
 }
+
 ?>

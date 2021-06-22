@@ -150,6 +150,11 @@ nav {
   z-index: 1;
 }
 
+#financial-links {
+  float: right;
+  margin-right: 25%;
+}
+
 .subnav-links {
   float: right;
   margin-right: 13%;
