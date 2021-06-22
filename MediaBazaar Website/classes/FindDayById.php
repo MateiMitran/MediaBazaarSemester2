@@ -2,7 +2,9 @@
 class FindDayById extends Database {
     public function findDay($dayId) {
         $sql = "SELECT * FROM days WHERE id = ?";
-        $query = Database::connect()->prepare($sql);
+        $conn = Database::connect();
+        if($conn != null){
+        $query = $conn->prepare($sql);
         $query->execute([$dayId]);
 
         $result = $query->fetch(PDO::FETCH_ASSOC);
@@ -18,5 +20,10 @@ class FindDayById extends Database {
         } else {
             return false;
         }
+        }
+        else{
+         errorMessage("Connection went down.Try again later.");
+        }
+       
     }
 }
